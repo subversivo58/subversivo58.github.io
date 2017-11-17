@@ -1,0 +1,1 @@
+## Directory o Languages (JSON files)
