@@ -1,5 +1,5 @@
 /**
- * @licence The MIT License (MIT)
+ * @license The MIT License (MIT)
  * @copyright Copyright (c) 2017 Lauro Moraes [https://github.com/subversivo58]
  */
  ;(function (root, factory) {
