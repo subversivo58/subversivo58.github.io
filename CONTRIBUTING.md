@@ -52,7 +52,7 @@ Consider using a **[FEATURE]** prefix in the title of your question followed by 
 
 * If necessary and if possible add a template to the documentation
 
-**Note:** This repository is not intended for discussions or theoretical engagements... consider requesting an invitation to our group in [Slack](https://projectopen.slack.com/) for more detailed discussions about the request for new features.
+**Note:** This repository is not intended for discussions or theoretical engagements ... a means (link or service) for such, will be added or published soon.
 
 
 ### Your First Code Contribution
