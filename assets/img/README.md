@@ -1,0 +1,12 @@
+## Directory of general assets (images)
+
+Some images lack reference source and may be (probably are) in disagreement to their licensing or rules of use (applicable to them). These general purpose images are used only at the development stage and can be removed if there is a complaint contact and will certainly be removed for publication of a stable version of this software.
+
+## License
+
+This source code is licensed under [MIT License](https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE)
+
+Copyright (c) 2017 Lauro Moraes [[AKA Subversivo58]](https://github.com/subversivo58)
+
+
+If you believe that the other sources (of third parties) may contain a conflict with this license please contact us in this email: [subversivo58@gmail.com](mailto:subversivo58@gmail.com?subject=LICENSE)
