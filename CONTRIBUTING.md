@@ -1,4 +1,4 @@
-# Contributing to Collabore
+# Contributing to Subversivo58 Blog
 
 :tada: First, thanks for contribute to this project! :tada:
 
