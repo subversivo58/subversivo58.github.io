@@ -1,5 +1,10 @@
 ## Directory of Vendors
 
+This directory contains third-party libraries and (or) custom extensions.
+
+It will be maintained for local testing and development in the main branch until a stable version is released.
+
+
 **list of vendors**
 
 source | url   | license
