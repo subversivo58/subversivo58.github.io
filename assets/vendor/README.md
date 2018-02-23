@@ -15,7 +15,7 @@ World Flags Sprite | [github.com/lafeber/world-flags-sprite](https://github.com/
 
 ## License
 
-This source code is licensed under MIT License
+This source code is licensed under [MIT License](https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE)
 
 Copyright (c) 2017 Lauro Moraes [[AKA Subversivo58]](https://github.com/subversivo58)
 
