@@ -2,9 +2,37 @@
 
 Blog news, projects, tech, tendences and cybercultures
 
+Welcome, this is the source code of my personal blog hosted on the GitHub Page service.
 
 
-# License
+## Motivation:
+
+This repository was created to evade the standardization of CMS's for static pages
+
+
+## Features:
+
+Although hosted in a static page service I use a lot of JavaScript here to bring dynamism to the navigation interface.
+
+A blockchain implementation (in development) is used over WebRTC data channels to create a distributed database.
+
+
+## To do:
+
+Many things to do ... a listing will be created later
+
+
+## Contributing:
+
+Your contribution to this code will be welcomed, please see the [contribution guide](CONTRIBUTING.md)
+
+
+## Thanks:
+
+This work is only possible thanks to the use of numerous open source libraries
+
+
+## License
 
 MIT License
 
