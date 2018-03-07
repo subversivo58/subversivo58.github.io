@@ -1,1 +1,3 @@
-## Posts Directory (JSON files)
+## Posts Directory (Markdown files)
+
+This directory contens posts files (Markdown files).
