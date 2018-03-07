@@ -17,11 +17,6 @@ Font Electrolize | [Google Fontes](https://fonts.google.com/specimen/Electrolize
 > These sources may contain sub-resources from other sources that may contain (or not) their own licensing and distribution terms
 
 
-For more information please refer to:
-
-* **FontAwesome**: [fontawesome.io](http://fontawesome.io/)
-* **Font Electrolize**: [Google Fonts](https://fonts.google.com/specimen/Electrolize?selection.family=Electrolize)
-
 ## License
 
 This source code is licensed under [MIT License](https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE)
