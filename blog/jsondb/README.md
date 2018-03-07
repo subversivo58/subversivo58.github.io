@@ -28,7 +28,7 @@ The basic structure may look something like this:
             "user": {
                 "id": "xxxxxxxxxxx",
                 "alias": "Subversivo58"
-            }
+            },
             "date": 1510821016096,
             "posts": []
         }
@@ -96,3 +96,5 @@ The basic structure may look something like this:
 }
 
 ```
+
+Max posts peer database is 100
