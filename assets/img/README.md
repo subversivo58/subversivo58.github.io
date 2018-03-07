@@ -3,6 +3,17 @@
 Some images lack reference source and may be (probably are) in disagreement to their licensing or rules of use (applicable to them). These general purpose images are used only at the development stage and can be removed if there is a complaint contact and will certainly be removed for publication of a stable version of this software.
 
 
+**directory structure**:
+
+
+```none
+|-- /icons (software or third-party icons)
+|
+|-- /logos (software or third-party logos)
+
+```
+
+
 **list of vendors**
 
 source | url   | license
