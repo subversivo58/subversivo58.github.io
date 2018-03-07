@@ -14,9 +14,6 @@ Bootstrap | [bootstrap.com](https://getbootstrap.com/) | [MIT](https://github.co
 OpenPGP.js | [openpgpjs.org](https://openpgpjs.org/) | [LGPL-3.0](https://github.com/openpgpjs/openpgpjs/blob/master/LICENSE)
 hashid.js | [hashids.org/javascript](http://hashids.org/javascript/) | [MIT](https://github.com/ivanakimov/hashids.js/blob/master/LICENSE)
 Showdown | [showdownjs.com](http://showdownjs.com/) | [BSD-3-Clause](https://github.com/showdownjs/showdown/blob/master/license.txt)
-FontAwesome | [fontawesome.io](http://fontawesome.io/) | [OFL / MIT](http://fontawesome.io/license/)
-Font Electrolize | [Google Fontes](https://fonts.google.com/specimen/Electrolize?selection.family=Electrolize) | [OFL](http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL_web)
-World Flags Sprite | [github.com/lafeber/world-flags-sprite](https://github.com/lafeber/world-flags-sprite/) | [MIT](https://github.com/lafeber/world-flags-sprite/blob/master/LICENSE)
 
 > These sources may contain sub-resources from other sources that may contain (or not) their own licensing and distribution terms
 
