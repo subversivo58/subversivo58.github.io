@@ -6,6 +6,17 @@ It will be maintained for local testing and development in the main branch until
 
 These sources are owned by their respective right holders and follow their own licensing (or attribution) rules.
 
+
+**list of vendors**
+
+source | url   | license
+------------|:-----------:|:---------------:
+FontAwesome | [fontawesome.io](http://fontawesome.io/) | [OFL / MIT](http://fontawesome.io/license/)
+Font Electrolize | [Google Fontes](https://fonts.google.com/specimen/Electrolize?selection.family=Electrolize) | [OFL](http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL_web)
+
+> These sources may contain sub-resources from other sources that may contain (or not) their own licensing and distribution terms
+
+
 For more information please refer to:
 
 * **FontAwesome**: [fontawesome.io](http://fontawesome.io/)
