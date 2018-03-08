@@ -34,6 +34,12 @@ $RECYCLE.BIN/
 /node_modules
 npm-debug.log
 
+# Posts files (blacklist)
+/blog/posts/*
+
+# Posts files (whitelist to README.md)
+!/blog/posts/README.md
+
 # Local development
 *.env
 *.dev
