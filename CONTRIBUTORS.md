@@ -1,4 +1,4 @@
-Collabore contributors (sorted alphabetically)
+Contributors list (sorted alphabetically)
 ============================================
 
 
