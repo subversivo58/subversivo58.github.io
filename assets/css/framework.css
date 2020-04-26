@@ -744,13 +744,13 @@ footer #foothead {
   color: #FFF;
 }
 footer #foothead #footer-fh-img {
-  /*background-image: url(../img/footoodles/footoodle.png);*/
+  /*background-image: url(../media/img/footoodles/footoodle.png);*/
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 200px;
 }
 footer #footbody {
-  background-image: url(../img/shadown-map-background.png);
+  background-image: url(../media/img/shadown-map-background.png);
   background-position: center center;
   background-repeat: no-repeat;
   padding: 3.6rem 1.2rem;
