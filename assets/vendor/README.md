@@ -9,11 +9,7 @@ It will be maintained for local testing and development in the main branch until
 
 source | url   | license
 ------------|:-----------:|:---------------:
-jQuery | [jquery.org](https://jquery.org/) | [MIT](https://jquery.org/license)
-Bootstrap | [bootstrap.com](https://getbootstrap.com/) | [MIT](https://github.com/twbs/bootstrap/blob/master/LICENSE)
-OpenPGP.js | [openpgpjs.org](https://openpgpjs.org/) | [LGPL-3.0](https://github.com/openpgpjs/openpgpjs/blob/master/LICENSE)
-hashid.js | [hashids.org/javascript](http://hashids.org/javascript/) | [MIT](https://github.com/ivanakimov/hashids.js/blob/master/LICENSE)
-Showdown | [showdownjs.com](http://showdownjs.com/) | [BSD-3-Clause](https://github.com/showdownjs/showdown/blob/master/license.txt)
+
 
 > These sources may contain sub-resources from other sources that may contain (or not) their own licensing and distribution terms
 
