@@ -1,4 +1,4 @@
-## Directory of general media assets (audio and video)
+## Directory of general media assets (image, audio and video)
 
 Some features may lack source information and licensing ... will be avoided as much as possible using them at the development stage and will certainly be removed in the first stable release.
 
