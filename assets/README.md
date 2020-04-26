@@ -6,17 +6,16 @@
 ```none
 |-- /css (software custom stylization)
 |
-|-- /fonts (used for developement)
-|      |-- /font-awesome-4.7.0
-|      |-- /font-electrolize
-|
-|-- /html (HTML fragments)
+|-- /tpl (HTML fragments)
 |
 |-- /img (layout images)
 |     |-- /icons (software or third-party icons)
 |     |-- /logos (software or third-party logos)
 |
 |-- /js (software core script and custom function)
+|     |-- /modules (ES6 modules)
+|
+|-- /posts (Markdown files)
 |
 |-- /lang (software interface dictionaries)
 |
