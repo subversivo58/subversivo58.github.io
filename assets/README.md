@@ -8,10 +8,6 @@
 |
 |-- /tpl (HTML fragments)
 |
-|-- /img (layout images)
-|     |-- /icons (software or third-party icons)
-|     |-- /logos (software or third-party logos)
-|
 |-- /js (software core script and custom function)
 |     |-- /modules (ES6 modules)
 |
@@ -19,9 +15,12 @@
 |
 |-- /lang (software interface dictionaries)
 |
-|-- /media (audio and video assets)
+|-- /media (audio, video and image assets)
 |      |-- /audio
 |      |-- /video
+|      |-- /img (layout images)
+|            |-- /icons (software or third-party icons)
+|            |-- /logos (software or third-party logos)
 |
 |-- /vendor (used for developement)
        |-- /... (multiple vendors)
