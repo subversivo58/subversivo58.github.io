@@ -18,7 +18,7 @@ Some images lack reference source and may be (probably are) in disagreement to t
 
 source | url   | license
 ------------|:-----------:|:---------------:
-World Flags Sprite | [github.com/lafeber/world-flags-sprite](https://github.com/lafeber/world-flags-sprite/) | [MIT](https://github.com/lafeber/world-flags-sprite/blob/master/LICENSE)
+
 
 > These sources may contain sub-resources from other sources that may contain (or not) their own licensing and distribution terms
 
