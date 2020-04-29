@@ -76,6 +76,223 @@ const DeepFreeze = function(obj) {
     return Object.freeze(obj)
 }
 
+
+
+/**
+ * Sound play - execute site audio effects
+ */
+const SoundPlay = sourceURL => {
+    // @see https://caniuse.com/#search=web%20audio
+    const context = new AudioContext()
+    // .ogg like Chrome and FireFox
+    Fetch(sourceURL).then(response => response.arrayBuffer()).then(arrayBuffer => context.decodeAudioData(arrayBuffer)).then(audioBuffer => {
+        const source = context.createBufferSource()
+        source.buffer = audioBuffer
+        source.connect(context.destination)
+        source.start()
+    }).catch(e => {
+        // fallback
+        try {
+            const elementAudio = _.DOM.create('audio')
+            audioElement.setAttribute('src', BaseRoot + sourceURL)
+            audioElement.play();
+        } catch(ex) {}
+    })
+}
+
+
+/**
+ * @REVISE - adjust selectors (button or div)
+ * Color Picker - create a collor pallet
+ * @param {String} element - target element (id[#] or class[.])
+ */
+const ColorPallet = containerTarget => {
+    const element = _.DOM.querySelector(containerTarget);
+    element.insertAdjacentHTML('afterbegin', '<div id="pallet" class="col mt-5 px-0">')
+    let values = '00336699CCFF',
+        r,
+        g,
+        by,
+        cor;
+    const pallet = _.DOM.getById('pallet');
+    for (r = 0; r < 6; r++) {
+         for (g = 0; g < 6; g++) {
+              if ( g % 2 === 0 ) {
+                  for (by = 0; by < 6; by++) {
+                       cor = values.substr(2 * r, 2) + values.substr(2 * g, 2) + values.substr(2 * by, 2);
+                       pallet.insertAdjacentHTML('afterbegin', '<button class="btn btn-lg" style="background-color:#' + cor + '" btnColor="#' + cor + '">');
+                  }
+                  if ( g % 2 === 1) {
+                      pallet.insertAdjacentHTML('afterbegin', '</button>');
+                  }
+              }
+         }
+    }
+    pallet.insertAdjacentHTML('afterbegin', '<button btnColor="#FFFFFF" data-title="words.white" class="i18n btn btn-lg bg-white"></button><button data-title="words.restore" btnColor="default" class="i18n btn btn-lg bg-white fa fa-undo"></button></div>')
+    //let subtree = _.qSA('[class^="i18n"]:not([translated])', _.qS(elem))
+    //if ( subtree ) {
+    //    ;[...subtree].forEach(node => {
+    //        this.iLib.observe(node)
+    //    })
+    //}
+}
+
+/**
+ * Nice time for humans readable
+ * @see https://stackoverflow.com/questions/8211744/convert-time-interval-given-in-seconds-into-more-human-readable-form#22731327
+ * @param  { Integer } milliseconds - UNIX Timestamp
+ * @return { String }
+ */
+const TimeLength = milliseconds => {
+    let data = new Date(milliseconds);
+    return data.getUTCHours() + ' hours, ' + data.getUTCMinutes() + ' minutes and ' + data.getUTCSeconds() + ' second(s)';
+}
+
+/**
+ * Time ago (UNIX)
+ * @param  { String|Number } time - UNIX Timestamp
+ * @return { String }             - human readable time elapsed [just in current language]
+ */
+const TimeAgo = time => {
+    let round = Math.round,
+        now = Date.now(),
+        t
+    let format = (n, unit) => {
+        let a = 'hora' == unit ? 'ha' : '1'
+        unit = 1 == n ? unit : (unit !== 'mês' ? unit + 's' : unit)
+        return (1 == n ? a : n) + ' ' + unit
+    }
+    // past / future
+    let diff = (time > now) ? (time - now) : (now - time)
+    // just now
+    if (1e3 > diff) return 'agora'
+    // s, m, h, d, w, m, y
+    if (60 > (t = round(diff / 1e3))) return format(t, 'segundo')
+    if (60 > (t = round(diff / 6e4))) return format(t, 'minuto')
+    if (24 > (t = round(diff / 3.6e+6))) return format(t, 'hora')
+    if (7 > (t = round(diff / 8.64e+7))) return format(t, 'dia');
+    if (4.34812 > (t = diff / 6.048e+8)) return format(round(t), 'semana')
+    if (12 > (t = round(diff / 2.63e+9))) return format(t, 'mês')
+    if (10 > (t = round(diff / 3.156e+10))) return format(t, 'ano')
+    // decades
+    return format(round(diff / 3.156e+11), 'década')
+}
+
+
+
+
+/**
+ * WPM (Words Per Minute) - calculate readind time expected with base 250 w2ords per minute
+ * @param  { String } text - words collection
+ * @return { Object }
+ */
+const ReadingTextTime = text => {
+    let wordsByMinute = 250,
+        words = text.split(/\s/g).length
+    return {
+        time: Math.ceil(words / wordsByMinute),
+        words: words
+    }
+}
+
+/**
+ * Scrool Move Anchors
+ *
+anchorScrool() {
+    let bod = _.getTN('html')[0]
+    let speed = length => {
+        let result = Math.abs(length)
+        if ( result < 500 ) {
+             return 700
+        }
+        if ( result > 1500 ) {
+             return 1000
+        } else {
+             return length
+        }
+    }
+    let eventHandler = (element, target, margin) => {
+        let length = Math.abs(target.offsetTop - bod.scrollTop),
+            timing = speed(length);
+        element.addEventListener('click', e => {
+           e.preventDefault()
+           $('html, body').animate({
+              scrollTop: target.offsetTop - margin
+           }, timing)
+           return false
+        }, _.EventOptions(false, false, false))
+    }
+    let index = _.getCN('anchor-link')
+    if ( index.length >= 1 ) {
+        [...index].forEach(item => {
+            let tag = item.tagName.toLowerCase()
+            if ( tag === 'span' || tag === 'button' || tag === 'i' ) {
+                 let target = _.getBI(_.getA(item, 'data-anchor-id'))
+                 let margin = (_.getA(item, 'data-anchor-mg')) ? _.getA(item, 'data-anchor-mg') : 0
+                 if ( !!target ) {
+                     eventHandler(item, target, margin)
+                 }
+            } else if ( tag === 'a' ) {
+                 if ( location.pathname.replace(/^\//, '') === item.pathname.replace(/^\//, '') && location.hostname === item.hostname ) {
+                      let target = _.getBI(item.hash.slice(1))
+                      let margin = (_.getA(item, 'data-anchor-mg')) ? _.getA(item, 'data-anchor-mg') : 0
+                      if ( !!target ) {
+                          eventHandler(item, target, margin)
+                      }
+                 }
+            } else {
+                 return false
+            }
+        })
+        // on scroll
+        wd.addEventListener('scroll', () => {
+            let btnTop = _.getBI('anchor-to-top')
+            if ( bod.scrollTop > 400 ) {
+                 if ( !btnTop ) {
+                     let el = _.create('button')
+                     el.id = 'anchor-to-top'
+                     el.type = 'button'
+                     _.setA(el, 'class', 'fx bg-sky btn rounded-0 cp')
+                     el.style.bottom = '25px'
+                     el.style.right = '25px'
+                     el.innerHTML = (i18n.combo.hasOwnProperty('btn_top')) ? i18n.combo.btn_top : 'Back To Top'
+                     bod.appendChild(el)
+                     el.addEventListener('click',() => {
+                         $('html, body').animate({
+                             scrollTop : 0
+                         }, 800)
+                         return false
+                     }, _.EventOptions(false, true, false))
+                     setTimeout(() => {
+                         $(el).fadeOut('slow', () => {
+                             el.remove()
+                         })
+                     }, 3000)
+                 }
+            } else {
+                 if ( btnTop ) {
+                      btnTop.parentNode.removeChild(btnTop)
+                 }
+            }
+        }, _.EventOptions(false, true, false))
+    }
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  *
  */
@@ -351,6 +568,7 @@ const SendBeacon = (uri, data, auth) => {
 export {
     Bytes2Size,
     DeepFreeze,
+    DeepEqual,
     ValidURL,
     StringDistance,
     FindAndReplace,
@@ -359,13 +577,19 @@ export {
     PathName,
     DirsLevel,
     Redirect,
-    SendBeacon
+    SendBeacon,
+    SoundPlay,
+    ColorPallet,
+    TimeLength,
+    TimeAgo,
+    ReadingTextTime
 }
 
 /*
 import {
     Bytes2Size,
     DeepFreeze,
+    DeepEqual,
     StringDistance,
     FindAndReplace,
     Queue,
