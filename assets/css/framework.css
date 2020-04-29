@@ -314,6 +314,9 @@ body {
 .gray {
   color: gray!important;
 }
+.contrast {
+  color: #495057!important;
+}
 .black {
   color: #000!important;
 }
