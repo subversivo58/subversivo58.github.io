@@ -106,6 +106,16 @@ let _ = {
     },
 
     /**
+     * Base64
+     */
+    base64(string) {
+        return {
+            encode: btoa,
+            decode: atob
+        }
+    },
+
+    /**
      * Old method to extends object
      * extend(origin, add) {
      *     // Don't do anything if add isn't an object
@@ -211,7 +221,8 @@ let _ = {
         return this.isString(str) && /^[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)?$/.test(str)
     },
     isBase64(str) {
-        return this.isString(str) && /^[A-Za-z0-9\-_]+$/.test(str)
+        //@see https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/btoa#Polyfill
+        return this.isString(str) && /^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$/.test(str)/*/^[A-Za-z0-9\-_]+$/.test(str)*/
     },
     isEqual(a, b) {
         return Object.is(a, b)
