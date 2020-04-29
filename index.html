@@ -16,30 +16,678 @@
     <meta name="DEBUG" content="REPPORT_ALL">
     <meta name="reply-to" content="https://github.com/subversivo58.github.io/issues/new">
     <link rel="copyright" href="copyright.html">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon-icon-192x192.png" type="image/png">
+
+    <!-- Twitter Open Graph -->
+    <meta name="twitter:site"        content="@subversivo58">
+
+    <!-- Open Graph -->
+    <meta property="og:url"          content="https://subversivo58.github.io">
+    <meta property="og:type"         content="website">
+    <meta property="og:title"        content="Subversivo58 | Blog">
+    <meta property="og:description"  content="Subversivo58 Personal Blog Page">
+    <meta property="og:image"        content="https://subversivo58.github.io/assets/media/img/graph-image.webp">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <link rel="icon" href="/assets/media/img/icons/cube.webp" type="image/webp">
+
     <!-- Prequel - verify required requirements and show browsers suggestions (on "oldbrowser" page) -->
     <script src="assets/js/prequel.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap">
+
+    <!-- Preload -->
+    <link rel="preload" href="assets/js/prequel.js" as="script">
+    <link rel="preload" href="assets/js/setup.mjs" as="script" crossorigin="anonimous">
+    <!--
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" as="style">
+    -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="assets/js/modules/BasePrefixes.mjs" as="script" crossorigin="anonimous">
+    <link rel="preload" href="assets/js/modules/Helpers.mjs" as="script" crossorigin="anonimous">
+    <link rel="preload" href="assets/js/modules/Emitter.mjs" as="script" crossorigin="anonimous">
+    <link rel="preload" href="assets/js/modules/AwesomeIndexedDB.mjs" as="script" crossorigin="anonimous">
+    <link rel="preload" href="assets/js/modules/bootstrap-native.mjs" as="script" crossorigin="anonimous">
+    <link rel="preload" href="assets/css/framework.css" as="style">
+    <link rel="preload" href="assets/css/main.css" as="style">
+    <!--
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" async>
+    -->
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="assets/css/framework.css">
-    <link type="application/json" rel="manifest" href="manifest.json">
+    <link type="text/css" rel="stylesheet" href="assets/css/main.css">
+    <link type="application/json" rel="manifest" href="manifest.json" async>
     <meta name="theme-color" content="#1ebfff">
+
+    <!-- Content Security Policy Rules -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'none';
+          base-uri 'self';
+          child-src 'self';
+          block-all-mixed-content;
+          frame-src 'self';
+          media-src 'self';
+          manifest-src 'self';
+          connect-src 'self' https://api.github.com https://unpkg.com https://cdnjs.cloudflare.com data:;
+          object-src 'none';
+          form-action 'self';
+          img-src 'self' data:;
+          script-src 'self' https://unpkg.com https://cdnjs.cloudflare.com;
+          style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;
+          font-src 'self' https://fonts.gstatic.com;">
+
     <!-- NOSCRIPT !-->
     <noscript>
-        <!--
-            noscript register ...
+        <!-- noscript tracking --
+        <img src="https://localhost:5000/noscript/1x1.gif" class="d-none" alt="">
         -->
         <meta http-equiv="refresh" content="0;url=nojs.html">
     </noscript>
 </head>
 <body id="body">
+
+
+    <!-- MODALS -->
+
+    <!-- VERSION SOURCE INFO MODAL -->
+    <section id="modal-source-version-info" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content rounded-0">
+                <div class="modal-header border-none">
+                    <h5 class="col modal-title text-center">🚧 Under Construction 🚧</h5>
+                </div>
+                <div class="modal-body pt-0 pb-3">
+                    <div class="row">
+                        <div class="col-12 col-sm-5 px-0 my-auto">
+                            <picture>
+                                <img alt="development state"
+                                     src="assets/media/img/underconstruct-dev.png"
+                                     srcset="assets/media/img/underconstruct-dev.png 1x" class="img-fluid">
+                            </picture>
+                        </div>
+                        <div class="col-12 col-sm-7 py-3 py-sm-0 text-center my-auto">
+                            <small class="col-12">
+                                <strong>Version</strong>: 0.1.0 [development stage]
+                            </small>
+                            <div class="col-12 d-none d-sm-block alert alert-success rounded-0 px-2 mt-3">
+                                <small data-i18n-html="copyright.contributors" class="i18n">Este projeto só foi possível graças ao uso de muitos outros projetos de código fonte aberta e a <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' target="blank_" rel="noopener" class='blue'>comunidade de contribuidores</a>... você é livre para criar, usar, modificar e distribuir respeitando todas as licenças subjacentes!</small>
+                                <a href="copyright.html" target="_blank" class="tdu sky">
+                                    <small>Veja as licenças</small>
+                                </a>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <small class="col">Source-code: <a href="https://github.com/subversivo58/subversivo58.github.io" target="_blank" rel="noopener" class="tdu sky">view on GitHub</a></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FEEDBACK -->
+    <section id="modal-feedback" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div id="modal-feedback-content" class="modal-content rounded-0">
+                <div class="modal-header border-0 rounded-0">
+                    <h5 data-i18n-html="drawer.feedback.title" class="i18n modal-title"></h5>
+                    <button type="button" class="close cp" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body pt-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="drawer-feedback-block" class="d-flex align-items-start flex-column">
+                                <div class="mb-auto"></div>
+                                <div class="d-flex w-100 mt-3">
+                                    <span data-i18n-html="drawer.feedback.rating" class="i18n mt-2"></span>
+                                    <div class="rating cp">
+                                        <span data-star-value="5" class="star-rating fa fa-star-o gray"></span>
+                                        <span data-star-value="4" class="star-rating fa fa-star-o gray"></span>
+                                        <span data-star-value="3" class="star-rating fa fa-star-o gray"></span>
+                                        <span data-star-value="2" class="star-rating fa fa-star-o gray"></span>
+                                        <span data-star-value="1" class="star-rating fa fa-star-o gray ml-4"></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex w-100 mt-2">
+                                    <span data-i18n-html="drawer.feedback.question_info" class="i18n col px-0"></span>
+                                </div>
+                            </div>
+                            <form id="feedback-form" action="./feedback" method="post" accept-charset="utf-8">
+                                <div class="form-group mt-1 mb-0">
+                                    <textarea type="textarea" id="feedback-textarea" data-i18n-place="drawer.feedback.placeholder" class="i18n form-control resize-none rounded-0" rows="5" maxlength="400" required></textarea>
+                                </div>
+                                <div class="form-group mt-2 mt-md-0">
+                                    <button type="reset" id="feedback-form-clear" data-i18n-html="words.clear" class="i18n btn btn-sm btn-outline-secondary rounded-0 cp"></button>
+                                    <button type="submit" id="feedback-form-submit" data-i18n-html="drawer.bug_report.send" class="i18n btn btn-sm btn-info rounded-0 float-right cp"></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <section class="row">
+                        <small data-i18n-html="drawer.feedback.footer_info" class="i18n col"></small>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- BUGS REPORT -->
+    <section id="modal-bugs-report" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div id="modal-bugs-report-content" class="modal-content rounded-0">
+                <div class="modal-header rounded-0 border-0">
+                    <h5 data-i18n-html="drawer.bug_report.title" class="i18n modal-title">Reportar Erros</h5>
+                    <button type="button" class="close cp" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body pt-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <form id="bugs-report-form" action="./bugs" method="post" accept-charset="utf-8">
+                                <div class="col px-0">
+                                    <div class="col px-0">
+                                        <div class="form-group">
+                                            <label class="d-block">
+                                                <strong>Selecione o tipo:</strong>
+                                            </label>
+                                            <select class="border-def d-block">
+                                                <option selected value="custom">Erro personalizado</option>
+                                                <option value="css">Erro de CSS</option>
+                                                <option value="javascript">Erro de JavaScript</option>
+                                                <option value="language">Erro de Idioma</option>
+                                                <option value="plugin">Erro em Plugins</option>
+                                                <option value="server">Erro do Servidor</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-2 mb-0">
+                                    <label>
+                                        <strong class="col px-0">Envie uma descrição</strong>
+                                    </label>
+                                    <textarea type="textarea" id="bugs-report-textarea" placeholder="Description here..." class="form-control resize-none rounded-0" rows="5" maxlength="400" required></textarea>
+                                </div>
+                                <div class="form-group mt-2 mt-md-3">
+                                    <button type="reset" data-i18n-html="words.clear" class="i18n btn btn-sm btn-outline-secondary rounded-0 cp">Limpar</button>
+                                    <button type="submit" id="bugs-report-form-submit" data-i18n-html="drawer.bug_report.send" class="i18n btn btn-sm btn-info rounded-0 float-right cp">Enviar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <section class="mt-4 row">
+                        <small data-i18n-html="drawer.bug_report.footer_info" class="i18n col">Reportando erros. Veja a <a href='#' class='tdu blue'>documentação</a> sobre isto.</small>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- DRAWER -->
+    <div data-drawer="drawer-menu" class="drawer-menu drawer-container drawer-md fx md-z-index none">
+        <div class="arrow-up pa"></div>
+        <div class="arrow-up-s pr"></div>
+        <div class="drawer-box bg-white">
+            <div id="drawer-icons" class="row p-3">
+                <!-- LANGUAGE
+                <div id="drawer-language-selector" data-toggle="modal" data-target="#modal-language-selector" class="p-3 col-4 ct cp">
+                    <span class="col-12 p-1 fa fa-language fa-2x"></span>
+                    <span data-i18n-html="drawer.words.lang" class="i18n col-12"></span>
+                </div>-->
+                <!-- SETTINGS -
+                <div class="p-3 col-4 blue ct cp">
+                    <a id="slide-link" href="#settings-slide" class="tdu-none">
+                       <span class="col-12 p-1 fa fa-gear fa-2x"></span>
+                       <span data-i18n-html="words.settings" class="i18n col-12 tc"></span>
+                    </a>
+                </div>-->
+                <!-- NOTIFICATIONS -
+                <div id="drawer-notifications" class="p-3 col-4 gray ct cp">
+                    <span class="col-12 p-1 fa fa-bell-o fa-2x"></span>
+                    <span data-i18n-html="drawer.words.not" class="i18n col-12"></span>
+                </div>-->
+                <!-- GEOLOCATION -
+                <div id="drawer-geolocation" class="p-3 col-4 gray ct cp">
+                    <span class="col-12 p-1 fa fa-map-marker fa-2x"></span>
+                    <span data-i18n-html="drawer.words.geo" class="i18n col-12"></span>
+                </div>-->
+                <!-- MEDIA VIDEO -
+                <div id="drawer-video" class="p-3 col-4 gray ct cp">
+                    <span class="col-12 p-1 fa fa-video-camera fa-2x"></span>
+                    <span data-i18n-html="drawer.words.cam" class="i18n col-12"></span>
+                </div>-->
+                <!-- MEDIA AUDIO -
+                <div id="drawer-audio" class="p-3 col-4 gray ct cp">
+                    <span class="col-12 p-1 fa fa-microphone fa-2x"></span>
+                    <span data-i18n-html="drawer.words.mic" class="i18n col-12"></span>
+                </div>-->
+                <!-- MEDIA AUDIO AND VIDEO -
+                <div id="drawer-media" class="p-3 col-4 gray ct cp d-none">
+                    <span class="col-12 p-1 fa fa-film fa-2x"></span>
+                    <span data-i18n-html="words.media" class="i18n col-12 tc"></span>
+                </div>-->
+
+
+              <!-- BOOKMARKS -
+                <div data-toggle="modal" data-target="#modal-feedback" class="p-3 col-4 sky ct cp">
+                    <span class="col-12 p-1 fa fa-bookmark-o fa-2x"></span>
+                    <span data-i18n-html="drawer.words.marks" class="i18n col-12"></span>
+                </div>-->
+                <!-- NOTES -
+                <div data-toggle="modal" data-target="#modal-fast-notes" class="p-3 col-4 orange ct cp">
+                    <span class="col-12 p-1 fa fa-lightbulb-o fa-2x"></span>
+                    <span data-i18n-html="drawer.words.note" class="i18n col-12"></span>
+                </div>-->
+                <!-- SHARE -
+                <div data-toggle="modal" data-target="#modal-sharer-content" class="p-3 col-4 black ct cp">
+                    <span class="col-12 p-1 fa fa-share-alt fa-2x"></span>
+                    <span class="col-12">Share</span>
+                </div>-->
+                <!-- OFFLINE -
+                <div data-toggle="modal" data-target="#modal-offline-resources" class="d-none p-3 col-4 green-special ct cp">
+                    <span class="col-12 p-1 fa fa-signal fa-2x"></span>
+                    <span class="col-12">Offline</span>
+                </div>-->
+                <!-- COLOR UI-
+                <div class="p-3 col-4 purple ct cp">
+                    <span class="col-12 p-1 fa fa-tint fa-2x"></span>
+                    <span data-i18n-html="drawer.words.color" class="i18n col-12"></span>
+                </div>-->
+                <!-- LABORATORY -
+                <div class="p-3 col-4 green-special ct cp">
+                    <span class="col-12 p-1 fa fa-flask fa-2x"></span>
+                    <span data-i18n-html="drawer.words.lab" class="i18n col-12"></span>
+                </div>-->
+
+              <!-- FEEDBACK -->
+                <div data-toggle="modal" data-target="#modal-feedback" class="d-none p-3 col-4 blue ct cp">
+                    <span class="col-12 p-1 fa fa-rocket fa-2x">📢</span>
+                    <span data-i18n-html="drawer.words.feedback" class="i18n col-12"></span>
+                </div>
+                <!-- CLEAR META-DATA -
+                <div data-toggle="modal" data-target="#modal-clear-metadata" class="p-3 col-4 red ct cp">
+                    <span class="col-12 p-1 fa fa-recycle fa-2x"></span>
+                    <span data-i18n-html="drawer.words.clear" class="i18n col-12"></span>
+                </div>-->
+                <!-- BUGS REPPORT -->
+                <div data-toggle="modal" data-target="#modal-bugs-report" class="d-none p-3 col-4 ct cp">
+                    <span class="col-12 p-1 fa fa-bug fa-2x">🐛</span>
+                    <span data-i18n-html="drawer.words.bug" class="i18n col-12">Bug</span>
+                </div>
+
+              <div data-toggle="modal" data-target="#modal-source-version-info" class="d-sm-none p3 col-4 gray ct cp">
+                    <span class="col-12 p-1 fa fa-info-circle fa-2x"></span>
+                    <span class="col-12">Version</span>
+                </div>
+
+
+           </div>
+             <!-- MORE ITENS -->
+             <div id="drawer-more-itens" class="row d-none mx-0 bg-light-gray ct">
+                 <small data-css-fs="0.6" data-i18n-html="words.more" class="i18n css col-12 p-2 cp tc"></small>
+             </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- FIXED NAVBAR -->
+    <nav id="navbar-fixed" class="navbar navbar-expand-md navbar-light fixed-top bg-white" role="navigation">
+        <a class="navbar-brand d-none d-md-flex" href="./">
+            <img alt="Brand"
+                 src="./assets/media/img/logos/site-logo-banner-2@500.webp"
+                 srcset="./assets/media/img/logos/site-logo-banner-2@500.webp 3x"  class="img-fluid cp">
+        </a>
+        <div class="d-md-none d-sm-flex mw-100">
+            <a class="navbar-brand" href="./">
+                <img alt="Brand"
+                     src="./assets/media/img/subversivo58-close-up.webp"
+                     srcset="./assets/media/img/subversivo58-close-up.webp 220w"
+                     sizes="35px" class="img-fluid cp">
+            </a>
+            <!-- Button trigger modal -->
+            <picture id="drawer-menu-2" class="navbar-brand">
+                <img alt="Brand"
+                     src="./assets/media/img/icons/animated-cube.webp"
+                     srcset="./assets/media/img/icons/animated-cube.webp 55w"
+                     sizes="35px" class="img-fluid cp">
+            </picture>
+            <a class="btn navbar-btn btn-outline-info rounded-0 cp" href="#">Signin</a>
+        </div>
+        <button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <!--
+                Change Bootstrap class "navbar-toggler-icon" to Font-Awesome class "fa fa-bars"
+                because Bootstrap class violate CSP image Policie
+                OBS: add Bootstrap class "p-1" (padding) to normalize style concepts
+            -->
+            📌
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav mr-auto">
+                <!--
+                <li class="nav-item">
+                    <a href="https://github.com/Collabore/collabore.github.io/wiki" data-i18n-html="navbar.wiki" class="i18n nav-link tc"></a>
+                </li>
+                -->
+                <li class="nav-item">
+                    <a href="./blog" data-i18n-html="navbar.blog" class="i18n nav-link contrast tc">blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact.html" data-i18n-html="navbar.contact" class="i18n nav-link contrast tc">contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/slack.html" data-i18n-html="navbar.slack" class="i18n nav-link contrast tc">slack</a>
+                </li>
+                <li class="nav-item">
+                    <a href="./docs" data-i18n-html="navbar.docs" class="i18n nav-link contrast tc">docs</a>
+                    <!--
+                    <a href="https://github.com/Collabore/collabore.github.io/tree/master/docs" data-i18n-html="navbar.docs" class="i18n nav-link tc"></a>
+                    -->
+                </li>
+                <li class="nav-item">
+                    <a href="/policies.html" data-i18n-html="navbar.policies" class="i18n nav-link contrast tc">policy</a>
+                </li>
+                <!--
+                <li class="nav-item">
+                    <a href="#" data-i18n-html="navbar.colab" class="i18n nav-link tc"></a>
+                </li>
+                -->
+            </ul>
+            <ul class="navbar-nav d-none d-md-flex">
+                <li class="nav-item">
+                    <picture id="drawer-menu-1" class="navbar-brand">
+                        <img alt="Brand"
+                             src="./assets/media/img/icons/animated-cube.webp"
+                             srcset="./assets/media/img/icons/animated-cube.webp 2x" class="img-fluid cp">
+                    </picture>
+                </li>
+                <li class="nav-item">
+                    <a class="btn navbar-btn btn-outline-info rounded-0 cp" href="#" disabled>Signin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- CONTENT CONTAINER -->
-    <section id="background-mask" class="container-fluid px-0 position-absolute md-z-index"></section>
+    <section id="index-central-block" class="container-fluid px-0 border mt-5 fill-height">
+        <!--vertical align on parent using my-auto, horizontal align on self mx-auto-->
+        <div class="row mx-0 fill-height h-100">
+            <div class="col-sm-12 my-auto">
+                <div id="preload-block-box" class="col-12 mx-auto px-0">
+                    <div class="col-12 mx-auto px-0 mt-3 d-flex">
+                        <img alt="page loader icon"
+                             src="./assets/media/img/icons/animated-cube.webp"
+                             srcset="./assets/media/img/icons/animated-cube.webp 1.2x" class="img-fluid mx-auto">
+                    </div>
+                    <div id="output" class="col-12 col-md-8 mx-auto px-0 mt-5 d-block">
+                        <div class="progress progress-slim">
+                            <div id="resources-request-progress-bar" class="progress-bar progress-bar-info progress-bar-striped"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="row container-fluid px-0 mx-0 border">
+        <span class="bg-green-special col progress-slim-0 m-0 lh-75"></span>
+        <span class="bg-blue col progress-slim"></span>
+        <span class="bg-red col progress-slim"></span>
+        <span class="bg-aqua col progress-slim"></span>
+        <span class="bg-yellowgreen col progress-slim"></span>
+    </section>
 
     <!-- FOOTER -->
-    <footer id="footer-container" class="container-fluid px-0"></footer>
+    <footer id="footer-container" class="container-fluid px-0">
+
+        <!-- FOOTHEAD (OR: INJECTED) -->
+        <section id="foothead" class="container-fluid">
+            <!--
+            <div class="row">
+               <h1 id="footer-fh-title" class="col ct">Torne-se um Membro de Himliy Docs</h1>
+               <p id="footer-fh-content" class="mt-4 col-md-10 mx-auto ct">Em um esforço para tornar a Plataforma "global", Himliy abre as portas a desenvolvedores e entusiastas. Através de uma interface de versionamento simples o usuário poderá modificar, revisar e criar novas transcrições da documentação Himliy. Partilhe seu conhecimento, revise outras sugestões, ranqueie e tenha sua colaboração ranqueada. Milhares ou mesmo milhões de usuários poderão optar por utilizar sua transcrição para aceder a interface Himliy de maneira localizada.</p>
+            </div>
+            -->
+            <div class="row">
+               <h1 id="footer-fh-title" class="col-12 tsa1 ct">&nbsp;</h1>
+               <p id="footer-fh-content" class="mt-4 col-md-10 mx-auto ct">&nbsp;</p>
+            </div>
+            <div class="mt-5 row">
+               <div id="footer-fh-img" class="col-12 col-md-10 col-lg-8 mx-auto"></div>
+            </div>
+        </section>
+        <!-- FOOTBODY -->
+        <section id="footbody" class="container-fluid">
+           <div class="row">
+               <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                  <div class="row">
+                      <picture class="col">
+                          <img alt="Brand"
+                               src="./assets/media/img/logos/site-logo-banner-3@500.png"
+                               srcset="./assets/media/img/logos/site-logo-banner-3@500.png 1.5x"  class="img-fluid cp">
+                      </picture>
+                  </div>
+                  <div class="mt-2 row">
+                      <p class="col white ct">©️ 2010 - 2020 Subversivo58 ®️</p>
+                  </div>
+                  <div class="mt-3 row">
+                      <p data-i18n-html="footer.content.desc1" class="i18n col-12 ct">Este site reúne uma coleção de projetos iniciados em 2010 e tem por objetivo servir como blogue pessoal para compartilhar dos mais diversos temas. Sinta-se a vontade para explorar o site e compartilhar seu conteúdo.</p>
+                      <div class="col alert alert-info rounded-0 mx-3 p-2 ct">
+                          <p data-i18n-html="footer.content.desc2" class="i18n mb-0">Este site esta em constante desenvolvimento, fique a vontade para apontar erros ou sugerir melhorias.</p>
+                      </div>
+                  </div>
+                  <!--
+                  <div class="mt-3 row">
+                      <a href="./signup" rel="nofollow" class="col ct">
+                          <button type="button" class="btn btn-block btn-outline-info rounded-0"> <i data-i18n-html="footer.content.start" class="i18n"></i></button>
+                      </a>
+                  </div>
+                  -->
+               </div>
+               <div class="col-12 my-5 d-sm-none dropdown-divider"></div>
+               <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                  <span data-i18n-html="footer.content.contactnf" class="i18n white">CONTATO</span>
+                  <div class="mt-3 col px-0">
+                     <small class="col-1 ct pl-0">🏢</small>
+                     <small class="col pl-0"><a href="https://www.google.com/search?q=subversivo58">Subversivo58</a></small>
+                  </div>
+                  <div class="col mt-3 px-0">
+                     <small class="col-1 ct pl-0">🗺️</small>
+                     <small class="col pl-0"><a href="geo:Porto Alegre, RS - Brasil">Porto Alegre, RS - Brasil</a></small>
+                  </div>
+                  <div class="col mt-3 px-0">
+                     <small class="col-1 ct pl-0">✉️</small>
+                     <small class="col pl-0"><a href="mailto:subversivo58@gmail.com?subject=Contact" rel="nofollow">subversivo58@gmail.com</a></small>
+                  </div>
+                  <div class="col mt-3 px-0">
+                     <small class="col-1 ct pl-0">🌎</small>
+                     <small class="col pl-0"><a href="https://subversivo58.github.io/">https://subversivo58.github.io/</a></small>
+                  </div>
+                  <div class="col mt-3 px-0">
+                     <small class="col-1 ct pl-0">📱</small>
+                     <small class="col pl-0"><a href="tel:+5551984419162">+55 (51) 98441-9162</a></small>
+                  </div>
+                  <div class="col mt-3 px-0">
+                     <small class="col-1 ct pl-0">🧭</small>
+                     <small class="col pl-0"><a href="geo:-30.0397,-51.2382">-30.0397,-51.2382</a></small>
+                  </div>
+                  <div class="mt-3 row ct">
+                     <picture class="col">
+                        <a href="https://www.openstreetmap.org/#map=12/-30.0397/-51.2382" target="blank_" rel="noopener">
+                           <img alt="geo map"
+                                src="assets/media/img/poa-osm-print.png"
+                                srcset="assets/media/img/poa-osm-print.png 1x" class="img-fluid">
+                        </a>
+                        <figcaption class="bg-white">©️ <a class="tdu contrast" href="//www.openstreetmap.org/copyright" target="blank_" rel="noopener">OpenStreetMap</a> contributors</figcaption>
+                     </picture>
+                  </div>
+               </div>
+               <div class="col-12 my-5 d-md-none dropdown-divider"></div>
+               <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                   <span data-i18n-html="footer.content.blognew" class="i18n white">NOVIDADES</span>
+                   <div id="dinamic-footer-news" class="col px-0">
+                       <div class="mt-3 col footer-column-bb">
+                           <a href="#" class="row">
+                               <small>📰 At 2500 Users</small>
+                           </a>
+                           <small class="row">Mar 17, 2017</small>
+                       </div>
+                       <div class="col mt-3 footer-column-bb">
+                           <a href="#" class="row">
+                               <small>📰 Channels in all platform</small>
+                           </a>
+                           <small class="row">Feb 28, 2017</small>
+                       </div>
+                       <div class="col mt-3 footer-column-bb">
+                           <a href="#" class="row">
+                               <small>📰 Find-Me module added</small>
+                           </a>
+                           <small class="row">Jan 16, 2017</small>
+                       </div>
+                       <div class="col mt-3 footer-column-bb">
+                           <a href="#" class="row">
+                               <small>📰 Mobile 1.0 started</small>
+                           </a>
+                           <small class="row">Dec 6, 2016</small>
+                       </div>
+                       <div class="col mt-3 footer-column-bb">
+                           <a href="#" class="row">
+                               <small>📰 Release 1.0</small>
+                           </a>
+                           <small class="row">Jun 11, 2016</small>
+                       </div>
+                       <div class="col mt-3 footer-column-bb">
+                           <a href="#" class="row">
+                               <small>📰 Alpha</small>
+                           </a>
+                           <small class="row">Mai 23, 2016</small>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-12 my-5 d-sm-none d-md-block d-lg-none dropdown-divider"></div>
+               <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                  <span data-i18n-html="footer.content.uselink" class="i18n white">LINKS UTEIS</span>
+                  <div class="col mt-3 footer-column-bb px-0">
+                     <a class="row mx-0 cp" href="who-am-i.html">
+                         <small class="col-1 px-0">❔</small>
+                         <small class="i18n col px-0 ml-2" data-i18n-html="footer.about">Sobre</small>
+                     </a>
+                  </div>
+                  <div class="col mt-3 footer-column-bb px-0">
+                      <a class="row mx-0 cp" href="copyright.html">
+                         <small class="col-1 px-0">©️</small>
+                         <small class="i18n col px-0 ml-2" data-i18n-html="combo.copyr">Direitos Autorais</small>
+                      </a>
+                  </div>
+                  <div class="col mt-3 footer-column-bb px-0">
+                     <a class="row mx-0 cp" href="docs/">
+                        <small class="col-1 px-0">📖</small>
+                        <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.docs">Documentação</small>
+                     </a>
+                  </div>
+                  <div class="col mt-3 footer-column-bb px-0">
+                      <a class="row mx-0 cp" href="policy.html">
+                          <small class="col-1 px-0">📃</small>
+                          <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.policies">Politicas Gereais</small>
+                      </a>
+                  </div>
+
+                  <div class="col mt-3 footer-column-bb px-0">
+                     <a class="row mx-0 cp" href="contact.html">
+                         <small class="col-1 px-0">✉️</small>
+                         <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.policies">Contato</small>
+                     </a>
+                  </div>
+
+                  <div class="col mt-3 footer-column-bb px-0">
+                     <a class="row mx-0 cp" href="https://github.com/subversivo58/subversivo58.github.io" target="blank_" rel="noopener">
+                         <small class="col-1 px-0">🍴</small>
+                         <small class="i18n col px-0 ml-2">Github</small>
+                     </a>
+                  </div>
+                  <!--
+                  <div class="col mt-3 footer-column-bb px-0">
+                     <i class="col-1 ct fa fa-group pl-0"></i>
+                     <small class="col pl-0">
+                         <a href="//forum.himliy.com/">
+                             <span data-i18n-html="footer.content.forum" class="i18n"></span>
+                             <i class="fr">↗️</i>
+                         </a>
+                     </small>
+                  </div>
+                  <div class="col mt-3 footer-column-bb px-0">
+                     <i class="col-1 ct fa fa-wrench pl-0"></i>
+                     <small class="col pl-0">
+                         <a href="//dev.himliy.com/">
+                             <span data-i18n-html="footer.content.devtool" class="i18n"></span>
+                             <i class="fr">↗️</i>
+                         </a>
+                     </small>
+                  </div>
+                  <div class="col mt-3 footer-column-bb px-0">
+                     <i class="col-1 ct fa fa-cogs pl-0"></i>
+                     <small class="col pl-0">
+                         <a href="//api.himliy.com/">
+                             <span data-i18n-html="footer.content.api" class="i18n"></span>
+                             <i class="fr">↗️</i>
+                         </a>
+                     </small>
+                  </div>
+                  -->
+                  <div class="col mt-3 footer-column-bb px-0">
+                      <a href="::" data-toggle="modal" data-target="#modal-bugs-report">
+                          <small class="col-1 px-0">🐛</small>
+                          <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.bugs">Reportar Erros</small>
+                      </a>
+                  </div>
+               </div>
+            </div>
+        </section>
+        <!-- FOOTNOTE -->
+        <section id="content-footnote" class="container-fluid d-md-block">
+           <div class="row">
+               <div class="col-12 col-sm-4 col-md-4">
+                  <!--
+                  <a href="https://collabore.github.io/" target="_blank" data-i18n-title="source.author" class="i18n hbnh cp">
+                      <span>Powered By </span>
+                      <picture>
+                          <img {{indexed_image=ya016lsz7k51mz5w5pl5n}} width="20px" height="20px">
+                      </picture>
+                  </a>
+                  -->
+                  <a href="::" data-toggle="modal" data-target="#modal-source-version-info">
+                      <span class="hbnh d-inline-flex float-md-left cp tc">version</span>
+                  </a>
+                  <a href="who-am-i.html" data-i18n-html="footer.about" class="i18n hbnh cp tc">About</a>
+               </div>
+               <div class="col-12 col-sm-12 col-md-4 text-md-center">
+                  <a href="copyright.html" class="hbnh cp">©️ Subversivo58 - 2020</a>
+               </div>
+               <div class="col-12 col-sm-12 col-md-4">
+                   <a href="policies.html#3-licit" data-i18n-html="footer.licit" class="i18n hbnh cp tc float-md-right">Licit</a>
+                   <a href="policies.html#cookies" data-i18n-html="footer.cookie" class="i18n hbnh cp tc float-md-right">Cookies</a>
+                   <a href="policies.html#privacci" data-i18n-html="footer.privacci" class="i18n hbnh cp tc float-md-right">Privacci</a>
+               </div>
+           </div>
+        </section>
+
+
+
+    </footer>
 
     <!-- JAVASCRIPT RESOURCES -->
+    <script type="module" src="./assets/js/setup.mjs"></script>
+
 </body>
 </html>

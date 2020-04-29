@@ -133,6 +133,11 @@ body {
 .adjust-middle {
   margin-top: -.2rem;
 }
+.fill-height {
+  min-height: -webkit-fill-available;
+  min-height: -moz-available;
+  min-height: stretch;
+}
 /* PROGRESS BARS KEYFRAMES -----------------------------------------*/
 @-webkit-keyframes progress-bar-stripes {
   from {
