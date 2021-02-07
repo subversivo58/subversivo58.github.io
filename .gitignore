@@ -86,10 +86,6 @@ npm-debug.log
 
 # docs (blacklist)
 /docs/*
-/docs/policies/*
-/docs/policies/archive/*
-/docs/policies/transcript/*
-/docs/policies/transcript/en_US/*
 
 #docs (whitelist)
 !/docs/white-paper.md
