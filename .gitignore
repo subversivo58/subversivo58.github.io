@@ -84,29 +84,6 @@ npm-debug.log
 # Development
 /development
 
-# docs (blacklist)
-/docs/*
-
-#docs (whitelist)
-!/docs/white-paper.md
-!/docs/licenses.md
-!/docs/policies/policy.md
-!/docs/policies/privacy.md
-!/docs/policies/storage.md
-!/docs/policies/terms.md
-!/docs/policies/white-paper.md
-!/docs/policies/raw-contract.md
-!/docs/policies/README.md
-!/docs/policies/archive/README.md
-!/docs/policies/transcript/README.md
-!/docs/policies/transcript/en_US/README.md
-
-# Posts files (blacklist)
-/blog/posts/*
-
-# Posts files (whitelist to README.md)
-!/blog/posts/README.md
-
 # Local development
 *.env
 *.dev
