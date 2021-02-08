@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://subversivo58.github.io/index.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://subversivo58.github.io/about.html</loc>
+        <changefreq>mounthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://subversivo58.github.io/policy.html</loc>
+        <changefreq>mounthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://subversivo58.github.io/copyright.html</loc>
+        <changefreq>mounthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://subversivo58.github.io/nocookie.html</loc>
+        <changefreq>year</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://subversivo58.github.io/you-in-control-of-your-data.html</loc>
+        <changefreq>year</changefreq>
+        <priority>0.5</priority>
+    </url>
+</urlset>

@@ -1,0 +1,69 @@
+{
+    "name": "Subversivo58 | Blog",
+    "short_name": "Subversivo58",
+    "description" : "Welcome to Subversivo58 Personal Blog Page",
+    "author": {
+        "name": "Subversivo58",
+        "url": "https://subversivo58.github.io"
+    },
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#1ebfff",
+    "background_color": "#1ebfff",
+    "display": "standalone",
+    "start_url": "/?utm_source=homescreen",
+    "scope": "/",
+    "categories": [
+        "entertainment",
+        "lifestyle",
+        "news",
+        "personalization",
+        "photo",
+        "productivity",
+        "social",
+        "utilities"
+    ],
+    "shortcuts" : [
+        {
+            "name": "Policy",
+            "url": "/policy.html",
+            "description": "General Policy, Terms, Privacy and Security"
+        },
+        {
+            "name": "White Paper",
+            "url": "/you-in-control-of-your-data.html",
+            "description": "Our commitment to you"
+        },
+        {
+            "name": "Copyright",
+            "url": "/copyright.html",
+            "description": "Source right's and Third Party Software information"
+        },
+        {
+            "name": "About",
+            "url": "/about.html"
+        }
+    ],
+    "share_target": {
+        "action": "/share",
+        "method": "POST",
+        "enctype": "multipart/form-data",
+        "params": {
+            "files": [
+                {
+                  "name": "file"
+                }
+            ],
+            "title": "title",
+            "texto": "texto",
+            "url": "url"
+        }
+    },
+    "lang": "en-US",
+    "dir" : "ltr"
+}
