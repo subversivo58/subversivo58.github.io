@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /config/
-Disallow: /assets/
-
-Sitemap: https://subversivo58.github.io/sitemap.xml
