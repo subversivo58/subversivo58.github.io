@@ -1,0 +1,595 @@
+{
+    "anonimous": {
+        "title": "Are you in incognito mode?",
+        "body": {
+            "first": "Hmm... it looks like you're browsing in private mode (anonymously).",
+            "second": "In this browsing mode, all cookies and cached data from this session will be discarded as soon as you close it.",
+            "third": "Since this site was built to work even when offline, some features, plugins and apps may not work properly or may be unavailable."
+        },
+        "button": "Ok, I want to continue"
+    },
+    "source": {
+        "name": "Subversivo58 Blog",
+        "version": "0.1.0",
+        "author": "Subversivo58",
+        "home": "https://github.com/subversivo58/",
+        "colab": [],
+        "build": "Alpha",
+        "bugs": [
+            {
+                "type": "git",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
+            }
+        ],
+        "license": [
+            {
+                "type": "MIT",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
+            }
+        ]
+    },
+    "words": {
+        "an": "1 ago",
+        "agree": "agree",
+        "clear": "clear",
+        "signin": "sign in",
+        "logout": "log out",
+        "signup": "sign up",
+        "close": "close",
+        "drawer": "drawer",
+        "free": "for free",
+        "search": "search",
+        "recover": "recover",
+        "restore": "restore",
+        "white": "white",
+        "decade": "decade",
+        "year": "year",
+        "month": "month",
+        "week": "week",
+        "day": "day",
+        "hour": "hour",
+        "minute": "minute",
+        "license": "license",
+        "more": "more",
+        "second": "second",
+        "now": "now",
+        "rememberme": "remember me",
+        "source": "source",
+        "mail": "email",
+        "page": "page",
+        "pwd": "password",
+        "token": "token",
+        "media": "media",
+        "settings": "settings",
+        "version": "version",
+        "ooops": "ooops..."
+    },
+    "combo": {
+        "btn_top": "Back to Top",
+        "more_info": "get more information.",
+        "click_here": "Click here!",
+        "clear_exit": "Clear and exit",
+        "not_show_again": "don't show again",
+        "powered": "Powered by",
+        "copyr": "Copyright",
+        "knowmore": "Learn more",
+        "seelicenses": "See the licenses"
+    },
+    "langs": {
+        "enUS": "English (United States) - [default]",
+        "ptBR": "Portuguese (Brazil)"
+    },
+    "navbar": {
+        "wiki": "WIKI",
+        "blog": "blog",
+        "dpo": "DPO",
+        "colab": "collaborate",
+        "about": "about",
+        "lab": "lab",
+        "contact": "contact",
+        "policies": "policies",
+        "donations": "donations"
+    },
+    "footer": {
+        "content": {
+            "contactnf": "CONTACT",
+            "blognew": "WHAT'S NEW",
+            "uselink": "USEFUL LINKS",
+            "docs": "Documentation",
+            "policies": "General Policies",
+            "faq": "Support and FAQ",
+            "forum": "Forum and Community",
+            "devtool": "DEV Tools",
+            "api": "Services API",
+            "bugs": "Report Bugs",
+            "desc1": "This site brings together a collection of projects started in 2010 and aims to serve as a personal blog to share a wide range of topics. Feel free to explore the site and share its content.",
+            "desc2": "This site is under constant development, feel free to point out errors or suggest improvements.",
+            "start": "Get started now",
+            "source": "Source Code",
+            "feedback": "Feedback"
+        },
+        "author": "author",
+        "about": "about",
+        "licit": "legal",
+        "cookie": "cookies",
+        "privacci": "privacy",
+        "footoodle": {
+            "title": "Subscribe to Collabore",
+            "description": "<p>Collabore opens the doors to developers and enthusiasts. Turn your static pages service into dynamic ones.</p><p>Through a simple yet powerful interface you can modify, review and create new posts, add plugins and apps to your pages or embed your own extensions.</p><p>All of this through open source code designed to be extended. Use the built-in authentication system so Collabore users can sign up on your page in a few clicks and, best of all, authenticate automatically in your page's plugins and apps.</p><p class='mt-5 ct'>Be part of this collaborative system, <a href='./signup' class='white tdu'>sign up now!</a></p>"
+        }
+    },
+    "api": {
+        "geo": {
+            "request": "Request geolocation",
+            "description": "<div class='row'><p>Geolocation makes it possible to find content in a more accurate and relevant way.</p><p>This is the easiest way to find friends, pages, products, groups, channels, posts or tags closest to you.</p></div><div data-mg='top:15' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-map-marker ct' onclick='$.Geo.request()'> request permission</span></div></div>",
+            "link_docs": "For more information, see the permissions guide in our <a href='https://docs.himliy.com/gelocation#permissions' target='blank_' rel='nofollow' class='blue tdu'>documentation</a>"
+        },
+        "not": {
+            "request": "Request notification",
+            "description": "<div class='row'><p>When using notifications:</p><p><b>Signed-in users:</b> receive message, system, chat, channel and registered feed notifications (see documentation: <a href='http://docs.himliy.com/notification#subscribles' target='blank_' rel='nofollow' class='blue tdu'>subscription</a>) even while browsing other web pages or even when the browser is <b>minimized</b>.</p><p><b>Signed-out users:</b> receive system or survey notifications (see documentation: <a href='https://docs.himliy.com/notification#unsigned-subscrible' target='blank_' rel='nofollow' class='blue tdu'>unregistered subscription</a>.</p></div><div data-mg='top:5' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-bell-o ct' onclick='$.Notific.request()'> request permission</span></div></div>",
+            "link_docs": "For more information, see the permissions guide in our <a href='https://docs.himliy.com/notification#permissions' target='blank_' rel='nofollow' class='blue tdu'>documentation</a>",
+            "message": {
+                "head": "Thank you",
+                "body": "You enabled notifications on Collabore :)"
+            }
+        }
+    },
+    "cookies": {
+        "agree": {
+            "description_1": "This site uses cookies and other technologies to store information. By continuing on this site you agree to this use and to our \"policy\" regarding it.",
+            "description_2": "For more detailed information see our <a href='./policies.html#cookies' target='blank_' rel='nofollow' class='tdu sky'>Cookie Policy</a>.",
+            "close_banner_info": "To close, click the button below."
+        }
+    },
+    "drawer": {
+        "clear_data": {
+            "title": "Clear site data",
+            "question_info": "Are you sure about this?",
+            "positive": "Yes, clear",
+            "negative": "No, cancel",
+            "footer_info": "Clear cache and cookies. See the <a href='#' class='tdu blue'>documentation</a>."
+        },
+        "bug_report": {
+            "title": "Report bugs 🐛",
+            "question_info": "Found a bug? Report it!",
+            "placeholder": "Describe the bug here...",
+            "send": "Send",
+            "follow": "Go to support",
+            "footer_info": "Reporting bugs. See the <a href='#' class='tdu blue'>documentation</a> about it."
+        },
+        "feedback": {
+            "title": "Send your feedback",
+            "rating": "Rating:",
+            "question_info": "Send your opinion about Collabore!",
+            "placeholder": "Send criticism, praise or suggestions",
+            "footer_info": "Sending feedback. See the <a href='#' class='tdu blue'>documentation</a> about it.",
+            "notific": {
+                "error": {
+                    "title": "Feedback failed!",
+                    "message": "Sorry, there was an error processing your feedback."
+                },
+                "success": {
+                    "title": "Feedback sent!",
+                    "message": "Thank you, your feedback was sent successfully!"
+                }
+            }
+        },
+        "geolocation": {
+            "title": "Request Geolocation",
+            "btn1": "Yes, request",
+            "btn2": "No, cancel",
+            "footer_info": "Geolocation? See the <a href='#' class='tdu blue'>documentation</a>."
+        },
+        "notification": {
+            "title": "Request Notifications",
+            "btn1": "Yes, request",
+            "btn2": "No, cancel",
+            "footer_info": "Notifications? See the <a href='#' class='tdu blue'>documentation</a>."
+        },
+        "getmedia_audio": {
+            "title": "Request Microphone",
+            "btn1": "Yes, request",
+            "btn2": "No, cancel",
+            "footer_info": "Audio media? See the <a href='#' class='tdu blue'>documentation</a>."
+        },
+        "getmedia_video": {
+            "title": "Request Webcam",
+            "btn1": "Yes, request",
+            "btn2": "No, cancel",
+            "footer_info": "Video media? See the <a href='#' class='tdu blue'>documentation</a>."
+        },
+        "words": {
+            "clear": "Cleanup",
+            "geo": "Geo",
+            "cam": "Video",
+            "mic": "Audio",
+            "color": "Color",
+            "note": "Notes",
+            "bug": "Bugs",
+            "lab": "Laboratory",
+            "not": "Alerts",
+            "feedback": "Feedback",
+            "lang": "Languages",
+            "marks": "Marker"
+        }
+    },
+    "info_popup": {
+        "join_key": {
+            "head": "Security Key",
+            "body": "<p>Upload your <b>security key</b> file.</p><p>This process analize your exclusive encrypted key and authorize your access.</p>",
+            "footer": "<small>Security sugestions and more info. <a href='#' class='tdu sky'>Read the docs</a></small>"
+        },
+        "registration_pwd": {
+            "head": "Account password!",
+            "body": "<p class='lh-140'>This field requires minimun at 8 characters and max 50 in respect of allow rules:</p><ul class='list-group'><li class='list-group-item'><b>one lowercase letter</b></li></ul>",
+            "footer": "<small>Security sugestions and more info. <a href='#' class='tdu sky'>Read the docs</a></small>"
+        }
+    },
+    "registration": {
+        "error": {
+            "already": {
+                "message": "<p class='lh-140'>This email already registered!</p><p class='lh-140'>Please, active your account, re-send activaction link or goto <a href='/signin'>login page</a>.</p>"
+            },
+            "server": {
+                "message": "<p class='lh-140'>Sorry, ocurred internal server error!</p>"
+            }
+        }
+    },
+    "recover": {
+        "success": {
+            "title": "Congratulations!",
+            "message": "A recovery link has been sent! Check your email box... the link is valid for one hour"
+        },
+        "error": {
+            "server": {
+                "title": "[ERROR] Ocurred a error!",
+                "message": "Sorry, ocurred internal server error! Retry later."
+            },
+            "notfound": {
+                "title": "[INFO] Notfound email!",
+                "message": "Sorry, this email is not found in database!"
+            },
+            "inactived": {
+                "title": "[INFO] Account inactived!",
+                "message": "Sorry, this account is not actived yet!"
+            },
+            "wait": {
+                "title": "[INFO] Email waiting!",
+                "message": "This email has already been sent! The waiting time to make a new order is one hour."
+            },
+            "auth": {
+                "title": "[ERROR] Auth error!",
+                "message": "Your request dont have valid auth token! Click here to view docs about recover."
+            },
+            "conn": {
+                "title": "[INFO] Connection is closed!",
+                "message": "An email with a recovery link has already been sent! Check your email service."
+            },
+            "mail": {
+                "title": "[ERROR] Email error!",
+                "message": "This is invalid email format!  Click here to view docs about recover.",
+                "link": "#"
+            }
+        }
+    },
+    "copyright": {
+        "contributors": "This project was only possible thanks to the use of many other open source projects and the <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>community of contributors</a>... you are free to create, use, modify and distribute while respecting all underlying licenses!",
+        "caption": "List of sources and their respective licenses",
+        "backendsources": "Many other sources that run on the server (NodeJS) and are loaded dynamically are fundamental to this project, such as:",
+        "package": "and <a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>more...</a>",
+        "tps": "Third-party software",
+        "thissource": "This site's software",
+        "alllicenses": "All licenses"
+    },
+    "signin": {
+        "remember": "Remember me if this is your device",
+        "forgot": "Recover account?"
+    },
+    "signup": {
+        "success": {
+            "title": "Congratulations!",
+            "message": "A activaction link has been sent! Check your email service box... valid for 24 hours"
+        },
+        "error": {
+            "server": {
+                "title": "[ERROR] Ocurred a error!",
+                "message": "Sorry, ocurred internal server error! Retry later."
+            },
+            "already": {
+                "title": "[INFO] Already registered!",
+                "message": "This email has already been registered! Please, check your email service box."
+            },
+            "token": {
+                "title": "[ERROR] Auth error!",
+                "message": "Your request dont have valid token! Click here to view docs about signup."
+            },
+            "conn": {
+                "title": "[INFO] Connection is closed!",
+                "message": "An email with a activaction link has already been sent! Check your email service box."
+            },
+            "mail": {
+                "title": "[ERROR] Email error!",
+                "message": "This is invalid email format!  Click here to view docs about signup.",
+                "link": "#"
+            },
+            "pwd": {
+                "title": "[ERROR] Password error!",
+                "message": "This is invalid password format!  Click here to view docs about signup.",
+                "link": "#"
+            }
+        },
+        "modal": {
+            "head": "Account password",
+            "req": "This password requires:",
+            "test": "Test your password now:",
+            "chars": "minimum of 8 characters and maximum of 50",
+            "lower": "one lowercase letter",
+            "upper": "one uppercase letter",
+            "digit": "one digit (number)",
+            "special": "one special character",
+            "space": "no spaces",
+            "run": "test",
+            "footer": "For more information or suggestions, see the <a href='#' class='tdu blue' target='_blank' rel='nofollow'>documentation</a> about it.",
+            "result": {
+                "accept": "Good, valid password!",
+                "refuse": "Invalid",
+                "empty": ", empty",
+                "less": ", fewer than 8 characters",
+                "more": ", more than 50 characters",
+                "lower": ", no lowercase letters",
+                "upper": ", no uppercase letters",
+                "digit": ", no digits (numbers)",
+                "special": ", no special characters",
+                "space": ", contains spaces",
+                "unk": ", undefined"
+            }
+        },
+        "regnow": "Sign up now ",
+        "btnSubmit": "Sign up for Collabore",
+        "agreement": "By clicking the \"Sign up for Collabore\" button, you will be accepting the <a href='./licit' target='blank_'>terms of service</a> and <a href='./policies/privacci' target='blank_'>privacy policy</a>. We will occasionally send emails related to your account"
+    },
+    "slack": {
+        "another": "Request a new invitation? ",
+        "figcap": {
+            "property": "Slack is owned by ",
+            "rights": "All rights reserved."
+        },
+        "giturl": "GitHub Profile",
+        "join": " Join the Collabore Team",
+        "modal": {
+            "header": "About the GitHub Profile link",
+            "body1": " is a very good tool but <b class='green'>FREE</b> accounts have limitations.",
+            "body2": "We ask for an account link from ",
+            "body2_1": " to verify that the new member is in fact a developer and collaborates on other projects.",
+            "body3": "The email provided must be the same public email linked to your account on ",
+            "footer": "For more information, see the <a href='#' class='blue tdu'>documentation</a> about this."
+        },
+        "alert": {
+            "sended": "Your request was sent!",
+            "info": "Your request is awaiting a response!",
+            "success": "Your request has already been accepted!",
+            "danger": "Your request was declined!"
+        },
+        "notific": {
+            "success": {
+                "title": "Collabore Team Invitation!",
+                "message": "Success, your request is awaiting administrator action."
+            },
+            "errorserver": {
+                "title": "Server error!",
+                "message": "Sorry, a server error occurred! Click here to see the documentation."
+            },
+            "invalidauth": {
+                "title": "Authentication error!",
+                "message": "Your request does not contain a valid token! Click here to see the documentation."
+            },
+            "invalidmail": {
+                "title": "Email error!",
+                "message": "This is an invalid email!  Click here to see the documentation."
+            },
+            "invalidlink": {
+                "title": "GitHub Profile error!",
+                "message": "Sorry, this is not a GitHub Profile link! Click here to see the documentation."
+            },
+            "accepted": {
+                "title": "Invitation already accepted!",
+                "message": "Your request has already been accepted in the invitation list! Click here to see the documentation."
+            },
+            "refused": {
+                "title": "Invitation declined!",
+                "message": "Sorry, this request was declined by the administrator! Click here to see the documentation."
+            },
+            "waiting": {
+                "title": "Invitation pending!",
+                "message": "This request has already been sent! Awaiting administrator action."
+            },
+            "closeconn": {
+                "title": "The connection was closed!",
+                "message": "This request has already been sent! Click here to see the documentation."
+            }
+        }
+    },
+    "openpgp": {
+        "error": {
+            "encryption": {
+                "title": "[Error] Encryption request!",
+                "message": "Have one error in PGP encrypt! Click here to view docs about this error.",
+                "link": "#"
+            }
+        }
+    },
+    "nocookie": {
+        "title": "Unsupported",
+        "p1": "Sorry, we do not support the \"cookie free\" browsing mode.",
+        "p2": "Although this website uses cookies and other storage technologies, \"<strong>we do not store any data in your browser without your express permission</strong>\"!",
+        "p3": "We believe we have good reasons for not supporting \"cookies-free\" browsing. You may want to take a look at our <a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a> for more information. Unfortunately you will need to browse with cookies enabled"
+    },
+    "404": {
+        "general": "Ooops... Not found!",
+        "title": "Page not found",
+        "message": "The address you tried to open does not exist or has been moved. Check that you typed it correctly or go back to the home page.",
+        "button": "Back to home"
+    },
+    "mail": {
+        "account": {
+            "title": "Account Created!",
+            "text_a": "Welcome to Collabore an Open Source Project that uses free tools and web languages to create small cooperative blogs and collaboration tools &mdash; Explore the best HTML5 APIs, create JavaScript plugins, use WebSockets to create chats, comment systems, and manage your pages remotely quickly and easily.",
+            "text_b": "Click the link below in 24 hours to activate your account and start using it.",
+            "btn_a": "Activate account!",
+            "features": "Collabore Features",
+            "btn_b": "Visit Now!",
+            "feat_a": {
+                "title": "Programming",
+                "msg": "Flexible and Powerfull development use JavaScript frameworks and HTML API's and many more."
+            },
+            "feat_b": {
+                "title": "Web Development",
+                "msg": "Choose between plugins or extend to server applications in a simple way."
+            },
+            "feat_c": {
+                "title": "API Implementation",
+                "msg": "Implement your own API easily and quickly."
+            },
+            "feat_d": {
+                "title": "Deploy your blog",
+                "msg": "Simple steps to deploy blog templates."
+            },
+            "feat_e": {
+                "title": "Responsive",
+                "msg": "Responsive templates using Bootstrap."
+            }
+        },
+        "recover": {
+            "title": "Account Recover!",
+            "btn": "Recover Now!",
+            "text_a": "Hello,",
+            "text_b": "&mdash; That email is to recover Collabore account.",
+            "text_c": "Click the link below in one hour to recover your account access."
+        },
+        "policy": {
+            "title": "Policy Changes!",
+            "text_a": "Watts?",
+            "text_b": "We recently updated our usage policy. The policies govern the compromise between the application and the user as well as their privacy, data use and the provision of services.",
+            "view_changes": "Visit Collabore App an read more about this changes.",
+            "btn": "View Now!"
+        },
+        "twofactory": {
+            "title": "Change 2FA",
+            "text_a": "Whats?",
+            "text_b": "A Two Factory Authentication (2FA) system change action was requested.",
+            "confirm": "Click the button below to confirm this change",
+            "btn": "Confirm Now!"
+        },
+        "unsubscribe": {
+            "text_a": "If you do not recognize this email or do not know why you received it, ignore it",
+            "text_b": " or unsubscribe this"
+        },
+        "visite_text": "Visit Collabore webpage on GitHub an read more about how to use.",
+        "visite_link": "Visit Collabore Home Page",
+        "copy": "Template Email - &copy; 2016 - Subversivo58"
+    },
+    "twofactory": {
+        "security_slide": {
+            "enabled": "disable 2FA",
+            "disabled": "enable 2FA"
+        }
+    },
+    "webpush": {
+        "subscribe": {
+            "": ""
+        }
+    },
+    "date": {
+        "days": {
+            "long": [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ],
+            "short": [
+                "Sun",
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat"
+            ]
+        },
+        "months": {
+            "long": [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ],
+            "short": [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec"
+            ]
+        },
+        "formatter": {
+            "error": "Undefined date"
+        }
+    },
+    "modals": {
+        "language": {
+            "title": "Select Language",
+            "avaliable": "Available Languages",
+            "pt_BR": "Portuguese",
+            "en_US": "English",
+            "footer": "No option in your language? Create a translation!"
+        },
+        "version": {
+            "title": "🚧 Under Construction 🚧",
+            "text1": "This project was only possible thanks to the use of many other open source projects and the ",
+            "text2": "community of contributors",
+            "text3": "You are free to create, use, modify and distribute while respecting all underlying licenses!"
+        }
+    },
+    "notify": {
+        "storage": {
+            "title": "Subversivo58 - Storage",
+            "body": "This site uses \"cookies\" and other technologies that store information on your device, do you agree?",
+            "actions": [
+                {
+                    "action": "cookie-agree",
+                    "title": "what is it?",
+                    "icon": "🍪"
+                },
+                {
+                    "action": "cookie-policy",
+                    "title": "view policies",
+                    "icon": "🛡️"
+                },
+                {
+                    "action": "terms-policy",
+                    "title": "view terms",
+                    "icon": "📜"
+                }
+            ]
+        }
+    }
+}

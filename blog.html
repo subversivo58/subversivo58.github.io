@@ -1,0 +1,298 @@
+<!--
+  @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+  @copyright Copyright (c) 2021 Lauro Moraes - [https://github.com/subversivo58]
+  @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+-->
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Blog</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Subversivo58 Personal Blog Page">
+    <meta name="keywords" content="blog, news, projects, tech, tendences, cyberculture, subversivo58">
+    <meta name="author" content="Subversivo58">
+    <!-- Simple `window.console` debugger -->
+    <meta name="DEBUG" content="true">
+    <meta name="reply-to" content="https://github.com/subversivo58.github.io/issues/new">
+    <link rel="copyright" href="copyright.html">
+    <link rel="canonical" href="https://subversivo58.github.io/blog.html">
+
+    <!-- Twitter Open Graph -->
+    <meta name="twitter:site"        content="@subversivo58">
+    <meta name="twitter:card"        content="summary_large_image">
+
+    <!-- Open Graph -->
+    <meta property="og:url"          content="https://subversivo58.github.io/blog.html">
+    <meta property="og:type"         content="website">
+    <meta property="og:title"        content="Subversivo58 | Blog">
+    <meta property="og:description"  content="Subversivo58 Personal Blog Page">
+    <meta property="og:image"        content="https://subversivo58.github.io/assets/media/image/graph.webp">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="720">
+    <link rel="icon" href="/assets/media/image/icons/cube.webp" type="image/webp">
+
+
+    <!-- Preload -->
+    <link rel="preload" href="assets/js/setup.mjs" as="script" crossorigin="anonymous">
+    <link rel="preload" href="assets/js/modules/helpers/BasePrefixes.mjs" as="script" crossorigin="anonymous">
+    <link rel="preload" href="assets/js/modules/helpers/Helpers.mjs" as="script" crossorigin="anonymous">
+    <link rel="preload" href="assets/js/modules/functions/Functions.mjs" as="script" crossorigin="anonymous">
+    <link rel="preload" href="assets/js/modules/lib/Emitter.mjs" as="script" crossorigin="anonymous">
+    <link rel="preload" href="assets/js/modules/lib/AwesomeIndexedDB.mjs" as="script" crossorigin="anonymous">
+    <link rel="preload" href="assets/js/modules/vendor/bootstrap-native.mjs" as="script" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./assets/vendor/bootstrapv4/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/main.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1ebfff">
+
+    <!-- Content Security Policy Rules -
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'none';
+          base-uri 'self';
+          child-src 'self';
+          block-all-mixed-content;
+          frame-src 'self';
+          media-src 'self';
+          manifest-src 'self';
+          connect-src 'self' https://api.github.com https://unpkg.com https://cdnjs.cloudflare.com data:;
+          object-src 'none';
+          form-action 'self';
+          img-src 'self' data:;
+          script-src 'self' https://unpkg.com https://cdnjs.cloudflare.com;
+          style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;
+          font-src 'self' https://fonts.gstatic.com;"> -->
+
+    <!-- NOSCRIPT !-->
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=nojs.html">
+    </noscript>
+</head>
+<body id="body">
+
+    <!-- CONTENT CONTAINER -->
+    <section id="index-central-block" class="container-fluid px-0 py-5 fill-height">
+    </section>
+
+    <section class="row container-fluid px-0 mx-0">
+        <span class="bg-green-special col progress-slim-0 m-0 lh-75"></span>
+        <span class="bg-blue col progress-slim"></span>
+        <span class="bg-red col progress-slim"></span>
+        <span class="bg-aqua col progress-slim"></span>
+        <span class="bg-yellowgreen col progress-slim"></span>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer-container" class="container-fluid px-0">
+
+        <!-- FOOTHEAD (OR: INJECTED)--
+        <section id="foothead" class="container-fluid">
+            <div class="row">
+                <h1 id="footer-fh-title" class="col-12 h1 ct">&nbsp;bla bla bla, bla</h1>
+                <p id="footer-fh-content" class="mt-4 col-md-10 mx-auto ct">
+                    &nbsp;
+                    Mussum Ipsum, cacilds vidis litro abertis. Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi. Quem num gosta di mim que vai caçá sua turmis! Não sou faixa preta cumpadi, sou preto inteiris, inteiris. Copo furadis é disculpa de bebadis, arcu quam euismod magna.
+                </p>
+            </div>
+            <div class="mt-5 row">
+               <div id="footer-fh-img" data-lazy-target class="col-12 col-md-10 col-lg-8 mx-auto"></div>
+            </div>
+        </section>-->
+
+        <!-- FOOTBODY -->
+        <section id="footbody" data-lazy-target class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                    <div class="row">
+                        <picture class="col">
+                            <img alt="Brand"
+                                 src="./assets/media/image/1x1.gif"
+                                 data-src="./assets/media/image/logos/site-logo@500x100.webp" data-lazy-target
+                                 width="300" height="50" class="img-fluid w-100 cp">
+                        </picture>
+                    </div>
+                    <div class="mt-2 row">
+                        <p class="col white ct">©️ 2010 - 2021 Subversivo58 ®️</p>
+                    </div>
+                    <div class="mt-3 row">
+                        <p data-i18n-html="footer.content.desc1" class="i18n col-12 ct">Este site reúne uma coleção de projetos iniciados em 2010 e tem por objetivo servir como blogue pessoal para compartilhar dos mais diversos temas. Sinta-se a vontade para explorar o site e compartilhar seu conteúdo.</p>
+                        <div class="col alert alert-info rounded-0 mx-3 p-2 ct">
+                            <small data-i18n-html="footer.content.desc2" class="i18n mb-0">Este site esta em constante desenvolvimento, fique a vontade para apontar erros ou sugerir melhorias.</small>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="mt-3 row">
+                        <a href="./signup" rel="nofollow" class="col ct">
+                            <button type="button" class="btn btn-block btn-outline-info rounded-0"> <i data-i18n-html="footer.content.start" class="i18n"></i></button>
+                        </a>
+                    </div>
+                    -->
+                </div>
+                <div class="col-12 my-5 d-sm-none dropdown-divider"></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                    <span id="general-contact" data-i18n-html="footer.content.contactnf" class="i18n white"></span>
+                    <div class="mt-3 col px-0">
+                       <small class="col-1 ct pl-0">🏢</small>
+                       <small class="col pl-0"><a href="https://www.google.com/search?q=subversivo58" target="_blank" rel="noopener">Subversivo58</a></small>
+                    </div>
+                    <div class="col mt-3 px-0">
+                       <small class="col-1 ct pl-0">🗺️</small>
+                       <small class="col pl-0"><a href="geo:Porto Alegre, RS - Brasil">Porto Alegre, RS - Brasil</a></small>
+                    </div>
+                    <div class="col mt-3 px-0">
+                       <small class="col-1 ct pl-0">📧</small>
+                       <small class="col pl-0"><a href="mailto:subversivo58@gmail.com?subject=Contact" rel="nofollow">subversivo58@gmail.com</a></small>
+                    </div>
+                    <div class="col mt-3 px-0">
+                       <small class="col-1 ct pl-0">🌎</small>
+                       <small class="col pl-0"><a href="https://subversivo58.github.io/">https://subversivo58.github.io/</a></small>
+                    </div>
+                    <div class="col mt-3 px-0">
+                       <small class="col-1 ct pl-0">📱</small>
+                       <small class="col pl-0"><a href="tel:+5551984419162">+55 (51) 98441-9162</a></small>
+                    </div>
+                    <div class="col mt-3 px-0">
+                       <small class="col-1 ct pl-0">🧭</small>
+                       <small class="col pl-0"><a href="geo:-30.0397,-51.2382">-30.0397,-51.2382</a></small>
+                    </div>
+                    <div class="mt-3 row ct">
+                        <figure class="col mb-0">
+                            <a href="https://www.openstreetmap.org/#map=12/-30.0397/-51.2382" target="_blank" rel="noopener">
+                                <img alt="geo map"
+                                     src="./assets/media/image/1x1.gif"
+                                     data-src="assets/media/image/poa-osm-print.webp" data-lazy-target
+                                     width="285" height="165" class="img-fluid w-100 cp">
+                            </a>
+                            <figcaption class="bg-white">©️ <a class="tdu contrast" href="//www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-12 my-5 d-md-none dropdown-divider"></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                    <span data-i18n-html="footer.content.blognew" class="i18n white"></span>
+                    <div id="dinamic-footer-news" class="col px-0">
+                        <div class="mt-3 col footer-column-bb">
+                            <a href="#" class="row">
+                                <small>📰 At 2500 Users</small>
+                            </a>
+                            <small class="row">Mar 17, 2017</small>
+                        </div>
+                        <div class="col mt-3 footer-column-bb">
+                            <a href="#" class="row">
+                                <small>📰 Channels in all platform</small>
+                            </a>
+                            <small class="row">Feb 28, 2017</small>
+                        </div>
+                        <div class="col mt-3 footer-column-bb">
+                            <a href="#" class="row">
+                                <small>📰 Find-Me module added</small>
+                            </a>
+                            <small class="row">Jan 16, 2017</small>
+                        </div>
+                        <div class="col mt-3 footer-column-bb">
+                            <a href="#" class="row">
+                                <small>📰 Mobile 1.0 started</small>
+                            </a>
+                            <small class="row">Dec 6, 2016</small>
+                        </div>
+                        <div class="col mt-3 footer-column-bb">
+                            <a href="#" class="row">
+                                <small>📰 Release 1.0</small>
+                            </a>
+                            <small class="row">Jun 11, 2016</small>
+                        </div>
+                        <div class="col mt-3 footer-column-bb">
+                            <a href="#" class="row">
+                                <small>📰 Alpha</small>
+                            </a>
+                            <small class="row">Mai 23, 2016</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 my-5 d-sm-none d-md-block d-lg-none dropdown-divider"></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                    <span data-i18n-html="footer.content.uselink" class="i18n white"></span>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="./about.html">
+                            <small class="col-1 px-0">❔</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.about"></small>
+                        </a>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                         <a class="row mx-0 cp" href="copyright.html">
+                            <small class="col-1 px-0">©️</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="combo.copyr"></small>
+                         </a>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="docs/">
+                           <small class="col-1 px-0">📖</small>
+                           <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.docs"></small>
+                        </a>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="policy.html">
+                            <small class="col-1 px-0">📃</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.policies"></small>
+                        </a>
+                    </div>
+
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="::" data-fix-modal="#modal-feedback">
+                            <small class="col-1 px-0">📣</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.feedback"></small>
+                        </a>
+                    </div>
+
+                    <div class="col mt-3 footer-column-bb px-0">
+                       <a class="row mx-0 cp" href="https://github.com/subversivo58/subversivo58.github.io" target="_blank" rel="noopener">
+                           <small class="col-1 px-0">🍴</small>
+                           <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.source"></small>
+                       </a>
+                    </div>
+                    <!--
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <i class="col-1 ct fa fa-group pl-0"></i>
+                        <small class="col pl-0">
+                            <a href="//forum.himliy.com/">
+                                <span data-i18n-html="footer.content.forum" class="i18n"></span>
+                                <i class="fr">↗️</i>
+                            </a>
+                        </small>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <i class="col-1 ct fa fa-wrench pl-0"></i>
+                        <small class="col pl-0">
+                            <a href="//dev.himliy.com/">
+                                <span data-i18n-html="footer.content.devtool" class="i18n"></span>
+                                <i class="fr">↗️</i>
+                            </a>
+                        </small>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <i class="col-1 ct fa fa-cogs pl-0"></i>
+                        <small class="col pl-0">
+                            <a href="//api.himliy.com/">
+                                <span data-i18n-html="footer.content.api" class="i18n"></span>
+                                <i class="fr">↗️</i>
+                            </a>
+                        </small>
+                    </div>
+                    -->
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="::" data-fix-modal="#modal-bugs-report">
+                            <small class="col-1 px-0">🐛</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.bugs"></small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </footer>
+
+    <!-- JAVASCRIPT RESOURCES -->
+    <script type="module" src="./assets/js/setup.mjs"></script>
+
+</body>
+</html>

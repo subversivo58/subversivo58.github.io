@@ -1,0 +1,235 @@
+
+{
+    "source": {
+        "version": {
+            "canonical": "0.1.0 [development stage]",
+            "tag": "0.1.0"
+        },
+        "language": ["pt-BR", "en-US"],
+        "policies": {
+            "version": "1.0.0",
+            "last_update": "24/09/1985",
+            "path": "docs/policies/",
+            "file": "policies-v1.0.0.md",
+            "raw": "policies-latest.txt",
+            "revisions": []
+        }
+    },
+    "articles": {
+        "storage": [
+            {
+                "id": "post-01",
+                "title": "Primeiros passos",
+                "timestamp": 1792972800000,
+                "tags": ["teste", "blog"]
+            },
+            {
+                "id": "post-02",
+                "title": "Tabelas na web",
+                "timestamp": 1793059200000,
+                "tags": ["teste", "tabela"]
+            },
+            {
+                "id": "post-03",
+                "title": "Listas e ênfase",
+                "timestamp": 1793145600000,
+                "tags": ["teste", "listas"]
+            },
+            {
+                "id": "post-04",
+                "title": "Blocos de código",
+                "timestamp": 1793232000000,
+                "tags": ["teste", "código"]
+            },
+            {
+                "id": "post-05",
+                "title": "Markdown com HTML",
+                "timestamp": 1793318400000,
+                "tags": ["teste", "html"]
+            },
+            {
+                "id": "post-06",
+                "title": "Texto longo",
+                "timestamp": 1793404800000,
+                "tags": ["teste", "texto"]
+            },
+            {
+                "id": "post-07",
+                "title": "Cibercultura",
+                "timestamp": 1793491200000,
+                "tags": ["teste", "cibercultura"]
+            },
+            {
+                "id": "post-08",
+                "title": "Citações",
+                "timestamp": 1793577600000,
+                "tags": ["teste", "citação"]
+            },
+            {
+                "id": "post-09",
+                "title": "Tabelas alinhadas",
+                "timestamp": 1793664000000,
+                "tags": ["teste", "tabela"]
+            },
+            {
+                "id": "post-10",
+                "title": "Tudo junto",
+                "timestamp": 1793750400000,
+                "tags": ["teste", "blog"]
+            }
+        ],
+        "index-max-list": 5,
+        "footer-max-list": 6,
+        "blog-max-list": 20
+    },
+    "database": {
+        "name": "Subversivo58",
+        "version": 1,
+        "indexed": [
+            {
+                "tbn": "config"
+            },
+            {
+                "tbn": "plugins"
+            },
+            {
+                "tbn": "drafts"
+            },
+            {
+                "tbn": "posts"
+            },
+            {
+                "tbn": "media"
+            },
+            {
+                "tbn": "analytics"
+            }
+        ]
+    },
+    "templates": [
+        {
+            "source": "*",
+            "files": [
+                {
+                    "file": "settings-slide.tpl",
+                    "mode": "prepend",
+                    "target": "#body"
+                },
+                {
+                    "file": "color-palette-slide.tpl",
+                    "mode": "prepend",
+                    "target": "#body"
+                },
+                {
+                    "file": "modals.tpl",
+                    "mode": "prepend",
+                    "target": "#body"
+                }
+            ]
+        },
+        {
+            "source": [
+                "dpo",
+                "index",
+                "about",
+                "policy",
+                "admin",
+                "404",
+                "nocookie",
+                "blog",
+                "copyright",
+                "donations",
+                "you-in-control-of-your-data"
+            ],
+            "files": [
+                {
+                    "file": "fixed-navbar.tpl",
+                    "mode": "prepend",
+                    "target": "#body"
+                },
+                {
+                    "file": "drawer.tpl",
+                    "mode": "prepend",
+                    "target": "#body"
+                },
+                {
+                    "file": "footnote.tpl",
+                    "mode": "append",
+                    "target": "#footer-container"
+                },
+                {
+                    "file": "github-auth.tpl",
+                    "mode": "append",
+                    "target": "#index-central-block"
+                }
+            ]
+        },
+        {
+            "source": [
+                "policies",
+                "copyright",
+                "guard"
+            ],
+            "files": []
+        },
+        {
+            "source": [
+                "admin"
+            ],
+            "files": [
+                {
+                    "file": "admin-dashboard.tpl",
+                    "mode": "append",
+                    "target": "#index-central-block"
+                }
+            ]
+        }
+    ],
+    "files": {
+        "libs": [
+            "assets/js/modules/core/LifeCycle.mjs",
+            "assets/js/modules/functions/Functions.mjs",
+            "assets/js/modules/helpers/BasePrefixes.mjs",
+            "assets/js/modules/helpers/Helpers.mjs",
+            "assets/js/modules/lib/AwesomeIndexedDB.mjs",
+            "assets/js/modules/lib/AwesomeStorage.mjs",
+            "assets/js/modules/lib/CryptoHandler.mjs",
+            "assets/js/modules/lib/Emitter.mjs",
+            "assets/js/modules/lib/GitHubAPI.mjs",
+            "assets/js/modules/lib/IlibJS.mjs",
+            "assets/js/modules/lib/IndexedLogs.mjs",
+            "assets/js/modules/lib/LazyLoad.mjs",
+            "assets/js/modules/lib/Notifications.mjs",
+            "assets/js/modules/lib/Permissions.mjs",
+            "assets/js/modules/models/Controller.mjs",
+            "assets/js/modules/models/PolicyHandler.mjs",
+            "assets/js/modules/models/Templates.mjs",
+            "assets/js/modules/models/UIHandler.mjs"
+        ]
+    },
+    "serviceworker": {
+        "cacheVersion": 1531828506939,
+        "cacheList": {
+            "basic": [],
+            "standart": []
+        },
+        "updates": [],
+        "removals": {
+            "cachename": "",
+            "files": []
+        },
+        "nocache": [
+            "/admin.html",
+            "/sw.js",
+            "/404.html",
+            "/config/settings.json"
+        ],
+        "injections": []
+    },
+    "bug_tracker": {
+        "enable": false,
+        "url": ""
+    },
+    "cookies_warning": true,
+    "last_modified": 1498828299173
+}

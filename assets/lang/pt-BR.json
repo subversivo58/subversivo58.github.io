@@ -1,0 +1,595 @@
+{
+    "anonimous": {
+        "title": "Você esta no modo anonimo?",
+        "body": {
+            "first": "Hum... parece que você esta navegando no modo de privacidade (anonimamente).",
+            "second": "Neste modo de navegação todos os cookies e dados salvos em cache nesta navegação serão descartados assim que encerrar.",
+            "third": "Como este site foi criado para trabalhar mesmo estando offline, algumas funcionalidades, plugins e apps podem não funcionar corretamente ou podem não estar disponíveis."
+        },
+        "button": "Ok, quero continuar"
+    },
+    "source": {
+        "name": "Subversivo58 Blog",
+        "version": "0.1.0",
+        "author": "Subversivo58",
+        "home": "https://github.com/subversivo58/",
+        "colab": [],
+        "build": "Alpha",
+        "bugs": [
+            {
+                "type": "git",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
+            }
+        ],
+        "license": [
+            {
+                "type": "MIT",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
+            }
+        ]
+    },
+    "words": {
+        "an": "há 1",
+        "agree": "concordar",
+        "clear": "limpar",
+        "signin": "entrar",
+        "logout": "sair",
+        "signup": "cadastrar",
+        "close": "fechar",
+        "drawer": "gaveta",
+        "free": "gratuitamente",
+        "search": "procurar",
+        "recover": "recuperar",
+        "restore": "restaurar",
+        "white": "branco",
+        "decade": "decada",
+        "year": "ano",
+        "month": "mês",
+        "week": "semana",
+        "day": "dia",
+        "hour": "hora",
+        "minute": "minuto",
+        "license": "licença",
+        "more": "mais",
+        "second": "segundo",
+        "now": "agora",
+        "rememberme": "lembrar-me",
+        "source": "fonte",
+        "mail": "email",
+        "page": "página",
+        "pwd": "senha",
+        "token": "token",
+        "media": "midia",
+        "settings": "config",
+        "version": "versão",
+        "ooops": "ooops..."
+    },
+    "combo": {
+        "btn_top": "Devolta ao Topo",
+        "more_info": "obter mais informações.",
+        "click_here": "Clique aqui!",
+        "clear_exit": "Limpar e sair",
+        "not_show_again": "não mostrar novamente",
+        "powered": "Distribuido por",
+        "copyr": "Direitos Autorais",
+        "knowmore": "Saiba mais",
+        "seelicenses": "Veja as licenças"
+    },
+    "langs": {
+        "enUS": "Inglês (Estados Unidos) - [padrão]",
+        "ptBR": "Português (Brasil)"
+    },
+    "navbar": {
+        "wiki": "WIKI",
+        "blog": "blogue",
+        "dpo": "DPO",
+        "colab": "colaborar",
+        "about": "sobre",
+        "lab": "laboratório",
+        "contact": "contato",
+        "policies": "politicas",
+        "donations": "doações"
+    },
+    "footer": {
+        "content": {
+            "contactnf": "CONTATO",
+            "blognew": "NOVIDADES",
+            "uselink": "LINKS UTEIS",
+            "docs": "Documentação",
+            "policies": "Politicas Gereais",
+            "faq": "Suporte e FAQ",
+            "forum": "Fórum e Comunidade",
+            "devtool": "Ferramentas DEV",
+            "api": "API de Serviços",
+            "bugs": "Reportar Erros",
+            "desc1": "Este site reúne uma coleção de projetos iniciados em 2010 e tem por objetivo servir como blogue pessoal para compartilhar dos mais diversos temas. Sinta-se a vontade para explorar o site e compartilhar seu conteúdo.",
+            "desc2": "Este site esta em constante desenvolvimento, fique a vontade para apontar erros ou sugerir melhorias.",
+            "start": "Começar agora",
+            "source": "Código Fonte",
+            "feedback": "Feedback"
+        },
+        "author": "autor",
+        "about": "sobre",
+        "licit": "legal",
+        "cookie": "cookies",
+        "privacci": "privacidade",
+        "footoodle": {
+            "title": "Inscreva-se em Collabore",
+            "description": "<p>Collabore abre as portas para desenvolvedores e entusiastas. Transforme seu serviço de páginas staticas em dinãmicas.</p><p>Através de uma interface simples más poderosa você poderá modificar, revisar e criar novas publicações, adicionar plugins e apps em suas páginas ou incorporar suas próprias extensões.</p><p>Tudo isto através de um código fonte aberto projetado para expandir. Utilize o sistema de autenticação integrado fazendo com que usuários Collabore possam se registrar em sua página em poucos cliques e o melhor autenticando-se automaticamente nos plugins e apps de sua página.</p><p class='mt-5 ct'>Faça parte deste sistema colaborativo, <a href='./signup' class='white tdu'>registre-se agora!</a></p>"
+        }
+    },
+    "api": {
+        "geo": {
+            "request": "Requisitar geolocalização",
+            "description": "<div class='row'><p>A geolocalização possibilita buscar conteúdos de maneira mais prescisa e relevante.</p><p>Esta é a maneira mais fácil de buscar amigos, páginas, produtos, grupos, canais, postagens ou tags mais próximos de você.</p></div><div data-mg='top:15' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-map-marker ct' onclick='$.Geo.request()'> requisitar permissão</span></div></div>",
+            "link_docs": "Para maiores informações consulte a guia de permissões em nossa <a href='https://docs.himliy.com/gelocation#permissions' target='blank_' rel='nofollow' class='blue tdu'>documentação</a>"
+        },
+        "not": {
+            "request": "Requisitar notificação",
+            "description": "<div class='row'><p>Ao utilizar notificações:</p><p><b>Usuários logados:</b> recebem notificações de mensagens, do sistema, de chat, de canais, de feeds registrados(ver documentação: <a href='http://docs.himliy.com/notification#subscribles' target='blank_' rel='nofollow' class='blue tdu'>subscrição</a>) mesmo enquanto estiverem navegando em outras páginas da web ou mesmo que o navegador estaja <b>minimizado</b>.</p><p><b>Usuários não logados:</b> recebem notificações do sistema ou de pesquisas(ver documentação: <a href='https://docs.himliy.com/notification#unsigned-subscrible' target='blank_' rel='nofollow' class='blue tdu'>subscrição não registrada</a>.</p></div><div data-mg='top:5' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-bell-o ct' onclick='$.Notific.request()'> requisitar permissão</span></div></div>",
+            "link_docs": "Para maiores informações consulte a guia de permissões em nossa <a href='https://docs.himliy.com/notification#permissions' target='blank_' rel='nofollow' class='blue tdu'>documentação</a>",
+            "message": {
+                "head": "Obrigado",
+                "body": "Você ativou notificações em Collabore :)"
+            }
+        }
+    },
+    "cookies": {
+        "agree": {
+            "description_1": "Este site utiliza cookies e outras tecnologias para guardar informações. Ao continuar neste site você estará concordando com este uso e nossa \"politica\" arespeito deste uso.",
+            "description_2": "Para informações mais detalhadas veja a nossa <a href='./policies.html#cookies' target='blank_' rel='nofollow' class='tdu sky'>Politica de Cookies</a>.",
+            "close_banner_info": "Para fechar clique no botão abaixo."
+        }
+    },
+    "drawer": {
+        "clear_data": {
+            "title": "Limpar dados do site",
+            "question_info": "Você esta certo disto?",
+            "positive": "Sim, limpar",
+            "negative": "Não, cancelar",
+            "footer_info": "Limpar cache e cookies. Veja a <a href='#' class='tdu blue'>documentação</a>."
+        },
+        "bug_report": {
+            "title": "Reportar erros 🐛",
+            "question_info": "Encontrou um erro? Reporte isto!",
+            "placeholder": "Descreva o erro aqui...",
+            "send": "Enviar",
+            "follow": "Ir para suporte",
+            "footer_info": "Reportando erros. Veja a <a href='#' class='tdu blue'>documentação</a> sobre isto."
+        },
+        "feedback": {
+            "title": "Envie seu comentário",
+            "rating": "Avaliação:",
+            "question_info": "Envie sua opnião sobre Collabore!",
+            "placeholder": "Envie criticas, elogios ou sugestões",
+            "footer_info": "Enviando comentários. Veja a <a href='#' class='tdu blue'>documentação</a> sobre isto.",
+            "notific": {
+                "error": {
+                    "title": "Falha no Feedback!",
+                    "message": "Desculpe, houve um erro no processamento de seu comentário."
+                },
+                "success": {
+                    "title": "Feedback enviado!",
+                    "message": "Obrigado, seu comentário foi enviado com sucesso!"
+                }
+            }
+        },
+        "geolocation": {
+            "title": "Requisitar Geolocalização",
+            "btn1": "Sim, requisitar",
+            "btn2": "Não, cancelar",
+            "footer_info": "Geolocalização? Veja a <a href='#' class='tdu blue'>documentação</a>."
+        },
+        "notification": {
+            "title": "Requisitar Notificações",
+            "btn1": "Sim, requisitar",
+            "btn2": "Não, cancelar",
+            "footer_info": "Notificações? Veja a <a href='#' class='tdu blue'>documentação</a>."
+        },
+        "getmedia_audio": {
+            "title": "Requisitar Microfone",
+            "btn1": "Sim, requisitar",
+            "btn2": "Não, cancelar",
+            "footer_info": "Midia Audio? Veja a <a href='#' class='tdu blue'>documentação</a>."
+        },
+        "getmedia_video": {
+            "title": "Requisitar Webcam",
+            "btn1": "Sim, requisitar",
+            "btn2": "Não, cancelar",
+            "footer_info": "Midia Video? Veja a <a href='#' class='tdu blue'>documentação</a>."
+        },
+        "words": {
+            "clear": "Limpeza",
+            "geo": "Geo",
+            "cam": "Vídeo",
+            "mic": "Audio",
+            "color": "Color",
+            "note": "Notas",
+            "bug": "Bugs",
+            "lab": "Laboratório",
+            "not": "Alertas",
+            "feedback": "Feedback",
+            "lang": "Idiomas",
+            "marks": "Marcador"
+        }
+    },
+    "info_popup": {
+        "join_key": {
+            "head": "Chave de Segurança",
+            "body": "<p>Envie o arquivo da sua <b>chave de segurança</b>.</p><p>Este processo analisa sua chave criptografada exclusiva e autoriza seu acesso.</p>",
+            "footer": "<small>Sugestões de segurança e mais informações. <a href='#' class='tdu sky'>Leia a documentação</a></small>"
+        },
+        "registration_pwd": {
+            "head": "Senha da conta!",
+            "body": "<p class='lh-140'>Este campo requer no mínimo 8 e no máximo 50 caracteres, respeitando as regras permitidas:</p><ul class='list-group'><li class='list-group-item'><b>uma letra minúscula</b></li></ul>",
+            "footer": "<small>Sugestões de segurança e mais informações. <a href='#' class='tdu sky'>Leia a documentação</a></small>"
+        }
+    },
+    "registration": {
+        "error": {
+            "already": {
+                "message": "<p class='lh-140'>Este email já está registrado!</p><p class='lh-140'>Por favor, ative sua conta, reenvie o link de ativação ou vá para a <a href='/signin'>página de login</a>.</p>"
+            },
+            "server": {
+                "message": "<p class='lh-140'>Desculpe, ocorreu um erro interno no servidor!</p>"
+            }
+        }
+    },
+    "recover": {
+        "success": {
+            "title": "Parabéns!",
+            "message": "Um link de recuperação foi enviado! Verifique sua caixa de email... o link é válido por uma hora"
+        },
+        "error": {
+            "server": {
+                "title": "[ERRO] Ocorreu um erro!",
+                "message": "Desculpe, ocorreu um erro interno no servidor! Tente novamente mais tarde."
+            },
+            "notfound": {
+                "title": "[INFO] Email não encontrado!",
+                "message": "Desculpe, este email não foi encontrado no banco de dados!"
+            },
+            "inactived": {
+                "title": "[INFO] Conta inativa!",
+                "message": "Desculpe, esta conta ainda não foi ativada!"
+            },
+            "wait": {
+                "title": "[INFO] Email em espera!",
+                "message": "Este email já foi enviado! O tempo de espera para fazer um novo pedido é de uma hora."
+            },
+            "auth": {
+                "title": "[ERRO] Erro de autenticação!",
+                "message": "Sua requisição não possui um token de autenticação válido! Clique aqui para ver a documentação sobre recuperação."
+            },
+            "conn": {
+                "title": "[INFO] Conexão encerrada!",
+                "message": "Um email com um link de recuperação já foi enviado! Verifique seu serviço de email."
+            },
+            "mail": {
+                "title": "[ERRO] Erro de email!",
+                "message": "Este formato de email é inválido!  Clique aqui para ver a documentação sobre recuperação.",
+                "link": "#"
+            }
+        }
+    },
+    "copyright": {
+        "contributors": "Este projeto só foi possível graças ao uso de muitos outros projetos de código fonte aberta e a <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>comunidade de contribuidores</a>... você é livre para criar, usar, modificar e distribuir respeitando todas as licenças subjacentes!",
+        "caption": "Lista de fontes e suas respectivas licenças",
+        "backendsources": "Muitas outras fontes que são executadas no servidor (NodeJS) e que são carregadas dinamicamente são fundamentais para este projeto, tais como:",
+        "package": "e <a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>mais...</a>",
+        "tps": "Software de terceiros",
+        "thissource": "Software deste site",
+        "alllicenses": "Todas as licenças"
+    },
+    "signin": {
+        "remember": "Lembrar - se este é seu aparelho",
+        "forgot": "Recuperar conta?"
+    },
+    "signup": {
+        "success": {
+            "title": "Parabéns!",
+            "message": "Um link de ativação foi enviado! Verifique a caixa do seu serviço de email... válido por 24 horas"
+        },
+        "error": {
+            "server": {
+                "title": "[ERRO] Ocorreu um erro!",
+                "message": "Desculpe, ocorreu um erro interno no servidor! Tente novamente mais tarde."
+            },
+            "already": {
+                "title": "[INFO] Já registrado!",
+                "message": "Este email já foi registrado! Por favor, verifique a caixa do seu serviço de email."
+            },
+            "token": {
+                "title": "[ERRO] Erro de autenticação!",
+                "message": "Sua requisição não possui um token válido! Clique aqui para ver a documentação sobre cadastro."
+            },
+            "conn": {
+                "title": "[INFO] Conexão encerrada!",
+                "message": "Um email com um link de ativação já foi enviado! Verifique a caixa do seu serviço de email."
+            },
+            "mail": {
+                "title": "[ERRO] Erro de email!",
+                "message": "Este formato de email é inválido!  Clique aqui para ver a documentação sobre cadastro.",
+                "link": "#"
+            },
+            "pwd": {
+                "title": "[ERRO] Erro de senha!",
+                "message": "Este formato de senha é inválido!  Clique aqui para ver a documentação sobre cadastro.",
+                "link": "#"
+            }
+        },
+        "modal": {
+            "head": "Senha de conta",
+            "req": "Esta senha requer:",
+            "test": "Testar sua senha agora:",
+            "chars": "minimo de 8 caracteres e máximo de 50",
+            "lower": "uma letra minuscula",
+            "upper": "uma letra maiúscula",
+            "digit": "um digito (número)",
+            "special": "um caractere especial",
+            "space": "sem espaços",
+            "run": "testar",
+            "footer": "Para mais informações ou sugestões, veja a <a href='#' class='tdu blue' target='_blank' rel='nofollow'>documentação</a> sobre isto.",
+            "result": {
+                "accept": "Bom, senha valida!",
+                "refuse": "Invalida",
+                "empty": ", vazia",
+                "less": ", menos de 8 caracteres",
+                "more": ", mais que 50 caracteres",
+                "lower": ", sem minusculas",
+                "upper": ", sem maiúsculas",
+                "digit": ", sem digitos (numeros)",
+                "special": ", sem caracteres especiais",
+                "space": ", contém spaços",
+                "unk": ", indefinido"
+            }
+        },
+        "regnow": "Registre-se agora ",
+        "btnSubmit": "Registre-se em Collabore",
+        "agreement": "Clicando no botão \"Registre-se em Collabore\", você estará aceitamdo os <a href='./licit' target='blank_'>termos de serviço</a> e <a href='./policies/privacci' target='blank_'>politicas de privacidade</a>. Nós ocasionalmente enviaremos emails relacionados a sua conta"
+    },
+    "slack": {
+        "another": "Solicitar um novo convite? ",
+        "figcap": {
+            "property": "Slack é propriedade de ",
+            "rights": "Todos os direitos reservados."
+        },
+        "giturl": "Perfil GitHub",
+        "join": " Junte-se ao Time Collabore",
+        "modal": {
+            "header": "Sobre o link de Perfil GitHub",
+            "body1": " é uma ferramenta muito boa más contas <b class='green'>FREE</b> possuem limitações.",
+            "body2": "Nós pedimos um link de conta ",
+            "body2_1": " para verificar se o novo membro é de fato um desenvolvedor e se colabora com outros projetos.",
+            "body3": "O email informado deve ser o mesmo email público vinculado a sua conta ",
+            "footer": "Para mais informações, veja a <a href='#' class='blue tdu'>documentação</a> a respeito disto."
+        },
+        "alert": {
+            "sended": "Seu pedido foi enviado!",
+            "info": "Seu pedido aguarda resposta!",
+            "success": "Seu pedido já foi aceito!",
+            "danger": "Seu pedido foi recusado!"
+        },
+        "notific": {
+            "success": {
+                "title": "Convite Collabore Time!",
+                "message": "Sucesso, seu pedido aguarda ação do administrador."
+            },
+            "errorserver": {
+                "title": "Erro no servidor!",
+                "message": "Desculpe, ocorreu um erro no servidor! Clique aqui para ver a documentação."
+            },
+            "invalidauth": {
+                "title": "Erro de autenticação!",
+                "message": "Seu pedido não contém um token valido! Clique aqui para ver a documentação."
+            },
+            "invalidmail": {
+                "title": "Erro no email!",
+                "message": "Este email é inválido!  Clique aqui para ver a documentação."
+            },
+            "invalidlink": {
+                "title": "Erro no Perfil GitHub!",
+                "message": "Desculpe, este não é um link de Perfil do GitHub! Clique aqui para ver a documentação."
+            },
+            "accepted": {
+                "title": "Convite já aceito!",
+                "message": "Seu pedido já foi aceito na lista de convites! Clique aqui para ver a documentação."
+            },
+            "refused": {
+                "title": "Convite recusado!",
+                "message": "Desculpe, este pedido foi recusado pelo administrador! Clique aqui para ver a documentação."
+            },
+            "waiting": {
+                "title": "Convite em espera!",
+                "message": "Este pedido já foi enviado! Aguardando ação do administrador."
+            },
+            "closeconn": {
+                "title": "A conexão foi encerrada!",
+                "message": "Este pedido já foi enviado! Clique aqui para ver a documentação."
+            }
+        }
+    },
+    "openpgp": {
+        "error": {
+            "encryption": {
+                "title": "[Erro] Requisição de criptografia!",
+                "message": "Ocorreu um erro na criptografia PGP! Clique aqui para ver a documentação sobre este erro.",
+                "link": "#"
+            }
+        }
+    },
+    "nocookie": {
+        "title": "Não suportado",
+        "p1": "Desculpe, não oferecemos suporte à navegação \"sem cookies\".",
+        "p2": "Embora este site use cookies e outras tecnologias de armazenamento, \"<strong>não guardamos nenhum dado no seu navegador sem a sua permissão expressa</strong>\"!",
+        "p3": "Acreditamos ter bons motivos para não oferecer suporte à navegação \"sem cookies\". Dê uma olhada no nosso <a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a> para mais informações. Infelizmente, você precisará navegar com os cookies ativados."
+    },
+    "404": {
+        "general": "Ooops... Não encontrado!",
+        "title": "Página não encontrada",
+        "message": "O endereço que você tentou abrir não existe ou foi movido. Confira se digitou corretamente ou volte para a página inicial.",
+        "button": "Voltar para a página inicial"
+    },
+    "mail": {
+        "account": {
+            "title": "Conta criada!",
+            "text_a": "Bem-vindo ao Collabore, um projeto de código aberto que usa ferramentas e linguagens web gratuitas para criar pequenos blogs cooperativos e ferramentas de colaboração &mdash; Explore as melhores APIs HTML5, crie plugins JavaScript, use WebSockets para criar chats, sistemas de comentários e gerencie suas páginas remotamente de forma rápida e fácil.",
+            "text_b": "Clique no link abaixo em até 24 horas para ativar sua conta e começar a usá-la.",
+            "btn_a": "Ativar conta!",
+            "features": "Recursos do Collabore",
+            "btn_b": "Visite agora!",
+            "feat_a": {
+                "title": "Programação",
+                "msg": "Desenvolvimento flexível e poderoso usando frameworks JavaScript, APIs HTML e muito mais."
+            },
+            "feat_b": {
+                "title": "Desenvolvimento Web",
+                "msg": "Escolha entre plugins ou estenda para aplicações de servidor de forma simples."
+            },
+            "feat_c": {
+                "title": "Implementação de API",
+                "msg": "Implemente sua própria API de forma fácil e rápida."
+            },
+            "feat_d": {
+                "title": "Publique seu blog",
+                "msg": "Passos simples para publicar templates de blog."
+            },
+            "feat_e": {
+                "title": "Responsivo",
+                "msg": "Templates responsivos usando Bootstrap."
+            }
+        },
+        "recover": {
+            "title": "Recuperação de conta!",
+            "btn": "Recuperar agora!",
+            "text_a": "Olá,",
+            "text_b": "&mdash; Este email serve para recuperar a conta Collabore.",
+            "text_c": "Clique no link abaixo em até uma hora para recuperar o acesso à sua conta."
+        },
+        "policy": {
+            "title": "Mudanças nas políticas!",
+            "text_a": "E aí?",
+            "text_b": "Atualizamos recentemente nossa política de uso. As políticas regem o compromisso entre a aplicação e o usuário, assim como sua privacidade, uso de dados e prestação de serviços.",
+            "view_changes": "Visite o aplicativo Collabore e leia mais sobre essas mudanças.",
+            "btn": "Ver agora!"
+        },
+        "twofactory": {
+            "title": "Alterar 2FA",
+            "text_a": "O quê?",
+            "text_b": "Foi solicitada uma ação de alteração do sistema de Autenticação de Dois Fatores (2FA).",
+            "confirm": "Clique no botão abaixo para confirmar esta alteração",
+            "btn": "Confirmar agora!"
+        },
+        "unsubscribe": {
+            "text_a": "Se você não reconhece este email ou não sabe por que o recebeu, ignore-o",
+            "text_b": " ou cancele esta inscrição"
+        },
+        "visite_text": "Visite a página do Collabore no GitHub e leia mais sobre como usar.",
+        "visite_link": "Visitar a página inicial do Collabore",
+        "copy": "Template de Email - &copy; 2016 - Subversivo58"
+    },
+    "twofactory": {
+        "security_slide": {
+            "enabled": "desativar 2FA",
+            "disabled": "ativar 2FA"
+        }
+    },
+    "webpush": {
+        "subscribe": {
+            "": ""
+        }
+    },
+    "date": {
+        "days": {
+            "long": [
+                "Domingo",
+                "Segunda-feira",
+                "Terça-feira",
+                "Quarta-feira",
+                "Quinta-feira",
+                "Sexta-feira",
+                "Sábado"
+            ],
+            "short": [
+                "Dom",
+                "Seg",
+                "Ter",
+                "Qua",
+                "Qui",
+                "Sex",
+                "Sáb"
+            ]
+        },
+        "months": {
+            "long": [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abril",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ],
+            "short": [
+                "Jan",
+                "Fev",
+                "Mar",
+                "Abr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Set",
+                "Out",
+                "Nov",
+                "Dez"
+            ]
+        },
+        "formatter": {
+            "error": "Data indefinida"
+        }
+    },
+    "modals": {
+        "language": {
+            "title": "Selecionar Idioma",
+            "avaliable": "Idiomas disponíveis",
+            "pt_BR": "Português",
+            "en_US": "Inglês",
+            "footer": "Não tem opção em seu idioma? Crie uma tradução!"
+        },
+        "version": {
+            "title": "🚧 Em Construção 🚧",
+            "text1": "Este projeto só foi possível graças ao uso de muitos outros projetos de código fonte aberta e a ",
+            "text2": "comunidade de contribuidores",
+            "text3": "Você é livre para criar, usar, modificar e distribuir respeitando todas as licenças subjacentes!"
+        }
+    },
+    "notify": {
+        "storage": {
+            "title": "Subversivo58 - Armazenamento",
+            "body": "Este site usa \"cookies\" e outras tecnologias que armazenam informações no seu dispositivo, você concorda com isso?",
+            "actions": [
+                {
+                    "action": "cookie-agree",
+                    "title": "o que é?",
+                    "icon": "🍪"
+                },
+                {
+                    "action": "cookie-policy",
+                    "title": "ver politicas",
+                    "icon": "🛡️"
+                },
+                {
+                    "action": "terms-policy",
+                    "title": "ver os termos",
+                    "icon": "📜"
+                }
+            ]
+        }
+    }
+}
