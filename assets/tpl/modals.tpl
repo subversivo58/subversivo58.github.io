@@ -100,10 +100,10 @@
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Requisitar camera</a>
+                        <a class="nav-link active i18n" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" data-i18n-html="modals.tabs.camera">Requisitar câmera</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false">Permissões</a>
+                        <a class="nav-link i18n" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false" data-i18n-html="modals.tabs.permissions">Permissões</a>
                     </li>
                     <li class="nav-item col">
                         <button type="button" class="close mt-2 fr cp" data-dismiss="modal">
@@ -233,7 +233,7 @@
         <div class="modal-dialog">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h5 class="mb-0">Share this blog</h5>
+                    <h5 class="mb-0 i18n" data-i18n-html="modals.share.title">Compartilhar este blogue</h5>
                     <button type="button" class="close cp" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -243,7 +243,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="col px-0">
-                        <small data-toggle="modal" data-target="#modal-bugs-report" data-dismiss="modal" class="tdu sky cp">Reportar um link quebrado?</small>
+                        <small data-toggle="modal" data-target="#modal-bugs-report" data-dismiss="modal" class="tdu sky cp i18n" data-i18n-html="modals.share.broken_link">Reportar um link quebrado?</small>
                     </div>
                 </div>
             </div>
@@ -256,7 +256,7 @@
         <div class="modal-dialog">
             <div class="modal-content rounded-0">
                 <div class="modal-header rounded-0 border-0">
-                    <h5 class="modal-title">Notas rapidas</h5>
+                    <h5 class="modal-title i18n" data-i18n-html="modals.notes.title">Notas rápidas</h5>
                     <button type="button" class="close cp" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -270,11 +270,11 @@
                                     <div class="col px-0">
                                         <div class="form-group">
                                             <label class="d-block">
-                                                <strong>Titulo:</strong>
+                                                <strong class="i18n" data-i18n-html="modals.notes.note_title">Título:</strong>
                                             </label>
                                             <div class="input-group input-group-sm">
                                                 <span class="input-group-addon fa fa-edit rounded-0"></span>
-                                                <input type="text" placeholder="Titulo" class="form-control rounded-0" maxlength="50">
+                                                <input type="text" placeholder="Titulo" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_title">
                                             </div>
                                         </div>
 
@@ -282,22 +282,22 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label class="d-block">
-                                                        <strong>Categoria:</strong>
+                                                        <strong class="i18n" data-i18n-html="modals.notes.category">Categoria:</strong>
                                                     </label>
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon fa fa-thumb-tack rounded-0"></span>
-                                                        <input type="text" placeholder="Categoria" class="form-control rounded-0" maxlength="50">
+                                                        <input type="text" placeholder="Categoria" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_category">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label class="d-block">
-                                                        <strong>Tags:</strong>
+                                                        <strong class="i18n" data-i18n-html="modals.notes.tags">Tags:</strong>
                                                     </label>
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon fa fa-tags rounded-0"></span>
-                                                        <input type="text" placeholder="Tags" class="form-control rounded-0" maxlength="50">
+                                                        <input type="text" placeholder="Tags" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_tags">
                                                     </div>
                                                 </div>
                                             </div>
@@ -306,15 +306,15 @@
                                 </div>
                                 <div class="form-group mt-2 mb-0">
                                     <label>
-                                        <strong class="col px-0">Nota:</strong>
+                                        <strong class="col px-0 i18n" data-i18n-html="modals.notes.note">Nota:</strong>
                                     </label>
-                                    <textarea type="textarea" id="notes-textarea" placeholder="Your note here..." class="form-control resize-none rounded-0" rows="5" maxlength="400" required></textarea>
+                                    <textarea type="textarea" id="notes-textarea" placeholder="Your note here..." class="form-control resize-none rounded-0 i18n" rows="5" maxlength="400" required data-i18n-place="modals.notes.ph_note"></textarea>
                                 </div>
                                 <div class="form-group mt-2 mt-md-0">
                                     <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 fa fa-microphone cp"></button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 fa fa-camera cp"></button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 fa fa-video-camera cp"></button>
-                                    <button type="submit" class="btn btn-sm btn-info rounded-0 float-right cp">Salvar</button>
+                                    <button type="submit" class="btn btn-sm btn-info rounded-0 float-right cp i18n" data-i18n-html="modals.notes.save">Salvar</button>
                                 </div>
                             </form>
                         </div>
@@ -333,22 +333,22 @@
             <div class="modal-content rounded-0">
                 <div id="modal-offline-content" class="modal-body px-0 py-2" style="height: 280px;">
                     <div class="col-12 p-2">
-                        <h5 class="mb-0 white d-inline-block">Save to offline</h5>
+                        <h5 class="mb-0 white d-inline-block i18n" data-i18n-html="modals.offline.title">Salvar para uso offline</h5>
                         <button type="button" class="close cp" data-dismiss="modal">
                             <span class="white" aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="col-12 px-0 pa" style="bottom:0px;">
                         <div class="col-10 col-md-6 mx-auto p-2">
-                            <button type="button" class="btn btn-success rounded-0">Yes, save!</button>
-                            <button type="button" class="btn btn-danger rounded-0 float-right" data-dismiss="modal">No, cancel</button>
+                            <button type="button" class="btn btn-success rounded-0 i18n" data-i18n-html="modals.offline.yes">Sim, salvar!</button>
+                            <button type="button" class="btn btn-danger rounded-0 float-right i18n" data-dismiss="modal" data-i18n-html="modals.offline.no">Não, cancelar</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="col px-0">
                         <a href="{{adjust_dirs=./docs}}" target="_blank" class="tdu sky cp">
-                            <small>About of offline resources?</small>
+                            <small class="i18n" data-i18n-html="modals.offline.about">Sobre os recursos offline?</small>
                         </a>
                     </div>
                 </div>
@@ -362,7 +362,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h5 class="mb-0">Signin and Authorize</h5>
+                    <h5 class="mb-0 i18n" data-i18n-html="modals.auth.title">Entrar e autorizar</h5>
                     <button type="button" class="close cp" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -395,7 +395,7 @@
                                 </a>
                             </div>
                             <div class="col-12 mt-2">
-                                <small class="col">Source-code: <a href="https://github.com/subversivo58/subversivo58.github.io" target="about:blank" rel="noopener" class="tdu ext-link-icon">view on GitHub</a></small>
+                                <small class="col i18n" data-i18n-html="modals.auth.source">Código-fonte: <a href="https://github.com/subversivo58/subversivo58.github.io" target="about:blank" rel="noopener" class="tdu ext-link-icon">ver no GitHub</a></small>
                             </div>
                         </div>
 
@@ -478,24 +478,24 @@
                                     <div class="col px-0">
                                         <div class="form-group">
                                             <label class="d-block">
-                                                <strong>Selecione o tipo:</strong>
+                                                <strong class="i18n" data-i18n-html="modals.bugs.select_type">Selecione o tipo:</strong>
                                             </label>
                                             <select class="border-def d-block">
-                                                <option selected value="custom">Erro personalizado</option>
-                                                <option value="css">Erro de CSS</option>
-                                                <option value="javascript">Erro de JavaScript</option>
-                                                <option value="language">Erro de Idioma</option>
-                                                <option value="plugin">Erro em Plugins</option>
-                                                <option value="server">Erro do Servidor</option>
+                                                <option class="i18n" selected value="custom" data-i18n-html="modals.bugs.custom">Erro personalizado</option>
+                                                <option class="i18n" value="css" data-i18n-html="modals.bugs.css">Erro de CSS</option>
+                                                <option class="i18n" value="javascript" data-i18n-html="modals.bugs.js">Erro de JavaScript</option>
+                                                <option class="i18n" value="language" data-i18n-html="modals.bugs.language">Erro de Idioma</option>
+                                                <option class="i18n" value="plugin" data-i18n-html="modals.bugs.plugins">Erro em Plugins</option>
+                                                <option class="i18n" value="server" data-i18n-html="modals.bugs.server">Erro do Servidor</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group mt-2 mb-0">
                                     <label>
-                                        <strong class="col px-0">Envie uma descrição</strong>
+                                        <strong class="col px-0 i18n" data-i18n-html="modals.bugs.description">Envie uma descrição</strong>
                                     </label>
-                                    <textarea type="textarea" id="bugs-report-textarea" placeholder="Description here..." class="form-control resize-none rounded-0" rows="5" maxlength="400" required></textarea>
+                                    <textarea type="textarea" id="bugs-report-textarea" placeholder="Description here..." class="form-control resize-none rounded-0 i18n" rows="5" maxlength="400" required data-i18n-place="modals.bugs.ph_description"></textarea>
                                 </div>
                                 <div class="form-group mt-2 mt-md-3">
                                     <button type="reset" data-i18n-html="words.clear" class="i18n btn btn-sm btn-outline-secondary rounded-0 cp">Limpar</button>

@@ -3,11 +3,9 @@
         <a id="slide-link" href="#body" class="btme pulse-red tdu-none white br-50 fr cp">👆</a>
         <div class="hbnh bs">
             <i class="fa fa-cog fa-spin"></i>
-            <span class="ml-1">Site settings</span>
+            <span class="ml-1 i18n" data-i18n-html="settings_slide.title">Configurações do site</span>
         </div>
-        <div class="col-12 px-0 mt-4" style="border-bottom: 1px solid #e4e4e4;">
-            Media API
-        </div>
+        <div class="col-12 px-0 mt-4 i18n" style="border-bottom: 1px solid #e4e4e4;" data-i18n-html="settings_slide.media_api">API de mídia</div>
         <div class="row mt-2">
             <div class="col-12">
                 <div class="row">
@@ -15,7 +13,7 @@
                         <span id="sets-media-audio" class="fa fa-toggle-off red cp"></span>
                     </div>
                     <div class="col-10">
-                        <span data-css-fs=".9" class="css">auto-call audio after first allow</span>
+                        <span data-css-fs=".9" class="css i18n" data-i18n-html="settings_slide.auto_audio">chamar áudio automaticamente após a primeira permissão</span>
                     </div>
                 </div>
             </div>
@@ -25,14 +23,12 @@
                         <span id="sets-media-video" class="fa fa-toggle-off red cp"></span>
                     </div>
                     <div class="col-10">
-                        <span data-css-fs=".9" class="css">auto-call video after first allow</span>
+                        <span data-css-fs=".9" class="css i18n" data-i18n-html="settings_slide.auto_video">chamar vídeo automaticamente após a primeira permissão</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 px-0 mt-4" style="border-bottom: 1px solid #e4e4e4;">
-            Geolocation API
-        </div>
+        <div class="col-12 px-0 mt-4 i18n" style="border-bottom: 1px solid #e4e4e4;" data-i18n-html="settings_slide.geo_api">API de geolocalização</div>
         <div class="row mt-2">
             <div class="col-12">
                 <div class="row">
@@ -40,14 +36,12 @@
                         <span id="sets-geo-stats" class="fa fa-toggle-off red cp"></span>
                     </div>
                     <div class="col-10">
-                        <span data-css-fs=".9" class="css">share geo tracking analytics</span>
+                        <span data-css-fs=".9" class="css i18n" data-i18n-html="settings_slide.geo_share">compartilhar análises de rastreamento geográfico</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 px-0 mt-4" style="border-bottom: 1px solid #e4e4e4;">
-            Audio effects
-        </div>
+        <div class="col-12 px-0 mt-4 i18n" style="border-bottom: 1px solid #e4e4e4;" data-i18n-html="settings_slide.audio_effects">Efeitos de áudio</div>
         <div class="row mt-2">
             <div class="col-12">
                 <div class="row">
@@ -55,7 +49,7 @@
                         <span id="sets-effect-audio" class="fa fa-volume-off red cp"></span>
                     </div>
                     <div class="col-10">
-                        <span data-css-fs=".9" class="css">enable audio effetcs</span>
+                        <span data-css-fs=".9" class="css i18n" data-i18n-html="settings_slide.audio_effects_on">ativar efeitos de áudio</span>
                     </div>
                 </div>
             </div>
@@ -65,14 +59,12 @@
                         <span id="sets-effect-notific" class="fa fa-volume-off red cp"></span>
                     </div>
                     <div class="col-10">
-                        <span data-css-fs=".9" class="css">enable audio notifications</span>
+                        <span data-css-fs=".9" class="css i18n" data-i18n-html="settings_slide.audio_notify_on">ativar notificações de áudio</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 px-0 mt-4" style="border-bottom: 1px solid #e4e4e4;">
-            Connection (status)
-        </div>
+        <div class="col-12 px-0 mt-4 i18n" style="border-bottom: 1px solid #e4e4e4;" data-i18n-html="settings_slide.connection">Conexão (status)</div>
         <div class="row mt-2">
             <div class="col-12">
                 <div class="row">
@@ -80,14 +72,12 @@
                         <span id="sets-conn-notific" class="fa fa-toggle-off red cp"></span>
                     </div>
                     <div class="col-10">
-                        <span data-css-fs=".9" class="css">disable notification</span>
+                        <span data-css-fs=".9" class="css i18n" data-i18n-html="settings_slide.notify_off">desativar notificação</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 px-0 mt-4" style="border-bottom: 1px solid #e4e4e4;">
-            Analytics
-        </div>
+        <div class="col-12 px-0 mt-4 i18n" style="border-bottom: 1px solid #e4e4e4;" data-i18n-html="settings_slide.analytics">Análises</div>
         <div class="row mt-2">
             <div class="col-12">
                 <div class="row">
@@ -95,7 +85,7 @@
                         <span id="sets-conn-notific2" class="fa fa-toggle-off red cp"></span>
                     </div>
                     <div class="col-10">
-                        <span data-css-fs=".9" class="css">enable or disable</span>
+                        <span data-css-fs=".9" class="css i18n" data-i18n-html="settings_slide.analytics_toggle">ativar ou desativar</span>
                     </div>
                 </div>
             </div>

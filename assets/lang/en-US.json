@@ -88,7 +88,9 @@
         "lab": "lab",
         "contact": "contact",
         "policies": "policies",
-        "donations": "donations"
+        "donations": "donations",
+        "signin": "Sign in",
+        "docs": "docs"
     },
     "footer": {
         "content": {
@@ -106,7 +108,8 @@
             "desc2": "This site is under constant development, feel free to point out errors or suggest improvements.",
             "start": "Get started now",
             "source": "Source Code",
-            "feedback": "Feedback"
+            "feedback": "Feedback",
+            "dpo": "Data Protection Officer (DPO)"
         },
         "author": "author",
         "about": "about",
@@ -211,7 +214,8 @@
             "feedback": "Feedback",
             "lang": "Languages",
             "marks": "Marker"
-        }
+        },
+        "version": "Version"
     },
     "info_popup": {
         "join_key": {
@@ -567,6 +571,47 @@
             "text1": "This project was only possible thanks to the use of many other open source projects and the ",
             "text2": "community of contributors",
             "text3": "You are free to create, use, modify and distribute while respecting all underlying licenses!"
+        },
+        "tabs": {
+            "camera": "Request camera",
+            "permissions": "Permissions"
+        },
+        "share": {
+            "title": "Share this blog",
+            "broken_link": "Report a broken link?"
+        },
+        "notes": {
+            "title": "Quick notes",
+            "note_title": "Title:",
+            "category": "Category:",
+            "tags": "Tags:",
+            "note": "Note:",
+            "save": "Save",
+            "ph_title": "Title",
+            "ph_category": "Category",
+            "ph_tags": "Tags",
+            "ph_note": "Your note here..."
+        },
+        "offline": {
+            "title": "Save to offline",
+            "yes": "Yes, save!",
+            "no": "No, cancel",
+            "about": "About offline resources?"
+        },
+        "auth": {
+            "title": "Sign in and authorize",
+            "source": "Source-code: <a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">view on GitHub</a>"
+        },
+        "bugs": {
+            "select_type": "Select the type:",
+            "custom": "Custom error",
+            "css": "CSS error",
+            "js": "JavaScript error",
+            "language": "Language error",
+            "plugins": "Plugin error",
+            "server": "Server error",
+            "description": "Send a description",
+            "ph_description": "Description here..."
         }
     },
     "notify": {
@@ -590,6 +635,88 @@
                     "icon": "📜"
                 }
             ]
+        },
+        "permission_granted": {
+            "title": "Notifications enabled",
+            "body": "Thank you for allowing notifications!"
         }
+    },
+    "pages": {
+        "about": {
+            "heading": "Technology, trends and cyberculture",
+            "item1": "✓ Web APIs, JavaScript and HTML5 features.",
+            "item2": "✓ Functional programming, patterns, frameworks.",
+            "item3": "✓ WebCrypto, lab experiments and code flasks.",
+            "item4": "✓ Opinions, lifestyle, geek culture and much more.",
+            "photo": "Photo by <a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a> on <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "title": "About",
+            "p1": "Hello, I'm Lauro Moraes \"aka\" <a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a> and this site is my digital lab and personal blog.",
+            "p2": "Here I publish content about technology trends, cyberculture and web-focused programming such as PWAs, Single Page Apps and the use of modern JavaScript, HTML5 and CSS3 APIs",
+            "p3": "I'm passionate about functional programming, design patterns and topics such as web decentralization ... blockchain and web cryptography are constant themes here.",
+            "p4": "This is also where I publish my experiments and share my code and small working snippets, besides expressing my opinions on various subjects, a bit of geek culture and this lifestyle.",
+            "p5": "Feel free to explore the blog's content and join our community."
+        },
+        "you_in_control": {
+            "heading": "You are in control of your data",
+            "item1": "✓ Privacy is your right, not a product to be sold to you.",
+            "item2": "✓ Cryptography as the foundation of all digital security.",
+            "item3": "✓ Respect for privacy begins with respecting your choices.",
+            "item4": "✓ You decide what, when and with whom to share your data.",
+            "photo": "Photo by <a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a> on <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>"
+        },
+        "donations": {
+            "heading": "Thinking about doing something cool?",
+            "photo": "Photo by <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> on <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "thanks_title": "Acknowledgments",
+            "thanks_text": "We proudly use <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> and the services of <a href=\"https://glitch.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Glitch.com</a> and <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Wokers</a>, these platforms and their tools are truly amazing and allow us to do cool things like this blog and our tools.",
+            "platforms_title": "Meet these platforms",
+            "link_github": "Discover and explore GitHub Pages",
+            "link_glitch": "Create and invent with Glitch",
+            "link_workers": "See what Cloud Workers does",
+            "donate_title": "Your donation matters"
+        },
+        "dpo": {
+            "heading": "Data Protection Officer (DPO)",
+            "intro1": "In compliance with the Brazilian General Data Protection Law (LGPD - Law No. 13,709/2018), we provide the contact of our Data Protection Officer.",
+            "intro2": "The DPO is the person responsible for mediating communication between the Site, data subjects (you) and the Brazilian National Data Protection Authority (ANPD).",
+            "contact_title": "Contact Information",
+            "officer": "<strong>Data Protection Officer:</strong> Lauro de Moraes",
+            "email": "Email:",
+            "deadline": "<strong>Response time:</strong> Up to 30 days, in accordance with the regulation applicable to small-scale processing agents.",
+            "send_email": "Email the DPO",
+            "rights_title": "How to exercise your rights",
+            "rights1": "To exercise any of your rights under Art. 18 of the LGPD (such as confirmation of processing, access, correction, anonymization, deletion, among others), simply send an email to the address above.",
+            "rights2": "To speed up the service, we suggest that you include in the subject or body of the email:",
+            "list1": "Your full name;",
+            "list2": "The right you wish to exercise (e.g. data deletion, access, etc.);",
+            "list3": "Details that may help us locate your data in our systems.",
+            "policies": "For more details on how we handle your data, see our <a href=\"./policy.html#policy-general\">General Policy</a> and our <a href=\"./policy.html#policy-privacy\">Privacy Policy</a>."
+        }
+    },
+    "settings_slide": {
+        "title": "Site settings",
+        "media_api": "Media API",
+        "auto_audio": "auto-call audio after first allow",
+        "auto_video": "auto-call video after first allow",
+        "geo_api": "Geolocation API",
+        "geo_share": "share geo tracking analytics",
+        "audio_effects": "Audio effects",
+        "audio_effects_on": "enable audio effects",
+        "audio_notify_on": "enable audio notifications",
+        "connection": "Connection (status)",
+        "notify_off": "disable notification",
+        "analytics": "Analytics",
+        "analytics_toggle": "enable or disable"
+    },
+    "palette": {
+        "title": "Color palette",
+        "schema": "Schema"
+    },
+    "blog": {
+        "empty": "Nothing published yet.",
+        "not_found": "Post not found.",
+        "load_error": "Could not load this post.",
+        "showing": "Showing {shown} of {total}",
+        "load_more": "Load more"
     }
 }

@@ -1,4 +1,3 @@
-
 {
     "source": {
         "version": {
@@ -17,67 +16,18 @@
     },
     "articles": {
         "storage": [
-            {
-                "id": "post-01",
-                "title": "Primeiros passos",
-                "timestamp": 1792972800000,
-                "tags": ["teste", "blog"]
-            },
-            {
-                "id": "post-02",
-                "title": "Tabelas na web",
-                "timestamp": 1793059200000,
-                "tags": ["teste", "tabela"]
-            },
-            {
-                "id": "post-03",
-                "title": "Listas e ênfase",
-                "timestamp": 1793145600000,
-                "tags": ["teste", "listas"]
-            },
-            {
-                "id": "post-04",
-                "title": "Blocos de código",
-                "timestamp": 1793232000000,
-                "tags": ["teste", "código"]
-            },
-            {
-                "id": "post-05",
-                "title": "Markdown com HTML",
-                "timestamp": 1793318400000,
-                "tags": ["teste", "html"]
-            },
-            {
-                "id": "post-06",
-                "title": "Texto longo",
-                "timestamp": 1793404800000,
-                "tags": ["teste", "texto"]
-            },
-            {
-                "id": "post-07",
-                "title": "Cibercultura",
-                "timestamp": 1793491200000,
-                "tags": ["teste", "cibercultura"]
-            },
-            {
-                "id": "post-08",
-                "title": "Citações",
-                "timestamp": 1793577600000,
-                "tags": ["teste", "citação"]
-            },
-            {
-                "id": "post-09",
-                "title": "Tabelas alinhadas",
-                "timestamp": 1793664000000,
-                "tags": ["teste", "tabela"]
-            },
-            {
-                "id": "post-10",
-                "title": "Tudo junto",
-                "timestamp": 1793750400000,
-                "tags": ["teste", "blog"]
-            }
-        ],
+  { "id": "post-01", "title": "Primeiros passos", "date": 1792972800, "tags": ["teste", "blog"] },
+  { "id": "post-02", "title": "Tabelas na web", "date": 1793059200, "tags": ["teste", "tabela"] },
+  { "id": "post-03", "title": "Listas e ênfase", "date": 1793145600, "tags": ["teste", "listas"] },
+  { "id": "post-04", "title": "Blocos de código", "date": 1793232000, "tags": ["teste", "código"] },
+  { "id": "post-05", "title": "Markdown com HTML", "date": 1793318400, "tags": ["teste", "html"] },
+  { "id": "post-06", "title": "Texto longo", "date": 1793404800, "tags": ["teste", "texto"] },
+  { "id": "post-07", "title": "Cibercultura", "date": 1793491200, "tags": ["teste", "cibercultura"] },
+  { "id": "post-08", "title": "Citações", "date": 1793577600, "tags": ["teste", "citação"] },
+  { "id": "post-09", "title": "Tabelas alinhadas", "date": 1793664000, "tags": ["teste", "tabela"] },
+  { "id": "post-10", "title": "Tudo junto", "date": 1793750400, "tags": ["teste", "blog"] }
+]
+,
         "index-max-list": 5,
         "footer-max-list": 6,
         "blog-max-list": 20

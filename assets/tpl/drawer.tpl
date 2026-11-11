@@ -94,7 +94,7 @@
 
               <div data-toggle="modal" data-target="#modal-source-version-info" class="p-2 col-4 ct cp">
                     <span class="d-block p-1">📦</span>
-                    <span class="d-block">Version</span>
+                    <span class="d-block i18n" data-i18n-html="drawer.version">Versão</span>
                 </div>
 
 

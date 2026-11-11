@@ -1473,3 +1473,99 @@ footer #footbody > div > .widget-column a:hover {
   }
 }
 
+/* ==== POSTS CAROUSEL (página inicial) ==== */
+.posts-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.posts-carousel::-webkit-scrollbar {
+  display: none;
+}
+.posts-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  padding: 0 1rem;
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+}
+.posts-slide img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+}
+.posts-dots {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+.posts-dots button {
+  width: .75rem;
+  height: .75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #bbb;
+}
+.posts-dots button[aria-current="true"] {
+  background: #3367d6;
+}
+
+
+
+/* ==========================================
+   RESPONSIVE NAVBAR LINKS
+   ========================================== */
+
+/* Mobile estreito: Blog, About e DPO */
+.nav-item-lab,
+.nav-item-contact,
+.nav-item-donations,
+.nav-item-policies {
+    display: none;
+}
+
+/* Mobile intermediário: adiciona Donations */
+@media (min-width: 400px) and (max-width: 767.98px) {
+    .nav-item-donations {
+        display: block;
+    }
+}
+
+/* Tablet e desktop: todos os links */
+@media (min-width: 768px) {
+    .nav-item-lab,
+    .nav-item-contact,
+    .nav-item-donations,
+    .nav-item-policies {
+        display: block;
+    }
+}
+
+/* Prevent navigation links from wrapping */
+#navbarNavAltMarkup .navbar-nav {
+    flex-wrap: nowrap;
+}
+
+#navbarNavAltMarkup .nav-link {
+    white-space: nowrap;
+}
+
+
+@media (max-width: 767.98px) {
+    #navbarNavAltMarkup .nav-link {
+        margin-right: 1rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    #navbarNavAltMarkup .nav-link {
+        padding-bottom: 4px;
+    }
+}

@@ -108,6 +108,9 @@ import PolicyHandler from './modules/models/PolicyHandler.mjs'
 
 import Templates from './modules/models/Templates.mjs'
 
+// Postagens recentes (carrossel da home e resumo no rodapé)
+import { renderFooterNews, renderIndexCarousel } from './modules/models/RecentPosts.mjs'
+
 import indexedDBLogs from './modules/lib/IndexedLogs.mjs'
 
 import { DrawerEvents, SlideMenus } from './modules/models/UIHandler.mjs'
@@ -190,6 +193,15 @@ let BaseRootRegExp = new RegExp(BaseRoot),
 // Instance and "mode" (i18n|l10n|Intl)
 const i18n = new IlibJS('i18n')
 
+// Tradução em tempo de execução (texto montado por JavaScript).
+// Sem a chave no dicionário usa o texto padrão; {nome} é trocado por vars.nome.
+const tr = (key, fallback, vars = {}) => {
+    const word = i18n.getWord(key)
+    const text = (typeof word === 'string' && word) ? word : fallback
+
+    return text.replace(/\{(\w+)\}/g, (match, name) => name in vars ? vars[name] : match)
+}
+
 
 const Events = new Emitter('setup')
 
@@ -205,6 +217,7 @@ const Notify = new NotifyJS({
   permissions: BrowserPermissions,
     watchPermissions: true,
     player: SoundPlay,
+    translate: tr,
     //logger: NotifyLogger.loging,
     // only for "bootstraped" template
     gui: {
@@ -446,6 +459,11 @@ const DSNotify = new NotifyJS({
             await TemplatesReady.import
 
 
+if (router === 'index') {
+
+    renderIndexCarousel(settings, document.getElementById('index-central-block'), { locale: PolicyHandler.language })
+}
+
 if (router === 'blog') {
 
     const box = document.getElementById('index-central-block')
@@ -475,7 +493,7 @@ if (router === 'blog') {
     )
 
     const formatDate = seconds => new Date(seconds * 1000)
-        .toLocaleDateString(navigator.language, { dateStyle: 'medium' })
+        .toLocaleDateString(PolicyHandler.language, { dateStyle: 'medium' })
 
     let drawing = 0
 
@@ -500,7 +518,7 @@ if (router === 'blog') {
 
         const shown = Math.min(visible, posts.length)
 
-        count.textContent = `Mostrando ${shown} de ${posts.length}`
+        count.textContent = tr('blog.showing', 'Mostrando {shown} de {total}', { shown, total: posts.length })
 
         count.hidden = posts.length <= maxList
 
@@ -540,10 +558,10 @@ if (router === 'blog') {
             visible = Math.ceil((index + 1) / maxList) * maxList
         }
 
-        let article = '<p class="ct my-5">Nada publicado ainda.</p>'
+        let article = `<p class="ct my-5">${tr('blog.empty', 'Nada publicado ainda.')}</p>`
 
         if (posts.length && !post) {
-            article = '<p class="ct my-5">Post não encontrado.</p>'
+            article = `<p class="ct my-5">${tr('blog.not_found', 'Post não encontrado.')}</p>`
         }
 
         if (post) {
@@ -555,7 +573,7 @@ if (router === 'blog') {
             } catch (error) {
                 console.error('[BLOG]:', error)
 
-                article = '<p class="ct my-5">Não foi possível carregar este post.</p>'
+                article = `<p class="ct my-5">${tr('blog.load_error', 'Não foi possível carregar este post.')}</p>`
             }
         }
 
@@ -572,7 +590,8 @@ if (router === 'blog') {
                 <p id="blog-count" class="small text-muted ct mt-3 mb-0" hidden></p>
                 <button type="button"
                         id="blog-more"
-                        class="btn btn-outline-secondary btn-block rounded-0 cp mt-3"
+                        class="btn btn-outline-secondary btn-block rounded-0 cp mt-3 i18n"
+                        data-i18n-html="blog.load_more"
                         hidden>Carregar mais</button>
                 <div class="mb-5"></div>
             </div>`
@@ -1077,6 +1096,9 @@ closeEditorButton.addEventListener('click', () => {
 
 
 
+
+    // Rodapé: últimas postagens (limite: settings.articles['footer-max-list'])
+    renderFooterNews(settings, document.getElementById('dinamic-footer-news'), PolicyHandler.language)
 
     // @revise - lazy-load global initializator?
     // @oriority: MEDIUM

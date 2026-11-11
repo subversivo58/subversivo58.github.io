@@ -345,6 +345,12 @@ class NotifyJS extends Emitter {
             typeof settings.player === 'function'
         ) ? settings.player : noop;
 
+        // Tradução de textos fixos (opcional): translate(chave, textoPadrao)
+        this.translate = (
+            'translate' in settings &&
+            typeof settings.translate === 'function'
+        ) ? settings.translate : (key, fallback) => fallback;
+
         this.FIFO = new Queue();
 
         this.container = false;
@@ -532,8 +538,8 @@ class NotifyJS extends Emitter {
             // Use the same rendering pipeline as every notification:
             // native first, HTML fallback if native construction fails.
             const notification = this.create({
-                title: 'Notificações ativadas',
-                body: 'Obrigado por permitir o envio de notificações!',
+                title: this.translate('notify.permission_granted.title', 'Notificações ativadas'),
+                body: this.translate('notify.permission_granted.body', 'Obrigado por permitir o envio de notificações!'),
                 icon: this.default.icon || '',
                 tag: 'notifyjs-permission-granted'
             });

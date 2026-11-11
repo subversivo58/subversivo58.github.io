@@ -87,8 +87,10 @@
         "about": "sobre",
         "lab": "laboratório",
         "contact": "contato",
-        "policies": "politicas",
-        "donations": "doações"
+        "policies": "políticas",
+        "donations": "doações",
+        "signin": "Entrar",
+        "docs": "documentação"
     },
     "footer": {
         "content": {
@@ -96,7 +98,7 @@
             "blognew": "NOVIDADES",
             "uselink": "LINKS UTEIS",
             "docs": "Documentação",
-            "policies": "Politicas Gereais",
+            "policies": "Políticas Gerais",
             "faq": "Suporte e FAQ",
             "forum": "Fórum e Comunidade",
             "devtool": "Ferramentas DEV",
@@ -106,7 +108,8 @@
             "desc2": "Este site esta em constante desenvolvimento, fique a vontade para apontar erros ou sugerir melhorias.",
             "start": "Começar agora",
             "source": "Código Fonte",
-            "feedback": "Feedback"
+            "feedback": "Feedback",
+            "dpo": "Encarregado (DPO)"
         },
         "author": "autor",
         "about": "sobre",
@@ -211,7 +214,8 @@
             "feedback": "Feedback",
             "lang": "Idiomas",
             "marks": "Marcador"
-        }
+        },
+        "version": "Versão"
     },
     "info_popup": {
         "join_key": {
@@ -567,6 +571,47 @@
             "text1": "Este projeto só foi possível graças ao uso de muitos outros projetos de código fonte aberta e a ",
             "text2": "comunidade de contribuidores",
             "text3": "Você é livre para criar, usar, modificar e distribuir respeitando todas as licenças subjacentes!"
+        },
+        "tabs": {
+            "camera": "Requisitar câmera",
+            "permissions": "Permissões"
+        },
+        "share": {
+            "title": "Compartilhar este blogue",
+            "broken_link": "Reportar um link quebrado?"
+        },
+        "notes": {
+            "title": "Notas rápidas",
+            "note_title": "Título:",
+            "category": "Categoria:",
+            "tags": "Tags:",
+            "note": "Nota:",
+            "save": "Salvar",
+            "ph_title": "Título",
+            "ph_category": "Categoria",
+            "ph_tags": "Tags",
+            "ph_note": "Sua nota aqui..."
+        },
+        "offline": {
+            "title": "Salvar para uso offline",
+            "yes": "Sim, salvar!",
+            "no": "Não, cancelar",
+            "about": "Sobre os recursos offline?"
+        },
+        "auth": {
+            "title": "Entrar e autorizar",
+            "source": "Código-fonte: <a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">ver no GitHub</a>"
+        },
+        "bugs": {
+            "select_type": "Selecione o tipo:",
+            "custom": "Erro personalizado",
+            "css": "Erro de CSS",
+            "js": "Erro de JavaScript",
+            "language": "Erro de Idioma",
+            "plugins": "Erro em Plugins",
+            "server": "Erro do Servidor",
+            "description": "Envie uma descrição",
+            "ph_description": "Descrição aqui..."
         }
     },
     "notify": {
@@ -590,6 +635,88 @@
                     "icon": "📜"
                 }
             ]
+        },
+        "permission_granted": {
+            "title": "Notificações ativadas",
+            "body": "Obrigado por permitir o envio de notificações!"
         }
+    },
+    "pages": {
+        "about": {
+            "heading": "Tecnologias, tendências e cybercultura",
+            "item1": "✓ Web APIs, JavaScript e HTML5 features.",
+            "item2": "✓ Progamação funcional, patterns, frameworks.",
+            "item3": "✓ WebCrypto, laboratório e code-flask's.",
+            "item4": "✓ Opiniões, life-style, cultura Geek e muito mais.",
+            "photo": "Foto de <a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a> em <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "title": "Sobre",
+            "p1": "Olá, eu sou Lauro Moraes \"aka\" <a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a> e este site é meu laboratório digital e blog pessoal.",
+            "p2": "Aqui eu público conteúdo sobre tendências tecnológicas, cybercultura e programação voltada para web como PWA's, Single Page Apps e o uso de modernas api's JavaScript, HTML5 e CSS3",
+            "p3": "Sou apaixonado por programação funcional, design de padrões e assuntos como descentralização da web ... blockchain e criptografia na web são temas constantes por aqui.",
+            "p4": "Também é por aqui que, público minhas experimentações e partilho meus códigos e pequenos fragmentos funcionais além de expressar minhas opiniões sobre temas diversos, um pouco de cultura Geek e este estilo de vida.",
+            "p5": "Sinta-se a vontade para explorar o conteúdo do blogue e participar de nossa comunidade."
+        },
+        "you_in_control": {
+            "heading": "Você no controle de seus dados",
+            "item1": "✓ Privacidade é seu direito, não um produto a lhe ser ofertado.",
+            "item2": "✓ Cryptografia como base de toda segurança digital.",
+            "item3": "✓ O respeito a privacidade começa por respeitar suas escolhas.",
+            "item4": "✓ Você decide o quê, quando e com quem compartilhar seus dados.",
+            "photo": "Foto de <a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a> em <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>"
+        },
+        "donations": {
+            "heading": "Pensando em fazer algo legal?",
+            "photo": "Foto de <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> em <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "thanks_title": "Agradecimentos",
+            "thanks_text": "Com muito orgulho utilizamos as <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Páginas do Github</a> e os serviços de <a href=\"https://glitch.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Glitch.com</a> e de <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Wokers</a>, estas plataformas e suas ferramentas são realmente incriveis que nos permitem fazer coisas legais como este blogue e nossas ferramentas.",
+            "platforms_title": "Conheça estas plataformas",
+            "link_github": "Conheça e explore o GitHub Pages",
+            "link_glitch": "Crie e invente com Glitch",
+            "link_workers": "Veja o que Cloud Workers faz",
+            "donate_title": "Sua doação é importante"
+        },
+        "dpo": {
+            "heading": "Encarregado de Proteção de Dados (DPO)",
+            "intro1": "Em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018), informamos o contato do nosso Encarregado (Data Protection Officer).",
+            "intro2": "O DPO é a pessoa responsável por intermediar a comunicação entre o Site, os titulares de dados (você) e a Autoridade Nacional de Proteção de Dados (ANPD).",
+            "contact_title": "Informações de Contato",
+            "officer": "<strong>Encarregado:</strong> Lauro de Moraes",
+            "email": "E-mail:",
+            "deadline": "<strong>Prazo de Resposta:</strong> Até 30 dias, conforme regulamentação aplicável a agentes de tratamento de pequeno porte.",
+            "send_email": "Enviar e-mail ao DPO",
+            "rights_title": "Como exercer seus direitos",
+            "rights1": "Para exercer qualquer um dos seus direitos previstos no Art. 18 da LGPD (como confirmação de tratamento, acesso, correção, anonimização, eliminação, entre outros), basta enviar um e-mail para o endereço acima.",
+            "rights2": "Para agilizar o atendimento, sugerimos que inclua no assunto ou no corpo do e-mail:",
+            "list1": "Seu nome completo;",
+            "list2": "O direito que deseja exercer (ex: exclusão de dados, acesso, etc.);",
+            "list3": "Detalhes que possam nos ajudar a localizar seus dados em nossos sistemas.",
+            "policies": "Para mais detalhes sobre como tratamos seus dados, consulte nossa <a href=\"./policy.html#policy-general\">Política Geral</a> e nossa <a href=\"./policy.html#policy-privacy\">Política de Privacidade</a>."
+        }
+    },
+    "settings_slide": {
+        "title": "Configurações do site",
+        "media_api": "API de mídia",
+        "auto_audio": "chamar áudio automaticamente após a primeira permissão",
+        "auto_video": "chamar vídeo automaticamente após a primeira permissão",
+        "geo_api": "API de geolocalização",
+        "geo_share": "compartilhar análises de rastreamento geográfico",
+        "audio_effects": "Efeitos de áudio",
+        "audio_effects_on": "ativar efeitos de áudio",
+        "audio_notify_on": "ativar notificações de áudio",
+        "connection": "Conexão (status)",
+        "notify_off": "desativar notificação",
+        "analytics": "Análises",
+        "analytics_toggle": "ativar ou desativar"
+    },
+    "palette": {
+        "title": "Paleta de cores",
+        "schema": "Esquema"
+    },
+    "blog": {
+        "empty": "Nada publicado ainda.",
+        "not_found": "Post não encontrado.",
+        "load_error": "Não foi possível carregar este post.",
+        "showing": "Mostrando {shown} de {total}",
+        "load_more": "Carregar mais"
     }
 }
