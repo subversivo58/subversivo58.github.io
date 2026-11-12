@@ -325,7 +325,7 @@ if (location.search === '?clear-site-data=1') {
   // this route
     const router = PathName(true)
 
-  
+  dc.documentElement.lang = PolicyHandler.language
     await i18n.get(`${BaseRoot}assets/lang/${PolicyHandler.language}.json`, {
         credentials: 'include',
         cache: 'reload'

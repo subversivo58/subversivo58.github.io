@@ -1,0 +1,725 @@
+{
+    "anonimous": {
+        "title": "匿名モードで閲覧していますか？",
+        "body": {
+            "first": "どうやらプライベートブラウジングモード（匿名）で閲覧しているようです。",
+            "second": "この閲覧モードでは、保存されたすべてのCookieとキャッシュデータは、ブラウジングを終了すると破棄されます。",
+            "third": "このサイトはオフラインでも動作するように設計されていますが、一部の機能、プラグイン、アプリが正常に動作しない、または利用できない場合があります。"
+        },
+        "button": "わかりました。続行します"
+    },
+    "source": {
+        "name": "Subversivo58 Blog",
+        "version": "0.1.0",
+        "author": "Subversivo58",
+        "home": "https://github.com/subversivo58/",
+        "colab": [],
+        "build": "Alpha",
+        "bugs": [
+            {
+                "type": "git",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
+            }
+        ],
+        "license": [
+            {
+                "type": "MIT",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
+            }
+        ]
+    },
+    "words": {
+        "an": "1件前",
+        "agree": "同意する",
+        "clear": "消去",
+        "signin": "ログイン",
+        "logout": "ログアウト",
+        "signup": "登録",
+        "close": "閉じる",
+        "drawer": "ドロワー",
+        "free": "無料",
+        "search": "検索",
+        "recover": "復元",
+        "restore": "元に戻す",
+        "white": "白",
+        "decade": "10年",
+        "year": "年",
+        "month": "月",
+        "week": "週",
+        "day": "日",
+        "hour": "時間",
+        "minute": "分",
+        "license": "ライセンス",
+        "more": "もっと見る",
+        "second": "秒",
+        "now": "今",
+        "rememberme": "ログイン状態を保持する",
+        "source": "ソース",
+        "mail": "メール",
+        "page": "ページ",
+        "pwd": "パスワード",
+        "token": "トークン",
+        "media": "メディア",
+        "settings": "設定",
+        "version": "バージョン",
+        "ooops": "おっと..."
+    },
+    "combo": {
+        "btn_top": "トップへ戻る",
+        "more_info": "詳細を見る。",
+        "click_here": "こちらをクリック！",
+        "clear_exit": "消去して終了",
+        "not_show_again": "今後表示しない",
+        "powered": "提供",
+        "copyr": "著作権",
+        "knowmore": "詳しく見る",
+        "seelicenses": "ライセンスを見る"
+    },
+    "langs": {
+        "enUS": "英語（アメリカ合衆国）- [デフォルト]",
+        "ptBR": "ポルトガル語（ブラジル）"
+    },
+    "navbar": {
+        "wiki": "WIKI",
+        "blog": "ブログ",
+        "dpo": "DPO",
+        "colab": "コラボレーション",
+        "about": "サイトについて",
+        "lab": "ラボ",
+        "contact": "お問い合わせ",
+        "policies": "ポリシー",
+        "donations": "寄付",
+        "signin": "ログイン",
+        "docs": "ドキュメント"
+    },
+    "footer": {
+        "content": {
+            "contactnf": "お問い合わせ",
+            "blognew": "最新情報",
+            "uselink": "便利なリンク",
+            "docs": "ドキュメント",
+            "policies": "一般ポリシー",
+            "faq": "サポートとFAQ",
+            "forum": "フォーラムとコミュニティ",
+            "devtool": "開発者ツール",
+            "api": "サービスAPI",
+            "bugs": "バグを報告",
+            "desc1": "このサイトは2010年に始まったプロジェクトを集めたもので、さまざまなテーマを共有する個人ブログとして運営されています。ぜひサイトを探索し、コンテンツを共有してください。",
+            "desc2": "このサイトは継続的に開発されています。エラーの報告や改善の提案を歓迎します。",
+            "start": "今すぐ始める",
+            "source": "ソースコード",
+            "feedback": "フィードバック",
+            "dpo": "データ保護責任者（DPO）"
+        },
+        "author": "作成者",
+        "about": "サイトについて",
+        "licit": "法的情報",
+        "cookie": "Cookie",
+        "privacci": "プライバシー",
+        "footoodle": {
+            "title": "Collaboreに参加する",
+            "description": "<p>Collaboreは開発者や愛好家に門戸を開いています。静的ページのサービスを動的なものへと変えましょう。</p><p>シンプルでありながら強力なインターフェースを通じて、投稿の編集、レビュー、新規作成、ページへのプラグインやアプリの追加、独自の拡張機能の組み込みができます。</p><p>これらすべてを、拡張性を考慮して設計されたオープンソースコードで実現できます。統合認証システムを利用すれば、Collaboreのユーザーは数回のクリックであなたのページに登録でき、ページ上のプラグインやアプリにも自動的に認証されます。</p><p class='mt-5 ct'>この協働システムに参加しましょう。<a href='./signup' class='white tdu'>今すぐ登録！</a></p>"
+        }
+    },
+    "api": {
+        "geo": {
+            "request": "位置情報を要求する",
+            "description": "<div class='row'><p>位置情報を利用すると、より正確で関連性の高いコンテンツを検索できます。</p><p>友人、ページ、商品、グループ、チャンネル、投稿、タグなど、近くにあるものを探す最も簡単な方法です。</p></div><div data-mg='top:15' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-map-marker ct' onclick='$.Geo.request()'> 許可を要求する</span></div></div>",
+            "link_docs": "詳しくは、<a href='https://docs.himliy.com/gelocation#permissions' target='blank_' rel='nofollow' class='blue tdu'>ドキュメント</a>の権限に関するガイドをご覧ください。"
+        },
+        "not": {
+            "request": "通知を要求する",
+            "description": "<div class='row'><p>通知を利用すると：</p><p><b>ログインユーザー：</b>メッセージ、システム、チャット、チャンネル、登録済みフィード（ドキュメント：<a href='http://docs.himliy.com/notification#subscribles' target='blank_' rel='nofollow' class='blue tdu'>購読</a>を参照）に関する通知を受け取れます。他のWebページを閲覧している間や、ブラウザーが<b>最小化</b>されている場合でも通知されます。</p><p><b>未ログインユーザー：</b>システム通知や検索通知を受け取れます（ドキュメント：<a href='https://docs.himliy.com/notification#unsigned-subscrible' target='blank_' rel='nofollow' class='blue tdu'>未登録の購読</a>を参照）。</p></div><div data-mg='top:5' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-bell-o ct' onclick='$.Notific.request()'> 許可を要求する</span></div></div>",
+            "link_docs": "詳しくは、<a href='https://docs.himliy.com/notification#permissions' target='blank_' rel='nofollow' class='blue tdu'>ドキュメント</a>の権限に関するガイドをご覧ください。",
+            "message": {
+                "head": "ありがとうございます",
+                "body": "Collaboreの通知を有効にしました :)"
+            }
+        }
+    },
+    "cookies": {
+        "agree": {
+            "description_1": "このサイトでは、情報を保存するためにCookieやその他の技術を使用しています。このサイトを引き続き利用することで、これらの使用および関連する「ポリシー」に同意したものとみなされます。",
+            "description_2": "詳しい情報については、当サイトの<a href='./policies.html#cookies' target='blank_' rel='nofollow' class='tdu sky'>クッキーポリシー</a>をご覧ください。",
+            "close_banner_info": "閉じるには、下のボタンをクリックしてください。"
+        }
+    },
+    "drawer": {
+        "clear_data": {
+            "title": "サイトデータを消去",
+            "question_info": "本当によろしいですか？",
+            "positive": "はい、消去する",
+            "negative": "いいえ、キャンセル",
+            "footer_info": "キャッシュとCookieを消去します。<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
+        },
+        "bug_report": {
+            "title": "バグを報告 🐛",
+            "question_info": "エラーを見つけましたか？報告してください！",
+            "placeholder": "ここにエラーの内容を記入...",
+            "send": "送信",
+            "follow": "サポートへ移動",
+            "footer_info": "バグの報告については、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
+        },
+        "feedback": {
+            "title": "コメントを送信",
+            "rating": "評価：",
+            "question_info": "Collaboreについてのご意見をお聞かせください！",
+            "placeholder": "批評、感想、提案を入力してください",
+            "footer_info": "コメントの送信については、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。",
+            "notific": {
+                "error": {
+                    "title": "フィードバックの送信に失敗しました！",
+                    "message": "申し訳ありません。コメントの処理中にエラーが発生しました。"
+                },
+                "success": {
+                    "title": "フィードバックを送信しました！",
+                    "message": "ありがとうございます。コメントは正常に送信されました！"
+                }
+            }
+        },
+        "geolocation": {
+            "title": "位置情報を要求",
+            "btn1": "はい、要求する",
+            "btn2": "いいえ、キャンセル",
+            "footer_info": "位置情報については、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
+        },
+        "notification": {
+            "title": "通知を要求",
+            "btn1": "はい、要求する",
+            "btn2": "いいえ、キャンセル",
+            "footer_info": "通知については、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
+        },
+        "getmedia_audio": {
+            "title": "マイクを要求",
+            "btn1": "はい、要求する",
+            "btn2": "いいえ、キャンセル",
+            "footer_info": "音声メディアについては、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
+        },
+        "getmedia_video": {
+            "title": "Webカメラを要求",
+            "btn1": "はい、要求する",
+            "btn2": "いいえ、キャンセル",
+            "footer_info": "ビデオメディアについては、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
+        },
+        "words": {
+            "clear": "消去",
+            "geo": "位置情報",
+            "cam": "ビデオ",
+            "mic": "音声",
+            "color": "色",
+            "note": "メモ",
+            "bug": "バグ",
+            "lab": "ラボ",
+            "not": "通知",
+            "feedback": "フィードバック",
+            "lang": "言語",
+            "marks": "マーカー"
+        },
+        "version": "バージョン"
+    },
+    "info_popup": {
+        "join_key": {
+            "head": "セキュリティキー",
+            "body": "<p><b>セキュリティキー</b>ファイルを送信してください。</p><p>この処理では、固有の暗号化キーを解析し、アクセスを許可します。</p>",
+            "footer": "<small>セキュリティに関する提案や詳細については、<a href='#' class='tdu sky'>ドキュメントをお読みください</a></small>"
+        },
+        "registration_pwd": {
+            "head": "アカウントのパスワード！",
+            "body": "<p class='lh-140'>この欄には、許可されたルールに従って8文字以上50文字以下で入力してください：</p><ul class='list-group'><li class='list-group-item'><b>小文字を1文字以上</b></li></ul>",
+            "footer": "<small>セキュリティに関する提案や詳細については、<a href='#' class='tdu sky'>ドキュメントをお読みください</a></small>"
+        }
+    },
+    "registration": {
+        "error": {
+            "already": {
+                "message": "<p class='lh-140'>このメールアドレスは既に登録されています！</p><p class='lh-140'>アカウントを有効化するか、アクティベーションリンクを再送信するか、<a href='/signin'>ログインページ</a>に進んでください。</p>"
+            },
+            "server": {
+                "message": "<p class='lh-140'>申し訳ありません。サーバー内部でエラーが発生しました！</p>"
+            }
+        }
+    },
+    "recover": {
+        "success": {
+            "title": "おめでとうございます！",
+            "message": "アカウント復旧リンクを送信しました！メールボックスをご確認ください...リンクの有効期限は1時間です。"
+        },
+        "error": {
+            "server": {
+                "title": "[エラー] エラーが発生しました！",
+                "message": "申し訳ありません。サーバー内部でエラーが発生しました！後でもう一度お試しください。"
+            },
+            "notfound": {
+                "title": "[情報] メールアドレスが見つかりません！",
+                "message": "申し訳ありません。このメールアドレスはデータベースに登録されていません！"
+            },
+            "inactived": {
+                "title": "[情報] アカウントが無効です！",
+                "message": "申し訳ありません。このアカウントはまだ有効化されていません！"
+            },
+            "wait": {
+                "title": "[情報] メール送信待ち！",
+                "message": "このメールは既に送信されています！新しいリクエストを行うまで1時間お待ちください。"
+            },
+            "auth": {
+                "title": "[エラー] 認証エラー！",
+                "message": "リクエストに有効な認証トークンが含まれていません！こちらをクリックして、アカウント復旧に関するドキュメントをご覧ください。"
+            },
+            "conn": {
+                "title": "[情報] 接続が終了しました！",
+                "message": "アカウント復旧リンクを含むメールは既に送信されています！メールサービスをご確認ください。"
+            },
+            "mail": {
+                "title": "[エラー] メールエラー！",
+                "message": "このメールアドレスの形式は無効です！こちらをクリックして、アカウント復旧に関するドキュメントをご覧ください。",
+                "link": "#"
+            }
+        }
+    },    "copyright": {
+        "contributors": "このプロジェクトは、多くのオープンソースプロジェクトと<a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>貢献者コミュニティ</a>のおかげで実現しました。すべての関連ライセンスを遵守する限り、自由に作成、使用、変更、配布できます！",
+        "caption": "ソースと各ライセンスの一覧",
+        "backendsources": "サーバー（NodeJS）上で実行され、動的に読み込まれる多くのソースも、このプロジェクトに不可欠です。例えば：",
+        "package": "および<a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>その他...</a>",
+        "tps": "サードパーティソフトウェア",
+        "thissource": "このサイトのソフトウェア",
+        "alllicenses": "すべてのライセンス"
+    },
+    "signin": {
+        "remember": "この端末を記憶する",
+        "forgot": "アカウントを復旧しますか？"
+    },
+    "signup": {
+        "success": {
+            "title": "おめでとうございます！",
+            "message": "アクティベーションリンクを送信しました！メールボックスをご確認ください。有効期限は24時間です。"
+        },
+        "error": {
+            "server": {
+                "title": "[エラー] エラーが発生しました！",
+                "message": "申し訳ありません。サーバー内部でエラーが発生しました！後でもう一度お試しください。"
+            },
+            "already": {
+                "title": "[情報] 登録済みです！",
+                "message": "このメールアドレスは既に登録されています！メールボックスをご確認ください。"
+            },
+            "token": {
+                "title": "[エラー] 認証エラー！",
+                "message": "リクエストに有効なトークンが含まれていません！こちらをクリックして、登録に関するドキュメントをご覧ください。"
+            },
+            "conn": {
+                "title": "[情報] 接続が終了しました！",
+                "message": "アクティベーションリンクを含むメールは既に送信されています！メールボックスをご確認ください。"
+            },
+            "mail": {
+                "title": "[エラー] メールエラー！",
+                "message": "このメールアドレスの形式は無効です！こちらをクリックして、登録に関するドキュメントをご覧ください。",
+                "link": "#"
+            },
+            "pwd": {
+                "title": "[エラー] パスワードエラー！",
+                "message": "このパスワードの形式は無効です！こちらをクリックして、登録に関するドキュメントをご覧ください。",
+                "link": "#"
+            }
+        },
+        "modal": {
+            "head": "アカウントのパスワード",
+            "req": "このパスワードには以下が必要です：",
+            "test": "今すぐパスワードを確認する：",
+            "chars": "8文字以上50文字以下",
+            "lower": "小文字を1文字以上",
+            "upper": "大文字を1文字以上",
+            "digit": "数字を1文字以上",
+            "special": "特殊文字を1文字以上",
+            "space": "スペースなし",
+            "run": "テストする",
+            "footer": "詳しい情報や提案については、こちらの<a href='#' class='tdu blue' target='_blank' rel='nofollow'>ドキュメント</a>をご覧ください。",
+            "result": {
+                "accept": "問題ありません。有効なパスワードです！",
+                "refuse": "無効です",
+                "empty": "、空です",
+                "less": "、8文字未満です",
+                "more": "、50文字を超えています",
+                "lower": "、小文字がありません",
+                "upper": "、大文字がありません",
+                "digit": "、数字がありません",
+                "special": "、特殊文字がありません",
+                "space": "、スペースが含まれています",
+                "unk": "、不明です"
+            }
+        },
+        "regnow": "今すぐ登録 ",
+        "btnSubmit": "Collaboreに登録する",
+        "agreement": "「Collaboreに登録する」ボタンをクリックすると、<a href='./licit' target='blank_'>利用規約</a>および<a href='./policies/privacci' target='blank_'>プライバシーポリシー</a>に同意したものとみなされます。アカウントに関するメールを随時お送りする場合があります。"
+    },
+    "slack": {
+        "another": "新しい招待をリクエストしますか？ ",
+        "figcap": {
+            "property": "Slackの所有者：",
+            "rights": "無断転載を禁じます。"
+        },
+        "giturl": "GitHubプロフィール",
+        "join": "Collaboreチームに参加する",
+        "modal": {
+            "header": "GitHubプロフィールリンクについて",
+            "body1": " は非常に優れたツールですが、<b class='green'>無料</b>アカウントには制限があります。",
+            "body2": "新しいメンバーが実際に開発者であり、他のプロジェクトに貢献しているかを確認するため、アカウントのリンク ",
+            "body2_1": " の提示をお願いしています。",
+            "body3": "入力するメールアドレスは、アカウントに公開設定で紐付けられているものと同じである必要があります： ",
+            "footer": "詳しくは、こちらの<a href='#' class='blue tdu'>ドキュメント</a>をご覧ください。"
+        },
+        "alert": {
+            "sended": "リクエストを送信しました！",
+            "info": "リクエストへの回答をお待ちください！",
+            "success": "リクエストは既に承認されています！",
+            "danger": "リクエストは拒否されました！"
+        },
+        "notific": {
+            "success": {
+                "title": "Collaboreチームへの招待！",
+                "message": "リクエストは正常に送信されました。管理者の対応をお待ちください。"
+            },
+            "errorserver": {
+                "title": "サーバーエラー！",
+                "message": "申し訳ありません。サーバーでエラーが発生しました！こちらをクリックしてドキュメントをご覧ください。"
+            },
+            "invalidauth": {
+                "title": "認証エラー！",
+                "message": "リクエストに有効なトークンが含まれていません！こちらをクリックしてドキュメントをご覧ください。"
+            },
+            "invalidmail": {
+                "title": "メールエラー！",
+                "message": "このメールアドレスは無効です！こちらをクリックしてドキュメントをご覧ください。"
+            },
+            "invalidlink": {
+                "title": "GitHubプロフィールエラー！",
+                "message": "申し訳ありません。これは有効なGitHubプロフィールへのリンクではありません！こちらをクリックしてドキュメントをご覧ください。"
+            },
+            "accepted": {
+                "title": "招待は既に承認されています！",
+                "message": "このリクエストは招待リストですでに承認されています！こちらをクリックしてドキュメントをご覧ください。"
+            },
+            "refused": {
+                "title": "招待は拒否されました！",
+                "message": "申し訳ありません。このリクエストは管理者によって拒否されました！こちらをクリックしてドキュメントをご覧ください。"
+            },
+            "waiting": {
+                "title": "招待の保留中！",
+                "message": "このリクエストは既に送信されています！管理者の対応をお待ちください。"
+            },
+            "closeconn": {
+                "title": "接続が終了しました！",
+                "message": "このリクエストは既に送信されています！こちらをクリックしてドキュメントをご覧ください。"
+            }
+        }
+    },
+    "openpgp": {
+        "error": {
+            "encryption": {
+                "title": "[エラー] 暗号化リクエスト！",
+                "message": "PGP暗号化中にエラーが発生しました！こちらをクリックして、このエラーに関するドキュメントをご覧ください。",
+                "link": "#"
+            }
+        }
+    },
+    "nocookie": {
+        "title": "サポート対象外",
+        "p1": "申し訳ありませんが、「Cookieなし」でのブラウジングには対応していません。",
+        "p2": "このサイトではCookieやその他の保存技術を使用していますが、<strong>明示的な許可なくブラウザーにデータを保存することはありません</strong>！",
+        "p3": "「Cookieなし」のブラウジングに対応しないのには、正当な理由があると考えています。詳しくは、<a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">ホワイトペーパー</a>をご覧ください。残念ながら、Cookieを有効にして閲覧する必要があります。"
+    },
+    "404": {
+        "general": "おっと... 見つかりません！",
+        "title": "ページが見つかりません",
+        "message": "アクセスしようとしたアドレスは存在しないか、移動されています。入力内容を確認するか、ホームページに戻ってください。",
+        "button": "ホームページに戻る"
+    },
+    "mail": {
+        "account": {
+            "title": "アカウントが作成されました！",
+            "text_a": "Collaboreへようこそ。Collaboreは、無料のWebツールと言語を使用して、小規模な協力型ブログやコラボレーションツールを作成するオープンソースプロジェクトです。HTML5 APIを探索し、JavaScriptプラグインを作成し、WebSocketを使用してチャットやコメントシステムを構築し、ページをリモートで簡単かつ迅速に管理しましょう。",
+            "text_b": "以下のリンクを24時間以内にクリックしてアカウントを有効化し、利用を開始してください。",
+            "btn_a": "アカウントを有効化！",
+            "features": "Collaboreの機能",
+            "btn_b": "今すぐアクセス！",
+            "feat_a": {
+                "title": "プログラミング",
+                "msg": "JavaScriptフレームワーク、HTML APIなどを活用した柔軟で強力な開発。"
+            },
+            "feat_b": {
+                "title": "Web開発",
+                "msg": "プラグインを選択したり、サーバーアプリケーションへ簡単に拡張したりできます。"
+            },
+            "feat_c": {
+                "title": "APIの実装",
+                "msg": "独自のAPIを簡単かつ迅速に実装できます。"
+            },
+            "feat_d": {
+                "title": "ブログを公開する",
+                "msg": "簡単な手順でブログテンプレートを公開できます。"
+            },
+            "feat_e": {
+                "title": "レスポンシブ",
+                "msg": "Bootstrapを使用したレスポンシブテンプレート。"
+            }
+        },
+        "recover": {
+            "title": "アカウントの復旧！",
+            "btn": "今すぐ復旧！",
+            "text_a": "こんにちは、",
+            "text_b": "&mdash; このメールはCollaboreアカウントを復旧するためのものです。",
+            "text_c": "以下のリンクを1時間以内にクリックして、アカウントへのアクセスを復旧してください。"
+        },
+        "policy": {
+            "title": "ポリシーの変更！",
+            "text_a": "こんにちは！",
+            "text_b": "利用ポリシーを最近更新しました。ポリシーは、アプリケーションとユーザー間の取り決めに加え、プライバシー、データの利用、サービスの提供について定めています。",
+            "view_changes": "Collaboreアプリケーションにアクセスして、これらの変更について詳しくお読みください。",
+            "btn": "今すぐ確認！"
+        },
+        "twofactory": {
+            "title": "2FAの変更",
+            "text_a": "何ですか？",
+            "text_b": "二要素認証（2FA）システムの変更操作がリクエストされました。",
+            "confirm": "以下のボタンをクリックして、この変更を確認してください。",
+            "btn": "今すぐ確認！"
+        },
+        "unsubscribe": {
+            "text_a": "このメールに心当たりがない場合、または受信した理由がわからない場合は、無視してください。",
+            "text_b": " または、この登録を解除してください。"
+        },
+        "visite_text": "CollaboreのGitHubページにアクセスして、使い方について詳しくご覧ください。",
+        "visite_link": "Collaboreのホームページにアクセス",
+        "copy": "メールテンプレート - &copy; 2016 - Subversivo58"
+    },
+    "twofactory": {
+        "security_slide": {
+            "enabled": "2FAを無効にする",
+            "disabled": "2FAを有効にする"
+        }
+    },
+    "webpush": {
+        "subscribe": {
+            "": ""
+        }
+    },    "date": {
+        "days": {
+            "long": [
+                "日曜日",
+                "月曜日",
+                "火曜日",
+                "水曜日",
+                "木曜日",
+                "金曜日",
+                "土曜日"
+            ],
+            "short": [
+                "日",
+                "月",
+                "火",
+                "水",
+                "木",
+                "金",
+                "土"
+            ]
+        },
+        "months": {
+            "long": [
+                "1月",
+                "2月",
+                "3月",
+                "4月",
+                "5月",
+                "6月",
+                "7月",
+                "8月",
+                "9月",
+                "10月",
+                "11月",
+                "12月"
+            ],
+            "short": [
+                "1月",
+                "2月",
+                "3月",
+                "4月",
+                "5月",
+                "6月",
+                "7月",
+                "8月",
+                "9月",
+                "10月",
+                "11月",
+                "12月"
+            ]
+        },
+        "formatter": {
+            "error": "日付が定義されていません"
+        }
+    },
+    "modals": {
+        "language": {
+    "title": "言語を選択",
+    "avaliable": "利用可能な言語",
+    "pt_BR": "ポルトガル語",
+    "en_US": "英語",
+    "es_ES": "スペイン語",
+    "fr_FR": "フランス語",
+    "de_DE": "ドイツ語",
+    "ja_JP": "日本語",
+    "footer": "お使いの言語がありませんか？翻訳を作成してください！"
+        },
+        "version": {
+            "title": "🚧 工事中 🚧",
+            "text1": "このプロジェクトは、多くのオープンソースプロジェクトと",
+            "text2": "貢献者コミュニティ",
+            "text3": "のおかげで実現しました。すべての関連ライセンスを遵守する限り、自由に作成、使用、変更、配布できます！"
+        },
+        "tabs": {
+            "camera": "カメラを要求",
+            "permissions": "権限"
+        },
+        "share": {
+            "title": "このブログを共有",
+            "broken_link": "リンク切れを報告しますか？"
+        },
+        "notes": {
+            "title": "クイックメモ",
+            "note_title": "タイトル：",
+            "category": "カテゴリー：",
+            "tags": "タグ：",
+            "note": "メモ：",
+            "save": "保存",
+            "ph_title": "タイトル",
+            "ph_category": "カテゴリー",
+            "ph_tags": "タグ",
+            "ph_note": "ここにメモを入力..."
+        },
+        "offline": {
+            "title": "オフライン用に保存",
+            "yes": "はい、保存する！",
+            "no": "いいえ、キャンセル",
+            "about": "オフライン機能について"
+        },
+        "auth": {
+            "title": "ログインして認証",
+            "source": "ソースコード：<a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">GitHubで見る</a>"
+        },
+        "bugs": {
+            "select_type": "種類を選択：",
+            "custom": "カスタムエラー",
+            "css": "CSSエラー",
+            "js": "JavaScriptエラー",
+            "language": "言語エラー",
+            "plugins": "プラグインエラー",
+            "server": "サーバーエラー",
+            "description": "説明を入力してください",
+            "ph_description": "ここに説明を入力..."
+        }
+    },
+    "notify": {
+        "storage": {
+            "title": "Subversivo58 - ストレージ",
+            "body": "このサイトでは、デバイスに情報を保存するためにCookieなどの技術を使用しています。同意しますか？",
+            "actions": [
+                {
+                    "action": "cookie-agree",
+                    "title": "これは何ですか？",
+                    "icon": "🍪"
+                },
+                {
+                    "action": "cookie-policy",
+                    "title": "ポリシーを見る",
+                    "icon": "🛡️"
+                },
+                {
+                    "action": "terms-policy",
+                    "title": "利用規約を見る",
+                    "icon": "📜"
+                }
+            ]
+        },
+        "permission_granted": {
+            "title": "通知が有効になりました",
+            "body": "通知の送信を許可していただきありがとうございます！"
+        }
+    },
+    "pages": {
+        "about": {
+            "heading": "テクノロジー、トレンド、サイバーカルチャー",
+            "item1": "✓ Web API、JavaScript、HTML5の機能。",
+            "item2": "✓ 関数型プログラミング、デザインパターン、フレームワーク。",
+            "item3": "✓ WebCrypto、ラボ、コード実験。",
+            "item4": "✓ 意見、ライフスタイル、Geek文化など。",
+            "photo": "<a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a>による写真（<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>）",
+            "title": "サイトについて",
+            "p1": "こんにちは。私はLauro Moraes、通称<a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a>です。このサイトは私のデジタルラボであり、個人ブログです。",
+            "p2": "ここでは、技術トレンド、サイバーカルチャー、PWAやSingle Page AppsなどのWebプログラミング、最新のJavaScript API、HTML5、CSS3について発信しています。",
+            "p3": "関数型プログラミングやデザインパターン、Webの分散化などに情熱を注いでいます。ブロックチェーンやWeb暗号技術も、ここで頻繁に取り上げるテーマです。",
+            "p4": "また、ここでは実験を公開し、コードや小さな機能サンプルを共有するとともに、さまざまなテーマやGeek文化、ライフスタイルについての意見も発信しています。",
+            "p5": "ぜひブログのコンテンツを探索し、コミュニティに参加してください。"
+        },
+        "you_in_control": {
+            "heading": "あなた自身がデータを管理する",
+            "item1": "✓ プライバシーは提供される商品ではなく、あなたの権利です。",
+            "item2": "✓ 暗号化はデジタルセキュリティの基盤です。",
+            "item3": "✓ プライバシーの尊重は、あなたの選択を尊重することから始まります。",
+            "item4": "✓ 何を、いつ、誰と共有するかは、あなたが決めます。",
+            "photo": "<a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a>による写真（<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>）"
+        },
+        "donations": {
+            "heading": "何か素敵なことをしてみませんか？",
+            "photo": "<a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a>による写真（<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>）",
+            "thanks_title": "謝辞",
+            "thanks_text": "私たちは<a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a>と、<a href=\"https://glitch.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Glitch.com</a>および<a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>のサービスを誇りを持って利用しています。これらのプラットフォームとツールは本当に素晴らしく、このブログや私たちのツールのようなものを作ることを可能にしてくれます。",
+            "platforms_title": "これらのプラットフォームを知る",
+            "link_github": "GitHub Pagesを探索する",
+            "link_glitch": "Glitchで作成し、アイデアを形にする",
+            "link_workers": "Cloudflare Workersの機能を見る",
+            "donate_title": "あなたの寄付は大切です"
+        },
+        "dpo": {
+            "heading": "データ保護責任者（DPO）",
+            "intro1": "ブラジル一般データ保護法（LGPD - 法律第13.709/2018号）に従い、データ保護責任者（Data Protection Officer）の連絡先をお知らせします。",
+            "intro2": "DPOは、サイト、データ主体（あなた）、および国家データ保護機関（ANPD）との連絡を仲介する責任者です。",
+            "contact_title": "連絡先情報",
+            "officer": "<strong>責任者：</strong> Lauro de Moraes",
+            "email": "メールアドレス：",
+            "deadline": "<strong>回答期限：</strong> 小規模なデータ処理事業者に適用される規則に従い、最大30日。",
+            "send_email": "DPOにメールを送信",
+            "rights_title": "あなたの権利を行使する方法",
+            "rights1": "LGPD第18条に定められた権利（データ処理の確認、アクセス、訂正、匿名化、削除など）を行使するには、上記のメールアドレスにご連絡ください。",
+            "rights2": "対応を円滑に進めるため、メールの件名または本文に以下を記載することをお勧めします。",
+            "list1": "氏名",
+            "list2": "行使したい権利（例：データの削除、アクセスなど）",
+            "list3": "システム内でお客様のデータを特定するために役立つ情報",
+            "policies": "データの取り扱いについて詳しくは、<a href=\"./policy.html#policy-general\">一般ポリシー</a>および<a href=\"./policy.html#policy-privacy\">プライバシーポリシー</a>をご覧ください。"
+        }
+    },
+    "settings_slide": {
+        "title": "サイト設定",
+        "media_api": "メディアAPI",
+        "auto_audio": "初回の許可後に音声を自動的に起動する",
+        "auto_video": "初回の許可後にビデオを自動的に起動する",
+        "geo_api": "位置情報API",
+        "geo_share": "位置情報追跡の分析データを共有する",
+        "audio_effects": "オーディオエフェクト",
+        "audio_effects_on": "オーディオエフェクトを有効にする",
+        "audio_notify_on": "音声通知を有効にする",
+        "connection": "接続（状態）",
+        "notify_off": "通知を無効にする",
+        "analytics": "分析",
+        "analytics_toggle": "有効または無効にする"
+    },
+    "palette": {
+        "title": "カラーパレット",
+        "schema": "配色"
+    },
+    "blog": {
+        "empty": "まだ投稿はありません。",
+        "not_found": "投稿が見つかりません。",
+        "load_error": "この投稿を読み込めませんでした。",
+        "showing": "{total}件中{shown}件を表示",
+        "load_more": "さらに読み込む",
+        "read_time": "読了時間：約{minutes}分"
+    }
+}

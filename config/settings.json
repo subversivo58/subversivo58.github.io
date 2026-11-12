@@ -4,7 +4,14 @@
             "canonical": "0.1.0 [development stage]",
             "tag": "0.1.0"
         },
-        "language": ["pt-BR", "en-US"],
+        "language": [
+    "pt-BR",
+    "en-US",
+    "es-ES",
+    "fr-FR",
+    "de-DE",
+    "ja-JP"
+        ],
         "policies": {
             "version": "1.0.0",
             "last_update": "24/09/1985",

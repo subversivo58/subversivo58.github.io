@@ -115,27 +115,28 @@ const DebugConsole = (() => {
                 box-sizing: border-box;
             }
 
-            #fab {
-                position: fixed;
-                left: 10px;
-                bottom: 10px;
-                width: 46px;
-                height: 46px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border: 2px solid #fff;
-                border-radius: 50%;
-                background: grey;
-                color: #fff;
-                font-size: 27px;
-                line-height: 1;
-                cursor: pointer;
-                box-shadow: 0 2px 8px #0008;
-                pointer-events: auto;
-                margin: 0;
-                padding: 0;
-            }
+          #fab {
+    position: fixed;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: grey;
+    color: #fff;
+    font-size: 27px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #0008;
+    pointer-events: auto;
+    margin: 0;
+    padding: 0;
+}
 
             #panel {
                 position: fixed;

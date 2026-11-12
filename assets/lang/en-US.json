@@ -560,11 +560,15 @@
     },
     "modals": {
         "language": {
-            "title": "Select Language",
-            "avaliable": "Available Languages",
-            "pt_BR": "Portuguese",
-            "en_US": "English",
-            "footer": "No option in your language? Create a translation!"
+    "title": "Select Language",
+    "avaliable": "Available Languages",
+    "pt_BR": "Portuguese",
+    "en_US": "English",
+    "es_ES": "Spanish",
+    "fr_FR": "French",
+    "de_DE": "German",
+    "ja_JP": "Japanese",
+    "footer": "No option in your language? Create a translation!"
         },
         "version": {
             "title": "🚧 Under Construction 🚧",

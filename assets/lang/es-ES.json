@@ -1,0 +1,730 @@
+{
+    "anonimous": {
+        "title": "¿Estás en modo incógnito?",
+        "body": {
+            "first": "Hmm... parece que estás navegando en modo privado (anónimo).",
+            "second": "En este modo de navegación, todas las cookies y los datos almacenados en caché de esta sesión se eliminarán en cuanto la cierres.",
+            "third": "Como este sitio está diseñado para funcionar incluso sin conexión, algunas funciones, complementos y aplicaciones podrían no funcionar correctamente o no estar disponibles."
+        },
+        "button": "De acuerdo, quiero continuar"
+    },
+    "source": {
+        "name": "Subversivo58 Blog",
+        "version": "0.1.0",
+        "author": "Subversivo58",
+        "home": "https://github.com/subversivo58/",
+        "colab": [],
+        "build": "Alpha",
+        "bugs": [
+            {
+                "type": "git",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
+            }
+        ],
+        "license": [
+            {
+                "type": "MIT",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
+            }
+        ]
+    },
+    "words": {
+        "an": "hace 1 año",
+        "agree": "aceptar",
+        "clear": "borrar",
+        "signin": "iniciar sesión",
+        "logout": "cerrar sesión",
+        "signup": "registrarse",
+        "close": "cerrar",
+        "drawer": "panel",
+        "free": "gratis",
+        "search": "buscar",
+        "recover": "recuperar",
+        "restore": "restaurar",
+        "white": "blanco",
+        "decade": "década",
+        "year": "año",
+        "month": "mes",
+        "week": "semana",
+        "day": "día",
+        "hour": "hora",
+        "minute": "minuto",
+        "license": "licencia",
+        "more": "más",
+        "second": "segundo",
+        "now": "ahora",
+        "rememberme": "recordarme",
+        "source": "fuente",
+        "mail": "correo electrónico",
+        "page": "página",
+        "pwd": "contraseña",
+        "token": "token",
+        "media": "multimedia",
+        "settings": "configuración",
+        "version": "versión",
+        "ooops": "¡vaya...!"
+    },
+    "combo": {
+        "btn_top": "Volver arriba",
+        "more_info": "obtener más información.",
+        "click_here": "¡Haz clic aquí!",
+        "clear_exit": "Borrar y salir",
+        "not_show_again": "no volver a mostrar",
+        "powered": "Desarrollado por",
+        "copyr": "Derechos de autor",
+        "knowmore": "Saber más",
+        "seelicenses": "Ver las licencias"
+    },
+    "langs": {
+        "enUS": "Inglés (Estados Unidos) - [predeterminado]",
+        "ptBR": "Portugués (Brasil)",
+        "esES": "Español (España)",
+        "frFR": "Francés (Francia)",
+        "deDE": "Alemán (Alemania)",
+        "jaJP": "Japonés"
+    },
+    "navbar": {
+        "wiki": "WIKI",
+        "blog": "blog",
+        "dpo": "DPO",
+        "colab": "colaborar",
+        "about": "acerca de",
+        "lab": "laboratorio",
+        "contact": "contacto",
+        "policies": "políticas",
+        "donations": "donaciones",
+        "signin": "Iniciar sesión",
+        "docs": "documentación"
+    },
+    "footer": {
+        "content": {
+            "contactnf": "CONTACTO",
+            "blognew": "NOVEDADES",
+            "uselink": "ENLACES ÚTILES",
+            "docs": "Documentación",
+            "policies": "Políticas generales",
+            "faq": "Ayuda y preguntas frecuentes",
+            "forum": "Foro y comunidad",
+            "devtool": "Herramientas para desarrolladores",
+            "api": "API de servicios",
+            "bugs": "Informar de errores",
+            "desc1": "Este sitio reúne una colección de proyectos iniciados en 2010 y tiene como objetivo servir de blog personal para compartir una amplia variedad de temas. Explora el sitio y comparte su contenido.",
+            "desc2": "Este sitio está en constante desarrollo. No dudes en señalar errores o sugerir mejoras.",
+            "start": "Empieza ahora",
+            "source": "Código fuente",
+            "feedback": "Comentarios",
+            "dpo": "Delegado de Protección de Datos (DPO)"
+        },
+        "author": "autor",
+        "about": "acerca de",
+        "licit": "legal",
+        "cookie": "cookies",
+        "privacci": "privacidad",
+        "footoodle": {
+            "title": "Únete a Collabore",
+            "description": "<p>Collabore abre sus puertas a desarrolladores y entusiastas. Convierte tu servicio de páginas estáticas en uno dinámico.</p><p>A través de una interfaz sencilla pero potente, puedes modificar, revisar y crear nuevas publicaciones, añadir complementos y aplicaciones a tus páginas o integrar tus propias extensiones.</p><p>Todo ello mediante código abierto diseñado para ser ampliado. Utiliza el sistema de autenticación integrado para que los usuarios de Collabore puedan registrarse en tu página con unos pocos clics y, lo mejor de todo, autenticarse automáticamente en los complementos y aplicaciones de tu página.</p><p class='mt-5 ct'>Forma parte de este sistema colaborativo, <a href='./signup' class='white tdu'>¡regístrate ahora!</a></p>"
+        }
+    },
+    "api": {
+        "geo": {
+            "request": "Solicitar geolocalización",
+            "description": "<div class='row'><p>La geolocalización permite encontrar contenido de una forma más precisa y relevante.</p><p>Es la manera más sencilla de encontrar amigos, páginas, productos, grupos, canales, publicaciones o etiquetas cercanos a ti.</p></div><div data-mg='top:15' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-map-marker ct' onclick='$.Geo.request()'> solicitar permiso</span></div></div>",
+            "link_docs": "Para obtener más información, consulta la guía de permisos en nuestra <a href='https://docs.himliy.com/gelocation#permissions' target='blank_' rel='nofollow' class='blue tdu'>documentación</a>"
+        },
+        "not": {
+            "request": "Solicitar notificaciones",
+            "description": "<div class='row'><p>Al utilizar las notificaciones:</p><p><b>Usuarios con sesión iniciada:</b> reciben notificaciones de mensajes, del sistema, chats, canales y fuentes registradas (consulta la documentación: <a href='http://docs.himliy.com/notification#subscribles' target='blank_' rel='nofollow' class='blue tdu'>suscripción</a>), incluso mientras navegan por otras páginas web o cuando el navegador está <b>minimizado</b>.</p><p><b>Usuarios sin sesión iniciada:</b> reciben notificaciones del sistema o encuestas (consulta la documentación: <a href='https://docs.himliy.com/notification#unsigned-subscrible' target='blank_' rel='nofollow' class='blue tdu'>suscripción de usuarios no registrados</a>.</p></div><div data-mg='top:5' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-bell-o ct' onclick='$.Notific.request()'> solicitar permiso</span></div></div>",
+            "link_docs": "Para obtener más información, consulta la guía de permisos en nuestra <a href='https://docs.himliy.com/notification#permissions' target='blank_' rel='nofollow' class='blue tdu'>documentación</a>",
+            "message": {
+                "head": "Gracias",
+                "body": "Has activado las notificaciones en Collabore :)"
+            }
+        }
+    },
+    "cookies": {
+        "agree": {
+            "description_1": "Este sitio utiliza cookies y otras tecnologías para almacenar información. Al continuar en este sitio, aceptas este uso y nuestra \"política\" al respecto.",
+            "description_2": "Para obtener información más detallada, consulta nuestra <a href='./policies.html#cookies' target='blank_' rel='nofollow' class='tdu sky'>Política de cookies</a>.",
+            "close_banner_info": "Para cerrar, haz clic en el botón de abajo."
+        }
+    },
+    "drawer": {
+        "clear_data": {
+            "title": "Borrar los datos del sitio",
+            "question_info": "¿Estás seguro?",
+            "positive": "Sí, borrar",
+            "negative": "No, cancelar",
+            "footer_info": "Borra la caché y las cookies. Consulta la <a href='#' class='tdu blue'>documentación</a>."
+        },
+        "bug_report": {
+            "title": "Informar de errores 🐛",
+            "question_info": "¿Has encontrado un error? ¡Infórmanos!",
+            "placeholder": "Describe aquí el error...",
+            "send": "Enviar",
+            "follow": "Ir al soporte",
+            "footer_info": "Información sobre cómo notificar errores. Consulta la <a href='#' class='tdu blue'>documentación</a>."
+        },
+        "feedback": {
+            "title": "Enviar tus comentarios",
+            "rating": "Valoración:",
+            "question_info": "¡Comparte tu opinión sobre Collabore!",
+            "placeholder": "Envía críticas, elogios o sugerencias",
+            "footer_info": "Información sobre el envío de comentarios. Consulta la <a href='#' class='tdu blue'>documentación</a>.",
+            "notific": {
+                "error": {
+                    "title": "¡No se pudieron enviar los comentarios!",
+                    "message": "Lo sentimos, se ha producido un error al procesar tus comentarios."
+                },
+                "success": {
+                    "title": "¡Comentarios enviados!",
+                    "message": "¡Gracias! Tus comentarios se han enviado correctamente."
+                }
+            }
+        },
+        "geolocation": {
+            "title": "Solicitar geolocalización",
+            "btn1": "Sí, solicitar",
+            "btn2": "No, cancelar",
+            "footer_info": "¿Geolocalización? Consulta la <a href='#' class='tdu blue'>documentación</a>."
+        },
+        "notification": {
+            "title": "Solicitar notificaciones",
+            "btn1": "Sí, solicitar",
+            "btn2": "No, cancelar",
+            "footer_info": "¿Notificaciones? Consulta la <a href='#' class='tdu blue'>documentación</a>."
+        },
+        "getmedia_audio": {
+            "title": "Solicitar micrófono",
+            "btn1": "Sí, solicitar",
+            "btn2": "No, cancelar",
+            "footer_info": "¿Audio? Consulta la <a href='#' class='tdu blue'>documentación</a>."
+        },
+        "getmedia_video": {
+            "title": "Solicitar cámara web",
+            "btn1": "Sí, solicitar",
+            "btn2": "No, cancelar",
+            "footer_info": "¿Vídeo? Consulta la <a href='#' class='tdu blue'>documentación</a>."
+        },
+        "words": {
+            "clear": "Limpieza",
+            "geo": "Geo",
+            "cam": "Vídeo",
+            "mic": "Audio",
+            "color": "Color",
+            "note": "Notas",
+            "bug": "Errores",
+            "lab": "Laboratorio",
+            "not": "Alertas",
+            "feedback": "Comentarios",
+            "lang": "Idiomas",
+            "marks": "Marcador"
+        },
+        "version": "Versión"
+    },
+    "info_popup": {
+        "join_key": {
+            "head": "Clave de seguridad",
+            "body": "<p>Sube tu archivo de <b>clave de seguridad</b>.</p><p>Este proceso analiza tu clave cifrada exclusiva y autoriza tu acceso.</p>",
+            "footer": "<small>Consejos de seguridad y más información. <a href='#' class='tdu sky'>Lee la documentación</a></small>"
+        },
+        "registration_pwd": {
+            "head": "¡Contraseña de la cuenta!",
+            "body": "<p class='lh-140'>Este campo requiere un mínimo de 8 caracteres y un máximo de 50, respetando las siguientes reglas:</p><ul class='list-group'><li class='list-group-item'><b>una letra minúscula</b></li></ul>",
+            "footer": "<small>Consejos de seguridad y más información. <a href='#' class='tdu sky'>Lee la documentación</a></small>"
+        }
+    },
+    "registration": {
+        "error": {
+            "already": {
+                "message": "<p class='lh-140'>¡Este correo electrónico ya está registrado!</p><p class='lh-140'>Por favor, activa tu cuenta, vuelve a enviar el enlace de activación o ve a la <a href='/signin'>página de inicio de sesión</a>.</p>"
+            },
+            "server": {
+                "message": "<p class='lh-140'>Lo sentimos, ¡se ha producido un error interno del servidor!</p>"
+            }
+        }
+    },
+    "recover": {
+        "success": {
+            "title": "¡Enhorabuena!",
+            "message": "¡Se ha enviado un enlace de recuperación! Comprueba tu correo electrónico... el enlace es válido durante una hora."
+        },
+        "error": {
+            "server": {
+                "title": "[ERROR] ¡Se ha producido un error!",
+                "message": "Lo sentimos, ¡se ha producido un error interno del servidor! Inténtalo más tarde."
+            },
+            "notfound": {
+                "title": "[INFO] ¡Correo no encontrado!",
+                "message": "Lo sentimos, ¡este correo electrónico no figura en la base de datos!"
+            },
+            "inactived": {
+                "title": "[INFO] ¡Cuenta inactiva!",
+                "message": "Lo sentimos, ¡esta cuenta todavía no está activada!"
+            },
+            "wait": {
+                "title": "[INFO] ¡Correo pendiente!",
+                "message": "¡Este correo electrónico ya se ha enviado! El tiempo de espera para realizar una nueva solicitud es de una hora."
+            },
+            "auth": {
+                "title": "[ERROR] ¡Error de autenticación!",
+                "message": "Tu solicitud no contiene un token de autenticación válido. Haz clic aquí para consultar la documentación sobre recuperación."
+            },
+            "conn": {
+                "title": "[INFO] ¡Conexión cerrada!",
+                "message": "¡Ya se ha enviado un correo electrónico con un enlace de recuperación! Comprueba tu servicio de correo."
+            },
+            "mail": {
+                "title": "[ERROR] ¡Error de correo electrónico!",
+                "message": "¡El formato de este correo electrónico no es válido! Haz clic aquí para consultar la documentación sobre recuperación.",
+                "link": "#"
+            }
+        }
+    },
+    "copyright": {
+        "contributors": "Este proyecto solo ha sido posible gracias al uso de muchos otros proyectos de código abierto y a la <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>comunidad de colaboradores</a>... ¡eres libre de crear, utilizar, modificar y distribuir, siempre que respetes todas las licencias correspondientes!",
+        "caption": "Lista de fuentes y sus respectivas licencias",
+        "backendsources": "Muchas otras fuentes que se ejecutan en el servidor (NodeJS) y se cargan dinámicamente son fundamentales para este proyecto, como por ejemplo:",
+        "package": "y <a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>muchas más...</a>",
+        "tps": "Software de terceros",
+        "thissource": "Software de este sitio",
+        "alllicenses": "Todas las licencias"
+    },
+    "signin": {
+        "remember": "Recordarme si este es tu dispositivo",
+        "forgot": "¿Recuperar cuenta?"
+    },
+    "signup": {
+        "success": {
+            "title": "¡Enhorabuena!",
+            "message": "¡Se ha enviado un enlace de activación! Comprueba tu correo electrónico... será válido durante 24 horas."
+        },
+        "error": {
+            "server": {
+                "title": "[ERROR] ¡Se ha producido un error!",
+                "message": "Lo sentimos, ¡se ha producido un error interno del servidor! Inténtalo más tarde."
+            },
+            "already": {
+                "title": "[INFO] ¡Ya estás registrado!",
+                "message": "¡Este correo electrónico ya está registrado! Comprueba tu bandeja de entrada."
+            },
+            "token": {
+                "title": "[ERROR] ¡Error de autenticación!",
+                "message": "Tu solicitud no contiene un token válido. Haz clic aquí para consultar la documentación sobre el registro."
+            },
+            "conn": {
+                "title": "[INFO] ¡Conexión cerrada!",
+                "message": "¡Ya se ha enviado un correo electrónico con un enlace de activación! Comprueba tu bandeja de entrada."
+            },
+            "mail": {
+                "title": "[ERROR] ¡Error de correo electrónico!",
+                "message": "¡El formato de este correo electrónico no es válido! Haz clic aquí para consultar la documentación sobre el registro.",
+                "link": "#"
+            },
+            "pwd": {
+                "title": "[ERROR] ¡Error de contraseña!",
+                "message": "¡El formato de esta contraseña no es válido! Haz clic aquí para consultar la documentación sobre el registro.",
+                "link": "#"
+            }
+        },
+        "modal": {
+            "head": "Contraseña de la cuenta",
+            "req": "Esta contraseña debe cumplir los siguientes requisitos:",
+            "test": "Comprueba tu contraseña ahora:",
+            "chars": "un mínimo de 8 caracteres y un máximo de 50",
+            "lower": "una letra minúscula",
+            "upper": "una letra mayúscula",
+            "digit": "un dígito (número)",
+            "special": "un carácter especial",
+            "space": "sin espacios",
+            "run": "comprobar",
+            "footer": "Para obtener más información o sugerencias, consulta la <a href='#' class='tdu blue' target='_blank' rel='nofollow'>documentación</a>.",
+            "result": {
+                "accept": "Correcto, ¡contraseña válida!",
+                "refuse": "No válida",
+                "empty": ", está vacía",
+                "less": ", tiene menos de 8 caracteres",
+                "more": ", tiene más de 50 caracteres",
+                "lower": ", no contiene letras minúsculas",
+                "upper": ", no contiene letras mayúsculas",
+                "digit": ", no contiene dígitos (números)",
+                "special": ", no contiene caracteres especiales",
+                "space": ", contiene espacios",
+                "unk": ", no definida"
+            }
+        },
+        "regnow": "Regístrate ahora ",
+        "btnSubmit": "Registrarse en Collabore",
+        "agreement": "Al hacer clic en el botón \"Registrarse en Collabore\", aceptas los <a href='./licit' target='blank_'>términos del servicio</a> y la <a href='./policies/privacci' target='blank_'>política de privacidad</a>. Ocasionalmente te enviaremos correos electrónicos relacionados con tu cuenta."
+    },    "slack": {
+        "another": "¿Solicitar una nueva invitación? ",
+        "figcap": {
+            "property": "Slack pertenece a ",
+            "rights": "Todos los derechos reservados."
+        },
+        "giturl": "Perfil de GitHub",
+        "join": " Únete al equipo de Collabore",
+        "modal": {
+            "header": "Acerca del enlace al perfil de GitHub",
+            "body1": " es una herramienta excelente, pero las cuentas <b class='green'>GRATUITAS</b> tienen limitaciones.",
+            "body2": "Solicitamos un enlace a una cuenta de ",
+            "body2_1": " para verificar que el nuevo miembro es realmente desarrollador y colabora en otros proyectos.",
+            "body3": "El correo electrónico proporcionado debe ser el mismo correo público vinculado a tu cuenta en ",
+            "footer": "Para obtener más información, consulta la <a href='#' class='blue tdu'>documentación</a>."
+        },
+        "alert": {
+            "sended": "¡Tu solicitud ha sido enviada!",
+            "info": "¡Tu solicitud está pendiente de respuesta!",
+            "success": "¡Tu solicitud ya ha sido aceptada!",
+            "danger": "¡Tu solicitud ha sido rechazada!"
+        },
+        "notific": {
+            "success": {
+                "title": "¡Invitación al equipo de Collabore!",
+                "message": "Correcto, tu solicitud está pendiente de la aprobación de un administrador."
+            },
+            "errorserver": {
+                "title": "¡Error del servidor!",
+                "message": "Lo sentimos, ¡se ha producido un error en el servidor! Haz clic aquí para consultar la documentación."
+            },
+            "invalidauth": {
+                "title": "¡Error de autenticación!",
+                "message": "¡Tu solicitud no contiene un token válido! Haz clic aquí para consultar la documentación."
+            },
+            "invalidmail": {
+                "title": "¡Error de correo electrónico!",
+                "message": "¡Este correo electrónico no es válido! Haz clic aquí para consultar la documentación."
+            },
+            "invalidlink": {
+                "title": "¡Error en el perfil de GitHub!",
+                "message": "Lo sentimos, ¡este enlace no corresponde a un perfil de GitHub! Haz clic aquí para consultar la documentación."
+            },
+            "accepted": {
+                "title": "¡Invitación ya aceptada!",
+                "message": "¡Tu solicitud ya ha sido aceptada en la lista de invitaciones! Haz clic aquí para consultar la documentación."
+            },
+            "refused": {
+                "title": "¡Invitación rechazada!",
+                "message": "Lo sentimos, ¡el administrador ha rechazado esta solicitud! Haz clic aquí para consultar la documentación."
+            },
+            "waiting": {
+                "title": "¡Invitación pendiente!",
+                "message": "¡Esta solicitud ya ha sido enviada! Está pendiente de la aprobación de un administrador."
+            },
+            "closeconn": {
+                "title": "¡La conexión se ha cerrado!",
+                "message": "¡Esta solicitud ya ha sido enviada! Haz clic aquí para consultar la documentación."
+            }
+        }
+    },
+    "openpgp": {
+        "error": {
+            "encryption": {
+                "title": "[Error] ¡Solicitud de cifrado!",
+                "message": "¡Se ha producido un error al cifrar con PGP! Haz clic aquí para consultar la documentación sobre este error.",
+                "link": "#"
+            }
+        }
+    },
+    "nocookie": {
+        "title": "No compatible",
+        "p1": "Lo sentimos, no admitimos el modo de navegación sin cookies.",
+        "p2": "Aunque este sitio web utiliza cookies y otras tecnologías de almacenamiento, \"<strong>no almacenamos ningún dato en tu navegador sin tu permiso expreso</strong>\".",
+        "p3": "Creemos que existen buenas razones para no admitir la navegación sin cookies. Puedes consultar nuestro <a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"Libro blanco\"</a> para obtener más información. Lamentablemente, tendrás que navegar con las cookies activadas."
+    },
+    "404": {
+        "general": "¡Vaya... No encontrado!",
+        "title": "Página no encontrada",
+        "message": "La dirección que has intentado abrir no existe o se ha trasladado. Comprueba que la has escrito correctamente o vuelve a la página de inicio.",
+        "button": "Volver al inicio"
+    },
+    "mail": {
+        "account": {
+            "title": "¡Cuenta creada!",
+            "text_a": "Te damos la bienvenida a Collabore, un proyecto de código abierto que utiliza herramientas gratuitas y lenguajes web para crear pequeños blogs colaborativos y herramientas de cooperación. Explora las mejores API de HTML5, crea complementos de JavaScript, utiliza WebSockets para desarrollar chats y sistemas de comentarios, y gestiona tus páginas de forma remota, rápida y sencilla.",
+            "text_b": "Haz clic en el enlace de abajo durante las próximas 24 horas para activar tu cuenta y empezar a utilizarla.",
+            "btn_a": "¡Activar cuenta!",
+            "features": "Características de Collabore",
+            "btn_b": "¡Visitar ahora!",
+            "feat_a": {
+                "title": "Programación",
+                "msg": "Desarrollo flexible y potente mediante frameworks de JavaScript, API de HTML y muchas otras tecnologías."
+            },
+            "feat_b": {
+                "title": "Desarrollo web",
+                "msg": "Elige entre complementos o amplía tus páginas con aplicaciones de servidor de forma sencilla."
+            },
+            "feat_c": {
+                "title": "Implementación de API",
+                "msg": "Implementa tu propia API de forma fácil y rápida."
+            },
+            "feat_d": {
+                "title": "Publica tu blog",
+                "msg": "Pasos sencillos para publicar plantillas de blogs."
+            },
+            "feat_e": {
+                "title": "Adaptable",
+                "msg": "Plantillas adaptables que utilizan Bootstrap."
+            }
+        },
+        "recover": {
+            "title": "¡Recuperación de cuenta!",
+            "btn": "¡Recuperar ahora!",
+            "text_a": "Hola,",
+            "text_b": "&mdash; Este correo electrónico sirve para recuperar tu cuenta de Collabore.",
+            "text_c": "Haz clic en el enlace de abajo durante la próxima hora para recuperar el acceso a tu cuenta."
+        },
+        "policy": {
+            "title": "¡Cambios en las políticas!",
+            "text_a": "¿Qué ocurre?",
+            "text_b": "Hemos actualizado recientemente nuestra política de uso. Las políticas regulan el compromiso entre la aplicación y el usuario, así como su privacidad, el uso de los datos y la prestación de servicios.",
+            "view_changes": "Visita Collabore y descubre más sobre estos cambios.",
+            "btn": "¡Ver ahora!"
+        },
+        "twofactory": {
+            "title": "Cambiar 2FA",
+            "text_a": "¿Qué ocurre?",
+            "text_b": "Se ha solicitado un cambio en el sistema de autenticación de dos factores (2FA).",
+            "confirm": "Haz clic en el botón de abajo para confirmar este cambio.",
+            "btn": "¡Confirmar ahora!"
+        },
+        "unsubscribe": {
+            "text_a": "Si no reconoces este correo electrónico o no sabes por qué lo has recibido, ignóralo",
+            "text_b": " o cancela tu suscripción."
+        },
+        "visite_text": "Visita la página de Collabore en GitHub y descubre más sobre cómo utilizarla.",
+        "visite_link": "Visitar la página principal de Collabore",
+        "copy": "Plantilla de correo electrónico - &copy; 2016 - Subversivo58"
+    },
+    "twofactory": {
+        "security_slide": {
+            "enabled": "desactivar 2FA",
+            "disabled": "activar 2FA"
+        }
+    },
+    "webpush": {
+        "subscribe": {
+            "": ""
+        }
+    },
+    "date": {
+        "days": {
+            "long": [
+                "domingo",
+                "lunes",
+                "martes",
+                "miércoles",
+                "jueves",
+                "viernes",
+                "sábado"
+            ],
+            "short": [
+                "dom",
+                "lun",
+                "mar",
+                "mié",
+                "jue",
+                "vie",
+                "sáb"
+            ]
+        },
+        "months": {
+            "long": [
+                "enero",
+                "febrero",
+                "marzo",
+                "abril",
+                "mayo",
+                "junio",
+                "julio",
+                "agosto",
+                "septiembre",
+                "octubre",
+                "noviembre",
+                "diciembre"
+            ],
+            "short": [
+                "ene",
+                "feb",
+                "mar",
+                "abr",
+                "may",
+                "jun",
+                "jul",
+                "ago",
+                "sep",
+                "oct",
+                "nov",
+                "dic"
+            ]
+        },
+        "formatter": {
+            "error": "Fecha no definida"
+        }
+    },
+    "modals": {
+        "language": {
+            "title": "Seleccionar idioma",
+            "avaliable": "Idiomas disponibles",
+            "pt_BR": "Portugués",
+            "en_US": "Inglés",
+            "es_ES": "Español",
+            "fr_FR": "Francés",
+            "de_DE": "Alemán",
+            "ja_JP": "Japonés",
+            "footer": "¿No hay ninguna opción en tu idioma? ¡Crea una traducción!"
+        },
+        "version": {
+            "title": "🚧 En construcción 🚧",
+            "text1": "Este proyecto solo ha sido posible gracias al uso de muchos otros proyectos de código abierto y a la ",
+            "text2": "comunidad de colaboradores",
+            "text3": "¡Eres libre de crear, utilizar, modificar y distribuir, siempre que respetes todas las licencias correspondientes!"
+        },
+        "tabs": {
+            "camera": "Solicitar cámara",
+            "permissions": "Permisos"
+        },
+        "share": {
+            "title": "Compartir este blog",
+            "broken_link": "¿Informar de un enlace roto?"
+        },
+        "notes": {
+            "title": "Notas rápidas",
+            "note_title": "Título:",
+            "category": "Categoría:",
+            "tags": "Etiquetas:",
+            "note": "Nota:",
+            "save": "Guardar",
+            "ph_title": "Título",
+            "ph_category": "Categoría",
+            "ph_tags": "Etiquetas",
+            "ph_note": "Escribe tu nota aquí..."
+        },
+        "offline": {
+            "title": "Guardar para usar sin conexión",
+            "yes": "¡Sí, guardar!",
+            "no": "No, cancelar",
+            "about": "¿Acerca de los recursos sin conexión?"
+        },
+        "auth": {
+            "title": "Iniciar sesión y autorizar",
+            "source": "Código fuente: <a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">ver en GitHub</a>"
+        },
+        "bugs": {
+            "select_type": "Selecciona el tipo:",
+            "custom": "Error personalizado",
+            "css": "Error de CSS",
+            "js": "Error de JavaScript",
+            "language": "Error de traducción",
+            "plugins": "Error de complemento",
+            "server": "Error del servidor",
+            "description": "Enviar una descripción",
+            "ph_description": "Describe aquí el problema..."
+        }
+    },
+    "notify": {
+        "storage": {
+            "title": "Subversivo58 - Almacenamiento",
+            "body": "Este sitio utiliza \"cookies\" y otras tecnologías que almacenan información en tu dispositivo. ¿Estás de acuerdo?",
+            "actions": [
+                {
+                    "action": "cookie-agree",
+                    "title": "¿qué es esto?",
+                    "icon": "🍪"
+                },
+                {
+                    "action": "cookie-policy",
+                    "title": "ver políticas",
+                    "icon": "🛡️"
+                },
+                {
+                    "action": "terms-policy",
+                    "title": "ver condiciones",
+                    "icon": "📜"
+                }
+            ]
+        },
+        "permission_granted": {
+            "title": "Notificaciones activadas",
+            "body": "¡Gracias por permitir las notificaciones!"
+        }
+    },
+    "pages": {
+        "about": {
+            "heading": "Tecnología, tendencias y cibercultura",
+            "item1": "✓ API web, JavaScript y funcionalidades de HTML5.",
+            "item2": "✓ Programación funcional, patrones y frameworks.",
+            "item3": "✓ WebCrypto, experimentos de laboratorio y pruebas de código.",
+            "item4": "✓ Opiniones, estilo de vida, cultura geek y mucho más.",
+            "photo": "Foto de <a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a> en <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "title": "Acerca de",
+            "p1": "Hola, soy Lauro Moraes, también conocido como <a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a>, y este sitio es mi laboratorio digital y blog personal.",
+            "p2": "Aquí publico contenido sobre tendencias tecnológicas, cibercultura y programación orientada a la web, como las PWA, las aplicaciones de página única (SPA) y el uso de las modernas API de JavaScript, HTML5 y CSS3.",
+            "p3": "Me apasionan la programación funcional, los patrones de diseño y temas como la descentralización web... la cadena de bloques y la criptografía web son temas habituales aquí.",
+            "p4": "También publico mis experimentos y comparto mi código y pequeños ejemplos funcionales, además de expresar mis opiniones sobre diversos temas, algo de cultura geek y este estilo de vida.",
+            "p5": "No dudes en explorar el contenido del blog y unirte a nuestra comunidad."
+        },
+        "you_in_control": {
+            "heading": "Tú tienes el control de tus datos",
+            "item1": "✓ La privacidad es un derecho, no un producto que se te pueda vender.",
+            "item2": "✓ La criptografía como base de toda la seguridad digital.",
+            "item3": "✓ Respetar la privacidad empieza por respetar tus decisiones.",
+            "item4": "✓ Tú decides qué datos compartir, cuándo y con quién.",
+            "photo": "Foto de <a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a> en <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>"
+        },
+        "donations": {
+            "heading": "¿Pensando en hacer algo genial?",
+            "photo": "Foto de <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> en <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "thanks_title": "Agradecimientos",
+            "thanks_text": "Nos enorgullece utilizar <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> y los servicios de <a href=\"https://glitch.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Glitch.com</a> y <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>. Estas plataformas y sus herramientas son realmente increíbles y nos permiten hacer cosas geniales, como este blog y nuestras herramientas.",
+            "platforms_title": "Conoce estas plataformas",
+            "link_github": "Descubre y explora GitHub Pages",
+            "link_glitch": "Crea e inventa con Glitch",
+            "link_workers": "Descubre qué hace Cloudflare Workers",
+            "donate_title": "Tu donación importa"
+        },
+        "dpo": {
+            "heading": "Delegado de Protección de Datos (DPO)",
+            "intro1": "En cumplimiento de la Ley General de Protección de Datos de Brasil (LGPD - Ley n.º 13.709/2018), facilitamos los datos de contacto de nuestro Delegado de Protección de Datos.",
+            "intro2": "El DPO es la persona responsable de mediar en la comunicación entre el sitio, los interesados (tú) y la Autoridad Nacional de Protección de Datos de Brasil (ANPD).",
+            "contact_title": "Información de contacto",
+            "officer": "<strong>Delegado de Protección de Datos:</strong> Lauro de Moraes",
+            "email": "Correo electrónico:",
+            "deadline": "<strong>Plazo de respuesta:</strong> Hasta 30 días, de acuerdo con la normativa aplicable a los agentes de tratamiento de datos de pequeña escala.",
+            "send_email": "Enviar un correo al DPO",
+            "rights_title": "Cómo ejercer tus derechos",
+            "rights1": "Para ejercer cualquiera de tus derechos contemplados en el artículo 18 de la LGPD (como la confirmación del tratamiento, el acceso, la rectificación, la anonimización o la eliminación de datos, entre otros), basta con enviar un correo electrónico a la dirección indicada arriba.",
+            "rights2": "Para agilizar la atención, te recomendamos que incluyas en el asunto o en el cuerpo del correo electrónico:",
+            "list1": "Tu nombre completo;",
+            "list2": "El derecho que deseas ejercer (por ejemplo, eliminación de datos, acceso, etc.);",
+            "list3": "Detalles que puedan ayudarnos a localizar tus datos en nuestros sistemas.",
+            "policies": "Para obtener más información sobre cómo tratamos tus datos, consulta nuestra <a href=\"./policy.html#policy-general\">Política general</a> y nuestra <a href=\"./policy.html#policy-privacy\">Política de privacidad</a>."
+        }
+    },
+    "settings_slide": {
+        "title": "Configuración del sitio",
+        "media_api": "API multimedia",
+        "auto_audio": "activar automáticamente el audio tras el primer permiso",
+        "auto_video": "activar automáticamente el vídeo tras el primer permiso",
+        "geo_api": "API de geolocalización",
+        "geo_share": "compartir estadísticas de seguimiento geográfico",
+        "audio_effects": "Efectos de sonido",
+        "audio_effects_on": "activar efectos de sonido",
+        "audio_notify_on": "activar notificaciones sonoras",
+        "connection": "Conexión (estado)",
+        "notify_off": "desactivar notificaciones",
+        "analytics": "Analítica",
+        "analytics_toggle": "activar o desactivar"
+    },
+    "palette": {
+        "title": "Paleta de colores",
+        "schema": "Esquema"
+    },
+    "blog": {
+        "empty": "Todavía no hay publicaciones.",
+        "not_found": "Publicación no encontrada.",
+        "load_error": "No se ha podido cargar esta publicación.",
+        "showing": "Mostrando {shown} de {total}",
+        "load_more": "Cargar más",
+        "read_time": "{minutes} min de lectura"
+    }
+}

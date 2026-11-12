@@ -15,17 +15,39 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+
+                
                     <div class="row">
                         <span data-i18n-html="modals.language.avaliable" class="i18n col"></span>
                     </div>
-                    <div class="row px-3">
-                        <div id="pt-BR" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
-                            <div data-i18n-html="modals.language.pt_BR" class="i18n-append">🇧🇷</div>
-                        </div>
-                        <div id="en-US" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
-                            <div data-i18n-html="modals.language.en_US" class="i18n-append">🇺🇸</div>
-                        </div>
-                    </div>
+
+                    
+                    
+<div class="row px-3">
+    <div id="pt-BR" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+        <div data-i18n-html="modals.language.pt_BR" class="i18n-append">🇧🇷</div>
+    </div>
+    <div id="en-US" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+        <div data-i18n-html="modals.language.en_US" class="i18n-append">🇺🇸</div>
+    </div>
+    <div id="es-ES" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+        <div data-i18n-html="modals.language.es_ES" class="i18n-append">🇪🇸</div>
+    </div>
+    <div id="fr-FR" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+        <div data-i18n-html="modals.language.fr_FR" class="i18n-append">🇫🇷</div>
+    </div>
+    <div id="de-DE" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+        <div data-i18n-html="modals.language.de_DE" class="i18n-append">🇩🇪</div>
+    </div>
+    <div id="ja-JP" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+        <div data-i18n-html="modals.language.ja_JP" class="i18n-append">🇯🇵</div>
+    </div>
+</div>
+
+
+
+                    
                     <section id="language-selector-footer" class="mt-4 row">
                         <small data-i18n-html="modals.language.footer" class="i18n col"></small>
                     </section>

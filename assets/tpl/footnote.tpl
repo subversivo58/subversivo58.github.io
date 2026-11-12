@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-12 col-sm-5 col-md-4">
                     <a href="./policy.html#policy-general" data-i18n-html="footer.licit" class="i18n btme cp tc float-sm-right" {{disable_on_policy=true}}></a>
-                    <a href="./policy.html#policy-storage" data-i18n-html="footer.cookie" class="i18n btme cp tc float-sm-right" {{disable_on_policy=true}}></a>
+                    <a href="./policy.html#cookie-agree" data-i18n-html="footer.cookie" class="i18n btme cp tc float-sm-right" {{disable_on_policy=true}}></a>
                     <a href="./policy.html#policy-privacy" data-i18n-html="footer.privacci" class="i18n btme cp tc float-sm-right" {{disable_on_policy=true}}></a>
                 </div>
             </div>
