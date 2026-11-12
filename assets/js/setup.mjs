@@ -461,7 +461,7 @@ const DSNotify = new NotifyJS({
 
 if (router === 'index') {
 
-    renderIndexCarousel(settings, document.getElementById('index-central-block'), { locale: PolicyHandler.language })
+      renderIndexCarousel(settings, document.getElementById('index-central-block'), { locale: PolicyHandler.language, translate: tr })
 }
 
 if (router === 'blog') {

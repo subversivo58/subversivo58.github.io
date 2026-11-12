@@ -717,6 +717,7 @@
         "not_found": "Post não encontrado.",
         "load_error": "Não foi possível carregar este post.",
         "showing": "Mostrando {shown} de {total}",
-        "load_more": "Carregar mais"
+        "load_more": "Carregar mais",
+        "read_time": "{minutes} min de leitura"
     }
 }
