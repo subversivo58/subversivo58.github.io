@@ -1,7 +1,7 @@
 /**
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2021 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage] - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
  *
  * @file MarkdownEditor.mjs
  * @description Editor Markdown integrado ao sistema de postagens.
@@ -9,14 +9,12 @@
 
 import PostManager from './PostManager.mjs'
 
-// Tabela do IndexedDB usada só pelos rascunhos do editor.
-// Chaves: 'autosave' (única), 'draft:<título>' e 'img:<hash>'.
 const DRAFTS_STORE = 'drafts'
 const AUTOSAVE_KEY = 'autosave'
 const DRAFT_PREFIX = 'draft:'
 const IMAGE_PREFIX = 'img:'
 const MEDIA_REF = /media:([A-Za-z0-9_-]+)/g
-// O preview usa as mesmas extensões da página do blog
+
 const PREVIEW_EXTENSIONS = [
     'tables',
     'images',
@@ -25,36 +23,28 @@ const PREVIEW_EXTENSIONS = [
     'blockAttributes',
     'highlight'
 ]
-// Imagem transparente 1x1 enquanto a imagem real não chega do banco
+
 const BLANK_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 
 class MarkdownEditor {
     constructor(options = {}) {
         this.options = options
-
         this.root = options.root || null
         this.postManager = options.postManager || new PostManager()
-
         this.onCreate = options.onCreate || (() => {})
         this.onStatus = options.onStatus || (() => {})
 
-        // Markdown WASM: carregada sob demanda no mount() (só no admin)
         this.markdown = null
         this.previewRun = 0
-
         this.elements = {}
-
-        // Conexão do IndexedDB (a mesma aberta no setup)
         this.db = options.db || null
 
         this.hasChanges = false
         this.currentDraftKey = null
 
-        // Fila: serializa as gravações no banco
         this._queue = Promise.resolve()
         this._pendingInserts = 0
 
-        // Imagens: hash -> URL temporária para o preview
         this.mediaURLs = new Map()
         this.mediaLoading = new Set()
         this.mediaMissing = new Set()
@@ -79,6 +69,54 @@ class MarkdownEditor {
         this.root = root
 
         this.root.innerHTML = `
+            <style>
+                #post-preview-panel {
+                    position: fixed;
+                    inset: 0;
+                    z-index: 2000;
+                    width: 100%;
+                    height: 100vh;
+                    height: 100dvh;
+                    background: #fff;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+                    animation: postPreviewSlideIn 0.25s ease-out;
+                }
+
+                #post-preview-panel[hidden] {
+                    display: none !important;
+                }
+
+                @keyframes postPreviewSlideIn {
+                    from {
+                        transform: translateX(100%);
+                    }
+
+                    to {
+                        transform: translateX(0);
+                    }
+                }
+
+                #post-preview-header {
+                    flex: 0 0 auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
+                    border-bottom: 1px solid #dee2e6;
+                    background: #fff;
+                }
+
+                #post-preview-content {
+                    flex: 1 1 auto;
+                    min-height: 0;
+                    overflow-y: auto;
+                    -webkit-overflow-scrolling: touch;
+                    padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
+                }
+            </style>
+
             <section class="markdown-editor">
 
                 <p class="small text-muted mb-3"
@@ -112,63 +150,73 @@ class MarkdownEditor {
                                  aria-label="Ferramentas de formatação">
 
                                 <div class="btn-group btn-group-sm mr-2 mb-1" role="group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="heading"
-                                    data-level="1"
-                                    title="Título nível 1" aria-label="Título nível 1">H1</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="heading"
-                                    data-level="2"
-                                    title="Título nível 2" aria-label="Título nível 2">H2</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="heading"
-                                    data-level="3"
-                                    title="Título nível 3" aria-label="Título nível 3">H3</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="heading"
-                                    data-level="4"
-                                    title="Título nível 4" aria-label="Título nível 4">H4</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="heading"
-                                    data-level="5"
-                                    title="Título nível 5" aria-label="Título nível 5">H5</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="heading"
-                                    data-level="6"
-                                    title="Título nível 6" aria-label="Título nível 6">H6</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="heading"
+                                        data-level="1"
+                                        title="Título nível 1" aria-label="Título nível 1">H1</button>
+
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="heading"
+                                        data-level="2"
+                                        title="Título nível 2" aria-label="Título nível 2">H2</button>
+
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="heading"
+                                        data-level="3"
+                                        title="Título nível 3" aria-label="Título nível 3">H3</button>
+
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="heading"
+                                        data-level="4"
+                                        title="Título nível 4" aria-label="Título nível 4">H4</button>
+
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="heading"
+                                        data-level="5"
+                                        title="Título nível 5" aria-label="Título nível 5">H5</button>
+
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="heading"
+                                        data-level="6"
+                                        title="Título nível 6" aria-label="Título nível 6">H6</button>
                                 </div>
 
                                 <div class="btn-group btn-group-sm mr-2 mb-1" role="group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="bold"
-                                    title="Negrito" aria-label="Negrito"><strong>B</strong></button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="italic"
-                                    title="Itálico" aria-label="Itálico"><em>I</em></button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="strike"
-                                    title="Tachado" aria-label="Tachado"><s>S</s></button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="bold"
+                                        title="Negrito" aria-label="Negrito"><strong>B</strong></button>
+
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="italic"
+                                        title="Itálico" aria-label="Itálico"><em>I</em></button>
+
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="strike"
+                                        title="Tachado" aria-label="Tachado"><s>S</s></button>
                                 </div>
 
                                 <div class="btn-group btn-group-sm mr-2 mb-1" role="group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="unordered-list"
-                                    title="Lista com marcadores" aria-label="Lista com marcadores">• Lista</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="ordered-list"
-                                    title="Lista numerada" aria-label="Lista numerada">1. Lista</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="quote"
-                                    title="Citação" aria-label="Citação">❝</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="unordered-list"
+                                        title="Lista com marcadores" aria-label="Lista com marcadores">• Lista</button>
+
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="ordered-list"
+                                        title="Lista numerada" aria-label="Lista numerada">1. Lista</button>
+
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="quote"
+                                        title="Citação" aria-label="Citação">❝</button>
                                 </div>
 
                                 <div class="btn-group btn-group-sm mr-2 mb-1" role="group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="link"
-                                    title="Inserir link" aria-label="Inserir link">Link</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                    data-editor-action="code"
-                                    title="Inserir código" aria-label="Inserir código">&lt;/&gt;</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="link"
+                                        title="Inserir link" aria-label="Inserir link">Link</button>
+
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
+                                        data-editor-action="code"
+                                        title="Inserir código" aria-label="Inserir código">&lt;/&gt;</button>
                                 </div>
 
                                 <div class="d-flex align-items-center mr-2 mb-1">
@@ -178,14 +226,14 @@ class MarkdownEditor {
                                         id="post-font-size"
                                         class="custom-select custom-select-sm rounded-0 w-auto"
                                         title="Tamanho da fonte">
-                                    <option value="12px">12</option>
-                                    <option value="14px">14</option>
-                                    <option value="16px" selected>16</option>
-                                    <option value="18px">18</option>
-                                    <option value="20px">20</option>
-                                    <option value="24px">24</option>
-                                    <option value="28px">28</option>
-                                    <option value="32px">32</option>
+                                        <option value="12px">12</option>
+                                        <option value="14px">14</option>
+                                        <option value="16px" selected>16</option>
+                                        <option value="18px">18</option>
+                                        <option value="20px">20</option>
+                                        <option value="24px">24</option>
+                                        <option value="28px">28</option>
+                                        <option value="32px">32</option>
                                     </select>
                                 </div>
 
@@ -208,6 +256,18 @@ class MarkdownEditor {
                                     >
                                 </div>
 
+                                <div class="mb-1 ml-md-auto">
+                                    <button
+                                        type="button"
+                                        id="post-preview-toggle"
+                                        class="btn btn-sm btn-outline-primary rounded-0 cp"
+                                        aria-expanded="false"
+                                        aria-controls="post-preview-panel">
+                                        <span aria-hidden="true">◉</span>
+                                        Visualizar
+                                    </button>
+                                </div>
+
                             </div>
                         </div>
 
@@ -219,21 +279,6 @@ class MarkdownEditor {
                             spellcheck="true"
                         ></textarea>
 
-                    </div>
-
-                    <button
-                        type="button"
-                        id="post-preview-toggle"
-                        class="btn btn-sm btn-outline-secondary rounded-0 cp mt-2"
-                        aria-expanded="false"
-                        aria-controls="post-preview">
-                        <span aria-hidden="true">◉</span> Pré-visualização
-                    </button>
-
-                    <div
-                        id="post-preview"
-                        class="border bg-white p-3 mt-2 overflow-auto text-break"
-                        hidden>
                     </div>
                 </div>
 
@@ -254,9 +299,7 @@ class MarkdownEditor {
                         id="post-draft-list"
                         class="custom-select rounded-0"
                         aria-label="Selecionar rascunho">
-
                         <option value="">Selecionar rascunho</option>
-
                     </select>
 
                     <div class="input-group-append">
@@ -286,59 +329,61 @@ class MarkdownEditor {
                 </div>
 
             </section>
+
+            <div id="post-preview-panel" hidden>
+
+                <div id="post-preview-header">
+                    <strong>Pré-visualização</strong>
+
+                    <button
+                        type="button"
+                        id="post-preview-close"
+                        class="btn btn-sm btn-outline-secondary rounded-0 cp">
+                        ✕ Fechar
+                    </button>
+                </div>
+
+                <div id="post-preview-content" class="text-break">
+                    <div id="post-preview"></div>
+                </div>
+
+            </div>
         `
 
         this.elements = {
             editor: this.root.querySelector('.markdown-editor'),
-
             status: this.root.querySelector('#post-editor-status'),
-
             title: this.root.querySelector('#post-title'),
-
             content: this.root.querySelector('#post-content'),
-
             tags: this.root.querySelector('#post-tags'),
-
             toolbar: this.root.querySelector('#post-editor-toolbar'),
-
             addImage: this.root.querySelector('#post-add-image'),
-
             imageInput: this.root.querySelector('#post-image-input'),
-
             fontSize: this.root.querySelector('#post-font-size'),
 
             previewToggle: this.root.querySelector('#post-preview-toggle'),
-
+            previewPanel: this.root.querySelector('#post-preview-panel'),
+            previewClose: this.root.querySelector('#post-preview-close'),
             preview: this.root.querySelector('#post-preview'),
 
             saveDraft: this.root.querySelector('#post-save-draft'),
-
             draftList: this.root.querySelector('#post-draft-list'),
-
             openDraft: this.root.querySelector('#post-open-draft'),
-
             generate: this.root.querySelector('#post-generate')
         }
 
         this.bindEvents()
-
         this.updatePreview()
-
         this.startAutoSaveTimer()
-
         this.bindLifecycle()
 
         this.isMounted = true
 
-        // Lê rascunhos e autosave do banco (assíncrono)
         this.ready = this.initStorage()
-
-        // Carrega o renderizador (Markdown WASM) e desenha o preview
         this.markdownReady = this.loadMarkdownLib()
 
         return true
     }
-
       bindEvents() {
         const {
             title,
@@ -349,6 +394,7 @@ class MarkdownEditor {
             imageInput,
             fontSize,
             previewToggle,
+            previewClose,
             saveDraft,
             openDraft,
             generate
@@ -363,9 +409,14 @@ class MarkdownEditor {
 
         tags.addEventListener('input', () => this.markAsChanged())
 
-        // Botões da toolbar não tiram o foco (nem fecham o teclado) do textarea
+        // Botões da toolbar não tiram o foco do textarea,
+        // exceto o botão de pré-visualização.
         toolbar.addEventListener('mousedown', event => {
-            if (event.target.closest('button')) event.preventDefault()
+            const button = event.target.closest('button')
+
+            if (button && button.id !== 'post-preview-toggle') {
+                event.preventDefault()
+            }
         })
 
         content.addEventListener('beforeinput', event => {
@@ -401,6 +452,10 @@ class MarkdownEditor {
             this.togglePreview()
         })
 
+        previewClose.addEventListener('click', () => {
+            this.togglePreview(false)
+        })
+
         saveDraft.addEventListener('click', () => {
             this.saveDraft()
         })
@@ -414,12 +469,15 @@ class MarkdownEditor {
         })
     }
 
-    togglePreview() {
-        const { preview, previewToggle } = this.elements
+    togglePreview(visible = !this.previewVisible) {
+        const {
+            previewPanel,
+            previewToggle
+        } = this.elements
 
-        this.previewVisible = !this.previewVisible
+        this.previewVisible = visible
 
-        preview.hidden = !this.previewVisible
+        previewPanel.hidden = !this.previewVisible
 
         previewToggle.setAttribute(
             'aria-expanded',
@@ -430,6 +488,10 @@ class MarkdownEditor {
             'active',
             this.previewVisible
         )
+
+        if (!this.previewVisible) {
+            previewToggle.focus()
+        }
     }
 
     applyToolbarAction(action, button) {
@@ -437,9 +499,7 @@ class MarkdownEditor {
 
         const actions = {
             bold: () => this.toggleInline('**'),
-
             italic: () => this.toggleInline('*'),
-
             strike: () => this.toggleInline('~~'),
 
             heading: () => {
@@ -451,9 +511,7 @@ class MarkdownEditor {
             },
 
             'unordered-list': () => this.toggleList(false),
-
             'ordered-list': () => this.toggleList(true),
-
             quote: () => this.toggleQuote(),
 
             link: () => {
@@ -483,11 +541,6 @@ class MarkdownEditor {
         textarea.focus()
     }
 
-    /**
-     * Troca o trecho [start, end) por `text` e posiciona a seleção.
-     * Usa execCommand quando possível para manter o desfazer (Ctrl+Z)
-     * do navegador; se não for suportado, cai em setRangeText.
-     */
     applyEdit(start, end, text, selStart = start + text.length, selEnd = selStart) {
         const textarea = this.elements.content
 
@@ -495,7 +548,6 @@ class MarkdownEditor {
 
         try {
             textarea.focus()
-
             textarea.setSelectionRange(start, end)
 
             let done = false
@@ -513,7 +565,6 @@ class MarkdownEditor {
                 textarea.value.slice(start, start + text.length) !== text
             ) {
                 textarea.setRangeText(text, start, end, 'end')
-
                 this.markAsChanged()
                 this.updatePreview()
             }
@@ -531,7 +582,6 @@ class MarkdownEditor {
         const end = textarea.selectionEnd
 
         const selected = textarea.value.substring(start, end)
-
         const text = selected || placeholder
 
         this.applyEdit(
@@ -543,10 +593,6 @@ class MarkdownEditor {
         )
     }
 
-    /**
-     * Negrito, itálico e tachado: envolve a seleção (ou deixa o cursor
-     * entre os marcadores, pronto para digitar). Clicar de novo remove.
-     */
     toggleInline(marker) {
         const textarea = this.elements.content
         const value = textarea.value
@@ -557,7 +603,6 @@ class MarkdownEditor {
 
         const selected = value.slice(start, end)
 
-        // O itálico (*) não pode confundir com o negrito (**)
         const notBold = marker !== '*' || (
             value[start - 2] !== '*' && value[end + 1] !== '*'
         )
@@ -569,8 +614,13 @@ class MarkdownEditor {
             notBold
 
         if (outside) {
-            this.applyEdit(start - size, end + size, selected, start - size, end - size)
-
+            this.applyEdit(
+                start - size,
+                end + size,
+                selected,
+                start - size,
+                end - size
+            )
             return
         }
 
@@ -581,10 +631,18 @@ class MarkdownEditor {
             (marker !== '*' || !selected.startsWith('**'))
 
         if (inside) {
-            const unwrapped = selected.slice(size, selected.length - size)
+            const unwrapped = selected.slice(
+                size,
+                selected.length - size
+            )
 
-            this.applyEdit(start, end, unwrapped, start, start + unwrapped.length)
-
+            this.applyEdit(
+                start,
+                end,
+                unwrapped,
+                start,
+                start + unwrapped.length
+            )
             return
         }
 
@@ -597,15 +655,9 @@ class MarkdownEditor {
         )
     }
 
-    /**
-     * Linhas que o botão vai alterar. Se só houver linhas vazias
-     * (ex.: editor em branco), a primeira conta, para o usuário
-     * poder clicar no botão e continuar digitando.
-     */
     getLineBlock() {
         const textarea = this.elements.content
         const value = textarea.value
-
         const start = textarea.selectionStart
 
         let end = textarea.selectionEnd
@@ -621,7 +673,6 @@ class MarkdownEditor {
         if (lineEnd === -1) lineEnd = value.length
 
         const lines = value.slice(lineStart, lineEnd).split('\n')
-
         const hasText = lines.some(line => line.trim())
 
         const targets = lines.map(line => hasText ? !!line.trim() : false)
@@ -639,10 +690,8 @@ class MarkdownEditor {
         const { lines: result, blankBefore } = mapper(lines, targets)
 
         let text = result.join('\n')
-
         let offset = 0
 
-        // Linha em branco antes da lista: leitura mais clara e vale em qualquer parser
         if (blankBefore && lineStart > 0) {
             const previous = textarea.value
                 .slice(0, lineStart - 1)
@@ -653,13 +702,11 @@ class MarkdownEditor {
 
             if (previous.trim() && !isListLine) {
                 text = '\n' + text
-
                 offset = 1
             }
         }
 
         const blockStart = lineStart + offset
-
         const blockEnd = lineStart + text.length
 
         if (result.length === 1) {
@@ -743,10 +790,6 @@ class MarkdownEditor {
         })
     }
 
-    /**
-     * Enter dentro de lista ou citação continua a marcação
-     * (- , 2. , > ). Enter em item vazio sai da lista.
-     */
     handleEnter(event) {
         if (this._editing) return
 
@@ -760,7 +803,6 @@ class MarkdownEditor {
         if (textarea.selectionStart !== textarea.selectionEnd) return
 
         const value = textarea.value
-
         const position = textarea.selectionStart
 
         const lineStart = position === 0
@@ -787,7 +829,6 @@ class MarkdownEditor {
 
         if (!rest.trim()) {
             this.applyEdit(lineStart, lineEnd, '', lineStart)
-
             return
         }
 
@@ -807,11 +848,9 @@ class MarkdownEditor {
         const end = textarea.selectionEnd
 
         const selected = textarea.value.substring(start, end)
-
         const code = selected || 'código'
 
-        const replacement =
-            '\n```\n' + code + '\n```\n'
+        const replacement = '\n```\n' + code + '\n```\n'
 
         textarea.setRangeText(
             replacement,
@@ -851,7 +890,6 @@ class MarkdownEditor {
 
     markAsChanged() {
         this.hasChanges = true
-
         this.setStatus('Alterações pendentes.')
     }
 
@@ -870,7 +908,6 @@ class MarkdownEditor {
     getEditorData() {
         return {
             title: this.elements.title.value.trim(),
-
             content: this.elements.content.value,
 
             tags: this.elements.tags.value
@@ -879,9 +916,7 @@ class MarkdownEditor {
                 .filter(Boolean)
         }
     }
-
-    async insertImages(files) {
-        // Copia agora: o input é limpo logo depois do evento change
+      async insertImages(files) {
         const list = Array.from(files || []).filter(
             file => file.type && file.type.startsWith('image/')
         )
@@ -890,7 +925,6 @@ class MarkdownEditor {
 
         if (!this.db) {
             this.setStatus('Banco de dados indisponível: não foi possível guardar as imagens.')
-
             return
         }
 
@@ -910,7 +944,6 @@ class MarkdownEditor {
                         tbk: key
                     })
 
-                    // A mesma imagem nunca é gravada duas vezes
                     if (exists) return
 
                     await this.db.create([{
@@ -969,12 +1002,10 @@ class MarkdownEditor {
                     .map(byte => byte.toString(16).padStart(2, '0'))
                     .join('')
             } catch (error) {
-                // cai no hash simples abaixo
+                // Usa o hash simples abaixo
             }
         }
 
-        // Página fora de contexto seguro (HTTP que não é localhost):
-        // hash simples de 64 bits + tamanho do arquivo.
         const bytes = new Uint8Array(buffer)
 
         let h1 = 0xdeadbeef
@@ -997,10 +1028,6 @@ class MarkdownEditor {
             '-' + bytes.length
     }
 
-    /**
-     * Lê do banco as imagens que o preview ainda não tem
-     * e redesenha o preview quando elas chegam.
-     */
     async loadMedia(hashes) {
         if (!this.db) return
 
@@ -1078,10 +1105,8 @@ class MarkdownEditor {
         ) return
 
         const run = ++this.previewRun
-
         const missing = new Set()
 
-        // media:<hash> -> URL temporária da imagem guardada no banco
         const content = this.elements.content.value.replace(
             /\]\(media:([A-Za-z0-9_-]+)\)/g,
             (match, hash) => {
@@ -1091,7 +1116,6 @@ class MarkdownEditor {
 
                 if (!this.mediaMissing.has(hash)) missing.add(hash)
 
-                // Evita o navegador tentar abrir "media:" como URL
                 return '](' + BLANK_IMAGE + ')'
             }
         )
@@ -1107,11 +1131,9 @@ class MarkdownEditor {
                 '[MarkdownEditor]: Erro na pré-visualização:',
                 error
             )
-
             return
         }
 
-        // Uma digitação mais nova já pediu outra renderização
         if (run !== this.previewRun) return
 
         this.elements.preview.innerHTML = html
@@ -1119,10 +1141,6 @@ class MarkdownEditor {
         if (missing.size) this.loadMedia([...missing])
     }
 
-    /**
-     * Mesmo título = mesmo rascunho (sem diferenciar maiúsculas
-     * nem espaços repetidos). Título diferente = outro rascunho.
-     */
     getDraftKey(title) {
         return DRAFT_PREFIX + String(title || '')
             .normalize('NFC')
@@ -1136,11 +1154,8 @@ class MarkdownEditor {
 
         return {
             title: data.title,
-
             content: data.content,
-
             tags: data.tags,
-
             updatedAt: new Date().toISOString()
         }
     }
@@ -1160,21 +1175,17 @@ class MarkdownEditor {
             )
 
             this.setStatus('Banco de dados indisponível: os rascunhos não serão salvos.')
-
             return false
         }
 
         await this.loadDraftList()
-
         await this.restoreAutoSave()
-
         await this.cleanupImages()
 
         return true
     }
 
     bindLifecycle() {
-        // No celular a aba pode ser encerrada ao trocar de app
         this._onHide = () => {
             if (document.visibilityState === 'hidden') this.autoSave()
         }
@@ -1184,19 +1195,14 @@ class MarkdownEditor {
         }
 
         document.addEventListener('visibilitychange', this._onHide)
-
         window.addEventListener('pagehide', this._onPageHide)
     }
 
     unbindLifecycle() {
         document.removeEventListener('visibilitychange', this._onHide)
-
         window.removeEventListener('pagehide', this._onPageHide)
     }
 
-    /**
-     * Autosave: UMA única entrada ('autosave'), sempre sobrescrita.
-     */
     async autoSave() {
         if (!this.hasChanges || !this.db) return false
 
@@ -1227,7 +1233,6 @@ class MarkdownEditor {
             }
 
             return true
-
         } catch (error) {
             this.hasChanges = true
 
@@ -1250,21 +1255,16 @@ class MarkdownEditor {
         this.onStatus(message)
     }
 
-    /**
-     * Salvar rascunho: cada título tem o seu rascunho independente.
-     */
     async saveDraft() {
         const data = this.getEditorData()
 
         if (!data.title && !data.content.trim()) {
             this.setStatus('Digite um título ou conteúdo antes de salvar.')
-
             return false
         }
 
         if (!this.db) {
             this.setStatus('Banco de dados indisponível.')
-
             return false
         }
 
@@ -1308,7 +1308,6 @@ class MarkdownEditor {
             this.cleanupImages()
 
             return true
-
         } catch (error) {
             console.error(
                 '[MarkdownEditor]: Erro ao salvar rascunho:',
@@ -1330,7 +1329,6 @@ class MarkdownEditor {
                 tbk: AUTOSAVE_KEY
             })
 
-            // Se o usuário já começou a digitar, não sobrescreve
             if (!draft || typeof draft !== 'object' || this.hasChanges) {
                 return false
             }
@@ -1347,7 +1345,6 @@ class MarkdownEditor {
             this.setStatus('Alterações anteriores recuperadas.')
 
             return true
-
         } catch (error) {
             console.error(
                 '[MarkdownEditor]: Erro ao recuperar autosave:',
@@ -1378,7 +1375,6 @@ class MarkdownEditor {
             const first = document.createElement('option')
 
             first.value = ''
-
             first.textContent = 'Selecionar rascunho'
 
             select.appendChild(first)
@@ -1387,7 +1383,6 @@ class MarkdownEditor {
                 const option = document.createElement('option')
 
                 option.value = key
-
                 option.textContent =
                     (value && value.title) || 'Rascunho sem título'
 
@@ -1395,7 +1390,6 @@ class MarkdownEditor {
             })
 
             select.value = selected || this.currentDraftKey || ''
-
         } catch (error) {
             console.error(
                 '[MarkdownEditor]: Erro ao carregar lista de rascunhos:',
@@ -1409,7 +1403,6 @@ class MarkdownEditor {
 
         if (!key) {
             this.setStatus('Selecione um rascunho para abrir.')
-
             return false
         }
 
@@ -1421,20 +1414,17 @@ class MarkdownEditor {
 
             if (!draft) {
                 this.setStatus('Rascunho não encontrado.')
-
                 return false
             }
 
             this.restoreDraftData(draft)
 
             this.currentDraftKey = key
-
             this.hasChanges = false
 
             this.setStatus('Rascunho aberto com sucesso.')
 
             return true
-
         } catch (error) {
             console.error(
                 '[MarkdownEditor]: Erro ao abrir rascunho:',
@@ -1447,16 +1437,11 @@ class MarkdownEditor {
         }
     }
 
-    /**
-     * Apaga da tabela as imagens que nenhum rascunho, o autosave
-     * ou o texto atual usam mais.
-     */
     async cleanupImages() {
         if (!this.db || this._pendingInserts > 0) return 0
 
         try {
             return await this._enqueue(async () => {
-                // Uma imagem está sendo inserida agora: tenta depois
                 if (this._pendingInserts > 0) return 0
 
                 const [images, drafts, auto] = await Promise.all([
@@ -1503,7 +1488,6 @@ class MarkdownEditor {
 
                 stale.forEach(item => {
                     const hash = item.key.slice(IMAGE_PREFIX.length)
-
                     const url = this.mediaURLs.get(hash)
 
                     if (url) URL.revokeObjectURL(url)
@@ -1525,7 +1509,6 @@ class MarkdownEditor {
 
     restoreDraftData(draft) {
         this.elements.title.value = draft.title || ''
-
         this.elements.content.value = draft.content || ''
 
         this.elements.tags.value = Array.isArray(draft.tags)
@@ -1537,20 +1520,15 @@ class MarkdownEditor {
 
     resetEditor() {
         this.elements.title.value = ''
-
         this.elements.content.value = ''
-
         this.elements.tags.value = ''
-
         this.elements.imageInput.value = ''
 
         this.currentDraftKey = null
-
         this.hasChanges = false
 
         this.previewVisible = false
-
-        this.elements.preview.hidden = true
+        this.elements.previewPanel.hidden = true
 
         this.elements.previewToggle.setAttribute(
             'aria-expanded',
@@ -1562,19 +1540,12 @@ class MarkdownEditor {
         this.elements.draftList.value = ''
 
         this.updatePreview()
-
         this.releaseMedia()
 
         this.setStatus('Editor pronto para uma nova postagem.')
     }
 
-    /**
-     * Postagem publicada: limpa o editor (o autosave deixa de gravar
-     * até o usuário digitar de novo), apaga o registro 'autosave' e
-     * remove as imagens que ficaram sem uso.
-     */
     async confirmPublication() {
-        // Primeiro zera o editor, para nenhum autosave gravar de novo
         this.resetEditor()
 
         if (this.db) {
@@ -1591,14 +1562,12 @@ class MarkdownEditor {
             }
         }
 
-        // Os rascunhos manuais são preservados.
         await this.cleanupImages()
 
         return true
     }
 
-
-      async generatePost() {
+    async generatePost() {
         const data = this.getEditorData()
 
         if (!data.title) {
@@ -1613,7 +1582,6 @@ class MarkdownEditor {
             return false
         }
 
-        // Preserva o conteúdo antes de iniciar a preparação.
         await this.autoSave()
 
         this.setStatus('Preparando postagem...')
@@ -1627,14 +1595,11 @@ class MarkdownEditor {
 
             await this.onCreate(result)
 
-            // Limpa o editor somente depois que a preparação
-            // e a chamada de onCreate forem concluídas sem erro.
             await this.confirmPublication()
 
             this.setStatus('Postagem preparada para publicação.')
 
             return result
-
         } catch (error) {
             console.error(
                 '[MarkdownEditor]: Erro ao gerar postagem:',

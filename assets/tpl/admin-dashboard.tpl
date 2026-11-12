@@ -8,20 +8,6 @@
         <aside id="admin-dashboard-sidebar"
                class="col-12 col-md-3 col-lg-2 px-0">
 
-            <!-- MOBILE MENU TRIGGER -->
-            <div class="d-md-none px-3 py-2">
-
-                <a href="#admin-dashboard-slide"
-                   id="slide-admin-menu"
-                   class="btn btn-outline-secondary btn-block rounded-0">
-
-                    <span class="mr-2">&#9776;</span>
-                    Menu Administrativo
-
-                </a>
-
-            </div>
-
             <!-- MOBILE SLIDE MENU -->
             <nav id="admin-dashboard-slide"
                  class="slide-left fx transition bg-white overflow
@@ -107,30 +93,52 @@
             <header id="admin-dashboard-header"
                     class="mb-4">
 
-                <h2 class="h3 mb-1">
-                    Painel Administrativo
-                </h2>
+                <div class="d-flex flex-column flex-md-row
+                            align-items-md-center
+                            justify-content-md-between">
 
-                <p class="text-muted mb-0">
-                    Gerencie as postagens do seu blog.
-                </p>
+                    <div>
+                        <h2 class="h3 mb-1">
+                            Painel Administrativo
+                        </h2>
+
+                        <p class="text-muted mb-0">
+                            Gerencie as postagens do seu blog.
+                        </p>
+                    </div>
+
+                    <!-- DASHBOARD ACTIONS -->
+                    <div id="admin-dashboard-actions"
+                         class="d-flex align-items-center mt-3 mt-md-0">
+
+                        <!-- MOBILE MENU BUTTON -->
+                        <a href="#admin-dashboard-slide"
+                           id="slide-admin-menu"
+                           class="btn btn-outline-secondary btn-sm
+                                  rounded-0 flex-fill flex-md-grow-0
+                                  mr-2 d-md-none">
+
+                            <span aria-hidden="true">&#9776;</span>
+                            Menu
+
+                        </a>
+
+                        <!-- NEW POST BUTTON -->
+                        <button
+                            type="button"
+                            id="admin-new-post"
+                            class="btn btn-info btn-sm rounded-0
+                                   flex-fill flex-md-grow-0">
+
+                            + Nova Postagem
+
+                        </button>
+
+                    </div>
+
+                </div>
 
             </header>
-
-            <!-- NEW POST -->
-            <section id="admin-dashboard-actions"
-                     class="mb-4">
-
-                <button
-                    type="button"
-                    id="admin-new-post"
-                    class="btn btn-info btn-block rounded-0">
-
-                    + Nova Postagem
-
-                </button>
-
-            </section>
 
             <!-- POST EDITOR CONTAINER -->
             <section id="admin-post-editor-container"
