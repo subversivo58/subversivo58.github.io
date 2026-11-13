@@ -39,6 +39,7 @@ class MarkdownEditor {
         this.recognition = null
         this.recognitionSelection = null
         this.recognitionText = ''
+        this.isRecognizing = false
         this.markdown = null
         this.previewRun = 0
         this.elements = {}
@@ -482,6 +483,21 @@ initializeSpeechRecognition() {
     this.recognition.onresult = event => {
         this.handleSpeechRecognitionResult(event)
     }
+    this.recognition.onstart = () => {
+        this.setSpeechRecognitionActive(true)
+    }
+
+    this.recognition.onend = () => {
+        this.setSpeechRecognitionActive(false)
+    }
+
+    this.recognition.onerror = event => {
+        this.setSpeechRecognitionActive(false)
+
+        this.setStatus(
+            `Erro no reconhecimento de voz: ${event.error}.`
+        )
+    }
     return true
 }
 
@@ -525,7 +541,59 @@ handleSpeechRecognitionResult(event) {
     this.updatePreview()
 }
 
+ setSpeechRecognitionActive(active) {
+    this.isRecognizing = active
 
+    const microphone = this.elements.microphone
+
+    if (!microphone) return
+
+    microphone.classList.toggle('btn-danger', active)
+    microphone.classList.toggle('pulse-red', active)
+}
+
+toggleSpeechRecognition() {
+    if (!this.recognition) {
+        this.setStatus(
+            'Reconhecimento de voz indisponível neste navegador.'
+        )
+        return
+    }
+
+    if (this.isRecognizing) {
+        try {
+            this.recognition.stop()
+        } catch (error) {
+            this.setSpeechRecognitionActive(false)
+
+            console.error(
+                '[MarkdownEditor]: Erro ao interromper o reconhecimento:',
+                error
+            )
+        }
+
+        return
+    }
+
+    this.saveRecognitionSelection()
+
+    this.setSpeechRecognitionActive(true)
+
+    try {
+        this.recognition.start()
+    } catch (error) {
+        this.setSpeechRecognitionActive(false)
+
+        console.error(
+            '[MarkdownEditor]: Erro ao iniciar o reconhecimento:',
+            error
+        )
+
+        this.setStatus(
+            `Não foi possível iniciar o reconhecimento: ${error.message}`
+        )
+    }
+}
 
   
     bindEvents() {
@@ -538,6 +606,7 @@ handleSpeechRecognitionResult(event) {
             toolbar,
             addImage,
             imageInput,
+            microphone,
             fontSize,
             previewToggle,
             previewClose,
@@ -599,6 +668,10 @@ handleSpeechRecognitionResult(event) {
         imageInput.addEventListener('change', event => {
             this.insertImages(event.target.files)
             imageInput.value = ''
+        })
+
+        microphone.addEventListener('click', () => {
+            this.toggleSpeechRecognition()
         })
 
         fontSize.addEventListener('change', () => {
