@@ -618,7 +618,7 @@ class MarkdownEditor {
             }
 
             textarea.setSelectionRange(selStart, selEnd)
-        } finally {
+                  } finally {
             this._editing = false
         }
     }
@@ -1239,7 +1239,7 @@ class MarkdownEditor {
 
         this.autoSummary = this.buildAutomaticSummary()
 
-        if (!this.summaryManual) {
+              if (!this.summaryManual) {
             this.elements.summary.value = this.autoSummary
         }
     }
@@ -1756,21 +1756,19 @@ class MarkdownEditor {
     }
 
     async generatePost() {
-        const data = this.getEditorData()
+        const initialData = this.getEditorData()
 
-        if (!data.title) {
+        if (!initialData.title) {
             this.setStatus('Informe o título da postagem.')
             this.elements.title.focus()
             return false
         }
 
-        if (!data.content.trim()) {
+        if (!initialData.content.trim()) {
             this.setStatus('Informe o conteúdo da postagem.')
             this.elements.content.focus()
             return false
         }
-
-        await this.autoSave()
 
         this.setStatus('Preparando postagem...')
 
@@ -1780,6 +1778,10 @@ class MarkdownEditor {
             }
 
             await this.updatePreview()
+
+            const data = this.getEditorData()
+
+            await this.autoSave()
 
             const prepared = await this.prepareImages(data.content)
 
