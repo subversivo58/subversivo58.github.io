@@ -42,15 +42,6 @@
                 "readingTime": 3
             },
             {
-                "id": "post-01",
-                "title": "Primeiros passos",
-                "date": 1792972800,
-                "tags": [
-                    "teste",
-                    "blog"
-                ]
-            },
-            {
                 "id": "post-02",
                 "title": "Tabelas na web",
                 "date": 1793059200,
