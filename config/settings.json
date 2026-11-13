@@ -51,6 +51,15 @@
                 ]
             },
             {
+                "id": "post-03",
+                "title": "Listas e Ãnfase",
+                "date": 1793145600,
+                "tags": [
+                    "teste",
+                    "listas"
+                ]
+            },
+            {
                 "id": "post-04",
                 "title": "Blocos de cÃdigo",
                 "date": 1793232000,
@@ -75,15 +84,6 @@
                 "tags": [
                     "teste",
                     "cibercultura"
-                ]
-            },
-            {
-                "id": "post-08",
-                "title": "CitaÃÃes",
-                "date": 1793577600,
-                "tags": [
-                    "teste",
-                    "citaÃÃo"
                 ]
             },
             {
@@ -258,5 +258,5 @@
         "url": ""
     },
     "cookies_warning": true,
-    "last_modified": 1794552005292
+    "last_modified": 1794552025114
 }
