@@ -483,6 +483,12 @@ if (router === 'index') {
       renderIndexCarousel(settings, document.getElementById('index-central-block'), { locale: PolicyHandler.language, translate: tr })
 }
 
+
+
+
+
+
+
 if (router === 'blog') {
 
     const box = document.getElementById('index-central-block')
@@ -502,6 +508,17 @@ if (router === 'blog') {
         return Number.isFinite(date) && date > 0 ? date * 1000 : 0
     }
 
+    // Recupera a data da última modificação.
+    const getLastModifiedTimestamp = post => {
+        const timestamp = Number(post.lastModified)
+
+        if (!Number.isFinite(timestamp) || timestamp <= 0) {
+            return 0
+        }
+
+        return timestamp > 1e12 ? timestamp : timestamp * 1000
+    }
+
     const posts = [...settings.articles.storage].sort(
         (a, b) => getPostTimestamp(b) - getPostTimestamp(a)
     )
@@ -517,8 +534,6 @@ if (router === 'blog') {
         const date = new Date(timestamp)
         if (Number.isNaN(date.getTime())) return ''
         return date.toLocaleDateString(PolicyHandler.language, { dateStyle: 'medium' })
-
-      
     }
 
     const getReadingTime = post => {
@@ -536,7 +551,7 @@ if (router === 'blog') {
         <a href="#${encodeURIComponent(item.id)}"
            class="list-group-item list-group-item-action rounded-0${item.id === currentId ? ' active' : ''}">
             ${esc(item.title)}
-            
+
             ${date ? `<small class="d-block">${date}</small>` : ''}
         </a>`
     }
@@ -591,6 +606,8 @@ if (router === 'blog') {
         if (run !== drawing) return
 
         let postHeader = ''
+        let postFooter = ''
+
         if (post) {
             const date = formatDate(getPostTimestamp(post))
             const readingTime = getReadingTime(post)
@@ -599,15 +616,58 @@ if (router === 'blog') {
             postHeader = `
                 <header class="mb-4">
                     <h1>${esc(post.title)}</h1>
-                    
+
                     ${metadata.length ? `<p class="small text-muted">${metadata.join(' · ')}</p>` : ''}
                 </header>`
+
+            // Exibe a atualização somente quando a data for diferente da criação.
+            const createdTimestamp = getPostTimestamp(post)
+            const modifiedTimestamp = getLastModifiedTimestamp(post)
+
+            const updatedDate = (
+                createdTimestamp &&
+                modifiedTimestamp &&
+                createdTimestamp !== modifiedTimestamp
+            ) ? formatDate(modifiedTimestamp) : ''
+
+            // Tags em pílulas com contorno, sem # e sem funcionalidade por enquanto.
+            const tags = Array.isArray(post.tags)
+                ? post.tags.map(tag => String(tag).trim()).filter(Boolean)
+                : []
+
+            const footerContent = []
+
+            if (updatedDate) {
+                footerContent.push(`
+                    <p class="small text-danger text-right mb-2">
+                        Última atualização: ${esc(updatedDate)}
+                    </p>`)
+            }
+
+            if (tags.length) {
+                footerContent.push(`
+                    <div class="d-flex flex-wrap align-items-center">
+                        ${tags.map(tag => `
+                            <span class="border rounded-pill px-2 py-1 mr-2 mb-2 small">
+                                ${esc(tag)}
+                            </span>
+                        `).join('')}
+                    </div>`)
+            }
+
+            if (footerContent.length) {
+                postFooter = `
+                    <footer class="mt-4">
+                        ${footerContent.join('')}
+                    </footer>`
+            }
         }
 
         box.innerHTML = `
             <div class="container">
                 ${postHeader}
                 <article class="text-break">${article}</article>
+                ${postFooter}
                 <h4 class="mt-5">Mais postagens</h4>
                 <div id="blog-list" class="list-group">
                     ${posts.slice(0, visible).map(itemHTML).join('')}
@@ -630,6 +690,17 @@ if (router === 'blog') {
     await drawBlog()
 }
 
+
+
+
+
+
+
+
+
+
+
+        
 if (router === 'admin') {
 
     const TOKEN_KEY = 'github-token'
