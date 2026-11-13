@@ -1248,6 +1248,138 @@ if (router === 'admin') {
     i18n.transcript()
     i18n.observe(document)
 
+    // Preferências individuais do usuário
+    const preferenceSwitches = {
+        'sets-media-audio': 'mediaAudio',
+        'sets-media-video': 'mediaVideo',
+        'sets-geo-stats': 'geoStats',
+        'sets-effect-audio': 'effectAudio',
+        'sets-effect-notific': 'effectNotific',
+        'sets-conn-notific': 'connNotific',
+        'sets-conn-notific2': 'connNotific2'
+    }
+
+    // Estado inicial: todos os switches desligados.
+    const userPreferences = {
+        mediaAudio: false,
+        mediaVideo: false,
+        geoStats: false,
+        effectAudio: false,
+        effectNotific: false,
+        connNotific: false,
+        connNotific2: false
+    }
+
+    // Recupera as preferências salvas.
+    if (DBMethods) {
+        try {
+            const savedPreferences = await DBMethods.read({
+                tbn: 'config',
+                tbk: 'preferences'
+            })
+
+            if (
+                savedPreferences &&
+                typeof savedPreferences === 'object' &&
+                !Array.isArray(savedPreferences)
+            ) {
+                Object.keys(userPreferences).forEach(key => {
+                    if (typeof savedPreferences[key] === 'boolean') {
+                        userPreferences[key] = savedPreferences[key]
+                    }
+                })
+            }
+        } catch (error) {
+            console.error(
+                '[SETUP]: Could not load user preferences',
+                error
+            )
+        }
+    }
+
+    // Atualiza o indicador visual de cada switch.
+    const renderPreferenceSwitch = (id, enabled) => {
+        const element = dc.getElementById(id)
+        if (!element) return
+
+        const isAudio = id === 'sets-effect-audio' ||
+                        id === 'sets-effect-notific'
+
+        element.classList.remove(
+            'fa-toggle-off',
+            'fa-toggle-on',
+            'fa-volume-off',
+            'fa-volume-up',
+            'red',
+            'green'
+        )
+
+        if (isAudio) {
+            element.classList.add(
+                enabled ? 'fa-volume-up' : 'fa-volume-off'
+            )
+        } else {
+            element.classList.add(
+                enabled ? 'fa-toggle-on' : 'fa-toggle-off'
+            )
+        }
+
+        element.classList.add(enabled ? 'green' : 'red')
+    }
+
+    // Aplica os estados recuperados ao painel.
+    Object.entries(preferenceSwitches).forEach(([id, key]) => {
+        renderPreferenceSwitch(id, userPreferences[key])
+    })
+
+    // Serializa as gravações para preservar a ordem dos cliques.
+    let preferenceSaveQueue = Promise.resolve()
+
+    // Alterna e salva a preferência acionada.
+    dc.addEventListener('click', evt => {
+        const element = evt.target.closest(
+            '#settings-slide [id^="sets-"]'
+        )
+
+        if (
+            !element ||
+            !Object.prototype.hasOwnProperty.call(
+                preferenceSwitches,
+                element.id
+            )
+        ) {
+            return
+        }
+
+        const key = preferenceSwitches[element.id]
+
+        userPreferences[key] = !userPreferences[key]
+
+        renderPreferenceSwitch(element.id, userPreferences[key])
+
+        if (!DBMethods) {
+            console.error(
+                '[SETUP]: IndexedDB connection unavailable; preference not saved.'
+            )
+            return
+        }
+
+        const preferencesToSave = { ...userPreferences }
+
+        preferenceSaveQueue = preferenceSaveQueue
+            .then(() => DBMethods.update([{
+                tbn: 'config',
+                tbk: 'preferences',
+                tbv: preferencesToSave
+            }]))
+            .catch(error => {
+                console.error(
+                    '[SETUP]: Could not save user preferences',
+                    error
+                )
+            })
+    })
+
     DrawerEvents(BrowserPermissions, Notify)
 
 SlideMenus()
