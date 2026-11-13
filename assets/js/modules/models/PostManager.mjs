@@ -80,32 +80,32 @@ export default class PostManager {
      */
     orderImages(markdown, images = []) {
 
-        const orderedImages = []
-        const usedImages = new Set()
+    const orderedImages = []
+    const usedImages = new Set()
 
-        const imagePattern =
-            /!\[[^\]]*\]\((?:<([^>]+)>|([^\s)]+))(?:\s+[^)]*)?\)/g
+    const imagePattern =
+        /!\[[^\]]*\]\((?:<([^>]+)>|([^\s)]+))(?:\s+[^)]*)?\)/g
 
-        let match
+    let match
 
-        while ((match = imagePattern.exec(markdown)) !== null) {
+    while ((match = imagePattern.exec(markdown)) !== null) {
 
-            const imagePath = match[1] ?? match[2]
+        const imagePath = match[1] ?? match[2]
 
-            const image = images.find(item =>
-                item.path === imagePath
-            )
+        const image = images.find(item =>
+            item.path === imagePath
+        )
 
-            if (!image || usedImages.has(image.path)) {
-                continue
-            }
-
-            usedImages.add(image.path)
-            orderedImages.push(image)
-
+        if (!image || usedImages.has(image.path)) {
+            continue
         }
 
-        return orderedImages
+        usedImages.add(image.path)
+        orderedImages.push(image)
+
+    }
+
+    return orderedImages
 
     }
 
@@ -162,100 +162,98 @@ export default class PostManager {
      */
     async createPost(data = {}) {
 
-        // Data original de criação da postagem.
-        const timestamp = Date.now()
+    // Data original de criação da postagem.
+    const timestamp = Date.now()
 
-        // Na criação, a última modificação é igual à criação.
-        const lastModified = timestamp
+    // Na criação, a última modificação é igual à criação.
+    const lastModified = timestamp
 
-        const id = this.generateID(timestamp)
+    const id = this.generateID(timestamp)
 
-        const markdown = this.buildMarkdown(data)
+    const markdown = this.buildMarkdown(data)
 
-        // Organiza os arquivos pela ordem das referências Markdown.
-        const imageFiles = this.orderImages(
-            markdown,
-            data.images ?? []
-        )
+    // Organiza os arquivos pela ordem das referências Markdown.
+    const imageFiles = this.orderImages(
+        markdown,
+        data.images ?? []
+    )
 
-        // Guarda somente os caminhos no objeto de metadados.
-        const images = imageFiles.map(image =>
-            `assets/posts/${image.path}`
-        )
+    // Os caminhos das imagens já são completos.
+    const images = imageFiles.map(image => image.path)
 
-        // A primeira imagem será a capa.
-        const cover = images[0] ?? null
+    // A primeira imagem será a capa.
+    const cover = images[0] ?? null
 
-        const tags = this.normalizeTags(data.tags ?? [])
+    const tags = this.normalizeTags(data.tags ?? [])
 
-        const summary = String(data.summary ?? '').trim()
+    const summary = String(data.summary ?? '').trim()
 
-        const readingTime = this.normalizeReadingTime(
-            data.readingTime
-        )
+    const readingTime = this.normalizeReadingTime(
+        data.readingTime
+    )
 
-        const postMetadata = {
-            id,
-            title: data.title?.trim() ?? '',
-            summary,
-            path: `assets/posts/${id}.md`,
-            cover,
-            images,
-            tags,
-            timestamp,
-            lastModified,
-            readingTime
+    const postMetadata = {
+        id,
+        title: data.title?.trim() ?? '',
+        summary,
+        path: `assets/posts/${id}.md`,
+        cover,
+        images,
+        tags,
+        timestamp,
+        lastModified,
+        readingTime
+    }
+
+    // Lê e atualiza o settings.json em memória.
+    const updatedSettings = await this.prepareSettings(
+        postMetadata,
+        timestamp
+    )
+
+    // Prepara todos os arquivos para publicação.
+    const files = [
+
+        // Imagens na pasta exclusiva.
+        ...imageFiles.map(image => ({
+            path: image.path,
+            content: image.file
+        })),
+
+        // Arquivo Markdown.
+        {
+            path: postMetadata.path,
+            content: markdown
+        },
+
+        // settings.json atualizado.
+        {
+            path: this.settingsPath,
+            content: updatedSettings
         }
 
-        // Lê e atualiza o settings.json em memória.
-        const updatedSettings = await this.prepareSettings(
-            postMetadata,
-            timestamp
-        )
+    ]
 
-        // Prepara todos os arquivos para uma futura publicação.
-        const files = [
+    return {
 
-            // Imagens primeiro.
-            ...imageFiles.map(image => ({
-                path: `assets/posts/${image.path}`,
-                content: image.file
-            })),
+        ...postMetadata,
 
-            // Arquivo Markdown.
-            {
-                path: postMetadata.path,
-                content: markdown
-            },
+        filename: `${id}.md`,
 
-            // settings.json atualizado.
-            {
-                path: this.settingsPath,
-                content: updatedSettings
-            }
+        markdown,
 
-        ]
+        // Arquivos File mantidos apenas em memória.
+        imageFiles,
 
-        return {
+        // Lista completa pronta para a API.
+        files,
 
-            ...postMetadata,
-
-            filename: `${id}.md`,
-
-            markdown,
-
-            // Arquivos File mantidos apenas em memória.
-            imageFiles,
-
-            // Lista completa pronta para a futura API.
-            files,
-
-            // Conteúdo JSON atualizado.
-            updatedSettings
-
-        }
+        // Conteúdo JSON atualizado.
+        updatedSettings
 
     }
+
+}
 
     /**
      * Decodifica um Hash ID.

@@ -4,8 +4,154 @@
  */
 
 /* ===== UTF-8 (inalterado) ===== */
-const utf8 = function utf8(){const root={};var stringFromCharCode=String.fromCharCode;function ucs2decode(a){for(var b,c,d=[],e=0,f=a.length;e<f;)b=a.charCodeAt(e++),55296<=b&&56319>=b&&e<f?(c=a.charCodeAt(e++),56320==(64512&c)?d.push(((1023&b)<<10)+(1023&c)+65536):(d.push(b),e--)):d.push(b);return d}function ucs2encode(a){for(var b,c=a.length,d=-1,e="";++d<c;)b=a[d],65535<b&&(b-=65536,e+=stringFromCharCode(55296|1023&b>>>10),b=56320|1023&b),e+=stringFromCharCode(b);return e}function checkScalarValue(a){if(55296<=a&&57343>=a)throw Error("Lone surrogate U+"+a.toString(16).toUpperCase()+" is not a scalar value")}function createByte(a,b){return stringFromCharCode(128|63&a>>b)}function encodeCodePoint(a){if(0==(4294967168&a))return stringFromCharCode(a);var b="";return 0==(4294965248&a)?b=stringFromCharCode(192|31&a>>6):0==(4294901760&a)?(checkScalarValue(a),b=stringFromCharCode(224|15&a>>12),b+=createByte(a,6)):0==(4292870144&a)&&(b=stringFromCharCode(240|7&a>>18),b+=createByte(a,12),b+=createByte(a,6)),b+=stringFromCharCode(128|63&a),b}function utf8encode(a){for(var b,c=ucs2decode(a),d=c.length,e=-1,f="";++e<d;)b=c[e],f+=encodeCodePoint(b);return f}function readContinuationByte(){if(byteIndex>=byteCount)throw Error("Invalid byte index");var a=255&byteArray[byteIndex];if(byteIndex++,128==(192&a))return 63&a;throw Error("Invalid continuation byte")}function decodeSymbol(){var a,b,c,d,e;if(byteIndex>byteCount)throw Error("Invalid byte index");if(byteIndex==byteCount)return!1;if(a=255&byteArray[byteIndex],byteIndex++,0==(128&a))return a;if(192==(224&a)){if(b=readContinuationByte(),e=(31&a)<<6|b,128<=e)return e;throw Error("Invalid continuation byte")}if(224==(240&a)){if(b=readContinuationByte(),c=readContinuationByte(),e=(15&a)<<12|b<<6|c,2048<=e)return checkScalarValue(e),e;throw Error("Invalid continuation byte")}if(240==(248&a)&&(b=readContinuationByte(),c=readContinuationByte(),d=readContinuationByte(),e=(7&a)<<18|b<<12|c<<6|d,65536<=e&&1114111>=e))return e;throw Error("Invalid UTF-8 detected")}var byteArray,byteCount,byteIndex;function utf8decode(a){byteArray=ucs2decode(a),byteCount=byteArray.length,byteIndex=0;for(var b,c=[];!1!==(b=decodeSymbol());)c.push(b);return ucs2encode(c)}root.version="3.0.0",root.encode=utf8encode,root.decode=utf8decode;return root};
+const utf8 = (function utf8() {
+  const root = {};
+  var stringFromCharCode = String.fromCharCode;
 
+  function ucs2decode(a) {
+    for (var b, c, d = [], e = 0, f = a.length; e < f;)
+      b = a.charCodeAt(e++),
+      55296 <= b && 56319 >= b && e < f
+        ? (
+            c = a.charCodeAt(e++),
+            56320 == (64512 & c)
+              ? d.push(((1023 & b) << 10) + (1023 & c) + 65536)
+              : (d.push(b), e--)
+          )
+        : d.push(b);
+    return d;
+  }
+
+  function ucs2encode(a) {
+    for (var b, c = a.length, d = -1, e = ""; ++d < c;)
+      b = a[d],
+      65535 < b &&
+        (
+          b -= 65536,
+          e += stringFromCharCode(55296 | 1023 & b >>> 10),
+          b = 56320 | 1023 & b
+        ),
+      e += stringFromCharCode(b);
+    return e;
+  }
+
+  function checkScalarValue(a) {
+    if (55296 <= a && 57343 >= a)
+      throw Error("Lone surrogate U+" + a.toString(16).toUpperCase() + " is not a scalar value");
+  }
+
+  function createByte(a, b) {
+    return stringFromCharCode(128 | 63 & a >> b);
+  }
+
+  function encodeCodePoint(a) {
+    if (0 == (4294967168 & a))
+      return stringFromCharCode(a);
+
+    var b = "";
+
+    return 0 == (4294965248 & a)
+      ? b = stringFromCharCode(192 | 31 & a >> 6)
+      : 0 == (4294901760 & a)
+        ? (
+            checkScalarValue(a),
+            b = stringFromCharCode(224 | 15 & a >> 12),
+            b += createByte(a, 6)
+          )
+        : 0 == (4292870144 & a) &&
+          (
+            b = stringFromCharCode(240 | 7 & a >> 18),
+            b += createByte(a, 12),
+            b += createByte(a, 6)
+          );
+
+    b += stringFromCharCode(128 | 63 & a);
+    return b;
+  }
+
+  function utf8encode(a) {
+    for (var b, c = ucs2decode(a), d = c.length, e = -1, f = ""; ++e < d;)
+      b = c[e],
+      f += encodeCodePoint(b);
+    return f;
+  }
+
+  function readContinuationByte() {
+    if (byteIndex >= byteCount)
+      throw Error("Invalid byte index");
+
+    var a = 255 & byteArray[byteIndex];
+
+    if (byteIndex++, 128 == (192 & a))
+      return 63 & a;
+
+    throw Error("Invalid continuation byte");
+  }
+
+  function decodeSymbol() {
+    var a, b, c, d, e;
+
+    if (byteIndex > byteCount)
+      throw Error("Invalid byte index");
+
+    if (byteIndex == byteCount)
+      return !1;
+
+    if (a = 255 & byteArray[byteIndex], byteIndex++, 0 == (128 & a))
+      return a;
+
+    if (192 == (224 & a)) {
+      if (b = readContinuationByte(), e = (31 & a) << 6 | b, 128 <= e)
+        return e;
+      throw Error("Invalid continuation byte");
+    }
+
+    if (224 == (240 & a)) {
+      if (
+        b = readContinuationByte(),
+        c = readContinuationByte(),
+        e = (15 & a) << 12 | b << 6 | c,
+        2048 <= e
+      )
+        return checkScalarValue(e), e;
+
+      throw Error("Invalid continuation byte");
+    }
+
+    if (
+      240 == (248 & a) &&
+      (
+        b = readContinuationByte(),
+        c = readContinuationByte(),
+        d = readContinuationByte(),
+        e = (7 & a) << 18 | b << 12 | c << 6 | d,
+        65536 <= e && 1114111 >= e
+      )
+    )
+      return e;
+
+    throw Error("Invalid UTF-8 detected");
+  }
+
+  var byteArray, byteCount, byteIndex;
+
+  function utf8decode(a) {
+    byteArray = ucs2decode(a);
+    byteCount = byteArray.length;
+    byteIndex = 0;
+
+    for (var b, c = []; !1 !== (b = decodeSymbol());)
+      c.push(b);
+
+    return ucs2encode(c);
+  }
+
+  root.version = "3.0.0";
+  root.encode = utf8encode;
+  root.decode = utf8decode;
+
+  return root;
+})();
 /* ===== Base64 (inalterado) ===== */
 const Base64 = function Base64() {var _Base64={},version="2.5.2",buffer=void 0,b64chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",b64tab=function(a){for(var b={},c=0,d=a.length;c<d;c++)b[a.charAt(c)]=c;return b}(b64chars),fromCharCode=String.fromCharCode,cb_utob=function(a){if(2>a.length){var b=a.charCodeAt(0);return 128>b?a:2048>b?fromCharCode(192|b>>>6)+fromCharCode(128|63&b):fromCharCode(224|15&b>>>12)+fromCharCode(128|63&b>>>6)+fromCharCode(128|63&b)}var b=65536+1024*(a.charCodeAt(0)-55296)+(a.charCodeAt(1)-56320);return fromCharCode(240|7&b>>>18)+fromCharCode(128|63&b>>>12)+fromCharCode(128|63&b>>>6)+fromCharCode(128|63&b)},re_utob=/[\uD800-\uDBFF][\uDC00-\uDFFFF]|[^\x00-\x7F]/g,utob=function(a){return a.replace(re_utob,cb_utob)},cb_encode=function(a){var b=[0,2,1][a.length%3],c=a.charCodeAt(0)<<16|(1<a.length?a.charCodeAt(1):0)<<8|(2<a.length?a.charCodeAt(2):0),d=[b64chars.charAt(c>>>18),b64chars.charAt(63&c>>>12),2<=b?"=":b64chars.charAt(63&c>>>6),1<=b?"=":b64chars.charAt(63&c)];return d.join("")},btoa=btoa?function(a){return btoa(a)}:function(a){return a.replace(/[\s\S]{1,3}/g,cb_encode)},_encode=function(a){var b="[object Uint8Array]"===Object.prototype.toString.call(a);return b?a.toString("base64"):btoa(utob(a+""))},encode=function(a,b){return b?_encode(a+"").replace(/[+\/]/g,function(a){return"+"==a?"-":"_"}).replace(/=/g,""):_encode(a)},encodeURI=function(a){return encode(a,!0)},re_btou=/[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF]{2}|[\xF0-\xF7][\x80-\xBF]{3}/g,cb_btou=function(a){switch(a.length){case 4:var b=(7&a.charCodeAt(0))<<18|(63&a.charCodeAt(1))<<12|(63&a.charCodeAt(2))<<6|63&a.charCodeAt(3),c=b-65536;return fromCharCode((c>>>10)+55296)+fromCharCode((1023&c)+56320);case 3:return fromCharCode((15&a.charCodeAt(0))<<12|(63&a.charCodeAt(1))<<6|63&a.charCodeAt(2));default:return fromCharCode((31&a.charCodeAt(0))<<6|63&a.charCodeAt(1));}},btou=function(a){return a.replace(re_btou,cb_btou)},cb_decode=function(a){var b=a.length,c=(0<b?b64tab[a.charAt(0)]<<18:0)|(1<b?b64tab[a.charAt(1)]<<12:0)|(2<b?b64tab[a.charAt(2)]<<6:0)|(3<b?b64tab[a.charAt(3)]:0),d=[fromCharCode(c>>>16),fromCharCode(255&c>>>8),fromCharCode(255&c)];return d.length-=[0,0,2,1][b%4],d.join("")},_atob=atob?function(b){return atob(b)}:function(b){return b.replace(/\S{1,4}/g,cb_decode)},atob=function(b){return _atob((b+"").replace(/[^A-Za-z0-9\+\/]/g,""))},_decode=function(b){return btou(_atob(b))},decode=function(b){return _decode((b+"").replace(/[-_]/g,function(a){return"-"==a?"+":"/"}).replace(/[^A-Za-z0-9\+\/]/g,""))};if(_Base64={VERSION:version,atob:atob,btoa:btoa,fromBase64:decode,toBase64:encode,utob:utob,encode:encode,encodeURI:encodeURI,btou:btou,decode:decode},"function"==typeof Object.defineProperty){var noEnum=function(a){return{value:a,enumerable:!1,writable:!0,configurable:!0}};_Base64.extendString=function(){Object.defineProperty(String.prototype,"fromBase64",noEnum(function(){return decode(this)})),Object.defineProperty(String.prototype,"toBase64",noEnum(function(a){return encode(this,a)})),Object.defineProperty(String.prototype,"toBase64URI",noEnum(function(){return encode(this,!0)}))}}return _Base64};
 

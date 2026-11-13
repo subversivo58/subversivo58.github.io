@@ -1629,77 +1629,80 @@ class MarkdownEditor {
         this.updatePreview()
     }
 
-    async prepareImages(markdown) {
-        const hashes = [
-            ...new Set(
-                [...String(markdown).matchAll(MEDIA_REF)]
-                    .map(match => match[1])
-            )
-        ]
 
-        if (!hashes.length) {
-            return {
-                markdown,
-                images: []
-            }
-        }
+async prepareImages(markdown) {
+    const hashes = [
+        ...new Set(
+            [...String(markdown).matchAll(MEDIA_REF)]
+                .map(match => match[1])
+        )
+    ]
 
-        if (!this.db) {
-            throw new Error(
-                'Banco de dados indisponível para recuperar as imagens.'
-            )
-        }
-
-        const images = []
-        let preparedMarkdown = String(markdown)
-
-        const extensions = {
-            'image/jpeg': 'jpg',
-            'image/png': 'png',
-            'image/gif': 'gif',
-            'image/webp': 'webp',
-            'image/svg+xml': 'svg',
-            'image/avif': 'avif',
-            'image/bmp': 'bmp'
-        }
-
-        for (const hash of hashes) {
-            const record = await this.db.read({
-                tbn: DRAFTS_STORE,
-                tbk: IMAGE_PREFIX + hash
-            })
-
-            if (!record || !record.blob) {
-                throw new Error(
-                    `A imagem ${hash} não foi encontrada no armazenamento local.`
-                )
-            }
-
-            const type = record.type || record.blob.type || ''
-            const extension = extensions[type] || 'bin'
-            const path = `${hash}.${extension}`
-
-            images.push({
-                path,
-                file: record.blob
-            })
-
-            const reference = new RegExp(
-                '\\]\\(media:' + hash + '\\)',
-                'g'
-            )
-
-            preparedMarkdown = preparedMarkdown.replace(
-                reference,
-                `](${path})`
-            )
-        }
-
+    if (!hashes.length) {
         return {
-            markdown: preparedMarkdown,
-            images
+            markdown,
+            images: []
         }
     }
+
+    if (!this.db) {
+        throw new Error(
+            'Banco de dados indisponível para recuperar as imagens.'
+        )
+    }
+
+    const images = []
+    let preparedMarkdown = String(markdown)
+
+    const extensions = {
+        'image/jpeg': 'jpg',
+        'image/png': 'png',
+        'image/gif': 'gif',
+        'image/webp': 'webp',
+        'image/svg+xml': 'svg',
+        'image/avif': 'avif',
+        'image/bmp': 'bmp'
+    }
+
+    for (const hash of hashes) {
+        const record = await this.db.read({
+            tbn: DRAFTS_STORE,
+            tbk: IMAGE_PREFIX + hash
+        })
+
+        if (!record || !record.blob) {
+            throw new Error(
+                `A imagem ${hash} não foi encontrada no armazenamento local.`
+            )
+        }
+
+        const type = record.type || record.blob.type || ''
+        const extension = extensions[type] || 'bin'
+
+        const path = `assets/posts/images/${hash}.${extension}`
+
+        images.push({
+            path,
+            file: record.blob
+        })
+
+        const reference = new RegExp(
+            '\\]\\(media:' + hash + '\\)',
+            'g'
+        )
+
+        preparedMarkdown = preparedMarkdown.replace(
+            reference,
+            `](${path})`
+        )
+    }
+
+    return {
+        markdown: preparedMarkdown,
+        images
+    }
+}
+  
 
     resetEditor() {
         this.elements.title.value = ''
@@ -1756,7 +1759,6 @@ class MarkdownEditor {
     }
 
 
-  
     async generatePost() {
         const initialData = this.getEditorData()
 
@@ -1824,32 +1826,34 @@ class MarkdownEditor {
                 published: false,
                 post
             }
+
         } catch (error) {
-            const details = {
-                stage,
-                name: error?.name || 'Error',
-                message: error?.message || String(error),
-                stack: error?.stack || 'Pilha indisponível'
+            const errorName = error?.name || 'Error'
+            const errorMessage = error?.message || String(error)
+
+            try {
+                console.error(
+                    '[MarkdownEditor] Falha na publicação:',
+                    {
+                        stage,
+                        name: errorName,
+                        message: errorMessage,
+                        stack: error?.stack || 'Pilha indisponível'
+                    }
+                )
+            } catch {
+                // O diagnóstico visual não depende do console.
             }
 
-            console.log(
-                '[MarkdownEditor] FALHA AO PREPARAR POSTAGEM:',
-                details
-            )
-
-            console.error(
-                '[MarkdownEditor] Erro original:',
-                error
-            )
-
             this.setStatus(
-                'Erro ao preparar postagem. O conteúdo foi preservado.'
+                `Falha na etapa "${stage}": ${errorName}: ${errorMessage}. O conteúdo foi preservado.`
             )
 
             return false
         }
     }
 
+  
 
     destroy() {
         if (this.autoSaveTimer) {
