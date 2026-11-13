@@ -1043,7 +1043,7 @@ createPostItem(post) {
 
                 window.setTimeout(async () => {
 
-                    this.closeModal()
+                    this.closeModal(true)
 
                     await this.refresh()
 
@@ -1064,7 +1064,7 @@ createPostItem(post) {
                 )
 
                 window.setTimeout(() => {
-                    this.closeModal()
+                    this.closeModal(true)
                 }, 2000)
 
             }
@@ -1075,9 +1075,11 @@ createPostItem(post) {
 
     }
 
-    closeModal() {
+    closeModal(force = false) {
 
-        if (!this.modal || this.modalBusy) return
+        // O fechamento manual continua bloqueado durante a operação.
+        // O fechamento forçado é reservado ao término do processo.
+        if (!this.modal || (this.modalBusy && !force)) return
 
         this.modal.remove()
 

@@ -114,7 +114,16 @@ export default class PostManager {
      */
     async loadSettings() {
 
-        const response = await fetch(this.settingsPath, {
+        // Usa uma URL exclusiva para impedir a reutilização de
+        // settings.json por caches intermediários ou do navegador.
+        const settingsURL = new URL(
+            this.settingsPath,
+            document.baseURI
+        )
+
+        settingsURL.searchParams.set('_', Date.now().toString())
+
+        const response = await fetch(settingsURL, {
             cache: 'no-store'
         })
 
