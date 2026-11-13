@@ -518,7 +518,7 @@ if (router === 'blog') {
         <a href="#${encodeURIComponent(item.id)}"
            class="list-group-item list-group-item-action rounded-0${item.id === currentId ? ' active' : ''}">
             ${esc(item.title)}
-            ${item.summary ? `<small class="d-block">${esc(item.summary)}</small>` : ''}
+            
             ${date ? `<small class="d-block">${date}</small>` : ''}
         </a>`
     }
@@ -581,7 +581,7 @@ if (router === 'blog') {
             postHeader = `
                 <header class="mb-4">
                     <h1>${esc(post.title)}</h1>
-                    ${post.summary ? `<p class="lead">${esc(post.summary)}</p>` : ''}
+                    
                     ${metadata.length ? `<p class="small text-muted">${metadata.join(' · ')}</p>` : ''}
                 </header>`
         }
