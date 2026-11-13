@@ -471,7 +471,12 @@ const DSNotify = new NotifyJS({
             }
         
             await TemplatesReady.import
+            // Exibe o atalho administrativo quando existe uma chave salva.
+            const adminShortcut = dc.getElementById('drawer-admin')
 
+            if (adminShortcut && LocalStorage.get('github-token')) {
+                adminShortcut.classList.remove('d-none')
+            }
 
 if (router === 'index') {
 

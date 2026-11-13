@@ -1,3 +1,4 @@
+
     <!-- DRAWER -->
     <div data-drawer="drawer-menu" class="drawer-menu drawer-container drawer-md fx md-z-index invisible">
         <div class="arrow-up pa"></div>
@@ -42,8 +43,7 @@
                     <span data-i18n-html="words.media" class="i18n d-block tc"></span>
                 </div>
 
-
-              <!-- BOOKMARKS -->
+                <!-- BOOKMARKS -->
                 <div data-toggle="modal" data-target="#modal-feedback" class="p-2 col-4 ct cp">
                     <span class="d-block p-1">🔖</span>
                     <span data-i18n-html="drawer.words.marks" class="i18n d-block"></span>
@@ -76,7 +76,7 @@
                     <span data-i18n-html="drawer.words.lab" class="i18n d-block"></span>
                 </div>
 
-              <!-- FEEDBACK -->
+                <!-- FEEDBACK -->
                 <div data-toggle="modal" data-target="#modal-feedback" class="p-2 col-4 ct cp">
                     <span class="d-block p-1 fa fa-rocket fa-2x">📢</span>
                     <span data-i18n-html="drawer.words.feedback" class="i18n d-block"></span>
@@ -92,16 +92,23 @@
                     <span data-i18n-html="drawer.words.bug" class="i18n d-block"></span>
                 </div>
 
-              <div data-toggle="modal" data-target="#modal-source-version-info" class="p-2 col-4 ct cp">
+                <div data-toggle="modal" data-target="#modal-source-version-info" class="p-2 col-4 ct cp">
                     <span class="d-block p-1">📦</span>
                     <span class="d-block i18n" data-i18n-html="drawer.version">Versão</span>
                 </div>
 
+                <!-- ADMINISTRATION -->
+                <div id="drawer-admin" class="p-2 col-4 ct cp d-none">
+                    <a href="/admin.html" class="tdu-none">
+                        <span class="d-block p-1">🛡️</span>
+                        <span class="d-block tc">Administração</span>
+                    </a>
+                </div>
 
-           </div>
-             <!-- MORE ITENS -->
-             <div id="drawer-more-itens" class="row mx-0 bg-light-gray">
-                 <small data-css-fs="0.6" data-i18n-html="words.more" class="i18n css col-12 px-0 text-center cp tc"></small>
-             </div>
+            </div>
+            <!-- MORE ITENS -->
+            <div id="drawer-more-itens" class="row mx-0 bg-light-gray">
+                <small data-css-fs="0.6" data-i18n-html="words.more" class="i18n css col-12 px-0 text-center cp tc"></small>
+            </div>
         </div>
     </div>
