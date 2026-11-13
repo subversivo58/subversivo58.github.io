@@ -513,7 +513,7 @@ saveRecognitionSelection() {
 }
 
 handleSpeechRecognitionResult(event) {
-    if (!this.recognitionSelection) return
+    if (!this.isRecognizing || !this.recognitionSelection) return
 
     let transcript = ''
 
@@ -541,13 +541,14 @@ handleSpeechRecognitionResult(event) {
     this.updatePreview()
 }
 
- setSpeechRecognitionActive(active) {
+setSpeechRecognitionActive(active) {
     this.isRecognizing = active
 
     const microphone = this.elements.microphone
 
     if (!microphone) return
 
+    microphone.classList.toggle('btn-outline-secondary', !active)
     microphone.classList.toggle('btn-danger', active)
     microphone.classList.toggle('pulse-red', active)
 }
@@ -562,7 +563,8 @@ toggleSpeechRecognition() {
 
     if (this.isRecognizing) {
         try {
-            this.recognition.stop()
+            this.recognition.abort()
+            this.setSpeechRecognitionActive(false)
         } catch (error) {
             this.setSpeechRecognitionActive(false)
 
