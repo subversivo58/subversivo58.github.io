@@ -1302,29 +1302,7 @@ if (router === 'admin') {
         const element = dc.getElementById(id)
         if (!element) return
 
-        const isAudio = id === 'sets-effect-audio' ||
-                        id === 'sets-effect-notific'
-
-        element.classList.remove(
-            'fa-toggle-off',
-            'fa-toggle-on',
-            'fa-volume-off',
-            'fa-volume-up',
-            'red',
-            'green'
-        )
-
-        if (isAudio) {
-            element.classList.add(
-                enabled ? 'fa-volume-up' : 'fa-volume-off'
-            )
-        } else {
-            element.classList.add(
-                enabled ? 'fa-toggle-on' : 'fa-toggle-off'
-            )
-        }
-
-        element.classList.add(enabled ? 'green' : 'red')
+        element.textContent = enabled ? '🟢' : '🔴'
     }
 
     // Aplica os estados recuperados ao painel.
