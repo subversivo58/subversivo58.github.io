@@ -37,6 +37,8 @@ class MarkdownEditor {
         this.onCreate = options.onCreate || (() => {})
         this.onStatus = options.onStatus || (() => {})
         this.recognition = null
+        this.recognitionSelection = null
+        this.recognitionText = ''
         this.markdown = null
         this.previewRun = 0
         this.elements = {}
@@ -477,9 +479,55 @@ initializeSpeechRecognition() {
     this.recognition.continuous = true
     this.recognition.interimResults = true
     this.recognition.maxAlternatives = 1
-
+    this.recognition.onresult = event => {
+        this.handleSpeechRecognitionResult(event)
+    }
     return true
 }
+
+saveRecognitionSelection() {
+    const textarea = this.elements.content
+
+    this.recognitionSelection = {
+        start: textarea.selectionStart,
+        end: textarea.selectionEnd
+    }
+
+    this.recognitionText = ''
+}
+
+handleSpeechRecognitionResult(event) {
+    if (!this.recognitionSelection) return
+
+    let transcript = ''
+
+    for (let i = 0; i < event.results.length; i++) {
+        transcript += event.results[i][0].transcript
+    }
+
+    if (transcript === this.recognitionText) return
+
+    const textarea = this.elements.content
+    const start = this.recognitionSelection.start
+    const end = this.recognitionSelection.end
+
+    textarea.setRangeText(
+        transcript,
+        start,
+        end,
+        'end'
+    )
+
+    this.recognitionSelection.end = start + transcript.length
+    this.recognitionText = transcript
+
+    this.markAsChanged()
+    this.updatePreview()
+}
+
+
+
+  
     bindEvents() {
         const {
             title,
