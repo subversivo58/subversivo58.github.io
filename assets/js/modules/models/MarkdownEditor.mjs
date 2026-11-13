@@ -48,6 +48,7 @@ class MarkdownEditor {
 
         this._queue = Promise.resolve()
         this._pendingInserts = 0
+        this.isGenerating = false
 
         this.mediaURLs = new Map()
         this.mediaLoading = new Set()
@@ -1418,7 +1419,7 @@ class MarkdownEditor {
             return true
         } catch (error) {
             console.error(
-                '[MarkdownEditor]: Erro ao salvar rascunho:',
+                '[MarkdownEditor]: Erro ao salvar o rascunho:',
                 error
             )
 
@@ -1536,7 +1537,7 @@ class MarkdownEditor {
             return true
         } catch (error) {
             console.error(
-                '[MarkdownEditor]: Erro ao abrir rascunho:',
+                '[MarkdownEditor]: Erro ao abrir o rascunho:',
                 error
             )
 
@@ -1702,7 +1703,7 @@ async prepareImages(markdown) {
         images
     }
 }
-  
+
 
     resetEditor() {
         this.elements.title.value = ''
@@ -1760,100 +1761,122 @@ async prepareImages(markdown) {
 
 
     async generatePost() {
-        const initialData = this.getEditorData()
+        // Bloqueia chamadas repetidas enquanto a publicação está em andamento.
+        if (this.isGenerating) return false
 
-        if (!initialData.title) {
-            this.setStatus('Informe o título da postagem.')
-            this.elements.title.focus()
-            return false
+        this.isGenerating = true
+
+        const button = this.elements.generate
+        const originalButtonText = button ? button.textContent : ''
+
+        if (button) {
+            button.disabled = true
+            button.setAttribute('aria-busy', 'true')
+            button.textContent = 'Publicando...'
         }
-
-        if (!initialData.content.trim()) {
-            this.setStatus('Informe o conteúdo da postagem.')
-            this.elements.content.focus()
-            return false
-        }
-
-        let stage = 'Inicialização da publicação'
-
-        this.setStatus('Preparando postagem...')
 
         try {
-            if (this.markdownReady) {
-                stage = 'Carregamento da biblioteca Markdown'
-                await this.markdownReady
+            const initialData = this.getEditorData()
+
+            if (!initialData.title) {
+                this.setStatus('Informe o título da postagem.')
+                this.elements.title.focus()
+                return false
             }
 
-            stage = 'Atualização da pré-visualização'
-            await this.updatePreview()
-
-            stage = 'Leitura dos dados do editor'
-            const data = this.getEditorData()
-
-            stage = 'Salvamento automático'
-            await this.autoSave()
-
-            stage = 'Preparação das imagens'
-            const prepared = await this.prepareImages(data.content)
-
-            stage = 'Criação dos arquivos da postagem'
-            const post = await this.postManager.createPost({
-                title: data.title,
-                summary: data.summary,
-                readingTime: data.readingTime,
-                content: prepared.markdown,
-                images: prepared.images,
-                tags: data.tags
-            })
-
-            stage = 'Publicação no GitHub'
-            const publication = await this.onCreate(post)
-
-            if (publication && publication.published === true) {
-                stage = 'Confirmação da publicação'
-                await this.confirmPublication()
-
-                this.setStatus('Postagem publicada com sucesso.')
-
-                return post
+            if (!initialData.content.trim()) {
+                this.setStatus('Informe o conteúdo da postagem.')
+                this.elements.content.focus()
+                return false
             }
 
-            this.setStatus(
-                'Postagem preparada. O conteúdo foi preservado no editor.'
-            )
+            let stage = 'Inicialização da publicação'
 
-            return {
-                published: false,
-                post
-            }
-
-        } catch (error) {
-            const errorName = error?.name || 'Error'
-            const errorMessage = error?.message || String(error)
+            this.setStatus('Preparando postagem...')
 
             try {
-                console.error(
-                    '[MarkdownEditor] Falha na publicação:',
-                    {
-                        stage,
-                        name: errorName,
-                        message: errorMessage,
-                        stack: error?.stack || 'Pilha indisponível'
-                    }
+                if (this.markdownReady) {
+                    stage = 'Carregamento da biblioteca Markdown'
+                    await this.markdownReady
+                }
+
+                stage = 'Atualização da pré-visualização'
+                await this.updatePreview()
+
+                stage = 'Leitura dos dados do editor'
+                const data = this.getEditorData()
+
+                stage = 'Salvamento automático'
+                await this.autoSave()
+
+                stage = 'Preparação das imagens'
+                const prepared = await this.prepareImages(data.content)
+
+                stage = 'Criação dos arquivos da postagem'
+                const post = await this.postManager.createPost({
+                    title: data.title,
+                    summary: data.summary,
+                    readingTime: data.readingTime,
+                    content: prepared.markdown,
+                    images: prepared.images,
+                    tags: data.tags
+                })
+
+                stage = 'Publicação no GitHub'
+                const publication = await this.onCreate(post)
+
+                if (publication && publication.published === true) {
+                    stage = 'Confirmação da publicação'
+                    await this.confirmPublication()
+
+                    this.setStatus('Postagem publicada com sucesso.')
+
+                    return post
+                }
+
+                this.setStatus(
+                    'Postagem preparada. O conteúdo foi preservado no editor.'
                 )
-            } catch {
-                // O diagnóstico visual não depende do console.
+
+                return {
+                    published: false,
+                    post
+                }
+
+            } catch (error) {
+                const errorName = error?.name || 'Error'
+                const errorMessage = error?.message || String(error)
+
+                try {
+                    console.error(
+                        '[MarkdownEditor] Falha na publicação:',
+                        {
+                            stage,
+                            name: errorName,
+                            message: errorMessage,
+                            stack: error?.stack || 'Pilha indisponível'
+                        }
+                    )
+                } catch {
+                    // O diagnóstico visual não depende do console.
+                }
+
+                this.setStatus(
+                    `Falha na etapa "${stage}": ${errorName}: ${errorMessage}. O conteúdo foi preservado.`
+                )
+
+                return false
             }
+        } finally {
+            this.isGenerating = false
 
-            this.setStatus(
-                `Falha na etapa "${stage}": ${errorName}: ${errorMessage}. O conteúdo foi preservado.`
-            )
-
-            return false
+            if (button) {
+                button.disabled = false
+                button.removeAttribute('aria-busy')
+                button.textContent = originalButtonText
+            }
         }
     }
-
-  
 
     destroy() {
         if (this.autoSaveTimer) {

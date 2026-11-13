@@ -10,9 +10,22 @@
 // Fica como primeiro import para registrar os erros dos módulos seguintes.
 import './modules/lib/DebugConsole.mjs'
 
-import settings from '../../config/settings.json' with {
-   type: 'json'
+
+// Carrega as configurações sempre com dados atualizados do servidor.
+const settingsResponse = await fetch(
+    new URL('../../config/settings.json', import.meta.url),
+    {
+        cache: 'no-store'
+    }
+)
+
+if (!settingsResponse.ok) {
+    throw new Error(
+        `[SETUP]: Failed to load settings.json (${settingsResponse.status})`
+    )
 }
+
+const settings = await settingsResponse.json()
 
 
 // helpers
