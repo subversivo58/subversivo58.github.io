@@ -1755,6 +1755,8 @@ class MarkdownEditor {
         return true
     }
 
+
+  
     async generatePost() {
         const initialData = this.getEditorData()
 
@@ -1770,21 +1772,29 @@ class MarkdownEditor {
             return false
         }
 
+        let stage = 'Inicialização da publicação'
+
         this.setStatus('Preparando postagem...')
 
         try {
             if (this.markdownReady) {
+                stage = 'Carregamento da biblioteca Markdown'
                 await this.markdownReady
             }
 
+            stage = 'Atualização da pré-visualização'
             await this.updatePreview()
 
+            stage = 'Leitura dos dados do editor'
             const data = this.getEditorData()
 
+            stage = 'Salvamento automático'
             await this.autoSave()
 
+            stage = 'Preparação das imagens'
             const prepared = await this.prepareImages(data.content)
 
+            stage = 'Criação dos arquivos da postagem'
             const post = await this.postManager.createPost({
                 title: data.title,
                 summary: data.summary,
@@ -1794,9 +1804,11 @@ class MarkdownEditor {
                 tags: data.tags
             })
 
+            stage = 'Publicação no GitHub'
             const publication = await this.onCreate(post)
 
             if (publication && publication.published === true) {
+                stage = 'Confirmação da publicação'
                 await this.confirmPublication()
 
                 this.setStatus('Postagem publicada com sucesso.')
@@ -1813,8 +1825,20 @@ class MarkdownEditor {
                 post
             }
         } catch (error) {
+            const details = {
+                stage,
+                name: error?.name || 'Error',
+                message: error?.message || String(error),
+                stack: error?.stack || 'Pilha indisponível'
+            }
+
+            console.log(
+                '[MarkdownEditor] FALHA AO PREPARAR POSTAGEM:',
+                details
+            )
+
             console.error(
-                '[MarkdownEditor]: Erro ao gerar postagem:',
+                '[MarkdownEditor] Erro original:',
                 error
             )
 
@@ -1825,6 +1849,7 @@ class MarkdownEditor {
             return false
         }
     }
+
 
     destroy() {
         if (this.autoSaveTimer) {
