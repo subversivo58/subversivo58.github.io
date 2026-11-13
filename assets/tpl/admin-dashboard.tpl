@@ -24,7 +24,7 @@
                             px-3 py-3 border-bottom">
 
                     <h3 class="h5 mb-0">
-                        Administração
+                        Postagens
                     </h3>
 
                     <a href="#body"
@@ -38,24 +38,11 @@
 
                 </div>
 
-                <!-- MOBILE NAVIGATION -->
-                <div class="list-group list-group-flush">
-
-                    <a href="#admin-dashboard"
-                       class="list-group-item list-group-item-action">
-
-                        Painel
-
-                    </a>
-
-                </div>
 
                 <!-- MOBILE POSTS -->
                 <div class="px-2 py-3">
 
-                    <h4 class="h6 px-2 mb-2">
-                        Postagens
-                    </h4>
+              
 
                     <div id="admin-posts-list-mobile"
                          class="list-group list-group-flush">
@@ -74,16 +61,7 @@
             <nav id="admin-dashboard-desktop-menu"
                  class="d-none d-md-block">
 
-                <div class="list-group list-group-flush">
-
-                    <a href="#admin-dashboard"
-                       class="list-group-item list-group-item-action active">
-
-                        Painel
-
-                    </a>
-
-                </div>
+                
 
                 <!-- DESKTOP POSTS -->
                 <div class="px-2 py-3">

@@ -615,7 +615,7 @@ if (router === 'blog') {
 
             postHeader = `
                 <header class="mb-4">
-                    <h1>${esc(post.title)}</h1>
+                    <h3>${esc(post.title)}</h3>
 
                     ${metadata.length ? `<p class="small text-muted">${metadata.join(' · ')}</p>` : ''}
                 </header>`
@@ -668,6 +668,7 @@ if (router === 'blog') {
                 ${postHeader}
                 <article class="text-break markdown-body">${article}</article>
                 ${postFooter}
+                <hr class="my-4">
                 <h4 class="mt-5">Mais postagens</h4>
                 <div id="blog-list" class="list-group">
                     ${posts.slice(0, visible).map(itemHTML).join('')}
