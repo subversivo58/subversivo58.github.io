@@ -30,6 +30,7 @@ const BLANK_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABA
 class MarkdownEditor {
     constructor(options = {}) {
         this.options = options
+        this.permissions = options.permissions || null
         this.root = options.root || null
         this.postManager = options.postManager || new PostManager()
         this.imageProcessor = options.imageProcessor || new ImageProcessor({ auto: true })

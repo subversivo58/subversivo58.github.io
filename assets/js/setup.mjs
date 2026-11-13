@@ -785,6 +785,7 @@ if (router === 'admin') {
     const markdownEditor = new MarkdownEditor({
         root: editorRoot,
         db: DBMethods,
+        permissions: BrowserPermissions,
 
         onCreate: async post => {
             try {
