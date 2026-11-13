@@ -36,7 +36,7 @@ class MarkdownEditor {
         this.imageProcessor = options.imageProcessor || new ImageProcessor({ auto: true })
         this.onCreate = options.onCreate || (() => {})
         this.onStatus = options.onStatus || (() => {})
-
+        this.recognition = null
         this.markdown = null
         this.previewRun = 0
         this.elements = {}
@@ -291,6 +291,18 @@ class MarkdownEditor {
                                         hidden
                                     >
                                 </div>
+<div class="mb-1 mr-2">
+    <button
+        type="button"
+        id="post-microphone"
+        class="btn btn-sm btn-outline-secondary rounded-0 cp"
+        title="Transcrever voz"
+        aria-label="Transcrever voz"
+        disabled>
+        <span aria-hidden="true">🎙️</span>
+        Microfone
+    </button>
+</div>
 
                                 <div class="mb-1 ml-md-auto">
                                     <button
@@ -397,6 +409,7 @@ class MarkdownEditor {
             toolbar: this.root.querySelector('#post-editor-toolbar'),
             addImage: this.root.querySelector('#post-add-image'),
             imageInput: this.root.querySelector('#post-image-input'),
+            microphone: this.root.querySelector('#post-microphone'),
             fontSize: this.root.querySelector('#post-font-size'),
 
             previewToggle: this.root.querySelector('#post-preview-toggle'),
@@ -410,6 +423,12 @@ class MarkdownEditor {
             generate: this.root.querySelector('#post-generate')
         }
 
+        this.updateMicrophoneButton()
+
+
+
+
+      
         this.bindEvents()
         this.updatePreview()
         this.startAutoSaveTimer()
@@ -432,7 +451,14 @@ this.adminPosts.mount().catch(error => {
 
         return true
     }
+async updateMicrophoneButton() {
+    if (!this.elements.microphone || !this.permissions) return
 
+    await this.permissions.ready
+
+    this.elements.microphone.disabled =
+        this.permissions.status.microphone !== 'granted'
+}
     bindEvents() {
         const {
             title,
