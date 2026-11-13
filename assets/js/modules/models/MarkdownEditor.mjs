@@ -423,6 +423,7 @@ class MarkdownEditor {
             generate: this.root.querySelector('#post-generate')
         }
 
+        this.initializeSpeechRecognition()
         this.updateMicrophoneButton()
 
 
@@ -458,6 +459,26 @@ async updateMicrophoneButton() {
 
     this.elements.microphone.disabled =
         this.permissions.status.microphone !== 'granted'
+}
+
+initializeSpeechRecognition() {
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition
+
+    if (!SpeechRecognition) {
+        this.recognition = null
+        return false
+    }
+
+    this.recognition = new SpeechRecognition()
+
+    this.recognition.lang = 'pt-BR'
+    this.recognition.continuous = true
+    this.recognition.interimResults = true
+    this.recognition.maxAlternatives = 1
+
+    return true
 }
     bindEvents() {
         const {
