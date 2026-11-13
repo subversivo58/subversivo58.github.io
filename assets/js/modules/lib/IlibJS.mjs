@@ -6,28 +6,11 @@
  */
 import _ from '../helpers/Helpers.mjs'
 
-import Console from './Console.mjs'
-
-const ConsoleJS = new Console('[IlibJS]:')
-
-
 async function GetResource(uri, options = {}) {
     try {
         return await fetch(uri, options).then(response => response.json())
     } catch(ex) {
-        //console.log(ex)
-        return {
-            IlibJS: 'https://github.com/iconic-dreams/ilibjs',
-            author: {
-                name: 'Lauro Moraes aka Subversivo58',
-                url: 'https://github.com/subversivo58',
-                homepage: 'https://subversivo58.github.io'
-            },
-            license: {
-                type: 'The MIT License (MIT)',
-                url: 'https://github.com/iconic-dreams/ilibjs/blob/master/LICENSE'
-            }
-        }
+        return {}
     }
 }
 
@@ -522,32 +505,3 @@ export default class IlibJS {
         return observer
     }
 }
-
-
-/**
- * How to use:
-
-import iLib from './pathToIlib/iLib.mjs'
-
-// Instance and "mode" (i18n|l10n|Intl)
-const i18n = new IlibJS('i18n')
-
-// Request JSON dictonary
-// second argument (optional) headers for get (`window.Fetch()`)
-i18n.get('https://domain.com/pathToDictionari.json', {
-    credentials: 'include',
-    cache: 'reload'
-})
-
-
-
-
-
-
-
-
-
-
-
-
- */
