@@ -1315,10 +1315,13 @@ if (router === 'admin') {
 
     // Alterna e salva a preferência acionada.
     dc.addEventListener('click', evt => {
+
+      
         const element = evt.target.closest(
             '#settings-slide [id^="sets-"]'
         )
 
+      
         if (
             !element ||
             !Object.prototype.hasOwnProperty.call(
