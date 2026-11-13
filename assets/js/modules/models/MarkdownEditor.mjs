@@ -378,7 +378,7 @@ class MarkdownEditor {
                 </div>
 
                 <div id="post-preview-content" class="text-break">
-                    <div id="post-preview"></div>
+                    <div id="post-preview" class="markdown-body"></div>
                 </div>
 
             </div>

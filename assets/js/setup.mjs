@@ -666,7 +666,7 @@ if (router === 'blog') {
         box.innerHTML = `
             <div class="container">
                 ${postHeader}
-                <article class="text-break">${article}</article>
+                <article class="text-break markdown-body">${article}</article>
                 ${postFooter}
                 <h4 class="mt-5">Mais postagens</h4>
                 <div id="blog-list" class="list-group">
