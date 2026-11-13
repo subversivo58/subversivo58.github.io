@@ -8,6 +8,7 @@
  */
 
 import PostManager from './PostManager.mjs'
+import AdminPosts from './AdminPosts.mjs'
 
 const DRAFTS_STORE = 'drafts'
 const AUTOSAVE_KEY = 'autosave'
@@ -413,6 +414,16 @@ class MarkdownEditor {
         this.bindLifecycle()
 
         this.isMounted = true
+
+this.adminPosts = new AdminPosts(this)
+
+this.adminPosts.mount().catch(error => {
+    console.error(
+        '[MarkdownEditor]: Erro ao inicializar gerenciamento de postagens:',
+        error
+    )
+})
+      
 
         this.ready = this.initStorage()
         this.markdownReady = this.loadMarkdownLib()

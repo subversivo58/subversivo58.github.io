@@ -48,12 +48,23 @@
 
                     </a>
 
-                    <a href="#admin-posts"
-                       class="list-group-item list-group-item-action">
+                </div>
 
+                <!-- MOBILE POSTS -->
+                <div class="px-2 py-3">
+
+                    <h4 class="h6 px-2 mb-2">
                         Postagens
+                    </h4>
 
-                    </a>
+                    <div id="admin-posts-list-mobile"
+                         class="list-group list-group-flush">
+
+                        <div class="list-group-item small text-muted">
+                            Carregando postagens...
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -72,12 +83,23 @@
 
                     </a>
 
-                    <a href="#admin-posts"
-                       class="list-group-item list-group-item-action">
+                </div>
 
+                <!-- DESKTOP POSTS -->
+                <div class="px-2 py-3">
+
+                    <h4 class="h6 px-2 mb-2">
                         Postagens
+                    </h4>
 
-                    </a>
+                    <div id="admin-posts-list-desktop"
+                         class="list-group list-group-flush">
+
+                        <div class="list-group-item small text-muted">
+                            Carregando postagens...
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -98,6 +120,7 @@
                             justify-content-md-between">
 
                     <div>
+
                         <h2 class="h3 mb-1">
                             Painel Administrativo
                         </h2>
@@ -105,6 +128,7 @@
                         <p class="text-muted mb-0">
                             Gerencie as postagens do seu blog.
                         </p>
+
                     </div>
 
                     <!-- DASHBOARD ACTIONS -->
@@ -170,34 +194,6 @@
                      class="card-body">
 
                     <!-- MARKDOWN EDITOR WILL BE MOUNTED HERE -->
-
-                </div>
-
-            </section>
-
-            <!-- POSTS -->
-            <section id="admin-posts"
-                     class="card rounded-0">
-
-                <div class="card-header bg-transparent">
-
-                    <h3 class="h5 mb-0">
-                        Suas Postagens
-                    </h3>
-
-                </div>
-
-                <div id="admin-posts-list"
-                     class="list-group list-group-flush">
-
-                    <!-- POSTS WILL BE INSERTED HERE -->
-
-                    <div id="admin-posts-empty"
-                         class="list-group-item text-muted text-center py-4">
-
-                        Nenhuma postagem carregada.
-
-                    </div>
 
                 </div>
 
