@@ -202,7 +202,7 @@
                     <div class="row">
                         <div id="drawer-getmedia-audio-block" class="col-6 col-sm-5 px-0">
                             <div class="col mt-sm-5">
-                                <button type="button" id="modal-getmedia-audio-request" data-dismiss="modal" data-i18n-html="drawer.getmedia_audio.btn1" class="i18n btn btn-block btn-info rounded-0 cp"></button>
+                                <button type="button" id="modal-getmedia-audio-request" data-i18n-html="drawer.getmedia_audio.btn1" class="i18n btn btn-block btn-info rounded-0 cp"></button>
                             </div>
                             <div class="col mt-2 mt-sm-4">
                                 <button type="button" data-dismiss="modal" data-i18n-html="drawer.getmedia_audio.btn2" class="i18n btn btn-block btn-outline-dark rounded-0 cp"></button>

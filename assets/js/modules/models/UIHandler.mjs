@@ -151,6 +151,89 @@ if (state === 'granted' && notify) {
     })
 }
 
+
+
+/**
+ * Request microphone access through the browser's native API.
+ * The request must happen directly inside the user's click gesture.
+ */
+const MicrophoneRequest = (permissions = null) => {
+    _.DOM.waitEl(dc, '#modal-getmedia-audio-request', list => {
+        ;[...list].forEach(button => {
+            if (button.dataset.microphoneRequestBound === 'true') return
+            button.dataset.microphoneRequestBound = 'true'
+
+            _.DOM.event(button, 'click', async evt => {
+                evt.preventDefault()
+
+                // Prevent repeated requests while one is pending.
+                if (button.dataset.microphoneRequestPending === 'true') return
+
+                button.dataset.microphoneRequestPending = 'true'
+                button.disabled = true
+
+                try {
+                    const mediaDevices = wd.navigator?.mediaDevices
+
+                    if (
+                        !mediaDevices ||
+                        typeof mediaDevices.getUserMedia !== 'function'
+                    ) {
+                        if (permissions?.status) {
+                            permissions.status.microphone = 'unsupported'
+                        }
+                        return
+                    }
+
+                    // The browser permission prompt is triggered here.
+                    const stream = await mediaDevices.getUserMedia({
+                        audio: true
+                    })
+
+                    // Stop microphone capture immediately after authorization.
+                    stream.getTracks().forEach(track => track.stop())
+
+                    if (permissions?.status) {
+                        permissions.status.microphone = 'granted'
+                    }
+
+                } catch (error) {
+                    const deniedErrors = [
+                        'NotAllowedError',
+                        'PermissionDeniedError',
+                        'SecurityError'
+                    ]
+
+                    if (permissions?.status) {
+                        permissions.status.microphone =
+                            deniedErrors.includes(error?.name)
+                                ? 'denied'
+                                : 'error'
+                    }
+
+                    console.error(
+                        '[UIHandler] Could not request microphone permission:',
+                        error
+                    )
+
+                } finally {
+                    button.disabled = false
+                    delete button.dataset.microphoneRequestPending
+
+                    // Close the modal only after the request has finished.
+                    const modal = _.DOM.getById('modal-getmedia-audio')
+                    const closeButton = modal?.querySelector(
+                        '.modal-header button[data-dismiss="modal"]'
+                    )
+
+                    closeButton?.click()
+                }
+            })
+        })
+    })
+}
+
+
 const DrawerEvents = (permissions = null, notify = null) => {
     NotificationRequest(permissions, notify)
     let drawer = [];
