@@ -1,9 +1,8 @@
 /**
- * GitHubAPI - Wraper to upload binary files to GitHub repo
+ * GitHubAPI - Wrapper to upload binary files to GitHub repo
  * Uses the modified GitHub library under the hood and exposes it as `gh` property for get instance of all methods
  * @note:
  *   -- inspired at article: @see <https://medium.freecodecamp.org/pushing-a-list-of-files-to-the-github-with-javascript-b724c8c09b66>
- *   -- issue (not yet resolved): @see issue <https://github.com/github-tools/github/issues/417>
  * @copyright Copyright (c) 2020 Lauro Moraes <https://github.com/subversivo58>
  * @license MIT License <https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE>
  */
@@ -15,17 +14,17 @@ const GitHubAPI = function(auth) {
         gh = new GitHub(auth)
 
     /**
-     * Get current instance of GitHub library (very suggestive method name)
+     * Get current instance of GitHub library
      * @public
-     * @return {Object} instanceof GitHub
+     * @return {Object}
      */
     this.GHInstance = gh
 
     /**
      * Sets the current repository to make push to
      * @public
-     * @param {string} userName Name of the user who owns the repository
-     * @param {string} repoName Name of the repository
+     * @param {string} userName
+     * @param {string} repoName
      * @return void
      */
     this.setRepo = (userName, repoName) => {
@@ -33,18 +32,17 @@ const GitHubAPI = function(auth) {
     }
 
     /**
-     * Sets the current branch to make push to. If the branch doesn't exist yet,
-     * it will be created first (from `baseBranch`, or from the repository default branch)
+     * Sets the current branch to make push to.
      * @public
-     * @param {string} branchName The name of the branch
-     * @param {string} [baseBranch] Branch used as the starting point when creating a new one
+     * @param {string} branchName
+     * @param {string} [baseBranch]
      * @return {Promise}
      */
     this.setBranch = (branchName, baseBranch) => {
         if ( !repo ) {
             return Promise.reject(new Error('Repository is not initialized'))
         }
-        // the branch exists? (404 means "no")
+
         return repo.getRef('heads/' + branchName).then(() => true, error => {
             if ( error && error.response && error.response.status === 404 ) {
                 return false
@@ -55,10 +53,11 @@ const GitHubAPI = function(auth) {
                 currentBranch.name = branchName
                 return
             }
-            // "main" or "master" ... whatever the repository uses
+
             const base = baseBranch
                 ? Promise.resolve(baseBranch)
                 : repo.getDetails().then(details => details.data.default_branch)
+
             return base.then(name => repo.createBranch(name, branchName)).then(() => {
                 currentBranch.name = branchName
             })
@@ -66,34 +65,43 @@ const GitHubAPI = function(auth) {
     }
 
     /**
-     * Makes the push to the currently set branch (one commit for all files)
+     * Makes the push to the currently set branch.
+     * All files are included in one commit.
+     *
      * @public
-     * @param  {string}   message Message of the commit
-     * @param  {object[]} files   Array of objects, containing data to push:
-     *                            - create/update a file: {path, content}
-     *                            - delete a file:        {path, delete: true}
-     * @return {Promise}          Rejects if any step fails (the error is also logged)
+     * @param {string} message
+     * @param {object[]} files
+     * @return {Promise}
      */
     this.pushFiles = (message, files) => {
         if ( !repo ) {
             return Promise.reject(new Error('Repository is not initialized'))
         }
+
         if ( !currentBranch.hasOwnProperty('name') ) {
             return Promise.reject(new Error('Branch is not set'))
         }
+
         if ( !Array.isArray(files) || files.length === 0 ) {
             return Promise.reject(new Error('"files" must be a non-empty Array'))
         }
-        // state of THIS push (never shared between calls)
+
         const branch = currentBranch.name,
-              state  = { commitSHA: null, treeSHA: null, entries: [] }
+              state = {
+                  commitSHA: null,
+                  treeSHA: null,
+                  entries: []
+              }
 
         return repo.getRef('heads/' + branch).then(ref => {
             state.commitSHA = ref.data.object.sha
             return repo.getCommit(state.commitSHA)
         }).then(commit => {
             state.treeSHA = commit.data.tree.sha
-            return Promise.all(files.map(file => createEntry(file, state)))
+
+            return Promise.all(
+                files.map(file => createEntry(file, state))
+            )
         }).then(() => {
             return repo.createTree(state.entries, state.treeSHA)
         }).then(tree => {
@@ -107,24 +115,69 @@ const GitHubAPI = function(auth) {
     }
 
     /**
-     * Adds one entry to the new tree: a blob (create/update) or a deletion
+     * Converts a Blob into Base64 without corrupting binary data.
+     *
      * @private
-     * @param  {object} fileInfo {path, content} or {path, delete: true}
-     * @param  {object} state    state of the current push
+     * @param {Blob} blob
+     * @return {Promise<string>}
+     */
+    const blobToBase64 = blob => {
+        return blob.arrayBuffer().then(buffer => {
+            const bytes = new Uint8Array(buffer)
+            const chunkSize = 0x8000
+            let binary = ''
+
+            for ( let i = 0; i < bytes.length; i += chunkSize ) {
+                binary += String.fromCharCode(
+                    ...bytes.subarray(i, i + chunkSize)
+                )
+            }
+
+            return btoa(binary)
+        })
+    }
+
+    /**
+     * Adds one entry to the new tree.
+     *
+     * Supports:
+     * - text files (string)
+     * - binary files (Blob/File)
+     * - file deletion
+     *
+     * @private
+     * @param {object} fileInfo
+     * @param {object} state
      * @return {Promise}
      */
     const createEntry = (fileInfo, state) => {
+
         if ( fileInfo.delete === true ) {
-            // `sha: null` removes the file from the tree
             state.entries.push({
                 path: fileInfo.path,
                 mode: '100644',
                 type: 'blob',
                 sha: null
             })
+
             return Promise.resolve()
         }
-        return repo.createBlob(fileInfo.content).then(blob => {
+
+        let content = fileInfo.content
+
+        if (
+            typeof Blob !== 'undefined' &&
+            content instanceof Blob
+        ) {
+            content = blobToBase64(content).then(base64 => ({
+                content: base64,
+                encoding: 'base64'
+            }))
+        }
+
+        return Promise.resolve(content).then(data => {
+            return repo.createBlob(data)
+        }).then(blob => {
             state.entries.push({
                 sha: blob.data.sha,
                 path: fileInfo.path,

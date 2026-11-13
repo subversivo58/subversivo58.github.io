@@ -1,3 +1,4 @@
+
 /**
  * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2021 Lauro Moraes - [https://github.com/subversivo58]
@@ -467,99 +468,92 @@ if (router === 'index') {
 if (router === 'blog') {
 
     const box = document.getElementById('index-central-block')
-
-    // Só a página do blog carrega o WASM e as extensões
     const { renderMarkdownURL } = await loadMarkdown()
 
     const mdOptions = {
-        extensions: [
-            'tables',
-            'images',
-            'anchors',
-            'externalLinks',
-            'blockAttributes',
-            'highlight'
-        ]
+        extensions: ['tables', 'images', 'anchors', 'externalLinks', 'blockAttributes', 'highlight']
     }
 
-    // Mais recentes primeiro (date em segundos)
-    const posts = [...settings.articles.storage].sort((a, b) => b.date - a.date)
+    // Compatibilidade: timestamp novo em milissegundos e date legado em segundos.
+    const getPostTimestamp = post => {
+        const timestamp = Number(post.timestamp)
+        if (Number.isFinite(timestamp) && timestamp > 0) {
+            return timestamp > 1e12 ? timestamp : timestamp * 1000
+        }
+        const date = Number(post.date)
+        return Number.isFinite(date) && date > 0 ? date * 1000 : 0
+    }
 
+    const posts = [...settings.articles.storage].sort(
+        (a, b) => getPostTimestamp(b) - getPostTimestamp(a)
+    )
     const maxList = settings.articles['blog-max-list']
 
-    const esc = text => String(text).replace(
+    const esc = text => String(text ?? '').replace(
         /[&<>"]/g,
         char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char])
     )
 
-    const formatDate = seconds => new Date(seconds * 1000)
-        .toLocaleDateString(PolicyHandler.language, { dateStyle: 'medium' })
+    const formatDate = timestamp => {
+        if (!timestamp) return ''
+        const date = new Date(timestamp)
+        if (Number.isNaN(date.getTime())) return ''
+        return date.toLocaleDateString(PolicyHandler.language, { dateStyle: 'medium' })
+
+      
+    }
+
+    const getReadingTime = post => {
+        const value = Number(post.readingTime)
+        return Number.isFinite(value) && value > 0 ? Math.ceil(value) : null
+    }
 
     let drawing = 0
-
-    // Quantos itens da lista estão visíveis (cresce de maxList em maxList)
     let visible = maxList
-
     let currentId = null
 
-    const itemHTML = item => `
+    const itemHTML = item => {
+        const date = formatDate(getPostTimestamp(item))
+        return `
         <a href="#${encodeURIComponent(item.id)}"
            class="list-group-item list-group-item-action rounded-0${item.id === currentId ? ' active' : ''}">
             ${esc(item.title)}
-            <small class="d-block">${formatDate(item.date)}</small>
+            ${item.summary ? `<small class="d-block">${esc(item.summary)}</small>` : ''}
+            ${date ? `<small class="d-block">${date}</small>` : ''}
         </a>`
+    }
 
-    // "Mostrando 20 de 57" e o botão: só aparecem se ainda há o que mostrar
     const updateMore = () => {
         const count = document.getElementById('blog-count')
         const more = document.getElementById('blog-more')
-
         if (!count || !more) return
-
         const shown = Math.min(visible, posts.length)
-
-        count.textContent = tr('blog.showing', 'Mostrando {shown} de {total}', { shown, total: posts.length })
-
+        count.textContent = tr('blog.showing', 'Mostrando {shown} de {total}', {
+            shown, total: posts.length
+        })
         count.hidden = posts.length <= maxList
-
         more.hidden = shown >= posts.length
     }
 
-    // Só acrescenta os próximos itens da mesma lista (sem nova requisição)
     const loadMore = () => {
         const list = document.getElementById('blog-list')
-
+        if (!list) return
         const from = Math.min(visible, posts.length)
-
         visible = Math.min(visible + maxList, posts.length)
-
-        list.insertAdjacentHTML(
-            'beforeend',
-            posts.slice(from, visible).map(itemHTML).join('')
-        )
-
+        list.insertAdjacentHTML('beforeend', posts.slice(from, visible).map(itemHTML).join(''))
         updateMore()
     }
 
-    // Rota: blog.html#post-03 (sem hash mostra o post mais recente)
     const drawBlog = async () => {
         const run = ++drawing
-
         const id = decodeURIComponent(location.hash.slice(1))
-
         const post = id ? posts.find(item => item.id === id) : posts[0]
-
         currentId = post ? post.id : null
 
-        // O post aberto sempre aparece na lista
         const index = post ? posts.indexOf(post) : -1
-
-        if (index >= visible) {
-            visible = Math.ceil((index + 1) / maxList) * maxList
-        }
+        if (index >= visible) visible = Math.ceil((index + 1) / maxList) * maxList
 
         let article = `<p class="ct my-5">${tr('blog.empty', 'Nada publicado ainda.')}</p>`
-
         if (posts.length && !post) {
             article = `<p class="ct my-5">${tr('blog.not_found', 'Post não encontrado.')}</p>`
         }
@@ -572,16 +566,29 @@ if (router === 'blog') {
                 )
             } catch (error) {
                 console.error('[BLOG]:', error)
-
                 article = `<p class="ct my-5">${tr('blog.load_error', 'Não foi possível carregar este post.')}</p>`
             }
         }
 
-        // Outra navegação começou enquanto este post carregava
         if (run !== drawing) return
+
+        let postHeader = ''
+        if (post) {
+            const date = formatDate(getPostTimestamp(post))
+            const readingTime = getReadingTime(post)
+            const metadata = [date, readingTime ? `${readingTime} min de leitura` : ''].filter(Boolean)
+
+            postHeader = `
+                <header class="mb-4">
+                    <h1>${esc(post.title)}</h1>
+                    ${post.summary ? `<p class="lead">${esc(post.summary)}</p>` : ''}
+                    ${metadata.length ? `<p class="small text-muted">${metadata.join(' · ')}</p>` : ''}
+                </header>`
+        }
 
         box.innerHTML = `
             <div class="container">
+                ${postHeader}
                 <article class="text-break">${article}</article>
                 <h4 class="mt-5">Mais postagens</h4>
                 <div id="blog-list" class="list-group">
@@ -597,43 +604,62 @@ if (router === 'blog') {
             </div>`
 
         document.getElementById('blog-more').addEventListener('click', loadMore)
-
         updateMore()
-
         window.scrollTo(0, 0)
     }
 
     window.addEventListener('hashchange', drawBlog)
-
     await drawBlog()
 }
 
 if (router === 'admin') {
 
+    const TOKEN_KEY = 'github-token'
+    const AUTH_KEY = 'github-authenticated'
+    const REPOSITORY_OWNER = 'subversivo58'
+    const REPOSITORY_NAME = 'subversivo58.github.io'
+    const REPOSITORY_BRANCH = 'main'
 
+    const clearGitHubAuth = () => {
+        LocalStorage.del(TOKEN_KEY)
+        LocalStorage.del(AUTH_KEY)
+        GitHubAPIInstance = null
+    }
 
-  
+    const authenticateGitHub = async token => {
+        const api = new GitHubAPI({ token })
+        const response = await api.GHInstance.getUser().getProfile()
+        GitHubAPIInstance = api
+        return response.data
+    }
 
-    // Verifica se já houve uma autenticação bem-sucedida
-    const isAuthenticated =
-        LocalStorage.get('github-authenticated') === 'true'
+    // Restaura e valida o token salvo no navegador.
+    const storedToken = LocalStorage.get(TOKEN_KEY)
+    if (storedToken) {
+        try {
+            await authenticateGitHub(storedToken)
+            LocalStorage.set(AUTH_KEY, 'true')
+        } catch (error) {
+            console.error('[ADMIN]: A autenticação armazenada não é válida.', error)
+            clearGitHubAuth()
+        }
+    }
 
-    // Se já foi autenticado, não exibe o modal
-    if (!isAuthenticated) {
-
+    if (!GitHubAPIInstance) {
         const modal = document.querySelector('#modal-github-auth')
         const input = document.querySelector('#github-auth-key')
         const button = document.querySelector('#github-auth-verify')
         const status = document.querySelector('#github-auth-status')
 
-        const githubAuthModal = new BootstrapNative.Modal(modal)
+        if (!modal || !input || !button || !status) {
+            throw new Error('[ADMIN]: Elementos do modal de autenticação não encontrados.')
+        }
 
+        const githubAuthModal = new BootstrapNative.Modal(modal)
         githubAuthModal.show()
 
         button.addEventListener('click', async () => {
-
             const apiKey = input.value.trim()
-
             if (!apiKey) {
                 status.textContent = 'Informe sua API Key.'
                 return
@@ -643,118 +669,81 @@ if (router === 'admin') {
             status.textContent = 'Verificando autenticação...'
 
             try {
-
-                const api = new GitHubAPI({
-                    token: apiKey
-                })
-
-                const response = await api.GHInstance
-                    .getUser()
-                    .getProfile()
-
-                // Mantém a instância disponível nesta execução
-                GitHubAPIInstance = api
-
-                // Registra localmente a autenticação bem-sucedida
-                LocalStorage.set('github-authenticated', 'true')
-
-                status.textContent =
-                    `Autenticado como ${response.data.login}.`
-
-                // Fecha o modal após a confirmação
+                const profile = await authenticateGitHub(apiKey)
+                LocalStorage.set(TOKEN_KEY, apiKey)
+                LocalStorage.set(AUTH_KEY, 'true')
+                status.textContent = `Autenticado como ${profile.login}.`
                 githubAuthModal.hide()
+            } catch (error) {
+                GitHubAPIInstance = null
+                status.textContent = 'Falha na autenticação. Verifique sua API Key.'
+                console.error('[ADMIN]:', error)
+            } finally {
+                button.disabled = false
+            }
+        })
+    }
+
+    SlideMenus()
+    AnchorScrool()
+
+    const editorContainer = document.getElementById('admin-post-editor-container')
+    const editorRoot = document.getElementById('admin-post-editor')
+    const openEditorButton = document.getElementById('admin-new-post')
+    const closeEditorButton = document.getElementById('admin-close-post-editor')
+
+    const markdownEditor = new MarkdownEditor({
+        root: editorRoot,
+        db: DBMethods,
+
+        onCreate: async post => {
+            try {
+                if (!GitHubAPIInstance) {
+                    throw new Error('Autenticação do GitHub indisponível.')
+                }
+
+                if (!post || !Array.isArray(post.files) || !post.files.length) {
+                    throw new Error('A postagem não contém arquivos para publicação.')
+                }
+
+                for (const file of post.files) {
+                    if (!file || typeof file.path !== 'string' ||
+                        !file.path.trim() || !('content' in file)) {
+                        throw new Error('A lista de arquivos contém um item inválido.')
+                    }
+                }
+
+                const api = GitHubAPIInstance
+                api.setRepo(REPOSITORY_OWNER, REPOSITORY_NAME)
+                await api.setBranch(REPOSITORY_BRANCH)
+
+                const response = await api.pushFiles(
+                    `Publicação: ${post.title || post.id}`,
+                    post.files
+                )
+
+                console.log('[ADMIN]: Publicação concluída.', response)
+                return { published: true, post, response }
 
             } catch (error) {
-
-                status.textContent =
-                    'Falha na autenticação. Verifique sua API Key.'
-
-                console.error(error)
-
-            } finally {
-
-                button.disabled = false
-
+                console.error('[ADMIN]: Falha ao publicar postagem.', error)
+                throw error
             }
-
-        })
-
-    }
-
-  
-
-            SlideMenus()
-
-            AnchorScrool()
-
-
-
-// ELEMENTOS DO EDITOR
-const editorContainer = document.getElementById(
-    'admin-post-editor-container'
-)
-
-const editorRoot = document.getElementById(
-    'admin-post-editor'
-)
-
-const openEditorButton = document.getElementById(
-    'admin-new-post'
-)
-
-const closeEditorButton = document.getElementById(
-    'admin-close-post-editor'
-)
-
-// INICIALIZA MARKDOWN EDITOR
-const markdownEditor = new MarkdownEditor({
-
-    root: editorRoot,
-
-    db: DBMethods,
-
-    
-
-    onCreate: async post => {
-
-        // Neste ponto a postagem está preparada.
-        // A publicação GitHub ainda depende da rotina
-        // de envio dos arquivos ao repositório.
-
-        console.log(
-            '[ADMIN]: Postagem preparada para publicação.',
-            post
-        )
-
-        return {
-            published: false,
-            post
         }
-
-    }
-
-})
-
-markdownEditor.mount()
-
-// ABRIR EDITOR
-openEditorButton.addEventListener('click', () => {
-    editorContainer.classList.remove('d-none')
-
-    editorContainer.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
     })
-})
 
-// FECHAR EDITOR
-closeEditorButton.addEventListener('click', () => {
-    editorContainer.classList.add('d-none')
-})
+    markdownEditor.mount()
 
+    openEditorButton.addEventListener('click', () => {
+        editorContainer.classList.remove('d-none')
+        editorContainer.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
 
-            }
+    closeEditorButton.addEventListener('click', () => {
+        editorContainer.classList.add('d-none')
+    })
 
+}
             break
 
         case 'control':
@@ -903,7 +892,7 @@ closeEditorButton.addEventListener('click', () => {
                 }
                 //
                 if ( GeneralPolicyBox && !DataStoragePolicyBox && TermsPolicyBox && PrivacyPolicyBox ) {
-                    // @revise - get policies url from configuration file
+                    // @revise - get terms definition from `json` language interface library
                     // @priority: HIGH
                     const { renderMarkdownURL, ParseFlags } = await loadMarkdown()
 
@@ -1012,6 +1001,8 @@ closeEditorButton.addEventListener('click', () => {
                     // check cookies
                     ;[...dc.querySelectorAll('[data-charge-type]')].forEach(btn => {
                         let finish;
+
+                
                         PressHoldCollorCharger(btn, init => {
                             btn.classList.add(btn.dataset.chargeType)
                         }, end => {
@@ -1514,4 +1505,5 @@ const DebugPermissions = async () => {
 
     return report;
 })();
-*/ 
+*/
+      

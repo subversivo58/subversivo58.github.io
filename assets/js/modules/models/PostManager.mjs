@@ -61,6 +61,21 @@ export default class PostManager {
     }
 
     /**
+     * Normaliza o tempo estimado de leitura.
+     */
+    normalizeReadingTime(value) {
+
+        const readingTime = Number(value)
+
+        if (!Number.isFinite(readingTime)) {
+            return 1
+        }
+
+        return Math.max(1, Math.round(readingTime))
+
+    }
+
+    /**
      * Organiza as imagens conforme sua ordem no Markdown.
      */
     orderImages(markdown, images = []) {
@@ -147,7 +162,12 @@ export default class PostManager {
      */
     async createPost(data = {}) {
 
+        // Data original de criação da postagem.
         const timestamp = Date.now()
+
+        // Na criação, a última modificação é igual à criação.
+        const lastModified = timestamp
+
         const id = this.generateID(timestamp)
 
         const markdown = this.buildMarkdown(data)
@@ -168,14 +188,23 @@ export default class PostManager {
 
         const tags = this.normalizeTags(data.tags ?? [])
 
+        const summary = String(data.summary ?? '').trim()
+
+        const readingTime = this.normalizeReadingTime(
+            data.readingTime
+        )
+
         const postMetadata = {
             id,
             title: data.title?.trim() ?? '',
+            summary,
             path: `assets/posts/${id}.md`,
             cover,
             images,
             tags,
-            timestamp
+            timestamp,
+            lastModified,
+            readingTime
         }
 
         // Lê e atualiza o settings.json em memória.

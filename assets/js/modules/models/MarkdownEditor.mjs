@@ -42,6 +42,10 @@ class MarkdownEditor {
         this.hasChanges = false
         this.currentDraftKey = null
 
+        this.summaryManual = false
+        this.autoSummary = ''
+        this.readingTime = 1
+
         this._queue = Promise.resolve()
         this._pendingInserts = 0
 
@@ -136,6 +140,34 @@ class MarkdownEditor {
                         placeholder="Título da postagem"
                         autocomplete="off"
                     >
+                </div>
+
+                <div class="form-group">
+                    <label for="post-summary">Resumo</label>
+
+                    <div class="input-group">
+                        <textarea
+                            id="post-summary"
+                            class="form-control rounded-0"
+                            rows="2"
+                            placeholder="Resumo da postagem"
+                        ></textarea>
+
+                        <div class="input-group-append">
+                            <button
+                                type="button"
+                                id="post-summary-restore"
+                                class="btn btn-outline-secondary rounded-0 cp"
+                                title="Restaurar resumo automático">
+                                Restaurar automático
+                            </button>
+                        </div>
+                    </div>
+
+                    <small class="form-text text-muted">
+                        O resumo é preenchido automaticamente. Você pode
+                        modificá-lo livremente.
+                    </small>
                 </div>
 
                 <div class="form-group">
@@ -354,6 +386,8 @@ class MarkdownEditor {
             editor: this.root.querySelector('.markdown-editor'),
             status: this.root.querySelector('#post-editor-status'),
             title: this.root.querySelector('#post-title'),
+            summary: this.root.querySelector('#post-summary'),
+            summaryRestore: this.root.querySelector('#post-summary-restore'),
             content: this.root.querySelector('#post-content'),
             tags: this.root.querySelector('#post-tags'),
             toolbar: this.root.querySelector('#post-editor-toolbar'),
@@ -384,9 +418,12 @@ class MarkdownEditor {
 
         return true
     }
-      bindEvents() {
+
+    bindEvents() {
         const {
             title,
+            summary,
+            summaryRestore,
             content,
             tags,
             toolbar,
@@ -401,6 +438,17 @@ class MarkdownEditor {
         } = this.elements
 
         title.addEventListener('input', () => this.markAsChanged())
+
+        summary.addEventListener('input', () => {
+            this.summaryManual = true
+            this.markAsChanged()
+        })
+
+        summaryRestore.addEventListener('click', () => {
+            this.summaryManual = false
+            summary.value = this.autoSummary
+            this.markAsChanged()
+        })
 
         content.addEventListener('input', () => {
             this.markAsChanged()
@@ -887,8 +935,7 @@ class MarkdownEditor {
 
         this.elements.content.focus()
     }
-
-    markAsChanged() {
+      markAsChanged() {
         this.hasChanges = true
         this.setStatus('Alterações pendentes.')
     }
@@ -908,15 +955,19 @@ class MarkdownEditor {
     getEditorData() {
         return {
             title: this.elements.title.value.trim(),
+            summary: this.elements.summary.value.trim(),
             content: this.elements.content.value,
 
             tags: this.elements.tags.value
                 .split(',')
                 .map(tag => tag.trim())
-                .filter(Boolean)
+                .filter(Boolean),
+
+            readingTime: this.readingTime
         }
     }
-      async insertImages(files) {
+
+    async insertImages(files) {
         const list = Array.from(files || []).filter(
             file => file.type && file.type.startsWith('image/')
         )
@@ -1138,7 +1189,59 @@ class MarkdownEditor {
 
         this.elements.preview.innerHTML = html
 
+        this.updateDerivedMetadata()
+
         if (missing.size) this.loadMedia([...missing])
+    }
+
+    buildAutomaticSummary() {
+        const preview = this.elements.preview
+
+        if (!preview) return ''
+
+        const text = (preview.textContent || '')
+            .replace(/\s+/g, ' ')
+            .trim()
+
+        if (!text) return ''
+
+        const limit = 160
+
+        if (text.length <= limit) return text
+
+        const excerpt = text.slice(0, limit + 1)
+        const lastSpace = excerpt.lastIndexOf(' ')
+
+        return (
+            lastSpace > 0
+                ? excerpt.slice(0, lastSpace)
+                : excerpt.slice(0, limit)
+        ).trim()
+    }
+
+    updateDerivedMetadata() {
+        const preview = this.elements.preview
+
+        if (!preview) return
+
+        const text = (preview.textContent || '')
+            .replace(/\s+/g, ' ')
+            .trim()
+
+        const words = text
+            ? text.split(/\s+/).length
+            : 0
+
+        this.readingTime = Math.max(
+            1,
+            Math.ceil(words / 200)
+        )
+
+        this.autoSummary = this.buildAutomaticSummary()
+
+        if (!this.summaryManual) {
+            this.elements.summary.value = this.autoSummary
+        }
     }
 
     getDraftKey(title) {
@@ -1154,6 +1257,8 @@ class MarkdownEditor {
 
         return {
             title: data.title,
+            summary: data.summary,
+            summaryManual: this.summaryManual,
             content: data.content,
             tags: data.tags,
             updatedAt: new Date().toISOString()
@@ -1213,7 +1318,8 @@ class MarkdownEditor {
         const empty =
             !draft.title &&
             !draft.content.trim() &&
-            !draft.tags.length
+            !draft.tags.length &&
+            !draft.summary
 
         try {
             await this._enqueue(() => empty
@@ -1285,6 +1391,8 @@ class MarkdownEditor {
                     tbv: {
                         kind: 'draft',
                         title: data.title,
+                        summary: data.summary,
+                        summaryManual: this.summaryManual,
                         content: data.content,
                         tags: data.tags,
                         createdAt: (previous && previous.createdAt) || now,
@@ -1336,7 +1444,8 @@ class MarkdownEditor {
             const hasContent =
                 draft.title ||
                 draft.content ||
-                (draft.tags && draft.tags.length)
+                (draft.tags && draft.tags.length) ||
+                draft.summary
 
             if (!hasContent) return false
 
@@ -1436,8 +1545,7 @@ class MarkdownEditor {
             return false
         }
     }
-
-    async cleanupImages() {
+      async cleanupImages() {
         if (!this.db || this._pendingInserts > 0) return 0
 
         try {
@@ -1510,6 +1618,9 @@ class MarkdownEditor {
     restoreDraftData(draft) {
         this.elements.title.value = draft.title || ''
         this.elements.content.value = draft.content || ''
+        this.elements.summary.value = draft.summary || ''
+
+        this.summaryManual = draft.summaryManual === true
 
         this.elements.tags.value = Array.isArray(draft.tags)
             ? draft.tags.join(', ')
@@ -1518,11 +1629,88 @@ class MarkdownEditor {
         this.updatePreview()
     }
 
+    async prepareImages(markdown) {
+        const hashes = [
+            ...new Set(
+                [...String(markdown).matchAll(MEDIA_REF)]
+                    .map(match => match[1])
+            )
+        ]
+
+        if (!hashes.length) {
+            return {
+                markdown,
+                images: []
+            }
+        }
+
+        if (!this.db) {
+            throw new Error(
+                'Banco de dados indisponível para recuperar as imagens.'
+            )
+        }
+
+        const images = []
+        let preparedMarkdown = String(markdown)
+
+        const extensions = {
+            'image/jpeg': 'jpg',
+            'image/png': 'png',
+            'image/gif': 'gif',
+            'image/webp': 'webp',
+            'image/svg+xml': 'svg',
+            'image/avif': 'avif',
+            'image/bmp': 'bmp'
+        }
+
+        for (const hash of hashes) {
+            const record = await this.db.read({
+                tbn: DRAFTS_STORE,
+                tbk: IMAGE_PREFIX + hash
+            })
+
+            if (!record || !record.blob) {
+                throw new Error(
+                    `A imagem ${hash} não foi encontrada no armazenamento local.`
+                )
+            }
+
+            const type = record.type || record.blob.type || ''
+            const extension = extensions[type] || 'bin'
+            const path = `${hash}.${extension}`
+
+            images.push({
+                path,
+                file: record.blob
+            })
+
+            const reference = new RegExp(
+                '\\]\\(media:' + hash + '\\)',
+                'g'
+            )
+
+            preparedMarkdown = preparedMarkdown.replace(
+                reference,
+                `](${path})`
+            )
+        }
+
+        return {
+            markdown: preparedMarkdown,
+            images
+        }
+    }
+
     resetEditor() {
         this.elements.title.value = ''
+        this.elements.summary.value = ''
         this.elements.content.value = ''
         this.elements.tags.value = ''
         this.elements.imageInput.value = ''
+
+        this.summaryManual = false
+        this.autoSummary = ''
+        this.readingTime = 1
 
         this.currentDraftKey = null
         this.hasChanges = false
@@ -1587,26 +1775,50 @@ class MarkdownEditor {
         this.setStatus('Preparando postagem...')
 
         try {
-            const result = await this.postManager.buildMarkdown({
+            if (this.markdownReady) {
+                await this.markdownReady
+            }
+
+            await this.updatePreview()
+
+            const prepared = await this.prepareImages(data.content)
+
+            const post = await this.postManager.createPost({
                 title: data.title,
-                content: data.content,
+                summary: data.summary,
+                readingTime: data.readingTime,
+                content: prepared.markdown,
+                images: prepared.images,
                 tags: data.tags
             })
 
-            await this.onCreate(result)
+            const publication = await this.onCreate(post)
 
-            await this.confirmPublication()
+            if (publication && publication.published === true) {
+                await this.confirmPublication()
 
-            this.setStatus('Postagem preparada para publicação.')
+                this.setStatus('Postagem publicada com sucesso.')
 
-            return result
+                return post
+            }
+
+            this.setStatus(
+                'Postagem preparada. O conteúdo foi preservado no editor.'
+            )
+
+            return {
+                published: false,
+                post
+            }
         } catch (error) {
             console.error(
                 '[MarkdownEditor]: Erro ao gerar postagem:',
                 error
             )
 
-            this.setStatus('Erro ao preparar postagem. O conteúdo foi preservado.')
+            this.setStatus(
+                'Erro ao preparar postagem. O conteúdo foi preservado.'
+            )
 
             return false
         }
