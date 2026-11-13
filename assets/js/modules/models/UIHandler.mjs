@@ -236,6 +236,7 @@ const MicrophoneRequest = (permissions = null) => {
 
 const DrawerEvents = (permissions = null, notify = null) => {
     NotificationRequest(permissions, notify)
+    MicrophoneRequest(permissions)
     let drawer = [];
     // get dinamic
     _.DOM.waitEl(dc, 'picture[id^="drawer-"]', list => {
