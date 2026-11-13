@@ -9,7 +9,7 @@
 
 import PostManager from './PostManager.mjs'
 import AdminPosts from './AdminPosts.mjs'
-
+import ImageProcessor from '../lib/ImageProcessor.mjs'
 const DRAFTS_STORE = 'drafts'
 const AUTOSAVE_KEY = 'autosave'
 const DRAFT_PREFIX = 'draft:'
@@ -32,6 +32,7 @@ class MarkdownEditor {
         this.options = options
         this.root = options.root || null
         this.postManager = options.postManager || new PostManager()
+        this.imageProcessor = options.imageProcessor || new ImageProcessor({ auto: true })
         this.onCreate = options.onCreate || (() => {})
         this.onStatus = options.onStatus || (() => {})
 
@@ -979,6 +980,8 @@ this.adminPosts.mount().catch(error => {
         }
     }
 
+
+
     async insertImages(files) {
         const list = Array.from(files || []).filter(
             file => file.type && file.type.startsWith('image/')
@@ -995,8 +998,33 @@ this.adminPosts.mount().catch(error => {
 
         try {
             const markdown = []
+            const originalSize = list.reduce(
+                (total, file) => total + file.size,
+                0
+            )
 
-            for (const file of list) {
+            let processedSize = 0
+
+            for (const selectedFile of list) {
+                let file = selectedFile
+
+                try {
+                    file = await this.imageProcessor.process(selectedFile)
+                } catch (error) {
+                    console.warn(
+                        '[MarkdownEditor]: Falha no processamento da imagem; usando o original.',
+                        error
+                    )
+
+                    file = selectedFile
+                }
+
+                if (!(file instanceof Blob)) {
+                    file = selectedFile
+                }
+
+                processedSize += file.size
+
                 const hash = await this.hashFile(file)
 
                 await this._enqueue(async () => {
@@ -1014,8 +1042,8 @@ this.adminPosts.mount().catch(error => {
                         tbk: key,
                         tbv: {
                             kind: 'image',
-                            name: file.name,
-                            type: file.type,
+                            name: file.name || selectedFile.name,
+                            type: file.type || selectedFile.type,
                             size: file.size,
                             blob: file,
                             createdAt: new Date().toISOString()
@@ -1024,10 +1052,13 @@ this.adminPosts.mount().catch(error => {
                 })
 
                 if (!this.mediaURLs.has(hash)) {
-                    this.mediaURLs.set(hash, URL.createObjectURL(file))
+                    this.mediaURLs.set(
+                        hash,
+                        URL.createObjectURL(file)
+                    )
                 }
 
-                const alt = file.name
+                const alt = selectedFile.name
                     .replace(/\.[^.]+$/, '')
                     .replace(/[\[\]()<>]/g, ' ')
                     .trim() || 'imagem'
@@ -1042,6 +1073,22 @@ this.adminPosts.mount().catch(error => {
                 textarea.selectionEnd,
                 '\n' + markdown.join('\n') + '\n'
             )
+
+            if (processedSize < originalSize) {
+                const formatSize = size => size >= 1048576
+                    ? (size / 1048576).toFixed(2) + ' MB'
+                    : (size / 1024).toFixed(1) + ' KB'
+
+                this.setStatus(
+                    'Imagens otimizadas: ' +
+                    formatSize(originalSize) +
+                    ' → ' +
+                    formatSize(processedSize) +
+                    '.'
+                )
+            } else {
+                this.setStatus('Imagens adicionadas. Não houve redução de tamanho.')
+            }
         } catch (error) {
             console.error(
                 '[MarkdownEditor]: Erro ao guardar imagem:',
@@ -1053,6 +1100,8 @@ this.adminPosts.mount().catch(error => {
             this._pendingInserts--
         }
     }
+
+            
 
     async hashFile(file) {
         const buffer = await file.arrayBuffer()

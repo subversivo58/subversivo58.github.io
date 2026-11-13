@@ -1078,7 +1078,7 @@ hidden,
 /* DONATION ---------------------------------------------*/
 .donations-page {
   background-image: url('../media/image/clark-tibbs-oqStl2L5oxI-unsplash.webp');
-  background-size: 100% 90vw!important;
+  background-size: 100% 80vw!important;
 
   background-repeat: no-repeat;
 
@@ -1097,9 +1097,7 @@ hidden,
   bottom: 10px;
 }
 
-.donations-page > .unplash-credits-position {
-  position: absolute;
-}
+
 
 /* POLICY -----------------------------------------------*/
 .whithepaper-page {
@@ -1439,7 +1437,7 @@ footer #footbody > div > .widget-column a:hover {
     padding: .5rem 1rem;
   }
   .policy-page,.donations-page {
-    background-size: 100% 60vw!important;
+    background-size: 100% 80vw!important;
   }
 
 #modal-feedback-content {
