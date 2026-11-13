@@ -1302,7 +1302,10 @@ if (router === 'admin') {
         const element = dc.getElementById(id)
         if (!element) return
 
-        element.textContent = enabled ? '🟢' : '🔴'
+        const indicator = element.querySelector('.preference-indicator')
+        if (!indicator) return
+
+        indicator.textContent = enabled ? '🟢' : '🔴'
     }
 
     // Aplica os estados recuperados ao painel.
@@ -1316,9 +1319,8 @@ if (router === 'admin') {
     // Alterna e salva a preferência acionada.
     dc.addEventListener('click', evt => {
 
-      
         const element = evt.target.closest(
-            '#settings-slide [id^="sets-"]'
+            '#settings-slide .preference-switch'
         )
 
       
