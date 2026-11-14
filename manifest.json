@@ -1,7 +1,7 @@
 {
   "name": "Subversivo58 | Blog",
   "short_name": "Subversivo58",
-  "description" : "Welcome to Subversivo58 Personal Blog Page",
+  "description": "Welcome to Subversivo58 Personal Blog Page",
   "author": {
     "name": "Subversivo58",
     "url": "https://subversivo58.github.io"
@@ -16,9 +16,9 @@
     "enctype": "multipart/form-data",
     "params": {
       "files": [
-          {
-            "name": "file"
-          }
+        {
+          "name": "file"
+        }
       ],
       "title": "title",
       "text": "text",
@@ -26,11 +26,16 @@
     }
   },
   "lang": "en-US",
-  "dir" : "ltr",
+  "dir": "ltr",
   "icons": [
     {
       "src": "favicon-icon-192x192.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-icon-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]

@@ -1,5 +1,8 @@
+
 User-agent: *
 Disallow: /config/
-Disallow: /assets/
+Disallow: /assets/lang/
+Disallow: /assets/tpl/
+Disallow: /assets/vendor/
 
 Sitemap: https://subversivo58.github.io/sitemap.xml
