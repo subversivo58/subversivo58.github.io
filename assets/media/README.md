@@ -1,6 +1,21 @@
 ## Directory of general media assets (image, audio and video)
 
-Some features may lack source information and licensing ... will be avoided as much as possible using them at the development stage and will certainly be removed in the first stable release.
+This directory holds the static media resources (images, audio and video) consumed by the site interface and its features, organized by media type in subdirectories.
+
+**structure**:
+
+
+```none
+|-- /audio (audio assets)
+|
+|-- /image (image assets)
+|     |-- /footoodles (footer banners, inspired by Google Doodles; planned feature, not implemented yet)
+|     |-- /icons (software or third-party icons)
+|     |-- /logos (software or third-party logos)
+|     |-- /svg (SVG images)
+|
+|-- /video (video assets)
+```
 
 
 ## License

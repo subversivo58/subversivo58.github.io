@@ -1,26 +1,20 @@
 ## Directory of general assets (images)
 
-Some images lack reference source and may be (probably are) in disagreement to their licensing or rules of use (applicable to them). These general purpose images are used only at the development stage and can be removed if there is a complaint contact and will certainly be removed for publication of a stable version of this software.
+This directory holds the static image resources (banners, illustrations, icons, logos and SVG graphics) used by the site interface, with specific groups organized in subdirectories.
 
 
 **directory structure**:
 
 
 ```none
+|-- /footoodles (footer banners, inspired by Google Doodles; planned feature, not implemented yet)
+|
 |-- /icons (software or third-party icons)
 |
 |-- /logos (software or third-party logos)
-
+|
+|-- /svg (SVG images)
 ```
-
-
-**list of vendors**
-
-source | url   | license
-------------|:-----------:|:---------------:
-
-
-> These sources may contain sub-resources from other sources that may contain (or not) their own licensing and distribution terms
 
 
 ## License

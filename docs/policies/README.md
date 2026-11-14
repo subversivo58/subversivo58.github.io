@@ -1,8 +1,8 @@
 ## Directory of Policy files (Markdown files)
 
-This directory contains latest files of last policy.
+This directory contains the latest versions of the policy files.
 
-This folder has been structured at:
+This folder is structured as follows:
 
 ```none
 |-- README.md
@@ -11,19 +11,28 @@ This folder has been structured at:
 |-- terms.md
 |-- storage.md
 |-- privacy.md
+|-- raw-contract.md
 |
 |-- /archive
 |
-|-- /transcript
-        |-- /en-US
+|-- /transcripts
 ```
 
-The **archive** folder is dedicated for all olders versions of this policies.
+The **archive** folder is dedicated to all older versions of these policies.
 
-The olders versions has been archived by date of creation. Eg: `policy-05.10.2020.md` follow as date format **MM/DD/YY**
-
-
-The transcripts subfolder contains all officially supported transcripts. All transcripts represent only the status of the latest version of these licenses.
+The older versions are archived by date of creation. E.g.: `policy-05.10.2020.md` follows the date format **DD.MM.YYYY** (October 5, 2020).
 
 
-> Note: although the standard documentation and interface follow the nomenclature and terms of the English language, for all legal and judicial matters the use contract is governed by the Portuguese language documentation
+The **transcripts** subfolder contains all officially supported transcripts. All transcripts represent only the status of the latest version of these policies.
+
+
+> Note: although the standard documentation and interface follow the nomenclature and terms of the English language, for all legal and judicial matters the usage contract is governed by the Portuguese language documentation.
+
+
+## License
+
+This source code is licensed under [MIT License](https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE)
+
+Copyright (c) 2017 Lauro Moraes [[AKA Subversivo58]](https://github.com/subversivo58)
+
+If you believe that the other sources (of third parties) may contain a conflict with this license please contact us in this email: [subversivo58@gmail.com](mailto:subversivo58@gmail.com?subject=LICENSE)

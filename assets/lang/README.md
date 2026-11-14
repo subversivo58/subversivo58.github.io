@@ -1,20 +1,24 @@
-## Directory o Languages (JSON files)
+## Directory of Languages (JSON files)
 
 This directory contains files in the `JSON` format that serve as a base (dictionary) to internationalize the interface of this software.
 
-If you are using the software and do not have a file in your language, please consider submitting your transcript.
+If you are using the software and do not have a file in your language, please consider submitting your translation.
 
 **list of current languages**:
 
-* **en-US.json**: English (US) - default language of interface
-* **pt-BR.json**: Portuguese (BR) - Brazilian tipical vocabulary (see notes)
+* **en-US.json**: English (US) - default interface language
+* **de-DE.json**: German (Germany)
+* **es-ES.json**: Spanish (Spain)
+* **fr-FR.json**: French (France)
+* **ja-JP.json**: Japanese (Japan)
+* **pt-BR.json**: Portuguese (BR) - Brazilian typical vocabulary (see notes)
 
 
 ## Notes
 
-1. Portuguese Language is regimented by the treaty **"[Community of Portuguese Language Countries](https://en.wikipedia.org/wiki/Community_of_Portuguese_Language_Countries)"** but, outside the treaty of unification of the language, the use and pronouncements are really different. If you are interested in knowing the unification agreement of this language, consult the official website [www.cplp.org/](https://www.cplp.org/)
+1. The Portuguese language is governed by the treaty **"[Community of Portuguese Language Countries](https://en.wikipedia.org/wiki/Community_of_Portuguese_Language_Countries)"** but, outside the language unification treaty, usage and pronunciation are really different. If you are interested in the unification agreement of this language, consult the official website [www.cplp.org/](https://www.cplp.org/)
 
-Other languages used as a common language in several countries may present a distinction such as those presented in the item above, supporting one or other "typical" languages is a matter of subjective think ... the one with a higher (more spoken) scope is prioritized.
+Other languages shared by several countries may present distinctions like those described in the item above. Supporting one or another "typical" variant is a matter of subjective judgment ... the one with the broader scope (most spoken) is prioritized.
 
 
 ## License

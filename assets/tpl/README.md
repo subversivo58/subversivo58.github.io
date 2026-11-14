@@ -1,7 +1,7 @@
 ## Directory of HTML fragments (templates)
 
 
-This directory contains fragments used in dynamic mount rendering function on page initialized (load) process
+This directory contains fragments used by the dynamic rendering (mount) function during the page initialization (load) process.
 
 
 ## License

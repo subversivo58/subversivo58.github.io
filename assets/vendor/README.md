@@ -1,17 +1,26 @@
 ## Directory of Vendors
 
-This directory contains third-party libraries and (or) custom extensions.
+This directory contains third-party libraries and/or custom extensions.
 
 It will be maintained for local testing and development in the main branch until a stable version is released.
+
+
+**directory structure**:
+
+
+```none
+|-- /bootstrapv4 (Bootstrap v4.3.1 stylesheet)
+```
 
 
 **list of vendors**
 
 source | url   | license
 ------------|:-----------:|:---------------:
+Bootstrap v4.3.1 | https://getbootstrap.com/ | MIT
 
 
-> These sources may contain sub-resources from other sources that may contain (or not) their own licensing and distribution terms
+> These sources may contain sub-resources from other sources that may or may not have their own licensing and distribution terms
 
 ## License
 

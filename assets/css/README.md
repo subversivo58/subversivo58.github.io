@@ -4,7 +4,7 @@
 
 **styles:**
 
-* **main.css**: all site styles (default rules, utilities, syntax highlight and layout adjustments)
+* **main.css**: all site styles (default rules, utilities, syntax highlighting and layout adjustments)
 
 
 
