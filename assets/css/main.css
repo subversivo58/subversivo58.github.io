@@ -7,9 +7,7 @@
 
 /* ==== CORE (antigo core.css) ==== */
 /**____________________________________________________________________________
-   DEFAULT RULES ____________________________________________________________*/
-*,
-*:before,
+   DEFAULT RULES ____________________________________________________________descriptionore,
 *:after {
   margin: 0;
   padding: 0;
@@ -1072,24 +1070,27 @@ hidden,
 
 /* ==== MAIN (antigo main.css) ==== */
 
-/**____________________________________________________________________________
-   @REVISE PAGES ____________________________________________________________*/
+
+/* SHARED PAGE BANNER ------------------------------------*/
+.page-banner {
+  min-height: clamp(420px, 55vw, 680px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background-size: cover!important;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
 
 /* DONATION ---------------------------------------------*/
 .donations-page {
   background-image: url('../media/image/clark-tibbs-oqStl2L5oxI-unsplash.webp');
-  background-size: 100% 80vw!important;
-
-  background-repeat: no-repeat;
-
 }
-/* POLICY -----------------------------------------------*/
+
+/* ABOUT / POLICY ---------------------------------------*/
 .policy-page {
   background-image: url('../media/image/glenn-carstens-peters-npxXWgQ33ZQ-unsplash.webp');
-  background-size: 100% 80vw!important;
-
-  background-repeat: no-repeat;
-
 }
 
 .unplash-credits-position {
@@ -1097,6 +1098,9 @@ hidden,
   bottom: 10px;
 }
 
+.fontClamp {
+   font-size: clamp(1.25rem, 4vw, 2rem);
+}
 
 
 /* POLICY -----------------------------------------------*/
@@ -1435,9 +1439,6 @@ footer #footbody > div > .widget-column a:hover {
   #navbar-fixed {
 
     padding: .5rem 1rem;
-  }
-  .policy-page,.donations-page {
-    background-size: 100% 80vw!important;
   }
 
 #modal-feedback-content {
