@@ -76,15 +76,6 @@
                 "readingTime": 3
             },
             {
-                "id": "post-04",
-                "title": "Blocos de cÃdigo",
-                "date": 1793232000,
-                "tags": [
-                    "teste",
-                    "cÃdigo"
-                ]
-            },
-            {
                 "id": "post-06",
                 "title": "Texto longo",
                 "date": 1793404800,
@@ -265,5 +256,5 @@
         "url": ""
     },
     "cookies_warning": true,
-    "last_modified": 1794566283531
+    "last_modified": 1794629376631
 }
