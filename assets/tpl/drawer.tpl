@@ -101,7 +101,7 @@
                 <div id="drawer-admin" class="p-2 col-4 ct cp d-none">
                     <a href="/admin.html" class="tdu-none">
                         <span class="d-block p-1">🛡️</span>
-                        <span class="d-block tc">Administração</span>
+                        <span class="d-block tc i18n" data-i18n-html="drawer.words.admin"></span>
                     </a>
                 </div>
 

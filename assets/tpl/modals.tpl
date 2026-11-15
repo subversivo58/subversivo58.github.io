@@ -17,13 +17,13 @@
                 <div class="modal-body">
 
 
-                
+
                     <div class="row">
                         <span data-i18n-html="modals.language.avaliable" class="i18n col"></span>
                     </div>
 
-                    
-                    
+
+
 <div class="row px-3">
     <div id="pt-BR" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
         <div data-i18n-html="modals.language.pt_BR" class="i18n-append">🇧🇷</div>
@@ -47,7 +47,7 @@
 
 
 
-                    
+
                     <section id="language-selector-footer" class="mt-4 row">
                         <small data-i18n-html="modals.language.footer" class="i18n col"></small>
                     </section>
@@ -122,10 +122,10 @@
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active i18n" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" data-i18n-html="modals.tabs.camera">Requisitar câmera</a>
+                        <a class="nav-link active i18n" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" data-i18n-html="modals.tabs.camera"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link i18n" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false" data-i18n-html="modals.tabs.permissions">Permissões</a>
+                        <a class="nav-link i18n" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false" data-i18n-html="modals.tabs.permissions"></a>
                     </li>
                     <li class="nav-item col">
                         <button type="button" class="close mt-2 fr cp" data-dismiss="modal">
@@ -255,7 +255,7 @@
         <div class="modal-dialog">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h5 class="mb-0 i18n" data-i18n-html="modals.share.title">Compartilhar este blogue</h5>
+                    <h5 class="mb-0 i18n" data-i18n-html="modals.share.title"></h5>
                     <button type="button" class="close cp" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -265,7 +265,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="col px-0">
-                        <small data-toggle="modal" data-target="#modal-bugs-report" data-dismiss="modal" class="tdu sky cp i18n" data-i18n-html="modals.share.broken_link">Reportar um link quebrado?</small>
+                        <small data-toggle="modal" data-target="#modal-bugs-report" data-dismiss="modal" class="tdu sky cp i18n" data-i18n-html="modals.share.broken_link"></small>
                     </div>
                 </div>
             </div>
@@ -278,7 +278,7 @@
         <div class="modal-dialog">
             <div class="modal-content rounded-0">
                 <div class="modal-header rounded-0 border-0">
-                    <h5 class="modal-title i18n" data-i18n-html="modals.notes.title">Notas rápidas</h5>
+                    <h5 class="modal-title i18n" data-i18n-html="modals.notes.title"></h5>
                     <button type="button" class="close cp" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -292,11 +292,11 @@
                                     <div class="col px-0">
                                         <div class="form-group">
                                             <label class="d-block">
-                                                <strong class="i18n" data-i18n-html="modals.notes.note_title">Título:</strong>
+                                                <strong class="i18n" data-i18n-html="modals.notes.note_title"></strong>
                                             </label>
                                             <div class="input-group input-group-sm">
                                                 <span class="input-group-addon fa fa-edit rounded-0"></span>
-                                                <input type="text" placeholder="Titulo" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_title">
+                                                <input type="text" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_title">
                                             </div>
                                         </div>
 
@@ -304,22 +304,22 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label class="d-block">
-                                                        <strong class="i18n" data-i18n-html="modals.notes.category">Categoria:</strong>
+                                                        <strong class="i18n" data-i18n-html="modals.notes.category"></strong>
                                                     </label>
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon fa fa-thumb-tack rounded-0"></span>
-                                                        <input type="text" placeholder="Categoria" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_category">
+                                                        <input type="text" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_category">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label class="d-block">
-                                                        <strong class="i18n" data-i18n-html="modals.notes.tags">Tags:</strong>
+                                                        <strong class="i18n" data-i18n-html="modals.notes.tags"></strong>
                                                     </label>
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon fa fa-tags rounded-0"></span>
-                                                        <input type="text" placeholder="Tags" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_tags">
+                                                        <input type="text" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_tags">
                                                     </div>
                                                 </div>
                                             </div>
@@ -328,15 +328,15 @@
                                 </div>
                                 <div class="form-group mt-2 mb-0">
                                     <label>
-                                        <strong class="col px-0 i18n" data-i18n-html="modals.notes.note">Nota:</strong>
+                                        <strong class="col px-0 i18n" data-i18n-html="modals.notes.note"></strong>
                                     </label>
-                                    <textarea type="textarea" id="notes-textarea" placeholder="Your note here..." class="form-control resize-none rounded-0 i18n" rows="5" maxlength="400" required data-i18n-place="modals.notes.ph_note"></textarea>
+                                    <textarea type="textarea" id="notes-textarea" class="form-control resize-none rounded-0 i18n" rows="5" maxlength="400" required data-i18n-place="modals.notes.ph_note"></textarea>
                                 </div>
                                 <div class="form-group mt-2 mt-md-0">
                                     <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 fa fa-microphone cp"></button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 fa fa-camera cp"></button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 fa fa-video-camera cp"></button>
-                                    <button type="submit" class="btn btn-sm btn-info rounded-0 float-right cp i18n" data-i18n-html="modals.notes.save">Salvar</button>
+                                    <button type="submit" class="btn btn-sm btn-info rounded-0 float-right cp i18n" data-i18n-html="modals.notes.save"></button>
                                 </div>
                             </form>
                         </div>
@@ -355,22 +355,22 @@
             <div class="modal-content rounded-0">
                 <div id="modal-offline-content" class="modal-body px-0 py-2" style="height: 280px;">
                     <div class="col-12 p-2">
-                        <h5 class="mb-0 white d-inline-block i18n" data-i18n-html="modals.offline.title">Salvar para uso offline</h5>
+                        <h5 class="mb-0 white d-inline-block i18n" data-i18n-html="modals.offline.title"></h5>
                         <button type="button" class="close cp" data-dismiss="modal">
                             <span class="white" aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="col-12 px-0 pa" style="bottom:0px;">
                         <div class="col-10 col-md-6 mx-auto p-2">
-                            <button type="button" class="btn btn-success rounded-0 i18n" data-i18n-html="modals.offline.yes">Sim, salvar!</button>
-                            <button type="button" class="btn btn-danger rounded-0 float-right i18n" data-dismiss="modal" data-i18n-html="modals.offline.no">Não, cancelar</button>
+                            <button type="button" class="btn btn-success rounded-0 i18n" data-i18n-html="modals.offline.yes"></button>
+                            <button type="button" class="btn btn-danger rounded-0 float-right i18n" data-dismiss="modal" data-i18n-html="modals.offline.no"></button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="col px-0">
                         <a href="{{adjust_dirs=./docs}}" target="_blank" class="tdu sky cp">
-                            <small class="i18n" data-i18n-html="modals.offline.about">Sobre os recursos offline?</small>
+                            <small class="i18n" data-i18n-html="modals.offline.about"></small>
                         </a>
                     </div>
                 </div>
@@ -384,7 +384,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h5 class="mb-0 i18n" data-i18n-html="modals.auth.title">Entrar e autorizar</h5>
+                    <h5 class="mb-0 i18n" data-i18n-html="modals.auth.title"></h5>
                     <button type="button" class="close cp" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -417,7 +417,7 @@
                                 </a>
                             </div>
                             <div class="col-12 mt-2">
-                                <small class="col i18n" data-i18n-html="modals.auth.source">Código-fonte: <a href="https://github.com/subversivo58/subversivo58.github.io" target="about:blank" rel="noopener" class="tdu ext-link-icon">ver no GitHub</a></small>
+                                <small class="col i18n" data-i18n-html="modals.auth.source"></small>
                             </div>
                         </div>
 
@@ -432,7 +432,7 @@
         <div class="modal-dialog">
             <div id="modal-feedback-content" class="modal-content rounded-0">
                 <div class="modal-header border-0 rounded-0">
-                    <h5 data-i18n-html="drawer.feedback.title" class="i18n modal-title">Envie seu comentário</h5>
+                    <h5 data-i18n-html="drawer.feedback.title" class="i18n modal-title"></h5>
                     <button type="button" class="close cp" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -443,7 +443,7 @@
                             <div id="drawer-feedback-block" class="d-flex align-items-start flex-column">
 
                                 <div class="d-flex w-100 mt-3">
-                                    <span data-i18n-html="drawer.feedback.rating" class="i18n mt-2">Avaliação</span>
+                                    <span data-i18n-html="drawer.feedback.rating" class="i18n mt-2"></span>
                                     <div class="rating cp">
                                         <span data-star-value="5" class="star-rating">☆</span>
                                         <span data-star-value="4" class="star-rating">☆</span>
@@ -454,7 +454,7 @@
                                 </div>
 
                                 <div class="d-flex w-100 mt-2">
-                                    <small data-i18n-html="drawer.feedback.question_info" class="i18n col px-0">Envie sua opnião sobre este site!</small>
+                                    <small data-i18n-html="drawer.feedback.question_info" class="i18n col px-0"></small>
                                 </div>
 
                                 <div class="d-flex w-100 mt-2">
@@ -463,8 +463,8 @@
                                             <textarea type="textarea" id="feedback-textarea" data-i18n-place="drawer.feedback.placeholder" class="i18n form-control resize-none bg-none rounded-0" rows="5" maxlength="400" required></textarea>
                                         </div>
                                         <div class="form-group mt-2 mt-md-0 mb-0">
-                                            <button type="reset" id="feedback-form-clear" data-i18n-html="words.clear" class="i18n btn btn-sm btn-outline-secondary rounded-0 cp">Limpar</button>
-                                            <button type="submit" id="feedback-form-submit" data-i18n-html="drawer.bug_report.send" class="i18n btn btn-sm btn-info rounded-0 float-right cp">Enviar</button>
+                                            <button type="reset" id="feedback-form-clear" data-i18n-html="words.clear" class="i18n btn btn-sm btn-outline-secondary rounded-0 cp"></button>
+                                            <button type="submit" id="feedback-form-submit" data-i18n-html="drawer.bug_report.send" class="i18n btn btn-sm btn-info rounded-0 float-right cp"></button>
                                         </div>
                                     </form>
                                 </div>
@@ -473,7 +473,7 @@
                         </div>
                     </div>
                     <section class="row">
-                        <small data-i18n-html="drawer.feedback.footer_info" class="i18n col">Enviando comentários. Veja a <a href='#' class='tdu blue'>documentação</a> sobre isto.</small>
+                        <small data-i18n-html="drawer.feedback.footer_info" class="i18n col"></small>
                     </section>
                 </div>
             </div>
@@ -500,34 +500,34 @@
                                     <div class="col px-0">
                                         <div class="form-group">
                                             <label class="d-block">
-                                                <strong class="i18n" data-i18n-html="modals.bugs.select_type">Selecione o tipo:</strong>
+                                                <strong class="i18n" data-i18n-html="modals.bugs.select_type"></strong>
                                             </label>
                                             <select class="border-def d-block">
-                                                <option class="i18n" selected value="custom" data-i18n-html="modals.bugs.custom">Erro personalizado</option>
-                                                <option class="i18n" value="css" data-i18n-html="modals.bugs.css">Erro de CSS</option>
-                                                <option class="i18n" value="javascript" data-i18n-html="modals.bugs.js">Erro de JavaScript</option>
-                                                <option class="i18n" value="language" data-i18n-html="modals.bugs.language">Erro de Idioma</option>
-                                                <option class="i18n" value="plugin" data-i18n-html="modals.bugs.plugins">Erro em Plugins</option>
-                                                <option class="i18n" value="server" data-i18n-html="modals.bugs.server">Erro do Servidor</option>
+                                                <option class="i18n" selected value="custom" data-i18n-html="modals.bugs.custom"></option>
+                                                <option class="i18n" value="css" data-i18n-html="modals.bugs.css"></option>
+                                                <option class="i18n" value="javascript" data-i18n-html="modals.bugs.js"></option>
+                                                <option class="i18n" value="language" data-i18n-html="modals.bugs.language"></option>
+                                                <option class="i18n" value="plugin" data-i18n-html="modals.bugs.plugins"></option>
+                                                <option class="i18n" value="server" data-i18n-html="modals.bugs.server"></option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group mt-2 mb-0">
                                     <label>
-                                        <strong class="col px-0 i18n" data-i18n-html="modals.bugs.description">Envie uma descrição</strong>
+                                        <strong class="col px-0 i18n" data-i18n-html="modals.bugs.description"></strong>
                                     </label>
-                                    <textarea type="textarea" id="bugs-report-textarea" placeholder="Description here..." class="form-control resize-none rounded-0 i18n" rows="5" maxlength="400" required data-i18n-place="modals.bugs.ph_description"></textarea>
+                                    <textarea type="textarea" id="bugs-report-textarea" class="form-control resize-none rounded-0 i18n" rows="5" maxlength="400" required data-i18n-place="modals.bugs.ph_description"></textarea>
                                 </div>
                                 <div class="form-group mt-2 mt-md-3">
-                                    <button type="reset" data-i18n-html="words.clear" class="i18n btn btn-sm btn-outline-secondary rounded-0 cp">Limpar</button>
-                                    <button type="submit" id="bugs-report-form-submit" data-i18n-html="drawer.bug_report.send" class="i18n btn btn-sm btn-info rounded-0 float-right cp">Enviar</button>
+                                    <button type="reset" data-i18n-html="words.clear" class="i18n btn btn-sm btn-outline-secondary rounded-0 cp"></button>
+                                    <button type="submit" id="bugs-report-form-submit" data-i18n-html="drawer.bug_report.send" class="i18n btn btn-sm btn-info rounded-0 float-right cp"></button>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <section class="mt-4 row">
-                        <small data-i18n-html="drawer.bug_report.footer_info" class="i18n col">Reportando erros. Veja a <a href='#' class='tdu blue'>documentação</a> sobre isto.</small>
+                        <small data-i18n-html="drawer.bug_report.footer_info" class="i18n col"></small>
                     </section>
                 </div>
             </div>

@@ -218,7 +218,8 @@
       "not": "Alertas",
       "feedback": "Feedback",
       "lang": "Idiomas",
-      "marks": "Marcador"
+      "marks": "Marcador",
+      "admin": "Administraçao"
     },
     "version": "Versão"
   },
@@ -763,6 +764,14 @@
   "menu": "Menu",
   "new_post": "Nova Postagem",
   "close_editor": "Fechar editor"
+},
+
+"github_auth": {
+  "title": "Autenticação GitHub",
+  "description": "Informe sua API Key do GitHub para acessar o painel administrativo.",
+  "label": "GitHub API Key",
+  "placeholder": "Cole sua API Key",
+  "verify": "Verificar"
 },
 
   "blog": {
