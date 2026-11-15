@@ -1253,7 +1253,9 @@ if (router === 'admin') {
 
     i18n.transcript()
     i18n.observe(document)
-
+  
+    // Libera a página após a tradução inicial.
+    dc.documentElement.classList.remove('i18n-loading')
     // Preferências individuais do usuário
     const preferenceSwitches = {
         'sets-media-audio': 'mediaAudio',

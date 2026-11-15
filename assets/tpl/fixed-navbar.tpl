@@ -86,7 +86,7 @@
                      class="navbar-brand py-0">
                 <img alt="Brand"
                      src="./assets/media/image/1x1.gif"
-                     data-src="./assets/media/image/icons/cube-26x26.gif"
+                     data-src="./assets/media/image/icons/animated-cube.webp"
                      data-lazy-target
                      width="26px"
                      height="26px"
@@ -95,7 +95,7 @@
 
             <a class="i18n btn btn-sm btn-outline-none border-def contrast rounded-0 mt-0 cp"
                href="#"
-               data-i18n-html="navbar.signin">Entrar</a>
+               data-i18n-html="navbar.signin"></a>
 
         </div>
 
@@ -107,7 +107,7 @@
                          class="navbar-brand py-0">
                     <img alt="Brand"
                          src="./assets/media/image/1x1.gif"
-                         data-src="./assets/media/image/icons/cube-26x26.gif"
+                         data-src="./assets/media/image/icons/animated-cube.webp"
                          data-lazy-target
                          width="26px"
                          height="26px"
@@ -119,7 +119,7 @@
                 <a class="i18n btn btn-sm btn-outline-none border-def contrast rounded-0 mt-0 cp"
                    href="#"
                    data-i18n-html="navbar.signin"
-                   disabled>Entrar</a>
+                   disabled></a>
             </li>
 
         </ul>

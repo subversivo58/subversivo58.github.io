@@ -1945,5 +1945,26 @@ footer #footbody > div > .widget-column a:hover {
 }
 
 html[lang="ja-JP"] .navbar {
-    font-size: 0.9em;
+    font-size: 0.8rem;
+}
+
+/* =========================================
+   TELA DE ESPERA — TRADUÇÃO I18N
+========================================= */
+
+html.i18n-loading::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    background-color: #f5f6f7;
+    background-image: url("../media/image/icons/badage-monochrome.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 52px 52px;
+}
+
+html.i18n-loading,
+html.i18n-loading body {
+    overflow: hidden;
 }
