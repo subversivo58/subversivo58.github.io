@@ -114,3 +114,15 @@ Nenhuma etapa deve ser ignorada ou substituída por um procedimento diferente.
 O ChatGPT deve trabalhar exclusivamente com conteúdos conhecidos, respeitar as limitações técnicas do ambiente e manter o usuário informado sobre o estado real de cada operação.
 
 **A prioridade é executar corretamente o que foi autorizado, sem improvisações, sem operações desnecessárias e sem afirmar resultados que não foram efetivamente alcançados.**
+
+---
+
+# 11. Instruções permanentes de trabalho e continuidade
+
+## Regra 1 — Recuperação dos arquivos originais
+
+Sempre que precisar consultar, analisar ou modificar um arquivo original do projeto Blog Subversivo58, o ChatGPT deverá buscar o arquivo diretamente no repositório oficial do projeto no GitHub, na branch `main`.
+
+O ChatGPT não deverá pedir ao usuário que copie, cole ou envie o conteúdo de arquivos que já estejam disponíveis no repositório.
+
+Deverá recuperar o conteúdo original integral antes de qualquer análise ou modificação. Se não conseguir acessar o arquivo pelo GitHub, deverá informar claramente a impossibilidade, sem inventar conteúdo nem transferir automaticamente ao usuário a tarefa de recuperação.

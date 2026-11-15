@@ -1,4 +1,10 @@
 {
+    "404": {
+        "general": "Ooops... Not found!",
+        "title": "Page not found",
+        "message": "The address you tried to open does not exist or has been moved. Check that you typed it correctly or go back to the home page.",
+        "button": "Back to home"
+    },
     "anonimous": {
         "title": "Are you in incognito mode?",
         "body": {
@@ -206,8 +212,7 @@
             "geo": "Geo",
             "cam": "Video",
             "mic": "Audio",
-            "color": "Color",
-            "note": "Notes",
+            "color": "Color",            "note": "Notes",
             "bug": "Bugs",
             "lab": "Laboratory",
             "not": "Alerts",
@@ -428,12 +433,6 @@
         "p2": "Although this website uses cookies and other storage technologies, \"<strong>we do not store any data in your browser without your express permission</strong>\"!",
         "p3": "We believe we have good reasons for not supporting \"cookies-free\" browsing. You may want to take a look at our <a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a> for more information. Unfortunately you will need to browse with cookies enabled"
     },
-    "404": {
-        "general": "Ooops... Not found!",
-        "title": "Page not found",
-        "message": "The address you tried to open does not exist or has been moved. Check that you typed it correctly or go back to the home page.",
-        "button": "Back to home"
-    },
     "mail": {
         "account": {
             "title": "Account Created!",
@@ -560,15 +559,15 @@
     },
     "modals": {
         "language": {
-    "title": "Select Language",
-    "avaliable": "Available Languages",
-    "pt_BR": "Portuguese",
-    "en_US": "English",
-    "es_ES": "Spanish",
-    "fr_FR": "French",
-    "de_DE": "German",
-    "ja_JP": "Japanese",
-    "footer": "No option in your language? Create a translation!"
+            "title": "Select Language",
+            "avaliable": "Available Languages",
+            "pt_BR": "Portuguese",
+            "en_US": "English",
+            "es_ES": "Spanish",
+            "fr_FR": "French",
+            "de_DE": "German",
+            "ja_JP": "Japanese",
+            "footer": "No option in your language? Create a translation!"
         },
         "version": {
             "title": "🚧 Under Construction 🚧",
@@ -617,8 +616,7 @@
             "description": "Send a description",
             "ph_description": "Description here..."
         }
-    },
-    "notify": {
+    },    "notify": {
         "storage": {
             "title": "Subversivo58 - Storage",
             "body": "This site uses \"cookies\" and other technologies that store information on your device, do you agree?",
@@ -695,6 +693,100 @@
             "list2": "The right you wish to exercise (e.g. data deletion, access, etc.);",
             "list3": "Details that may help us locate your data in our systems.",
             "policies": "For more details on how we handle your data, see our <a href=\"./policy.html#policy-general\">General Policy</a> and our <a href=\"./policy.html#policy-privacy\">Privacy Policy</a>."
+        },
+        "home": {
+            "intro": {
+                "eyebrow": "ABOUT SUBVERSIVO58",
+                "title": "Much more than a blog.",
+                "description": "A space dedicated to curiosity, technology, and the freedom to explore ideas.",
+                "details": "Here, knowledge and creativity come together in content, experiences, and projects that go beyond the conventional.",
+                "signature": "CURIOSITY · KNOWLEDGE · CREATIVITY"
+            },
+            "exploration": {
+                "eyebrow": "DISCOVER",
+                "title": "Explore different ideas.",
+                "description": "Different paths to learn, experiment, and discover new possibilities.",
+                "programming": {
+                    "title": "Programming",
+                    "description": "Code, development, and creative solutions for the digital world."
+                },
+                "technology": {
+                    "title": "Technology",
+                    "description": "Tools, resources, and news that transform our everyday lives."
+                },
+                "experiments": {
+                    "title": "Experiments",
+                    "description": "Ideas in progress, tests, and discoveries beyond the conventional."
+                },
+                "knowledge": {
+                    "title": "Knowledge",
+                    "description": "Learning, reflections, and information to broaden horizons."
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / LAB",
+                "title": "A space to explore new possibilities.",
+                "description": "Experiments, projects, and tools developed to turn curiosity into discoveries.",
+                "link": "Explore the lab"
+            }
+        },
+        "policy": {
+            "cards": {
+                "introduction": {
+                    "title": "Introduction",
+                    "description": "This site was created using web technologies. We believe in decentralization and cryptographic security. We believe you are the sole owner of your data.",
+                    "link": "Read more in our \"White Paper\""
+                },
+                "privacy": {
+                    "title": "Privacy",
+                    "description": "The privacy policy explains why this site requests data, how it is processed, and how users can edit, download, or delete their data.",
+                    "link": "Read our Privacy Policy"
+                },
+                "terms": {
+                    "title": "Terms",
+                    "description": "The terms explain how this site operates, what users can expect from it, and what we expect from our users in this process.",
+                    "link": "Read our Terms of Use"
+                },
+                "general": {
+                    "title": "Policy",
+                    "description": "The \"Policy\" is the general document governing the relationship between the Site and the User. It establishes the guarantees and limitations of the agreement for using the Site and its tools.",
+                    "link": "Read our General Policy"
+                }
+            },
+            "overview": {
+                "quote1": "Policies define how the Site and its users relate to one another. They provide security and trust by ensuring transparency and quality throughout this relationship. They are also required by many data protection and privacy laws around the world.",
+                "quote2": "We try to keep our policies as simple as possible, avoiding the usual \"<strong>alphabet soup</strong>\". Not too much, because more does not guarantee quality; not too little, because less does not guarantee substance.",
+                "quote3": "We hope this relationship of trust will be a learning process for both our users and ourselves.",
+                "whitepaper_link": "An excerpt from our \"White Paper\"",
+                "contact": "Any questions arising from the use of the Site or its tools can be reported through our contact forms or <strong>feedback</strong> tools (we love feedback). We also invite you to contact our DPO at <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Politicas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
+                "markdown1": "The policies on this site were written in a slightly modified version of the <strong>Markdown</strong> markup language. You can view them as plain text or download them from <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a> through <a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">this link to our repository</a>.",
+                "markdown2": "There you can find this and any previous versions of these Policies, as well as this Site's source code. You can also print them by clicking the print icon <span class=\"badge badge-light border-def contrast\">Print&nbsp;🖨️</span> at the top of our General Policy."
+            },
+            "privacy": {
+                "heading": "Privacy",
+                "image_alt": "You have choices",
+                "image_title": "You have choices",
+                "paragraph1": "We believe the principle of privacy is the freedom to choose. Users should not have to give up their data with a single click or accept terms that require them to surrender large amounts of data in exchange for using a particular tool.",
+                "paragraph2": "Freedom of choice and a progressive, non-obstructive approach to requesting data—with consent obtained only when necessary—should be the standard.",
+                "paragraph3": "Respect for privacy begins with respecting the User's choice about what they wish to share and when."
+            },
+            "terms": {
+                "heading": "Terms of Use",
+                "image_alt": "Site Terms Image",
+                "image_title": "Our Terms"
+            },
+            "general": {
+                "heading": "General Policy",
+                "image_alt": "Site Contract Image",
+                "image_title": "Agreement"
+            },
+            "cookies": {
+                "heading": "Accept Cookies",
+                "paragraph1": "If you are wondering whether you <strong>really need to accept cookies and data storage</strong>, the short answer is: <strong>no, you do not</strong>! You will still be able to browse and use many of the Site's tools and features, although you may not have the best experience 🙁",
+                "paragraph2": "For example, when you choose a language, save a favorite color, or change a setting, you will have to make that choice again every time you visit or browse the site... the only way to \"persist\" your choices is to store them locally.",
+                "paragraph3": "Following our philosophy that <a href=\"./you-in-control-of-your-data.html\" dada-=\"\" class=\"display-block ext-link-icon\">you are the sole owner of your data</a>, we believe you have choices. If you choose to accept cookies by <strong>clicking and pressing</strong> the button below, you can also <strong>disable them</strong> whenever you want here or in the User tab, and remove everything already stored at once 😎",
+                "button": "🍪 press to enable cookies"
+            }
         }
     },
     "settings_slide": {

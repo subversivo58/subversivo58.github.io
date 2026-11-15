@@ -355,7 +355,8 @@
         "regnow": "Regístrate ahora ",
         "btnSubmit": "Registrarse en Collabore",
         "agreement": "Al hacer clic en el botón \"Registrarse en Collabore\", aceptas los <a href='./licit' target='blank_'>términos del servicio</a> y la <a href='./policies/privacci' target='blank_'>política de privacidad</a>. Ocasionalmente te enviaremos correos electrónicos relacionados con tu cuenta."
-    },    "slack": {
+    },
+    "slack": {
         "another": "¿Solicitar una nueva invitación? ",
         "figcap": {
             "property": "Slack pertenece a ",
@@ -649,6 +650,100 @@
         }
     },
     "pages": {
+        "home": {
+            "intro": {
+                "eyebrow": "SOBRE SUBVERSIVO58",
+                "title": "Mucho más que un blog.",
+                "description": "Un espacio dedicado a la curiosidad, la tecnología y la libertad de explorar ideas.",
+                "details": "Aquí, el conocimiento y la creatividad se encuentran en contenidos, experiencias y proyectos que van más allá de lo convencional.",
+                "signature": "CURIOSIDAD · CONOCIMIENTO · CREATIVIDAD"
+            },
+            "exploration": {
+                "eyebrow": "DESCUBRE",
+                "title": "Explora diferentes ideas.",
+                "description": "Diferentes caminos para aprender, experimentar y descubrir nuevas posibilidades.",
+                "programming": {
+                    "title": "Programación",
+                    "description": "Código, desarrollo y soluciones creativas para el mundo digital."
+                },
+                "technology": {
+                    "title": "Tecnología",
+                    "description": "Herramientas, recursos y novedades que transforman nuestra vida cotidiana."
+                },
+                "experiments": {
+                    "title": "Experimentos",
+                    "description": "Ideas en construcción, pruebas y descubrimientos fuera de lo convencional."
+                },
+                "knowledge": {
+                    "title": "Conocimiento",
+                    "description": "Aprendizaje, reflexiones e información para ampliar horizontes."
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / LABORATORIO",
+                "title": "Un espacio para explorar nuevas posibilidades.",
+                "description": "Experimentos, proyectos y herramientas desarrollados para transformar la curiosidad en descubrimientos.",
+                "link": "Explorar el laboratorio"
+            }
+        },
+        "policy": {
+            "cards": {
+                "introduction": {
+                    "title": "Introducción",
+                    "description": "Este sitio fue creado utilizando tecnologías web. Creemos en la descentralización y en la seguridad criptográfica. Creemos que tú eres el único titular de tus datos.",
+                    "link": "Descubre más en nuestro «Libro blanco»"
+                },
+                "privacy": {
+                    "title": "Privacidad",
+                    "description": "La política de privacidad describe por qué este sitio solicita datos, cómo se procesan y cómo el usuario puede editarlos, descargarlos o eliminarlos.",
+                    "link": "Lee nuestra Política de privacidad"
+                },
+                "terms": {
+                    "title": "Términos",
+                    "description": "Los términos describen cómo gestionamos este sitio, qué pueden esperar nuestros usuarios de él y qué esperamos de nuestros usuarios durante este proceso.",
+                    "link": "Lee nuestros Términos de uso"
+                },
+                "general": {
+                    "title": "Política",
+                    "description": "La «Política» es el documento general que rige la relación entre el sitio y el usuario, y establece las garantías y limitaciones del contrato de uso del sitio y sus herramientas.",
+                    "link": "Lee nuestra Política general"
+                }
+            },
+            "overview": {
+                "quote1": "Las políticas son la forma en que el sitio y sus usuarios se relacionan. Aportan seguridad y confianza, garantizando transparencia y calidad durante esta relación. También son objeto de regulación en muchas leyes de protección de datos y privacidad de diversos países del mundo.",
+                "quote2": "Intentamos simplificar al máximo nuestras políticas para alejarnos del típico «sopa de letras». Ni demasiado extensas, porque más no garantiza calidad, ni demasiado breves, porque menos no garantiza contenido.",
+                "quote3": "Esperamos que esta relación de confianza sea un proceso de aprendizaje tanto para nuestros usuarios como para nosotros mismos.",
+                "whitepaper_link": "Un fragmento de nuestro «Libro blanco»",
+                "contact": "Cualquier duda relacionada con el uso del sitio o sus herramientas puede comunicarse a través de nuestros formularios de contacto o herramientas de <strong>feedback</strong> (nos encanta recibir comentarios). Reiteramos nuestra invitación a resolver problemas a través de nuestro DPO, en la siguiente dirección de correo electrónico: <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Politicas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
+                "markdown1": "Las políticas de este sitio se redactaron en un lenguaje de marcado <strong>Markdown</strong> ligeramente modificado. Puedes verlas en texto sin formato o descargarlas desde <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a> mediante este <a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">enlace a nuestro repositorio</a>.",
+                "markdown2": "Allí encontrarás esta y cualquier versión anterior de estas políticas, así como el código fuente de este sitio. También puedes imprimirlas haciendo clic en el icono de impresión <span class=\"badge badge-light border-def contrast\">Imprimir&nbsp;🖨️</span> situado en la parte superior de nuestra Política general."
+            },
+            "privacy": {
+                "heading": "Privacidad",
+                "image_alt": "Tienes opciones",
+                "image_title": "Tienes opciones",
+                "paragraph1": "Creemos que el principio de la privacidad es la libertad de elección. El usuario no debería tener que renunciar a sus datos con un solo clic ni aceptar términos que le obliguen a ceder una gran cantidad de información para poder utilizar una determinada herramienta.",
+                "paragraph2": "La libertad de elección, un modelo progresivo pero no obstructivo para solicitar datos y el consentimiento únicamente cuando sea necesario deberían ser un estándar a seguir.",
+                "paragraph3": "El respeto a la privacidad comienza por respetar la elección del usuario sobre qué y cuándo desea compartir."
+            },
+            "terms": {
+                "heading": "Términos de uso",
+                "image_alt": "Imagen de los términos del sitio",
+                "image_title": "Nuestros términos"
+            },
+            "general": {
+                "heading": "Política general",
+                "image_alt": "Imagen del contrato del sitio",
+                "image_title": "Contrato"
+            },
+            "cookies": {
+                "heading": "Aceptar cookies",
+                "paragraph1": "Si te preguntas si <strong>realmente necesitas aceptar las cookies y el almacenamiento de datos</strong>, la respuesta corta es: <strong>¡no, no es necesario!</strong> Aún podrás navegar y utilizar muchas herramientas y funcionalidades del sitio, aunque quizá no disfrutes de la mejor experiencia 🙁",
+                "paragraph2": "Por ejemplo: cuando eliges un idioma, guardas un color favorito o defines una configuración, tendrás que repetir esa elección cada vez que accedas o navegues por el sitio... la única forma de «conservar» tus preferencias es almacenándolas localmente.",
+                "paragraph3": "Siguiendo nuestra filosofía de que <a href=\"./you-in-control-of-your-data.html\" dada-=\"\" class=\"display-block ext-link-icon\">tú eres el único titular de tus datos</a>, creemos que tienes opciones. Si decides aceptar el uso de cookies «<strong>haciendo clic y pulsando</strong> el botón de abajo», también podrás elegir <strong>desactivarlas</strong> cuando quieras desde aquí o desde la pestaña de Usuario, así como eliminar de una sola vez todo lo que ya se haya almacenado 😎",
+                "button": "🍪 pulsa para activar las cookies"
+            }
+        },
         "about": {
             "heading": "Tecnología, tendencias y cibercultura",
             "item1": "✓ API web, JavaScript y funcionalidades de HTML5.",
