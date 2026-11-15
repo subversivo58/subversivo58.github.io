@@ -9,8 +9,6 @@ import Emitter from './Emitter.mjs'
 
 import CryptoHandler from './CryptoHandler.mjs'
 
-import GitHubAPI from './GitHubAPI.mjs'
-
 import {
     Cookies as AWCookies,
     Storage as AWStorage,
@@ -25,7 +23,6 @@ import IlibJS from './IlibJS.mjs'
 export {
     Emitter,
     CryptoHandler,
-    GitHubAPI,
     AWCookies,
     AWStorage,
     AWCache,

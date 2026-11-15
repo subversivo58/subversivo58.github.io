@@ -100,11 +100,6 @@ export function renderFooterNews(
 
     if (!posts.length) {
         container.replaceChildren()
-
-        const column = container.closest('.widget-column')
-
-        if (column) column.hidden = true
-
         return
     }
 

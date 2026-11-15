@@ -1,11 +1,10 @@
-
 /**
  * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2021 Lauro Moraes - [https://github.com/subversivo58]
  * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
  */
 'use strict'
-  
+
 // Console de depuração (liga sozinho quando <meta name="DEBUG" content="true">).
 // Fica como primeiro import para registrar os erros dos módulos seguintes.
 import './modules/lib/DebugConsole.mjs'
@@ -84,7 +83,6 @@ import {
     PressHoldCollorCharger
 } from './modules/functions/Functions.mjs'
 
-import MarkdownEditor from './modules/models/MarkdownEditor.mjs'
 import { loadMarkdown } from './modules/lib/MarkdownKit.mjs'
 
 //import GitHubAPI from './modules/lib/GitHubAPI.mjs'
@@ -102,7 +100,6 @@ import LazyLoad from './modules/lib/LazyLoad.mjs'
 import {
     Emitter,
     CryptoHandler,
-    GitHubAPI,
     AWCookies,
     AWStorage,
     AWCache,
@@ -155,12 +152,11 @@ DBMethods = await ConnectionDB.open(
 
 
 
-  
 
 
-    
 
-  
+
+
     // Inject the shared connection into the logger.
     SetupLog.setConnection(DBMethods)
 
@@ -169,7 +165,7 @@ DBMethods = await ConnectionDB.open(
         version: settings.database.version,
         stores: settings.database.indexed.map(item => item.tbn)
     })
-    
+
 } catch (error) {
 
     console.error(
@@ -469,7 +465,7 @@ const DSNotify = new NotifyJS({
             if ( location.search === '?utm_source=homescreen' ) {
                 // is pwa launch ... register log
             }
-        
+
             await TemplatesReady.import
             // Exibe o atalho administrativo quando existe uma chave salva.
             const adminShortcut = dc.getElementById('drawer-admin')
@@ -527,8 +523,8 @@ if (router === 'blog') {
     const maxList = settings.articles['blog-max-list']
 
     const esc = text => String(text ?? '').replace(
-        /[&<>"]/g,
-        char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char])
+        /[&<>\"]/g,
+        char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;' }[char])
     )
 
     const formatDate = timestamp => {
@@ -702,9 +698,12 @@ if (router === 'blog') {
 
 
 
-
-        
 if (router === 'admin') {
+
+    const [{ default: MarkdownEditor }, { default: GitHubAPI }] = await Promise.all([
+        import('./modules/models/MarkdownEditor.mjs'),
+        import('./modules/lib/GitHubAPI.mjs')
+    ])
 
     const TOKEN_KEY = 'github-token'
     const AUTH_KEY = 'github-authenticated'
@@ -1095,7 +1094,7 @@ if (router === 'admin') {
                     ;[...dc.querySelectorAll('[data-charge-type]')].forEach(btn => {
                         let finish;
 
-                
+
                         PressHoldCollorCharger(btn, init => {
                             btn.classList.add(btn.dataset.chargeType)
                         }, end => {
@@ -1165,7 +1164,8 @@ if (router === 'admin') {
             break;
 
     }
-  
+
+
 
 
 
@@ -1207,6 +1207,7 @@ if (router === 'admin') {
             element.classList.add('dark-text');
         }
     } catch(e){/*console.log(e)*/}
+
 
 
 
@@ -1325,7 +1326,7 @@ if (router === 'admin') {
             '#settings-slide .preference-switch'
         )
 
-      
+
         if (
             !element ||
             !Object.prototype.hasOwnProperty.call(

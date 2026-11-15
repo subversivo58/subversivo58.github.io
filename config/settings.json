@@ -1,3 +1,4 @@
+
 {
     "source": {
         "version": {
@@ -22,8 +23,7 @@
         }
     },
     "articles": {
-        "storage": [
-        ], 
+        "storage": [],
         "index-max-list": 5,
         "footer-max-list": 6,
         "blog-max-list": 20
@@ -102,11 +102,6 @@
                     "file": "footnote.tpl",
                     "mode": "append",
                     "target": "#footer-container"
-                },
-                {
-                    "file": "github-auth.tpl",
-                    "mode": "append",
-                    "target": "#index-central-block"
                 }
             ]
         },
@@ -127,6 +122,11 @@
                     "file": "admin-dashboard.tpl",
                     "mode": "append",
                     "target": "#index-central-block"
+                },
+                {
+                    "file": "github-auth.tpl",
+                    "mode": "append",
+                    "target": "#index-central-block"
                 }
             ]
         }
@@ -141,7 +141,6 @@
             "assets/js/modules/lib/AwesomeStorage.mjs",
             "assets/js/modules/lib/CryptoHandler.mjs",
             "assets/js/modules/lib/Emitter.mjs",
-            "assets/js/modules/lib/GitHubAPI.mjs",
             "assets/js/modules/lib/IlibJS.mjs",
             "assets/js/modules/lib/IndexedLogs.mjs",
             "assets/js/modules/lib/LazyLoad.mjs",
