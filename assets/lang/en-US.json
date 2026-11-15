@@ -158,7 +158,7 @@
         "clear_data": {
             "title": "Clear site data",
             "question_info": "Are you sure about this?",
-            "positive": "Yes, clear",
+            "positive": "Hold to clear",
             "negative": "No, cancel",
             "footer_info": "Clear cache and cookies. See the <a href='#' class='tdu blue'>documentation</a>."
         },
@@ -543,7 +543,8 @@
                 "paragraph1": "If you are wondering whether you <strong>really need to accept cookies and data storage</strong>, the short answer is: <strong>no, you do not</strong>! You will still be able to browse and use many of the Site's tools and features, although you may not have the best experience 🙁",
                 "paragraph2": "For example, when you choose a language, save a favorite color, or change a setting, you will have to make that choice again every time you visit or browse the site... the only way to \"persist\" your choices is to store them locally.",
                 "paragraph3": "Following our philosophy that <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">you are the sole owner of your data</a>, we believe you have choices. If you choose to accept cookies by <strong>clicking and pressing</strong> the button below, you can also <strong>disable them</strong> whenever you want here or in the User tab, and remove everything already stored at once 😎",
-                "button": "🍪 press to enable cookies"
+                "button": "🍪 press to enable cookies",
+                "disable": "😮 click to disable cookies!"
             }
         }
     },

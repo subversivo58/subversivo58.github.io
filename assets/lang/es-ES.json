@@ -158,7 +158,7 @@
         "clear_data": {
             "title": "Borrar los datos del sitio",
             "question_info": "¿Estás seguro?",
-            "positive": "Sí, borrar",
+            "positive": "Mantén pulsado para borrar",
             "negative": "No, cancelar",
             "footer_info": "Borra la caché y las cookies. Consulta la <a href='#' class='tdu blue'>documentación</a>."
         },
@@ -494,7 +494,8 @@
                 "paragraph1": "Si te preguntas si <strong>realmente necesitas aceptar las cookies y el almacenamiento de datos</strong>, la respuesta corta es: <strong>¡no, no es necesario!</strong> Aún podrás navegar y utilizar muchas herramientas y funcionalidades del sitio, aunque quizá no disfrutes de la mejor experiencia 🙁",
                 "paragraph2": "Por ejemplo: cuando eliges un idioma, guardas un color favorito o defines una configuración, tendrás que repetir esa elección cada vez que accedas o navegues por el sitio... la única forma de «conservar» tus preferencias es almacenándolas localmente.",
                 "paragraph3": "Siguiendo nuestra filosofía de que <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">tú eres el único titular de tus datos</a>, creemos que tienes opciones. Si decides aceptar el uso de cookies «<strong>haciendo clic y pulsando</strong> el botón de abajo», también podrás elegir <strong>desactivarlas</strong> cuando quieras desde aquí o desde la pestaña de Usuario, así como eliminar de una sola vez todo lo que ya se haya almacenado 😎",
-                "button": "🍪 pulsa para activar las cookies"
+                "button": "🍪 mantén pulsado para activar cookies",
+                "disable": "😮 haz clic para desactivar cookies!"
             }
         },
         "about": {

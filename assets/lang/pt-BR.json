@@ -158,7 +158,7 @@
         "clear_data": {
             "title": "Limpar dados do site",
             "question_info": "Você esta certo disto?",
-            "positive": "Sim, limpar",
+            "positive": "Segure para limpar",
             "negative": "Não, cancelar",
             "footer_info": "Limpar cache e cookies. Veja a <a href='#' class='tdu blue'>documentação</a>."
         },
@@ -539,11 +539,12 @@
                 "image_title": "Contrato"
             },
             "cookies": {
-                "heading": "Accept Cookies",
+                "heading": "Aceitar cookies",
                 "paragraph1": "Se você se perguntar se: <strong>realmente precisa aceitar cookies e armazenamento de dados</strong>? A resposta curta é: <strong>não, você não precisa</strong>! Você ainda vai poder navegar e usar várias ferramentas e funcionalidades do Site porém, talvez não obtenha a melhor experiência 🙁",
                 "paragraph2": "Por exemplo: quando você escolhe um idioma, salva uma cor favorita ou define uma configuração terá de refazer esta escolha a cada vez que acessa ou navega no site ... o único modo de \"persistir\" suas escolhas é armazenando-as localmente.",
                 "paragraph3": "Seguindo nossa filisofia de que <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">você é o único detentor de seus dados</a>, acreditamos que você tem escolhas. Se escolher aceitar o uso de cookies \"<strong>clicando e pressionando</strong> o botão abaixo, também poderá escolher <strong>desativá-los</strong> sempre que quiser por aqui ou na guia de Usuário, assim como também poderá remover tudo que já tiver armazenado de uma só vez 😎",
-                "button": "🍪 press to enable cookies"
+                "button": "🍪 segure para ativar cookies",
+                "disable": "😮 clique para desativar cookies!"
             }
         }
     },

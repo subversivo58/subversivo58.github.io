@@ -158,7 +158,7 @@
         "clear_data": {
             "title": "Effacer les données du site",
             "question_info": "Êtes-vous sûr de vouloir continuer ?",
-            "positive": "Oui, effacer",
+            "positive": "Maintenez pour effacer",
             "negative": "Non, annuler",
             "footer_info": "Efface le cache et les cookies. Consultez la <a href='#' class='tdu blue'>documentation</a>."
         },
@@ -543,7 +543,8 @@
                 "paragraph1": "Si vous vous demandez : <strong>ai-je vraiment besoin d'accepter les cookies et le stockage de données</strong> ? La réponse courte est : <strong>non, vous n'en avez pas besoin</strong> ! Vous pourrez toujours naviguer et utiliser plusieurs outils et fonctionnalités du site, mais vous n'aurez peut-être pas la meilleure expérience 🙁",
                 "paragraph2": "Par exemple : lorsque vous choisissez une langue, enregistrez une couleur favorite ou définissez un réglage, vous devrez refaire ce choix à chaque fois que vous accédez au site ou y naviguez ... le seul moyen de « persister » vos choix est de les stocker localement.",
                 "paragraph3": "Fidèles à notre philosophie selon laquelle <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">vous êtes le seul détenteur de vos données</a>, nous pensons que vous avez le choix. Si vous choisissez d'accepter l'utilisation des cookies en <strong>cliquant et en appuyant</strong> sur le bouton ci-dessous, vous pourrez aussi choisir de les <strong>désactiver</strong> quand vous le souhaitez, ici ou dans l'onglet Utilisateur, et vous pourrez également supprimer d'un seul coup tout ce qui a déjà été stocké 😎",
-                "button": "🍪 appuyez pour activer les cookies"
+                "button": "🍪 maintenez pour activer les cookies",
+                "disable": "😮 cliquez pour désactiver les cookies !"
             }
         }
     },

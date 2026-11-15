@@ -158,7 +158,7 @@
         "clear_data": {
             "title": "Website-Daten löschen",
             "question_info": "Bist du sicher?",
-            "positive": "Ja, löschen",
+            "positive": "Gedrückt halten zum Löschen",
             "negative": "Nein, abbrechen",
             "footer_info": "Cache und Cookies löschen. Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
         },
@@ -543,7 +543,8 @@
                 "paragraph1": "Wenn Sie sich fragen: <strong>Muss ich wirklich Cookies und Datenspeicherung akzeptieren</strong>? Die kurze Antwort lautet: <strong>Nein, müssen Sie nicht</strong>! Sie können weiterhin viele Werkzeuge und Funktionen der Website nutzen, haben jedoch möglicherweise nicht die beste Erfahrung 🙁",
                 "paragraph2": "Zum Beispiel: Wenn Sie eine Sprache auswählen, eine Lieblingsfarbe speichern oder eine Einstellung festlegen, müssen Sie diese Auswahl bei jedem Besuch oder jeder Navigation auf der Website erneut treffen ... die einzige Möglichkeit, Ihre Auswahl zu „speichern“, ist, sie lokal abzulegen.",
                 "paragraph3": "Gemäß unserer Philosophie, dass <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">Sie der alleinige Inhaber Ihrer Daten sind</a>, glauben wir, dass Sie die Wahl haben. Wenn Sie die Verwendung von Cookies akzeptieren, indem Sie auf die Schaltfläche unten <strong>klicken und drücken</strong>, können Sie sie auch jederzeit hier oder im Reiter „Benutzer“ <strong>deaktivieren</strong> und außerdem alles, was bereits gespeichert wurde, auf einmal entfernen 😎",
-                "button": "🍪 Zum Aktivieren der Cookies drücken"
+                "button": "🍪 gedrückt halten, um Cookies zu aktivieren",
+                "disable": "😮 klicken, um Cookies zu deaktivieren!"
             }
         }
     },

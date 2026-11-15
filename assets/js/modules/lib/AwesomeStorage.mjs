@@ -271,7 +271,7 @@ const KNOWN_DATABASES = ['Subversivo58']
 const CLEAN_TIMEOUT = 3000
 
 /**
- * Clear all browser storagement: local/session storage, caches, IndexedDB and cookies
+ * Clear all browser storagement: local/session storage, caches, IndexedDB, cookies and service workers
  * @return {Promise<void>} resolves when everything has been cleaned (or after `CLEAN_TIMEOUT`); never rejects
  */
 export function CleanBrowserStoragement() {
@@ -293,7 +293,13 @@ export function CleanBrowserStoragement() {
     }).catch(warn('could not erase the IndexedDB databases'))
     // clear all cookies
     const cookies = Promise.resolve().then(() => Cookies.clear()).catch(warn('could not clear the cookies'))
+    // unregister every service worker of this origin (none stays active after the clean up)
+    const serviceWorkers = Promise.resolve()
+        .then(() => (typeof navigator !== 'undefined' && navigator.serviceWorker)
+            ? navigator.serviceWorker.getRegistrations().then(registrations => Promise.all(registrations.map(registration => registration.unregister())))
+            : null)
+        .catch(warn('could not unregister the service workers'))
     // wait for all of them, but never longer than the timeout
     const timeout = new Promise(resolve => { timer = setTimeout(resolve, CLEAN_TIMEOUT) })
-    return Promise.race([Promise.all([cachesDone, idb, cookies]), timeout]).then(noop).finally(() => clearTimeout(timer))
+    return Promise.race([Promise.all([cachesDone, idb, cookies, serviceWorkers]), timeout]).then(noop).finally(() => clearTimeout(timer))
 }

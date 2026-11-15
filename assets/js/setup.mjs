@@ -411,6 +411,7 @@ if (location.search === '?clear-site-data=1') {
   // this route
     const router = PathName(true)
 
+  PolicyHandler.supported = settings.source.language
   dc.documentElement.lang = PolicyHandler.language
     await i18n.get(`${BaseRoot}assets/lang/${PolicyHandler.language}.json`, {
         credentials: 'include',
@@ -469,15 +470,24 @@ const DSNotify = new NotifyJS({
 
             let NotifyI18nStorage = i18n.dictionary().notify.storage
             // @revise - create notification and show ()
+            const DSNoticeTag = 'ds-policy-notice'
+
             DSNotify.create({
                 title: NotifyI18nStorage.title,
                 body: NotifyI18nStorage.body,
                 badage: 'assets/media/image/icons/badage-monochrome.webp',
                 actions: NotifyI18nStorage.actions,
+                tag: DSNoticeTag,
                 bootstrap: {
-                    pinned: true
+                    pinned: false
                 }
             }).show();
+
+            // Dismiss automatically after a while; the user can also close it with ✖️
+            setTimeout(() => {
+                const closeButton = dc.querySelector(`small[data-target="${DSNoticeTag}"]`)
+                if ( closeButton ) closeButton.click()
+            }, 15000)
         });
     }
 
@@ -1170,7 +1180,7 @@ if (router === 'admin') {
 
             if ( AcceptCookiesBtn ) {
                 const GoToDisable = () => {
-                    AcceptCookiesBtn.innerHTML = '😮 click to disable cookies!';
+                    AcceptCookiesBtn.innerHTML = i18n.dictionary().pages.policy.cookies.disable;
                     AcceptCookiesBtn.setAttribute('data-toggle', 'modal')
                     AcceptCookiesBtn.setAttribute('data-target', '#modal-clear-metadata')
                     // re-launch Bootstrap Native for this dinamic attributes
@@ -1238,10 +1248,8 @@ if (router === 'admin') {
                     }, complete => {
                        Policy.acceptStoragement().then(success => {
                           console.log('cookies has been actived')
-                          AcceptCookiesBtn.addEventListener('mouseleave', () => {
-                              AcceptCookiesBtn.classList.remove('background-charge-success')
-                              GoToDisable()
-                          }, {once: true})
+                          AcceptCookiesBtn.classList.remove('background-charge-success')
+                          GoToDisable()
                           // notify
                        }).catch(error => {
                           console.log('error in cookies activaction ... sorry')
@@ -1481,3 +1489,37 @@ if (dc.readyState === 'loading') {
 } else {
     SetupDOMReady();
 }
+
+
+// Drawer > clear modal: press and hold the button to erase all browser data.
+// Independent from the cookie consent buttons on the policy page.
+const bindClearAllButton = button => {
+
+    if (button.dataset.clearBound) return
+    button.dataset.clearBound = 'true'
+
+    let completed = false
+
+    PressHoldCollorCharger(button, () => {
+        button.classList.add('background-charge-danger')
+    }, () => {
+        button.classList.remove('background-charge-danger')
+        if (!completed) return
+        completed = false
+        Policy.refuseStoragement(true)
+            .then(() => wd.location.reload())
+            .catch(error => console.log('clear all data failed', error))
+    }, () => {
+        completed = true
+    }, 100)
+
+}
+
+const clearAllButton = dc.getElementById('clear-all-data-storage')
+if (clearAllButton) bindClearAllButton(clearAllButton)
+
+// The modals are injected by templates: bind the button as soon as it exists.
+new MutationObserver(() => {
+    const button = dc.getElementById('clear-all-data-storage')
+    if (button) bindClearAllButton(button)
+}).observe(dc.body, { childList: true, subtree: true })

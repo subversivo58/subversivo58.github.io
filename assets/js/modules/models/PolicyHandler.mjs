@@ -128,6 +128,24 @@ export default class PolicyHandler {
     }
 
     static get language() {
-        return dc.cookie.includes('i18n=') ? Cookies.getSync('i18n') : (dc.documentElement.lang !== '' ? dc.documentElement.lang : nv.languages[0])
+        // A language chosen by the user (cookie) always wins.
+        if ( dc.cookie.includes('i18n=') ) {
+            return Cookies.getSync('i18n')
+        }
+
+        const supported = PolicyHandler.supported || []
+
+        // Match only the primary subtag (pt, es, en...). The region suffix is ignored.
+        for (const candidate of (nv.languages || [])) {
+            const prefix = String(candidate).split('-')[0].toLowerCase()
+            const match = supported.find(code => code.split('-')[0].toLowerCase() === prefix)
+            if ( match ) return match
+        }
+
+        // Unknown language: fall back to en-US.
+        return 'en-US'
     }
 }
+
+// Supported languages (from settings.source.language), set once by setup.
+PolicyHandler.supported = []
