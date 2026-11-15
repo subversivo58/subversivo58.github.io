@@ -2,31 +2,31 @@
 
 # Muito mais que um blog
 
-Tem gente que coleciona disco, tem gente que coleciona meme, tem gente que coleciona projeto inacabado no GitHub. Eu me encaixo tranquilo nessa Ãltima categoria - e, sinceramente, Ã uma das partes mais divertidas da coisa.
+Tem gente que coleciona disco, tem gente que coleciona meme, tem gente que coleciona projeto inacabado no GitHub. Eu me encaixo tranquilo nessa última categoria - e, sinceramente, é uma das partes mais divertidas da coisa.
 
-Este Ã o primeiro post deste blog, e nada mais justo do que comeÃar me apresentando. Meu nome Ã **Lauro Moraes**, mas na internet vocÃ provavelmente vai me encontrar como **subversivo58**. Sou de Rio Grande do Sul - Brasil, e me descrevo como um cara "bom vivÃo", que gosta de games, filmes e mÃsica, e que tem uma curiosidade meio teimosa por programaÃÃo - especialmente JavaScript. Essa curiosidade Ã o motor de tudo aqui.
+Este é o primeiro post deste blog, e nada mais justo do que começar me apresentando. Meu nome é **Lauro Moraes**, mas na internet você provavelmente vai me encontrar como **subversivo58**. Sou de Rio Grande do Sul - Brasil, e me descrevo como um cara "bom vivão", que gosta de games, filmes e música, e que tem uma curiosidade meio teimosa por programação - especialmente JavaScript. Essa curiosidade é o motor de tudo aqui.
 
-**Subversivo58** nasceu para ser mais do que um blog. A ideia Ã criar um espaÃo dedicado Ã curiosidade, Ã tecnologia e Ã liberdade de explorar ideias.
+**Subversivo58** nasceu para ser mais do que um blog. A ideia é criar um espaço dedicado à curiosidade, à tecnologia e à liberdade de explorar ideias.
 
-Um lugar onde conhecimento e criatividade se encontram em conteÃdos, experiÃncias e projetos que vÃo alÃm do convencional.
+Um lugar onde conhecimento e criatividade se encontram em conteúdos, experiências e projetos que vão além do convencional.
 
-NÃo Ã um blog para seguir receita de bolo. Ã um laboratÃrio aberto, uma mesa de trabalho bagunÃada do jeito certo, um caderno de anotaÃÃes que eu resolvi compartilhar com quem tiver paciÃncia e curiosidade para ler.
+Não é um blog para seguir receita de bolo. É um laboratório aberto, uma mesa de trabalho bagunçada do jeito certo, um caderno de anotações que eu resolvi compartilhar com quem tiver paciência e curiosidade para ler.
 
-Aqui vocÃ vai encontrar um pouco de tudo o que passa pela minha cabeÃa e pelas minhas mÃos:
+Aqui você vai encontrar um pouco de tudo o que passa pela minha cabeça e pelas minhas mãos:
 
-- **ProgramaÃÃo** - cÃdigo, desenvolvimento e soluÃÃes criativas para o mundo digital. Coisas que funcionam, coisas que quebram, coisas que eu conserto no susto e coisas que eu aprendo explicando.
-- **Tecnologia** - ferramentas, recursos e novidades que transformam o nosso dia a dia. Ãs vezes algo Ãtil, Ãs vezes algo sÃ divertido, Ãs vezes algo que ninguÃm pediu, mas ficou legal.
-- **Experimentos** - ideias em andamento, testes e descobertas fora do convencional. O tipo de coisa que comeÃa com "serÃ que dÃ?" e termina com "bom, pelo menos agora eu sei".
-- **Conhecimento** - aprendizado, reflexÃes e informaÃÃes para ampliar horizontes. Porque curiosidade sem compartilhamento Ã sÃ um monte de aba aberta no navegador.
+- **Programação** - código, desenvolvimento e soluções criativas para o mundo digital. Coisas que funcionam, coisas que quebram, coisas que eu conserto no susto e coisas que eu aprendo explicando.
+- **Tecnologia** - ferramentas, recursos e novidades que transformam o nosso dia a dia. Às vezes algo útil, às vezes algo só divertido, às vezes algo que ninguém pediu, mas ficou legal.
+- **Experimentos** - ideias em andamento, testes e descobertas fora do convencional. O tipo de coisa que começa com "será que dá?" e termina com "bom, pelo menos agora eu sei".
+- **Conhecimento** - aprendizado, reflexões e informações para ampliar horizontes. Porque curiosidade sem compartilhamento é só um monte de aba aberta no navegador.
 
-A ideia Ã simples: transformar curiosidade em descoberta. E vocÃ Ã bem-vindo para acompanhar essa jornada. NÃo precisa concordar com tudo, nÃo precisa entender tudo de primeira e muito menos precisa saber programar. Se vocÃ gosta de aprender, testar, quebrar a cabeÃa e rir do processo, jÃ Ã meio caminho andado.
+A ideia é simples: transformar curiosidade em descoberta. E você é bem-vindo para acompanhar essa jornada. Não precisa concordar com tudo, não precisa entender tudo de primeira e muito menos precisa saber programar. Se você gosta de aprender, testar, quebrar a cabeça e rir do processo, já é meio caminho andado.
 
-Este blog tambÃm Ã uma extensÃo do que eu jÃ venho fazendo por aÃ. Quem quiser dar uma olhada no lado mais "mÃo na massa" do projeto pode visitar o laboratÃrio: [**Subversivo58 / Lab**](https://subversivo58.github.io/lab.html). LÃ tem cÃdigo, experimentos e o tipo de coisa que nÃo cabe em um post bonitinho - ou que ainda nÃo decidiu se vai caber.
+Este blog também é uma extensão do que eu já venho fazendo por aí. Quem quiser dar uma olhada no lado mais "mão na massa" do projeto pode visitar o laboratório: [**Subversivo58 / Lab**](https://subversivo58.github.io/lab.html). Lá tem código, experimentos e o tipo de coisa que não cabe em um post bonitinho - ou que ainda não decidiu se vai caber.
 
-Se vocÃ chegou atÃ aqui, obrigado pela companhia. Este Ã sÃ o comeÃo. Ainda tem muita ideia para organizar, muito cÃdigo para testar, muito filme para comentar, muita mÃsica para tocar no fundo enquanto o projeto compila - e, claro, muito erro de digitaÃÃo para corrigir depois.
+Se você chegou até aqui, obrigado pela companhia. Este é só o começo. Ainda tem muita ideia para organizar, muito código para testar, muito filme para comentar, muita música para tocar no fundo enquanto o projeto compila - e, claro, muito erro de digitação para corrigir depois.
 
-Seja bem-vindo ao **Subversivo58**. Fique Ã vontade para explorar, comentar e, principalmente, ser curioso.
+Seja bem-vindo ao **Subversivo58**. Fique à vontade para explorar, comentar e, principalmente, ser curioso.
 
-AtÃ a prÃxima,
+Até a próxima,
 
 **Lauro Moraes (subversivo58)**
