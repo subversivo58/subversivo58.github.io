@@ -1,588 +1,697 @@
 {
-  "404": {
-    "general": "Hoppla... Nicht gefunden!",
-    "title": "Seite nicht gefunden",
-    "message": "Die Adresse, die du öffnen wolltest, existiert nicht oder wurde verschoben. Überprüfe die Schreibweise oder kehre zur Startseite zurück.",
-    "button": "Zur Startseite"
-  },
-  "anonimous": {
-    "title": "Verwendest du den Inkognito-Modus?",
-    "body": {
-      "first": "Hmm... es sieht so aus, als würdest du im privaten Modus (anonym) surfen.",
-      "second": "In diesem Browsermodus werden alle Cookies und zwischengespeicherten Daten dieser Sitzung gelöscht, sobald du sie beendest.",
-      "third": "Da diese Website auch offline funktioniert, stehen einige Funktionen, Plugins und Apps möglicherweise nicht zur Verfügung oder funktionieren nicht richtig."
+    "404": {
+        "general": "Hoppla... Nicht gefunden!",
+        "title": "Seite nicht gefunden",
+        "message": "Die Adresse, die du öffnen wolltest, existiert nicht oder wurde verschoben. Überprüfe die Schreibweise oder kehre zur Startseite zurück.",
+        "button": "Zur Startseite"
     },
-    "button": "Okay, ich möchte fortfahren"
-  },
-  "source": {
-    "name": "Subversivo58 Blog",
-    "version": "0.1.0",
-    "author": "Subversivo58",
-    "home": "https://github.com/subversivo58/",
-    "colab": [],
-    "build": "Alpha",
-    "bugs": [
-      {
-        "type": "git",
-        "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
-      }
-    ],
-    "license": [
-      {
-        "type": "MIT",
-        "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
-      }
-    ]
-  },
-  "words": {
-    "an": "vor 1",
-    "agree": "zustimmen",
-    "clear": "löschen",
-    "signin": "anmelden",
-    "logout": "abmelden",
-    "signup": "registrieren",
-    "close": "schließen",
-    "drawer": "Seitenleiste",
-    "free": "kostenlos",
-    "search": "suchen",
-    "recover": "wiederherstellen",
-    "restore": "zurücksetzen",
-    "white": "weiß",
-    "decade": "Jahrzehnt",
-    "year": "Jahr",
-    "month": "Monat",
-    "week": "Woche",
-    "day": "Tag",
-    "hour": "Stunde",
-    "minute": "Minute",
-    "license": "Lizenz",
-    "more": "mehr",
-    "second": "Sekunde",
-    "now": "jetzt",
-    "rememberme": "an mich erinnern",
-    "source": "Quelle",
-    "mail": "E-Mail",
-    "page": "Seite",
-    "pwd": "Passwort",
-    "token": "Token",
-    "media": "Medien",
-    "settings": "Einstellungen",
-    "version": "Version",
-    "ooops": "hoppla..."
-  },
-  "combo": {
-    "btn_top": "Zurück nach oben",
-    "more_info": "weitere Informationen erhalten.",
-    "click_here": "Hier klicken!",
-    "clear_exit": "Löschen und verlassen",
-    "not_show_again": "nicht erneut anzeigen",
-    "powered": "Bereitgestellt von",
-    "copyr": "Urheberrecht",
-    "knowmore": "Mehr erfahren",
-    "seelicenses": "Lizenzen ansehen"
-  },
-  "langs": {
-    "enUS": "Englisch (Vereinigte Staaten) - [Standard]",
-    "ptBR": "Portugiesisch (Brasilien)",
-    "esES": "Spanisch (Spanien)",
-    "frFR": "Französisch (Frankreich)",
-    "deDE": "Deutsch (Deutschland)",
-    "jaJP": "Japanisch"
-  },
-  "navbar": {
-    "wiki": "WIKI",
-    "blog": "Blog",
-    "dpo": "DPO",
-    "colab": "mitwirken",
-    "about": "Über uns",
-    "lab": "Labor",
-    "contact": "Kontakt",
-    "policies": "Richtlinien",
-    "donations": "Spenden",
-    "signin": "Anmelden",
-    "docs": "Dokumentation"
-  },
-  "footer": {
-    "content": {
-      "contactnf": "KONTAKT",
-      "blognew": "NEUIGKEITEN",
-      "uselink": "NÜTZLICHE LINKS",
-      "docs": "Dokumentation",
-      "policies": "Allgemeine Richtlinien",
-      "faq": "Support und FAQ",
-      "forum": "Forum und Community",
-      "devtool": "DEV-Tools",
-      "api": "Dienst-API",
-      "bugs": "Fehler melden",
-      "desc1": "Diese Website vereint eine Sammlung von Projekten, die 2010 begonnen wurden, und dient als persönlicher Blog zum Teilen verschiedenster Themen. Entdecke die Website und teile ihre Inhalte.",
-      "desc2": "Diese Website wird ständig weiterentwickelt. Du kannst gerne auf Fehler hinweisen oder Verbesserungen vorschlagen.",
-      "start": "Jetzt beginnen",
-      "source": "Quellcode",
-      "feedback": "Feedback",
-      "dpo": "Datenschutzbeauftragter (DPO)"
-    },
-    "author": "Autor",
-    "about": "Über uns",
-    "licit": "Rechtliches",
-    "cookie": "Cookies",
-    "privacci": "Datenschutz",
-    "footoodle": {
-      "title": "Bei Collabore anmelden",
-      "description": "<p>Collabore öffnet Entwicklern und Technikbegeisterten neue Möglichkeiten. Verwandle deinen Dienst für statische Seiten in dynamische Seiten.</p><p>Über eine einfache, aber leistungsstarke Benutzeroberfläche kannst du Beiträge bearbeiten, überprüfen und erstellen, Plugins und Apps zu deinen Seiten hinzufügen oder eigene Erweiterungen integrieren.</p><p>All dies basiert auf offenem Quellcode, der für Erweiterungen entwickelt wurde. Nutze das integrierte Authentifizierungssystem, damit sich Collabore-Benutzer mit wenigen Klicks auf deiner Seite registrieren und sich automatisch bei den Plugins und Apps deiner Seite anmelden können.</p><p class='mt-5 ct'>Werde Teil dieses kollaborativen Systems, <a href='./signup' class='white tdu'>registriere dich jetzt!</a></p>"
-    }
-  },
-  "api": {
-    "geo": {
-      "request": "Standortzugriff anfordern",
-      "description": "<div class='row'><p>Die Geolokalisierung ermöglicht es, Inhalte genauer und relevanter zu finden.</p><p>So kannst du ganz einfach Freunde, Seiten, Produkte, Gruppen, Kanäle, Beiträge oder Tags in deiner Nähe finden.</p></div><div data-mg='top:15' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-map-marker ct' onclick='$.Geo.request()'> Berechtigung anfordern</span></div></div>",
-      "link_docs": "Weitere Informationen findest du in unserer Anleitung zu Berechtigungen in der <a href='https://docs.himliy.com/gelocation#permissions' target='blank_' rel='nofollow' class='blue tdu'>Dokumentation</a>"
-    },
-    "not": {
-      "request": "Benachrichtigungen anfordern",
-      "description": "<div class='row'><p>Bei Verwendung von Benachrichtigungen:</p><p><b>Angemeldete Benutzer:</b> erhalten Nachrichten-, System-, Chat-, Kanal- und registrierte Feed-Benachrichtigungen (siehe Dokumentation: <a href='http://docs.himliy.com/notification#subscribles' target='blank_' rel='nofollow' class='blue tdu'>Abonnement</a>), auch wenn sie andere Webseiten besuchen oder der Browser <b>minimiert</b> ist.</p><p><b>Nicht angemeldete Benutzer:</b> erhalten System- oder Umfragebenachrichtigungen (siehe Dokumentation: <a href='https://docs.himliy.com/notification#unsigned-subscrible' target='blank_' rel='nofollow' class='blue tdu'>nicht registriertes Abonnement</a>.</p></div><div data-mg='top:5' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-bell-o ct' onclick='$.Notific.request()'> Berechtigung anfordern</span></div></div>",
-      "link_docs": "Weitere Informationen findest du in unserer Anleitung zu Berechtigungen in der <a href='https://docs.himliy.com/notification#permissions' target='blank_' rel='nofollow' class='blue tdu'>Dokumentation</a>",
-      "message": {
-        "head": "Vielen Dank",
-        "body": "Du hast Benachrichtigungen für Collabore aktiviert :)"
-      }
-    }
-  },
-  "cookies": {
-    "agree": {
-      "description_1": "Diese Website verwendet Cookies und andere Technologien zum Speichern von Informationen. Wenn du diese Website weiterhin nutzt, stimmst du dieser Verwendung und unserer entsprechenden \"Richtlinie\" zu.",
-      "description_2": "Ausführlichere Informationen findest du in unserer <a href='./policies.html#cookies' target='blank_' rel='nofollow' class='tdu sky'>Cookie-Richtlinie</a>.",
-      "close_banner_info": "Klicke zum Schließen auf die Schaltfläche unten."
-    }
-  },
-  "drawer": {
-    "clear_data": {
-      "title": "Website-Daten löschen",
-      "question_info": "Bist du sicher?",
-      "positive": "Ja, löschen",
-      "negative": "Nein, abbrechen",
-      "footer_info": "Cache und Cookies löschen. Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
-    },
-    "bug_report": {
-      "title": "Fehler melden 🐛",
-      "question_info": "Einen Fehler gefunden? Melde ihn!",
-      "placeholder": "Beschreibe den Fehler hier...",
-      "send": "Senden",
-      "follow": "Zum Support",
-      "footer_info": "Fehler melden. Weitere Informationen findest du in der <a href='#' class='tdu blue'>Dokumentation</a>."
-    },
-    "feedback": {
-      "title": "Feedback senden",
-      "rating": "Bewertung:",
-      "question_info": "Teile uns deine Meinung zu Collabore mit!",
-      "placeholder": "Sende Kritik, Lob oder Vorschläge",
-      "footer_info": "Feedback senden. Weitere Informationen findest du in der <a href='#' class='tdu blue'>Dokumentation</a>.",
-      "notific": {
-        "error": {
-          "title": "Feedback fehlgeschlagen!",
-          "message": "Entschuldigung, bei der Verarbeitung deines Feedbacks ist ein Fehler aufgetreten."
+    "anonimous": {
+        "title": "Verwendest du den Inkognito-Modus?",
+        "body": {
+            "first": "Hmm... es sieht so aus, als würdest du im privaten Modus (anonym) surfen.",
+            "second": "In diesem Browsermodus werden alle Cookies und zwischengespeicherten Daten dieser Sitzung gelöscht, sobald du sie beendest.",
+            "third": "Da diese Website auch offline funktioniert, stehen einige Funktionen, Plugins und Apps möglicherweise nicht zur Verfügung oder funktionieren nicht richtig."
         },
-        "success": {
-          "title": "Feedback gesendet!",
-          "message": "Vielen Dank! Dein Feedback wurde erfolgreich gesendet."
-        }
-      }
+        "button": "Okay, ich möchte fortfahren"
     },
-    "geolocation": {
-      "title": "Standortzugriff anfordern",
-      "btn1": "Ja, anfordern",
-      "btn2": "Nein, abbrechen",
-      "footer_info": "Geolokalisierung? Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
-    },
-    "notification": {
-      "title": "Benachrichtigungen anfordern",
-      "btn1": "Ja, anfordern",
-      "btn2": "Nein, abbrechen",
-      "footer_info": "Benachrichtigungen? Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
-    },
-    "getmedia_audio": {
-      "title": "Mikrofon anfordern",
-      "btn1": "Ja, anfordern",
-      "btn2": "Nein, abbrechen",
-      "footer_info": "Audiomedien? Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
-    },
-    "getmedia_video": {
-      "title": "Webcam anfordern",
-      "btn1": "Ja, anfordern",
-      "btn2": "Nein, abbrechen",
-      "footer_info": "Videomedien? Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
+    "source": {
+        "name": "Subversivo58 Blog",
+        "version": "0.1.0",
+        "author": "Subversivo58",
+        "home": "https://github.com/subversivo58/",
+        "colab": [],
+        "build": "Alpha",
+        "bugs": [
+            {
+                "type": "git",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
+            }
+        ],
+        "license": [
+            {
+                "type": "MIT",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
+            }
+        ]
     },
     "words": {
-      "clear": "Bereinigen",
-      "geo": "Geo",
-      "cam": "Video",
-      "mic": "Audio",
-      "color": "Farbe",
-      "note": "Notizen",
-      "bug": "Fehler",
-      "lab": "Labor",
-      "not": "Hinweise",
-      "feedback": "Feedback",
-      "lang": "Sprachen",
-      "marks": "Markierung",
-      "admin": "Verwaltung"
+        "an": "vor 1",
+        "agree": "zustimmen",
+        "clear": "löschen",
+        "signin": "anmelden",
+        "logout": "abmelden",
+        "signup": "registrieren",
+        "close": "schließen",
+        "drawer": "Seitenleiste",
+        "free": "kostenlos",
+        "search": "suchen",
+        "recover": "wiederherstellen",
+        "restore": "zurücksetzen",
+        "white": "weiß",
+        "decade": "Jahrzehnt",
+        "year": "Jahr",
+        "month": "Monat",
+        "week": "Woche",
+        "day": "Tag",
+        "hour": "Stunde",
+        "minute": "Minute",
+        "license": "Lizenz",
+        "more": "mehr",
+        "second": "Sekunde",
+        "now": "jetzt",
+        "rememberme": "an mich erinnern",
+        "source": "Quelle",
+        "mail": "E-Mail",
+        "page": "Seite",
+        "pwd": "Passwort",
+        "token": "Token",
+        "media": "Medien",
+        "settings": "Einstellungen",
+        "version": "Version",
+        "ooops": "hoppla..."
     },
-    "version": "Version"
-  },
-  "copyright": {
-    "contributors": "Dieses Projekt war nur dank der Nutzung vieler anderer Open-Source-Projekte und der <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>Community der Mitwirkenden</a> möglich... Du darfst es erstellen, verwenden, verändern und verbreiten, sofern du alle zugrunde liegenden Lizenzen beachtest!",
-    "caption": "Liste der Quellen und ihrer jeweiligen Lizenzen",
-    "backendsources": "Viele weitere Quellen, die auf dem Server (NodeJS) ausgeführt und dynamisch geladen werden, sind für dieses Projekt von grundlegender Bedeutung, darunter:",
-    "package": "und <a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>mehr...</a>",
-    "tps": "Software von Drittanbietern",
-    "thissource": "Software dieser Website",
-    "alllicenses": "Alle Lizenzen"
-  },
-  "nocookie": {
-    "title": "Nicht unterstützt",
-    "p1": "Entschuldigung, das Surfen ohne Cookies wird nicht unterstützt.",
-    "p2": "Obwohl diese Website Cookies und andere Speichertechnologien verwendet, \"<strong>speichern wir ohne deine ausdrückliche Zustimmung keine Daten in deinem Browser</strong>\"!",
-    "p3": "Wir sind der Ansicht, gute Gründe dafür zu haben, das Surfen ohne Cookies nicht zu unterstützen. Weitere Informationen findest du in unserem <a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a>. Leider musst du Cookies in deinem Browser aktivieren."
-  },
-  "twofactory": {
-    "security_slide": {
-      "enabled": "2FA deaktivieren",
-      "disabled": "2FA aktivieren"
-    }
-  },
-  "webpush": {
-    "subscribe": {
-      "": ""
-    }
-  },
-  "date": {
-    "days": {
-      "long": [
-        "Sonntag",
-        "Montag",
-        "Dienstag",
-        "Mittwoch",
-        "Donnerstag",
-        "Freitag",
-        "Samstag"
-      ],
-      "short": [
-        "So",
-        "Mo",
-        "Di",
-        "Mi",
-        "Do",
-        "Fr",
-        "Sa"
-      ]
+    "combo": {
+        "btn_top": "Zurück nach oben",
+        "more_info": "weitere Informationen erhalten.",
+        "click_here": "Hier klicken!",
+        "clear_exit": "Löschen und verlassen",
+        "not_show_again": "nicht erneut anzeigen",
+        "powered": "Bereitgestellt von",
+        "copyr": "Urheberrecht",
+        "knowmore": "Mehr erfahren",
+        "seelicenses": "Lizenzen ansehen"
     },
-    "months": {
-      "long": [
-        "Januar",
-        "Februar",
-        "März",
-        "April",
-        "Mai",
-        "Juni",
-        "Juli",
-        "August",
-        "September",
-        "Oktober",
-        "November",
-        "Dezember"
-      ],
-      "short": [
-        "Jan",
-        "Feb",
-        "Mär",
-        "Apr",
-        "Mai",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Okt",
-        "Nov",
-        "Dez"
-      ]
+    "langs": {
+        "enUS": "Englisch (Vereinigte Staaten) - [Standard]",
+        "ptBR": "Portugiesisch (Brasilien)",
+        "esES": "Spanisch (Spanien)",
+        "frFR": "Französisch (Frankreich)",
+        "deDE": "Deutsch (Deutschland)",
+        "jaJP": "Japanisch"
     },
-    "formatter": {
-      "error": "Ungültiges Datum"
-    }
-  },
-  "modals": {
-    "language": {
-      "title": "Sprache auswählen",
-      "avaliable": "Verfügbare Sprachen",
-      "pt_BR": "Portugiesisch",
-      "en_US": "Englisch",
-      "es_ES": "Spanisch",
-      "fr_FR": "Französisch",
-      "de_DE": "Deutsch",
-      "ja_JP": "Japanisch",
-      "footer": "Keine Option in deiner Sprache? Erstelle eine Übersetzung!"
+    "navbar": {
+        "wiki": "WIKI",
+        "blog": "Blog",
+        "dpo": "DPO",
+        "colab": "mitwirken",
+        "about": "Über uns",
+        "lab": "Labor",
+        "contact": "Kontakt",
+        "policies": "Richtlinien",
+        "donations": "Spenden",
+        "signin": "Anmelden",
+        "docs": "Dokumentation"
     },
-    "version": {
-      "title": "🚧 In Entwicklung 🚧",
-      "text1": "Dieses Projekt war nur dank der Nutzung vieler anderer Open-Source-Projekte und der ",
-      "text2": "Community der Mitwirkenden",
-      "text3": "Du darfst es erstellen, verwenden, verändern und verbreiten, sofern du alle zugrunde liegenden Lizenzen beachtest!"
-    },
-    "tabs": {
-      "camera": "Kamera anfordern",
-      "permissions": "Berechtigungen"
-    },
-    "share": {
-      "title": "Diesen Blog teilen",
-      "broken_link": "Einen defekten Link melden?"
-    },
-    "notes": {
-      "title": "Schnelle Notizen",
-      "note_title": "Titel:",
-      "category": "Kategorie:",
-      "tags": "Tags:",
-      "note": "Notiz:",
-      "save": "Speichern",
-      "ph_title": "Titel",
-      "ph_category": "Kategorie",
-      "ph_tags": "Tags",
-      "ph_note": "Deine Notiz hier..."
-    },
-    "offline": {
-      "title": "Offline speichern",
-      "yes": "Ja, speichern!",
-      "no": "Nein, abbrechen",
-      "about": "Über Offline-Ressourcen?"
-    },
-    "auth": {
-      "title": "Anmelden und autorisieren",
-      "source": "Quellcode: <a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">auf GitHub ansehen</a>"
-    },
-    "bugs": {
-      "select_type": "Typ auswählen:",
-      "custom": "Benutzerdefinierter Fehler",
-      "css": "CSS-Fehler",
-      "js": "JavaScript-Fehler",
-      "language": "Sprachfehler",
-      "plugins": "Plugin-Fehler",
-      "server": "Serverfehler",
-      "description": "Eine Beschreibung senden",
-      "ph_description": "Beschreibung hier..."
-    }
-  },
-  "notify": {
-    "storage": {
-      "title": "Subversivo58 - Speicher",
-      "body": "Diese Website verwendet Cookies und andere Technologien, die Informationen auf deinem Gerät speichern. Stimmst du dem zu?",
-      "actions": [
-        {
-          "action": "cookie-agree",
-          "title": "Was ist das?",
-          "icon": "🍪"
+    "footer": {
+        "content": {
+            "contactnf": "KONTAKT",
+            "blognew": "NEUIGKEITEN",
+            "uselink": "NÜTZLICHE LINKS",
+            "docs": "Dokumentation",
+            "policies": "Allgemeine Richtlinien",
+            "faq": "Support und FAQ",
+            "forum": "Forum und Community",
+            "devtool": "DEV-Tools",
+            "api": "Dienst-API",
+            "bugs": "Fehler melden",
+            "desc1": "Diese Website vereint eine Sammlung von Projekten, die 2010 begonnen wurden, und dient als persönlicher Blog zum Teilen verschiedenster Themen. Entdecke die Website und teile ihre Inhalte.",
+            "desc2": "Diese Website wird ständig weiterentwickelt. Du kannst gerne auf Fehler hinweisen oder Verbesserungen vorschlagen.",
+            "start": "Jetzt beginnen",
+            "source": "Quellcode",
+            "feedback": "Feedback",
+            "dpo": "Datenschutzbeauftragter (DPO)"
         },
-        {
-          "action": "cookie-policy",
-          "title": "Richtlinien ansehen",
-          "icon": "🛡️"
-        },
-        {
-          "action": "terms-policy",
-          "title": "Nutzungsbedingungen ansehen",
-          "icon": "📜"
+        "author": "Autor",
+        "about": "Über uns",
+        "licit": "Rechtliches",
+        "cookie": "Cookies",
+        "privacci": "Datenschutz",
+        "footoodle": {
+            "title": "Bei Collabore anmelden",
+            "description": "<p>Collabore öffnet Entwicklern und Technikbegeisterten neue Möglichkeiten. Verwandle deinen Dienst für statische Seiten in dynamische Seiten.</p><p>Über eine einfache, aber leistungsstarke Benutzeroberfläche kannst du Beiträge bearbeiten, überprüfen und erstellen, Plugins und Apps zu deinen Seiten hinzufügen oder eigene Erweiterungen integrieren.</p><p>All dies basiert auf offenem Quellcode, der für Erweiterungen entwickelt wurde. Nutze das integrierte Authentifizierungssystem, damit sich Collabore-Benutzer mit wenigen Klicks auf deiner Seite registrieren und sich automatisch bei den Plugins und Apps deiner Seite anmelden können.</p><p class='mt-5 ct'>Werde Teil dieses kollaborativen Systems, <a href='./signup' class='white tdu'>registriere dich jetzt!</a></p>"
         }
-      ]
     },
-    "permission_granted": {
-      "title": "Benachrichtigungen aktiviert",
-      "body": "Vielen Dank, dass du Benachrichtigungen zugelassen hast!"
-    }
-  },
-  "pages": {
-    "about": {
-      "heading": "Technologie, Trends und Cyberkultur",
-      "item1": "✓ Web-APIs, JavaScript und HTML5-Funktionen.",
-      "item2": "✓ Funktionale Programmierung, Patterns und Frameworks.",
-      "item3": "✓ WebCrypto, Laborexperimente und Code-Beispiele.",
-      "item4": "✓ Meinungen, Lifestyle, Geek-Kultur und vieles mehr.",
-      "photo": "Foto von <a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a> auf <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
-      "title": "Über uns",
-      "p1": "Hallo, ich bin Lauro Moraes, auch bekannt als <a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a>, und diese Website ist mein digitales Labor und mein persönlicher Blog.",
-      "p2": "Hier veröffentliche ich Inhalte über Technologietrends, Cyberkultur und Webprogrammierung, darunter PWAs, Single-Page-Apps und den Einsatz moderner JavaScript-, HTML5- und CSS3-APIs.",
-      "p3": "Ich interessiere mich besonders für funktionale Programmierung, Design Patterns und Themen wie die Dezentralisierung des Webs ... Blockchain und Web-Kryptografie sind hier wiederkehrende Themen.",
-      "p4": "Hier veröffentliche ich auch meine Experimente und teile meinen Code sowie kleine funktionierende Beispiele. Außerdem äußere ich meine Meinungen zu verschiedenen Themen, Geek-Kultur und diesem Lebensstil.",
-      "p5": "Entdecke gerne die Inhalte des Blogs und werde Teil unserer Community."
-    },
-    "you_in_control": {
-      "heading": "Du hast die Kontrolle über deine Daten",
-      "item1": "✓ Datenschutz ist dein Recht und kein Produkt, das dir verkauft werden sollte.",
-      "item2": "✓ Kryptografie als Grundlage der digitalen Sicherheit.",
-      "item3": "✓ Der Respekt vor der Privatsphäre beginnt mit dem Respekt vor deinen Entscheidungen.",
-      "item4": "✓ Du entscheidest, was, wann und mit wem du deine Daten teilst.",
-      "photo": "Foto von <a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a> auf <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>"
-    },
-    "donations": {
-      "heading": "Möchtest du etwas Gutes tun?",
-      "photo": "Foto von <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> auf <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
-      "thanks_title": "Danksagungen",
-      "thanks_text": "Wir sind stolz darauf, <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> sowie die Dienste von <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a> zu nutzen. Diese Plattformen und ihre Werkzeuge sind wirklich beeindruckend und ermöglichen uns Projekte wie diesen Blog und unsere Tools.",
-      "platforms_title": "Lerne diese Plattformen kennen",
-      "link_github": "GitHub Pages",
-      "link_workers": "Cloudflare Workers",
-      "donate_title": "Deine Spende ist wichtig"
-    },
-    "dpo": {
-      "heading": "Datenschutzbeauftragter (DPO)",
-      "intro1": "In Übereinstimmung mit dem brasilianischen Datenschutzgesetz (LGPD - Gesetz Nr. 13.709/2018) geben wir die Kontaktdaten unseres Datenschutzbeauftragten bekannt.",
-      "intro2": "Der DPO ist dafür verantwortlich, die Kommunikation zwischen der Website, den betroffenen Personen (dir) und der brasilianischen Datenschutzbehörde (ANPD) zu vermitteln.",
-      "contact_title": "Kontaktinformationen",
-      "officer": "<strong>Datenschutzbeauftragter:</strong> Lauro de Moraes",
-      "email": "E-Mail:",
-      "deadline": "<strong>Antwortfrist:</strong> Bis zu 30 Tage gemäß den geltenden Vorschriften für kleine Datenverarbeiter.",
-      "send_email": "E-Mail an den DPO senden",
-      "rights_title": "So kannst du deine Rechte ausüben",
-      "rights1": "Um eines deiner Rechte gemäß Artikel 18 des LGPD auszuüben (z. B. Bestätigung der Datenverarbeitung, Zugang, Berichtigung, Anonymisierung oder Löschung), sende einfach eine E-Mail an die oben angegebene Adresse.",
-      "rights2": "Um die Bearbeitung zu beschleunigen, empfehlen wir, in den Betreff oder Text der E-Mail Folgendes aufzunehmen:",
-      "list1": "Deinen vollständigen Namen;",
-      "list2": "Das Recht, das du ausüben möchtest (z. B. Datenlöschung, Auskunft usw.);",
-      "list3": "Angaben, die uns helfen können, deine Daten in unseren Systemen zu finden.",
-      "policies": "Weitere Informationen zur Verarbeitung deiner Daten findest du in unserer <a href=\"./policy.html#policy-general\">Allgemeinen Richtlinie</a> und unserer <a href=\"./policy.html#policy-privacy\">Datenschutzrichtlinie</a>."
-    },
-    "home": {
-      "intro": {
-        "eyebrow": "ÜBER SUBVERSIVO58",
-        "title": "Weit mehr als ein Blog.",
-        "description": "Ein Raum für Neugier, Technologie und die Freiheit, Ideen zu erkunden.",
-        "details": "Hier treffen Wissen und Kreativität in Inhalten, Erfahrungen und Projekten aufeinander, die über das Konventionelle hinausgehen.",
-        "signature": "NEUGIER · WISSEN · KREATIVITÄT"
-      },
-      "exploration": {
-        "eyebrow": "ENTDECKEN",
-        "title": "Entdecke verschiedene Ideen.",
-        "description": "Verschiedene Wege, um zu lernen, zu experimentieren und neue Möglichkeiten zu entdecken.",
-        "programming": {
-          "title": "Programmierung",
-          "description": "Code, Entwicklung und kreative Lösungen für die digitale Welt."
+    "api": {
+        "geo": {
+            "request": "Standortzugriff anfordern",
+            "description": "<div class='row'><p>Die Geolokalisierung ermöglicht es, Inhalte genauer und relevanter zu finden.</p><p>So kannst du ganz einfach Freunde, Seiten, Produkte, Gruppen, Kanäle, Beiträge oder Tags in deiner Nähe finden.</p></div><div data-mg='top:15' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-map-marker ct' onclick='$.Geo.request()'> Berechtigung anfordern</span></div></div>",
+            "link_docs": "Weitere Informationen findest du in unserer Anleitung zu Berechtigungen in der <a href='https://docs.himliy.com/gelocation#permissions' target='blank_' rel='nofollow' class='blue tdu'>Dokumentation</a>"
         },
-        "technology": {
-          "title": "Technologie",
-          "description": "Werkzeuge, Ressourcen und Neuheiten, die unseren Alltag verändern."
-        },
-        "experiments": {
-          "title": "Experimente",
-          "description": "Ideen im Entstehen, Tests und Entdeckungen abseits des Konventionellen."
-        },
-        "knowledge": {
-          "title": "Wissen",
-          "description": "Lernen, Reflexionen und Informationen, um Horizonte zu erweitern."
+        "not": {
+            "request": "Benachrichtigungen anfordern",
+            "description": "<div class='row'><p>Bei Verwendung von Benachrichtigungen:</p><p><b>Angemeldete Benutzer:</b> erhalten Nachrichten-, System-, Chat-, Kanal- und registrierte Feed-Benachrichtigungen (siehe Dokumentation: <a href='http://docs.himliy.com/notification#subscribles' target='blank_' rel='nofollow' class='blue tdu'>Abonnement</a>), auch wenn sie andere Webseiten besuchen oder der Browser <b>minimiert</b> ist.</p><p><b>Nicht angemeldete Benutzer:</b> erhalten System- oder Umfragebenachrichtigungen (siehe Dokumentation: <a href='https://docs.himliy.com/notification#unsigned-subscrible' target='blank_' rel='nofollow' class='blue tdu'>nicht registriertes Abonnement</a>.</p></div><div data-mg='top:5' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-bell-o ct' onclick='$.Notific.request()'> Berechtigung anfordern</span></div></div>",
+            "link_docs": "Weitere Informationen findest du in unserer Anleitung zu Berechtigungen in der <a href='https://docs.himliy.com/notification#permissions' target='blank_' rel='nofollow' class='blue tdu'>Dokumentation</a>",
+            "message": {
+                "head": "Vielen Dank",
+                "body": "Du hast Benachrichtigungen für Collabore aktiviert :)"
+            }
         }
-      },
-      "lab": {
-        "eyebrow": "SUBVERSIVO58 / LABOR",
-        "title": "Ein Raum, um neue Möglichkeiten zu erkunden.",
-        "description": "Experimente, Projekte und Werkzeuge, entwickelt, um Neugier in Entdeckungen zu verwandeln.",
-        "link": "Das Labor erkunden"
-      }
     },
-    "policy": {
-      "cards": {
-        "introduction": {
-          "title": "Einführung",
-          "description": "Diese Website wurde mit Web-Technologien erstellt; wir glauben an Dezentralisierung und kryptografische Sicherheit. Wir glauben, dass Sie der alleinige Inhaber Ihrer Daten sind.",
-          "link": "Mehr dazu in unserem „White Paper“"
-        },
-        "privacy": {
-          "title": "Datenschutz",
-          "description": "Die Datenschutzrichtlinie beschreibt, warum diese Website Daten anfordert und wie sie verarbeitet werden, und informiert darüber, wie Nutzer ihre Daten bearbeiten, herunterladen oder löschen können.",
-          "link": "Unsere Datenschutzrichtlinie lesen"
-        },
-        "terms": {
-          "title": "Bedingungen",
-          "description": "Die Bedingungen beschreiben, wie wir diese Website betreiben, was unsere Nutzer von ihr erwarten können und was wir in diesem Prozess von unseren Nutzern erwarten.",
-          "link": "Unsere Nutzungsbedingungen lesen"
-        },
-        "general": {
-          "title": "Richtlinie",
-          "description": "Die „Richtlinie“ ist das allgemeine Dokument, das die Beziehung zwischen der Website und dem Nutzer regelt und die Garantien und Einschränkungen des Nutzungsvertrags für die Website und ihre Werkzeuge festlegt.",
-          "link": "Unsere Allgemeine Richtlinie lesen"
+    "cookies": {
+        "agree": {
+            "description_1": "Diese Website verwendet Cookies und andere Technologien zum Speichern von Informationen. Wenn du diese Website weiterhin nutzt, stimmst du dieser Verwendung und unserer entsprechenden \"Richtlinie\" zu.",
+            "description_2": "Ausführlichere Informationen findest du in unserer <a href='./policies.html#cookies' target='blank_' rel='nofollow' class='tdu sky'>Cookie-Richtlinie</a>.",
+            "close_banner_info": "Klicke zum Schließen auf die Schaltfläche unten."
         }
-      },
-      "overview": {
-        "quote1": "Richtlinien sind die Art und Weise, wie Website und Nutzer zueinander in Beziehung stehen. Sie schaffen Sicherheit und Vertrauen und gewährleisten Transparenz und Qualität in dieser Beziehung; außerdem sind sie in vielen Datenschutzgesetzen in zahlreichen Ländern der Welt Gegenstand der Regulierung.",
-        "quote2": "Wir versuchen, unsere Richtlinien so einfach wie möglich zu halten, um dem Muster der „<strong>Buchstabensuppe</strong>“ zu entgehen. Nicht zu viel, denn zu viel garantiert keine Qualität, und nicht zu wenig, denn zu wenig garantiert keinen Inhalt.",
-        "quote3": "Wir hoffen, dass dieses Vertrauensverhältnis für unsere Nutzer ebenso wie für uns selbst ein Lernprozess wird.",
-        "whitepaper_link": "Ein Auszug aus unserem „White Paper“",
-        "contact": "Fragen, die sich aus der Nutzung der Website oder ihrer Werkzeuge ergeben, können über unsere Kontaktformulare oder <strong>Feedback</strong>-Werkzeuge gemeldet werden (wir lieben Feedback). Außerdem laden wir Sie ein, Probleme über unseren Datenschutzbeauftragten (DPO) unter der folgenden E-Mail-Adresse zu klären: <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Politicas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
-        "markdown1": "Die Richtlinien dieser Website wurden in der leicht angepassten Auszeichnungssprache <strong>Markdown</strong> verfasst. Sie können sie als reinen Text ansehen oder sogar auf <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a> über diesen <a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">Link zu unserem Repository</a> herunterladen.",
-        "markdown2": "Dort finden Sie diese und alle früheren Versionen dieser Richtlinien sowie den Quellcode dieser Website. Sie können sie auch ausdrucken, indem Sie auf das Drucksymbol <span class=\"badge badge-light border-def contrast\">Drucken&nbsp;🖨️</span> oben in unserer Allgemeinen Richtlinie klicken."
-      },
-      "privacy": {
-        "heading": "Datenschutz",
-        "image_alt": "Sie haben die Wahl",
-        "image_title": "Sie haben die Wahl",
-        "paragraph1": "Wir glauben, dass das Prinzip des Datenschutzes die Wahlfreiheit ist. Nutzer sollten ihre Daten nicht mit einem einzigen Klick oder durch Bedingungen preisgeben müssen, die sie zwingen, eine große Menge an Daten für die Nutzung eines bestimmten Werkzeugs abzugeben.",
-        "paragraph2": "Wahlfreiheit sowie ein progressives, aber nicht obstruktives Modell für die Anforderung von Daten und die Einwilligung nur bei Bedarf sollten ein einzuhaltender Standard sein.",
-        "paragraph3": "Respekt vor der Privatsphäre beginnt damit, die Entscheidung des Nutzers darüber zu respektieren, „was“ und „wann“ er teilen möchte."
-      },
-      "terms": {
-        "heading": "Nutzungsbedingungen",
-        "image_alt": "Bild der Website-Bedingungen",
-        "image_title": "Unsere Bedingungen"
-      },
-      "general": {
-        "heading": "Allgemeine Richtlinie",
-        "image_alt": "Bild des Website-Vertrags",
-        "image_title": "Vertrag"
-      },
-      "cookies": {
-        "heading": "Cookies akzeptieren",
-        "paragraph1": "Wenn Sie sich fragen: <strong>Muss ich wirklich Cookies und Datenspeicherung akzeptieren</strong>? Die kurze Antwort lautet: <strong>Nein, müssen Sie nicht</strong>! Sie können weiterhin viele Werkzeuge und Funktionen der Website nutzen, haben jedoch möglicherweise nicht die beste Erfahrung 🙁",
-        "paragraph2": "Zum Beispiel: Wenn Sie eine Sprache auswählen, eine Lieblingsfarbe speichern oder eine Einstellung festlegen, müssen Sie diese Auswahl bei jedem Besuch oder jeder Navigation auf der Website erneut treffen ... die einzige Möglichkeit, Ihre Auswahl zu „speichern“, ist, sie lokal abzulegen.",
-        "paragraph3": "Gemäß unserer Philosophie, dass <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">Sie der alleinige Inhaber Ihrer Daten sind</a>, glauben wir, dass Sie die Wahl haben. Wenn Sie die Verwendung von Cookies akzeptieren, indem Sie auf die Schaltfläche unten <strong>klicken und drücken</strong>, können Sie sie auch jederzeit hier oder im Reiter „Benutzer“ <strong>deaktivieren</strong> und außerdem alles, was bereits gespeichert wurde, auf einmal entfernen 😎",
-        "button": "🍪 Zum Aktivieren der Cookies drücken"
-      }
+    },
+    "drawer": {
+        "clear_data": {
+            "title": "Website-Daten löschen",
+            "question_info": "Bist du sicher?",
+            "positive": "Ja, löschen",
+            "negative": "Nein, abbrechen",
+            "footer_info": "Cache und Cookies löschen. Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
+        },
+        "bug_report": {
+            "title": "Fehler melden 🐛",
+            "question_info": "Einen Fehler gefunden? Melde ihn!",
+            "placeholder": "Beschreibe den Fehler hier...",
+            "send": "Senden",
+            "follow": "Zum Support",
+            "footer_info": "Fehler melden. Weitere Informationen findest du in der <a href='#' class='tdu blue'>Dokumentation</a>."
+        },
+        "feedback": {
+            "title": "Feedback senden",
+            "rating": "Bewertung:",
+            "question_info": "Teile uns deine Meinung zu Collabore mit!",
+            "placeholder": "Sende Kritik, Lob oder Vorschläge",
+            "footer_info": "Feedback senden. Weitere Informationen findest du in der <a href='#' class='tdu blue'>Dokumentation</a>.",
+            "notific": {
+                "error": {
+                    "title": "Feedback fehlgeschlagen!",
+                    "message": "Entschuldigung, bei der Verarbeitung deines Feedbacks ist ein Fehler aufgetreten."
+                },
+                "success": {
+                    "title": "Feedback gesendet!",
+                    "message": "Vielen Dank! Dein Feedback wurde erfolgreich gesendet."
+                }
+            }
+        },
+        "geolocation": {
+            "title": "Standortzugriff anfordern",
+            "btn1": "Ja, anfordern",
+            "btn2": "Nein, abbrechen",
+            "footer_info": "Geolokalisierung? Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
+        },
+        "notification": {
+            "title": "Benachrichtigungen anfordern",
+            "btn1": "Ja, anfordern",
+            "btn2": "Nein, abbrechen",
+            "footer_info": "Benachrichtigungen? Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
+        },
+        "getmedia_audio": {
+            "title": "Mikrofon anfordern",
+            "btn1": "Ja, anfordern",
+            "btn2": "Nein, abbrechen",
+            "footer_info": "Audiomedien? Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
+        },
+        "getmedia_video": {
+            "title": "Webcam anfordern",
+            "btn1": "Ja, anfordern",
+            "btn2": "Nein, abbrechen",
+            "footer_info": "Videomedien? Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
+        },
+        "words": {
+            "clear": "Bereinigen",
+            "geo": "Geo",
+            "cam": "Video",
+            "mic": "Audio",
+            "color": "Farbe",
+            "note": "Notizen",
+            "bug": "Fehler",
+            "lab": "Labor",
+            "not": "Hinweise",
+            "feedback": "Feedback",
+            "lang": "Sprachen",
+            "marks": "Markierung",
+            "admin": "Verwaltung"
+        },
+        "version": "Version"
+    },
+    "copyright": {
+        "contributors": "Dieses Projekt war nur dank der Nutzung vieler anderer Open-Source-Projekte und der <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>Community der Mitwirkenden</a> möglich... Du darfst es erstellen, verwenden, verändern und verbreiten, sofern du alle zugrunde liegenden Lizenzen beachtest!",
+        "caption": "Liste der Quellen und ihrer jeweiligen Lizenzen",
+        "backendsources": "Viele weitere Quellen, die auf dem Server (NodeJS) ausgeführt und dynamisch geladen werden, sind für dieses Projekt von grundlegender Bedeutung, darunter:",
+        "package": "und <a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>mehr...</a>",
+        "tps": "Software von Drittanbietern",
+        "thissource": "Software dieser Website",
+        "alllicenses": "Alle Lizenzen"
+    },
+    "nocookie": {
+        "title": "Nicht unterstützt",
+        "p1": "Entschuldigung, das Surfen ohne Cookies wird nicht unterstützt.",
+        "p2": "Obwohl diese Website Cookies und andere Speichertechnologien verwendet, \"<strong>speichern wir ohne deine ausdrückliche Zustimmung keine Daten in deinem Browser</strong>\"!",
+        "p3": "Wir sind der Ansicht, gute Gründe dafür zu haben, das Surfen ohne Cookies nicht zu unterstützen. Weitere Informationen findest du in unserem <a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a>. Leider musst du Cookies in deinem Browser aktivieren."
+    },
+    "twofactory": {
+        "security_slide": {
+            "enabled": "2FA deaktivieren",
+            "disabled": "2FA aktivieren"
+        }
+    },
+    "webpush": {
+        "subscribe": {
+            "": ""
+        }
+    },
+    "date": {
+        "days": {
+            "long": [
+                "Sonntag",
+                "Montag",
+                "Dienstag",
+                "Mittwoch",
+                "Donnerstag",
+                "Freitag",
+                "Samstag"
+            ],
+            "short": [
+                "So",
+                "Mo",
+                "Di",
+                "Mi",
+                "Do",
+                "Fr",
+                "Sa"
+            ]
+        },
+        "months": {
+            "long": [
+                "Januar",
+                "Februar",
+                "März",
+                "April",
+                "Mai",
+                "Juni",
+                "Juli",
+                "August",
+                "September",
+                "Oktober",
+                "November",
+                "Dezember"
+            ],
+            "short": [
+                "Jan",
+                "Feb",
+                "Mär",
+                "Apr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Okt",
+                "Nov",
+                "Dez"
+            ]
+        },
+        "formatter": {
+            "error": "Ungültiges Datum"
+        }
+    },
+    "modals": {
+        "language": {
+            "title": "Sprache auswählen",
+            "avaliable": "Verfügbare Sprachen",
+            "pt_BR": "Portugiesisch",
+            "en_US": "Englisch",
+            "es_ES": "Spanisch",
+            "fr_FR": "Französisch",
+            "de_DE": "Deutsch",
+            "ja_JP": "Japanisch",
+            "footer": "Keine Option in deiner Sprache? Erstelle eine Übersetzung!"
+        },
+        "version": {
+            "title": "🚧 In Entwicklung 🚧",
+            "text1": "Dieses Projekt war nur dank der Nutzung vieler anderer Open-Source-Projekte und der ",
+            "text2": "Community der Mitwirkenden",
+            "text3": "Du darfst es erstellen, verwenden, verändern und verbreiten, sofern du alle zugrunde liegenden Lizenzen beachtest!"
+        },
+        "tabs": {
+            "camera": "Kamera anfordern",
+            "permissions": "Berechtigungen"
+        },
+        "share": {
+            "title": "Diesen Blog teilen",
+            "broken_link": "Einen defekten Link melden?"
+        },
+        "notes": {
+            "title": "Schnelle Notizen",
+            "note_title": "Titel:",
+            "category": "Kategorie:",
+            "tags": "Tags:",
+            "note": "Notiz:",
+            "save": "Speichern",
+            "ph_title": "Titel",
+            "ph_category": "Kategorie",
+            "ph_tags": "Tags",
+            "ph_note": "Deine Notiz hier..."
+        },
+        "offline": {
+            "title": "Offline speichern",
+            "yes": "Ja, speichern!",
+            "no": "Nein, abbrechen",
+            "about": "Über Offline-Ressourcen?"
+        },
+        "auth": {
+            "title": "Anmelden und autorisieren",
+            "source": "Quellcode: <a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">auf GitHub ansehen</a>"
+        },
+        "bugs": {
+            "select_type": "Typ auswählen:",
+            "custom": "Benutzerdefinierter Fehler",
+            "css": "CSS-Fehler",
+            "js": "JavaScript-Fehler",
+            "language": "Sprachfehler",
+            "plugins": "Plugin-Fehler",
+            "server": "Serverfehler",
+            "description": "Eine Beschreibung senden",
+            "ph_description": "Beschreibung hier..."
+        }
+    },
+    "notify": {
+        "storage": {
+            "title": "Subversivo58 - Speicher",
+            "body": "Diese Website verwendet Cookies und andere Technologien, die Informationen auf deinem Gerät speichern. Stimmst du dem zu?",
+            "actions": [
+                {
+                    "action": "cookie-agree",
+                    "title": "Was ist das?",
+                    "icon": "🍪"
+                },
+                {
+                    "action": "cookie-policy",
+                    "title": "Richtlinien ansehen",
+                    "icon": "🛡️"
+                },
+                {
+                    "action": "terms-policy",
+                    "title": "Nutzungsbedingungen ansehen",
+                    "icon": "📜"
+                }
+            ]
+        },
+        "permission_granted": {
+            "title": "Benachrichtigungen aktiviert",
+            "body": "Vielen Dank, dass du Benachrichtigungen zugelassen hast!"
+        }
+    },
+    "pages": {
+        "about": {
+            "heading": "Technologie, Trends und Cyberkultur",
+            "item1": "✓ Web-APIs, JavaScript und HTML5-Funktionen.",
+            "item2": "✓ Funktionale Programmierung, Patterns und Frameworks.",
+            "item3": "✓ WebCrypto, Laborexperimente und Code-Beispiele.",
+            "item4": "✓ Meinungen, Lifestyle, Geek-Kultur und vieles mehr.",
+            "photo": "Foto von <a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a> auf <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "title": "Über uns",
+            "p1": "Hallo, ich bin Lauro Moraes, auch bekannt als <a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a>, und diese Website ist mein digitales Labor und mein persönlicher Blog.",
+            "p2": "Hier veröffentliche ich Inhalte über Technologietrends, Cyberkultur und Webprogrammierung, darunter PWAs, Single-Page-Apps und den Einsatz moderner JavaScript-, HTML5- und CSS3-APIs.",
+            "p3": "Ich interessiere mich besonders für funktionale Programmierung, Design Patterns und Themen wie die Dezentralisierung des Webs ... Blockchain und Web-Kryptografie sind hier wiederkehrende Themen.",
+            "p4": "Hier veröffentliche ich auch meine Experimente und teile meinen Code sowie kleine funktionierende Beispiele. Außerdem äußere ich meine Meinungen zu verschiedenen Themen, Geek-Kultur und diesem Lebensstil.",
+            "p5": "Entdecke gerne die Inhalte des Blogs und werde Teil unserer Community."
+        },
+        "you_in_control": {
+            "heading": "Du hast die Kontrolle über deine Daten",
+            "item1": "✓ Datenschutz ist dein Recht und kein Produkt, das dir verkauft werden sollte.",
+            "item2": "✓ Kryptografie als Grundlage der digitalen Sicherheit.",
+            "item3": "✓ Der Respekt vor der Privatsphäre beginnt mit dem Respekt vor deinen Entscheidungen.",
+            "item4": "✓ Du entscheidest, was, wann und mit wem du deine Daten teilst.",
+            "photo": "Foto von <a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a> auf <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>"
+        },
+        "donations": {
+            "heading": "Möchtest du etwas Gutes tun?",
+            "photo": "Foto von <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> auf <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "thanks_title": "Danksagungen",
+            "thanks_text": "Wir sind stolz darauf, <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> sowie die Dienste von <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a> zu nutzen. Diese Plattformen und ihre Werkzeuge sind wirklich beeindruckend und ermöglichen uns Projekte wie diesen Blog und unsere Tools.",
+            "platforms_title": "Lerne diese Plattformen kennen",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
+            "donate_title": "Deine Spende ist wichtig"
+        },
+        "dpo": {
+            "heading": "Datenschutzbeauftragter (DPO)",
+            "intro1": "In Übereinstimmung mit dem brasilianischen Datenschutzgesetz (LGPD - Gesetz Nr. 13.709/2018) geben wir die Kontaktdaten unseres Datenschutzbeauftragten bekannt.",
+            "intro2": "Der DPO ist dafür verantwortlich, die Kommunikation zwischen der Website, den betroffenen Personen (dir) und der brasilianischen Datenschutzbehörde (ANPD) zu vermitteln.",
+            "contact_title": "Kontaktinformationen",
+            "officer": "<strong>Datenschutzbeauftragter:</strong> Lauro de Moraes",
+            "email": "E-Mail:",
+            "deadline": "<strong>Antwortfrist:</strong> Bis zu 30 Tage gemäß den geltenden Vorschriften für kleine Datenverarbeiter.",
+            "send_email": "E-Mail an den DPO senden",
+            "rights_title": "So kannst du deine Rechte ausüben",
+            "rights1": "Um eines deiner Rechte gemäß Artikel 18 des LGPD auszuüben (z. B. Bestätigung der Datenverarbeitung, Zugang, Berichtigung, Anonymisierung oder Löschung), sende einfach eine E-Mail an die oben angegebene Adresse.",
+            "rights2": "Um die Bearbeitung zu beschleunigen, empfehlen wir, in den Betreff oder Text der E-Mail Folgendes aufzunehmen:",
+            "list1": "Deinen vollständigen Namen;",
+            "list2": "Das Recht, das du ausüben möchtest (z. B. Datenlöschung, Auskunft usw.);",
+            "list3": "Angaben, die uns helfen können, deine Daten in unseren Systemen zu finden.",
+            "policies": "Weitere Informationen zur Verarbeitung deiner Daten findest du in unserer <a href=\"./policy.html#policy-general\">Allgemeinen Richtlinie</a> und unserer <a href=\"./policy.html#policy-privacy\">Datenschutzrichtlinie</a>."
+        },
+        "home": {
+            "intro": {
+                "eyebrow": "ÜBER SUBVERSIVO58",
+                "title": "Weit mehr als ein Blog.",
+                "description": "Ein Raum für Neugier, Technologie und die Freiheit, Ideen zu erkunden.",
+                "details": "Hier treffen Wissen und Kreativität in Inhalten, Erfahrungen und Projekten aufeinander, die über das Konventionelle hinausgehen.",
+                "signature": "NEUGIER · WISSEN · KREATIVITÄT"
+            },
+            "exploration": {
+                "eyebrow": "ENTDECKEN",
+                "title": "Entdecke verschiedene Ideen.",
+                "description": "Verschiedene Wege, um zu lernen, zu experimentieren und neue Möglichkeiten zu entdecken.",
+                "programming": {
+                    "title": "Programmierung",
+                    "description": "Code, Entwicklung und kreative Lösungen für die digitale Welt."
+                },
+                "technology": {
+                    "title": "Technologie",
+                    "description": "Werkzeuge, Ressourcen und Neuheiten, die unseren Alltag verändern."
+                },
+                "experiments": {
+                    "title": "Experimente",
+                    "description": "Ideen im Entstehen, Tests und Entdeckungen abseits des Konventionellen."
+                },
+                "knowledge": {
+                    "title": "Wissen",
+                    "description": "Lernen, Reflexionen und Informationen, um Horizonte zu erweitern."
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / LABOR",
+                "title": "Ein Raum, um neue Möglichkeiten zu erkunden.",
+                "description": "Experimente, Projekte und Werkzeuge, entwickelt, um Neugier in Entdeckungen zu verwandeln.",
+                "link": "Das Labor erkunden"
+            }
+        },
+        "policy": {
+            "cards": {
+                "introduction": {
+                    "title": "Einführung",
+                    "description": "Diese Website wurde mit Web-Technologien erstellt; wir glauben an Dezentralisierung und kryptografische Sicherheit. Wir glauben, dass Sie der alleinige Inhaber Ihrer Daten sind.",
+                    "link": "Mehr dazu in unserem „White Paper“"
+                },
+                "privacy": {
+                    "title": "Datenschutz",
+                    "description": "Die Datenschutzrichtlinie beschreibt, warum diese Website Daten anfordert und wie sie verarbeitet werden, und informiert darüber, wie Nutzer ihre Daten bearbeiten, herunterladen oder löschen können.",
+                    "link": "Unsere Datenschutzrichtlinie lesen"
+                },
+                "terms": {
+                    "title": "Bedingungen",
+                    "description": "Die Bedingungen beschreiben, wie wir diese Website betreiben, was unsere Nutzer von ihr erwarten können und was wir in diesem Prozess von unseren Nutzern erwarten.",
+                    "link": "Unsere Nutzungsbedingungen lesen"
+                },
+                "general": {
+                    "title": "Richtlinie",
+                    "description": "Die „Richtlinie“ ist das allgemeine Dokument, das die Beziehung zwischen der Website und dem Nutzer regelt und die Garantien und Einschränkungen des Nutzungsvertrags für die Website und ihre Werkzeuge festlegt.",
+                    "link": "Unsere Allgemeine Richtlinie lesen"
+                }
+            },
+            "overview": {
+                "quote1": "Richtlinien sind die Art und Weise, wie Website und Nutzer zueinander in Beziehung stehen. Sie schaffen Sicherheit und Vertrauen und gewährleisten Transparenz und Qualität in dieser Beziehung; außerdem sind sie in vielen Datenschutzgesetzen in zahlreichen Ländern der Welt Gegenstand der Regulierung.",
+                "quote2": "Wir versuchen, unsere Richtlinien so einfach wie möglich zu halten, um dem Muster der „<strong>Buchstabensuppe</strong>“ zu entgehen. Nicht zu viel, denn zu viel garantiert keine Qualität, und nicht zu wenig, denn zu wenig garantiert keinen Inhalt.",
+                "quote3": "Wir hoffen, dass dieses Vertrauensverhältnis für unsere Nutzer ebenso wie für uns selbst ein Lernprozess wird.",
+                "whitepaper_link": "Ein Auszug aus unserem „White Paper“",
+                "contact": "Fragen, die sich aus der Nutzung der Website oder ihrer Werkzeuge ergeben, können über unsere Kontaktformulare oder <strong>Feedback</strong>-Werkzeuge gemeldet werden (wir lieben Feedback). Außerdem laden wir Sie ein, Probleme über unseren Datenschutzbeauftragten (DPO) unter der folgenden E-Mail-Adresse zu klären: <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Politicas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
+                "markdown1": "Die Richtlinien dieser Website wurden in der leicht angepassten Auszeichnungssprache <strong>Markdown</strong> verfasst. Sie können sie als reinen Text ansehen oder sogar auf <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a> über diesen <a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">Link zu unserem Repository</a> herunterladen.",
+                "markdown2": "Dort finden Sie diese und alle früheren Versionen dieser Richtlinien sowie den Quellcode dieser Website. Sie können sie auch ausdrucken, indem Sie auf das Drucksymbol <span class=\"badge badge-light border-def contrast\">Drucken&nbsp;🖨️</span> oben in unserer Allgemeinen Richtlinie klicken."
+            },
+            "privacy": {
+                "heading": "Datenschutz",
+                "image_alt": "Sie haben die Wahl",
+                "image_title": "Sie haben die Wahl",
+                "paragraph1": "Wir glauben, dass das Prinzip des Datenschutzes die Wahlfreiheit ist. Nutzer sollten ihre Daten nicht mit einem einzigen Klick oder durch Bedingungen preisgeben müssen, die sie zwingen, eine große Menge an Daten für die Nutzung eines bestimmten Werkzeugs abzugeben.",
+                "paragraph2": "Wahlfreiheit sowie ein progressives, aber nicht obstruktives Modell für die Anforderung von Daten und die Einwilligung nur bei Bedarf sollten ein einzuhaltender Standard sein.",
+                "paragraph3": "Respekt vor der Privatsphäre beginnt damit, die Entscheidung des Nutzers darüber zu respektieren, „was“ und „wann“ er teilen möchte."
+            },
+            "terms": {
+                "heading": "Nutzungsbedingungen",
+                "image_alt": "Bild der Website-Bedingungen",
+                "image_title": "Unsere Bedingungen"
+            },
+            "general": {
+                "heading": "Allgemeine Richtlinie",
+                "image_alt": "Bild des Website-Vertrags",
+                "image_title": "Vertrag"
+            },
+            "cookies": {
+                "heading": "Cookies akzeptieren",
+                "paragraph1": "Wenn Sie sich fragen: <strong>Muss ich wirklich Cookies und Datenspeicherung akzeptieren</strong>? Die kurze Antwort lautet: <strong>Nein, müssen Sie nicht</strong>! Sie können weiterhin viele Werkzeuge und Funktionen der Website nutzen, haben jedoch möglicherweise nicht die beste Erfahrung 🙁",
+                "paragraph2": "Zum Beispiel: Wenn Sie eine Sprache auswählen, eine Lieblingsfarbe speichern oder eine Einstellung festlegen, müssen Sie diese Auswahl bei jedem Besuch oder jeder Navigation auf der Website erneut treffen ... die einzige Möglichkeit, Ihre Auswahl zu „speichern“, ist, sie lokal abzulegen.",
+                "paragraph3": "Gemäß unserer Philosophie, dass <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">Sie der alleinige Inhaber Ihrer Daten sind</a>, glauben wir, dass Sie die Wahl haben. Wenn Sie die Verwendung von Cookies akzeptieren, indem Sie auf die Schaltfläche unten <strong>klicken und drücken</strong>, können Sie sie auch jederzeit hier oder im Reiter „Benutzer“ <strong>deaktivieren</strong> und außerdem alles, was bereits gespeichert wurde, auf einmal entfernen 😎",
+                "button": "🍪 Zum Aktivieren der Cookies drücken"
+            }
+        }
+    },
+    "settings_slide": {
+        "title": "Website-Einstellungen",
+        "media_api": "Medien-API",
+        "auto_audio": "Audio nach der ersten Genehmigung automatisch aufrufen",
+        "auto_video": "Video nach der ersten Genehmigung automatisch aufrufen",
+        "geo_api": "Geolokalisierungs-API",
+        "geo_share": "Analysen zur geografischen Nachverfolgung teilen",
+        "audio_effects": "Audioeffekte",
+        "audio_effects_on": "Audioeffekte aktivieren",
+        "audio_notify_on": "Audiobenachrichtigungen aktivieren",
+        "connection": "Verbindung (Status)",
+        "notify_off": "Benachrichtigung deaktivieren",
+        "analytics": "Analysen",
+        "analytics_toggle": "aktivieren oder deaktivieren"
+    },
+    "palette": {
+        "title": "Farbpalette",
+        "schema": "Schema"
+    },
+    "blog": {
+        "empty": "Noch nichts veröffentlicht.",
+        "not_found": "Beitrag nicht gefunden.",
+        "load_error": "Dieser Beitrag konnte nicht geladen werden.",
+        "showing": "{shown} von {total} werden angezeigt",
+        "load_more": "Mehr laden",
+        "read_time": "{minutes} Min. Lesezeit"
+    },
+    "admin_dashboard": {
+        "posts": "Beiträge",
+        "close_menu": "Menü schließen",
+        "loading_posts": "Beiträge werden geladen...",
+        "title": "Administrations-Dashboard",
+        "description": "Verwalten Sie die Beiträge Ihres Blogs.",
+        "menu": "Menü",
+        "new_post": "Neuer Beitrag",
+        "close_editor": "Editor schließen",
+        "editor": {
+            "status_ready": "Bereit zum Bearbeiten.",
+            "title_label": "Titel",
+            "title_placeholder": "Titel des Beitrags",
+            "summary_label": "Zusammenfassung",
+            "summary_placeholder": "Zusammenfassung des Beitrags",
+            "summary_restore": "Automatisch wiederherstellen",
+            "summary_help": "Die Zusammenfassung wird automatisch ausgefüllt. Sie können sie frei bearbeiten.",
+            "content_label": "Inhalt",
+            "content_placeholder": "Schreiben Sie den Inhalt des Beitrags...",
+            "toolbar_label": "Formatierungswerkzeuge",
+            "bold": "Fett",
+            "italic": "Kursiv",
+            "strike": "Durchgestrichen",
+            "unordered_list": "Aufzählungsliste",
+            "unordered_list_label": "• Liste",
+            "ordered_list": "Nummerierte Liste",
+            "ordered_list_label": "1. Liste",
+            "quote": "Zitat",
+            "link": "Link einfügen",
+            "link_label": "Link",
+            "code": "Code einfügen",
+            "font_size": "Schrift",
+            "font_size_title": "Schriftgröße",
+            "image": "Bild",
+            "image_title": "Bild hinzufügen",
+            "microphone": "Mikrofon",
+            "microphone_title": "Sprache transkribieren",
+            "preview_toggle": "Vorschau",
+            "preview_heading": "Vorschau",
+            "preview_close": "Schließen",
+            "tags_label": "Tags",
+            "tags_placeholder": "Tags durch Kommas getrennt eingeben",
+            "draft_select_label": "Entwurf auswählen",
+            "draft_select_default": "Entwurf auswählen",
+            "draft_open": "Entwurf öffnen",
+            "draft_save": "Entwurf speichern",
+            "generate": "Beitrag erstellen"
+        },
+        "posts_list": {
+            "untitled": "Beitrag ohne Titel",
+            "edit": "Bearbeiten",
+            "delete": "Löschen"
+        },
+        "edit_post": "Beitrag bearbeiten",
+        "update_post": "Beitrag aktualisieren",
+        "delete_modal": {
+            "title": "Beitrag löschen",
+            "question": "Möchten Sie diesen Beitrag wirklich löschen?",
+            "cancel": "Abbrechen",
+            "confirm": "Ja, löschen",
+            "deleting": "Wird gelöscht...",
+            "deleting_status": "Beitrag wird auf GitHub gelöscht...",
+            "success": "Beitrag erfolgreich gelöscht!",
+            "error": "Der Beitrag konnte nicht gelöscht werden.",
+            "close": "Schließen"
+        },
+        "msg": {
+            "speech_error": "Fehler bei der Spracherkennung: {0}.",
+            "speech_unavailable": "Spracherkennung ist in diesem Browser nicht verfügbar.",
+            "speech_start_error": "Spracherkennung konnte nicht gestartet werden: {0}",
+            "pending_changes": "Ausstehende Änderungen.",
+            "images_db_unavailable": "Datenbank nicht verfügbar: Die Bilder konnten nicht gespeichert werden.",
+            "images_optimized": "Bilder optimiert: {0} → {1}.",
+            "images_added": "Bilder hinzugefügt. Die Größe wurde nicht verringert.",
+            "image_save_error": "Das Bild konnte nicht in der Datenbank gespeichert werden.",
+            "markdown_load_error": "Der Markdown-Renderer konnte nicht geladen werden.",
+            "drafts_db_unavailable": "Datenbank nicht verfügbar: Entwürfe werden nicht gespeichert.",
+            "autosave_ok": "Änderungen automatisch gespeichert.",
+            "autosave_error": "Automatisches Speichern fehlgeschlagen.",
+            "nothing_to_save": "Geben Sie vor dem Speichern einen Titel oder Inhalt ein.",
+            "db_unavailable": "Datenbank nicht verfügbar.",
+            "draft_updated": "Entwurf aktualisiert.",
+            "draft_saved": "Entwurf erfolgreich gespeichert.",
+            "draft_save_error": "Fehler beim Speichern des Entwurfs.",
+            "changes_recovered": "Vorherige Änderungen wiederhergestellt.",
+            "draft_select": "Wählen Sie einen Entwurf zum Öffnen aus.",
+            "draft_not_found": "Entwurf nicht gefunden.",
+            "draft_opened": "Entwurf erfolgreich geöffnet.",
+            "draft_open_error": "Fehler beim Öffnen des Entwurfs.",
+            "editor_ready_new": "Editor bereit für einen neuen Beitrag.",
+            "need_title": "Geben Sie den Titel des Beitrags ein.",
+            "need_content": "Geben Sie den Inhalt des Beitrags ein.",
+            "preparing": "Beitrag wird vorbereitet...",
+            "published": "Beitrag erfolgreich veröffentlicht.",
+            "prepared": "Beitrag vorbereitet. Der Inhalt wurde im Editor beibehalten.",
+            "publish_stage_error": "Fehler im Schritt \"{0}\": {1}. Der Inhalt wurde beibehalten.",
+            "publishing": "Wird veröffentlicht...",
+            "stage_init": "Initialisierung der Veröffentlichung",
+            "stage_library": "Laden der Markdown-Bibliothek",
+            "stage_preview": "Aktualisierung der Vorschau",
+            "stage_read": "Lesen der Editor-Daten",
+            "stage_autosave": "Automatisches Speichern",
+            "stage_images": "Vorbereitung der Bilder",
+            "stage_files": "Erstellen der Beitragsdateien",
+            "stage_publish": "Veröffentlichung auf GitHub",
+            "stage_confirm": "Bestätigung der Veröffentlichung",
+            "discard_changes": "Änderungen am bearbeiteten Beitrag verwerfen?",
+            "post_updated": "Beitrag erfolgreich aktualisiert.",
+            "post_loaded": "Beitrag zum Bearbeiten geladen.",
+            "post_load_error": "Der Beitrag konnte nicht zum Bearbeiten geladen werden.",
+            "delete_prepare_error": "Löschen konnte nicht vorbereitet werden: {0}",
+            "delete_error": "Beitrag konnte nicht gelöscht werden: {0}",
+            "draft_untitled": "Entwurf ohne Titel",
+            "post_missing": "Der Beitrag existiert nicht mehr im Verzeichnis. Aktualisierung abgebrochen.",
+            "post_missing_delete": "Der Beitrag existiert nicht mehr im Verzeichnis.",
+            "github_not_confirmed": "GitHub hat die Löschung nicht bestätigt.",
+            "markdown_fetch_error": "Das Markdown konnte nicht geladen werden."
+        }
+    },
+    "github_auth": {
+        "title": "GitHub-Authentifizierung",
+        "description": "Geben Sie Ihren GitHub-API-Schlüssel ein, um auf das Administrations-Dashboard zuzugreifen.",
+        "label": "GitHub-API-Schlüssel",
+        "placeholder": "Fügen Sie Ihren API-Schlüssel ein",
+        "verify": "Überprüfen"
     }
-  },
-  "settings_slide": {
-    "title": "Website-Einstellungen",
-    "media_api": "Medien-API",
-    "auto_audio": "Audio nach der ersten Genehmigung automatisch aufrufen",
-    "auto_video": "Video nach der ersten Genehmigung automatisch aufrufen",
-    "geo_api": "Geolokalisierungs-API",
-    "geo_share": "Analysen zur geografischen Nachverfolgung teilen",
-    "audio_effects": "Audioeffekte",
-    "audio_effects_on": "Audioeffekte aktivieren",
-    "audio_notify_on": "Audiobenachrichtigungen aktivieren",
-    "connection": "Verbindung (Status)",
-    "notify_off": "Benachrichtigung deaktivieren",
-    "analytics": "Analysen",
-    "analytics_toggle": "aktivieren oder deaktivieren"
-  },
-  "palette": {
-    "title": "Farbpalette",
-    "schema": "Schema"
-  },
-  "blog": {
-    "empty": "Noch nichts veröffentlicht.",
-    "not_found": "Beitrag nicht gefunden.",
-    "load_error": "Dieser Beitrag konnte nicht geladen werden.",
-    "showing": "{shown} von {total} werden angezeigt",
-    "load_more": "Mehr laden",
-    "read_time": "{minutes} Min. Lesezeit"
-  },
-  "admin_dashboard": {
-    "posts": "Beiträge",
-    "close_menu": "Menü schließen",
-    "loading_posts": "Beiträge werden geladen...",
-    "title": "Administrations-Dashboard",
-    "description": "Verwalten Sie die Beiträge Ihres Blogs.",
-    "menu": "Menü",
-    "new_post": "Neuer Beitrag",
-    "close_editor": "Editor schließen"
-  },
-  "github_auth": {
-    "title": "GitHub-Authentifizierung",
-    "description": "Geben Sie Ihren GitHub-API-Schlüssel ein, um auf das Administrations-Dashboard zuzugreifen.",
-    "label": "GitHub-API-Schlüssel",
-    "placeholder": "Fügen Sie Ihren API-Schlüssel ein",
-    "verify": "Überprüfen"
-  }
 }

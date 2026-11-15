@@ -49,9 +49,7 @@ class AdminPosts {
 
                 if (
                     this.editor.hasChanges &&
-                    !window.confirm(
-                        'Descartar as alterações da postagem em edição?'
-                    )
+                    !window.confirm(this.editor.message('discard_changes'))
                 ) {
                     return
                 }
@@ -105,11 +103,11 @@ class AdminPosts {
             )
 
             if (heading) {
-                heading.textContent = 'Nova Postagem'
+                this.setKey(heading, 'admin_dashboard.new_post')
             }
 
             if (editor.elements.generate) {
-                editor.elements.generate.textContent = 'Gerar postagem'
+                this.setKey(editor.elements.generate, 'admin_dashboard.editor.generate')
             }
 
             return result
@@ -143,7 +141,7 @@ class AdminPosts {
                 result &&
                 result.published !== false
             ) {
-                editor.setStatus('Postagem atualizada com sucesso.')
+                editor.setStatus('post_updated')
             }
 
             return result
@@ -185,10 +183,10 @@ class AdminPosts {
             )
 
             if (heading) {
-                heading.textContent = 'Editar Postagem'
+                this.setKey(heading, 'admin_dashboard.edit_post')
             }
 
-            editor.elements.generate.textContent = 'Atualizar postagem'
+            this.setKey(editor.elements.generate, 'admin_dashboard.update_post')
 
             const container = document.getElementById(
                 'admin-post-editor-container'
@@ -204,12 +202,26 @@ class AdminPosts {
 
             editor.updatePreview()
 
-            editor.setStatus('Postagem carregada para edição.')
+            editor.setStatus('post_loaded')
 
             editor.elements.title.focus()
 
         }
 
+    }
+
+    translate() {
+        if (typeof this.editor.translate === 'function') {
+            this.editor.translate()
+        }
+    }
+
+    setKey(element, key) {
+        if (!element) return
+        element.classList.add('i18n')
+        element.setAttribute('data-i18n-html', key)
+        element.removeAttribute('translated')
+        this.translate()
     }
 
     async refresh() {
@@ -223,6 +235,7 @@ class AdminPosts {
             )
 
             this.renderLists()
+            this.translate()
 
             return true
 
@@ -275,133 +288,82 @@ class AdminPosts {
  
 createPostItem(post) {
 
-    const item = document.createElement('div')
+        const fragment = document.getElementById(
+            'admin-post-item-template'
+        ).content.cloneNode(true)
 
-    item.className = 'list-group-item px-2 py-2'
+        const item = fragment.querySelector('[data-post-item]')
+        const cover = item.querySelector('[data-post-cover]')
+        const title = item.querySelector('[data-post-title]')
+        const date = item.querySelector('[data-post-date]')
+        const edit = item.querySelector('[data-post-action="edit"]')
+        const remove = item.querySelector('[data-post-action="delete"]')
 
-    const row = document.createElement('div')
+        // MINIATURA (dinâmica: depende dos dados da postagem)
+        cover.className = 'mr-2 flex-shrink-0'
+        cover.style.width = '48px'
+        cover.style.height = '48px'
+        cover.style.display = 'flex'
+        cover.style.alignItems = 'center'
+        cover.style.justifyContent = 'center'
+        cover.style.backgroundColor = '#e9ecef'
+        cover.style.color = '#6c757d'
 
-    row.className = 'd-flex align-items-center'
-
-
-    // MINIATURA
-    const cover = document.createElement('div')
-
-    cover.className = 'mr-2 flex-shrink-0'
-
-    cover.style.width = '48px'
-    cover.style.height = '48px'
-    cover.style.display = 'flex'
-    cover.style.alignItems = 'center'
-    cover.style.justifyContent = 'center'
-    cover.style.backgroundColor = '#e9ecef'
-    cover.style.color = '#6c757d'
-
-    const coverPath = (
-        post.cover ||
-        (Array.isArray(post.images) ? post.images[0] : null)
-    )
-
-    if (
-        typeof coverPath === 'string' &&
-        coverPath.startsWith('assets/posts/images/')
-    ) {
-
-        const image = document.createElement('img')
-
-        image.src = coverPath
-        image.alt = ''
-        image.loading = 'lazy'
-
-        image.style.width = '48px'
-        image.style.height = '48px'
-        image.style.objectFit = 'cover'
-        image.style.display = 'block'
-
-        image.onerror = () => {
-            cover.innerHTML = '<span aria-hidden="true">▧</span>'
-        }
-
-        cover.appendChild(image)
-
-    } else {
-
-        cover.innerHTML = '<span aria-hidden="true">▧</span>'
-
-    }
-
-  
-
-    // INFORMAÇÕES
-    const content = document.createElement('div')
-
-    content.className = 'flex-grow-1'
-    content.style.minWidth = '0'
-
-    const title = document.createElement('div')
-
-    title.className = 'font-weight-bold text-break'
-    title.style.fontSize = '13px'
-    title.style.lineHeight = '1.3'
-
-    title.textContent = post.title || 'Postagem sem título'
-
-    const date = document.createElement('small')
-
-    date.className = 'd-block text-muted'
-    date.style.fontSize = '11px'
-
-    const timestamp = this.getPostTimestamp(post)
-
-    if (timestamp) {
-
-        date.textContent = new Date(timestamp).toLocaleDateString(
-            'pt-BR'
+        const coverPath = (
+            post.cover ||
+            (Array.isArray(post.images) ? post.images[0] : null)
         )
 
+        if (
+            typeof coverPath === 'string' &&
+            coverPath.startsWith('assets/posts/images/')
+        ) {
+
+            const image = document.createElement('img')
+
+            image.src = coverPath
+            image.alt = ''
+            image.loading = 'lazy'
+            image.style.width = '48px'
+            image.style.height = '48px'
+            image.style.objectFit = 'cover'
+            image.style.display = 'block'
+
+            image.onerror = () => {
+                cover.textContent = '▧'
+            }
+
+            cover.appendChild(image)
+
+        } else {
+
+            cover.textContent = '▧'
+
+        }
+
+        // TÍTULO (fallback traduzível pelo template)
+        if (post.title) {
+            title.textContent = post.title
+        } else {
+            this.setKey(title, 'admin_dashboard.posts_list.untitled')
+        }
+
+        // DATA (locale do documento, não fixo em pt-BR)
+        const timestamp = this.getPostTimestamp(post)
+
+        if (timestamp) {
+            date.textContent = new Date(timestamp).toLocaleDateString(
+                document.documentElement.lang || undefined
+            )
+        }
+
+        // AÇÕES (textos vêm do template com data-i18n-html)
+        edit.dataset.postId = post.id
+        remove.dataset.postId = post.id
+
+        return item
+
     }
-
-    content.append(title, date)
-
-    row.append(cover, content)
-
-    // AÇÕES
-    const actions = document.createElement('div')
-
-    actions.className = 'd-flex align-items-center mt-2'
-
-    const edit = document.createElement('button')
-
-    edit.type = 'button'
-    edit.className = 'btn btn-outline-primary rounded-0 mr-1'
-    edit.textContent = 'Editar'
-    edit.dataset.postAction = 'edit'
-    edit.dataset.postId = post.id
-
-    edit.style.fontSize = '11px'
-    edit.style.padding = '3px 7px'
-    edit.style.lineHeight = '1.2'
-
-    const remove = document.createElement('button')
-
-    remove.type = 'button'
-    remove.className = 'btn btn-outline-danger rounded-0'
-    remove.textContent = 'Excluir'
-    remove.dataset.postAction = 'delete'
-    remove.dataset.postId = post.id
-
-    remove.style.fontSize = '11px'
-    remove.style.padding = '3px 7px'
-    remove.style.lineHeight = '1.2'
-
-    actions.append(edit, remove)
-
-    item.append(row, actions)
-
-    return item
-
-}
-
 
     async handleListClick(event, list) {
 
@@ -485,7 +447,7 @@ createPostItem(post) {
         if (!response.ok) {
 
             throw new Error(
-                `Não foi possível carregar o Markdown (${response.status}).`
+                'markdown_fetch_error'
             )
 
         }
@@ -517,9 +479,7 @@ createPostItem(post) {
 
             console.error('[ADMIN POSTS]:', error)
 
-            this.editor.setStatus(
-                'Não foi possível carregar a postagem para edição.'
-            )
+            this.editor.setStatus('post_load_error')
 
         }
 
@@ -616,7 +576,7 @@ createPostItem(post) {
         if (index < 0) {
 
             throw new Error(
-                'A postagem não existe mais no cadastro. Atualização cancelada.'
+                'post_missing'
             )
 
         }
@@ -747,7 +707,7 @@ createPostItem(post) {
         if (index < 0) {
 
             throw new Error(
-                'A postagem não existe mais no cadastro.'
+                'post_missing_delete'
             )
 
         }
@@ -836,9 +796,7 @@ createPostItem(post) {
 
             console.error('[ADMIN POSTS]:', error)
 
-            this.editor.setStatus(
-                `Não foi possível preparar a exclusão: ${error.message}`
-            )
+            this.editor.setStatus('delete_prepare_error', error.message)
 
         } finally {
 
@@ -865,76 +823,22 @@ createPostItem(post) {
         modal.setAttribute('aria-labelledby', 'admin-delete-title')
         modal.style.display = 'block'
 
-        modal.innerHTML = `
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content rounded-0">
+        modal.appendChild(
+            document.getElementById('admin-delete-modal-template')
+                .content.cloneNode(true)
+        )
 
-                    <div class="modal-header">
-
-                        <h5
-                            id="admin-delete-title"
-                            class="modal-title">
-                            Apagar postagem
-                        </h5>
-
-                        <button
-                            type="button"
-                            class="close"
-                            data-modal-close
-                            aria-label="Fechar">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-
-                    </div>
-
-                    <div class="modal-body">
-
-                        <p class="mb-2">
-                            Deseja realmente excluir esta postagem?
-                        </p>
-
-                        <strong
-                            class="d-block text-break"
-                            data-post-title>
-                        </strong>
-
-                        <p
-                            class="small mt-3 mb-0"
-                            role="status"
-                            aria-live="polite"
-                            data-modal-status
-                            hidden>
-                        </p>
-
-                    </div>
-
-                    <div class="modal-footer">
-
-                        <button
-                            type="button"
-                            class="btn btn-outline-secondary rounded-0"
-                            data-modal-close>
-                            Cancelar
-                        </button>
-
-                        <button
-                            type="button"
-                            class="btn btn-danger rounded-0"
-                            data-modal-confirm>
-                            Sim, excluir
-                        </button>
-
-                    </div>
-
-                </div>
-            </div>
-        `
-
-        modal.querySelector('[data-post-title]').textContent =
-            post.title || 'Postagem sem título'
+        const titleNode = modal.querySelector('[data-post-title]')
+        if (post.title) {
+            titleNode.textContent = post.title
+        } else {
+            this.setKey(titleNode, 'admin_dashboard.posts_list.untitled')
+        }
 
         document.body.append(backdrop, modal)
         document.body.classList.add('modal-open')
+
+        this.translate()
 
         this.modal = modal
         this.modalBackdrop = backdrop
@@ -990,7 +894,7 @@ createPostItem(post) {
             this.modalBusy = true
 
             confirm.disabled = true
-            confirm.textContent = 'Excluindo...'
+            this.setKey(confirm, 'admin_dashboard.delete_modal.deleting')
 
             modal.querySelectorAll('[data-modal-close]').forEach(button => {
                 button.disabled = true
@@ -998,7 +902,7 @@ createPostItem(post) {
 
             status.hidden = false
             status.className = 'small mt-3 mb-0 text-muted'
-            status.textContent = 'Excluindo postagem no GitHub...'
+            this.setKey(status, 'admin_dashboard.delete_modal.deleting_status')
 
             try {
 
@@ -1007,7 +911,7 @@ createPostItem(post) {
                 if (!result || result.published !== true) {
 
                     throw new Error(
-                        'O GitHub não confirmou a exclusão.'
+                        'github_not_confirmed'
                     )
 
                 }
@@ -1015,8 +919,7 @@ createPostItem(post) {
                 status.className =
                     'alert alert-success rounded-0 mt-3 mb-0'
 
-                status.textContent =
-                    'Postagem excluída com sucesso!'
+                this.setKey(status, 'admin_dashboard.delete_modal.success')
 
                 if (
                     this.editor.editingPost &&
@@ -1050,12 +953,9 @@ createPostItem(post) {
                 status.className =
                     'alert alert-danger rounded-0 mt-3 mb-0'
 
-                status.textContent =
-                    'Não foi possível excluir a postagem.'
+                this.setKey(status, 'admin_dashboard.delete_modal.error')
 
-                this.editor.setStatus(
-                    `Falha ao excluir postagem: ${error.message}`
-                )
+                this.editor.setStatus('delete_error', error.message)
 
                 window.setTimeout(() => {
                     this.closeModal(true)

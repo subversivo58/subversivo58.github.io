@@ -36,6 +36,7 @@ class MarkdownEditor {
         this.imageProcessor = options.imageProcessor || new ImageProcessor({ auto: true })
         this.onCreate = options.onCreate || (() => {})
         this.onStatus = options.onStatus || (() => {})
+        this.translate = options.translate || (() => {})
         this.recognition = null
         this.recognitionSelection = null
         this.recognitionText = ''
@@ -79,327 +80,8 @@ class MarkdownEditor {
 
         this.root = root
 
-        this.root.innerHTML = `
-            <style>
-                #post-preview-panel {
-                    position: fixed;
-                    inset: 0;
-                    z-index: 2000;
-                    width: 100%;
-                    height: 100vh;
-                    height: 100dvh;
-                    background: #fff;
-                    display: flex;
-                    flex-direction: column;
-                    overflow: hidden;
-                    animation: postPreviewSlideIn 0.25s ease-out;
-                }
-
-                #post-preview-panel[hidden] {
-                    display: none !important;
-                }
-
-                @keyframes postPreviewSlideIn {
-                    from {
-                        transform: translateX(100%);
-                    }
-
-                    to {
-                        transform: translateX(0);
-                    }
-                }
-
-                #post-preview-header {
-                    flex: 0 0 auto;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
-                    border-bottom: 1px solid #dee2e6;
-                    background: #fff;
-                }
-
-                #post-preview-content {
-                    flex: 1 1 auto;
-                    min-height: 0;
-                    overflow-y: auto;
-                    -webkit-overflow-scrolling: touch;
-                    padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
-                }
-            </style>
-
-            <section class="markdown-editor">
-
-                <p class="small text-muted mb-3"
-                   id="post-editor-status"
-                   role="status"
-                   aria-live="polite">
-                    Pronto para editar.
-                </p>
-
-                <div class="form-group">
-                    <label for="post-title">Título</label>
-
-                    <input
-                        type="text"
-                        id="post-title"
-                        class="form-control rounded-0"
-                        placeholder="Título da postagem"
-                        autocomplete="off"
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="post-summary">Resumo</label>
-
-                    <div class="input-group">
-                        <textarea
-                            id="post-summary"
-                            class="form-control rounded-0"
-                            rows="2"
-                            placeholder="Resumo da postagem"
-                        ></textarea>
-
-                        <div class="input-group-append">
-                            <button
-                                type="button"
-                                id="post-summary-restore"
-                                class="btn btn-outline-secondary rounded-0 cp"
-                                title="Restaurar resumo automático">
-                                Restaurar automático
-                            </button>
-                        </div>
-                    </div>
-
-                    <small class="form-text text-muted">
-                        O resumo é preenchido automaticamente. Você pode
-                        modificá-lo livremente.
-                    </small>
-                </div>
-
-                <div class="form-group">
-                    <label for="post-content">Conteúdo</label>
-
-                    <div class="card rounded-0">
-
-                        <div class="card-header bg-transparent p-2">
-                            <div class="btn-toolbar align-items-center"
-                                 id="post-editor-toolbar"
-                                 role="toolbar"
-                                 aria-label="Ferramentas de formatação">
-
-                                <div class="btn-group btn-group-sm mr-2 mb-1" role="group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="heading"
-                                        data-level="1"
-                                        title="Título nível 1" aria-label="Título nível 1">H1</button>
-
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="heading"
-                                        data-level="2"
-                                        title="Título nível 2" aria-label="Título nível 2">H2</button>
-
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="heading"
-                                        data-level="3"
-                                        title="Título nível 3" aria-label="Título nível 3">H3</button>
-
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="heading"
-                                        data-level="4"
-                                        title="Título nível 4" aria-label="Título nível 4">H4</button>
-
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="heading"
-                                        data-level="5"
-                                        title="Título nível 5" aria-label="Título nível 5">H5</button>
-
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="heading"
-                                        data-level="6"
-                                        title="Título nível 6" aria-label="Título nível 6">H6</button>
-                                </div>
-
-                                <div class="btn-group btn-group-sm mr-2 mb-1" role="group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="bold"
-                                        title="Negrito" aria-label="Negrito"><strong>B</strong></button>
-
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="italic"
-                                        title="Itálico" aria-label="Itálico"><em>I</em></button>
-
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="strike"
-                                        title="Tachado" aria-label="Tachado"><s>S</s></button>
-                                </div>
-
-                                <div class="btn-group btn-group-sm mr-2 mb-1" role="group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="unordered-list"
-                                        title="Lista com marcadores" aria-label="Lista com marcadores">• Lista</button>
-
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="ordered-list"
-                                        title="Lista numerada" aria-label="Lista numerada">1. Lista</button>
-
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="quote"
-                                        title="Citação" aria-label="Citação">❝</button>
-                                </div>
-
-                                <div class="btn-group btn-group-sm mr-2 mb-1" role="group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="link"
-                                        title="Inserir link" aria-label="Inserir link">Link</button>
-
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
-                                        data-editor-action="code"
-                                        title="Inserir código" aria-label="Inserir código">&lt;/&gt;</button>
-                                </div>
-
-                                <div class="d-flex align-items-center mr-2 mb-1">
-                                    <label for="post-font-size" class="small mb-0 mr-2">Fonte</label>
-
-                                    <select
-                                        id="post-font-size"
-                                        class="custom-select custom-select-sm rounded-0 w-auto"
-                                        title="Tamanho da fonte">
-                                        <option value="12px">12</option>
-                                        <option value="14px">14</option>
-                                        <option value="16px" selected>16</option>
-                                        <option value="18px">18</option>
-                                        <option value="20px">20</option>
-                                        <option value="24px">24</option>
-                                        <option value="28px">28</option>
-                                        <option value="32px">32</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-1">
-                                    <button type="button"
-                                        class="btn btn-sm btn-outline-secondary rounded-0 cp fileUpload"
-                                        id="post-add-image"
-                                        data-editor-action="image"
-                                        title="Adicionar imagem"
-                                        aria-label="Adicionar imagem">
-                                        <span aria-hidden="true">＋</span> Imagem
-                                    </button>
-
-                                    <input
-                                        type="file"
-                                        id="post-image-input"
-                                        accept="image/*"
-                                        multiple
-                                        hidden
-                                    >
-                                </div>
-<div class="mb-1 mr-2">
-    <button
-        type="button"
-        id="post-microphone"
-        class="btn btn-sm btn-outline-secondary rounded-0 cp"
-        title="Transcrever voz"
-        aria-label="Transcrever voz"
-        disabled>
-        <span aria-hidden="true">🎙️</span>
-        Microfone
-    </button>
-</div>
-
-                                <div class="mb-1 ml-md-auto">
-                                    <button
-                                        type="button"
-                                        id="post-preview-toggle"
-                                        class="btn btn-sm btn-outline-primary rounded-0 cp"
-                                        aria-expanded="false"
-                                        aria-controls="post-preview-panel">
-                                        <span aria-hidden="true">◉</span>
-                                        Visualizar
-                                    </button>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <textarea
-                            id="post-content"
-                            class="form-control rounded-0 border-0 text-monospace"
-                            rows="14"
-                            placeholder="Escreva o conteúdo da postagem..."
-                            spellcheck="true"
-                        ></textarea>
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="post-tags">Tags</label>
-
-                    <input
-                        type="text"
-                        id="post-tags"
-                        class="form-control rounded-0"
-                        placeholder="Digite as tags separadas por vírgula"
-                        autocomplete="off"
-                    >
-                </div>
-
-                <div class="input-group mb-3">
-                    <select
-                        id="post-draft-list"
-                        class="custom-select rounded-0"
-                        aria-label="Selecionar rascunho">
-                        <option value="">Selecionar rascunho</option>
-                    </select>
-
-                    <div class="input-group-append">
-                        <button
-                            type="button"
-                            id="post-open-draft"
-                            class="btn btn-outline-secondary rounded-0 cp">
-                            Abrir rascunho
-                        </button>
-                    </div>
-                </div>
-
-                <div class="d-flex flex-column flex-sm-row">
-                    <button
-                        type="button"
-                        id="post-save-draft"
-                        class="btn btn-outline-secondary rounded-0 cp mb-2 mb-sm-0 mr-sm-2">
-                        Salvar rascunho
-                    </button>
-
-                    <button
-                        type="button"
-                        id="post-generate"
-                        class="btn btn-info rounded-0 cp ml-sm-auto">
-                        Gerar postagem
-                    </button>
-                </div>
-
-            </section>
-
-            <div id="post-preview-panel" hidden>
-
-                <div id="post-preview-header">
-                    <strong>Pré-visualização</strong>
-
-                    <button
-                        type="button"
-                        id="post-preview-close"
-                        class="btn btn-sm btn-outline-secondary rounded-0 cp">
-                        ✕ Fechar
-                    </button>
-                </div>
-
-                <div id="post-preview-content" class="text-break">
-                    <div id="post-preview" class="markdown-body"></div>
-                </div>
-
-            </div>
-        `
+        // O markup do editor vem do template markdown-editor.tpl,
+        // injetado pelo settings.json (rota admin) no #admin-post-editor.
 
         this.elements = {
             editor: this.root.querySelector('.markdown-editor'),
@@ -494,9 +176,7 @@ initializeSpeechRecognition() {
     this.recognition.onerror = event => {
         this.setSpeechRecognitionActive(false)
 
-        this.setStatus(
-            `Erro no reconhecimento de voz: ${event.error}.`
-        )
+        this.setStatus('speech_error', event.error)
     }
     return true
 }
@@ -555,9 +235,7 @@ setSpeechRecognitionActive(active) {
 
 toggleSpeechRecognition() {
     if (!this.recognition) {
-        this.setStatus(
-            'Reconhecimento de voz indisponível neste navegador.'
-        )
+        this.setStatus('speech_unavailable')
         return
     }
 
@@ -591,9 +269,7 @@ toggleSpeechRecognition() {
             error
         )
 
-        this.setStatus(
-            `Não foi possível iniciar o reconhecimento: ${error.message}`
-        )
+        this.setStatus('speech_start_error', error.message)
     }
 }
 
@@ -1121,7 +797,7 @@ toggleSpeechRecognition() {
     }
       markAsChanged() {
         this.hasChanges = true
-        this.setStatus('Alterações pendentes.')
+        this.setStatus('pending_changes')
     }
 
     startAutoSaveTimer() {
@@ -1161,7 +837,7 @@ toggleSpeechRecognition() {
         if (!list.length) return
 
         if (!this.db) {
-            this.setStatus('Banco de dados indisponível: não foi possível guardar as imagens.')
+            this.setStatus('images_db_unavailable')
             return
         }
 
@@ -1250,15 +926,9 @@ toggleSpeechRecognition() {
                     ? (size / 1048576).toFixed(2) + ' MB'
                     : (size / 1024).toFixed(1) + ' KB'
 
-                this.setStatus(
-                    'Imagens otimizadas: ' +
-                    formatSize(originalSize) +
-                    ' → ' +
-                    formatSize(processedSize) +
-                    '.'
-                )
+                this.setStatus('images_optimized', formatSize(originalSize), formatSize(processedSize))
             } else {
-                this.setStatus('Imagens adicionadas. Não houve redução de tamanho.')
+                this.setStatus('images_added')
             }
         } catch (error) {
             console.error(
@@ -1266,7 +936,7 @@ toggleSpeechRecognition() {
                 error
             )
 
-            this.setStatus('Não foi possível guardar a imagem no banco de dados.')
+            this.setStatus('image_save_error')
         } finally {
             this._pendingInserts--
         }
@@ -1376,7 +1046,7 @@ toggleSpeechRecognition() {
                 error
             )
 
-            this.setStatus('Não foi possível carregar o renderizador de Markdown.')
+            this.setStatus('markdown_load_error')
         }
     }
 
@@ -1511,7 +1181,7 @@ toggleSpeechRecognition() {
                 '[MarkdownEditor]: conexão com o banco não informada.'
             )
 
-            this.setStatus('Banco de dados indisponível: os rascunhos não serão salvos.')
+            this.setStatus('drafts_db_unavailable')
             return false
         }
 
@@ -1567,7 +1237,7 @@ toggleSpeechRecognition() {
             )
 
             if (!this.hasChanges) {
-                this.setStatus('Alterações salvas automaticamente.')
+                this.setStatus('autosave_ok')
             }
 
             return true
@@ -1579,30 +1249,61 @@ toggleSpeechRecognition() {
                 error
             )
 
-            this.setStatus('Não foi possível salvar automaticamente.')
+            this.setStatus('autosave_error')
 
             return false
         }
     }
 
-    setStatus(message) {
-        if (this.elements.status) {
-            this.elements.status.textContent = message
+    message(id, ...args) {
+
+        let bank = this.root
+            ? this.root.querySelector(`[data-msg="${id}"]`)
+            : null
+
+        // Se a faixa ainda não foi traduzida, pede a tradução antes de ler.
+        if (bank && !bank.textContent.trim()) {
+            this.translate()
+            bank = this.root.querySelector(`[data-msg="${id}"]`)
         }
 
-        this.onStatus(message)
+        let text = bank ? bank.textContent.trim() : String(id)
+
+        args.forEach((value, index) => {
+            const bankItem = this.root
+                ? Array.from(this.root.querySelectorAll('[data-msg]'))
+                    .find(item => item.dataset.msg === String(value))
+                : null
+            const resolved = bankItem ? bankItem.textContent.trim() : value
+            text = text.split(`{${index}}`).join(String(resolved))
+        })
+
+        return text
+
+    }
+
+    setStatus(id, ...args) {
+
+        const text = this.message(id, ...args)
+
+        if (this.elements.status) {
+            this.elements.status.textContent = text
+        }
+
+        this.onStatus(text)
+
     }
 
     async saveDraft() {
         const data = this.getEditorData()
 
         if (!data.title && !data.content.trim()) {
-            this.setStatus('Digite um título ou conteúdo antes de salvar.')
+            this.setStatus('nothing_to_save')
             return false
         }
 
         if (!this.db) {
-            this.setStatus('Banco de dados indisponível.')
+            this.setStatus('db_unavailable')
             return false
         }
 
@@ -1639,11 +1340,7 @@ toggleSpeechRecognition() {
 
             await this.loadDraftList(key)
 
-            this.setStatus(
-                updated
-                    ? 'Rascunho atualizado.'
-                    : 'Rascunho salvo com sucesso.'
-            )
+            this.setStatus(updated ? 'draft_updated' : 'draft_saved')
 
             this.cleanupImages()
 
@@ -1654,7 +1351,7 @@ toggleSpeechRecognition() {
                 error
             )
 
-            this.setStatus('Erro ao salvar o rascunho.')
+            this.setStatus('draft_save_error')
 
             return false
         }
@@ -1683,7 +1380,7 @@ toggleSpeechRecognition() {
 
             this.restoreDraftData(draft)
 
-            this.setStatus('Alterações anteriores recuperadas.')
+            this.setStatus('changes_recovered')
 
             return true
         } catch (error) {
@@ -1725,7 +1422,7 @@ toggleSpeechRecognition() {
 
                 option.value = key
                 option.textContent =
-                    (value && value.title) || 'Rascunho sem título'
+                    (value && value.title) || this.message('draft_untitled')
 
                 select.appendChild(option)
             })
@@ -1743,7 +1440,7 @@ toggleSpeechRecognition() {
         const key = this.elements.draftList.value
 
         if (!key) {
-            this.setStatus('Selecione um rascunho para abrir.')
+            this.setStatus('draft_select')
             return false
         }
 
@@ -1754,7 +1451,7 @@ toggleSpeechRecognition() {
             })
 
             if (!draft) {
-                this.setStatus('Rascunho não encontrado.')
+                this.setStatus('draft_not_found')
                 return false
             }
 
@@ -1763,7 +1460,7 @@ toggleSpeechRecognition() {
             this.currentDraftKey = key
             this.hasChanges = false
 
-            this.setStatus('Rascunho aberto com sucesso.')
+            this.setStatus('draft_opened')
 
             return true
         } catch (error) {
@@ -1772,7 +1469,7 @@ toggleSpeechRecognition() {
                 error
             )
 
-            this.setStatus('Erro ao abrir o rascunho.')
+            this.setStatus('draft_open_error')
 
             return false
         }
@@ -1965,7 +1662,7 @@ async prepareImages(markdown) {
         this.updatePreview()
         this.releaseMedia()
 
-        this.setStatus('Editor pronto para uma nova postagem.')
+        this.setStatus('editor_ready_new')
     }
 
     async confirmPublication() {
@@ -2003,47 +1700,47 @@ async prepareImages(markdown) {
         if (button) {
             button.disabled = true
             button.setAttribute('aria-busy', 'true')
-            button.textContent = 'Publicando...'
+            button.textContent = this.message('publishing')
         }
 
         try {
             const initialData = this.getEditorData()
 
             if (!initialData.title) {
-                this.setStatus('Informe o título da postagem.')
+                this.setStatus('need_title')
                 this.elements.title.focus()
                 return false
             }
 
             if (!initialData.content.trim()) {
-                this.setStatus('Informe o conteúdo da postagem.')
+                this.setStatus('need_content')
                 this.elements.content.focus()
                 return false
             }
 
-            let stage = 'Inicialização da publicação'
+            let stage = 'stage_init'
 
-            this.setStatus('Preparando postagem...')
+            this.setStatus('preparing')
 
             try {
                 if (this.markdownReady) {
-                    stage = 'Carregamento da biblioteca Markdown'
+                    stage = 'stage_library'
                     await this.markdownReady
                 }
 
-                stage = 'Atualização da pré-visualização'
+                stage = 'stage_preview'
                 await this.updatePreview()
 
-                stage = 'Leitura dos dados do editor'
+                stage = 'stage_read'
                 const data = this.getEditorData()
 
-                stage = 'Salvamento automático'
+                stage = 'stage_autosave'
                 await this.autoSave()
 
-                stage = 'Preparação das imagens'
+                stage = 'stage_images'
                 const prepared = await this.prepareImages(data.content)
 
-                stage = 'Criação dos arquivos da postagem'
+                stage = 'stage_files'
                 const post = await this.postManager.createPost({
                     title: data.title,
                     summary: data.summary,
@@ -2053,21 +1750,19 @@ async prepareImages(markdown) {
                     tags: data.tags
                 })
 
-                stage = 'Publicação no GitHub'
+                stage = 'stage_publish'
                 const publication = await this.onCreate(post)
 
                 if (publication && publication.published === true) {
-                    stage = 'Confirmação da publicação'
+                    stage = 'stage_confirm'
                     await this.confirmPublication()
 
-                    this.setStatus('Postagem publicada com sucesso.')
+                    this.setStatus('published')
 
                     return post
                 }
 
-                this.setStatus(
-                    'Postagem preparada. O conteúdo foi preservado no editor.'
-                )
+                this.setStatus('prepared')
 
                 return {
                     published: false,
@@ -2092,9 +1787,7 @@ async prepareImages(markdown) {
                     // O diagnóstico visual não depende do console.
                 }
 
-                this.setStatus(
-                    `Falha na etapa "${stage}": ${errorName}: ${errorMessage}. O conteúdo foi preservado.`
-                )
+                this.setStatus('publish_stage_error', this.message(stage), `${errorName}: ${errorMessage}`)
 
                 return false
             }

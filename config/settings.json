@@ -127,6 +127,21 @@
                     "file": "github-auth.tpl",
                     "mode": "append",
                     "target": "#index-central-block"
+                },
+                {
+                    "file": "markdown-editor.tpl",
+                    "mode": "append",
+                    "target": "#admin-post-editor"
+                },
+                {
+                    "file": "admin-post-item.tpl",
+                    "mode": "append",
+                    "target": "#admin-dashboard-content"
+                },
+                {
+                    "file": "admin-delete-modal.tpl",
+                    "mode": "append",
+                    "target": "#body"
                 }
             ]
         }

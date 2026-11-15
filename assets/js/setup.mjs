@@ -790,6 +790,7 @@ if (router === 'admin') {
         root: editorRoot,
         db: DBMethods,
         permissions: BrowserPermissions,
+        translate: () => i18n.transcript(),
 
         onCreate: async post => {
             try {
