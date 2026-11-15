@@ -22,7 +22,26 @@
         }
     },
     "articles": {
-        "storage": [],
+        "storage": [
+            {
+                "id": "Z1gZqLW9Z",
+                "title": "A teoria do caos",
+                "summary": "Muito mais que um blog Tem gente que coleciona disco, tem gente que coleciona meme, tem gente que coleciona projeto inacabado no GitHub. Eu me encaixo tranquilo",
+                "path": "assets/posts/Z1gZqLW9Z.md",
+                "cover": "assets/posts/images/046e9fa28ac601401a483c125c233e8367e39f287e9298f9b81742599b7da67e.png",
+                "images": [
+                    "assets/posts/images/046e9fa28ac601401a483c125c233e8367e39f287e9298f9b81742599b7da67e.png"
+                ],
+                "tags": [
+                    "subversivo58",
+                    "tech",
+                    "cult"
+                ],
+                "timestamp": 1794740550474,
+                "lastModified": 1794740550474,
+                "readingTime": 3
+            }
+        ],
         "index-max-list": 5,
         "footer-max-list": 6,
         "blog-max-list": 20
@@ -190,7 +209,7 @@
         "url": ""
     },
     "cookies_warning": true,
-    "last_modified": 1794629437450,
+    "last_modified": 1794740550474,
     "submissions": {
         "routes": {
             "/bugs": {
