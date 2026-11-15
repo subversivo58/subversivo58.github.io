@@ -23,7 +23,8 @@
                             justify-content-between
                             px-3 py-3 border-bottom">
 
-                    <h3 class="h5 mb-0" data-i18n-html="admin_dashboard.posts"></h3>
+                    <h3 class="i18n h5 mb-0"
+                        data-i18n-html="admin_dashboard.posts"></h3>
 
                     <a href="#body"
                        id="slide-link-admin-close"
@@ -42,9 +43,6 @@
                     <div id="admin-posts-list-mobile"
                          class="list-group list-group-flush">
 
-                        <div class="list-group-item small text-muted"
-                             data-i18n-html="admin_dashboard.loading_posts"></div>
-
                     </div>
 
                 </div>
@@ -58,14 +56,11 @@
                 <!-- DESKTOP POSTS -->
                 <div class="px-2 py-3">
 
-                    <h4 class="h6 px-2 mb-2"
+                    <h4 class="i18n h6 px-2 mb-2"
                         data-i18n-html="admin_dashboard.posts"></h4>
 
                     <div id="admin-posts-list-desktop"
                          class="list-group list-group-flush">
-
-                        <div class="list-group-item small text-muted"
-                             data-i18n-html="admin_dashboard.loading_posts"></div>
 
                     </div>
 
@@ -89,10 +84,10 @@
 
                     <div>
 
-                        <h2 class="h3 mb-1"
+                        <h2 class="i18n h3 mb-1"
                             data-i18n-html="admin_dashboard.title"></h2>
 
-                        <p class="text-muted mb-0"
+                        <p class="i18n text-muted mb-0"
                            data-i18n-html="admin_dashboard.description"></p>
 
                     </div>
@@ -109,7 +104,8 @@
                                   mr-2 d-md-none">
 
                             <span aria-hidden="true">&#9776;</span>
-                            <span data-i18n-html="admin_dashboard.menu"></span>
+                            <span class="i18n"
+                                  data-i18n-html="admin_dashboard.menu"></span>
 
                         </a>
 
@@ -117,7 +113,7 @@
                         <button
                             type="button"
                             id="admin-new-post"
-                            class="btn btn-info btn-sm rounded-0
+                            class="i18n btn btn-info btn-sm rounded-0
                                    flex-fill flex-md-grow-0"
                             data-i18n-html="admin_dashboard.new_post">
                         </button>
@@ -137,7 +133,7 @@
                             d-flex align-items-center
                             justify-content-between">
 
-                    <h3 class="h5 mb-0"
+                    <h3 class="i18n h5 mb-0"
                         data-i18n-html="admin_dashboard.new_post"></h3>
 
                     <button

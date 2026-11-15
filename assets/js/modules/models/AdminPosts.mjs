@@ -229,11 +229,6 @@ class AdminPosts {
         } catch (error) {
 
             console.error('[ADMIN POSTS]:', error)
-
-            this.renderMessage(
-                'Não foi possível carregar as postagens.'
-            )
-
             return false
 
         }
@@ -260,7 +255,6 @@ class AdminPosts {
     renderLists() {
 
         if (!this.posts.length) {
-            this.renderMessage('Nenhuma postagem publicada.')
             return
         }
 
