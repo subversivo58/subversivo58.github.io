@@ -203,14 +203,6 @@ let BaseRootRegExp = new RegExp(BaseRoot),
 // Instance and "mode" (i18n|l10n|Intl)
 const i18n = new IlibJS('i18n')
 
-// Tradução em tempo de execução (texto montado por JavaScript).
-// Sem a chave no dicionário usa o texto padrão; {nome} é trocado por vars.nome.
-const tr = (key, fallback, vars = {}) => {
-    const word = i18n.getWord(key)
-    const text = (typeof word === 'string' && word) ? word : fallback
-
-    return text.replace(/\{(\w+)\}/g, (match, name) => name in vars ? vars[name] : match)
-}
 
 
 const Events = new Emitter('setup')
@@ -559,9 +551,9 @@ if (router === 'blog') {
         const more = document.getElementById('blog-more')
         if (!count || !more) return
         const shown = Math.min(visible, posts.length)
-        count.textContent = tr('blog.showing', 'Mostrando {shown} de {total}', {
-            shown, total: posts.length
-        })
+        count.textContent = i18n.getWord('blog.showing')
+    .replace('{shown}', shown)
+    .replace('{total}', posts.length)
         count.hidden = posts.length <= maxList
         more.hidden = shown >= posts.length
     }
@@ -584,9 +576,9 @@ if (router === 'blog') {
         const index = post ? posts.indexOf(post) : -1
         if (index >= visible) visible = Math.ceil((index + 1) / maxList) * maxList
 
-        let article = `<p class="ct my-5">${tr('blog.empty', 'Nada publicado ainda.')}</p>`
+        let article = `<p class="ct my-5">${i18n.getWord('blog.empty')}</p>`
         if (posts.length && !post) {
-            article = `<p class="ct my-5">${tr('blog.not_found', 'Post não encontrado.')}</p>`
+            article = `<p class="ct my-5">${i18n.getWord('blog.not_found')}</p>`
         }
 
         if (post) {
@@ -597,7 +589,7 @@ if (router === 'blog') {
                 )
             } catch (error) {
                 console.error('[BLOG]:', error)
-                article = `<p class="ct my-5">${tr('blog.load_error', 'Não foi possível carregar este post.')}</p>`
+                article = `<p class="ct my-5">${i18n.getWord('blog.load_error')}</p>`
             }
         }
 
