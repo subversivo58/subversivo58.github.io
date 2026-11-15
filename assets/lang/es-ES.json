@@ -1,4 +1,10 @@
 {
+    "404": {
+        "general": "¡Vaya... No encontrado!",
+        "title": "Página no encontrada",
+        "message": "La dirección que has intentado abrir no existe o se ha trasladado. Comprueba que la has escrito correctamente o vuelve a la página de inicio.",
+        "button": "Volver al inicio"
+    },
     "anonimous": {
         "title": "¿Estás en modo incógnito?",
         "body": {
@@ -217,68 +223,10 @@
             "not": "Alertas",
             "feedback": "Comentarios",
             "lang": "Idiomas",
-            "marks": "Marcador"
+            "marks": "Marcador",
+            "admin": "Administración"
         },
         "version": "Versión"
-    },
-    "info_popup": {
-        "join_key": {
-            "head": "Clave de seguridad",
-            "body": "<p>Sube tu archivo de <b>clave de seguridad</b>.</p><p>Este proceso analiza tu clave cifrada exclusiva y autoriza tu acceso.</p>",
-            "footer": "<small>Consejos de seguridad y más información. <a href='#' class='tdu sky'>Lee la documentación</a></small>"
-        },
-        "registration_pwd": {
-            "head": "¡Contraseña de la cuenta!",
-            "body": "<p class='lh-140'>Este campo requiere un mínimo de 8 caracteres y un máximo de 50, respetando las siguientes reglas:</p><ul class='list-group'><li class='list-group-item'><b>una letra minúscula</b></li></ul>",
-            "footer": "<small>Consejos de seguridad y más información. <a href='#' class='tdu sky'>Lee la documentación</a></small>"
-        }
-    },
-    "registration": {
-        "error": {
-            "already": {
-                "message": "<p class='lh-140'>¡Este correo electrónico ya está registrado!</p><p class='lh-140'>Por favor, activa tu cuenta, vuelve a enviar el enlace de activación o ve a la <a href='/signin'>página de inicio de sesión</a>.</p>"
-            },
-            "server": {
-                "message": "<p class='lh-140'>Lo sentimos, ¡se ha producido un error interno del servidor!</p>"
-            }
-        }
-    },
-    "recover": {
-        "success": {
-            "title": "¡Enhorabuena!",
-            "message": "¡Se ha enviado un enlace de recuperación! Comprueba tu correo electrónico... el enlace es válido durante una hora."
-        },
-        "error": {
-            "server": {
-                "title": "[ERROR] ¡Se ha producido un error!",
-                "message": "Lo sentimos, ¡se ha producido un error interno del servidor! Inténtalo más tarde."
-            },
-            "notfound": {
-                "title": "[INFO] ¡Correo no encontrado!",
-                "message": "Lo sentimos, ¡este correo electrónico no figura en la base de datos!"
-            },
-            "inactived": {
-                "title": "[INFO] ¡Cuenta inactiva!",
-                "message": "Lo sentimos, ¡esta cuenta todavía no está activada!"
-            },
-            "wait": {
-                "title": "[INFO] ¡Correo pendiente!",
-                "message": "¡Este correo electrónico ya se ha enviado! El tiempo de espera para realizar una nueva solicitud es de una hora."
-            },
-            "auth": {
-                "title": "[ERROR] ¡Error de autenticación!",
-                "message": "Tu solicitud no contiene un token de autenticación válido. Haz clic aquí para consultar la documentación sobre recuperación."
-            },
-            "conn": {
-                "title": "[INFO] ¡Conexión cerrada!",
-                "message": "¡Ya se ha enviado un correo electrónico con un enlace de recuperación! Comprueba tu servicio de correo."
-            },
-            "mail": {
-                "title": "[ERROR] ¡Error de correo electrónico!",
-                "message": "¡El formato de este correo electrónico no es válido! Haz clic aquí para consultar la documentación sobre recuperación.",
-                "link": "#"
-            }
-        }
     },
     "copyright": {
         "contributors": "Este proyecto solo ha sido posible gracias al uso de muchos otros proyectos de código abierto y a la <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>comunidad de colaboradores</a>... ¡eres libre de crear, utilizar, modificar y distribuir, siempre que respetes todas las licencias correspondientes!",
@@ -289,151 +237,11 @@
         "thissource": "Software de este sitio",
         "alllicenses": "Todas las licencias"
     },
-    "signin": {
-        "remember": "Recordarme si este es tu dispositivo",
-        "forgot": "¿Recuperar cuenta?"
-    },
-    "signup": {
-        "success": {
-            "title": "¡Enhorabuena!",
-            "message": "¡Se ha enviado un enlace de activación! Comprueba tu correo electrónico... será válido durante 24 horas."
-        },
-        "error": {
-            "server": {
-                "title": "[ERROR] ¡Se ha producido un error!",
-                "message": "Lo sentimos, ¡se ha producido un error interno del servidor! Inténtalo más tarde."
-            },
-            "already": {
-                "title": "[INFO] ¡Ya estás registrado!",
-                "message": "¡Este correo electrónico ya está registrado! Comprueba tu bandeja de entrada."
-            },
-            "token": {
-                "title": "[ERROR] ¡Error de autenticación!",
-                "message": "Tu solicitud no contiene un token válido. Haz clic aquí para consultar la documentación sobre el registro."
-            },
-            "conn": {
-                "title": "[INFO] ¡Conexión cerrada!",
-                "message": "¡Ya se ha enviado un correo electrónico con un enlace de activación! Comprueba tu bandeja de entrada."
-            },
-            "mail": {
-                "title": "[ERROR] ¡Error de correo electrónico!",
-                "message": "¡El formato de este correo electrónico no es válido! Haz clic aquí para consultar la documentación sobre el registro.",
-                "link": "#"
-            },
-            "pwd": {
-                "title": "[ERROR] ¡Error de contraseña!",
-                "message": "¡El formato de esta contraseña no es válido! Haz clic aquí para consultar la documentación sobre el registro.",
-                "link": "#"
-            }
-        },
-        "modal": {
-            "head": "Contraseña de la cuenta",
-            "req": "Esta contraseña debe cumplir los siguientes requisitos:",
-            "test": "Comprueba tu contraseña ahora:",
-            "chars": "un mínimo de 8 caracteres y un máximo de 50",
-            "lower": "una letra minúscula",
-            "upper": "una letra mayúscula",
-            "digit": "un dígito (número)",
-            "special": "un carácter especial",
-            "space": "sin espacios",
-            "run": "comprobar",
-            "footer": "Para obtener más información o sugerencias, consulta la <a href='#' class='tdu blue' target='_blank' rel='nofollow'>documentación</a>.",
-            "result": {
-                "accept": "Correcto, ¡contraseña válida!",
-                "refuse": "No válida",
-                "empty": ", está vacía",
-                "less": ", tiene menos de 8 caracteres",
-                "more": ", tiene más de 50 caracteres",
-                "lower": ", no contiene letras minúsculas",
-                "upper": ", no contiene letras mayúsculas",
-                "digit": ", no contiene dígitos (números)",
-                "special": ", no contiene caracteres especiales",
-                "space": ", contiene espacios",
-                "unk": ", no definida"
-            }
-        },
-        "regnow": "Regístrate ahora ",
-        "btnSubmit": "Registrarse en Collabore",
-        "agreement": "Al hacer clic en el botón \"Registrarse en Collabore\", aceptas los <a href='./licit' target='blank_'>términos del servicio</a> y la <a href='./policies/privacci' target='blank_'>política de privacidad</a>. Ocasionalmente te enviaremos correos electrónicos relacionados con tu cuenta."
-    },
-    "openpgp": {
-        "error": {
-            "encryption": {
-                "title": "[Error] ¡Solicitud de cifrado!",
-                "message": "¡Se ha producido un error al cifrar con PGP! Haz clic aquí para consultar la documentación sobre este error.",
-                "link": "#"
-            }
-        }
-    },
     "nocookie": {
         "title": "No compatible",
         "p1": "Lo sentimos, no admitimos el modo de navegación sin cookies.",
         "p2": "Aunque este sitio web utiliza cookies y otras tecnologías de almacenamiento, \"<strong>no almacenamos ningún dato en tu navegador sin tu permiso expreso</strong>\".",
         "p3": "Creemos que existen buenas razones para no admitir la navegación sin cookies. Puedes consultar nuestro <a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"Libro blanco\"</a> para obtener más información. Lamentablemente, tendrás que navegar con las cookies activadas."
-    },
-    "404": {
-        "general": "¡Vaya... No encontrado!",
-        "title": "Página no encontrada",
-        "message": "La dirección que has intentado abrir no existe o se ha trasladado. Comprueba que la has escrito correctamente o vuelve a la página de inicio.",
-        "button": "Volver al inicio"
-    },
-    "mail": {
-        "account": {
-            "title": "¡Cuenta creada!",
-            "text_a": "Te damos la bienvenida a Collabore, un proyecto de código abierto que utiliza herramientas gratuitas y lenguajes web para crear pequeños blogs colaborativos y herramientas de cooperación. Explora las mejores API de HTML5, crea complementos de JavaScript, utiliza WebSockets para desarrollar chats y sistemas de comentarios, y gestiona tus páginas de forma remota, rápida y sencilla.",
-            "text_b": "Haz clic en el enlace de abajo durante las próximas 24 horas para activar tu cuenta y empezar a utilizarla.",
-            "btn_a": "¡Activar cuenta!",
-            "features": "Características de Collabore",
-            "btn_b": "¡Visitar ahora!",
-            "feat_a": {
-                "title": "Programación",
-                "msg": "Desarrollo flexible y potente mediante frameworks de JavaScript, API de HTML y muchas otras tecnologías."
-            },
-            "feat_b": {
-                "title": "Desarrollo web",
-                "msg": "Elige entre complementos o amplía tus páginas con aplicaciones de servidor de forma sencilla."
-            },
-            "feat_c": {
-                "title": "Implementación de API",
-                "msg": "Implementa tu propia API de forma fácil y rápida."
-            },
-            "feat_d": {
-                "title": "Publica tu blog",
-                "msg": "Pasos sencillos para publicar plantillas de blogs."
-            },
-            "feat_e": {
-                "title": "Adaptable",
-                "msg": "Plantillas adaptables que utilizan Bootstrap."
-            }
-        },
-        "recover": {
-            "title": "¡Recuperación de cuenta!",
-            "btn": "¡Recuperar ahora!",
-            "text_a": "Hola,",
-            "text_b": "&mdash; Este correo electrónico sirve para recuperar tu cuenta de Collabore.",
-            "text_c": "Haz clic en el enlace de abajo durante la próxima hora para recuperar el acceso a tu cuenta."
-        },
-        "policy": {
-            "title": "¡Cambios en las políticas!",
-            "text_a": "¿Qué ocurre?",
-            "text_b": "Hemos actualizado recientemente nuestra política de uso. Las políticas regulan el compromiso entre la aplicación y el usuario, así como su privacidad, el uso de los datos y la prestación de servicios.",
-            "view_changes": "Visita Collabore y descubre más sobre estos cambios.",
-            "btn": "¡Ver ahora!"
-        },
-        "twofactory": {
-            "title": "Cambiar 2FA",
-            "text_a": "¿Qué ocurre?",
-            "text_b": "Se ha solicitado un cambio en el sistema de autenticación de dos factores (2FA).",
-            "confirm": "Haz clic en el botón de abajo para confirmar este cambio.",
-            "btn": "¡Confirmar ahora!"
-        },
-        "unsubscribe": {
-            "text_a": "Si no reconoces este correo electrónico o no sabes por qué lo has recibido, ignóralo",
-            "text_b": " o cancela tu suscripción."
-        },
-        "visite_text": "Visita la página de Collabore en GitHub y descubre más sobre cómo utilizarla.",
-        "visite_link": "Visitar la página principal de Collabore",
-        "copy": "Plantilla de correo electrónico - &copy; 2016 - Subversivo58"
     },
     "twofactory": {
         "security_slide": {
@@ -751,6 +559,23 @@
     "palette": {
         "title": "Paleta de colores",
         "schema": "Esquema"
+    },
+    "admin_dashboard": {
+        "posts": "Publicaciones",
+        "close_menu": "Cerrar menú",
+        "loading_posts": "Cargando publicaciones...",
+        "title": "Panel de administración",
+        "description": "Administra las publicaciones de tu blog.",
+        "menu": "Menú",
+        "new_post": "Nueva publicación",
+        "close_editor": "Cerrar editor"
+    },
+    "github_auth": {
+        "title": "Autenticación de GitHub",
+        "description": "Introduce tu clave API de GitHub para acceder al panel de administración.",
+        "label": "Clave API de GitHub",
+        "placeholder": "Pega tu clave API",
+        "verify": "Verificar"
     },
     "blog": {
         "empty": "Todavía no hay publicaciones.",

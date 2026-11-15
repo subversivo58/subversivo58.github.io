@@ -223,7 +223,8 @@
       "not": "Alerts",
       "feedback": "Feedback",
       "lang": "Languages",
-      "marks": "Marker"
+      "marks": "Marker",
+      "admin": "Administration"
     },
     "version": "Version"
   },
@@ -566,5 +567,22 @@
     "showing": "Showing {shown} of {total}",
     "load_more": "Load more",
     "read_time": "{minutes} min read"
+  },
+  "admin_dashboard": {
+    "posts": "Posts",
+    "close_menu": "Close menu",
+    "loading_posts": "Loading posts...",
+    "title": "Administrative Dashboard",
+    "description": "Manage your blog posts.",
+    "menu": "Menu",
+    "new_post": "New Post",
+    "close_editor": "Close editor"
+  },
+  "github_auth": {
+    "title": "GitHub Authentication",
+    "description": "Enter your GitHub API Key to access the administrative dashboard.",
+    "label": "GitHub API Key",
+    "placeholder": "Paste your API Key",
+    "verify": "Verify"
   }
 }
