@@ -1,7 +1,7 @@
 
 /**
  * @license The MIT License (MIT)             - [https://github.com/Pluggeding/pluggeding.github.io/blob/master/LICENSE]
- * @copyright Copyright (c) 2020 Lauro Moraes - [https://github.com/subversivo58]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
  * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
  */
 
@@ -11,7 +11,7 @@ import AWIndexedDB from './assets/js/modules/lib/AwesomeIndexedDB.mjs';
 
 const AdminHTML = `<!--
   @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/main/LICENSE]
-  @copyright Copyright (c) 2026 Lauro Moraes - [https://github.com/subversivo58]
+  @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
   @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/main/VERSIONING.md]
 -->
 <!DOCTYPE html>
@@ -25,11 +25,11 @@ const AdminHTML = `<!--
     <meta name="author" content="Subversivo58">
 
     <!-- Simple \`window.console\` debugger -->
-    <meta name="DEBUG" content="true">
+    <meta name="DEBUG" content="false">
     <meta name="reply-to" content="https://github.com/subversivo58/subversivo58.github.io/issues/new">
 
     <link rel="copyright" href="copyright.html">
-    <link rel="canonical" href="https://subversivo58.github.io/admin.html">
+    <meta name="robots" content="noindex">
 
     <!-- Twitter Open Graph -->
     <meta name="twitter:site" content="@subversivo58">
@@ -44,16 +44,10 @@ const AdminHTML = `<!--
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="720">
 
-    <link rel="icon" href="/assets/media/image/icons/cube.webp" type="image/webp">
+    <link rel="icon" href="favicon.ico">
 
     <!-- Preload -->
-    <link rel="preload" href="assets/js/setup.mjs" as="script" crossorigin="anonymous">
-    <link rel="preload" href="assets/js/modules/helpers/BasePrefixes.mjs" as="script" crossorigin="anonymous">
-    <link rel="preload" href="assets/js/modules/helpers/Helpers.mjs" as="script" crossorigin="anonymous">
-    <link rel="preload" href="assets/js/modules/functions/Functions.mjs" as="script" crossorigin="anonymous">
-    <link rel="preload" href="assets/js/modules/lib/Emitter.mjs" as="script" crossorigin="anonymous">
-    <link rel="preload" href="assets/js/modules/lib/AwesomeIndexedDB.mjs" as="script" crossorigin="anonymous">
-    <link rel="preload" href="assets/js/modules/vendor/bootstrap-native.mjs" as="script" crossorigin="anonymous">
+    <link rel="modulepreload" href="assets/js/setup.mjs">
 
     <link rel="stylesheet" type="text/css" href="./assets/vendor/bootstrapv4/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="assets/css/main.css">

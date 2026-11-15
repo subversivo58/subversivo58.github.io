@@ -1,7 +1,7 @@
 
 /**
  * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
- * @copyright Copyright (c) 2021 Lauro Moraes - [https://github.com/subversivo58]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
  * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
  *
  * @file PostManager.mjs
@@ -21,6 +21,12 @@ export default class PostManager {
 
         this.settingsPath =
             options.settingsPath ?? 'config/settings.json'
+
+        this.sitemapPath =
+            options.sitemapPath ?? 'sitemap.xml'
+
+        this.blogUrl =
+            options.blogUrl ?? 'https://subversivo58.github.io/blog.html'
 
     }
 
@@ -167,6 +173,48 @@ export default class PostManager {
     }
 
     /**
+     * Updates the lastmod of the blog entry in sitemap.xml.
+     * Returns null when the sitemap cannot be read, so publishing continues.
+     */
+    async prepareSitemap(timestamp) {
+
+        try {
+
+            const response = await fetch(this.sitemapPath, {
+                cache: 'no-store'
+            })
+
+            if (!response.ok) return null
+
+            const xml = await response.text()
+
+            const date = new Date(timestamp).toISOString().slice(0, 10)
+
+            const blogEntry = new RegExp(
+                '(<url>\\s*<loc>' +
+                this.blogUrl.replace(/[.*+?^${}()|[\]\\]/g, '\$&') +
+                '</loc>)([\\s\\S]*?)(</url>)'
+            )
+
+            if (!blogEntry.test(xml)) return null
+
+            return xml.replace(blogEntry, (match, open, body, close) => {
+
+                const cleaned = body.replace(/\s*<lastmod>[^<]*<\/lastmod>/, '')
+
+                return `${open}${cleaned.replace(/\s*$/, '')}\n        <lastmod>${date}</lastmod>\n    ${close}`
+
+            })
+
+        } catch (error) {
+
+            return null
+
+        }
+
+    }
+
+    /**
      * Cria uma postagem e prepara todos os arquivos.
      */
     async createPost(data = {}) {
@@ -220,6 +268,9 @@ export default class PostManager {
         timestamp
     )
 
+    // Updates the blog date in sitemap.xml, when the file can be read.
+    const updatedSitemap = await this.prepareSitemap(timestamp)
+
     // Prepara todos os arquivos para publicação.
     const files = [
 
@@ -239,7 +290,13 @@ export default class PostManager {
         {
             path: this.settingsPath,
             content: updatedSettings
-        }
+        },
+
+        // sitemap.xml with the blog lastmod updated (when available).
+        ...(updatedSitemap ? [{
+            path: this.sitemapPath,
+            content: updatedSitemap
+        }] : [])
 
     ]
 

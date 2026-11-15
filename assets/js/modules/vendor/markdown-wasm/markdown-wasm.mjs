@@ -1,3 +1,11 @@
+/**
+ * markdown-wasm — derivado da build original (Emscripten), reformatado para leitura.
+ * Modificações: remoção dos recursos addFunction/removeFunction/onCodeBlock e
+ * reorganização do código e da exportação ({ ready, ParseFlags, parse }).
+ * Modificações © 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
+ * @license MIT - texto completo em LICENSE (mesma pasta)
+ * @copyright Copyright (c) 2019-2020 Rasmus Andersson - [https://rsms.me/]
+ */
 //(function(exports) {
 
 

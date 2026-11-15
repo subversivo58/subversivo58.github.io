@@ -1,7 +1,7 @@
 
 /**
  * @license The MIT License (MIT)
- * @copyright Copyright (c) 2021 Lauro Moraes
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
  *
  * @file AdminPosts.mjs
  * @description Gerenciamento das postagens na administração.

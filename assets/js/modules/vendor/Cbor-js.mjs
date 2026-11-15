@@ -25,7 +25,7 @@
 /**
  * ES6 module implementation of cbor-js
  * @license The MIT License (MIT)
- * @copyright Copyright (c) 2020 Lauro Moraes - [https://github.com/subversivo58]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
  * @see original cbor.js repository           - [https://github.com/paroga/cbor-js]
  */
 

@@ -1,7 +1,7 @@
 /**
  * Emmiter - Event Emitter
  * @license The MIT License (MIT)                    - [https://github.com/subversivo58/Emitter/blob/master/LICENSE]
- * @copyright Copyright (c) 2018 - 2021 Lauro Moraes - [https://github.com/subversivo58]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
  * @version 0.1.0 [development stage]                - [https://github.com/subversivo58/Emitter/blob/master/VERSIONING.md]
  */
 const registry = Symbol('listenerRegistry')

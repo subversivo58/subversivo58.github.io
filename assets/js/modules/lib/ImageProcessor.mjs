@@ -1,7 +1,7 @@
 
 /**
  * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
- * @copyright Copyright (c) 2026 Subversivo58
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
  *
  * @file ImageProcessor.mjs
  * @description Processamento local e independente de imagens no navegador.

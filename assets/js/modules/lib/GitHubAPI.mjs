@@ -3,7 +3,7 @@
  * Uses the modified GitHub library under the hood and exposes it as `gh` property for get instance of all methods
  * @note:
  *   -- inspired at article: @see <https://medium.freecodecamp.org/pushing-a-list-of-files-to-the-github-with-javascript-b724c8c09b66>
- * @copyright Copyright (c) 2020 Lauro Moraes <https://github.com/subversivo58>
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes <https://github.com/subversivo58>
  * @license MIT License <https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE>
  */
 import GitHub from '../vendor/GitHub.bundle.mjs';

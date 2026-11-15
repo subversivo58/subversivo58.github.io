@@ -39,7 +39,7 @@ O titular pode exercer seus direitos mediante solicitação ao DPO através da [
 - anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade;
 - portabilidade, conforme regulamentação da ANPD;
 - eliminação dos dados tratados com consentimento, ressalvadas as hipóteses do Art. 16 da LGPD;
-- informação sobre compartilhamento: os dados de conexão são compartilhados com GitHub Pages e Glitch, conforme seção "Provedores de Serviço";
+- informação sobre compartilhamento: os dados de conexão são compartilhados com GitHub Pages, conforme seção "Provedores de Serviço";
 - informação sobre a possibilidade de não consentir e consequências: a negativa ao consentimento para dados de análise e feedback não impede o acesso ao Site, mas desativa as funcionalidades correspondentes;
 - revogação do consentimento, a qualquer momento, mediante solicitação ao DPO.
 
@@ -56,14 +56,13 @@ Os dados são armazenados pelos prazos necessários às finalidades informadas:
 - dados pessoais: enquanto a conta existir e por **6 meses** após solicitação de exclusão, para exercício regular de direitos;
 - dados públicos: enquanto o usuário mantiver publicados.
 
-Os prazos acima valem para os dados armazenados diretamente pelo Site. Provedores de serviço (GitHub Pages e Glitch) possuem políticas próprias de retenção, sobre as quais não temos controle.
+Os prazos acima valem para os dados armazenados diretamente pelo Site. Provedor de serviço (GitHub Pages) possui políticas próprias de retenção, sobre as quais não temos controle.
 
 ▪️ Provedores de serviço{class="h6 font-weight-bold text-decoration-underline mt-4"}
 
 ▪️ Termos e Políticas de Terceiros{class="h6 font-weight-bold text-decoration-underline mt-4"}
 
-Utilizamos os serviços de hospedagem de páginas estáticas [GitHub Pages](https://pages.github.com/)(target="_blank" rel="nofollow noopener" class="ext-link-icon"),
-[Glitch](https://glitch.com)(target="_blank" rel="nofollow noopener" class="ext-link-icon") para funções server-side.
+Utilizamos os serviços de hospedagem de páginas estáticas [GitHub Pages](https://pages.github.com/)(target="_blank" rel="nofollow noopener" class="ext-link-icon").
 
 Estas plataformas podem (e provavelmente o fazem) coletar dados de conexão tais como: endereço **IP**, **data e hora** de conexão bem como **informações de seu navegador** para uso e aprimoramento de suas próprias ferramentas. Não temos controle sobre como a coleta e uso destes dados ocorre; ao utilizar nosso Site o Usuário está "**intrinsecamente concordando**" não somente com nossos Termos e Políticas mas também com os Termos e Políticas destas plataformas que podem ou não estar em Português.
 
@@ -72,7 +71,6 @@ e [Pluggeding](https://pluggeding.github.io/)(target="_blank" rel="nofollow noop
 
 Para mais informações consulte:
 * [Declaração de privacidade do GitHub](https://docs.github.com/pt/github/site-policy/github-privacy-statement#github-pages "Declaração de privacidade do GitHub")(target="_blank" rel="nofollow noopener" class="ext-link-icon")
-* [Declaração de privacidade do Glitch (em Inglês)](https://glitch.com/legal/privacy "Declaração de privacidade do Glitch (em Inglês)")(target="_blank" rel="nofollow noopener" class="ext-link-icon")
 * [Declaração de privacidade de AuthChainJS](https://authchainjs.github.io/legal.html "Declaração de privacidade de AuthChainJS")(target="_blank" rel="nofollow noopener" class="ext-link-icon")
 * [Declaração de privacidade de Pluggeding](https://pluggeding.github.io/privacy.html "Declaração de privacidade de Pluggeding")(target="_blank" rel="nofollow noopener" class="ext-link-icon")
 
@@ -147,10 +145,9 @@ A tabela a seguir descreve quais tipos, descrição, motivo e dados que podem se
 ▪️1- Dados: coleta e guarda{class="h6 font-weight-bold mt-4"}
 
 1.1- Utilizamos os serviços de hospedagem de páginas estáticas [GitHub Pages](https://pages.github.com/)(target="_blank" rel="nofollow noopener" class="ext-link-icon")
-e [Glitch](https://glitch.com)(target="_blank" rel="nofollow noopener" class="ext-link-icon") para funções server-side ... estas plataformas podem (e provavelmente o fazem) coletar dados de conexão tais como: endereço **IP**, **data e hora** de conexão bem como **informações de seu navegador** para uso e aprimoramento de suas próprias ferramentas. Não temos controle sobre como a coleta e uso destes dados ocorre; ao utilizar nosso Site o Usuário está "**intrinsecamente concordando**" não somente com nossos Termos e Políticas mas também com os Termos e Políticas destas plataformas que podem ou não estar em Português.
+esta plataforma pode (e provavelmente o faz) coletar dados de conexão tais como: endereço **IP**, **data e hora** de conexão bem como **informações de seu navegador** para uso e aprimoramento de suas próprias ferramentas. Não temos controle sobre como a coleta e uso destes dados ocorre; ao utilizar nosso Site o Usuário está "**intrinsecamente concordando**" não somente com nossos Termos e Políticas mas também com os Termos e Políticas destas plataformas que podem ou não estar em Português.
 
 Para mais informações consulte: [Declaração de privacidade do GitHub](https://docs.github.com/pt/github/site-policy/github-privacy-statement#github-pages "Declaração de privacidade do GitHub")(target="_blank" rel="nofollow noopener" class="ext-link-icon")
-e [Declaração de privacidade do Glitch (em Inglês)](https://glitch.com/legal/privacy "Declaração de privacidade do Glitch (em Inglês)")(target="_blank" rel="nofollow noopener" class="ext-link-icon").
 
 Em um futuro próximo esperamos implementar nossos próprios serviços para trazer mais qualidade ao Site e enriquecer a experiência de nossos usuários. Na medida que implementarmos novas funcionalidades atualizaremos nossas Políticas e Termos de Uso.
 
@@ -161,7 +158,6 @@ Em um futuro próximo esperamos implementar nossos próprios serviços para traz
 1.3- Os seguintes websites (sistemas e serviços operados por este Site) podem coletar dados do Usuário ou armazenar **cookies** no dispositivo do Usuário:
 
 * **[package.pluggeding.workers.dev](https://package.pluggeding.workers.dev/)**: CloudFlare Workers - Browser Proxy para pacotes NPM (Pluggeding System)
-* **[subversivo58-blog-signaling.glitch.me](https://subversivo58-blog-signaling.glitch.me/)**: Glitch Node Server - Servidor de sinalização WebRTC para AuthChainJS
 
 1.4- A listagem a seguir descreve:
 
