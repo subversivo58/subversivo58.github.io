@@ -753,6 +753,18 @@
     "title": "Paleta de cores",
     "schema": "Esquema"
   },
+
+"admin_dashboard": {
+  "posts": "Postagens",
+  "close_menu": "Fechar menu",
+  "loading_posts": "Carregando postagens...",
+  "title": "Painel Administrativo",
+  "description": "Gerencie as postagens do seu blog.",
+  "menu": "Menu",
+  "new_post": "Nova Postagem",
+  "close_editor": "Fechar editor"
+},
+
   "blog": {
     "empty": "Nada publicado ainda.",
     "not_found": "Post não encontrado.",

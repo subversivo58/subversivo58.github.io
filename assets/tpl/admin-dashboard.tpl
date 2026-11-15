@@ -23,9 +23,7 @@
                             justify-content-between
                             px-3 py-3 border-bottom">
 
-                    <h3 class="h5 mb-0">
-                        Postagens
-                    </h3>
+                    <h3 class="h5 mb-0" data-i18n-html="admin_dashboard.posts"></h3>
 
                     <a href="#body"
                        id="slide-link-admin-close"
@@ -38,18 +36,14 @@
 
                 </div>
 
-
                 <!-- MOBILE POSTS -->
                 <div class="px-2 py-3">
-
-              
 
                     <div id="admin-posts-list-mobile"
                          class="list-group list-group-flush">
 
-                        <div class="list-group-item small text-muted">
-                            Carregando postagens...
-                        </div>
+                        <div class="list-group-item small text-muted"
+                             data-i18n-html="admin_dashboard.loading_posts"></div>
 
                     </div>
 
@@ -61,21 +55,17 @@
             <nav id="admin-dashboard-desktop-menu"
                  class="d-none d-md-block">
 
-                
-
                 <!-- DESKTOP POSTS -->
                 <div class="px-2 py-3">
 
-                    <h4 class="h6 px-2 mb-2">
-                        Postagens
-                    </h4>
+                    <h4 class="h6 px-2 mb-2"
+                        data-i18n-html="admin_dashboard.posts"></h4>
 
                     <div id="admin-posts-list-desktop"
                          class="list-group list-group-flush">
 
-                        <div class="list-group-item small text-muted">
-                            Carregando postagens...
-                        </div>
+                        <div class="list-group-item small text-muted"
+                             data-i18n-html="admin_dashboard.loading_posts"></div>
 
                     </div>
 
@@ -99,13 +89,11 @@
 
                     <div>
 
-                        <h2 class="h3 mb-1">
-                            Painel Administrativo
-                        </h2>
+                        <h2 class="h3 mb-1"
+                            data-i18n-html="admin_dashboard.title"></h2>
 
-                        <p class="text-muted mb-0">
-                            Gerencie as postagens do seu blog.
-                        </p>
+                        <p class="text-muted mb-0"
+                           data-i18n-html="admin_dashboard.description"></p>
 
                     </div>
 
@@ -121,7 +109,7 @@
                                   mr-2 d-md-none">
 
                             <span aria-hidden="true">&#9776;</span>
-                            Menu
+                            <span data-i18n-html="admin_dashboard.menu"></span>
 
                         </a>
 
@@ -130,10 +118,8 @@
                             type="button"
                             id="admin-new-post"
                             class="btn btn-info btn-sm rounded-0
-                                   flex-fill flex-md-grow-0">
-
-                            + Nova Postagem
-
+                                   flex-fill flex-md-grow-0"
+                            data-i18n-html="admin_dashboard.new_post">
                         </button>
 
                     </div>
@@ -151,9 +137,8 @@
                             d-flex align-items-center
                             justify-content-between">
 
-                    <h3 class="h5 mb-0">
-                        Nova Postagem
-                    </h3>
+                    <h3 class="h5 mb-0"
+                        data-i18n-html="admin_dashboard.new_post"></h3>
 
                     <button
                         type="button"
