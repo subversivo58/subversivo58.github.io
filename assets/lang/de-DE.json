@@ -77,7 +77,11 @@
     },
     "langs": {
         "enUS": "Englisch (Vereinigte Staaten) - [Standard]",
-        "ptBR": "Portugiesisch (Brasilien)"
+        "ptBR": "Portugiesisch (Brasilien)",
+        "esES": "Spanisch (Spanien)",
+        "frFR": "Französisch (Frankreich)",
+        "deDE": "Deutsch (Deutschland)",
+        "jaJP": "Japanisch"
     },
     "navbar": {
         "wiki": "WIKI",
@@ -351,67 +355,6 @@
         "btnSubmit": "Bei Collabore registrieren",
         "agreement": "Wenn du auf die Schaltfläche \"Bei Collabore registrieren\" klickst, akzeptierst du die <a href='./licit' target='blank_'>Nutzungsbedingungen</a> und die <a href='./policies/privacci' target='blank_'>Datenschutzrichtlinie</a>. Wir senden gelegentlich E-Mails zu deinem Konto."
     },
-    "slack": {
-        "another": "Eine neue Einladung anfordern? ",
-        "figcap": {
-            "property": "Slack gehört zu ",
-            "rights": "Alle Rechte vorbehalten."
-        },
-        "giturl": "GitHub-Profil",
-        "join": " Dem Collabore-Team beitreten",
-        "modal": {
-            "header": "Über den GitHub-Profil-Link",
-            "body1": " ist ein sehr gutes Tool, aber <b class='green'>KOSTENLOSE</b> Konten haben Einschränkungen.",
-            "body2": "Wir bitten um einen Kontolink von ",
-            "body2_1": ", um zu überprüfen, ob das neue Mitglied tatsächlich Entwickler ist und an anderen Projekten mitarbeitet.",
-            "body3": "Die angegebene E-Mail-Adresse muss mit der öffentlichen E-Mail-Adresse deines Kontos bei ",
-            "footer": "Weitere Informationen findest du in der entsprechenden <a href='#' class='blue tdu'>Dokumentation</a>."
-        },
-        "alert": {
-            "sended": "Deine Anfrage wurde gesendet!",
-            "info": "Deine Anfrage wartet auf eine Antwort!",
-            "success": "Deine Anfrage wurde bereits angenommen!",
-            "danger": "Deine Anfrage wurde abgelehnt!"
-        },
-        "notific": {
-            "success": {
-                "title": "Einladung zum Collabore-Team!",
-                "message": "Erfolgreich! Deine Anfrage wartet auf die Bearbeitung durch den Administrator."
-            },
-            "errorserver": {
-                "title": "Serverfehler!",
-                "message": "Entschuldigung, ein Serverfehler ist aufgetreten! Klicke hier, um die Dokumentation aufzurufen."
-            },
-            "invalidauth": {
-                "title": "Authentifizierungsfehler!",
-                "message": "Deine Anfrage enthält kein gültiges Token! Klicke hier, um die Dokumentation aufzurufen."
-            },
-            "invalidmail": {
-                "title": "E-Mail-Fehler!",
-                "message": "Diese E-Mail-Adresse ist ungültig! Klicke hier, um die Dokumentation aufzurufen."
-            },
-            "invalidlink": {
-                "title": "GitHub-Profilfehler!",
-                "message": "Entschuldigung, dies ist kein gültiger GitHub-Profil-Link! Klicke hier, um die Dokumentation aufzurufen."
-            },
-            "accepted": {
-                "title": "Einladung bereits angenommen!",
-                "message": "Deine Anfrage wurde bereits in der Einladungsliste angenommen! Klicke hier, um die Dokumentation aufzurufen."
-            },
-            "refused": {
-                "title": "Einladung abgelehnt!",
-                "message": "Entschuldigung, diese Anfrage wurde vom Administrator abgelehnt! Klicke hier, um die Dokumentation aufzurufen."
-            },
-            "waiting": {
-                "title": "Einladung ausstehend!",
-                "message": "Diese Anfrage wurde bereits gesendet! Sie wartet auf die Bearbeitung durch den Administrator."
-            },
-            "closeconn": {
-                "title": "Die Verbindung wurde geschlossen!",
-                "message": "Diese Anfrage wurde bereits gesendet! Klicke hier, um die Dokumentation aufzurufen."
-            }
-        }
-    },
     "openpgp": {
         "error": {
             "encryption": {
@@ -671,11 +614,10 @@
             "heading": "Möchtest du etwas Gutes tun?",
             "photo": "Foto von <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> auf <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
             "thanks_title": "Danksagungen",
-            "thanks_text": "Wir sind stolz darauf, <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> sowie die Dienste von <a href=\"https://glitch.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Glitch.com</a> und <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a> zu nutzen. Diese Plattformen und ihre Werkzeuge sind wirklich beeindruckend und ermöglichen uns Projekte wie diesen Blog und unsere Tools.",
+            "thanks_text": "Wir sind stolz darauf, <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> sowie die Dienste von <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a> zu nutzen. Diese Plattformen und ihre Werkzeuge sind wirklich beeindruckend und ermöglichen uns Projekte wie diesen Blog und unsere Tools.",
             "platforms_title": "Lerne diese Plattformen kennen",
-            "link_github": "Entdecke und erkunde GitHub Pages",
-            "link_glitch": "Erstelle und experimentiere mit Glitch",
-            "link_workers": "Erfahre, was Cloudflare Workers macht",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
             "donate_title": "Deine Spende ist wichtig"
         },
         "dpo": {
@@ -694,6 +636,100 @@
             "list2": "Das Recht, das du ausüben möchtest (z. B. Datenlöschung, Auskunft usw.);",
             "list3": "Angaben, die uns helfen können, deine Daten in unseren Systemen zu finden.",
             "policies": "Weitere Informationen zur Verarbeitung deiner Daten findest du in unserer <a href=\"./policy.html#policy-general\">Allgemeinen Richtlinie</a> und unserer <a href=\"./policy.html#policy-privacy\">Datenschutzrichtlinie</a>."
+        },
+        "home": {
+            "intro": {
+                "eyebrow": "ÜBER SUBVERSIVO58",
+                "title": "Weit mehr als ein Blog.",
+                "description": "Ein Raum für Neugier, Technologie und die Freiheit, Ideen zu erkunden.",
+                "details": "Hier treffen Wissen und Kreativität in Inhalten, Erfahrungen und Projekten aufeinander, die über das Konventionelle hinausgehen.",
+                "signature": "NEUGIER · WISSEN · KREATIVITÄT"
+            },
+            "exploration": {
+                "eyebrow": "ENTDECKEN",
+                "title": "Entdecke verschiedene Ideen.",
+                "description": "Verschiedene Wege, um zu lernen, zu experimentieren und neue Möglichkeiten zu entdecken.",
+                "programming": {
+                    "title": "Programmierung",
+                    "description": "Code, Entwicklung und kreative Lösungen für die digitale Welt."
+                },
+                "technology": {
+                    "title": "Technologie",
+                    "description": "Werkzeuge, Ressourcen und Neuheiten, die unseren Alltag verändern."
+                },
+                "experiments": {
+                    "title": "Experimente",
+                    "description": "Ideen im Entstehen, Tests und Entdeckungen abseits des Konventionellen."
+                },
+                "knowledge": {
+                    "title": "Wissen",
+                    "description": "Lernen, Reflexionen und Informationen, um Horizonte zu erweitern."
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / LABOR",
+                "title": "Ein Raum, um neue Möglichkeiten zu erkunden.",
+                "description": "Experimente, Projekte und Werkzeuge, entwickelt, um Neugier in Entdeckungen zu verwandeln.",
+                "link": "Das Labor erkunden"
+            }
+        },
+        "policy": {
+            "cards": {
+                "introduction": {
+                    "title": "Einführung",
+                    "description": "Diese Website wurde mit Web-Technologien erstellt; wir glauben an Dezentralisierung und kryptografische Sicherheit. Wir glauben, dass Sie der alleinige Inhaber Ihrer Daten sind.",
+                    "link": "Mehr dazu in unserem „White Paper“"
+                },
+                "privacy": {
+                    "title": "Datenschutz",
+                    "description": "Die Datenschutzrichtlinie beschreibt, warum diese Website Daten anfordert und wie sie verarbeitet werden, und informiert darüber, wie Nutzer ihre Daten bearbeiten, herunterladen oder löschen können.",
+                    "link": "Unsere Datenschutzrichtlinie lesen"
+                },
+                "terms": {
+                    "title": "Bedingungen",
+                    "description": "Die Bedingungen beschreiben, wie wir diese Website betreiben, was unsere Nutzer von ihr erwarten können und was wir in diesem Prozess von unseren Nutzern erwarten.",
+                    "link": "Unsere Nutzungsbedingungen lesen"
+                },
+                "general": {
+                    "title": "Richtlinie",
+                    "description": "Die „Richtlinie“ ist das allgemeine Dokument, das die Beziehung zwischen der Website und dem Nutzer regelt und die Garantien und Einschränkungen des Nutzungsvertrags für die Website und ihre Werkzeuge festlegt.",
+                    "link": "Unsere Allgemeine Richtlinie lesen"
+                }
+            },
+            "overview": {
+                "quote1": "Richtlinien sind die Art und Weise, wie Website und Nutzer zueinander in Beziehung stehen. Sie schaffen Sicherheit und Vertrauen und gewährleisten Transparenz und Qualität in dieser Beziehung; außerdem sind sie in vielen Datenschutzgesetzen in zahlreichen Ländern der Welt Gegenstand der Regulierung.",
+                "quote2": "Wir versuchen, unsere Richtlinien so einfach wie möglich zu halten, um dem Muster der „<strong>Buchstabensuppe</strong>“ zu entgehen. Nicht zu viel, denn zu viel garantiert keine Qualität, und nicht zu wenig, denn zu wenig garantiert keinen Inhalt.",
+                "quote3": "Wir hoffen, dass dieses Vertrauensverhältnis für unsere Nutzer ebenso wie für uns selbst ein Lernprozess wird.",
+                "whitepaper_link": "Ein Auszug aus unserem „White Paper“",
+                "contact": "Fragen, die sich aus der Nutzung der Website oder ihrer Werkzeuge ergeben, können über unsere Kontaktformulare oder <strong>Feedback</strong>-Werkzeuge gemeldet werden (wir lieben Feedback). Außerdem laden wir Sie ein, Probleme über unseren Datenschutzbeauftragten (DPO) unter der folgenden E-Mail-Adresse zu klären: <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Politicas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
+                "markdown1": "Die Richtlinien dieser Website wurden in der leicht angepassten Auszeichnungssprache <strong>Markdown</strong> verfasst. Sie können sie als reinen Text ansehen oder sogar auf <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a> über diesen <a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">Link zu unserem Repository</a> herunterladen.",
+                "markdown2": "Dort finden Sie diese und alle früheren Versionen dieser Richtlinien sowie den Quellcode dieser Website. Sie können sie auch ausdrucken, indem Sie auf das Drucksymbol <span class=\"badge badge-light border-def contrast\">Drucken&nbsp;🖨️</span> oben in unserer Allgemeinen Richtlinie klicken."
+            },
+            "privacy": {
+                "heading": "Datenschutz",
+                "image_alt": "Sie haben die Wahl",
+                "image_title": "Sie haben die Wahl",
+                "paragraph1": "Wir glauben, dass das Prinzip des Datenschutzes die Wahlfreiheit ist. Nutzer sollten ihre Daten nicht mit einem einzigen Klick oder durch Bedingungen preisgeben müssen, die sie zwingen, eine große Menge an Daten für die Nutzung eines bestimmten Werkzeugs abzugeben.",
+                "paragraph2": "Wahlfreiheit sowie ein progressives, aber nicht obstruktives Modell für die Anforderung von Daten und die Einwilligung nur bei Bedarf sollten ein einzuhaltender Standard sein.",
+                "paragraph3": "Respekt vor der Privatsphäre beginnt damit, die Entscheidung des Nutzers darüber zu respektieren, „was“ und „wann“ er teilen möchte."
+            },
+            "terms": {
+                "heading": "Nutzungsbedingungen",
+                "image_alt": "Bild der Website-Bedingungen",
+                "image_title": "Unsere Bedingungen"
+            },
+            "general": {
+                "heading": "Allgemeine Richtlinie",
+                "image_alt": "Bild des Website-Vertrags",
+                "image_title": "Vertrag"
+            },
+            "cookies": {
+                "heading": "Cookies akzeptieren",
+                "paragraph1": "Wenn Sie sich fragen: <strong>Muss ich wirklich Cookies und Datenspeicherung akzeptieren</strong>? Die kurze Antwort lautet: <strong>Nein, müssen Sie nicht</strong>! Sie können weiterhin viele Werkzeuge und Funktionen der Website nutzen, haben jedoch möglicherweise nicht die beste Erfahrung 🙁",
+                "paragraph2": "Zum Beispiel: Wenn Sie eine Sprache auswählen, eine Lieblingsfarbe speichern oder eine Einstellung festlegen, müssen Sie diese Auswahl bei jedem Besuch oder jeder Navigation auf der Website erneut treffen ... die einzige Möglichkeit, Ihre Auswahl zu „speichern“, ist, sie lokal abzulegen.",
+                "paragraph3": "Gemäß unserer Philosophie, dass <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">Sie der alleinige Inhaber Ihrer Daten sind</a>, glauben wir, dass Sie die Wahl haben. Wenn Sie die Verwendung von Cookies akzeptieren, indem Sie auf die Schaltfläche unten <strong>klicken und drücken</strong>, können Sie sie auch jederzeit hier oder im Reiter „Benutzer“ <strong>deaktivieren</strong> und außerdem alles, was bereits gespeichert wurde, auf einmal entfernen 😎",
+                "button": "🍪 Zum Aktivieren der Cookies drücken"
+            }
         }
     },
     "settings_slide": {

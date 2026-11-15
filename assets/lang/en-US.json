@@ -83,7 +83,11 @@
     },
     "langs": {
         "enUS": "English (United States) - [default]",
-        "ptBR": "Portuguese (Brazil)"
+        "ptBR": "Portuguese (Brazil)",
+        "esES": "Spanish (Spain)",
+        "frFR": "French (France)",
+        "deDE": "German (Germany)",
+        "jaJP": "Japanese"
     },
     "navbar": {
         "wiki": "WIKI",
@@ -357,67 +361,6 @@
         "btnSubmit": "Sign up for Collabore",
         "agreement": "By clicking the \"Sign up for Collabore\" button, you will be accepting the <a href='./licit' target='blank_'>terms of service</a> and <a href='./policies/privacci' target='blank_'>privacy policy</a>. We will occasionally send emails related to your account"
     },
-    "slack": {
-        "another": "Request a new invitation? ",
-        "figcap": {
-            "property": "Slack is owned by ",
-            "rights": "All rights reserved."
-        },
-        "giturl": "GitHub Profile",
-        "join": " Join the Collabore Team",
-        "modal": {
-            "header": "About the GitHub Profile link",
-            "body1": " is a very good tool but <b class='green'>FREE</b> accounts have limitations.",
-            "body2": "We ask for an account link from ",
-            "body2_1": " to verify that the new member is in fact a developer and collaborates on other projects.",
-            "body3": "The email provided must be the same public email linked to your account on ",
-            "footer": "For more information, see the <a href='#' class='blue tdu'>documentation</a> about this."
-        },
-        "alert": {
-            "sended": "Your request was sent!",
-            "info": "Your request is awaiting a response!",
-            "success": "Your request has already been accepted!",
-            "danger": "Your request was declined!"
-        },
-        "notific": {
-            "success": {
-                "title": "Collabore Team Invitation!",
-                "message": "Success, your request is awaiting administrator action."
-            },
-            "errorserver": {
-                "title": "Server error!",
-                "message": "Sorry, a server error occurred! Click here to see the documentation."
-            },
-            "invalidauth": {
-                "title": "Authentication error!",
-                "message": "Your request does not contain a valid token! Click here to see the documentation."
-            },
-            "invalidmail": {
-                "title": "Email error!",
-                "message": "This is an invalid email!  Click here to see the documentation."
-            },
-            "invalidlink": {
-                "title": "GitHub Profile error!",
-                "message": "Sorry, this is not a GitHub Profile link! Click here to see the documentation."
-            },
-            "accepted": {
-                "title": "Invitation already accepted!",
-                "message": "Your request has already been accepted in the invitation list! Click here to see the documentation."
-            },
-            "refused": {
-                "title": "Invitation declined!",
-                "message": "Sorry, this request was declined by the administrator! Click here to see the documentation."
-            },
-            "waiting": {
-                "title": "Invitation pending!",
-                "message": "This request has already been sent! Awaiting administrator action."
-            },
-            "closeconn": {
-                "title": "The connection was closed!",
-                "message": "This request has already been sent! Click here to see the documentation."
-            }
-        }
-    },
     "openpgp": {
         "error": {
             "encryption": {
@@ -670,11 +613,10 @@
             "heading": "Thinking about doing something cool?",
             "photo": "Photo by <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> on <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
             "thanks_title": "Acknowledgments",
-            "thanks_text": "We proudly use <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> and the services of <a href=\"https://glitch.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Glitch.com</a> and <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Wokers</a>, these platforms and their tools are truly amazing and allow us to do cool things like this blog and our tools.",
+            "thanks_text": "We proudly use <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> and the services of <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>, these platforms and their tools are truly amazing and allow us to do cool things like this blog and our tools.",
             "platforms_title": "Meet these platforms",
-            "link_github": "Discover and explore GitHub Pages",
-            "link_glitch": "Create and invent with Glitch",
-            "link_workers": "See what Cloud Workers does",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
             "donate_title": "Your donation matters"
         },
         "dpo": {
@@ -784,7 +726,7 @@
                 "heading": "Accept Cookies",
                 "paragraph1": "If you are wondering whether you <strong>really need to accept cookies and data storage</strong>, the short answer is: <strong>no, you do not</strong>! You will still be able to browse and use many of the Site's tools and features, although you may not have the best experience 🙁",
                 "paragraph2": "For example, when you choose a language, save a favorite color, or change a setting, you will have to make that choice again every time you visit or browse the site... the only way to \"persist\" your choices is to store them locally.",
-                "paragraph3": "Following our philosophy that <a href=\"./you-in-control-of-your-data.html\" dada-=\"\" class=\"display-block ext-link-icon\">you are the sole owner of your data</a>, we believe you have choices. If you choose to accept cookies by <strong>clicking and pressing</strong> the button below, you can also <strong>disable them</strong> whenever you want here or in the User tab, and remove everything already stored at once 😎",
+                "paragraph3": "Following our philosophy that <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">you are the sole owner of your data</a>, we believe you have choices. If you choose to accept cookies by <strong>clicking and pressing</strong> the button below, you can also <strong>disable them</strong> whenever you want here or in the User tab, and remove everything already stored at once 😎",
                 "button": "🍪 press to enable cookies"
             }
         }

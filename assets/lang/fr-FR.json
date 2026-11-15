@@ -355,67 +355,7 @@
         "regnow": "Inscrivez-vous maintenant ",
         "btnSubmit": "S'inscrire à Collabore",
         "agreement": "En cliquant sur le bouton \"S'inscrire à Collabore\", vous acceptez les <a href='./licit' target='blank_'>conditions d'utilisation</a> et la <a href='./policies/privacci' target='blank_'>politique de confidentialité</a>. Nous pourrons vous envoyer occasionnellement des e-mails concernant votre compte."
-    },    "slack": {
-        "another": "Demander une nouvelle invitation ? ",
-        "figcap": {
-            "property": "Slack appartient à ",
-            "rights": "Tous droits réservés."
-        },
-        "giturl": "Profil GitHub",
-        "join": " Rejoindre l'équipe Collabore",
-        "modal": {
-            "header": "À propos du lien vers le profil GitHub",
-            "body1": " est un excellent outil, mais les comptes <b class='green'>GRATUITS</b> présentent des limitations.",
-            "body2": "Nous demandons un lien vers un compte ",
-            "body2_1": " afin de vérifier que le nouveau membre est bien développeur et qu'il contribue à d'autres projets.",
-            "body3": "L'adresse e-mail fournie doit être la même adresse publique associée à votre compte sur ",
-            "footer": "Pour plus d'informations, consultez la <a href='#' class='blue tdu'>documentation</a> à ce sujet."
-        },
-        "alert": {
-            "sended": "Votre demande a été envoyée !",
-            "info": "Votre demande est en attente d'une réponse !",
-            "success": "Votre demande a déjà été acceptée !",
-            "danger": "Votre demande a été refusée !"
-        },
-        "notific": {
-            "success": {
-                "title": "Invitation à l'équipe Collabore !",
-                "message": "Votre demande a bien été envoyée et attend l'intervention d'un administrateur."
-            },
-            "errorserver": {
-                "title": "Erreur du serveur !",
-                "message": "Désolé, une erreur du serveur s'est produite ! Cliquez ici pour consulter la documentation."
-            },
-            "invalidauth": {
-                "title": "Erreur d'authentification !",
-                "message": "Votre demande ne contient pas de jeton valide ! Cliquez ici pour consulter la documentation."
-            },
-            "invalidmail": {
-                "title": "Erreur d'adresse e-mail !",
-                "message": "Cette adresse e-mail est invalide ! Cliquez ici pour consulter la documentation."
-            },
-            "invalidlink": {
-                "title": "Erreur de profil GitHub !",
-                "message": "Désolé, ce lien ne correspond pas à un profil GitHub ! Cliquez ici pour consulter la documentation."
-            },
-            "accepted": {
-                "title": "Invitation déjà acceptée !",
-                "message": "Votre demande a déjà été acceptée dans la liste des invitations ! Cliquez ici pour consulter la documentation."
-            },
-            "refused": {
-                "title": "Invitation refusée !",
-                "message": "Désolé, cette demande a été refusée par l'administrateur ! Cliquez ici pour consulter la documentation."
-            },
-            "waiting": {
-                "title": "Invitation en attente !",
-                "message": "Cette demande a déjà été envoyée ! Elle attend l'intervention d'un administrateur."
-            },
-            "closeconn": {
-                "title": "La connexion a été fermée !",
-                "message": "Cette demande a déjà été envoyée ! Cliquez ici pour consulter la documentation."
-            }
-        }
-    },
+    },    
     "openpgp": {
         "error": {
             "encryption": {
@@ -675,11 +615,10 @@
             "heading": "Envie de faire quelque chose de génial ?",
             "photo": "Photo de <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> sur <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
             "thanks_title": "Remerciements",
-            "thanks_text": "Nous sommes fiers d'utiliser <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> ainsi que les services de <a href=\"https://glitch.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Glitch.com</a> et de <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>. Ces plateformes et leurs outils sont vraiment remarquables et nous permettent de réaliser des projets intéressants comme ce blog et nos outils.",
+            "thanks_text": "Nous sommes fiers d'utiliser <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> ainsi que les services de <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>. Ces plateformes et leurs outils sont vraiment remarquables et nous permettent de réaliser des projets intéressants comme ce blog et nos outils.",
             "platforms_title": "Découvrez ces plateformes",
-            "link_github": "Découvrir et explorer GitHub Pages",
-            "link_glitch": "Créer et inventer avec Glitch",
-            "link_workers": "Découvrir les fonctionnalités de Cloudflare Workers",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
             "donate_title": "Votre don compte"
         },
         "dpo": {
@@ -698,6 +637,100 @@
             "list2": "Le droit que vous souhaitez exercer (par exemple, suppression des données, accès, etc.) ;",
             "list3": "Les informations susceptibles de nous aider à localiser vos données dans nos systèmes.",
             "policies": "Pour plus de détails sur la manière dont nous traitons vos données, consultez notre <a href=\"./policy.html#policy-general\">Politique générale</a> et notre <a href=\"./policy.html#policy-privacy\">Politique de confidentialité</a>."
+        },
+        "home": {
+            "intro": {
+                "eyebrow": "À PROPOS DE SUBVERSIVO58",
+                "title": "Bien plus qu'un blog.",
+                "description": "Un espace dédié à la curiosité, à la technologie et à la liberté d'explorer des idées.",
+                "details": "Ici, la connaissance et la créativité se rencontrent à travers des contenus, des expériences et des projets qui dépassent le conventionnel.",
+                "signature": "CURIOSITÉ · CONNAISSANCE · CRÉATIVITÉ"
+            },
+            "exploration": {
+                "eyebrow": "DÉCOUVREZ",
+                "title": "Explorez différentes idées.",
+                "description": "Différents chemins pour apprendre, expérimenter et découvrir de nouvelles possibilités.",
+                "programming": {
+                    "title": "Programmation",
+                    "description": "Code, développement et solutions créatives pour le monde numérique."
+                },
+                "technology": {
+                    "title": "Technologie",
+                    "description": "Outils, ressources et nouveautés qui transforment notre quotidien."
+                },
+                "experiments": {
+                    "title": "Expérimentations",
+                    "description": "Idées en construction, tests et découvertes en dehors du conventionnel."
+                },
+                "knowledge": {
+                    "title": "Connaissance",
+                    "description": "Apprentissage, réflexions et informations pour élargir les horizons."
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / LABORATOIRE",
+                "title": "Un espace pour explorer de nouvelles possibilités.",
+                "description": "Expérimentations, projets et outils développés pour transformer la curiosité en découvertes.",
+                "link": "Explorer le laboratoire"
+            }
+        },
+        "policy": {
+            "cards": {
+                "introduction": {
+                    "title": "Introduction",
+                    "description": "Ce site a été créé avec des technologies Web ; nous croyons en la décentralisation et en la sécurité cryptographique. Nous croyons que vous êtes le seul détenteur de vos données.",
+                    "link": "En savoir plus dans notre « White Paper »"
+                },
+                "privacy": {
+                    "title": "Confidentialité",
+                    "description": "La politique de confidentialité décrit pourquoi ce site demande des données, comment elles sont traitées et comment l'utilisateur peut modifier, télécharger ou supprimer ses données.",
+                    "link": "Lire notre Politique de confidentialité"
+                },
+                "terms": {
+                    "title": "Conditions",
+                    "description": "Les conditions décrivent la manière dont nous exploitons ce site, ce que nos utilisateurs peuvent en attendre et ce que nous attendons de nos utilisateurs dans ce processus.",
+                    "link": "Lire nos Conditions d'utilisation"
+                },
+                "general": {
+                    "title": "Politique",
+                    "description": "La « Politique » est le document général qui régit la relation entre le site et l'utilisateur et établit les garanties et les limites du contrat d'utilisation du site et de ses outils.",
+                    "link": "Lire notre Politique générale"
+                }
+            },
+            "overview": {
+                "quote1": "Les politiques sont la manière dont le site et les utilisateurs entrent en relation ; elles apportent sécurité et confiance en garantissant transparence et qualité tout au long de cette relation, et elles font aussi l'objet d'une réglementation dans de nombreuses lois sur la protection des données et de la vie privée dans divers pays du monde.",
+                "quote2": "Nous essayons de simplifier au maximum nos politiques pour échapper au modèle de la « <strong>soupe alphabétique</strong> ». Pas trop, car trop ne garantit pas la qualité, ni trop peu, car trop peu ne garantit pas le contenu.",
+                "quote3": "Nous espérons que cette relation de confiance sera un processus d'apprentissage aussi bien pour nos utilisateurs que pour nous-mêmes.",
+                "whitepaper_link": "Un extrait de notre « White Paper »",
+                "contact": "Toute question liée à l'utilisation du site ou de ses outils peut être signalée via nos formulaires de contact ou nos outils de <strong>feedback</strong> (nous adorons les retours). Nous vous invitons également à résoudre les problèmes auprès de notre DPO à l'adresse e-mail suivante : <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Politicas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
+                "markdown1": "Les politiques de ce site ont été rédigées dans le langage de balisage <strong>Markdown</strong>, légèrement modifié ; vous pouvez les consulter en texte brut ou même les télécharger sur <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a> via ce <a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">lien vers notre dépôt</a>",
+                "markdown2": "Vous y trouverez celle-ci et toutes les versions antérieures de ces politiques, ainsi que le code source de ce site. Vous pouvez aussi les imprimer en cliquant sur l'icône d'impression <span class=\"badge badge-light border-def contrast\">Imprimer&nbsp;🖨️</span> située en haut de notre Politique générale."
+            },
+            "privacy": {
+                "heading": "Confidentialité",
+                "image_alt": "Vous avez le choix",
+                "image_title": "Vous avez le choix",
+                "paragraph1": "Nous croyons que le principe de la confidentialité est la liberté de choix. L'utilisateur ne devrait pas avoir à renoncer à ses données d'un simple clic ni avec des conditions qui l'obligent à céder une grande quantité de données pour utiliser un outil donné.",
+                "paragraph2": "La liberté de choix et un modèle progressif mais non obstructif pour la demande de données et le consentement uniquement lorsque c'est nécessaire devraient être une norme à suivre.",
+                "paragraph3": "Le respect de la vie privée commence par respecter le choix de l'utilisateur sur « quoi » et « quand » il souhaite partager."
+            },
+            "terms": {
+                "heading": "Conditions d'utilisation",
+                "image_alt": "Image des conditions du site",
+                "image_title": "Nos Conditions"
+            },
+            "general": {
+                "heading": "Politique générale",
+                "image_alt": "Image du contrat du site",
+                "image_title": "Contrat"
+            },
+            "cookies": {
+                "heading": "Accepter les cookies",
+                "paragraph1": "Si vous vous demandez : <strong>ai-je vraiment besoin d'accepter les cookies et le stockage de données</strong> ? La réponse courte est : <strong>non, vous n'en avez pas besoin</strong> ! Vous pourrez toujours naviguer et utiliser plusieurs outils et fonctionnalités du site, mais vous n'aurez peut-être pas la meilleure expérience 🙁",
+                "paragraph2": "Par exemple : lorsque vous choisissez une langue, enregistrez une couleur favorite ou définissez un réglage, vous devrez refaire ce choix à chaque fois que vous accédez au site ou y naviguez ... le seul moyen de « persister » vos choix est de les stocker localement.",
+                "paragraph3": "Fidèles à notre philosophie selon laquelle <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">vous êtes le seul détenteur de vos données</a>, nous pensons que vous avez le choix. Si vous choisissez d'accepter l'utilisation des cookies en <strong>cliquant et en appuyant</strong> sur le bouton ci-dessous, vous pourrez aussi choisir de les <strong>désactiver</strong> quand vous le souhaitez, ici ou dans l'onglet Utilisateur, et vous pourrez également supprimer d'un seul coup tout ce qui a déjà été stocké 😎",
+                "button": "🍪 appuyez pour activer les cookies"
+            }
         }
     },
     "settings_slide": {

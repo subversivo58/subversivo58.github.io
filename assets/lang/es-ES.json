@@ -356,67 +356,6 @@
         "btnSubmit": "Registrarse en Collabore",
         "agreement": "Al hacer clic en el botón \"Registrarse en Collabore\", aceptas los <a href='./licit' target='blank_'>términos del servicio</a> y la <a href='./policies/privacci' target='blank_'>política de privacidad</a>. Ocasionalmente te enviaremos correos electrónicos relacionados con tu cuenta."
     },
-    "slack": {
-        "another": "¿Solicitar una nueva invitación? ",
-        "figcap": {
-            "property": "Slack pertenece a ",
-            "rights": "Todos los derechos reservados."
-        },
-        "giturl": "Perfil de GitHub",
-        "join": " Únete al equipo de Collabore",
-        "modal": {
-            "header": "Acerca del enlace al perfil de GitHub",
-            "body1": " es una herramienta excelente, pero las cuentas <b class='green'>GRATUITAS</b> tienen limitaciones.",
-            "body2": "Solicitamos un enlace a una cuenta de ",
-            "body2_1": " para verificar que el nuevo miembro es realmente desarrollador y colabora en otros proyectos.",
-            "body3": "El correo electrónico proporcionado debe ser el mismo correo público vinculado a tu cuenta en ",
-            "footer": "Para obtener más información, consulta la <a href='#' class='blue tdu'>documentación</a>."
-        },
-        "alert": {
-            "sended": "¡Tu solicitud ha sido enviada!",
-            "info": "¡Tu solicitud está pendiente de respuesta!",
-            "success": "¡Tu solicitud ya ha sido aceptada!",
-            "danger": "¡Tu solicitud ha sido rechazada!"
-        },
-        "notific": {
-            "success": {
-                "title": "¡Invitación al equipo de Collabore!",
-                "message": "Correcto, tu solicitud está pendiente de la aprobación de un administrador."
-            },
-            "errorserver": {
-                "title": "¡Error del servidor!",
-                "message": "Lo sentimos, ¡se ha producido un error en el servidor! Haz clic aquí para consultar la documentación."
-            },
-            "invalidauth": {
-                "title": "¡Error de autenticación!",
-                "message": "¡Tu solicitud no contiene un token válido! Haz clic aquí para consultar la documentación."
-            },
-            "invalidmail": {
-                "title": "¡Error de correo electrónico!",
-                "message": "¡Este correo electrónico no es válido! Haz clic aquí para consultar la documentación."
-            },
-            "invalidlink": {
-                "title": "¡Error en el perfil de GitHub!",
-                "message": "Lo sentimos, ¡este enlace no corresponde a un perfil de GitHub! Haz clic aquí para consultar la documentación."
-            },
-            "accepted": {
-                "title": "¡Invitación ya aceptada!",
-                "message": "¡Tu solicitud ya ha sido aceptada en la lista de invitaciones! Haz clic aquí para consultar la documentación."
-            },
-            "refused": {
-                "title": "¡Invitación rechazada!",
-                "message": "Lo sentimos, ¡el administrador ha rechazado esta solicitud! Haz clic aquí para consultar la documentación."
-            },
-            "waiting": {
-                "title": "¡Invitación pendiente!",
-                "message": "¡Esta solicitud ya ha sido enviada! Está pendiente de la aprobación de un administrador."
-            },
-            "closeconn": {
-                "title": "¡La conexión se ha cerrado!",
-                "message": "¡Esta solicitud ya ha sido enviada! Haz clic aquí para consultar la documentación."
-            }
-        }
-    },
     "openpgp": {
         "error": {
             "encryption": {
@@ -711,7 +650,7 @@
             },
             "overview": {
                 "quote1": "Las políticas son la forma en que el sitio y sus usuarios se relacionan. Aportan seguridad y confianza, garantizando transparencia y calidad durante esta relación. También son objeto de regulación en muchas leyes de protección de datos y privacidad de diversos países del mundo.",
-                "quote2": "Intentamos simplificar al máximo nuestras políticas para alejarnos del típico «sopa de letras». Ni demasiado extensas, porque más no garantiza calidad, ni demasiado breves, porque menos no garantiza contenido.",
+                "quote2": "Intentamos simplificar al máximo nuestras políticas para alejarnos del típico «<strong>sopa de letras</strong>». Ni demasiado extensas, porque más no garantiza calidad, ni demasiado breves, porque menos no garantiza contenido.",
                 "quote3": "Esperamos que esta relación de confianza sea un proceso de aprendizaje tanto para nuestros usuarios como para nosotros mismos.",
                 "whitepaper_link": "Un fragmento de nuestro «Libro blanco»",
                 "contact": "Cualquier duda relacionada con el uso del sitio o sus herramientas puede comunicarse a través de nuestros formularios de contacto o herramientas de <strong>feedback</strong> (nos encanta recibir comentarios). Reiteramos nuestra invitación a resolver problemas a través de nuestro DPO, en la siguiente dirección de correo electrónico: <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Politicas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
@@ -740,7 +679,7 @@
                 "heading": "Aceptar cookies",
                 "paragraph1": "Si te preguntas si <strong>realmente necesitas aceptar las cookies y el almacenamiento de datos</strong>, la respuesta corta es: <strong>¡no, no es necesario!</strong> Aún podrás navegar y utilizar muchas herramientas y funcionalidades del sitio, aunque quizá no disfrutes de la mejor experiencia 🙁",
                 "paragraph2": "Por ejemplo: cuando eliges un idioma, guardas un color favorito o defines una configuración, tendrás que repetir esa elección cada vez que accedas o navegues por el sitio... la única forma de «conservar» tus preferencias es almacenándolas localmente.",
-                "paragraph3": "Siguiendo nuestra filosofía de que <a href=\"./you-in-control-of-your-data.html\" dada-=\"\" class=\"display-block ext-link-icon\">tú eres el único titular de tus datos</a>, creemos que tienes opciones. Si decides aceptar el uso de cookies «<strong>haciendo clic y pulsando</strong> el botón de abajo», también podrás elegir <strong>desactivarlas</strong> cuando quieras desde aquí o desde la pestaña de Usuario, así como eliminar de una sola vez todo lo que ya se haya almacenado 😎",
+                "paragraph3": "Siguiendo nuestra filosofía de que <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">tú eres el único titular de tus datos</a>, creemos que tienes opciones. Si decides aceptar el uso de cookies «<strong>haciendo clic y pulsando</strong> el botón de abajo», también podrás elegir <strong>desactivarlas</strong> cuando quieras desde aquí o desde la pestaña de Usuario, así como eliminar de una sola vez todo lo que ya se haya almacenado 😎",
                 "button": "🍪 pulsa para activar las cookies"
             }
         },
@@ -770,11 +709,10 @@
             "heading": "¿Pensando en hacer algo genial?",
             "photo": "Foto de <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> en <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
             "thanks_title": "Agradecimientos",
-            "thanks_text": "Nos enorgullece utilizar <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> y los servicios de <a href=\"https://glitch.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Glitch.com</a> y <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>. Estas plataformas y sus herramientas son realmente increíbles y nos permiten hacer cosas geniales, como este blog y nuestras herramientas.",
+            "thanks_text": "Nos enorgullece utilizar <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a> y los servicios de <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>. Estas plataformas y sus herramientas son realmente increíbles y nos permiten hacer cosas geniales, como este blog y nuestras herramientas.",
             "platforms_title": "Conoce estas plataformas",
-            "link_github": "Descubre y explora GitHub Pages",
-            "link_glitch": "Crea e inventa con Glitch",
-            "link_workers": "Descubre qué hace Cloudflare Workers",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
             "donate_title": "Tu donación importa"
         },
         "dpo": {

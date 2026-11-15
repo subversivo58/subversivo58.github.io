@@ -78,7 +78,11 @@
   },
   "langs": {
     "enUS": "Inglês (Estados Unidos) - [padrão]",
-    "ptBR": "Português (Brasil)"
+    "ptBR": "Português (Brasil)",
+    "esES": "Espanhol (Espanha)",
+    "frFR": "Francês (França)",
+    "deDE": "Alemão (Alemanha)",
+    "jaJP": "Japonês"
   },
   "navbar": {
     "wiki": "WIKI",
@@ -353,67 +357,6 @@
     "btnSubmit": "Registre-se em Collabore",
     "agreement": "Clicando no botão \"Registre-se em Collabore\", você estará aceitamdo os <a href='./licit' target='blank_'>termos de serviço</a> e <a href='./policies/privacci' target='blank_'>politicas de privacidade</a>. Nós ocasionalmente enviaremos emails relacionados a sua conta"
   },
-  "slack": {
-    "another": "Solicitar um novo convite? ",
-    "figcap": {
-      "property": "Slack é propriedade de ",
-      "rights": "Todos os direitos reservados."
-    },
-    "giturl": "Perfil GitHub",
-    "join": " Junte-se ao Time Collabore",
-    "modal": {
-      "header": "Sobre o link de Perfil GitHub",
-      "body1": " é uma ferramenta muito boa más contas <b class='green'>FREE</b> possuem limitações.",
-      "body2": "Nós pedimos um link de conta ",
-      "body2_1": " para verificar se o novo membro é de fato um desenvolvedor e se colabora com outros projetos.",
-      "body3": "O email informado deve ser o mesmo email público vinculado a sua conta ",
-      "footer": "Para mais informações, veja a <a href='#' class='blue tdu'>documentação</a> a respeito disto."
-    },
-    "alert": {
-      "sended": "Seu pedido foi enviado!",
-      "info": "Seu pedido aguarda resposta!",
-      "success": "Seu pedido já foi aceito!",
-      "danger": "Seu pedido foi recusado!"
-    },
-    "notific": {
-      "success": {
-        "title": "Convite Collabore Time!",
-        "message": "Sucesso, seu pedido aguarda ação do administrador."
-      },
-      "errorserver": {
-        "title": "Erro no servidor!",
-        "message": "Desculpe, ocorreu um erro no servidor! Clique aqui para ver a documentação."
-      },
-      "invalidauth": {
-        "title": "Erro de autenticação!",
-        "message": "Seu pedido não contém um token valido! Clique aqui para ver a documentação."
-      },
-      "invalidmail": {
-        "title": "Erro no email!",
-        "message": "Este email é inválido!  Clique aqui para ver a documentação."
-      },
-      "invalidlink": {
-        "title": "Erro no Perfil GitHub!",
-        "message": "Desculpe, este não é um link de Perfil do GitHub! Clique aqui para ver a documentação."
-      },
-      "accepted": {
-        "title": "Convite já aceito!",
-        "message": "Seu pedido já foi aceito na lista de convites! Clique aqui para ver a documentação."
-      },
-      "refused": {
-        "title": "Convite recusado!",
-        "message": "Desculpe, este pedido foi recusado pelo administrador! Clique aqui para ver a documentação."
-      },
-      "waiting": {
-        "title": "Convite em espera!",
-        "message": "Este pedido já foi enviado! Aguardando ação do administrador."
-      },
-      "closeconn": {
-        "title": "A conexão foi encerrada!",
-        "message": "Este pedido já foi enviado! Clique aqui para ver a documentação."
-      }
-    }
-  },
   "openpgp": {
     "error": {
       "encryption": {
@@ -673,11 +616,10 @@
       "heading": "Pensando em fazer algo legal?",
       "photo": "Foto de <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> em <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
       "thanks_title": "Agradecimentos",
-      "thanks_text": "Com muito orgulho utilizamos as <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Páginas do Github</a> e os serviços de <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Wokers</a>, estas plataformas e suas ferramentas são realmente incriveis que nos permitem fazer coisas legais como este blogue e nossas ferramentas.",
+      "thanks_text": "Com muito orgulho utilizamos as <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Páginas do Github</a> e os serviços de <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>, estas plataformas e suas ferramentas são realmente incriveis que nos permitem fazer coisas legais como este blogue e nossas ferramentas.",
       "platforms_title": "Conheça estas plataformas",
       "link_github": "GitHub Pages",
-      "link_glitch": "Crie e invente com Glitch",
-      "link_workers": "Cloud Workers",
+      "link_workers": "Cloudflare Workers",
       "donate_title": "Sua doação é importante"
     },
     "dpo": {
@@ -787,7 +729,7 @@
         "heading": "Accept Cookies",
         "paragraph1": "Se você se perguntar se: <strong>realmente precisa aceitar cookies e armazenamento de dados</strong>? A resposta curta é: <strong>não, você não precisa</strong>! Você ainda vai poder navegar e usar várias ferramentas e funcionalidades do Site porém, talvez não obtenha a melhor experiência 🙁",
         "paragraph2": "Por exemplo: quando você escolhe um idioma, salva uma cor favorita ou define uma configuração terá de refazer esta escolha a cada vez que acessa ou navega no site ... o único modo de \"persistir\" suas escolhas é armazenando-as localmente.",
-        "paragraph3": "Seguindo nossa filisofia de que <a href=\"./you-in-control-of-your-data.html\" dada-=\"\" class=\"display-block ext-link-icon\">você é o único detentor de seus dados</a>, acreditamos que você tem escolhas. Se escolher aceitar o uso de cookies \"<strong>clicando e pressionando</strong> o botão abaixo, também poderá escolher <strong>desativá-los</strong> sempre que quiser por aqui ou na guia de Usuário, assim como também poderá remover tudo que já tiver armazenado de uma só vez 😎",
+        "paragraph3": "Seguindo nossa filisofia de que <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">você é o único detentor de seus dados</a>, acreditamos que você tem escolhas. Se escolher aceitar o uso de cookies \"<strong>clicando e pressionando</strong> o botão abaixo, também poderá escolher <strong>desativá-los</strong> sempre que quiser por aqui ou na guia de Usuário, assim como também poderá remover tudo que já tiver armazenado de uma só vez 😎",
         "button": "🍪 press to enable cookies"
       }
     }

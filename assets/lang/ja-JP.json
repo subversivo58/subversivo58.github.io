@@ -77,7 +77,11 @@
     },
     "langs": {
         "enUS": "英語（アメリカ合衆国）- [デフォルト]",
-        "ptBR": "ポルトガル語（ブラジル）"
+        "ptBR": "ポルトガル語（ブラジル）",
+        "esES": "スペイン語（スペイン）",
+        "frFR": "フランス語（フランス）",
+        "deDE": "ドイツ語（ドイツ）",
+        "jaJP": "日本語"
     },
     "navbar": {
         "wiki": "WIKI",
@@ -351,67 +355,6 @@
         "btnSubmit": "Collaboreに登録する",
         "agreement": "「Collaboreに登録する」ボタンをクリックすると、<a href='./licit' target='blank_'>利用規約</a>および<a href='./policies/privacci' target='blank_'>プライバシーポリシー</a>に同意したものとみなされます。アカウントに関するメールを随時お送りする場合があります。"
     },
-    "slack": {
-        "another": "新しい招待をリクエストしますか？ ",
-        "figcap": {
-            "property": "Slackの所有者：",
-            "rights": "無断転載を禁じます。"
-        },
-        "giturl": "GitHubプロフィール",
-        "join": "Collaboreチームに参加する",
-        "modal": {
-            "header": "GitHubプロフィールリンクについて",
-            "body1": " は非常に優れたツールですが、<b class='green'>無料</b>アカウントには制限があります。",
-            "body2": "新しいメンバーが実際に開発者であり、他のプロジェクトに貢献しているかを確認するため、アカウントのリンク ",
-            "body2_1": " の提示をお願いしています。",
-            "body3": "入力するメールアドレスは、アカウントに公開設定で紐付けられているものと同じである必要があります： ",
-            "footer": "詳しくは、こちらの<a href='#' class='blue tdu'>ドキュメント</a>をご覧ください。"
-        },
-        "alert": {
-            "sended": "リクエストを送信しました！",
-            "info": "リクエストへの回答をお待ちください！",
-            "success": "リクエストは既に承認されています！",
-            "danger": "リクエストは拒否されました！"
-        },
-        "notific": {
-            "success": {
-                "title": "Collaboreチームへの招待！",
-                "message": "リクエストは正常に送信されました。管理者の対応をお待ちください。"
-            },
-            "errorserver": {
-                "title": "サーバーエラー！",
-                "message": "申し訳ありません。サーバーでエラーが発生しました！こちらをクリックしてドキュメントをご覧ください。"
-            },
-            "invalidauth": {
-                "title": "認証エラー！",
-                "message": "リクエストに有効なトークンが含まれていません！こちらをクリックしてドキュメントをご覧ください。"
-            },
-            "invalidmail": {
-                "title": "メールエラー！",
-                "message": "このメールアドレスは無効です！こちらをクリックしてドキュメントをご覧ください。"
-            },
-            "invalidlink": {
-                "title": "GitHubプロフィールエラー！",
-                "message": "申し訳ありません。これは有効なGitHubプロフィールへのリンクではありません！こちらをクリックしてドキュメントをご覧ください。"
-            },
-            "accepted": {
-                "title": "招待は既に承認されています！",
-                "message": "このリクエストは招待リストですでに承認されています！こちらをクリックしてドキュメントをご覧ください。"
-            },
-            "refused": {
-                "title": "招待は拒否されました！",
-                "message": "申し訳ありません。このリクエストは管理者によって拒否されました！こちらをクリックしてドキュメントをご覧ください。"
-            },
-            "waiting": {
-                "title": "招待の保留中！",
-                "message": "このリクエストは既に送信されています！管理者の対応をお待ちください。"
-            },
-            "closeconn": {
-                "title": "接続が終了しました！",
-                "message": "このリクエストは既に送信されています！こちらをクリックしてドキュメントをご覧ください。"
-            }
-        }
-    },
     "openpgp": {
         "error": {
             "encryption": {
@@ -670,11 +613,10 @@
             "heading": "何か素敵なことをしてみませんか？",
             "photo": "<a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a>による写真（<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>）",
             "thanks_title": "謝辞",
-            "thanks_text": "私たちは<a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a>と、<a href=\"https://glitch.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Glitch.com</a>および<a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>のサービスを誇りを持って利用しています。これらのプラットフォームとツールは本当に素晴らしく、このブログや私たちのツールのようなものを作ることを可能にしてくれます。",
+            "thanks_text": "私たちは<a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a>と、<a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>のサービスを誇りを持って利用しています。これらのプラットフォームとツールは本当に素晴らしく、このブログや私たちのツールのようなものを作ることを可能にしてくれます。",
             "platforms_title": "これらのプラットフォームを知る",
-            "link_github": "GitHub Pagesを探索する",
-            "link_glitch": "Glitchで作成し、アイデアを形にする",
-            "link_workers": "Cloudflare Workersの機能を見る",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
             "donate_title": "あなたの寄付は大切です"
         },
         "dpo": {
@@ -693,6 +635,100 @@
             "list2": "行使したい権利（例：データの削除、アクセスなど）",
             "list3": "システム内でお客様のデータを特定するために役立つ情報",
             "policies": "データの取り扱いについて詳しくは、<a href=\"./policy.html#policy-general\">一般ポリシー</a>および<a href=\"./policy.html#policy-privacy\">プライバシーポリシー</a>をご覧ください。"
+        },
+        "home": {
+            "intro": {
+                "eyebrow": "SUBVERSIVO58について",
+                "title": "ブログをはるかに超えた場所。",
+                "description": "好奇心、テクノロジー、そしてアイデアを探求する自由のための場所です。",
+                "details": "ここでは、知識と創造性が、従来の枠を超えたコンテンツ、体験、プロジェクトの中で出会います。",
+                "signature": "好奇心・知識・創造性"
+            },
+            "exploration": {
+                "eyebrow": "発見する",
+                "title": "さまざまなアイデアを探求しよう。",
+                "description": "学び、試し、新しい可能性を発見するためのさまざまな道。",
+                "programming": {
+                    "title": "プログラミング",
+                    "description": "デジタル世界のためのコード、開発、そして創造的なソリューション。"
+                },
+                "technology": {
+                    "title": "テクノロジー",
+                    "description": "私たちの日常を変えるツール、リソース、最新情報。"
+                },
+                "experiments": {
+                    "title": "実験",
+                    "description": "制作途中のアイデア、テスト、そして型にはまらない発見。"
+                },
+                "knowledge": {
+                    "title": "知識",
+                    "description": "視野を広げるための学び、考察、情報。"
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / ラボ",
+                "title": "新しい可能性を探求するための場所。",
+                "description": "好奇心を発見へと変えるために開発された実験、プロジェクト、ツール。",
+                "link": "ラボを探索する"
+            }
+        },
+        "policy": {
+            "cards": {
+                "introduction": {
+                    "title": "はじめに",
+                    "description": "このサイトはWeb技術を使って作られており、分散化と暗号による安全性を信じています。あなたのデータを所有できるのはあなただけだと私たちは考えています。",
+                    "link": "「ホワイトペーパー」で詳しく見る"
+                },
+                "privacy": {
+                    "title": "プライバシー",
+                    "description": "プライバシーポリシーでは、このサイトがなぜデータを求めるのか、どのように処理されるのかを説明し、ユーザーが自分のデータを編集、ダウンロード、削除する方法についてもお知らせします。",
+                    "link": "プライバシーポリシーを読む"
+                },
+                "terms": {
+                    "title": "規約",
+                    "description": "規約では、このサイトをどのように運営しているか、ユーザーがこのサイトに期待できること、そしてこのプロセスにおいて私たちがユーザーに期待することを説明します。",
+                    "link": "利用規約を読む"
+                },
+                "general": {
+                    "title": "ポリシー",
+                    "description": "「ポリシー」は、サイトとユーザーの関係を定める総合的な文書であり、サイトおよびそのツールの利用契約に関する保証と制限を定めています。",
+                    "link": "総合ポリシーを読む"
+                }
+            },
+            "overview": {
+                "quote1": "ポリシーは、サイトとユーザーが関係を築くための方法です。この関係の中で透明性と品質を保証することで、安全と信頼をもたらします。また、世界各国の多くのデータ保護・プライバシー法でも規制の対象となっています。",
+                "quote2": "私たちは、「<strong>略語だらけの難解な文書</strong>」にならないよう、ポリシーをできる限りシンプルにするよう努めています。多すぎれば品質は保証されず、少なすぎれば内容は保証されないからです。",
+                "quote3": "この信頼関係が、ユーザーにとっても私たち自身にとっても学びのプロセスとなることを願っています。",
+                "whitepaper_link": "「ホワイトペーパー」からの抜粋",
+                "contact": "サイトまたはそのツールの利用に関するご質問は、お問い合わせフォームまたは<strong>フィードバック</strong>ツールからお寄せください（フィードバックは大歓迎です）。問題の解決には、次のメールアドレスの当サイトのDPO（データ保護責任者）もご利用いただけます：<a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Politicas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>。",
+                "markdown1": "このサイトのポリシーは、わずかに改変した<strong>Markdown</strong>マークアップ言語で書かれています。プレーンテキストで閲覧することも、<a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a>から、この<a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">リポジトリへのリンク</a>を通じてダウンロードすることもできます。",
+                "markdown2": "そこには、このポリシーと過去のすべてのバージョン、そしてこのサイトのソースコードがあります。総合ポリシーの上部にある印刷アイコン<span class=\"badge badge-light border-def contrast\">印刷&nbsp;🖨️</span>をクリックして印刷することもできます。"
+            },
+            "privacy": {
+                "heading": "プライバシー",
+                "image_alt": "あなたには選択肢があります",
+                "image_title": "あなたには選択肢があります",
+                "paragraph1": "私たちは、プライバシーの原則とは選択の自由だと考えています。ユーザーは、ワンクリックで、あるいは特定のツールを使うために大量のデータの提供を強いるような規約によって、自分のデータを手放すべきではありません。",
+                "paragraph2": "選択の自由、そして必要なときにのみデータの提供と同意を求める、段階的で妨げにならない仕組みは、従うべき標準であるべきです。",
+                "paragraph3": "プライバシーの尊重は、ユーザーが「何を」「いつ」共有したいかという選択を尊重することから始まります。"
+            },
+            "terms": {
+                "heading": "利用規約",
+                "image_alt": "サイトの規約の画像",
+                "image_title": "私たちの規約"
+            },
+            "general": {
+                "heading": "総合ポリシー",
+                "image_alt": "サイトの契約の画像",
+                "image_title": "契約"
+            },
+            "cookies": {
+                "heading": "Cookieを受け入れる",
+                "paragraph1": "もし<strong>本当にCookieとデータ保存を受け入れる必要があるのか</strong>と思われたら、簡単に言えば、<strong>いいえ、必要ありません</strong>！サイトの多くのツールや機能は引き続きご利用いただけますが、最良の体験は得られないかもしれません 🙁",
+                "paragraph2": "たとえば、言語を選んだり、お気に入りの色を保存したり、設定を変更したりしても、サイトにアクセスまたは移動するたびにその選択をやり直す必要があります ... 選択を「保持」する唯一の方法は、ローカルに保存することです。",
+                "paragraph3": "<a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">あなたのデータを所有できるのはあなただけ</a>という私たちの理念に基づき、あなたには選択肢があると考えています。下のボタンを<strong>クリックして押す</strong>ことでCookieの使用を受け入れた場合でも、ここまたはユーザータブからいつでも<strong>無効にする</strong>ことができ、すでに保存されているものをすべて一度に削除することもできます 😎",
+                "button": "🍪 押してCookieを有効にする"
+            }
         }
     },
     "settings_slide": {
