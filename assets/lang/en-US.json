@@ -168,7 +168,9 @@
             "placeholder": "Describe the bug here...",
             "send": "Send",
             "follow": "Go to support",
-            "footer_info": "Reporting bugs. See the <a href='#' class='tdu blue'>documentation</a> about it."
+            "footer_info": "Reporting bugs. See the <a href='#' class='tdu blue'>documentation</a> about it.",
+            "sent": "Thank you! The bug report was saved.",
+            "failed": "Could not save the bug report. Try again."
         },
         "feedback": {
             "title": "Send your feedback",
@@ -226,7 +228,11 @@
             "marks": "Marker",
             "admin": "Administration"
         },
-        "version": "Version"
+        "version": "Version",
+        "notes_form": {
+            "sent": "Note saved.",
+            "failed": "Could not save the note. Try again."
+        }
     },
     "copyright": {
         "contributors": "This project was only possible thanks to the use of many other open source projects and the <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>community of contributors</a>... you are free to create, use, modify and distribute while respecting all underlying licenses!",
@@ -692,6 +698,12 @@
         "description": "Enter your GitHub API Key to access the administrative dashboard.",
         "label": "GitHub API Key",
         "placeholder": "Paste your API Key",
-        "verify": "Verify"
+        "verify": "Verify",
+        "messages": {
+            "empty": "Enter your API Key.",
+            "verifying": "Verifying authentication...",
+            "failed": "Authentication failed. Check your API Key.",
+            "authenticated": "Authenticated as {0}."
+        }
     }
 }

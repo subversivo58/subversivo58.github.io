@@ -287,7 +287,8 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <form id="fats-notes-form" action="./bugs" method="post" accept-charset="utf-8">
+                            <form id="fats-notes-form" action="./notes" method="post" accept-charset="utf-8">
+                            <p id="fats-notes-form-status" class="small mt-2 mb-0" role="status" hidden></p>
                                 <div class="col px-0">
                                     <div class="col px-0">
                                         <div class="form-group">
@@ -296,7 +297,7 @@
                                             </label>
                                             <div class="input-group input-group-sm">
                                                 <span class="input-group-addon fa fa-edit rounded-0"></span>
-                                                <input type="text" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_title">
+                                                <input type="text" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_title" name="title">
                                             </div>
                                         </div>
 
@@ -308,7 +309,7 @@
                                                     </label>
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon fa fa-thumb-tack rounded-0"></span>
-                                                        <input type="text" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_category">
+                                                        <input type="text" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_category" name="category">
                                                     </div>
                                                 </div>
                                             </div>
@@ -319,7 +320,7 @@
                                                     </label>
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-addon fa fa-tags rounded-0"></span>
-                                                        <input type="text" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_tags">
+                                                        <input type="text" class="form-control rounded-0 i18n" maxlength="50" data-i18n-place="modals.notes.ph_tags" name="tags">
                                                     </div>
                                                 </div>
                                             </div>
@@ -330,12 +331,12 @@
                                     <label>
                                         <strong class="col px-0 i18n" data-i18n-html="modals.notes.note"></strong>
                                     </label>
-                                    <textarea type="textarea" id="notes-textarea" class="form-control resize-none rounded-0 i18n" rows="5" maxlength="400" required data-i18n-place="modals.notes.ph_note"></textarea>
+                                    <textarea type="textarea" id="notes-textarea" class="form-control resize-none rounded-0 i18n" rows="5" maxlength="400" required data-i18n-place="modals.notes.ph_note" name="note"></textarea>
                                 </div>
                                 <div class="form-group mt-2 mt-md-0">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 fa fa-microphone cp"></button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 fa fa-camera cp"></button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 fa fa-video-camera cp"></button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp">🎤</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp">📷</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp">🎥</button>
                                     <button type="submit" class="btn btn-sm btn-info rounded-0 float-right cp i18n" data-i18n-html="modals.notes.save"></button>
                                 </div>
                             </form>
@@ -459,8 +460,10 @@
 
                                 <div class="d-flex w-100 mt-2">
                                     <form class="col-12 d-inline-block px-0" id="feedback-form" action="./feedback" method="post" accept-charset="utf-8">
-                                        <div class="form-group mt-1 mb-2 fill-height">
-                                            <textarea type="textarea" id="feedback-textarea" data-i18n-place="drawer.feedback.placeholder" class="i18n form-control resize-none bg-none rounded-0" rows="5" maxlength="400" required></textarea>
+                            <p id="feedback-form-status" class="small mt-2 mb-0" role="status" hidden></p>
+                            <input type="hidden" id="feedback-rating" name="rating" form="feedback-form" disabled>
+                                        <div class="form-group mt-1 mb-2">
+                                            <textarea type="textarea" id="feedback-textarea" data-i18n-place="drawer.feedback.placeholder" class="i18n form-control resize-none bg-none rounded-0" rows="5" maxlength="400" required name="message"></textarea>
                                         </div>
                                         <div class="form-group mt-2 mt-md-0 mb-0">
                                             <button type="reset" id="feedback-form-clear" data-i18n-html="words.clear" class="i18n btn btn-sm btn-outline-secondary rounded-0 cp"></button>
@@ -496,13 +499,14 @@
                     <div class="row">
                         <div class="col-12">
                             <form id="bugs-report-form" action="./bugs" method="post" accept-charset="utf-8">
+                            <p id="bugs-report-form-status" class="small mt-2 mb-0" role="status" hidden></p>
                                 <div class="col px-0">
                                     <div class="col px-0">
                                         <div class="form-group">
                                             <label class="d-block">
                                                 <strong class="i18n" data-i18n-html="modals.bugs.select_type"></strong>
                                             </label>
-                                            <select class="border-def d-block">
+                                            <select class="border-def d-block" name="type">
                                                 <option class="i18n" selected value="custom" data-i18n-html="modals.bugs.custom"></option>
                                                 <option class="i18n" value="css" data-i18n-html="modals.bugs.css"></option>
                                                 <option class="i18n" value="javascript" data-i18n-html="modals.bugs.js"></option>
@@ -517,7 +521,7 @@
                                     <label>
                                         <strong class="col px-0 i18n" data-i18n-html="modals.bugs.description"></strong>
                                     </label>
-                                    <textarea type="textarea" id="bugs-report-textarea" class="form-control resize-none rounded-0 i18n" rows="5" maxlength="400" required data-i18n-place="modals.bugs.ph_description"></textarea>
+                                    <textarea type="textarea" id="bugs-report-textarea" class="form-control resize-none rounded-0 i18n" rows="5" maxlength="400" required data-i18n-place="modals.bugs.ph_description" name="message"></textarea>
                                 </div>
                                 <div class="form-group mt-2 mt-md-3">
                                     <button type="reset" data-i18n-html="words.clear" class="i18n btn btn-sm btn-outline-secondary rounded-0 cp"></button>

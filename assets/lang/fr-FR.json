@@ -168,7 +168,9 @@
             "placeholder": "Décrivez le bug ici...",
             "send": "Envoyer",
             "follow": "Accéder à l'assistance",
-            "footer_info": "Signalement des bugs. Consultez la <a href='#' class='tdu blue'>documentation</a> à ce sujet."
+            "footer_info": "Signalement des bugs. Consultez la <a href='#' class='tdu blue'>documentation</a> à ce sujet.",
+            "sent": "Merci ! Le bug a été enregistré.",
+            "failed": "Impossible d'enregistrer le bug. Réessayez."
         },
         "feedback": {
             "title": "Envoyer vos commentaires",
@@ -226,7 +228,11 @@
             "marks": "Marqueur",
             "admin": "Administration"
         },
-        "version": "Version"
+        "version": "Version",
+        "notes_form": {
+            "sent": "Note enregistrée.",
+            "failed": "Impossible d'enregistrer la note. Réessayez."
+        }
     },
     "copyright": {
         "contributors": "Ce projet n'aurait été possible sans l'utilisation de nombreux autres projets open source et la <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>communauté des contributeurs</a>... vous êtes libre de créer, d'utiliser, de modifier et de distribuer, dans le respect de toutes les licences applicables !",
@@ -692,6 +698,12 @@
         "description": "Saisissez votre clé API GitHub pour accéder au tableau de bord d'administration.",
         "label": "Clé API GitHub",
         "placeholder": "Collez votre clé API",
-        "verify": "Vérifier"
+        "verify": "Vérifier",
+        "messages": {
+            "empty": "Saisissez votre clé API.",
+            "verifying": "Vérification de l'authentification...",
+            "failed": "Échec de l'authentification. Vérifiez votre clé API.",
+            "authenticated": "Authentifié en tant que {0}."
+        }
     }
 }

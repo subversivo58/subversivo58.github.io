@@ -168,7 +168,9 @@
             "placeholder": "Descreva o erro aqui...",
             "send": "Enviar",
             "follow": "Ir para suporte",
-            "footer_info": "Reportando erros. Veja a <a href='#' class='tdu blue'>documentação</a> sobre isto."
+            "footer_info": "Reportando erros. Veja a <a href='#' class='tdu blue'>documentação</a> sobre isto.",
+            "sent": "Obrigado! O bug foi registrado.",
+            "failed": "Não foi possível registrar o bug. Tente novamente."
         },
         "feedback": {
             "title": "Envie seu comentário",
@@ -226,7 +228,11 @@
             "marks": "Marcador",
             "admin": "Administração"
         },
-        "version": "Versão"
+        "version": "Versão",
+        "notes_form": {
+            "sent": "Nota salva.",
+            "failed": "Não foi possível salvar a nota. Tente novamente."
+        }
     },
     "copyright": {
         "contributors": "Este projeto só foi possível graças ao uso de muitos outros projetos de código fonte aberta e a <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>comunidade de contribuidores</a>... você é livre para criar, usar, modificar e distribuir respeitando todas as licenças subjacentes!",
@@ -684,7 +690,13 @@
         "description": "Informe sua API Key do GitHub para acessar o painel administrativo.",
         "label": "GitHub API Key",
         "placeholder": "Cole sua API Key",
-        "verify": "Verificar"
+        "verify": "Verificar",
+        "messages": {
+            "empty": "Informe sua API Key.",
+            "verifying": "Verificando autenticação...",
+            "failed": "Falha na autenticação. Verifique sua API Key.",
+            "authenticated": "Autenticado como {0}."
+        }
     },
     "blog": {
         "empty": "Nada publicado ainda.",

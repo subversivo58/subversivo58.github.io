@@ -168,7 +168,9 @@
             "placeholder": "Describe aquí el error...",
             "send": "Enviar",
             "follow": "Ir al soporte",
-            "footer_info": "Información sobre cómo notificar errores. Consulta la <a href='#' class='tdu blue'>documentación</a>."
+            "footer_info": "Información sobre cómo notificar errores. Consulta la <a href='#' class='tdu blue'>documentación</a>.",
+            "sent": "¡Gracias! El error fue registrado.",
+            "failed": "No se pudo registrar el error. Inténtalo de nuevo."
         },
         "feedback": {
             "title": "Enviar tus comentarios",
@@ -226,7 +228,11 @@
             "marks": "Marcador",
             "admin": "Administración"
         },
-        "version": "Versión"
+        "version": "Versión",
+        "notes_form": {
+            "sent": "Nota guardada.",
+            "failed": "No se pudo guardar la nota. Inténtalo de nuevo."
+        }
     },
     "copyright": {
         "contributors": "Este proyecto solo ha sido posible gracias al uso de muchos otros proyectos de código abierto y a la <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>comunidad de colaboradores</a>... ¡eres libre de crear, utilizar, modificar y distribuir, siempre que respetes todas las licencias correspondientes!",
@@ -684,7 +690,13 @@
         "description": "Introduce tu clave API de GitHub para acceder al panel de administración.",
         "label": "Clave API de GitHub",
         "placeholder": "Pega tu clave API",
-        "verify": "Verificar"
+        "verify": "Verificar",
+        "messages": {
+            "empty": "Introduce tu clave API.",
+            "verifying": "Verificando autenticación...",
+            "failed": "Error de autenticación. Revisa tu clave API.",
+            "authenticated": "Autenticado como {0}."
+        }
     },
     "blog": {
         "empty": "Todavía no hay publicaciones.",

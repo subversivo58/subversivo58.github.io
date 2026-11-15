@@ -6,7 +6,7 @@
  */
 
 // Imports temporariamente comentados para manter o teste que funcionou.
-// import MISH from './assets/js/modules/lib/AwesomeIndexedDB.mjs';
+import AWIndexedDB from './assets/js/modules/lib/AwesomeIndexedDB.mjs';
 // import Emitter from './assets/js/modules/Emitter.mjs';
 
 const AdminHTML = `<!--
@@ -336,8 +336,96 @@ self.addEventListener('activate', event => {
     event.waitUntil(self.clients.claim());
 });
 
+// ---------------------------------------------------------------
+// Envios de formulário (POST) interceptados pelo Service Worker.
+// Banco, versão, store e rotas vêm de config/settings.json.
+// Os envios ficam em chaves-valor: cada chave guarda um array de objetos.
+// ---------------------------------------------------------------
+let settingsPromise = null;
+let databasePromise = null;
+
+function loadSettings() {
+    if (!settingsPromise) {
+        settingsPromise = fetch(new URL('config/settings.json', self.location.href), {
+            cache: 'no-store'
+        }).then(response => {
+            if (!response.ok) throw new Error(`settings.json (${response.status})`);
+            return response.json();
+        });
+
+        settingsPromise.catch(() => { settingsPromise = null; });
+    }
+
+    return settingsPromise;
+}
+
+// Usa a mesma biblioteca e a mesma configuração que a página.
+function getDatabase() {
+    if (!databasePromise) {
+        databasePromise = loadSettings().then(settings => {
+            const database = settings.database;
+            const connection = new AWIndexedDB(database.name, database.version, false);
+            return connection.open(database.indexed);
+        });
+
+        databasePromise.catch(() => { databasePromise = null; });
+    }
+
+    return databasePromise;
+}
+
+async function appendSubmission(store, key, entry) {
+    const db = await getDatabase();
+
+    const previous = await db.read({ tbn: store, tbk: key });
+    const list = Array.isArray(previous) ? previous : [];
+    list.push(entry);
+
+    // tbv em array é tratado pela biblioteca como vários valores;
+    // por isso o array da chave vai embrulhado em outro array.
+    await db.create([{ tbn: store, tbk: key, tbv: [list] }]);
+}
+
+function jsonResponse(body, status) {
+    return new Response(JSON.stringify(body), {
+        status,
+        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+    });
+}
+
+async function handlePost(request) {
+    const url = new URL(request.url);
+
+    if (url.origin !== self.location.origin) return fetch(request);
+
+    const settings = await loadSettings().catch(() => null);
+    const route = settings && settings.submissions.routes[url.pathname];
+
+    // Não é um envio configurado: segue normalmente para a rede.
+    if (!route) return fetch(request);
+
+    try {
+        const form = await request.formData();
+
+        await appendSubmission(route.store, route.key, {
+            ...Object.fromEntries(form.entries()),
+            sentAt: new Date().toISOString()
+        });
+
+        return jsonResponse({ ok: true }, 200);
+    } catch (error) {
+        console.error('[SW] Falha ao guardar o envio:', error);
+        return jsonResponse({ ok: false }, 500);
+    }
+}
+
 self.addEventListener('fetch', event => {
     const request = event.request;
+
+    if (request.method === 'POST') {
+        event.respondWith(handlePost(request));
+        return;
+    }
 
     if (request.method !== 'GET') return;
 

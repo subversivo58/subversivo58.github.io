@@ -168,7 +168,9 @@
             "placeholder": "ここにエラーの内容を記入...",
             "send": "送信",
             "follow": "サポートへ移動",
-            "footer_info": "バグの報告については、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
+            "footer_info": "バグの報告については、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。",
+            "sent": "ありがとうございます。バグを記録しました。",
+            "failed": "バグを記録できませんでした。もう一度お試しください。"
         },
         "feedback": {
             "title": "コメントを送信",
@@ -226,7 +228,11 @@
             "marks": "マーカー",
             "admin": "管理"
         },
-        "version": "バージョン"
+        "version": "バージョン",
+        "notes_form": {
+            "sent": "メモを保存しました。",
+            "failed": "メモを保存できませんでした。もう一度お試しください。"
+        }
     },
     "copyright": {
         "contributors": "このプロジェクトは、多くのオープンソースプロジェクトと<a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>貢献者コミュニティ</a>のおかげで実現しました。すべての関連ライセンスを遵守する限り、自由に作成、使用、変更、配布できます！",
@@ -692,6 +698,12 @@
         "description": "管理ダッシュボードにアクセスするには、GitHub APIキーを入力してください。",
         "label": "GitHub APIキー",
         "placeholder": "APIキーを貼り付けてください",
-        "verify": "確認"
+        "verify": "確認",
+        "messages": {
+            "empty": "APIキーを入力してください。",
+            "verifying": "認証を確認しています...",
+            "failed": "認証に失敗しました。APIキーを確認してください。",
+            "authenticated": "{0} として認証されました。"
+        }
     }
 }

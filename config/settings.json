@@ -1,4 +1,3 @@
-
 {
     "source": {
         "version": {
@@ -191,5 +190,21 @@
         "url": ""
     },
     "cookies_warning": true,
-    "last_modified": 1794629437450
+    "last_modified": 1794629437450,
+    "submissions": {
+        "routes": {
+            "/bugs": {
+                "store": "analytics",
+                "key": "bug"
+            },
+            "/feedback": {
+                "store": "analytics",
+                "key": "feedback"
+            },
+            "/notes": {
+                "store": "config",
+                "key": "notes"
+            }
+        }
+    }
 }

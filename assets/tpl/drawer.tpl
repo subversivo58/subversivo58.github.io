@@ -44,7 +44,7 @@
                 </div>
 
                 <!-- BOOKMARKS -->
-                <div data-toggle="modal" data-target="#modal-feedback" class="p-2 col-4 ct cp">
+                <div data-toggle="modal" data-target="#modal-feedback" class="p-2 col-4 ct cp d-none">
                     <span class="d-block p-1">🔖</span>
                     <span data-i18n-html="drawer.words.marks" class="i18n d-block"></span>
                 </div>
@@ -72,8 +72,10 @@
                 </div>
                 <!-- LABORATORY -->
                 <div class="p-2 col-4 ct cp">
-                    <span class="d-block p-1">🧪</span>
-                    <span data-i18n-html="drawer.words.lab" class="i18n d-block"></span>
+                    <a href="./lab/" class="tdu-none">
+                        <span class="d-block p-1">🧪</span>
+                        <span data-i18n-html="drawer.words.lab" class="i18n d-block"></span>
+                    </a>
                 </div>
 
                 <!-- FEEDBACK -->

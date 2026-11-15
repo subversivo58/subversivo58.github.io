@@ -56,3 +56,11 @@
         </div>
     </div>
 </section>
+
+<!-- MENSAGENS DE STATUS DA AUTENTICAÇÃO (ocultas): o JS copia a mensagem traduzida -->
+<div hidden id="github-auth-messages">
+    <span class="i18n" data-msg="github_auth_empty" data-i18n-html="github_auth.messages.empty"></span>
+    <span class="i18n" data-msg="github_auth_verifying" data-i18n-html="github_auth.messages.verifying"></span>
+    <span class="i18n" data-msg="github_auth_failed" data-i18n-html="github_auth.messages.failed"></span>
+    <span class="i18n" data-msg="github_auth_authenticated" data-i18n-html="github_auth.messages.authenticated"></span>
+</div>

@@ -130,6 +130,90 @@ import { DrawerEvents, SlideMenus } from './modules/models/UIHandler.mjs'
 // logging
 const SetupLog = new indexedDBLogs('[SETUP]: ')
 
+// Envio de bug e feedback sem sair da página.
+// O formulário é enviado por fetch: o Service Worker grava e responde 200.
+const FORM_STATUS = {
+    'bugs-report-form': { ok: 'drawer.bug_report.sent', fail: 'drawer.bug_report.failed' },
+    'feedback-form': { ok: 'drawer.feedback.notific.success.message', fail: 'drawer.feedback.notific.error.message' },
+    'fats-notes-form': { ok: 'drawer.notes_form.sent', fail: 'drawer.notes_form.failed' }
+}
+
+// Avaliação por estrelas do feedback (1 a 5, ou nenhuma).
+// Sem escolha, o campo "rating" fica desabilitado e não é enviado.
+const paintRating = value => {
+    dc.querySelectorAll('#drawer-feedback-block .star-rating').forEach(star => {
+        star.textContent = Number(star.dataset.starValue) <= value ? '★' : '☆'
+    })
+}
+
+const setRating = value => {
+    const input = dc.getElementById('feedback-rating')
+    if (!input) return
+
+    if (value) {
+        input.value = String(value)
+        input.disabled = false
+    } else {
+        input.value = ''
+        input.disabled = true
+    }
+
+    paintRating(value || 0)
+}
+
+dc.addEventListener('click', event => {
+    const star = event.target.closest('#drawer-feedback-block .star-rating')
+    if (!star) return
+
+    const value = Number(star.dataset.starValue)
+    const input = dc.getElementById('feedback-rating')
+    const current = input && !input.disabled ? Number(input.value) : 0
+
+    setRating(current === value ? 0 : value)
+})
+
+dc.addEventListener('reset', event => {
+    if (event.target && event.target.id === 'feedback-form') {
+        setRating(0)
+    }
+})
+
+dc.addEventListener('submit', async event => {
+    const form = event.target
+    const keys = FORM_STATUS[form.id]
+
+    if (!keys) return
+
+    event.preventDefault()
+
+    const status = document.getElementById(`${form.id}-status`)
+
+    const showStatus = (key, cls) => {
+        if (!status) return
+        status.className = `small mt-2 mb-0 i18n ${cls}`
+        status.setAttribute('data-i18n-html', key)
+        status.removeAttribute('translated')
+        status.hidden = false
+        i18n.transcript()
+    }
+
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form)
+        })
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
+
+        form.reset()
+        if (form.id === 'feedback-form') setRating(0)
+        showStatus(keys.ok, 'text-success')
+    } catch (error) {
+        console.error('[FORM]:', error)
+        showStatus(keys.fail, 'text-danger')
+    }
+})
+
 
 
 
@@ -714,6 +798,12 @@ if (router === 'admin') {
     const REPOSITORY_NAME = 'subversivo58.github.io'
     const REPOSITORY_BRANCH = 'main'
 
+    // Mensagens do pop-up vêm do template github-auth.tpl (já traduzidas pelo i18n).
+    const authMessage = (id, value = '') => {
+        const item = document.querySelector(`#github-auth-messages [data-msg="${id}"]`)
+        return item ? item.textContent.trim().split('{0}').join(String(value)) : ''
+    }
+
     const clearGitHubAuth = () => {
         LocalStorage.del(TOKEN_KEY)
         LocalStorage.del(AUTH_KEY)
@@ -755,22 +845,22 @@ if (router === 'admin') {
         button.addEventListener('click', async () => {
             const apiKey = input.value.trim()
             if (!apiKey) {
-                status.textContent = 'Informe sua API Key.'
+                status.textContent = authMessage('github_auth_empty')
                 return
             }
 
             button.disabled = true
-            status.textContent = 'Verificando autenticação...'
+            status.textContent = authMessage('github_auth_verifying')
 
             try {
                 const profile = await authenticateGitHub(apiKey)
                 LocalStorage.set(TOKEN_KEY, apiKey)
                 LocalStorage.set(AUTH_KEY, 'true')
-                status.textContent = `Autenticado como ${profile.login}.`
+                status.textContent = authMessage('github_auth_authenticated', profile.login)
                 githubAuthModal.hide()
             } catch (error) {
                 GitHubAPIInstance = null
-                status.textContent = 'Falha na autenticação. Verifique sua API Key.'
+                status.textContent = authMessage('github_auth_failed')
                 console.error('[ADMIN]:', error)
             } finally {
                 button.disabled = false

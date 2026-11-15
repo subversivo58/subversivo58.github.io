@@ -1408,14 +1408,10 @@ toggleSpeechRecognition() {
             rows.sort((a, b) => String(b.value?.updatedAt || '')
                 .localeCompare(String(a.value?.updatedAt || '')))
 
-            select.innerHTML = ''
-
-            const first = document.createElement('option')
-
-            first.value = ''
-            first.textContent = 'Selecionar rascunho'
-
-            select.appendChild(first)
+            // Mantém a primeira opção (vinda do template, já traduzida)
+            Array.from(select.querySelectorAll('option'))
+                .slice(1)
+                .forEach(option => option.remove())
 
             rows.forEach(({ key, value }) => {
                 const option = document.createElement('option')

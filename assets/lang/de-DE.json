@@ -168,7 +168,9 @@
             "placeholder": "Beschreibe den Fehler hier...",
             "send": "Senden",
             "follow": "Zum Support",
-            "footer_info": "Fehler melden. Weitere Informationen findest du in der <a href='#' class='tdu blue'>Dokumentation</a>."
+            "footer_info": "Fehler melden. Weitere Informationen findest du in der <a href='#' class='tdu blue'>Dokumentation</a>.",
+            "sent": "Danke! Der Fehler wurde gespeichert.",
+            "failed": "Der Fehler konnte nicht gespeichert werden. Bitte erneut versuchen."
         },
         "feedback": {
             "title": "Feedback senden",
@@ -226,7 +228,11 @@
             "marks": "Markierung",
             "admin": "Verwaltung"
         },
-        "version": "Version"
+        "version": "Version",
+        "notes_form": {
+            "sent": "Notiz gespeichert.",
+            "failed": "Die Notiz konnte nicht gespeichert werden. Bitte erneut versuchen."
+        }
     },
     "copyright": {
         "contributors": "Dieses Projekt war nur dank der Nutzung vieler anderer Open-Source-Projekte und der <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>Community der Mitwirkenden</a> möglich... Du darfst es erstellen, verwenden, verändern und verbreiten, sofern du alle zugrunde liegenden Lizenzen beachtest!",
@@ -692,6 +698,12 @@
         "description": "Geben Sie Ihren GitHub-API-Schlüssel ein, um auf das Administrations-Dashboard zuzugreifen.",
         "label": "GitHub-API-Schlüssel",
         "placeholder": "Fügen Sie Ihren API-Schlüssel ein",
-        "verify": "Überprüfen"
+        "verify": "Überprüfen",
+        "messages": {
+            "empty": "Geben Sie Ihren API-Schlüssel ein.",
+            "verifying": "Authentifizierung wird überprüft...",
+            "failed": "Authentifizierung fehlgeschlagen. Prüfen Sie Ihren API-Schlüssel.",
+            "authenticated": "Angemeldet als {0}."
+        }
     }
 }
