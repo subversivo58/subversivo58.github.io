@@ -673,11 +673,11 @@
       "heading": "Pensando em fazer algo legal?",
       "photo": "Foto de <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> em <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
       "thanks_title": "Agradecimentos",
-      "thanks_text": "Com muito orgulho utilizamos as <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Páginas do Github</a> e os serviços de <a href=\"https://glitch.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Glitch.com</a> e de <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Wokers</a>, estas plataformas e suas ferramentas são realmente incriveis que nos permitem fazer coisas legais como este blogue e nossas ferramentas.",
+      "thanks_text": "Com muito orgulho utilizamos as <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Páginas do Github</a> e os serviços de <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Wokers</a>, estas plataformas e suas ferramentas são realmente incriveis que nos permitem fazer coisas legais como este blogue e nossas ferramentas.",
       "platforms_title": "Conheça estas plataformas",
-      "link_github": "Conheça e explore o GitHub Pages",
+      "link_github": "GitHub Pages",
       "link_glitch": "Crie e invente com Glitch",
-      "link_workers": "Veja o que Cloud Workers faz",
+      "link_workers": "Cloud Workers",
       "donate_title": "Sua doação é importante"
     },
     "dpo": {
