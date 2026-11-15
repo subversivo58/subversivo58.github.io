@@ -219,7 +219,7 @@ const Notify = new NotifyJS({
   permissions: BrowserPermissions,
     watchPermissions: true,
     player: SoundPlay,
-    translate: tr,
+    translate: key => i18n.getWord(key),
     //logger: NotifyLogger.loging,
     // only for "bootstraped" template
     gui: {
@@ -470,7 +470,7 @@ if (router === 'index') {
 
   console.log('[TESTE] Entrou na rota index.');
 
-      renderIndexCarousel(settings, document.getElementById('index-central-block'), { locale: PolicyHandler.language, translate: tr })
+renderIndexCarousel(settings, document.getElementById('index-central-block'), { locale: PolicyHandler.language, translate: key => i18n.getWord(key) })
 }
 
 
@@ -593,10 +593,21 @@ if (router === 'blog') {
             }
         }
 
-        if (run !== drawing) return
+    if (run !== drawing) return
 
-        let postHeader = ''
-        let postFooter = ''
+    if (posts.length === 0) {
+        box.innerHTML = `
+            <div class="container d-flex align-items-center justify-content-center text-center py-5">
+                <div>
+                    <div class="display-3 mb-3" aria-hidden="true">📰</div>
+                    <p class="lead text-muted mb-0">${i18n.getWord('blog.empty')}</p>
+                </div>
+            </div>`
+        return
+    }
+
+    let postHeader = ''
+    let postFooter = ''
 
         if (post) {
             const date = formatDate(getPostTimestamp(post))
