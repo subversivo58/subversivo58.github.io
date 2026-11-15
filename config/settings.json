@@ -24,6 +24,26 @@
     "articles": {
         "storage": [
             {
+                "id": "yxbneQ88N",
+                "title": "Blockchain Além das Criptomoedas",
+                "summary": "Quando o assunto é blockchain, a associação imediata costuma ser com Bitcoin e outras criptomoedas.",
+                "path": "assets/posts/yxbneQ88N.md",
+                "cover": "assets/posts/images/5ff980417404d54e9f4968af5d472867959f5fe0ef76c323f30a00d26d89fe43.png",
+                "images": [
+                    "assets/posts/images/5ff980417404d54e9f4968af5d472867959f5fe0ef76c323f30a00d26d89fe43.png"
+                ],
+                "tags": [
+                    "blockchain",
+                    "javascript",
+                    "node",
+                    "ledger",
+                    "p2p"
+                ],
+                "timestamp": 1794747365702,
+                "lastModified": 1794747365702,
+                "readingTime": 5
+            },
+            {
                 "id": "Z1gZqLW9Z",
                 "title": "A teoria do caos",
                 "summary": "Muito mais que um blog Tem gente que coleciona disco, tem gente que coleciona meme, tem gente que coleciona projeto inacabado no GitHub. Eu me encaixo tranquilo",
@@ -209,7 +229,7 @@
         "url": ""
     },
     "cookies_warning": true,
-    "last_modified": 1794742293216,
+    "last_modified": 1794747365702,
     "submissions": {
         "routes": {
             "/bugs": {
