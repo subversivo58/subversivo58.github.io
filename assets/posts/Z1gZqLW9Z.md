@@ -1,6 +1,6 @@
 ![graph-image](assets/posts/images/046e9fa28ac601401a483c125c233e8367e39f287e9298f9b81742599b7da67e.png) 
 
-# Muito mais que um blog
+### Muito mais que um blog
 
 Tem gente que coleciona disco, tem gente que coleciona meme, tem gente que coleciona projeto inacabado no GitHub. Eu me encaixo tranquilo nessa última categoria - e, sinceramente, é uma das partes mais divertidas da coisa.
 
