@@ -581,7 +581,37 @@ if (router === 'blog') {
     const mdOptions = {
         extensions: ['tables', 'images', 'anchors', 'externalLinks', 'blockAttributes', 'highlight']
     }
+    let codeCopy = null
+// Copy code blocks.
+box.addEventListener('click', async event => {
 
+    const button = event.target.closest('[data-code-copy]')
+
+    if (!button || !box.contains(button)) return
+
+    const wrapper = button.closest('.code-container')
+    const code = wrapper?.querySelector('pre code')
+
+    if (!code) return
+
+    try {
+        await navigator.clipboard.writeText(code.textContent)
+
+        const originalContent = button.textContent
+
+        button.textContent = '✓'
+        button.classList.add('is-copied')
+
+        setTimeout(() => {
+            button.textContent = originalContent
+            button.classList.remove('is-copied')
+        }, 1200)
+
+    } catch (error) {
+        console.error('[BLOG]: Failed to copy code.', error)
+    }
+
+})
     // Compatibilidade: timestamp novo em milissegundos e date legado em segundos.
     const getPostTimestamp = post => {
         const timestamp = Number(post.timestamp)
@@ -777,6 +807,18 @@ if (router === 'blog') {
                 <div class="mb-5"></div>
             </div>`
 
+if (!codeCopy) {
+    const { default: CodeCopy } = await import(
+        './modules/lib/CodeCopy.mjs'
+    )
+
+    codeCopy = CodeCopy(
+        '#index-central-block',
+        '#code-copy-wrapper-template'
+    )
+}
+
+codeCopy()
         document.getElementById('blog-more').addEventListener('click', loadMore)
         updateMore()
         window.scrollTo(0, 0)

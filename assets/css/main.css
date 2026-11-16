@@ -1037,7 +1037,41 @@ MARKDOWN STYLE ___________________________________________________________*/
 .markdown-body pre code::after {
     content: normal;
 }
+/* Code Copy */
+.markdown-body .code-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+}
 
+.markdown-body .code-container > pre {
+    padding-top: 3rem;
+}
+
+.code-copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 2;
+    padding: 0.4rem 0.65rem;
+    color: #333;
+    background: #fff;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.code-copy-button:hover {
+    background: #f3f4f6;
+}
+
+.code-copy-button.is-copied {
+    color: #16803c;
+    border-color: #16803c;
+}
 /**____________________________________________________________________________
 MEDIA QUERIES ____________________________________________________________*/
 
