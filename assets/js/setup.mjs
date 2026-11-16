@@ -1561,6 +1561,9 @@ const injectFootoodle = () => {
     if ( content ) content.textContent = item.content
     if ( image ) image.style.backgroundImage = `url("${item.image}")`
 
+    // Shows the section only when there is something to show.
+    document.getElementById('foothead')?.classList.remove('d-none')
+
 }
 
 injectFootoodle()

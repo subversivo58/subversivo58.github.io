@@ -1275,9 +1275,6 @@ footer #foothead #footer-fh-img {
     background-repeat: no-repeat;
     height: 300px;
 }
-footer #foothead #footer-fh-img.lazy-isloaded {
-    background-image: url(../media/image/footoodles/footoodle.webp);
-}
 footer #footbody {
 
     padding: 3.6rem 1.2rem;

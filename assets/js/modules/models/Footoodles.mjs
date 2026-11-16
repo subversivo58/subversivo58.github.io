@@ -24,7 +24,7 @@ class Footoodles {
 
         // Reuses the post tools: ID generation (Hashids) and settings loading.
         this.posts = new PostManager({ settingsPath })
-        this.images = new ImageProcessor()
+        this.images = new ImageProcessor({ auto: true })
 
         this.editingId = null
 
