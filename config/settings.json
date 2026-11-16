@@ -64,6 +64,12 @@
         ],
         "footoodles": [
             {
+                "id": "LXk5XbeoW",
+                "title": "Do Código à Experiência do Usuário",
+                "content": "O doodle ilustra a prática de programação moderna: focando na sintaxe JavaScript (document.getElementById, fetch), manipulação de DOM e consumo de APIs, conectando o código puro diretamente à interface e experiência final do usuário no navegador.",
+                "image": "assets/footoodles/images/LXk5XbeoW.jpeg"
+            },
+            {
                 "id": "aBnYBpYAv",
                 "title": "Do Código à Experiência do Usuário",
                 "content": "O doodle ilustra a jornada do dev web: da lógica de programação e sintaxe em JavaScript (front/back-end) até a interface final e experiência do usuário em uma aplicação web moderna, estilizada e responsiva.",
