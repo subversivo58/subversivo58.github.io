@@ -140,7 +140,7 @@
         ],
         "index-max-list": 5,
         "footer-max-list": 6,
-        "blog-max-list": 20
+        "blog-max-list": 10
     },
     "database": {
         "name": "Subversivo58",
