@@ -62,7 +62,14 @@
                 "readingTime": 3
             }
         ],
-        "footoodles": [],
+        "footoodles": [
+            {
+                "id": "aBnYBpYAv",
+                "title": "Do Código à Experiência do Usuário",
+                "content": "O doodle ilustra a jornada do dev web: da lógica de programação e sintaxe em JavaScript (front/back-end) até a interface final e experiência do usuário em uma aplicação web moderna, estilizada e responsiva.",
+                "image": "assets/footoodles/images/aBnYBpYAv.jpeg"
+            }
+        ],
         "index-max-list": 5,
         "footer-max-list": 6,
         "blog-max-list": 20
