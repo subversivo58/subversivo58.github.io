@@ -24,6 +24,24 @@
     "articles": {
         "storage": [
             {
+                "id": "o2nabj6W6",
+                "title": "WebRTC no Front-End Moderno",
+                "summary": "Houve um tempo em que fazer uma chamada de vídeo ou transmitir áudio pelo navegador exigia a instalação de...",
+                "path": "assets/posts/o2nabj6W6.md",
+                "cover": "assets/posts/images/7785505f19139808966fee756e43be6cec41db97788d6fcc6f7cd0fd17c3502e.webp",
+                "images": [
+                    "assets/posts/images/7785505f19139808966fee756e43be6cec41db97788d6fcc6f7cd0fd17c3502e.webp"
+                ],
+                "tags": [
+                    "webrtc",
+                    "p2p",
+                    "descentralização"
+                ],
+                "timestamp": 1794846380796,
+                "lastModified": 1794846380796,
+                "readingTime": 6
+            },
+            {
                 "id": "GNWYARPre",
                 "title": "Descentralização na Web e no Front-End",
                 "summary": "A arquitetura da internet como conhecemos está passando por uma transformação profunda e estrutural. Historicamente, a web tem sido construída sobre...",
@@ -292,7 +310,7 @@
         "url": ""
     },
     "cookies_warning": true,
-    "last_modified": 1794839645326,
+    "last_modified": 1794846380796,
     "submissions": {
         "routes": {
             "/bugs": {
