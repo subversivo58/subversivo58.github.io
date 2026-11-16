@@ -8,17 +8,15 @@
         <aside id="admin-dashboard-sidebar"
                class="col-12 col-md-3 col-lg-2 px-0">
 
-            <!-- MOBILE SLIDE MENU -->
+            <!-- MOBILE POSTS SLIDE -->
             <nav id="admin-dashboard-slide"
-                 class="slide-left fx transition bg-white overflow
-                        d-md-none"
+                 class="slide-left fx transition bg-white overflow d-md-none"
                  style="
                     width: 85%;
                     max-width: 320px;
                     z-index: 1000;
                  ">
 
-                <!-- SLIDE HEADER -->
                 <div class="d-flex align-items-center
                             justify-content-between
                             px-3 py-3 border-bottom">
@@ -28,21 +26,50 @@
 
                     <a href="#body"
                        id="slide-link-admin-close"
-                       class="btn btn-sm btn-outline-secondary rounded-0"
-                       aria-label="Fechar menu">
-
+                       class="btn btn-sm btn-outline-secondary rounded-0">
                         &times;
-
                     </a>
 
                 </div>
 
-                <!-- MOBILE POSTS -->
                 <div class="px-2 py-3">
 
                     <div id="admin-posts-list-mobile"
                          class="list-group list-group-flush">
+                    </div>
 
+                </div>
+
+            </nav>
+
+            <!-- MOBILE FOOTDOODLES SLIDE -->
+            <nav id="admin-footoodles-slide"
+                 class="slide-left fx transition bg-white overflow d-md-none"
+                 style="
+                    width: 85%;
+                    max-width: 320px;
+                    z-index: 1000;
+                 ">
+
+                <div class="d-flex align-items-center
+                            justify-content-between
+                            px-3 py-3 border-bottom">
+
+                    <h3 class="i18n h5 mb-0"
+                        data-i18n-html="admin_dashboard.footoodles"></h3>
+
+                    <a href="#body"
+                       id="slide-link-footoodles-close"
+                       class="btn btn-sm btn-outline-secondary rounded-0">
+                        &times;
+                    </a>
+
+                </div>
+
+                <div class="px-2 py-3">
+
+                    <div id="admin-footoodles-list-mobile"
+                         class="list-group list-group-flush">
                     </div>
 
                 </div>
@@ -53,14 +80,67 @@
             <nav id="admin-dashboard-desktop-menu"
                  class="d-none d-md-block">
 
-                <!-- DESKTOP POSTS -->
-                <div class="px-2 py-3">
+                <ul class="nav nav-tabs nav-fill"
+                    id="admin-dashboard-tabs"
+                    role="tablist">
 
-                    <h4 class="i18n h6 px-2 mb-2"
-                        data-i18n-html="admin_dashboard.posts"></h4>
+                    <li class="nav-item" role="presentation">
 
-                    <div id="admin-posts-list-desktop"
-                         class="list-group list-group-flush">
+                        <a class="i18n nav-link active"
+                           id="admin-posts-tab"
+                           data-toggle="tab"
+                           href="#admin-posts-pane"
+                           role="tab"
+                           aria-controls="admin-posts-pane"
+                           aria-selected="true"
+                           data-i18n-html="admin_dashboard.posts"></a>
+
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+
+                        <a class="i18n nav-link"
+                           id="admin-footoodles-tab"
+                           data-toggle="tab"
+                           href="#admin-footoodles-pane"
+                           role="tab"
+                           aria-controls="admin-footoodles-pane"
+                           aria-selected="false"
+                           data-i18n-html="admin_dashboard.footoodles"></a>
+
+                    </li>
+
+                </ul>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane fade show active"
+                         id="admin-posts-pane"
+                         role="tabpanel"
+                         aria-labelledby="admin-posts-tab">
+
+                        <div class="px-2 py-3">
+
+                            <div id="admin-posts-list-desktop"
+                                 class="list-group list-group-flush">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade"
+                         id="admin-footoodles-pane"
+                         role="tabpanel"
+                         aria-labelledby="admin-footoodles-tab">
+
+                        <div class="px-2 py-3">
+
+                            <div id="admin-footoodles-list-desktop"
+                                 class="list-group list-group-flush">
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -96,7 +176,7 @@
                     <div id="admin-dashboard-actions"
                          class="d-flex align-items-center mt-3 mt-md-0">
 
-                        <!-- MOBILE MENU BUTTON -->
+                        <!-- MOBILE POSTS BUTTON -->
                         <a href="#admin-dashboard-slide"
                            id="slide-admin-menu"
                            class="btn btn-outline-secondary btn-sm
@@ -106,6 +186,18 @@
                             <span aria-hidden="true">&#9776;</span>
                             <span class="i18n"
                                   data-i18n-html="admin_dashboard.menu"></span>
+
+                        </a>
+
+                        <!-- MOBILE FOOTDOODLES BUTTON -->
+                        <a href="#admin-footoodles-slide"
+                           id="slide-admin-footoodles"
+                           class="btn btn-outline-secondary btn-sm
+                                  rounded-0 flex-fill flex-md-grow-0
+                                  mr-2 d-md-none">
+
+                            <span class="i18n"
+                                  data-i18n-html="admin_dashboard.footoodles"></span>
 
                         </a>
 
@@ -128,7 +220,6 @@
             <section id="admin-post-editor-container"
                      class="card rounded-0 mb-4 d-none">
 
-                <!-- EDITOR HEADER -->
                 <div class="card-header bg-transparent
                             d-flex align-items-center
                             justify-content-between">
@@ -139,11 +230,8 @@
                     <button
                         type="button"
                         id="admin-close-post-editor"
-                        class="btn btn-sm btn-outline-secondary rounded-0"
-                        aria-label="Fechar editor">
-
+                        class="btn btn-sm btn-outline-secondary rounded-0">
                         &times;
-
                     </button>
 
                 </div>
@@ -151,9 +239,6 @@
                 <!-- MARKDOWN EDITOR MOUNT POINT -->
                 <div id="admin-post-editor"
                      class="card-body">
-
-                    <!-- MARKDOWN EDITOR WILL BE MOUNTED HERE -->
-
                 </div>
 
             </section>
