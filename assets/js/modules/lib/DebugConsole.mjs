@@ -16,9 +16,17 @@ const DebugConsole = (() => {
         'meta[name="DEBUG"]'
     );
 
-    if (debugTag?.content.trim().toLowerCase() !== 'true') {
-        return null;
-    }
+const isLocalhost = [
+    'localhost',
+    '127.0.0.1'
+].includes(window.location.hostname);
+
+const isDebugEnabled =
+    debugTag?.content.trim().toLowerCase() === 'true';
+
+if (!isDebugEnabled && !isLocalhost) {
+    return null;
+}
 
     // --------------------------------------------------
     // Storage

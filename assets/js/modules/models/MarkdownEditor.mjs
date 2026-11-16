@@ -1136,7 +1136,7 @@ toggleSpeechRecognition() {
 
         this.readingTime = Math.max(
             1,
-            Math.ceil(words / 200)
+            Math.ceil(words / 250)
         )
 
         this.autoSummary = this.buildAutomaticSummary()

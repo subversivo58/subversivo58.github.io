@@ -1,12 +1,12 @@
 <!-- FIXED NAVBAR -->
-<nav id="navbar-fixed" class="navbar navbar-expand-md navbar-light fixed-top py-1 bg-white" role="navigation">
+<nav id="navbar-fixed" class="navbar navbar-expand-md navbar-light fixed-top py-1 bg-white anchor-link" role="navigation">
 
     <!-- DESKTOP LOGO -->
     <a class="navbar-brand d-none d-md-flex" href="./">
         <picture>
             <img alt="Brand"
                  src="./assets/media/image/1x1.gif"
-                 data-src="./assets/media/image/logos/subversivo58.blog.io.webp"
+                 data-src="./assets/media/image/logos/site-logo-avatar@500x100.png"
                  data-lazy-target
                  width="120px"
                  height="30px"
