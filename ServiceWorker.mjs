@@ -79,7 +79,6 @@ const AdminHTML = `<!--
     <!-- FOOTER -->
     <footer id="footer-container" class="container-fluid px-0">
 
-        <!-- FOOTHEAD (OR: INJECTED)--
         <section id="foothead" class="container-fluid">
             <div class="row">
                 <h1 id="footer-fh-title" class="col-12 h1 ct">&nbsp;bla bla bla, bla</h1>
@@ -91,7 +90,7 @@ const AdminHTML = `<!--
             <div class="mt-5 row">
                <div id="footer-fh-img" data-lazy-target class="col-12 col-md-10 col-lg-8 mx-auto"></div>
             </div>
-        </section>-->
+        </section>
 
         <!-- FOOTBODY -->
         <section id="footbody" data-lazy-target class="container-fluid">

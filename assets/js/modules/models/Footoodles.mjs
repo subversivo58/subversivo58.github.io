@@ -38,6 +38,12 @@ class Footoodles {
 
     async load() {
 
+        // After a commit, the published file may take a while to update,
+        // so the last committed settings are used as the source of truth.
+        if (this.committed) {
+            return structuredClone(this.committed)
+        }
+
         const settings = await this.posts.loadSettings()
         settings.articles.footoodles = settings.articles.footoodles ?? []
 
@@ -68,13 +74,17 @@ class Footoodles {
         api.setRepo(this.repo.owner, this.repo.name)
         await api.setBranch(this.branch)
 
-        return api.pushFiles(message, [
+        const response = await api.pushFiles(message, [
             ...files,
             {
                 path: this.posts.settingsPath,
                 content: JSON.stringify(settings, null, 4)
             }
         ])
+
+        this.committed = structuredClone(settings)
+
+        return response
 
     }
 
@@ -197,6 +207,13 @@ class Footoodles {
 
     }
 
+    // Closes the footoodles slide panel (mobile) through its own close link.
+    closeSlide() {
+
+        document.getElementById('slide-link-footoodles-close')?.click()
+
+    }
+
     showPostEditor() {
 
         this.root.classList.add('d-none')
@@ -232,6 +249,7 @@ class Footoodles {
         this.setStatus(item ? 'editor_edit' : 'editor_new')
 
         this.setHeading(this.tr(item ? 'tab' : 'new'))
+        this.closeSlide()
 
         this.postRoot.classList.add('d-none')
         this.root.classList.remove('d-none')
@@ -398,6 +416,7 @@ class Footoodles {
             await this.remove(id)
             if (this.editingId === id) this.resetForm()
             this.setStatus('deleted', 'text-success')
+            this.closeSlide()
             await this.refresh()
         } catch (error) {
             console.error('[FOOTOODLES]:', error)
