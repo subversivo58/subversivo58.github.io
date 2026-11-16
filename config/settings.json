@@ -62,14 +62,7 @@
                 "readingTime": 3
             }
         ],
-        "footoodles": [
-            {
-                "id": "b9KYXnd82",
-                "title": "Subversivo58: código, rede e criatividade",
-                "content": "Código aberto no coração e rede na veia. O Subversivo58 é um laboratório de ideias: explorar a web, testar caminhos novos e transformar tecnologia em algo útil, livre e com estilo. Aqui a curiosidade é o combustível. Entre, experimente e faça parte dessa conexão.",
-                "image": "assets/footoodles/images/b9KYXnd82.png"
-            }
-        ],
+        "footoodles": [],
         "index-max-list": 5,
         "footer-max-list": 6,
         "blog-max-list": 20

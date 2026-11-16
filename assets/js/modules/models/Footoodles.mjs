@@ -366,12 +366,15 @@ class Footoodles {
     renderRow(item) {
 
         const row = document.createElement('div')
-        row.className = 'list-group-item d-flex align-items-center px-2 py-2'
+        row.className = 'list-group-item px-2 py-2'
+
+        const top = document.createElement('div')
+        top.className = 'd-flex align-items-center'
 
         const thumb = document.createElement('div')
         thumb.className = 'flex-shrink-0 mr-2'
-        thumb.style.width = '40px'
-        thumb.style.height = '40px'
+        thumb.style.width = '48px'
+        thumb.style.height = '48px'
         thumb.style.backgroundImage = `url("${item.image}")`
         thumb.style.backgroundSize = 'cover'
         thumb.style.backgroundPosition = 'center'
@@ -381,12 +384,16 @@ class Footoodles {
         title.style.minWidth = '0'
         title.textContent = item.title
 
-        row.append(
-            thumb,
-            title,
+        top.append(thumb, title)
+
+        const actions = document.createElement('div')
+        actions.className = 'd-flex align-items-center mt-2'
+        actions.append(
             this.button(this.tr('edit'), 'btn-outline-primary', () => this.openEditor(item)),
             this.button(this.tr('delete'), 'btn-outline-danger', () => this.confirmRemove(item.id))
         )
+
+        row.append(top, actions)
 
         return row
 

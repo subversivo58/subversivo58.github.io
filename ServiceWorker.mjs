@@ -81,13 +81,13 @@ const AdminHTML = `<!--
 
         <section id="foothead" class="container-fluid">
             <div class="row">
-                <h1 id="footer-fh-title" class="col-12 h1 ct">&nbsp;bla bla bla, bla</h1>
-                <p id="footer-fh-content" class="mt-4 col-md-10 mx-auto ct">
+                <h2 id="footer-fh-title" class="col-12 h3 ct">&nbsp;bla bla bla, bla</h2>
+                <p id="footer-fh-content" class="mt-2 col-md-10 mx-auto ct">
                     &nbsp;
                     Mussum Ipsum, cacilds vidis litro abertis. Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi. Quem num gosta di mim que vai caçá sua turmis! Não sou faixa preta cumpadi, sou preto inteiris, inteiris. Copo furadis é disculpa de bebadis, arcu quam euismod magna.
                 </p>
             </div>
-            <div class="mt-5 row">
+            <div class="mt-3 row">
                <div id="footer-fh-img" data-lazy-target class="col-12 col-md-10 col-lg-8 mx-auto"></div>
             </div>
         </section>
