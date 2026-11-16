@@ -930,6 +930,25 @@ if (router === 'admin') {
 
     markdownEditor.mount()
 
+    // Footoodles admin: editor and lists share the post editor container.
+    const { default: Footoodles } = await import('./modules/models/Footoodles.mjs')
+
+    const footoodles = new Footoodles({
+        getApi: () => GitHubAPIInstance,
+        repo: { owner: REPOSITORY_OWNER, name: REPOSITORY_NAME },
+        branch: REPOSITORY_BRANCH,
+        translate: path => path.split('.').reduce((node, part) => node?.[part], i18n.dictionary())
+    })
+
+    await footoodles.mount({
+        container: editorContainer,
+        postRoot: editorRoot,
+        lists: [
+            document.getElementById('admin-footoodles-list-desktop'),
+            document.getElementById('admin-footoodles-list-mobile')
+        ]
+    })
+
     openEditorButton.addEventListener('click', () => {
         editorContainer.classList.remove('d-none')
         editorContainer.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -1523,3 +1542,25 @@ new MutationObserver(() => {
     const button = dc.getElementById('clear-all-data-storage')
     if (button) bindClearAllButton(button)
 }).observe(dc.body, { childList: true, subtree: true })
+
+
+// Footoodles: inject one random item into the footer head on any page.
+// Uses the settings already loaded by setup; no admin module is imported.
+const injectFootoodle = () => {
+
+    const list = settings.articles?.footoodles ?? []
+    if ( !list.length ) return
+
+    const item = list[Math.floor(Math.random() * list.length)]
+
+    const title = document.getElementById('footer-fh-title')
+    const content = document.getElementById('footer-fh-content')
+    const image = document.getElementById('footer-fh-img')
+
+    if ( title ) title.textContent = item.title
+    if ( content ) content.textContent = item.content
+    if ( image ) image.style.backgroundImage = `url("${item.image}")`
+
+}
+
+injectFootoodle()

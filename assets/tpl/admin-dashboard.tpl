@@ -67,6 +67,7 @@
 
                 <div class="px-2 py-3">
 
+                    <button type="button" data-footoodles-new class="i18n btn btn-info btn-sm rounded-0 mb-2 w-100 cp" data-i18n-html="admin_dashboard.footoodles.new"></button>
                     <div id="admin-footoodles-list-mobile"
                          class="list-group list-group-flush">
                     </div>
@@ -135,6 +136,7 @@
 
                         <div class="px-2 py-3">
 
+                            <button type="button" data-footoodles-new class="i18n btn btn-info btn-sm rounded-0 mb-2 w-100 cp" data-i18n-html="admin_dashboard.footoodles.new"></button>
                             <div id="admin-footoodles-list-desktop"
                                  class="list-group list-group-flush">
                             </div>
