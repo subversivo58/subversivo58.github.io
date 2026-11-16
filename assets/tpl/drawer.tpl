@@ -37,27 +37,16 @@
                     <span class="d-block p-1">🎤</span>
                     <span data-i18n-html="drawer.words.mic" class="i18n d-block"></span>
                 </div>
-                <!-- MEDIA AUDIO AND VIDEO -->
-                <div id="drawer-media" class="p-2 col-4 ct cp d-none">
-                    <span class="d-block p-1">🎥</span>
-                    <span data-i18n-html="words.media" class="i18n d-block tc"></span>
-                </div>
-
-                <!-- BOOKMARKS -->
-                <div data-toggle="modal" data-target="#modal-feedback" class="p-2 col-4 ct cp d-none">
-                    <span class="d-block p-1">🔖</span>
-                    <span data-i18n-html="drawer.words.marks" class="i18n d-block"></span>
-                </div>
                 <!-- NOTES -->
                 <div data-toggle="modal" data-target="#modal-fast-notes" class="p-2 col-4 ct cp">
                     <span class="d-block p-1">📝</span>
                     <span data-i18n-html="drawer.words.note" class="i18n d-block"></span>
                 </div>
-                <!-- SHARE --
-                <div data-toggle="modal" data-target="#modal-sharer-content" class="p-2 col-4 black ct cp">
-                    <span class="d-block p-1 fa fa-share-alt fa-2x"></span>
-                    <span class="d-block">Share</span>
-                </div>-->
+                <!-- SHARE -->
+                <div id="drawer-share" class="p-2 col-4 ct cp">
+                    <span class="d-block p-1">🔗</span>
+                    <span data-i18n-html="drawer.words.share" class="i18n d-block"></span>
+                </div>
                 <!-- OFFLINE --
                 <div data-toggle="modal" data-target="#modal-offline-resources" class="d-none p-2 col-4 green-special ct cp">
                     <span class="d-block p-1 fa fa-signal fa-2x"></span>

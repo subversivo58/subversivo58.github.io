@@ -1567,3 +1567,20 @@ const injectFootoodle = () => {
 }
 
 injectFootoodle()
+
+// Share: uses the native share sheet when available, otherwise copies the link.
+dc.addEventListener('click', async event => {
+    if ( !event.target.closest('#drawer-share') ) return
+
+    const data = { title: document.title, url: location.href }
+
+    try {
+        if ( navigator.share ) {
+            await navigator.share(data)
+        } else {
+            await navigator.clipboard?.writeText(location.href)
+        }
+    } catch (error) {
+        // the user cancelled the share sheet
+    }
+})

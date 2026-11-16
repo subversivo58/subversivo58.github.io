@@ -211,7 +211,11 @@
             "title": "Webcam anfordern",
             "btn1": "Ja, anfordern",
             "btn2": "Nein, abbrechen",
-            "footer_info": "Videomedien? Siehe die <a href='#' class='tdu blue'>Dokumentation</a>."
+            "footer_info": "Videomedien? Siehe die <a href='#' class='tdu blue'>Dokumentation</a>.",
+            "perm_title": "Kamera-Berechtigung",
+            "perm_1": "Die Website nutzt die Kamera nur, wenn Sie eine Funktion starten, die sie braucht.",
+            "perm_2": "Sie können die Berechtigung in den Einstellungen Ihres Browsers widerrufen.",
+            "perm_3": "Wenn Sie abbrechen, wird keine Berechtigung erteilt."
         },
         "words": {
             "clear": "Bereinigen",
@@ -226,7 +230,8 @@
             "feedback": "Feedback",
             "lang": "Sprachen",
             "marks": "Markierung",
-            "admin": "Verwaltung"
+            "admin": "Verwaltung",
+            "share": "Teilen"
         },
         "version": "Version",
         "notes_form": {
@@ -373,6 +378,13 @@
             "server": "Serverfehler",
             "description": "Eine Beschreibung senden",
             "ph_description": "Beschreibung hier..."
+        },
+        "permissions": {
+            "title_microphone": "Mikrofon-Berechtigung",
+            "title_geolocation": "Standort-Berechtigung",
+            "item_1": "Die Website nutzt diese Funktion nur, wenn Sie eine Aktion starten, die sie braucht.",
+            "item_2": "Sie können die Berechtigung in den Einstellungen Ihres Browsers widerrufen.",
+            "item_3": "Wenn Sie abbrechen, wird keine Berechtigung erteilt."
         }
     },
     "notify": {

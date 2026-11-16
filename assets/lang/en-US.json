@@ -211,7 +211,11 @@
             "title": "Request Webcam",
             "btn1": "Yes, request",
             "btn2": "No, cancel",
-            "footer_info": "Video media? See the <a href='#' class='tdu blue'>documentation</a>."
+            "footer_info": "Video media? See the <a href='#' class='tdu blue'>documentation</a>.",
+            "perm_title": "Camera permission",
+            "perm_1": "The site only uses the camera when you start a feature that needs it.",
+            "perm_2": "You can revoke the permission in your browser settings.",
+            "perm_3": "If you cancel, no permission is granted."
         },
         "words": {
             "clear": "Cleanup",
@@ -226,7 +230,8 @@
             "feedback": "Feedback",
             "lang": "Languages",
             "marks": "Marker",
-            "admin": "Administration"
+            "admin": "Administration",
+            "share": "Share"
         },
         "version": "Version",
         "notes_form": {
@@ -373,6 +378,13 @@
             "server": "Server error",
             "description": "Send a description",
             "ph_description": "Description here..."
+        },
+        "permissions": {
+            "title_microphone": "Microphone permission",
+            "title_geolocation": "Location permission",
+            "item_1": "The site only uses this feature when you start a function that needs it.",
+            "item_2": "You can revoke the permission in your browser settings.",
+            "item_3": "If you cancel, no permission is granted."
         }
     },
     "notify": {

@@ -211,7 +211,11 @@
             "title": "Requisitar Webcam",
             "btn1": "Sim, requisitar",
             "btn2": "Não, cancelar",
-            "footer_info": "Midia Video? Veja a <a href='#' class='tdu blue'>documentação</a>."
+            "footer_info": "Midia Video? Veja a <a href='#' class='tdu blue'>documentação</a>.",
+            "perm_title": "Permissão de câmera",
+            "perm_1": "O site só usa a câmera quando você inicia um recurso que precisa dela.",
+            "perm_2": "Você pode revogar a permissão nas configurações do seu navegador.",
+            "perm_3": "Se cancelar, nenhuma permissão é concedida."
         },
         "words": {
             "clear": "Limpeza",
@@ -226,7 +230,8 @@
             "feedback": "Feedback",
             "lang": "Idiomas",
             "marks": "Marcador",
-            "admin": "Administração"
+            "admin": "Administração",
+            "share": "Compartilhar"
         },
         "version": "Versão",
         "notes_form": {
@@ -373,6 +378,13 @@
             "server": "Erro do Servidor",
             "description": "Envie uma descrição",
             "ph_description": "Descrição aqui..."
+        },
+        "permissions": {
+            "title_microphone": "Permissão de microfone",
+            "title_geolocation": "Permissão de localização",
+            "item_1": "O site só usa este recurso quando você inicia uma função que precisa dele.",
+            "item_2": "Você pode revogar a permissão nas configurações do seu navegador.",
+            "item_3": "Se cancelar, nenhuma permissão é concedida."
         }
     },
     "notify": {

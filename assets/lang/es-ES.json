@@ -211,7 +211,11 @@
             "title": "Solicitar cámara web",
             "btn1": "Sí, solicitar",
             "btn2": "No, cancelar",
-            "footer_info": "¿Vídeo? Consulta la <a href='#' class='tdu blue'>documentación</a>."
+            "footer_info": "¿Vídeo? Consulta la <a href='#' class='tdu blue'>documentación</a>.",
+            "perm_title": "Permiso de cámara",
+            "perm_1": "El sitio solo usa la cámara cuando inicias una función que la necesita.",
+            "perm_2": "Puedes revocar el permiso en la configuración de tu navegador.",
+            "perm_3": "Si cancelas, no se concede ningún permiso."
         },
         "words": {
             "clear": "Limpieza",
@@ -226,7 +230,8 @@
             "feedback": "Comentarios",
             "lang": "Idiomas",
             "marks": "Marcador",
-            "admin": "Administración"
+            "admin": "Administración",
+            "share": "Compartir"
         },
         "version": "Versión",
         "notes_form": {
@@ -373,6 +378,13 @@
             "server": "Error del servidor",
             "description": "Enviar una descripción",
             "ph_description": "Describe aquí el problema..."
+        },
+        "permissions": {
+            "title_microphone": "Permiso de micrófono",
+            "title_geolocation": "Permiso de ubicación",
+            "item_1": "El sitio solo usa esta función cuando inicias una acción que la necesita.",
+            "item_2": "Puedes revocar el permiso en la configuración de tu navegador.",
+            "item_3": "Si cancelas, no se concede ningún permiso."
         }
     },
     "notify": {

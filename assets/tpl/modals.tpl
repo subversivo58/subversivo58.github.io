@@ -89,26 +89,50 @@
     <section id="modal-geolocation" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div id="modal-geolocation-content" class="modal-content rounded-0">
-                <div class="modal-header border-0 rounded-0">
-                    <h5 data-i18n-html="drawer.geolocation.title" class="i18n modal-title white tsa1"></h5>
-                    <button type="button" class="close cp" data-dismiss="modal">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body pt-0">
-                    <div class="row">
-                        <div id="drawer-geolocation-block" class="col-6 offset-6 col-sm-5 offset-sm-7 px-0">
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active i18n" id="geo-home-tab" data-toggle="tab" href="#geo-home" role="tab" aria-controls="geo-home" aria-selected="true" data-i18n-html="drawer.geolocation.title"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link i18n" id="geo-perm-tab" data-toggle="tab" href="#geo-perm" role="tab" aria-controls="geo-perm" aria-selected="false" data-i18n-html="modals.tabs.permissions"></a>
+                    </li>
+                    <li class="nav-item col">
+                        <button type="button" class="close mt-2 fr cp" data-dismiss="modal">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content px-3">
+                    <div class="tab-pane fade show active" id="geo-home" role="tabpanel" aria-labelledby="geo-home-tab">
+                    <div class="row pb-5">
+                        <div id="drawer-geolocation-block" class="col-6 offset-6 col-sm-5 offset-sm-7 pt-5">
                             <div class="col mt-sm-4">
-                                <button type="button" id="modal-geolocation-request" data-dismiss="modal" data-i18n-html="drawer.geolocation.btn1" class="i18n btn btn-block btn-info rounded-0 cp"></button>
+                                <button type="button" id="modal-geolocation-request" data-i18n-html="drawer.geolocation.btn1" class="i18n btn btn-block btn-info rounded-0 cp"></button>
                             </div>
                             <div class="col mt-2 mt-sm-3">
                                 <button type="button" data-dismiss="modal" data-i18n-html="drawer.geolocation.btn2" class="i18n btn btn-block btn-outline-danger rounded-0 cp"></button>
                             </div>
                         </div>
                     </div>
-                    <section class="row">
-                        <small data-i18n-html="drawer.geolocation.footer_info" class="i18n col"></small>
-                    </section>
+                    <section class="row mt-sm-0 p-3">
+                            <small data-i18n-html="drawer.geolocation.footer_info" class="i18n col px-0 text-light"></small>
+                        </section>
+                    </div>
+                    <div class="tab-pane fade" id="geo-perm" role="tabpanel" aria-labelledby="geo-perm-tab">
+                        <h6 class="i18n mt-3 text-white tsa1" data-i18n-html="modals.permissions.title_geolocation"></h6>
+                        <ul class="pl-3 mb-0 pb-5 text-white tsa1">
+                            <li class="i18n" data-i18n-html="modals.permissions.item_1"></li>
+                            <li class="i18n" data-i18n-html="modals.permissions.item_2"></li>
+                            <li class="i18n" data-i18n-html="modals.permissions.item_3"></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
                 </div>
             </div>
         </div>
@@ -136,13 +160,13 @@
                 <div class="tab-content px-3" id="myTabContent">
 
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            <div id="drawer-getmedia-video-block" class="col-12 d-flex justify-content-center">
-                                <div class="col-12 my-auto">
+                        <div class="row pb-5">
+                            <div id="drawer-getmedia-video-block" class="col-6 col-sm-5 px-0 pt-5">
+                                <div class="col">
                                     <div class="col-12 col-md-6 mt-2 mt-sm-4">
-                                        <button type="button" id="modal-getmedia-video-request" data-dismiss="modal" data-i18n-html="drawer.getmedia_video.btn1" class="i18n btn btn-block btn-info rounded-0 cp"></button>
+                                        <button type="button" id="modal-getmedia-video-request" data-i18n-html="drawer.getmedia_video.btn1" class="i18n btn btn-block btn-info rounded-0 cp"></button>
                                     </div>
-                                    <div class="col-1'2 col-md-6 mt-3 mt-sm-4">
+                                    <div class="col-12 col-md-6 mt-3 mt-sm-4">
                                         <button type="button" data-dismiss="modal" data-i18n-html="drawer.getmedia_video.btn2" class="i18n btn btn-block btn-outline-danger rounded-0 cp"></button>
                                     </div>
                                 </div>
@@ -155,35 +179,16 @@
                         </section>
 
                     </div>
-                    <div class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                    <div class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
+                        <h6 class="i18n mt-3 text-white tsa1" data-i18n-html="drawer.getmedia_video.perm_title"></h6>
+                        <ul class="pl-3 mb-0 pb-5 text-white tsa1">
+                            <li class="i18n" data-i18n-html="drawer.getmedia_video.perm_1"></li>
+                            <li class="i18n" data-i18n-html="drawer.getmedia_video.perm_2"></li>
+                            <li class="i18n" data-i18n-html="drawer.getmedia_video.perm_3"></li>
+                        </ul>
+                    </div>
                     <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">...</div>
                 </div>
-
-
-                <!--
-                <div class="modal-header border-0 rounded-0">
-                    <h5 data-i18n-html="drawer.getmedia_video.title" class="i18n modal-title"></h5>
-                    <button type="button" class="close cp" data-dismiss="modal">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body pt-0">
-                    <div class="row">
-                        <div id="drawer-getmedia-video-block" class="col-6 col-sm-5 px-0">
-                            <div class="col mt-2 mt-sm-4">
-                                <button type="button" id="modal-getmedia-video-request" data-dismiss="modal" data-i18n-html="drawer.getmedia_video.btn1" class="i18n btn btn-block btn-info rounded-0 cp"></button>
-                            </div>
-                            <div class="col mt-3 mt-sm-4">
-                                <button type="button" data-dismiss="modal" data-i18n-html="drawer.getmedia_video.btn2" class="i18n btn btn-block btn-outline-danger rounded-0 cp"></button>
-                            </div>
-                        </div>
-                    </div>
-                    <section class="row mt-4 mt-sm-0">
-                        <small data-i18n-html="drawer.getmedia_video.footer_info" class="i18n col"></small>
-                    </section>
-                </div>
-
-                -->
             </div>
         </div>
     </section>
@@ -192,15 +197,25 @@
     <section id="modal-getmedia-audio" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div id="modal-getmedia-audio-content" class="modal-content rounded-0">
-                <div class="modal-header border-0 rounded-0">
-                    <h5 data-i18n-html="drawer.getmedia_audio.title" class="i18n modal-title"></h5>
-                    <button type="button" class="close cp" data-dismiss="modal">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body pt-0">
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active i18n" id="audio-home-tab" data-toggle="tab" href="#audio-home" role="tab" aria-controls="audio-home" aria-selected="true" data-i18n-html="drawer.getmedia_audio.title"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link i18n" id="audio-perm-tab" data-toggle="tab" href="#audio-perm" role="tab" aria-controls="audio-perm" aria-selected="false" data-i18n-html="modals.tabs.permissions"></a>
+                    </li>
+                    <li class="nav-item col">
+                        <button type="button" class="close mt-2 fr cp" data-dismiss="modal">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content px-3">
+                    <div class="tab-pane fade show active" id="audio-home" role="tabpanel" aria-labelledby="audio-home-tab">
                     <div class="row">
-                        <div id="drawer-getmedia-audio-block" class="col-6 col-sm-5 px-0">
+                        <div id="drawer-getmedia-audio-block" class="col-6 col-sm-5 px-0 pt-5">
                             <div class="col mt-sm-5">
                                 <button type="button" id="modal-getmedia-audio-request" data-i18n-html="drawer.getmedia_audio.btn1" class="i18n btn btn-block btn-info rounded-0 cp"></button>
                             </div>
@@ -209,9 +224,23 @@
                             </div>
                         </div>
                     </div>
-                    <section class="row">
-                        <small data-i18n-html="drawer.getmedia_audio.footer_info" class="i18n col"></small>
-                    </section>
+                    <section class="row mt-4 mt-sm-0 p-3">
+                            <small data-i18n-html="drawer.getmedia_audio.footer_info" class="i18n col px-0 text-light"></small>
+                        </section>
+                    </div>
+                    <div class="tab-pane fade" id="audio-perm" role="tabpanel" aria-labelledby="audio-perm-tab">
+                        <h6 class="i18n mt-3 text-white tsa1" data-i18n-html="modals.permissions.title_microphone"></h6>
+                        <ul class="pl-3 mb-0 pb-5 text-white tsa1">
+                            <li class="i18n" data-i18n-html="modals.permissions.item_1"></li>
+                            <li class="i18n" data-i18n-html="modals.permissions.item_2"></li>
+                            <li class="i18n" data-i18n-html="modals.permissions.item_3"></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
                 </div>
             </div>
         </div>
@@ -250,27 +279,7 @@
 
 
 
-    <!-- SHARER -->
-    <section id="modal-sharer-content" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
-                    <h5 class="mb-0 i18n" data-i18n-html="modals.share.title"></h5>
-                    <button type="button" class="close cp" data-dismiss="modal">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body p-0">
-                    <div id="modal-sharer-content-body" class="row px-3"></div>
-                </div>
-                <div class="modal-footer">
-                    <div class="col px-0">
-                        <small data-toggle="modal" data-target="#modal-bugs-report" data-dismiss="modal" class="tdu sky cp i18n" data-i18n-html="modals.share.broken_link"></small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
 
     <!-- FAST NOTES -->

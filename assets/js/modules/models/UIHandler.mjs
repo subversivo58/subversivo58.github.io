@@ -154,89 +154,105 @@ if (state === 'granted' && notify) {
 
 
 /**
- * Request microphone access through the browser's native API.
- * The request must happen directly inside the user's click gesture.
+ * Generic permission request, triggered directly by the user's click.
+ * `request` is an async function that calls the browser API and throws on failure.
  */
-const MicrophoneRequest = (permissions = null) => {
-    _.DOM.waitEl(dc, '#modal-getmedia-audio-request', list => {
+const PromptRequest = ({ button: selector, modal: modalId, key, permissions = null, request }) => {
+    _.DOM.waitEl(dc, selector, list => {
         ;[...list].forEach(button => {
-            if (button.dataset.microphoneRequestBound === 'true') return
-            button.dataset.microphoneRequestBound = 'true'
+            if (button.dataset.promptBound === 'true') return
+            button.dataset.promptBound = 'true'
 
             _.DOM.event(button, 'click', async evt => {
                 evt.preventDefault()
 
                 // Prevent repeated requests while one is pending.
-                if (button.dataset.microphoneRequestPending === 'true') return
+                if (button.dataset.promptPending === 'true') return
 
-                button.dataset.microphoneRequestPending = 'true'
+                button.dataset.promptPending = 'true'
                 button.disabled = true
 
                 try {
-                    const mediaDevices = wd.navigator?.mediaDevices
+                    await request()
 
-                    if (
-                        !mediaDevices ||
-                        typeof mediaDevices.getUserMedia !== 'function'
-                    ) {
-                        if (permissions?.status) {
-                            permissions.status.microphone = 'unsupported'
-                        }
-                        return
-                    }
-
-                    // The browser permission prompt is triggered here.
-                    const stream = await mediaDevices.getUserMedia({
-                        audio: true
-                    })
-
-                    // Stop microphone capture immediately after authorization.
-                    stream.getTracks().forEach(track => track.stop())
-
-                    if (permissions?.status) {
-                        permissions.status.microphone = 'granted'
-                    }
+                    if (permissions?.status) permissions.status[key] = 'granted'
 
                 } catch (error) {
-                    const deniedErrors = [
-                        'NotAllowedError',
-                        'PermissionDeniedError',
-                        'SecurityError'
-                    ]
+                    const deniedErrors = ['NotAllowedError', 'PermissionDeniedError', 'SecurityError']
+                    const denied = deniedErrors.includes(error?.name) || error?.code === 1
 
                     if (permissions?.status) {
-                        permissions.status.microphone =
-                            deniedErrors.includes(error?.name)
-                                ? 'denied'
-                                : 'error'
+                        permissions.status[key] = error?.name === 'NotSupportedError'
+                            ? 'unsupported'
+                            : denied ? 'denied' : 'error'
                     }
 
-                    console.error(
-                        '[UIHandler] Could not request microphone permission:',
-                        error
-                    )
+                    console.error(`[UIHandler] Could not request ${key} permission:`, error)
 
                 } finally {
                     button.disabled = false
-                    delete button.dataset.microphoneRequestPending
+                    delete button.dataset.promptPending
 
                     // Close the modal only after the request has finished.
-                    const modal = _.DOM.getById('modal-getmedia-audio')
-                    const closeButton = modal?.querySelector(
-                        '.modal-header button[data-dismiss="modal"]'
-                    )
-
-                    closeButton?.click()
+                    const modal = _.DOM.getById(modalId)
+                    modal?.querySelector('[data-dismiss="modal"]')?.click()
                 }
             })
         })
     })
 }
 
+const unsupported = () => Object.assign(new Error('Not supported'), { name: 'NotSupportedError' })
+
+// Media: asks for the device and stops the capture right after authorization.
+const requestMedia = constraints => async () => {
+    const mediaDevices = wd.navigator?.mediaDevices
+
+    if (!mediaDevices || typeof mediaDevices.getUserMedia !== 'function') throw unsupported()
+
+    const stream = await mediaDevices.getUserMedia(constraints)
+    stream.getTracks().forEach(track => track.stop())
+}
+
+// Geolocation: a single position read, which triggers the browser prompt.
+const requestLocation = () => new Promise((resolve, reject) => {
+    const geolocation = wd.navigator?.geolocation
+
+    if (!geolocation) return reject(unsupported())
+
+    geolocation.getCurrentPosition(resolve, reject)
+})
+
+const MicrophoneRequest = (permissions = null) => PromptRequest({
+    button: '#modal-getmedia-audio-request',
+    modal: 'modal-getmedia-audio',
+    key: 'microphone',
+    permissions,
+    request: requestMedia({ audio: true })
+})
+
+const CameraRequest = (permissions = null) => PromptRequest({
+    button: '#modal-getmedia-video-request',
+    modal: 'modal-getmedia-video',
+    key: 'camera',
+    permissions,
+    request: requestMedia({ video: true, audio: true })
+})
+
+const GeoRequest = (permissions = null) => PromptRequest({
+    button: '#modal-geolocation-request',
+    modal: 'modal-geolocation',
+    key: 'geolocation',
+    permissions,
+    request: requestLocation
+})
+
 
 const DrawerEvents = (permissions = null, notify = null) => {
     NotificationRequest(permissions, notify)
     MicrophoneRequest(permissions)
+    CameraRequest(permissions)
+    GeoRequest(permissions)
     let drawer = [];
     // get dinamic
     _.DOM.waitEl(dc, 'picture[id^="drawer-"]', list => {

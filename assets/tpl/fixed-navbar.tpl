@@ -93,7 +93,7 @@
                      class="cp">
             </picture>
 
-            <a class="i18n btn btn-sm btn-outline-none border-def contrast rounded-0 mt-0 cp"
+            <a class="i18n btn btn-sm btn-outline-none border-def contrast rounded-0 mt-0 cp d-none"
                href="#"
                data-i18n-html="navbar.signin"></a>
 
@@ -116,7 +116,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="i18n btn btn-sm btn-outline-none border-def contrast rounded-0 mt-0 cp"
+                <a class="i18n btn btn-sm btn-outline-none border-def contrast rounded-0 mt-0 cp d-none"
                    href="#"
                    data-i18n-html="navbar.signin"
                    disabled></a>

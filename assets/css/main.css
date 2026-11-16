@@ -1326,7 +1326,7 @@ footer #footbody > div > .widget-column a:hover {
     background-repeat: no-repeat;
 }
 #modal-geolocation-content {
-    background-image: url(../media/image/geolocation.webp);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url(../media/image/geolocation.webp);
 }
 #modal-notification-content {
     background-image: url(../media/image/notifications-banner.webp);
@@ -1336,10 +1336,10 @@ footer #footbody > div > .widget-column a:hover {
     background-size: 100% 55vw!important;
 }
 #modal-getmedia-audio-content {
-    background-image: url(../media/image/microphone-banner.webp);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../media/image/microphone-banner.webp);
 }
 #modal-getmedia-video-content {
-    background-image: url(../media/image/webcam-banner.webp);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../media/image/webcam-banner.webp);
 
 }
 
@@ -1352,10 +1352,15 @@ footer #footbody > div > .widget-column a:hover {
     background-image: url(../media/image/bugs-report-banner.webp);
 }
 #modal-geolocation-content,
+#modal-getmedia-audio-content,
+#modal-getmedia-video {
+  background-size: cover;        /* cobre todo o modal sem distorcer */
+  background-position: center;   /* centraliza a imagem */
+  background-repeat: no-repeat;  /* evita repetição */
+  background-attachment: local;  /* opcional */
+}
 #modal-notification-content,
 #modal-feedback-content,
-#modal-getmedia-audio-content,
-#modal-getmedia-video,
 #modal-clear-meta-data-content,
 #modal-bugs-report-content {
     background-size: 100%;

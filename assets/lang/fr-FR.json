@@ -211,7 +211,11 @@
             "title": "Demander l'accès à la webcam",
             "btn1": "Oui, demander",
             "btn2": "Non, annuler",
-            "footer_info": "Vidéo ? Consultez la <a href='#' class='tdu blue'>documentation</a>."
+            "footer_info": "Vidéo ? Consultez la <a href='#' class='tdu blue'>documentation</a>.",
+            "perm_title": "Autorisation de la caméra",
+            "perm_1": "Le site n'utilise la caméra que lorsque vous lancez une fonction qui en a besoin.",
+            "perm_2": "Vous pouvez révoquer l'autorisation dans les paramètres de votre navigateur.",
+            "perm_3": "Si vous annulez, aucune autorisation n'est accordée."
         },
         "words": {
             "clear": "Nettoyage",
@@ -226,7 +230,8 @@
             "feedback": "Commentaires",
             "lang": "Langues",
             "marks": "Marqueur",
-            "admin": "Administration"
+            "admin": "Administration",
+            "share": "Partager"
         },
         "version": "Version",
         "notes_form": {
@@ -373,6 +378,13 @@
             "server": "Erreur du serveur",
             "description": "Envoyer une description",
             "ph_description": "Description ici..."
+        },
+        "permissions": {
+            "title_microphone": "Autorisation du microphone",
+            "title_geolocation": "Autorisation de localisation",
+            "item_1": "Le site n'utilise cette fonction que lorsque vous lancez une action qui en a besoin.",
+            "item_2": "Vous pouvez révoquer l'autorisation dans les paramètres de votre navigateur.",
+            "item_3": "Si vous annulez, aucune autorisation n'est accordée."
         }
     },
     "notify": {
