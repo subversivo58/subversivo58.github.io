@@ -1,7 +1,6 @@
 ![Web123](assets/posts/images/4b845d5b2ae0bfdfb79001ab1c122211bcd14349b06d7f31b2654876d00ef927.png)
 
 
-
 ## O Novo Paradigma JS
 
 A arquitetura da internet como conhecemos está passando por uma transformação profunda e estrutural. Historicamente, a web tem sido construída sobre pilares fortemente centralizados, onde grandes conglomerados tecnológicos controlam servidores massivos, armazenam os dados dos usuários em silos proprietários e ditam as regras da infraestrutura digital global. No entanto, o avanço contínuo de tecnologias voltadas à descentralização — como redes peer-to-peer (P2P), sistemas de arquivos distribuídos (IPFS/Filecoin) e registros imutáveis baseados em blockchain — tem desafiado frontalmente esse modelo tradicional. Para o ecossistema de desenvolvimento de software, esse movimento não representa apenas uma mudança técnica nos bastidores do servidor, mas uma reconfiguração completa do papel do desenvolvedor front-end. Esse profissional deixa de ser um mero consumidor passivo de APIs centralizadas para se tornar parte integrante e ativa de uma rede distribuída e soberana.
