@@ -24,6 +24,25 @@
     "articles": {
         "storage": [
             {
+                "id": "p2nWg3jjQ",
+                "title": "Subversivo58: ideias, tecnologia e experimentação",
+                "summary": "Subversivo58 — Um espaço nerd dedicado à troca de ideias, experimentações e tecnologia...",
+                "path": "assets/posts/p2nWg3jjQ.md",
+                "cover": "assets/posts/images/284ae3eebada87f7114495449d1c8a0a1e51d95bd0e6820a885df9619b6177b4.png",
+                "images": [
+                    "assets/posts/images/284ae3eebada87f7114495449d1c8a0a1e51d95bd0e6820a885df9619b6177b4.png"
+                ],
+                "tags": [
+                    "tech",
+                    "news",
+                    "group",
+                    "community"
+                ],
+                "timestamp": 1794832720060,
+                "lastModified": 1794832720060,
+                "readingTime": 4
+            },
+            {
                 "id": "yxbneQ88N",
                 "title": "Blockchain Além das Criptomoedas",
                 "summary": "Quando o assunto é blockchain, a associação imediata costuma ser com Bitcoin e outras criptomoedas.",
@@ -254,7 +273,7 @@
         "url": ""
     },
     "cookies_warning": true,
-    "last_modified": 1794747365702,
+    "last_modified": 1794832720060,
     "submissions": {
         "routes": {
             "/bugs": {
