@@ -62,14 +62,7 @@
                 "readingTime": 3
             }
         ],
-        "footoodles": [
-            {
-                "id": "gAnLMnYe7",
-                "title": "Código, rede e criatividade",
-                "content": "Mussum Ipsum, cacilds vidis litro abertis.  Manduma pindureta quium dia nois paga. Per aumento de cachacis, eu reclamis. Pellentesque nec nulla ligula. Donec gravida turpis a vulputate ultricies. Mé faiz elementum girarzis, nisi eros vermeio.",
-                "image": "assets/footoodles/images/gAnLMnYe7.png"
-            }
-        ],
+        "footoodles": [],
         "index-max-list": 5,
         "footer-max-list": 6,
         "blog-max-list": 20
