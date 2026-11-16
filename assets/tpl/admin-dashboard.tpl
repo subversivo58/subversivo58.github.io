@@ -1,4 +1,3 @@
-
 <!-- ADMIN DASHBOARD -->
 <section id="admin-dashboard" class="container-fluid px-0">
 
@@ -56,7 +55,7 @@
                             px-3 py-3 border-bottom">
 
                     <h3 class="i18n h5 mb-0"
-                        data-i18n-html="admin_dashboard.footoodles"></h3>
+                        data-i18n-html="admin_dashboard.footoodles.tab"></h3>
 
                     <a href="#body"
                        id="slide-link-footoodles-close"
@@ -106,7 +105,7 @@
                            role="tab"
                            aria-controls="admin-footoodles-pane"
                            aria-selected="false"
-                           data-i18n-html="admin_dashboard.footoodles"></a>
+                           data-i18n-html="admin_dashboard.footoodles.tab"></a>
 
                     </li>
 
@@ -197,7 +196,7 @@
                                   mr-2 d-md-none">
 
                             <span class="i18n"
-                                  data-i18n-html="admin_dashboard.footoodles"></span>
+                                  data-i18n-html="admin_dashboard.footoodles.tab"></span>
 
                         </a>
 
