@@ -64,6 +64,12 @@
         ],
         "footoodles": [
             {
+                "id": "2PvjPzlqW",
+                "title": "Arquitetura de Software e Código Limpo",
+                "content": "O doodle ilustra a arquitetura de sistemas web modernos: destacando editores de código com destaque de sintaxe, estruturação lógica de componentes e a interface de usuário final focada em UX.",
+                "image": "assets/footoodles/images/2PvjPzlqW.jpeg"
+            },
+            {
                 "id": "LXk5XbeoW",
                 "title": "Do Código à Experiência do Usuário",
                 "content": "O doodle ilustra a prática de programação moderna: focando na sintaxe JavaScript (document.getElementById, fetch), manipulação de DOM e consumo de APIs, conectando o código puro diretamente à interface e experiência final do usuário no navegador.",
