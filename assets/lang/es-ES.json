@@ -276,15 +276,7 @@
                 "viernes",
                 "sábado"
             ],
-            "short": [
-                "dom",
-                "lun",
-                "mar",
-                "mié",
-                "jue",
-                "vie",
-                "sáb"
-            ]
+            "short": ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"]
         },
         "months": {
             "long": [

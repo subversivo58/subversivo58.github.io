@@ -276,15 +276,7 @@
                 "Freitag",
                 "Samstag"
             ],
-            "short": [
-                "So",
-                "Mo",
-                "Di",
-                "Mi",
-                "Do",
-                "Fr",
-                "Sa"
-            ]
+            "short": ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
         },
         "months": {
             "long": [

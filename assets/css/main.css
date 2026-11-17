@@ -1765,14 +1765,6 @@ RESPONSIVE NAVBAR LINKS
 .nav-item-policies {
     display: none;
 }
-
-/* Mobile intermediário: adiciona Donations * /
-@media (min-width: 400px) and (max-width: 767.98px) {
-    .nav-item-donations {
-        display: block;
-    }
-}*/
-
 /* Tablet e desktop: todos os links */
 @media (min-width: 768px) {
     .nav-item-lab,

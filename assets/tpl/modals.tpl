@@ -1,9 +1,5 @@
     <!-- MODALS -->
-
-
-
-
-
+    
     <!-- LANGUAGE SELECTOR MODAL -->
     <section id="modal-language-selector" class="modal fade" tabindex="-1" role="dialog">
         <div id="login-overlay" class="modal-dialog">
@@ -15,8 +11,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-
 
                     <div class="row">
                         <span data-i18n-html="modals.language.avaliable" class="i18n col"></span>

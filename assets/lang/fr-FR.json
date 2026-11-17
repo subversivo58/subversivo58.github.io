@@ -276,15 +276,7 @@
                 "vendredi",
                 "samedi"
             ],
-            "short": [
-                "dim",
-                "lun",
-                "mar",
-                "mer",
-                "jeu",
-                "ven",
-                "sam"
-            ]
+            "short": ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"]
         },
         "months": {
             "long": [

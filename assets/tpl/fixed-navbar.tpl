@@ -50,14 +50,6 @@
                    data-i18n-html="navbar.lab"
                    class="i18n nav-link contrast tc"></a>
             </li>
-            <!--
-            <li class="nav-item nav-item-contact">
-                <a href="#general-contact"
-                   data-i18n-html="navbar.contact"
-                   data-anchor-mg="100"
-                   class="i18n nav-link anchor-link contrast tc"></a>
-            </li>
-            -->
 
             <li class="nav-item">
                 <a href="./dpo.html"

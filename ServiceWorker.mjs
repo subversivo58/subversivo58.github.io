@@ -1,4 +1,3 @@
-
 /**
  * @license The MIT License (MIT)             - [https://github.com/Pluggeding/pluggeding.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
@@ -6,8 +5,7 @@
  */
 
 // Imports temporariamente comentados para manter o teste que funcionou.
-import AWIndexedDB from './assets/js/modules/lib/AwesomeIndexedDB.mjs';
-// import Emitter from './assets/js/modules/Emitter.mjs';
+import AWIndexedDB from "./assets/js/modules/lib/AwesomeIndexedDB.mjs";
 
 const AdminHTML = `<!--
   @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/main/LICENSE]
@@ -114,16 +112,6 @@ const AdminHTML = `<!--
                             <small data-i18n-html="footer.content.desc2" class="i18n mb-0"></small>
                         </div>
                     </div>
-
-                    <!--
-                    <div class="mt-3 row">
-                        <a href="./signup" rel="nofollow" class="col ct">
-                            <button type="button" class="btn btn-block btn-outline-info rounded-0">
-                                <i data-i18n-html="footer.content.start" class="i18n"></i>
-                            </button>
-                        </a>
-                    </div>
-                    -->
                 </div>
 
                 <div class="col-12 my-5 d-sm-none dropdown-divider"></div>
@@ -249,36 +237,6 @@ const AdminHTML = `<!--
                         </a>
                     </div>
 
-                    <!--
-                    <div class="col mt-3 footer-column-bb px-0">
-                        <i class="col-1 ct fa fa-group pl-0"></i>
-                        <small class="col pl-0">
-                            <a href="//forum.himliy.com/">
-                                <span data-i18n-html="footer.content.forum" class="i18n"></span>
-                                <i class="fr">↗️</i>
-                            </a>
-                        </small>
-                    </div>
-                    <div class="col mt-3 footer-column-bb px-0">
-                        <i class="col-1 ct fa fa-wrench pl-0"></i>
-                        <small class="col pl-0">
-                            <a href="//dev.himliy.com/">
-                                <span data-i18n-html="footer.content.devtool" class="i18n"></span>
-                                <i class="fr">↗️</i>
-                            </a>
-                        </small>
-                    </div>
-                    <div class="col mt-3 footer-column-bb px-0">
-                        <i class="col-1 ct fa fa-cogs pl-0"></i>
-                        <small class="col pl-0">
-                            <a href="//api.himliy.com/">
-                                <span data-i18n-html="footer.content.api" class="i18n"></span>
-                                <i class="fr">↗️</i>
-                            </a>
-                        </small>
-                    </div>
-                    -->
-
                     <div class="col mt-3 footer-column-bb px-0">
                         <a class="row mx-0 cp" href="::" data-fix-modal="#modal-bugs-report">
                             <small class="col-1 px-0">🐛</small>
@@ -310,19 +268,23 @@ function Router(request) {
     return handler(request);
 }
 
-RegisterRoute('/admin.html', () => new Response(AdminHTML, {
-    status: 200,
-    headers: {
-        'Content-Type': 'text/html; charset=utf-8',
-        'Cache-Control': 'no-store'
-    }
-}));
+RegisterRoute(
+    "/admin.html",
+    () =>
+        new Response(AdminHTML, {
+            status: 200,
+            headers: {
+                "Content-Type": "text/html; charset=utf-8",
+                "Cache-Control": "no-store"
+            }
+        })
+);
 
-self.addEventListener('install', event => {
+self.addEventListener("install", event => {
     event.waitUntil(self.skipWaiting());
 });
 
-self.addEventListener('activate', event => {
+self.addEventListener("activate", event => {
     event.waitUntil(self.clients.claim());
 });
 
@@ -336,14 +298,20 @@ let databasePromise = null;
 
 function loadSettings() {
     if (!settingsPromise) {
-        settingsPromise = fetch(new URL('config/settings.json', self.location.href), {
-            cache: 'no-store'
-        }).then(response => {
-            if (!response.ok) throw new Error(`settings.json (${response.status})`);
+        settingsPromise = fetch(
+            new URL("config/settings.json", self.location.href),
+            {
+                cache: "no-store"
+            }
+        ).then(response => {
+            if (!response.ok)
+                throw new Error(`settings.json (${response.status})`);
             return response.json();
         });
 
-        settingsPromise.catch(() => { settingsPromise = null; });
+        settingsPromise.catch(() => {
+            settingsPromise = null;
+        });
     }
 
     return settingsPromise;
@@ -354,11 +322,17 @@ function getDatabase() {
     if (!databasePromise) {
         databasePromise = loadSettings().then(settings => {
             const database = settings.database;
-            const connection = new AWIndexedDB(database.name, database.version, false);
+            const connection = new AWIndexedDB(
+                database.name,
+                database.version,
+                false
+            );
             return connection.open(database.indexed);
         });
 
-        databasePromise.catch(() => { databasePromise = null; });
+        databasePromise.catch(() => {
+            databasePromise = null;
+        });
     }
 
     return databasePromise;
@@ -379,7 +353,7 @@ async function appendSubmission(store, key, entry) {
 function jsonResponse(body, status) {
     return new Response(JSON.stringify(body), {
         status,
-        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+        headers: { "Content-Type": "application/json; charset=utf-8" }
     });
 }
 
@@ -404,20 +378,20 @@ async function handlePost(request) {
 
         return jsonResponse({ ok: true }, 200);
     } catch (error) {
-        console.error('[SW] Falha ao guardar o envio:', error);
+        console.error("[SW] Falha ao guardar o envio:", error);
         return jsonResponse({ ok: false }, 500);
     }
 }
 
-self.addEventListener('fetch', event => {
+self.addEventListener("fetch", event => {
     const request = event.request;
 
-    if (request.method === 'POST') {
+    if (request.method === "POST") {
         event.respondWith(handlePost(request));
         return;
     }
 
-    if (request.method !== 'GET') return;
+    if (request.method !== "GET") return;
 
     const url = new URL(request.url);
     if (url.origin !== self.location.origin) return;

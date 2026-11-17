@@ -276,15 +276,7 @@
                 "Sexta-feira",
                 "Sábado"
             ],
-            "short": [
-                "Dom",
-                "Seg",
-                "Ter",
-                "Qua",
-                "Qui",
-                "Sex",
-                "Sáb"
-            ]
+            "short": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
         },
         "months": {
             "long": [

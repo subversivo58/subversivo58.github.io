@@ -94,8 +94,6 @@ import {
 
 import { loadMarkdown } from "./modules/lib/MarkdownKit.mjs";
 
-//import GitHubAPI from './modules/lib/GitHubAPI.mjs'
-
 let GitHubAPIInstance = null;
 
 // vendors
@@ -431,7 +429,6 @@ const SetupDOMReady = async evt => {
     // @priority: MODERATE
     const DataStoragePolicy = () => {
         AWCookies.get("__DSPolicy__").catch(() => {
-            //console.log('???')
             // @revise defaulted "english" message
             // @priority: HIGH
             const DSNotify = new NotifyJS({

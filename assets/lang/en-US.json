@@ -276,15 +276,7 @@
                 "Friday",
                 "Saturday"
             ],
-            "short": [
-                "Sun",
-                "Mon",
-                "Tue",
-                "Wed",
-                "Thu",
-                "Fri",
-                "Sat"
-            ]
+            "short": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
         },
         "months": {
             "long": [
