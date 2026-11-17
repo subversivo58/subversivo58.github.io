@@ -1,4 +1,4 @@
-![blockchain3](assets/posts/images/5ff980417404d54e9f4968af5d472867959f5fe0ef76c323f30a00d26d89fe43.png)
+![blockchain3](assets/posts/images/9a1e0dbd20531c57a892aaac8a2a676428b317604825eb24fea57b29544a9cf4.webp)
 
 ### Um Conceito com Aplicações Infinitas - Introdução: 
 

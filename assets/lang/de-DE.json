@@ -585,7 +585,10 @@
         "load_error": "Dieser Beitrag konnte nicht geladen werden.",
         "showing": "{shown} von {total} werden angezeigt",
         "load_more": "Mehr laden",
-        "read_time": "{minutes} Min. Lesezeit"
+        "read_time": "{minutes} Min. Lesezeit",
+        "updated": "Zuletzt aktualisiert: {date}",
+        "more_posts": "Weitere Beiträge",
+        "license": "Dieser Inhalt steht unter der Lizenz <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.de\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>"
     },
     "admin_dashboard": {
         "posts": "Beiträge",

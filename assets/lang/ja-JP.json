@@ -585,7 +585,10 @@
         "load_error": "この投稿を読み込めませんでした。",
         "showing": "{total}件中{shown}件を表示",
         "load_more": "さらに読み込む",
-        "read_time": "読了時間：約{minutes}分"
+        "read_time": "読了時間：約{minutes}分",
+        "updated": "最終更新: {date}",
+        "more_posts": "その他の投稿",
+        "license": "このコンテンツは<a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.ja\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>の下でライセンスされています"
     },
     "admin_dashboard": {
         "posts": "投稿",

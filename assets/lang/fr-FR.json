@@ -585,7 +585,10 @@
         "load_error": "Impossible de charger cette publication.",
         "showing": "Affichage de {shown} sur {total}",
         "load_more": "Charger davantage",
-        "read_time": "{minutes} min de lecture"
+        "read_time": "{minutes} min de lecture",
+        "updated": "Dernière mise à jour : {date}",
+        "more_posts": "Plus d'articles",
+        "license": "Ce contenu est sous licence <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.fr\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>"
     },
     "admin_dashboard": {
         "posts": "Publications",

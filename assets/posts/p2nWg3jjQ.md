@@ -1,4 +1,4 @@
-![e8408b39b07cbf491d4f1991c562430313a7857c38518d108c21c71e55fb2bc7](assets/posts/images/284ae3eebada87f7114495449d1c8a0a1e51d95bd0e6820a885df9619b6177b4.png)
+![e8408b39b07cbf491d4f1991c562430313a7857c38518d108c21c71e55fb2bc7](assets/posts/images/f942b77456165eda25fc066111c9eced1c983d5558c1eb0bada85dfc405f0bbf.webp)
 
 ## [Subversivo58](https://subversivo58.github.io) — Um espaço nerd dedicado à troca de ideias, experimentações e tecnologia
 

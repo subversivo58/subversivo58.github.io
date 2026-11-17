@@ -585,7 +585,10 @@
         "load_error": "Could not load this post.",
         "showing": "Showing {shown} of {total}",
         "load_more": "Load more",
-        "read_time": "{minutes} min read"
+        "read_time": "{minutes} min read",
+        "updated": "Last updated: {date}",
+        "more_posts": "More posts",
+        "license": "This content is licensed under <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.en\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>"
     },
     "admin_dashboard": {
         "posts": "Posts",

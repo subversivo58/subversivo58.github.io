@@ -11,10 +11,10 @@ class ImageProcessor {
     constructor(options = {}) {
         this.options = {
             auto: false,
-            maxLandscapeWidth: 1280,
-            maxPortraitHeight: 960,
-            maxSquareSize: 800,
-            quality: 0.78,
+            maxLandscapeWidth: 1024,
+            maxPortraitHeight: 768,
+            maxSquareSize: 640,
+            quality: 0.6,
             ...options
         }
 

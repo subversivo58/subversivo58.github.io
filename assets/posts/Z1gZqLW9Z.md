@@ -1,4 +1,4 @@
-![graph-image](assets/posts/images/046e9fa28ac601401a483c125c233e8367e39f287e9298f9b81742599b7da67e.png) 
+![graph-image](assets/posts/images/6aca0b4283da10a24ef5e55e426103a3b04d3473d24f9e61619de5f65d73db23.webp) 
 
 ### Muito mais que um blog
 

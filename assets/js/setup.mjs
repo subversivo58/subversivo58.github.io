@@ -741,14 +741,28 @@ const SetupDOMReady = async evt => {
 
                     let postHeader = "";
                     let postFooter = "";
+                    let postLicense = "";
 
                     if (post) {
                         const date = formatDate(getPostTimestamp(post));
                         const readingTime = getReadingTime(post);
                         const metadata = [
                             date,
-                            readingTime ? `${readingTime} min de leitura` : ""
+                            readingTime
+                                ? i18n
+                                      .getWord("blog.read_time")
+                                      .replace("{minutes}", readingTime)
+                                : ""
                         ].filter(Boolean);
+
+                        // Licença do conteúdo (CC BY-SA 4.0), logo após a postagem.
+                        postLicense = `
+                <div class="alert alert-light border small d-flex align-items-center mt-4 mb-0" role="note">
+                    <img src="assets/media/image/logos/cc-by-sa-4.0.png"
+                         alt="CC BY-SA 4.0" width="88" height="31"
+                         class="mr-3 flex-shrink-0">
+                    <span>${i18n.getWord("blog.license")}</span>
+                </div>`;
 
                         postHeader = `
                 <header class="mb-4">
@@ -781,7 +795,11 @@ const SetupDOMReady = async evt => {
                         if (updatedDate) {
                             footerContent.push(`
                     <p class="small text-danger text-right mb-2">
-                        Última atualização: ${esc(updatedDate)}
+                        ${esc(
+                            i18n
+                                .getWord("blog.updated")
+                                .replace("{date}", updatedDate)
+                        )}
                     </p>`);
                         }
 
@@ -812,9 +830,10 @@ const SetupDOMReady = async evt => {
             <div class="container">
                 ${postHeader}
                 <article class="text-break markdown-body">${article}</article>
+                ${postLicense}
                 ${postFooter}
                 <hr class="my-4">
-                <h4 class="mt-5">Mais postagens</h4>
+                <h4 class="mt-5">${i18n.getWord("blog.more_posts")}</h4>
                 <div id="blog-list" class="list-group">
                     ${posts.slice(0, visible).map(itemHTML).join("")}
                 </div>

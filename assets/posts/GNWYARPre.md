@@ -1,4 +1,4 @@
-![Web123](assets/posts/images/4b845d5b2ae0bfdfb79001ab1c122211bcd14349b06d7f31b2654876d00ef927.png)
+![Web123](assets/posts/images/5e2b2a672acf175f4b6c7bd0a4432e6e8f33d7445ce09f60ca7ba1a03ff4bb17.webp)
 
 
 ## O Novo Paradigma JS

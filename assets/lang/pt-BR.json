@@ -757,6 +757,9 @@
         "load_error": "Não foi possível carregar este post.",
         "showing": "Mostrando {shown} de {total}",
         "load_more": "Carregar mais",
-        "read_time": "{minutes} min de leitura"
+        "read_time": "{minutes} min de leitura",
+        "updated": "Última atualização: {date}",
+        "more_posts": "Mais postagens",
+        "license": "Este conteúdo está licenciado sob a <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>"
     }
 }
