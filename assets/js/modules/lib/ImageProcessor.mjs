@@ -32,7 +32,7 @@ class ImageProcessor {
 
         const type = this.getType(file)
 
-        if (!['image/jpeg', 'image/webp'].includes(type)) {
+        if (!['image/jpeg', 'image/png', 'image/webp'].includes(type)) {
             return file
         }
 
@@ -47,7 +47,8 @@ class ImageProcessor {
             return await this.render(file, {
                 format: 'image/webp',
                 resize: true,
-                quality: this.options.quality
+                quality: this.options.quality,
+                force: type !== 'image/webp'
             })
         } catch (error) {
             console.warn(
@@ -189,7 +190,11 @@ class ImageProcessor {
                 )
             })
 
-            if (!blob || blob.size >= file.size) {
+            if (!blob || blob.type !== options.format) {
+                return file
+            }
+
+            if (!options.force && blob.size >= file.size) {
                 return file
             }
 

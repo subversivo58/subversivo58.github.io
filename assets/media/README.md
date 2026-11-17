@@ -9,7 +9,7 @@ This directory holds the static media resources (images, audio and video) consum
 |-- /audio (audio assets)
 |
 |-- /image (image assets)
-|     |-- /footoodles (footer banners, inspired by Google Doodles; planned feature, not implemented yet)
+|     |-- /footoodles (footer banners, inspired by Google Doodles)
 |     |-- /icons (software or third-party icons)
 |     |-- /logos (software or third-party logos)
 |     |-- /svg (SVG images)

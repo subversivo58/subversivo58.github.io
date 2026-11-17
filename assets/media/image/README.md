@@ -9,7 +9,7 @@ This directory holds the static image resources (banners, illustrations, icons, 
 ```none
 |-- /donations (images used by the donations page: platform logos and QR code)
 |
-|-- /footoodles (footer banners, inspired by Google Doodles; planned feature, not implemented yet)
+|-- /footoodles (footer banners, inspired by Google Doodles)
 |
 |-- /icons (software or third-party icons)
 |

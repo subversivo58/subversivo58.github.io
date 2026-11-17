@@ -92,8 +92,8 @@ class Footoodles {
 
         const settings = await this.load()
         const id = this.posts.generateID()
-        const path = this.imagePath(id, image)
         const processed = await this.images.process(image)
+        const path = this.imagePath(id, processed)
 
         const entry = { id, title, content, image: path }
 
@@ -121,8 +121,10 @@ class Footoodles {
 
         if (image) {
 
-            path = this.imagePath(id, image)
-            files.push({ path, content: await this.images.process(image) })
+            const processed = await this.images.process(image)
+
+            path = this.imagePath(id, processed)
+            files.push({ path, content: processed })
 
             // Removes the old image only when its path changed and no other footoodle uses it.
             if (current.image !== path && !this.isImageShared(list, current.image, id)) {

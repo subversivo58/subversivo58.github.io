@@ -20,6 +20,9 @@
 |-- /posts (Markdown files)
 |     |-- /images (post images)
 |
+|-- /footoodles (footer banner images, managed by the footoodles administration)
+|     |-- /images (footoodle images)
+|
 |-- /lang (software interface dictionaries)
 |
 |-- /media (audio, video and image assets)

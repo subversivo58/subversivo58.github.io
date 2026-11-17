@@ -1,4 +1,3 @@
-
 /**
  * @license The MIT License (MIT)
  * @copyright Copyright (c) 2010-2026 Lauro Moraes
@@ -11,32 +10,23 @@
  */
 
 export default function CodeCopy(containerSelector, templateSelector) {
-
-    if (
-        typeof containerSelector !== 'string' ||
-        !containerSelector.trim()
-    ) {
+    if (typeof containerSelector !== "string" || !containerSelector.trim()) {
         throw new TypeError(
-            '[CodeCopy]: A valid container selector is required.'
+            "[CodeCopy]: A valid container selector is required."
         );
     }
 
-    if (
-        typeof templateSelector !== 'string' ||
-        !templateSelector.trim()
-    ) {
+    if (typeof templateSelector !== "string" || !templateSelector.trim()) {
         throw new TypeError(
-            '[CodeCopy]: A valid template selector is required.'
+            "[CodeCopy]: A valid template selector is required."
         );
     }
 
     return function initialize() {
-
         const container = document.querySelector(containerSelector);
         const template = document.querySelector(templateSelector);
 
-        const wrapperTemplate =
-            template?.content?.firstElementChild;
+        const wrapperTemplate = template?.content?.firstElementChild;
 
         if (!container) {
             console.warn(
@@ -52,11 +42,8 @@ export default function CodeCopy(containerSelector, templateSelector) {
             return;
         }
 
-        for (const pre of container.querySelectorAll('pre')) {
-
-            if (
-                pre.parentElement?.classList.contains('code-container')
-            ) {
+        for (const pre of container.querySelectorAll("pre")) {
+            if (pre.parentElement?.classList.contains("code-container")) {
                 continue;
             }
 

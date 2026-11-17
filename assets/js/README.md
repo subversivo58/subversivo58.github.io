@@ -22,6 +22,7 @@
       |-- /lib
       |     |-- AwesomeIndexedDB.mjs (IndexedDB CRUD operations)
       |     |-- AwesomeStorage.mjs (storage utilities, built on AwesomeIndexedDB.mjs)
+      |     |-- CodeCopy.mjs (adds copy buttons to rendered code blocks)
       |     |-- CryptoHandler.mjs (WebCrypto utilities)
       |     |-- DebugConsole.mjs (mobile `window.console` debugger, enabled by <meta name="DEBUG" content="true">)
       |     |-- Emitter.mjs (event emitter)
@@ -40,6 +41,7 @@
       |-- /models
       |     |-- AdminPosts.mjs (posts management in the administration)
       |     |-- Controller.mjs (permissions controller for cookies and persistent storage, based on PolicyHandler.mjs)
+      |     |-- Footoodles.mjs (footoodles administration: list, create, edit and delete)
       |     |-- MarkdownEditor.mjs (Markdown editor integrated with the posts system)
       |     |-- PolicyHandler.mjs (policy handler)
       |     |-- PostManager.mjs (management and identification of Markdown posts)
@@ -50,12 +52,14 @@
       |-- /vendor
             |-- Cbor-js.mjs (CBOR encoder and decoder, by Patrick Gansterer)
             |-- GitHub.bundle.mjs (GitHub library, rewritten to use native `fetch`)
+            |-- LICENSE-github-bundle.txt (original license of the GitHub library)
             |-- bootstrap-native.mjs (Native JavaScript for Bootstrap v3.0.0)
             |
             |-- /Hashids
             |     |-- hashids-es6.mjs (Hashids library, ES module)
             |
             |-- /markdown-wasm
+                  |-- LICENSE (original license of the Markdown WebAssembly parser)
                   |-- markdown-wasm.mjs (JavaScript loader of the Markdown WebAssembly parser)
                   |-- markdown.wasm (compiled WebAssembly Markdown parser)
                   |
