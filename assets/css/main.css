@@ -830,12 +830,9 @@ MARKDOWN STYLE ___________________________________________________________*/
     left: 0;
     text-rendering: optimizeSpeed;
     line-height: 1.7;
-
     font-family: Arial, sans-serif;
-
     word-wrap: break-word;
     font-size: 1.1rem;
-
     color: #495057 !important;
 }
 .markdown-body::before {
@@ -897,23 +894,18 @@ MARKDOWN STYLE ___________________________________________________________*/
 .markdown-body h1 {
     font-size: 1.8rem;
 }
-
 .markdown-body h2 {
     font-size: 1.5rem;
 }
-
 .markdown-body h3 {
     font-size: 1.3rem;
 }
-
 .markdown-body h4 {
     font-size: 1.2rem;
 }
-
 .markdown-body h5 {
     font-size: 1.1rem;
 }
-
 .markdown-body h6 {
     font-size: 1rem;
 }
@@ -929,7 +921,6 @@ MARKDOWN STYLE ___________________________________________________________*/
 .markdown-body h1,
 h2 {
     padding-bottom: 0.3em;
-    border-bottom: 1px solid #eaecef;
 }
 .markdown-body h6 {
     color: #6a737d;
@@ -1088,11 +1079,9 @@ h2 {
     width: 100%;
     max-width: 100%;
 }
-
 .markdown-body .code-container > pre {
     padding-top: 3rem;
 }
-
 .code-copy-button {
     position: absolute;
     top: 0.5rem;
@@ -1108,11 +1097,9 @@ h2 {
     cursor: pointer;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
-
 .code-copy-button:hover {
     background: #f3f4f6;
 }
-
 .code-copy-button.is-copied {
     color: #16803c;
     border-color: #16803c;
