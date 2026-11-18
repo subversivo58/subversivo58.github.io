@@ -54,76 +54,11 @@
                     aria-live="polite">
                 </div>
 
-                <!-- IDENTIDADE RETORNADA PELO GITHUB -->
-                <div id="github-auth-identity" class="mt-3" hidden>
-
-                    <div class="text-center mb-3">
-
-                        <img
-                            id="github-auth-avatar"
-                            src=""
-                            alt=""
-                            class="rounded-circle"
-                            width="96"
-                            height="96">
-
-                        <h5
-                            id="github-auth-name"
-                            class="mt-2 mb-1">
-                        </h5>
-
-                        <p
-                            id="github-auth-login"
-                            class="mb-1">
-                        </p>
-
-                    </div>
-
-                    <div class="mb-3">
-
-                        <p class="mb-1">
-                            <strong
-                                class="i18n"
-                                data-i18n-html="github_auth.identity.id_label">
-                            </strong>
-                            <span id="github-auth-id"></span>
-                        </p>
-
-                        <p class="mb-1">
-                            <strong
-                                class="i18n"
-                                data-i18n-html="github_auth.identity.profile_label">
-                            </strong>
-                            <a
-                                id="github-auth-profile"
-                                href=""
-                                target="_blank"
-                                rel="noopener noreferrer">
-                            </a>
-                        </p>
-
-                        <p id="github-auth-email-container" class="mb-1" hidden>
-                            <strong
-                                class="i18n"
-                                data-i18n-html="github_auth.identity.email_label">
-                            </strong>
-                            <span id="github-auth-email"></span>
-                        </p>
-
-                    </div>
-
-                    <p
-                        class="i18n"
-                        data-i18n-html="github_auth.identity.confirmation">
-                    </p>
-
-                    <button
-                        type="button"
-                        id="github-auth-confirm"
-                        class="btn btn-success btn-block rounded-0 cp i18n"
-                        data-i18n-html="github_auth.confirm">
-                    </button>
-
+                <!-- CONTÊINER DE COMPATIBILIDADE COM setup.mjs -->
+                <div
+                    id="github-auth-identity"
+                    class="mt-3"
+                    hidden>
                 </div>
 
                 <!-- DIAGNÓSTICO DE ERROS -->
@@ -153,12 +88,6 @@
 
     <span
         class="i18n"
-        data-msg="github_auth_empty"
-        data-i18n-html="github_auth.messages.empty">
-    </span>
-
-    <span
-        class="i18n"
         data-msg="github_auth_verifying"
         data-i18n-html="github_auth.messages.verifying">
     </span>
@@ -173,18 +102,6 @@
         class="i18n"
         data-msg="github_auth_authenticated"
         data-i18n-html="github_auth.messages.authenticated">
-    </span>
-
-    <span
-        class="i18n"
-        data-msg="github_auth_saving"
-        data-i18n-html="github_auth.messages.saving">
-    </span>
-
-    <span
-        class="i18n"
-        data-msg="github_auth_save_failed"
-        data-i18n-html="github_auth.messages.save_failed">
     </span>
 
 </div>

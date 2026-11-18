@@ -163,28 +163,19 @@
 
                     </div>
 
-                    <!-- GITHUB PAT -->
-                    <div class="input-group input-group-sm">
+                    <!-- LIMPAR CREDENCIAIS GITHUB -->
+                    <div class="d-flex align-items-center justify-content-between">
 
-                        <input
-                            type="text"
-                            id="admin-github-pat-mobile"
-                            class="form-control rounded-0"
-                            autocomplete="off"
-                            spellcheck="false"
-                            data-github-pat-input>
+                        <span class="i18n small"
+                            data-i18n-html="admin_dashboard.settings.clear_credentials">
+                        </span>
 
-                        <div class="input-group-append">
-
-                            <button
-                                type="button"
-                                id="admin-github-pat-save-mobile"
-                                class="i18n btn btn-success rounded-0"
-                                data-i18n-html="admin_dashboard.settings.save"
-                                data-github-pat-save>
-                            </button>
-
-                        </div>
+                        <button
+                            type="button"
+                            id="admin-github-credentials-clear-mobile"
+                            class="i18n btn btn-danger btn-sm rounded-0"
+                            data-i18n-html="admin_dashboard.settings.clear">
+                        </button>
 
                     </div>
 
@@ -342,28 +333,19 @@
 
                             </div>
 
-                            <!-- GITHUB PAT -->
-                            <div class="input-group input-group-sm">
+                            <!-- LIMPAR CREDENCIAIS GITHUB -->
+                            <div class="d-flex align-items-center justify-content-between">
 
-                                <input
-                                    type="text"
-                                    id="admin-github-pat-desktop"
-                                    class="form-control rounded-0"
-                                    autocomplete="off"
-                                    spellcheck="false"
-                                    data-github-pat-input>
+                                <span class="i18n small"
+                                    data-i18n-html="admin_dashboard.settings.clear_credentials">
+                                </span>
 
-                                <div class="input-group-append">
-
-                                    <button
-                                        type="button"
-                                        id="admin-github-pat-save-desktop"
-                                        class="i18n btn btn-success rounded-0"
-                                        data-i18n-html="admin_dashboard.settings.save"
-                                        data-github-pat-save>
-                                    </button>
-
-                                </div>
+                                <button
+                                    type="button"
+                                    id="admin-github-credentials-clear-desktop"
+                                    class="i18n btn btn-danger btn-sm rounded-0"
+                                    data-i18n-html="admin_dashboard.settings.clear">
+                                </button>
 
                             </div>
 
