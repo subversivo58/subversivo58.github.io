@@ -4,7 +4,7 @@
  * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
  */
 "use strict";
-alert('!')
+alert('!2!')
 // Console de depuração (liga sozinho quando <meta name="DEBUG" content="true">).
 // Fica como primeiro import para registrar os erros dos módulos seguintes.
 import "./modules/lib/DebugConsole.mjs";

@@ -279,11 +279,12 @@ async function appendSubmission(store, key, entry) {
 }
 
 // ---------------------------------------------------------------
-// Teste CORS do endpoint OAuth do GitHub
+// Teste CORS do endpoint OAuth do GitHub através do proxy
 // ---------------------------------------------------------------
 
 async function runGitHubCorsTest() {
-    const endpoint = "https://github.com/login/oauth/access_token";
+    const endpoint = "https://webpush-proxy.dib.workers.dev/login/oauth/access_token";
+    const upstreamEndpoint = "https://github.com/login/oauth/access_token";
     const startedAt = new Date().toISOString();
 
     const body = new URLSearchParams({
@@ -294,11 +295,12 @@ async function runGitHubCorsTest() {
     });
 
     const result = {
-        test: "GitHub OAuth token endpoint - CORS",
+        test: "GitHub OAuth token endpoint - CORS via Cloudflare proxy",
         startedAt,
         request: {
             method: "POST",
             endpoint,
+            upstreamEndpoint,
             origin: self.location.origin,
             contentType: "application/x-www-form-urlencoded",
             credentials: "fictitious"
@@ -359,7 +361,7 @@ async function runGitHubCorsTest() {
             name: error?.name || "Error",
             message: String(error?.message || error),
             explanation:
-                "O navegador não permitiu que o Service Worker obtivesse uma resposta legível. Isso pode ocorrer por CORS ou por uma falha de rede. Sem uma resposta HTTP acessível, não é possível identificar o servidor responsável pelo bloqueio."
+                "O navegador não permitiu que o Service Worker obtivesse uma resposta legível do proxy. Isso pode ocorrer por CORS ou por uma falha de rede. Sem uma resposta HTTP acessível, não é possível identificar o servidor responsável pelo bloqueio."
         };
     }
 
