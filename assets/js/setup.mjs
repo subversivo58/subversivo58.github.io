@@ -1063,9 +1063,7 @@ const SetupDOMReady = async evt => {
                         user.login || ""
                     );
                 };
-
-                // Abre o modal e verifica o estado atual da autenticação.
-                
+                // Verifica o estado atual antes de decidir se abre o modal.
 
                 statusElement.textContent = authMessage(
                     "github_auth_verifying"
@@ -1085,7 +1083,6 @@ const SetupDOMReady = async evt => {
 
                     if (result.status === "authenticated") {
                         // O Service Worker já confirmou a autenticação.
-                        
                     } else if (result.status === "pending_confirmation") {
                         // Exibe a identidade e aguarda confirmação explícita.
                         githubAuthModal.show();

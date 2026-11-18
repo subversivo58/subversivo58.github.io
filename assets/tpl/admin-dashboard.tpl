@@ -1,3 +1,4 @@
+
 <!-- ADMIN DASHBOARD -->
 <section id="admin-dashboard" class="container-fluid px-0">
 
@@ -76,6 +77,119 @@
 
             </nav>
 
+            <!-- MOBILE SETTINGS SLIDE -->
+            <nav id="admin-settings-slide"
+                class="slide-left fx transition bg-white overflow d-md-none"
+                style="
+                    width: 85%;
+                    max-width: 320px;
+                    z-index: 1000;
+                 ">
+
+                <div class="d-flex align-items-center
+                            justify-content-between
+                            px-3 py-3 border-bottom">
+
+                    <h3 class="i18n h5 mb-0"
+                        data-i18n-html="admin_dashboard.settings.title"></h3>
+
+                    <a href="#body"
+                        id="slide-link-settings-close"
+                        class="btn btn-sm btn-outline-secondary rounded-0">
+                        &times;
+                    </a>
+
+                </div>
+
+                <div class="px-3 py-3">
+
+                    <!-- GITHUB IDENTITY -->
+                    <div class="card rounded-0 mb-3"
+                        data-github-identity>
+
+                        <div class="card-body">
+
+                            <div class="text-center mb-3">
+
+                                <img
+                                    id="admin-github-avatar-mobile"
+                                    src=""
+                                    alt=""
+                                    class="rounded-circle mb-2"
+                                    width="72"
+                                    height="72"
+                                    hidden>
+
+                                <h4
+                                    id="admin-github-name-mobile"
+                                    class="h6 mb-1">
+                                </h4>
+
+                                <p
+                                    id="admin-github-login-mobile"
+                                    class="small text-muted mb-0">
+                                </p>
+
+                            </div>
+
+                            <p class="small mb-2">
+                                <strong class="i18n"
+                                    data-i18n-html="github_auth.identity.id_label"></strong>
+                                <span id="admin-github-id-mobile"></span>
+                            </p>
+
+                            <p class="small mb-2">
+                                <strong class="i18n"
+                                    data-i18n-html="github_auth.identity.profile_label"></strong>
+                                <a
+                                    id="admin-github-profile-mobile"
+                                    href=""
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                </a>
+                            </p>
+
+                            <p id="admin-github-email-container-mobile"
+                                class="small mb-0"
+                                hidden>
+                                <strong class="i18n"
+                                    data-i18n-html="github_auth.identity.email_label"></strong>
+                                <span id="admin-github-email-mobile"></span>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- GITHUB PAT -->
+                    <div class="input-group input-group-sm">
+
+                        <input
+                            type="text"
+                            id="admin-github-pat-mobile"
+                            class="form-control rounded-0"
+                            autocomplete="off"
+                            spellcheck="false"
+                            data-github-pat-input>
+
+                        <div class="input-group-append">
+
+                            <button
+                                type="button"
+                                id="admin-github-pat-save-mobile"
+                                class="i18n btn btn-success rounded-0"
+                                data-i18n-html="admin_dashboard.settings.save"
+                                data-github-pat-save>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </nav>
+
             <!-- DESKTOP NAVIGATION -->
             <nav id="admin-dashboard-desktop-menu"
                 class="d-none d-md-block">
@@ -110,6 +224,19 @@
 
                     </li>
 
+                    <li class="nav-item" role="presentation">
+
+                        <a class="i18n nav-link"
+                            id="admin-settings-tab"
+                            data-toggle="tab"
+                            href="#admin-settings-pane"
+                            role="tab"
+                            aria-controls="admin-settings-pane"
+                            aria-selected="false"
+                            data-i18n-html="admin_dashboard.settings.tab"></a>
+
+                    </li>
+
                 </ul>
 
                 <div class="tab-content">
@@ -139,6 +266,101 @@
                             <button type="button" data-footoodles-new class="i18n btn btn-info btn-sm rounded-0 mb-2 w-100 cp" data-i18n-html="admin_dashboard.footoodles.new"></button>
                             <div id="admin-footoodles-list-desktop"
                                 class="list-group list-group-flush">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- DESKTOP SETTINGS PANE -->
+                    <div class="tab-pane fade"
+                        id="admin-settings-pane"
+                        role="tabpanel"
+                        aria-labelledby="admin-settings-tab">
+
+                        <div class="px-3 py-3">
+
+                            <!-- GITHUB IDENTITY -->
+                            <div class="card rounded-0 mb-3"
+                                data-github-identity>
+
+                                <div class="card-body">
+
+                                    <div class="text-center mb-3">
+
+                                        <img
+                                            id="admin-github-avatar-desktop"
+                                            src=""
+                                            alt=""
+                                            class="rounded-circle mb-2"
+                                            width="72"
+                                            height="72"
+                                            hidden>
+
+                                        <h4
+                                            id="admin-github-name-desktop"
+                                            class="h6 mb-1">
+                                        </h4>
+
+                                        <p
+                                            id="admin-github-login-desktop"
+                                            class="small text-muted mb-0">
+                                        </p>
+
+                                    </div>
+
+                                    <p class="small mb-2">
+                                        <strong class="i18n"
+                                            data-i18n-html="github_auth.identity.id_label"></strong>
+                                        <span id="admin-github-id-desktop"></span>
+                                    </p>
+
+                                    <p class="small mb-2">
+                                        <strong class="i18n"
+                                            data-i18n-html="github_auth.identity.profile_label"></strong>
+                                        <a
+                                            id="admin-github-profile-desktop"
+                                            href=""
+                                            target="_blank"
+                                            rel="noopener noreferrer">
+                                        </a>
+                                    </p>
+
+                                    <p id="admin-github-email-container-desktop"
+                                        class="small mb-0"
+                                        hidden>
+                                        <strong class="i18n"
+                                            data-i18n-html="github_auth.identity.email_label"></strong>
+                                        <span id="admin-github-email-desktop"></span>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <!-- GITHUB PAT -->
+                            <div class="input-group input-group-sm">
+
+                                <input
+                                    type="text"
+                                    id="admin-github-pat-desktop"
+                                    class="form-control rounded-0"
+                                    autocomplete="off"
+                                    spellcheck="false"
+                                    data-github-pat-input>
+
+                                <div class="input-group-append">
+
+                                    <button
+                                        type="button"
+                                        id="admin-github-pat-save-desktop"
+                                        class="i18n btn btn-success rounded-0"
+                                        data-i18n-html="admin_dashboard.settings.save"
+                                        data-github-pat-save>
+                                    </button>
+
+                                </div>
+
                             </div>
 
                         </div>
@@ -199,6 +421,29 @@
 
                             <span class="i18n"
                                 data-i18n-html="admin_dashboard.footoodles.tab"></span>
+
+                        </a>
+
+                        <!-- MOBILE SETTINGS BUTTON -->
+                        <a href="#admin-settings-slide"
+                            id="slide-admin-settings"
+                            class="btn btn-outline-secondary btn-sm
+                                  rounded-0 mr-2 d-md-none"
+                            aria-label="GitHub Config">
+
+                            <span aria-hidden="true">&#9881;</span>
+
+                        </a>
+
+                        <!-- DESKTOP SETTINGS BUTTON -->
+                        <a href="#admin-settings-pane"
+                            id="admin-settings-shortcut"
+                            class="btn btn-outline-secondary btn-sm
+                                  rounded-0 mr-2 d-none d-md-inline-flex"
+                            data-toggle="tab"
+                            aria-label="GitHub Config">
+
+                            <span aria-hidden="true">&#9881;</span>
 
                         </a>
 
