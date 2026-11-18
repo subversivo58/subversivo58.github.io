@@ -432,7 +432,7 @@
                         <button
                             type="button"
                             id="admin-new-post"
-                            class="i18n btn btn-info btn-sm rounded-0
+                            class="i18n btn btn-outline-secondary btn-sm rounded-0
                                    flex-fill flex-md-grow-0 mr-2"
                             data-i18n-html="admin_dashboard.new_post">
                         </button>
