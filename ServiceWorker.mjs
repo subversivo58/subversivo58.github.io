@@ -116,10 +116,6 @@ const AdminHTML = `<!--
                         <small class="col pl-0"><a href="mailto:subversivo58@gmail.com?subject=Contact" rel="nofollow">subversivo58@gmail.com</a></small>
                     </div>
                     <div class="col mt-3 px-0">
-                        <small class="col-1 ct pl-0">🌎</small>
-                        <small class="col pl-0"><a href="https://subversivo58.github.io/">https://subversivo58.github.io/</a></small>
-                    </div>
-                    <div class="col mt-3 px-0">
                         <small class="col-1 ct pl-0">📱</small>
                         <small class="col pl-0"><a href="tel:+5551984419162">+55 (51) 98441-9162</a></small>
                     </div>
@@ -278,13 +274,14 @@ async function appendSubmission(store, key, entry) {
 }
 
 // ===============================================================
-// ARMAZENAMENTO DA AUTENTICAÇÃO OAUTH
+// ARMAZENAMENTO TEMPORÁRIO DA AUTENTICAÇÃO OAUTH
 // ===============================================================
 
 const AUTH_DB_NAME = "Subversivo58GitHubAuth";
 const AUTH_DB_VERSION = 1;
 const AUTH_STORE_NAME = "auth";
 const OAUTH_PENDING_TTL = 10 * 60 * 1000;
+const OAUTH_USER_TTL = 10 * 60 * 1000;
 
 let authDatabasePromise = null;
 
@@ -303,8 +300,12 @@ function openAuthDatabase() {
             request.onsuccess = () => resolve(request.result);
             request.onerror = () => reject(request.error);
         });
-        authDatabasePromise.catch(() => { authDatabasePromise = null; });
+
+        authDatabasePromise.catch(() => {
+            authDatabasePromise = null;
+        });
     }
+
     return authDatabasePromise;
 }
 
@@ -314,19 +315,44 @@ async function authStorage(action, key, value) {
     return new Promise((resolve, reject) => {
         const transaction = database.transaction(AUTH_STORE_NAME, "readwrite");
         const store = transaction.objectStore(AUTH_STORE_NAME);
-        let request;
 
-        if (action === "get") request = store.get(key);
-        else if (action === "set") request = store.put(value, key);
-        else if (action === "delete") request = store.delete(key);
-        else {
+        let request;
+        let result;
+
+        if (action === "get") {
+            request = store.get(key);
+        } else if (action === "set") {
+            request = store.put(value, key);
+        } else if (action === "delete") {
+            request = store.delete(key);
+        } else {
             reject(new Error("Operação de armazenamento inválida."));
             return;
         }
 
-        request.onsuccess = () => resolve(request.result);
-        request.onerror = () => reject(request.error);
-        transaction.onabort = () => reject(transaction.error);
+        request.onsuccess = () => {
+            result = request.result;
+
+            if (action === "get") {
+                resolve(result);
+            }
+        };
+
+        request.onerror = () => {
+            reject(request.error || new Error("Falha na operação IndexedDB."));
+        };
+
+        transaction.oncomplete = () => {
+            if (action !== "get") resolve(true);
+        };
+
+        transaction.onerror = () => {
+            reject(transaction.error || new Error("Falha na transação IndexedDB."));
+        };
+
+        transaction.onabort = () => {
+            reject(transaction.error || new Error("Transação IndexedDB cancelada."));
+        };
     });
 }
 
@@ -343,7 +369,10 @@ function logOAuth(stage, status, details = "") {
         status,
         details: String(details || "")
     });
-    if (oauthDiagnostics.length > 100) oauthDiagnostics.shift();
+
+    if (oauthDiagnostics.length > 100) {
+        oauthDiagnostics.shift();
+    }
 }
 
 async function saveDiagnostics() {
@@ -366,7 +395,11 @@ function safeFailure(code, message) {
 
 function base64UrlEncode(bytes) {
     let binary = "";
-    for (const byte of bytes) binary += String.fromCharCode(byte);
+
+    for (const byte of bytes) {
+        binary += String.fromCharCode(byte);
+    }
+
     return btoa(binary)
         .replace(/\+/g, "-")
         .replace(/\//g, "_")
@@ -382,6 +415,7 @@ async function createCodeChallenge(verifier) {
         "SHA-256",
         new TextEncoder().encode(verifier)
     );
+
     return base64UrlEncode(new Uint8Array(digest));
 }
 
@@ -404,26 +438,76 @@ function jsonResponse(body, status = 200) {
 function isSameOrigin(request) {
     const url = new URL(request.url);
     const origin = request.headers.get("Origin");
+
     return url.origin === self.location.origin &&
         (!origin || origin === self.location.origin);
 }
 
+// Normaliza a identidade pública recebida diretamente do GitHub.
 function publicUser(user) {
     return {
         id: user.id,
         login: user.login,
         name: user.name || user.login,
         avatar_url: user.avatar_url || null,
-        html_url: user.html_url || null
+        html_url: user.html_url || null,
+        profile_url: user.html_url || null,
+        email: user.email || null
     };
 }
 
-function sessionIsExpired(session) {
-    if (!session || !session.createdAt) return true;
-    if (Number.isFinite(session.expiresIn) && session.expiresIn > 0) {
-        return Date.now() >= session.createdAt + session.expiresIn * 1000;
+// Formato definitivo persistido no banco principal.
+function storedGitHubUser(user) {
+    return {
+        id: user.id,
+        login: user.login,
+        name: user.name || user.login,
+        avatar_url: user.avatar_url || null,
+        profile_url: user.profile_url || user.html_url || null,
+        email: user.email || null
+    };
+}
+
+function isValidGitHubUser(user) {
+    return Boolean(
+        user &&
+        Number.isInteger(user.id) &&
+        user.id > 0 &&
+        typeof user.login === "string" &&
+        user.login.trim()
+    );
+}
+
+// ===============================================================
+// LEITURA E GRAVAÇÃO DA IDENTIDADE NO BANCO PRINCIPAL
+// ===============================================================
+
+async function getStoredGitHubUser() {
+    const db = await getDatabase();
+    const user = await db.read({
+        tbn: "config",
+        tbk: "user-github"
+    });
+
+    if (!isValidGitHubUser(user)) return null;
+
+    return storedGitHubUser(user);
+}
+
+async function saveStoredGitHubUser(user) {
+    if (!isValidGitHubUser(user)) {
+        throw new Error("GITHUB_IDENTITY_INVALID");
     }
-    return false;
+
+    const db = await getDatabase();
+
+    await db.create([{
+        tbn: "config",
+        tbk: "user-github",
+        tbv: storedGitHubUser(user)
+    }]);
+
+    return true;
 }
 
 // ===============================================================
@@ -432,41 +516,72 @@ function sessionIsExpired(session) {
 
 async function startGitHubOAuth(request) {
     if (request.method !== "POST" || !isSameOrigin(request)) {
-        return jsonResponse({ ok: false, error: "invalid_request" }, 405);
+        return jsonResponse({
+            ok: false,
+            error: "invalid_request"
+        }, 405);
     }
 
     try {
         oauthDiagnostics = [];
-        logOAuth("Início", "OK", "Solicitação de autenticação recebida.");
+
+        // Remove eventual identidade temporária de uma tentativa anterior.
+        await authStorage("delete", "github_user_pending");
+
+        logOAuth(
+            "Início",
+            "OK",
+            "Solicitação de autenticação recebida."
+        );
 
         const state = randomOAuthValue(32);
         const verifier = randomOAuthValue(64);
         const challenge = await createCodeChallenge(verifier);
 
+        // O state e o verifier precisam sobreviver ao redirecionamento.
+        // São temporários e removidos durante o callback.
         await authStorage("set", "oauth_pending", {
             state,
             verifier,
             createdAt: Date.now()
         });
 
-        logOAuth("PKCE", "OK", "Parâmetros PKCE gerados e armazenados.");
+        logOAuth(
+            "PKCE",
+            "OK",
+            "Parâmetros PKCE gerados e armazenados temporariamente."
+        );
+
         await saveDiagnostics();
 
         const authorizationURL = new URL(GITHUB_AUTHORIZE_URL);
+
         authorizationURL.searchParams.set("client_id", GITHUB_CLIENT_ID);
         authorizationURL.searchParams.set("redirect_uri", GITHUB_REDIRECT_URI);
         authorizationURL.searchParams.set("state", state);
         authorizationURL.searchParams.set("code_challenge", challenge);
         authorizationURL.searchParams.set("code_challenge_method", "S256");
 
-        logOAuth("Redirecionamento", "302", "Redirecionando para autorização GitHub.");
+        logOAuth(
+            "Redirecionamento",
+            "302",
+            "Redirecionando para autorização GitHub."
+        );
+
         await saveDiagnostics();
 
         return Response.redirect(authorizationURL.toString(), 303);
+
     } catch (error) {
         console.error("[SW] Falha ao iniciar OAuth:", error);
-        safeFailure("OAUTH_START_FAILED", "Não foi possível iniciar a autenticação.");
+
+        safeFailure(
+            "OAUTH_START_FAILED",
+            "Não foi possível iniciar a autenticação."
+        );
+
         await saveDiagnostics().catch(() => {});
+
         return jsonResponse({
             ok: false,
             error: "OAUTH_START_FAILED",
@@ -480,7 +595,11 @@ async function startGitHubOAuth(request) {
 // ===============================================================
 
 async function exchangeGitHubCode(code, verifier) {
-    logOAuth("Proxy", "ENVIANDO", "Solicitando troca do código OAuth.");
+    logOAuth(
+        "Proxy",
+        "ENVIANDO",
+        "Solicitando troca do código OAuth."
+    );
 
     const body = new URLSearchParams({
         client_id: GITHUB_CLIENT_ID,
@@ -500,6 +619,7 @@ async function exchangeGitHubCode(code, verifier) {
     });
 
     let result;
+
     try {
         result = await response.json();
     } catch {
@@ -510,7 +630,12 @@ async function exchangeGitHubCode(code, verifier) {
         throw new Error("TOKEN_EXCHANGE_FAILED");
     }
 
-    logOAuth("Proxy", `HTTP ${response.status}`, "Resposta válida; token omitido.");
+    logOAuth(
+        "Proxy",
+        `HTTP ${response.status}`,
+        "Resposta válida; token omitido."
+    );
+
     return result;
 }
 
@@ -519,7 +644,11 @@ async function exchangeGitHubCode(code, verifier) {
 // ===============================================================
 
 async function getGitHubUser(accessToken) {
-    logOAuth("GitHub /user", "ENVIANDO", "Consultando identidade da conta.");
+    logOAuth(
+        "GitHub /user",
+        "ENVIANDO",
+        "Consultando identidade da conta."
+    );
 
     const response = await fetch(GITHUB_API_USER, {
         method: "GET",
@@ -531,14 +660,22 @@ async function getGitHubUser(accessToken) {
         cache: "no-store"
     });
 
-    if (!response.ok) throw new Error("GITHUB_IDENTITY_FAILED");
+    if (!response.ok) {
+        throw new Error("GITHUB_IDENTITY_FAILED");
+    }
 
     const user = await response.json();
-    if (!user || !user.id || !user.login) {
+
+    if (!isValidGitHubUser(user)) {
         throw new Error("GITHUB_IDENTITY_INVALID");
     }
 
-    logOAuth("GitHub /user", "OK", "Identidade da conta recebida.");
+    logOAuth(
+        "GitHub /user",
+        "OK",
+        "Identidade da conta recebida."
+    );
+
     return user;
 }
 
@@ -547,21 +684,31 @@ async function getGitHubUser(accessToken) {
 // ===============================================================
 
 async function handleGitHubCallback(url) {
-    logOAuth("Callback", "INÍCIO", "Retorno do GitHub recebido.");
+    logOAuth(
+        "Callback",
+        "INÍCIO",
+        "Retorno do GitHub recebido."
+    );
 
     try {
         const oauthError = url.searchParams.get("error");
+
         if (oauthError) {
             await authStorage("delete", "oauth_pending");
+            await authStorage("delete", "github_user_pending");
+
             throw new Error("GITHUB_AUTHORIZATION_DENIED");
         }
 
         const code = url.searchParams.get("code");
         const returnedState = url.searchParams.get("state");
 
-        if (!code || !returnedState) throw new Error("OAUTH_CALLBACK_INCOMPLETE");
+        if (!code || !returnedState) {
+            throw new Error("OAUTH_CALLBACK_INCOMPLETE");
+        }
 
         const pending = await authStorage("get", "oauth_pending");
+
         if (!pending || !pending.state || !pending.verifier) {
             throw new Error("OAUTH_REQUEST_NOT_FOUND");
         }
@@ -576,52 +723,98 @@ async function handleGitHubCallback(url) {
             throw new Error("OAUTH_STATE_MISMATCH");
         }
 
-        logOAuth("Validação state", "OK", "Correspondência confirmada.");
+        logOAuth(
+            "Validação state",
+            "OK",
+            "Correspondência confirmada."
+        );
+
+        // O verifier já está em memória. Podemos remover o registro temporário
+        // antes de iniciar a troca do código.
         await authStorage("delete", "oauth_pending");
 
-        const token = await exchangeGitHubCode(code, pending.verifier);
+        // O token existe somente nesta execução do callback.
+        const token = await exchangeGitHubCode(
+            code,
+            pending.verifier
+        );
+
         const user = await getGitHubUser(token.access_token);
+        const identity = publicUser(user);
 
-        const session = {
-            authenticated: true,
-            confirmed: false,
-            provider: "github",
-            user: publicUser(user),
-            access_token: token.access_token,
-            token_type: token.token_type || "bearer",
-            scope: token.scope || "",
-            createdAt: Date.now(),
-            expiresIn: Number.isFinite(Number(token.expires_in))
-                ? Number(token.expires_in)
-                : null
-        };
+        // Não persistimos access_token, token_type, scope ou sessão.
+        // Somente a identidade pública aguarda a confirmação do usuário.
+        await authStorage("set", "github_user_pending", {
+            user: identity,
+            createdAt: Date.now()
+        });
 
-        await authStorage("set", "github_session", session);
-        logOAuth("Sessão", "PENDENTE", "Identidade armazenada; aguardando confirmação.");
+        logOAuth(
+            "Identidade",
+            "PENDENTE",
+            "Identidade pública armazenada temporariamente; aguardando confirmação."
+        );
+
         await saveDiagnostics();
 
     } catch (error) {
-        const code = error instanceof Error ? error.message : "OAUTH_CALLBACK_FAILED";
+        const code = error instanceof Error
+            ? error.message
+            : "OAUTH_CALLBACK_FAILED";
+
         const knownMessages = {
-            GITHUB_AUTHORIZATION_DENIED: "A autorização no GitHub foi cancelada ou negada.",
-            OAUTH_CALLBACK_INCOMPLETE: "O retorno do GitHub não contém os parâmetros necessários.",
-            OAUTH_REQUEST_NOT_FOUND: "A solicitação OAuth não foi encontrada. Inicie novamente.",
-            OAUTH_REQUEST_EXPIRED: "A solicitação OAuth expirou. Inicie novamente.",
-            OAUTH_STATE_MISMATCH: "A validação de segurança do retorno falhou.",
-            TOKEN_RESPONSE_INVALID: "O proxy retornou uma resposta inválida.",
-            TOKEN_EXCHANGE_FAILED: "Não foi possível trocar o código por um token.",
-            GITHUB_IDENTITY_FAILED: "O GitHub não confirmou a identidade da conta.",
-            GITHUB_IDENTITY_INVALID: "O GitHub retornou dados de identidade incompletos."
+            GITHUB_AUTHORIZATION_DENIED:
+                "A autorização no GitHub foi cancelada ou negada.",
+
+            OAUTH_CALLBACK_INCOMPLETE:
+                "O retorno do GitHub não contém os parâmetros necessários.",
+
+            OAUTH_REQUEST_NOT_FOUND:
+                "A solicitação OAuth não foi encontrada. Inicie novamente.",
+
+            OAUTH_REQUEST_EXPIRED:
+                "A solicitação OAuth expirou. Inicie novamente.",
+
+            OAUTH_STATE_MISMATCH:
+                "A validação de segurança do retorno falhou.",
+
+            TOKEN_RESPONSE_INVALID:
+                "O proxy retornou uma resposta inválida.",
+
+            TOKEN_EXCHANGE_FAILED:
+                "Não foi possível trocar o código por um token.",
+
+            GITHUB_IDENTITY_FAILED:
+                "O GitHub não confirmou a identidade da conta.",
+
+            GITHUB_IDENTITY_INVALID:
+                "O GitHub retornou dados de identidade incompletos."
         };
 
-        safeFailure(code, knownMessages[code] || "Falha inesperada no callback OAuth.");
+        safeFailure(
+            code,
+            knownMessages[code] || "Falha inesperada no callback OAuth."
+        );
+
         console.error("[SW] Falha no callback OAuth:", code);
-        await authStorage("delete", "github_session").catch(() => {});
+
+        await authStorage("delete", "oauth_pending").catch(() => {});
+        await authStorage("delete", "github_user_pending").catch(() => {});
+
         await saveDiagnostics().catch(() => {});
     }
 
-    return Response.redirect(new URL("/admin.html", url.origin).toString(), 303);
+    // O callback sempre retorna à página administrativa.
+    // A página consulta /admin-auth/status para descobrir o resultado.
+    return Response.redirect(
+        new URL("/admin.html", url.origin).toString(),
+        303
+    );
 }
+
+// ===============================================================
+// PÁGINA ADMINISTRATIVA
+// ===============================================================
 
 async function handleAdminPage(request) {
     const url = new URL(request.url);
@@ -643,30 +836,67 @@ async function handleAdminPage(request) {
 
 async function getAuthStatus(request) {
     if (request.method !== "GET" || !isSameOrigin(request)) {
-        return jsonResponse({ ok: false, error: "invalid_request" }, 405);
+        return jsonResponse({
+            ok: false,
+            error: "invalid_request"
+        }, 405);
     }
 
     try {
-        const session = await authStorage("get", "github_session");
+        // Primeiro verifica se existe uma identidade aguardando confirmação.
+        const pending = await authStorage(
+            "get",
+            "github_user_pending"
+        );
 
-        if (!session || sessionIsExpired(session)) {
-            if (session) await authStorage("delete", "github_session");
+        if (pending) {
+            const expired =
+                !pending.createdAt ||
+                Date.now() - pending.createdAt > OAUTH_USER_TTL;
+
+            if (expired) {
+                await authStorage(
+                    "delete",
+                    "github_user_pending"
+                );
+            } else if (isValidGitHubUser(pending.user)) {
+                return jsonResponse({
+                    ok: true,
+                    status: "pending_confirmation",
+                    user: publicUser(pending.user)
+                });
+            } else {
+                await authStorage(
+                    "delete",
+                    "github_user_pending"
+                );
+            }
+        }
+
+        // Sem confirmação pendente, consulta a identidade definitiva.
+        // A identidade salva permite reconhecer o administrador após recargas.
+        const storedUser = await getStoredGitHubUser();
+
+        if (storedUser) {
             return jsonResponse({
                 ok: true,
-                status: "unauthenticated",
-                user: null
+                status: "authenticated",
+                user: publicUser(storedUser)
             });
         }
 
         return jsonResponse({
             ok: true,
-            status: session.confirmed
-                ? "authenticated"
-                : "pending_confirmation",
-            user: publicUser(session.user)
+            status: "unauthenticated",
+            user: null
         });
+
     } catch (error) {
-        console.error("[SW] Falha ao consultar sessão:", error);
+        console.error(
+            "[SW] Falha ao consultar estado da autenticação:",
+            error
+        );
+
         return jsonResponse({
             ok: false,
             error: "AUTH_STATUS_FAILED",
@@ -681,39 +911,88 @@ async function getAuthStatus(request) {
 
 async function confirmGitHubIdentity(request) {
     if (request.method !== "POST" || !isSameOrigin(request)) {
-        return jsonResponse({ ok: false, error: "invalid_request" }, 405);
+        return jsonResponse({
+            ok: false,
+            error: "invalid_request"
+        }, 405);
     }
 
     try {
-        const session = await authStorage("get", "github_session");
+        const pending = await authStorage(
+            "get",
+            "github_user_pending"
+        );
 
-        if (!session || sessionIsExpired(session)) {
-            if (session) await authStorage("delete", "github_session");
+        if (!pending || !pending.user) {
             return jsonResponse({
                 ok: false,
-                error: "SESSION_NOT_FOUND",
-                message: "Não existe uma sessão válida para confirmar."
+                error: "IDENTITY_NOT_FOUND",
+                message: "Não existe uma identidade pendente para confirmar."
             }, 401);
         }
 
-        session.confirmed = true;
-        session.confirmedAt = Date.now();
-        await authStorage("set", "github_session", session);
+        if (
+            !pending.createdAt ||
+            Date.now() - pending.createdAt > OAUTH_USER_TTL
+        ) {
+            await authStorage(
+                "delete",
+                "github_user_pending"
+            );
 
-        logOAuth("Confirmação", "OK", "Identidade confirmada pelo usuário.");
+            return jsonResponse({
+                ok: false,
+                error: "IDENTITY_EXPIRED",
+                message: "A confirmação expirou. Inicie novamente a autenticação."
+            }, 401);
+        }
+
+        if (!isValidGitHubUser(pending.user)) {
+            await authStorage(
+                "delete",
+                "github_user_pending"
+            );
+
+            return jsonResponse({
+                ok: false,
+                error: "GITHUB_IDENTITY_INVALID",
+                message: "Os dados da identidade estão incompletos."
+            }, 400);
+        }
+
+        // A gravação definitiva acontece somente após o clique em confirmar.
+        await saveStoredGitHubUser(pending.user);
+
+        logOAuth(
+            "Confirmação",
+            "OK",
+            "Identidade pública gravada no banco principal."
+        );
+
         await saveDiagnostics();
+
+        // Remove os dados temporários após a gravação definitiva.
+        await authStorage(
+            "delete",
+            "github_user_pending"
+        );
 
         return jsonResponse({
             ok: true,
             status: "authenticated",
-            user: publicUser(session.user)
+            user: publicUser(pending.user)
         });
+
     } catch (error) {
-        console.error("[SW] Falha ao confirmar identidade:", error);
+        console.error(
+            "[SW] Falha ao confirmar identidade:",
+            error
+        );
+
         return jsonResponse({
             ok: false,
             error: "AUTH_CONFIRM_FAILED",
-            message: "Não foi possível confirmar a identidade."
+            message: "Não foi possível confirmar e salvar a identidade."
         }, 500);
     }
 }
@@ -724,21 +1003,47 @@ async function confirmGitHubIdentity(request) {
 
 async function logoutGitHub(request) {
     if (request.method !== "POST" || !isSameOrigin(request)) {
-        return jsonResponse({ ok: false, error: "invalid_request" }, 405);
+        return jsonResponse({
+            ok: false,
+            error: "invalid_request"
+        }, 405);
     }
 
     try {
-        await authStorage("delete", "github_session");
+        await authStorage("delete", "github_user_pending");
         await authStorage("delete", "oauth_pending");
-        logOAuth("Sessão", "ENCERRADA", "Sessão local removida.");
+
+        // Logout remove também a identidade definitiva.
+        const db = await getDatabase();
+
+        await db.delete({
+            tbn: "config",
+            tbk: "user-github"
+        });
+
+        logOAuth(
+            "Autenticação",
+            "ENCERRADA",
+            "Identidade local removida."
+        );
+
         await saveDiagnostics();
-        return jsonResponse({ ok: true, status: "unauthenticated" });
+
+        return jsonResponse({
+            ok: true,
+            status: "unauthenticated"
+        });
+
     } catch (error) {
-        console.error("[SW] Falha ao encerrar sessão:", error);
+        console.error(
+            "[SW] Falha ao encerrar autenticação:",
+            error
+        );
+
         return jsonResponse({
             ok: false,
             error: "AUTH_LOGOUT_FAILED",
-            message: "Não foi possível encerrar a sessão local."
+            message: "Não foi possível encerrar a autenticação local."
         }, 500);
     }
 }
@@ -749,7 +1054,10 @@ async function logoutGitHub(request) {
 
 async function getAuthDiagnostics(request) {
     if (request.method !== "GET" || !isSameOrigin(request)) {
-        return jsonResponse({ ok: false, error: "invalid_request" }, 405);
+        return jsonResponse({
+            ok: false,
+            error: "invalid_request"
+        }, 405);
     }
 
     try {
@@ -757,7 +1065,13 @@ async function getAuthDiagnostics(request) {
             ok: true,
             entries: await readDiagnostics()
         });
+
     } catch (error) {
+        console.error(
+            "[SW] Falha ao consultar diagnósticos:",
+            error
+        );
+
         return jsonResponse({
             ok: false,
             error: "DIAGNOSTICS_UNAVAILABLE",
@@ -784,17 +1098,26 @@ RegisterRoute("/admin-auth/diagnostics", getAuthDiagnostics);
 async function handlePost(request) {
     const url = new URL(request.url);
 
-    if (url.origin !== self.location.origin) return fetch(request);
+    if (url.origin !== self.location.origin) {
+        return fetch(request);
+    }
 
     const routeHandler = Routes.get(url.pathname);
-    if (routeHandler) return routeHandler(request);
+
+    if (routeHandler) {
+        return routeHandler(request);
+    }
 
     const settings = await loadSettings().catch(() => null);
     const route = settings && settings.submissions.routes[url.pathname];
-    if (!route) return fetch(request);
+
+    if (!route) {
+        return fetch(request);
+    }
 
     try {
         const form = await request.formData();
+
         await appendSubmission(
             route.store,
             route.key,
@@ -803,10 +1126,20 @@ async function handlePost(request) {
                 sentAt: new Date().toISOString()
             }
         );
-        return jsonResponse({ ok: true }, 200);
+
+        return jsonResponse({
+            ok: true
+        }, 200);
+
     } catch (error) {
-        console.error("[SW] Falha ao guardar o envio:", error);
-        return jsonResponse({ ok: false }, 500);
+        console.error(
+            "[SW] Falha ao guardar o envio:",
+            error
+        );
+
+        return jsonResponse({
+            ok: false
+        }, 500);
     }
 }
 
@@ -826,19 +1159,30 @@ self.addEventListener("fetch", event => {
     const request = event.request;
     const url = new URL(request.url);
 
-    if (url.origin !== self.location.origin) return;
-
-    if (request.method === "POST") {
-        if (Routes.has(url.pathname) || request.mode === "navigate") {
-            event.respondWith(handlePost(request));
-        }
+    if (url.origin !== self.location.origin) {
         return;
     }
 
-    if (request.method !== "GET") return;
+    if (request.method === "POST") {
+        if (
+            Routes.has(url.pathname) ||
+            request.mode === "navigate"
+        ) {
+            event.respondWith(handlePost(request));
+        }
+
+        return;
+    }
+
+    if (request.method !== "GET") {
+        return;
+    }
 
     const response = Router(request);
-    if (response) event.respondWith(Promise.resolve(response));
+
+    if (response) {
+        event.respondWith(Promise.resolve(response));
+    }
 });
 
 export {
