@@ -885,7 +885,6 @@ const SetupDOMReady = async evt => {
                         import("./modules/lib/GitHubAPI.mjs")
                     ]);
 
-                const TOKEN_KEY = "github-pat";
                 const REPOSITORY_OWNER = settings.github_auth.repository_owner;
                 const REPOSITORY_NAME = settings.github_auth.repository_name;
                 const REPOSITORY_BRANCH = "main";
@@ -904,68 +903,17 @@ const SetupDOMReady = async evt => {
                         : "";
                 };
 
-                const authenticateGitHub = async token => {
-                    const api = new GitHubAPI({ token });
-
-                    const response =
-                        await api.GHInstance.getUser().getProfile();
-
-                    GitHubAPIInstance = api;
-
-                    return response.data;
-                };
-
-                // Recupera o PAT do IndexedDB.
-                let storedToken = DBMethods
-                    ? await DBMethods.read({
-                          tbn: "config",
-                          tbk: TOKEN_KEY
-                      })
-                    : false;
-
-                // Preenche os campos PAT desktop e mobile.
-                const patInputs = Array.from(
-                    dc.querySelectorAll("[data-github-pat-input]")
-                );
-
-                patInputs.forEach(input => {
-                    input.value =
-                        typeof storedToken === "string" ? storedToken : "";
-                });
-
-                // Valida o PAT armazenado sem apagá-lo em caso de erro.
-                if (typeof storedToken === "string" && storedToken.trim()) {
-                    try {
-                        await authenticateGitHub(storedToken);
-                    } catch (error) {
-                        GitHubAPIInstance = null;
-
-                        console.error(
-                            "[ADMIN]: O PAT armazenado não é válido.",
-                            error
-                        );
-                    }
-                }
-
-                // Autenticação administrativa pelo Service Worker.
+                // Elementos do modal de autenticação.
                 const modal = dc.getElementById("modal-github-auth");
-
                 const statusElement = dc.getElementById("github-auth-status");
-
                 const introElement = dc.getElementById("github-auth-intro");
-
                 const identityElement = dc.getElementById(
                     "github-auth-identity"
                 );
-
                 const errorElement = dc.getElementById("github-auth-error");
-
                 const diagnosticsElement = dc.getElementById(
                     "github-auth-diagnostics"
                 );
-
-                const confirmButton = dc.getElementById("github-auth-confirm");
-
                 const copyDiagnosticsButton = dc.getElementById(
                     "github-auth-copy-diagnostics"
                 );
@@ -977,7 +925,6 @@ const SetupDOMReady = async evt => {
                     !identityElement ||
                     !errorElement ||
                     !diagnosticsElement ||
-                    !confirmButton ||
                     !copyDiagnosticsButton
                 ) {
                     throw new Error(
@@ -987,114 +934,36 @@ const SetupDOMReady = async evt => {
 
                 const githubAuthModal = new BootstrapNative.Modal(modal);
 
-                // Apresenta o erro no próprio modal e mantém o modal aberto.
-                const showAuthError = (error, details = null) => {
+                // Apresenta o erro no modal sem apagar a credencial armazenada.
+                const showAuthError = error => {
                     const message =
                         error instanceof Error ? error.message : String(error);
 
                     statusElement.textContent = authMessage(
-                        "github_auth_save_failed"
+                        "github_auth_failed"
                     );
 
-                    diagnosticsElement.textContent = [
-                        message,
-                        details ? JSON.stringify(details, null, 2) : ""
-                    ]
-                        .filter(Boolean)
-                        .join("\n\n");
-
+                    diagnosticsElement.textContent = message;
                     errorElement.hidden = false;
 
-                    console.error("[ADMIN AUTH]:", error, details);
+                    console.error("[ADMIN AUTH]:", error);
                 };
 
-                // Lê e valida a resposta JSON do Service Worker.
-                const readAuthResponse = async response => {
-                    let result;
+                // Copia o diagnóstico exibido no modal.
+                copyDiagnosticsButton.addEventListener("click", async () => {
+                    const diagnostics = diagnosticsElement.textContent || "";
+
+                    if (!diagnostics) return;
 
                     try {
-                        result = await response.json();
+                        await navigator.clipboard.writeText(diagnostics);
                     } catch (error) {
-                        throw new Error(
-                            `Resposta inválida do Service Worker (HTTP ${response.status}).`
+                        console.error(
+                            "[ADMIN AUTH]: Não foi possível copiar o diagnóstico.",
+                            error
                         );
                     }
-
-                    if (!response.ok || result?.ok === false) {
-                        throw new Error(
-                            result?.error ||
-                                result?.message ||
-                                `Falha na requisição (HTTP ${response.status}).`
-                        );
-                    }
-
-                    return result;
-                };
-
-                // Apresenta a identidade pública retornada pelo GitHub.
-                const renderGitHubIdentity = user => {
-                    if (!user || typeof user !== "object") {
-                        throw new Error(
-                            "O Service Worker não retornou os dados da identidade do GitHub."
-                        );
-                    }
-
-                    const avatar = dc.getElementById("github-auth-avatar");
-
-                    const name = dc.getElementById("github-auth-name");
-
-                    const login = dc.getElementById("github-auth-login");
-
-                    const id = dc.getElementById("github-auth-id");
-
-                    const profile = dc.getElementById("github-auth-profile");
-
-                    const emailContainer = dc.getElementById(
-                        "github-auth-email-container"
-                    );
-
-                    const email = dc.getElementById("github-auth-email");
-
-                    const profileURL = user.profile_url || user.html_url || "";
-
-                    if (avatar) {
-                        avatar.src = user.avatar_url || "";
-                        avatar.alt = user.name || user.login || "GitHub";
-                    }
-
-                    if (name) {
-                        name.textContent = user.name || user.login || "";
-                    }
-
-                    if (login) {
-                        login.textContent = user.login ? `@${user.login}` : "";
-                    }
-
-                    if (id) {
-                        id.textContent = String(user.id ?? "");
-                    }
-
-                    if (profile) {
-                        profile.textContent = profileURL;
-                        profile.href = profileURL || "#";
-                    }
-
-                    if (emailContainer && email) {
-                        const hasEmail = Boolean(user.email);
-
-                        emailContainer.hidden = !hasEmail;
-                        email.textContent = hasEmail ? user.email : "";
-                    }
-
-                    introElement.hidden = true;
-                    identityElement.hidden = false;
-                    errorElement.hidden = true;
-
-                    statusElement.textContent = authMessage(
-                        "github_auth_authenticated",
-                        user.login || ""
-                    );
-                };
+                });
 
                 // Preenche os banners de identidade desktop e mobile.
                 const renderAdminGitHubIdentity = user => {
@@ -1162,194 +1031,61 @@ const SetupDOMReady = async evt => {
                     });
                 };
 
-                // Recupera a identidade confirmada no IndexedDB.
-                const loadAdminGitHubIdentity = async () => {
-                    if (!DBMethods) return;
+                // Recupera e valida a autenticação OAuth armazenada.
+                const loadAdminGitHubAuth = async () => {
+                    if (!DBMethods) {
+                        throw new Error(
+                            "IndexedDB indisponível. Não foi possível recuperar a autenticação."
+                        );
+                    }
 
-                    const user = await DBMethods.read({
+                    const storedAuth = await DBMethods.read({
                         tbn: "config",
                         tbk: "user-github"
                     });
 
-                    if (user) {
-                        renderAdminGitHubIdentity(user);
+                    const user = storedAuth?.user;
+                    const token = storedAuth?.tokens?.access_token;
+
+                    // Sem identidade ou token, solicita autenticação OAuth.
+                    if (!user || !token) {
+                        GitHubAPIInstance = null;
+
+                        introElement.hidden = false;
+                        identityElement.hidden = true;
+
+                        githubAuthModal.show();
+                        return;
                     }
+
+                    // Valida o token antes de liberar a API do GitHub.
+                    const api = new GitHubAPI({ token });
+
+                    await api.GHInstance.getUser().getProfile();
+
+                    GitHubAPIInstance = api;
+
+                    renderAdminGitHubIdentity(user);
+
+                    statusElement.textContent = authMessage(
+                        "github_auth_authenticated",
+                        user.login || ""
+                    );
                 };
 
-                // Carrega a identidade ao abrir o painel.
-                loadAdminGitHubIdentity().catch(error => {
-                    console.error(
-                        "[ADMIN]: Não foi possível carregar a identidade.",
-                        error
-                    );
-                });
-
-                // Verifica o estado atual antes de decidir se abre o modal.
-
+                // Inicializa a autenticação administrativa.
                 statusElement.textContent = authMessage(
                     "github_auth_verifying"
                 );
 
                 try {
-                    const response = await fetch("/admin-auth/status", {
-                        method: "GET",
-                        credentials: "same-origin",
-                        cache: "no-store",
-                        headers: {
-                            Accept: "application/json"
-                        }
-                    });
-
-                    const result = await readAuthResponse(response);
-
-                    if (result.status === "authenticated") {
-                        // O Service Worker já confirmou a autenticação.
-                    } else if (result.status === "pending_confirmation") {
-                        // Exibe a identidade e aguarda confirmação explícita.
-                        githubAuthModal.show();
-                        renderGitHubIdentity(result.user || result.identity);
-                    } else if (result.status === "unauthenticated") {
-                        githubAuthModal.show();
-                        introElement.hidden = false;
-                        identityElement.hidden = true;
-                        statusElement.textContent = "";
-                    } else {
-                        throw new Error(
-                            `Estado de autenticação desconhecido: ${result.status}`
-                        );
-                    }
+                    await loadAdminGitHubAuth();
                 } catch (error) {
+                    GitHubAPIInstance = null;
+
                     githubAuthModal.show();
                     showAuthError(error);
                 }
-
-                // O usuário confirma a identidade.
-                // A confirmação só libera o painel depois do sucesso do POST.
-                confirmButton.addEventListener("click", async () => {
-                    if (confirmButton.disabled) return;
-
-                    confirmButton.disabled = true;
-
-                    statusElement.textContent =
-                        authMessage("github_auth_saving");
-
-                    errorElement.hidden = true;
-                    diagnosticsElement.textContent = "";
-
-                    try {
-                        const response = await fetch("/admin-auth/confirm", {
-                            method: "POST",
-                            credentials: "same-origin",
-                            cache: "no-store",
-                            headers: {
-                                Accept: "application/json"
-                            }
-                        });
-
-                        const result = await readAuthResponse(response);
-
-                        if (result.ok !== true) {
-                            throw new Error(
-                                result.error ||
-                                    result.message ||
-                                    "O Service Worker não confirmou a gravação da identidade."
-                            );
-                        }
-
-                        // Fecha o modal somente após o Service Worker
-                        // confirmar que a gravação foi concluída.
-                        loadAdminGitHubIdentity().catch(error => {
-                            console.error(
-                                "[ADMIN]: Não foi possível atualizar a identidade.",
-                                error
-                            );
-                        });
-
-                        githubAuthModal.hide();
-                    } catch (error) {
-                        showAuthError(error);
-                    } finally {
-                        confirmButton.disabled = false;
-                    }
-                });
-
-                // Copia o diagnóstico exibido no modal.
-                copyDiagnosticsButton.addEventListener("click", async () => {
-                    const diagnostics = diagnosticsElement.textContent || "";
-
-                    if (!diagnostics) return;
-
-                    try {
-                        await navigator.clipboard.writeText(diagnostics);
-                    } catch (error) {
-                        console.error(
-                            "[ADMIN AUTH]: Não foi possível copiar o diagnóstico.",
-                            error
-                        );
-                    }
-                });
-
-                // Salva o PAT no IndexedDB e atualiza a instância da API.
-                const saveGitHubPAT = async input => {
-                    const token = input.value.trim();
-
-                    // Campo vazio não substitui nem apaga o PAT existente.
-                    if (!token) {
-                        input.value =
-                            typeof storedToken === "string" ? storedToken : "";
-                        return;
-                    }
-
-                    if (!DBMethods) {
-                        throw new Error(
-                            "IndexedDB indisponível. O PAT não foi salvo."
-                        );
-                    }
-
-                    // Valida a credencial antes de substituir a anterior.
-                    const api = new GitHubAPI({ token });
-
-                    await api.GHInstance.getUser().getProfile();
-
-                    await DBMethods.update([
-                        {
-                            tbn: "config",
-                            tbk: TOKEN_KEY,
-                            tbv: token
-                        }
-                    ]);
-
-                    storedToken = token;
-                    GitHubAPIInstance = api;
-
-                    patInputs.forEach(field => {
-                        field.value = token;
-                    });
-
-                    console.info("[ADMIN]: PAT salvo e validado.");
-                };
-
-                // Liga os botões Salvar das versões desktop e mobile.
-                dc.querySelectorAll("[data-github-pat-save]").forEach(
-                    button => {
-                        button.addEventListener("click", async () => {
-                            const input = button
-                                .closest(".input-group")
-                                ?.querySelector("[data-github-pat-input]");
-
-                            if (!input) return;
-
-                            try {
-                                await saveGitHubPAT(input);
-                            } catch (error) {
-                                console.error(
-                                    "[ADMIN]: Não foi possível salvar o PAT.",
-                                    error
-                                );
-                            }
-                        });
-                    }
-                );
 
                 SlideMenus();
                 AnchorScrool();
