@@ -140,17 +140,17 @@
             "source": "*",
             "files": [
                 {
-                    "file": "settings-slide.tpl",
+                    "file": "/assets/tpl/settings-slide.tpl",
                     "mode": "prepend",
                     "target": "#body"
                 },
                 {
-                    "file": "color-palette-slide.tpl",
+                    "file": "/assets/tpl/color-palette-slide.tpl",
                     "mode": "prepend",
                     "target": "#body"
                 },
                 {
-                    "file": "modals.tpl",
+                    "file": "/assets/tpl/modals.tpl",
                     "mode": "prepend",
                     "target": "#body"
                 }
@@ -158,70 +158,80 @@
         },
         {
             "source": [
-                "dpo",
-                "index",
-                "about",
-                "policy",
-                "admin",
-                "404",
-                "nocookie",
-                "blog",
-                "copyright",
-                "donations",
-                "you-in-control-of-your-data"
+                "/dpo",
+                "/",
+                "/about",
+                "/policy",
+                "/admin",
+                "/404",
+                "/nocookie",
+                "/blog",
+                "/copyright",
+                "/donations",
+                "/you-in-control-of-your-data"
             ],
             "files": [
                 {
-                    "file": "fixed-navbar.tpl",
+                    "file": "/assets/tpl/fixed-navbar.tpl",
                     "mode": "prepend",
                     "target": "#body"
                 },
                 {
-                    "file": "drawer.tpl",
+                    "file": "/assets/tpl/drawer.tpl",
                     "mode": "prepend",
                     "target": "#body"
                 },
                 {
-                    "file": "footnote.tpl",
+                    "file": "/assets/tpl/footnote.tpl",
                     "mode": "append",
                     "target": "#footer-container"
                 }
             ]
         },
         {
-            "source": ["policies", "copyright", "guard"],
+            "source": "/lab/",
+            "files": [
+                {
+                    "file": "/lab/assets/tpl/fixed-navibar-lab.tpl",
+                    "mode": "append",
+                    "target": "#body"
+                }
+            ]
+        },
+        {
+            "source": ["/policies", "/copyright", "/guard"],
             "files": []
         },
         {
-            "source": ["admin"],
+            "source": ["/admin"],
             "files": [
                 {
-                    "file": "admin-dashboard.tpl",
+                    "file": "/assets/tpl/admin-dashboard.tpl",
                     "mode": "append",
                     "target": "#index-central-block"
                 },
                 {
-                    "file": "github-auth.tpl",
+                    "file": "/assets/tpl/github-auth.tpl",
                     "mode": "append",
                     "target": "#index-central-block"
                 },
                 {
-                    "file": "markdown-editor.tpl",
+                    "file": "/assets/tpl/markdown-editor.tpl",
                     "mode": "append",
                     "target": "#admin-post-editor"
                 },
                 {
-                    "file": "admin-post-item.tpl",
+                    "file": "/assets/tpl/admin-post-item.tpl",
                     "mode": "append",
                     "target": "#admin-dashboard-content"
                 },
                 {
-                    "file": "admin-delete-modal.tpl",
+                    "file": "/assets/tpl/admin-delete-modal.tpl",
                     "mode": "append",
                     "target": "#body"
                 },
                 {
-                    "file": "footoodles-editor.tpl",
+                    "file": "/assets/tpl/footoodles-editor.tpl",
                     "mode": "append",
                     "target": "#admin-post-editor-container"
                 }

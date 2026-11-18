@@ -23,8 +23,6 @@ import _, {
     time,
     // protocol
     uri,
-    // root (domain)
-    BaseRoot,
     // XMLHttpRequest
     XHR,
     // FormData
@@ -135,18 +133,12 @@ const observedTargets = new WeakSet();
 
 /**
  * Busca os templates da rota, aplica as substituições e insere no DOM
- * @param  {Object} cfg          item de "templates" do settings.json ({source, files})
- * @param  {Object} replace      {rule, replacement} usados pelo FindAndReplace
- * @param  {Object} i18n         instância do IlibJS
- * @param  {String} templatePath diretório dos arquivos .tpl
- * @return {Promise}             resolve quando todos os templates foram inseridos
+ * @param  {Object} cfg      item de "templates" do settings.json ({source, files})
+ * @param  {Object} replace  {rule, replacement} usados pelo FindAndReplace
+ * @param  {Object} i18n     instância do IlibJS
+ * @return {Promise}         resolve quando todos os templates foram inseridos
  */
-const RenderTemplate = (
-    cfg,
-    replace,
-    i18n,
-    templatePath = `${BaseRoot}assets/tpl/`
-) => {
+const RenderTemplate = (cfg, replace, i18n) => {
     let urls = [],
         param = [],
         len = cfg.files.length;
@@ -161,7 +153,7 @@ const RenderTemplate = (
 
     // se falhar (rede ou HTTP != 2xx) devolve undefined e a página segue sem esse template
     let fetchResource = (url, i) => {
-        return Fetch(`${templatePath}${url}`)
+        return Fetch(url)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}`);
@@ -256,9 +248,8 @@ export default class Templates {
      * @param  {Array}  templates configurações dos templates
      * @param  {Object} replace   regras de substituição
      * @param  {Object} iLib      instância do IlibJS
-     * @param  {String} root      raiz da aplicação (opcional)
      */
-    constructor(templates = [], replace = false, iLib = false, root = false) {
+    constructor(templates = [], replace = false, iLib = false) {
         this.templates = templates;
         this.replace = !!replace
             ? replace
@@ -267,85 +258,35 @@ export default class Templates {
                   replacement: []
               };
         this.iLib = iLib && iLib instanceof IlibJS ? iLib : new IlibJS("i18n");
-        this.root = root;
     }
 
     /**
      *
      */
     get import() {
-        // Application root (normalized).
-        const root = this.root
-            ? `/${String(this.root).replace(/^\/+|\/+$/g, "")}`
-            : "";
-
-        // Current route.
+        // Rota atual, obtida a partir da raiz do domínio.
         const route = PathName(true);
 
-        // Resolve the route relative to the application root.
-        const prefix = root.replace(/^\/+/, "");
-
-        const currentRoute = prefix
-            ? route === prefix
-                ? "index"
-                : route.startsWith(`${prefix}/`)
-                  ? route.slice(prefix.length + 1)
-                  : route
-            : route;
-
-        // Resolve the templates directory.
-        const templatePath = root
-            ? `${root}/assets/tpl/`
-            : `${BaseRoot}assets/tpl/`;
+        // Converte a rota para o formato absoluto usado em "source".
+        const currentRoute =
+            route === "index"
+                ? "/"
+                : route.endsWith("/index")
+                  ? `/${route.slice(0, -5)}`
+                  : `/${route}`;
 
         const jobs = [];
 
         this.templates.forEach(item => {
-            // single {String} route
-            if (_.isString(item.source)) {
-                switch (item.source) {
-                    // same route
-                    case currentRoute:
-                        jobs.push(
-                            RenderTemplate(
-                                item,
-                                this.replace,
-                                this.iLib,
-                                templatePath
-                            )
-                        );
-                        break;
-                    // wildcard resources route
-                    case "*":
-                        jobs.push(
-                            RenderTemplate(
-                                item,
-                                this.replace,
-                                this.iLib,
-                                templatePath
-                            )
-                        );
-                        break;
-                }
-            }
+            const source = item.source;
 
-            // Array of routes
-            if (_.isArray(item.source)) {
-                item.source.forEach(target => {
-                    if (target === currentRoute) {
-                        jobs.push(
-                            RenderTemplate(
-                                {
-                                    source: currentRoute,
-                                    files: item.files
-                                },
-                                this.replace,
-                                this.iLib,
-                                templatePath
-                            )
-                        );
-                    }
-                });
+            // Verifica se o source corresponde à rota atual.
+            const matches = _.isString(source)
+                ? source === "*" || source === currentRoute
+                : _.isArray(source) && source.includes(currentRoute);
+
+            if (matches) {
+                jobs.push(RenderTemplate(item, this.replace, this.iLib));
             }
         });
 
