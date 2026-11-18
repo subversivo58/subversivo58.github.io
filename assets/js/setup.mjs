@@ -596,7 +596,8 @@ const SetupDOMReady = async evt => {
                     const timestamp = Number(post.timestamp);
                     if (Number.isFinite(timestamp) && timestamp > 0) {
                         return timestamp > 1e12 ? timestamp : timestamp * 1000;
-                    }                    const date = Number(post.date);
+                    }
+                    const date = Number(post.date);
                     return Number.isFinite(date) && date > 0 ? date * 1000 : 0;
                 };
 
@@ -855,7 +856,8 @@ const SetupDOMReady = async evt => {
                 await drawBlog();
             }
 
-            if (router === "admin") {                const [{ default: MarkdownEditor }, { default: GitHubAPI }] =
+            if (router === "admin") {
+                const [{ default: MarkdownEditor }, { default: GitHubAPI }] =
                     await Promise.all([
                         import("./modules/models/MarkdownEditor.mjs"),
                         import("./modules/lib/GitHubAPI.mjs")
@@ -916,29 +918,21 @@ const SetupDOMReady = async evt => {
                 // Autenticação administrativa pelo Service Worker.
                 const modal = dc.getElementById("modal-github-auth");
 
-                const statusElement = dc.getElementById(
-                    "github-auth-status"
-                );
+                const statusElement = dc.getElementById("github-auth-status");
 
-                const introElement = dc.getElementById(
-                    "github-auth-intro"
-                );
+                const introElement = dc.getElementById("github-auth-intro");
 
                 const identityElement = dc.getElementById(
                     "github-auth-identity"
                 );
 
-                const errorElement = dc.getElementById(
-                    "github-auth-error"
-                );
+                const errorElement = dc.getElementById("github-auth-error");
 
                 const diagnosticsElement = dc.getElementById(
                     "github-auth-diagnostics"
                 );
 
-                const confirmButton = dc.getElementById(
-                    "github-auth-confirm"
-                );
+                const confirmButton = dc.getElementById("github-auth-confirm");
 
                 const copyDiagnosticsButton = dc.getElementById(
                     "github-auth-copy-diagnostics"
@@ -964,9 +958,7 @@ const SetupDOMReady = async evt => {
                 // Apresenta o erro no próprio modal e mantém o modal aberto.
                 const showAuthError = (error, details = null) => {
                     const message =
-                        error instanceof Error
-                            ? error.message
-                            : String(error);
+                        error instanceof Error ? error.message : String(error);
 
                     statusElement.textContent = authMessage(
                         "github_auth_save_failed"
@@ -974,9 +966,7 @@ const SetupDOMReady = async evt => {
 
                     diagnosticsElement.textContent = [
                         message,
-                        details
-                            ? JSON.stringify(details, null, 2)
-                            : ""
+                        details ? JSON.stringify(details, null, 2) : ""
                     ]
                         .filter(Boolean)
                         .join("\n\n");
@@ -1017,36 +1007,23 @@ const SetupDOMReady = async evt => {
                         );
                     }
 
-                    const avatar = dc.getElementById(
-                        "github-auth-avatar"
-                    );
+                    const avatar = dc.getElementById("github-auth-avatar");
 
-                    const name = dc.getElementById(
-                        "github-auth-name"
-                    );
+                    const name = dc.getElementById("github-auth-name");
 
-                    const login = dc.getElementById(
-                        "github-auth-login"
-                    );
+                    const login = dc.getElementById("github-auth-login");
 
-                    const id = dc.getElementById(
-                        "github-auth-id"
-                    );
+                    const id = dc.getElementById("github-auth-id");
 
-                    const profile = dc.getElementById(
-                        "github-auth-profile"
-                    );
+                    const profile = dc.getElementById("github-auth-profile");
 
                     const emailContainer = dc.getElementById(
                         "github-auth-email-container"
                     );
 
-                    const email = dc.getElementById(
-                        "github-auth-email"
-                    );
+                    const email = dc.getElementById("github-auth-email");
 
-                    const profileURL =
-                        user.profile_url || user.html_url || "";
+                    const profileURL = user.profile_url || user.html_url || "";
 
                     if (avatar) {
                         avatar.src = user.avatar_url || "";
@@ -1054,14 +1031,11 @@ const SetupDOMReady = async evt => {
                     }
 
                     if (name) {
-                        name.textContent =
-                            user.name || user.login || "";
+                        name.textContent = user.name || user.login || "";
                     }
 
                     if (login) {
-                        login.textContent = user.login
-                            ? `@${user.login}`
-                            : "";
+                        login.textContent = user.login ? `@${user.login}` : "";
                     }
 
                     if (id) {
@@ -1077,9 +1051,7 @@ const SetupDOMReady = async evt => {
                         const hasEmail = Boolean(user.email);
 
                         emailContainer.hidden = !hasEmail;
-                        email.textContent = hasEmail
-                            ? user.email
-                            : "";
+                        email.textContent = hasEmail ? user.email : "";
                     }
 
                     introElement.hidden = true;
@@ -1093,40 +1065,33 @@ const SetupDOMReady = async evt => {
                 };
 
                 // Abre o modal e verifica o estado atual da autenticação.
-                githubAuthModal.show();
+                
 
                 statusElement.textContent = authMessage(
                     "github_auth_verifying"
                 );
 
                 try {
-                    const response = await fetch(
-                        "/admin-auth/status",
-                        {
-                            method: "GET",
-                            credentials: "same-origin",
-                            cache: "no-store",
-                            headers: {
-                                Accept: "application/json"
-                            }
+                    const response = await fetch("/admin-auth/status", {
+                        method: "GET",
+                        credentials: "same-origin",
+                        cache: "no-store",
+                        headers: {
+                            Accept: "application/json"
                         }
-                    );
+                    });
 
                     const result = await readAuthResponse(response);
 
                     if (result.status === "authenticated") {
                         // O Service Worker já confirmou a autenticação.
-                        githubAuthModal.hide();
-                    } else if (
-                        result.status === "pending_confirmation"
-                    ) {
+                        
+                    } else if (result.status === "pending_confirmation") {
                         // Exibe a identidade e aguarda confirmação explícita.
-                        renderGitHubIdentity(
-                            result.user || result.identity
-                        );
-                    } else if (
-                        result.status === "unauthenticated"
-                    ) {
+                        githubAuthModal.show();
+                        renderGitHubIdentity(result.user || result.identity);
+                    } else if (result.status === "unauthenticated") {
+                        githubAuthModal.show();
                         introElement.hidden = false;
                         identityElement.hidden = true;
                         statusElement.textContent = "";
@@ -1136,81 +1101,68 @@ const SetupDOMReady = async evt => {
                         );
                     }
                 } catch (error) {
+                    githubAuthModal.show();
                     showAuthError(error);
                 }
 
                 // O usuário confirma a identidade.
                 // A confirmação só libera o painel depois do sucesso do POST.
-                confirmButton.addEventListener(
-                    "click",
-                    async () => {
-                        if (confirmButton.disabled) return;
+                confirmButton.addEventListener("click", async () => {
+                    if (confirmButton.disabled) return;
 
-                        confirmButton.disabled = true;
+                    confirmButton.disabled = true;
 
-                        statusElement.textContent = authMessage(
-                            "github_auth_saving"
-                        );
+                    statusElement.textContent =
+                        authMessage("github_auth_saving");
 
-                        errorElement.hidden = true;
-                        diagnosticsElement.textContent = "";
+                    errorElement.hidden = true;
+                    diagnosticsElement.textContent = "";
 
-                        try {
-                            const response = await fetch(
-                                "/admin-auth/confirm",
-                                {
-                                    method: "POST",
-                                    credentials: "same-origin",
-                                    cache: "no-store",
-                                    headers: {
-                                        Accept: "application/json"
-                                    }
-                                }
-                            );
-
-                            const result =
-                                await readAuthResponse(response);
-
-                            if (result.ok !== true) {
-                                throw new Error(
-                                    result.error ||
-                                        result.message ||
-                                        "O Service Worker não confirmou a gravação da identidade."
-                                );
+                    try {
+                        const response = await fetch("/admin-auth/confirm", {
+                            method: "POST",
+                            credentials: "same-origin",
+                            cache: "no-store",
+                            headers: {
+                                Accept: "application/json"
                             }
+                        });
 
-                            // Fecha o modal somente após o Service Worker
-                            // confirmar que a gravação foi concluída.
-                            githubAuthModal.hide();
-                        } catch (error) {
-                            showAuthError(error);
-                        } finally {
-                            confirmButton.disabled = false;
+                        const result = await readAuthResponse(response);
+
+                        if (result.ok !== true) {
+                            throw new Error(
+                                result.error ||
+                                    result.message ||
+                                    "O Service Worker não confirmou a gravação da identidade."
+                            );
                         }
+
+                        // Fecha o modal somente após o Service Worker
+                        // confirmar que a gravação foi concluída.
+                        githubAuthModal.hide();
+                    } catch (error) {
+                        showAuthError(error);
+                    } finally {
+                        confirmButton.disabled = false;
                     }
-                );
+                });
 
                 // Copia o diagnóstico exibido no modal.
-                copyDiagnosticsButton.addEventListener(
-                    "click",
-                    async () => {
-                        const diagnostics =
-                            diagnosticsElement.textContent || "";
+                copyDiagnosticsButton.addEventListener("click", async () => {
+                    const diagnostics = diagnosticsElement.textContent || "";
 
-                        if (!diagnostics) return;
+                    if (!diagnostics) return;
 
-                        try {
-                            await navigator.clipboard.writeText(
-                                diagnostics
-                            );
-                        } catch (error) {
-                            console.error(
-                                "[ADMIN AUTH]: Não foi possível copiar o diagnóstico.",
-                                error
-                            );
-                        }
+                    try {
+                        await navigator.clipboard.writeText(diagnostics);
+                    } catch (error) {
+                        console.error(
+                            "[ADMIN AUTH]: Não foi possível copiar o diagnóstico.",
+                            error
+                        );
                     }
-                );
+                });
 
                 SlideMenus();
                 AnchorScrool();
@@ -1366,7 +1318,8 @@ const SetupDOMReady = async evt => {
                     i18n.transcript();
                 }
             })();
-            break;        case "copyright":
+            break;
+        case "copyright":
             await TemplatesReady.import;
             //
             (async () => {
@@ -1638,7 +1591,9 @@ const SetupDOMReady = async evt => {
                 } else {
                     // @revise - Notify error in request documents
                     // @priority: MODERATE
-                    console.error("[POLICY]: could not load the policy documents");
+                    console.error(
+                        "[POLICY]: could not load the policy documents"
+                    );
                 }
             })();
 
@@ -1695,7 +1650,10 @@ const SetupDOMReady = async evt => {
                                                     // notify
                                                 })
                                                 .catch(error => {
-                                                    console.error("[POLICY]: could not clear the data storage", error);
+                                                    console.error(
+                                                        "[POLICY]: could not clear the data storage",
+                                                        error
+                                                    );
                                                     // notify
                                                 });
                                         } else if (
@@ -1708,7 +1666,10 @@ const SetupDOMReady = async evt => {
                                                     // notify
                                                 })
                                                 .catch(error => {
-                                                    console.error("[POLICY]: could not disable cookies", error);
+                                                    console.error(
+                                                        "[POLICY]: could not disable cookies",
+                                                        error
+                                                    );
                                                     // notify
                                                 });
                                         }
@@ -1749,7 +1710,10 @@ const SetupDOMReady = async evt => {
                                     // notify
                                 })
                                 .catch(error => {
-                                    console.error("[POLICY]: could not enable cookies", error);
+                                    console.error(
+                                        "[POLICY]: could not enable cookies",
+                                        error
+                                    );
                                     // notify
                                 });
                         },
@@ -1762,7 +1726,7 @@ const SetupDOMReady = async evt => {
 
         default:
             break;
-    }    // Rodapé: últimas postagens (limite: settings.articles['footer-max-list'])
+    } // Rodapé: últimas postagens (limite: settings.articles['footer-max-list'])
     renderFooterNews(
         settings,
         document.getElementById("dinamic-footer-news"),
