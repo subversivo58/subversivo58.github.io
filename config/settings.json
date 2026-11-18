@@ -195,6 +195,11 @@
                     "file": "/lab/assets/tpl/fixed-navbar-lab.tpl",
                     "mode": "append",
                     "target": "#body"
+                },
+                {
+                    "file": "/assets/tpl/drawer.tpl",
+                    "mode": "append",
+                    "target": "#body"
                 }
             ]
         },
