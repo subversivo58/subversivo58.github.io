@@ -283,8 +283,8 @@ async function appendSubmission(store, key, entry) {
 // ---------------------------------------------------------------
 
 async function runGitHubCorsTest() {
-    const endpoint = "https://webpush-proxy.dib.workers.dev/login/oauth/access_token";
     const upstreamEndpoint = "https://github.com/login/oauth/access_token";
+    const endpoint = `https://webpush-proxy.dib.workers.dev/${upstreamEndpoint}`;
     const startedAt = new Date().toISOString();
 
     const body = new URLSearchParams({
