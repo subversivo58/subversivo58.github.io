@@ -428,6 +428,15 @@
 
                         </a>
 
+                        <!-- NEW POST BUTTON -->
+                        <button
+                            type="button"
+                            id="admin-new-post"
+                            class="i18n btn btn-info btn-sm rounded-0
+                                   flex-fill flex-md-grow-0"
+                            data-i18n-html="admin_dashboard.new_post">
+                        </button>
+
                         <!-- MOBILE SETTINGS BUTTON -->
                         <a href="#admin-settings-slide"
                             id="slide-admin-settings"
@@ -439,20 +448,12 @@
 
                         </a>
 
-                        <!-- NEW POST BUTTON -->
-                        <button
-                            type="button"
-                            id="admin-new-post"
-                            class="i18n btn btn-info btn-sm rounded-0
-                                   flex-fill flex-md-grow-0"
-                            data-i18n-html="admin_dashboard.new_post">
-                        </button>
-
                         <!-- DESKTOP SETTINGS BUTTON -->
                         <button
                             type="button"
                             id="admin-settings-shortcut"
-                            class="rounded-0 ml-md-auto d-none d-md-inline-flex"
+                            class="btn btn-outline-secondary btn-sm
+                                   rounded-0 ml-2 d-none d-md-inline-flex"
                             aria-label="GitHub Config"
                             title="GitHub Config"
                             onclick="document.getElementById('admin-settings-tab').click()">
