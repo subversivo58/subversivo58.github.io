@@ -111,14 +111,17 @@
 
                             <div class="text-center mb-3">
 
-                                <img
-                                    id="admin-github-avatar-mobile"
-                                    src=""
-                                    alt=""
-                                    class="rounded-circle mb-2"
-                                    width="72"
-                                    height="72"
-                                    hidden>
+                                <picture>
+                                    <img
+                                        id="admin-github-avatar-mobile"
+                                        src="/assets/media/image/1x1.gif"
+                                        data-src=""
+                                        data-lazy-target
+                                        alt=""
+                                        class="rounded-circle mb-2"
+                                        width="72"
+                                        height="72">
+                                </picture>
 
                                 <h4
                                     id="admin-github-name-mobile"
@@ -150,8 +153,7 @@
                             </p>
 
                             <p id="admin-github-email-container-mobile"
-                                class="small mb-0"
-                                hidden>
+                                class="small mb-0">
                                 <strong class="i18n"
                                     data-i18n-html="github_auth.identity.email_label"></strong>
                                 <span id="admin-github-email-mobile"></span>
@@ -288,14 +290,17 @@
 
                                     <div class="text-center mb-3">
 
-                                        <img
-                                            id="admin-github-avatar-desktop"
-                                            src=""
-                                            alt=""
-                                            class="rounded-circle mb-2"
-                                            width="72"
-                                            height="72"
-                                            hidden>
+                                        <picture>
+                                            <img
+                                                id="admin-github-avatar-desktop"
+                                                src="/assets/media/image/1x1.gif"
+                                                data-src=""
+                                                data-lazy-target
+                                                alt=""
+                                                class="rounded-circle mb-2"
+                                                width="72"
+                                                height="72">
+                                        </picture>
 
                                         <h4
                                             id="admin-github-name-desktop"
@@ -327,8 +332,7 @@
                                     </p>
 
                                     <p id="admin-github-email-container-desktop"
-                                        class="small mb-0"
-                                        hidden>
+                                        class="small mb-0">
                                         <strong class="i18n"
                                             data-i18n-html="github_auth.identity.email_label"></strong>
                                         <span id="admin-github-email-desktop"></span>
