@@ -1,3 +1,4 @@
+
 {
     "404": {
         "general": "Ooops... Não encontrado!",
@@ -739,15 +740,23 @@
     },
     "github_auth": {
         "title": "Autenticação GitHub",
-        "description": "Informe sua API Key do GitHub para acessar o painel administrativo.",
-        "label": "GitHub API Key",
-        "placeholder": "Cole sua API Key",
-        "verify": "Verificar",
+        "description": "Autentique-se com sua conta do GitHub para acessar o painel administrativo.",
+        "start": "Autenticar com GitHub",
+        "confirm": "Confirmar e continuar",
+        "copy_diagnostics": "Copiar diagnóstico",
+        "identity": {
+            "id_label": "ID:",
+            "profile_label": "Perfil:",
+            "email_label": "E-mail público:",
+            "confirmation": "Confirme se deseja utilizar esta identidade no painel administrativo."
+        },
         "messages": {
-            "empty": "Informe sua API Key.",
+            "empty": "Inicie a autenticação com o GitHub.",
             "verifying": "Verificando autenticação...",
-            "failed": "Falha na autenticação. Verifique sua API Key.",
-            "authenticated": "Autenticado como {0}."
+            "failed": "Falha na autenticação com o GitHub. Tente novamente.",
+            "authenticated": "Autenticado como {0}.",
+            "saving": "Salvando identidade...",
+            "save_failed": "Não foi possível salvar a identidade. Tente novamente."
         }
     },
     "blog": {
