@@ -413,6 +413,27 @@ async function createCodeChallenge(verifier) {
 }
 
 // ===============================================================
+// DIAGNÓSTICO DO FLUXO OAUTH — SOMENTE EM MEMÓRIA
+// ===============================================================
+
+let oauthDiagnostics = [];
+
+function logOAuth(stage, status, details = "") {
+    oauthDiagnostics.push({
+        time: new Date().toISOString(),
+        stage,
+        status,
+        details: String(details || "")
+    });
+}
+
+function diagnosticText() {
+    return oauthDiagnostics.map(item =>
+        `[${item.time}] ${item.stage} — ${item.status}${item.details ? ": " + item.details : ""}`
+    ).join("\n");
+}
+
+// ===============================================================
 // RESPOSTAS HTML DO TESTE
 // ===============================================================
 
@@ -427,80 +448,60 @@ function escapeHTML(value) {
 }
 
 function oauthHTML(title, message, details = "") {
+    const report = diagnosticText();
+
     return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex">
-    <title>${escapeHTML(title)}</title>
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            box-sizing: border-box;
-            background: #111827;
-            color: #e5e7eb;
-            font: 16px/1.5 sans-serif;
-        }
-        main {
-            width: 100%;
-            max-width: 520px;
-            padding: 28px;
-            box-sizing: border-box;
-            background: #1f2937;
-            border: 1px solid #374151;
-        }
-        h1 {
-            margin-top: 0;
-            font-size: 23px;
-        }
-        p {
-            color: #d1d5db;
-        }
-        a {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 12px 20px;
-            background: #238636;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        pre {
-            padding: 12px;
-            overflow-wrap: anywhere;
-            white-space: pre-wrap;
-            background: #111827;
-            color: #fca5a5;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>${escapeHTML(title)}</title>
+<style>
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;background:#111827;color:#e5e7eb;font:16px/1.5 sans-serif}
+main{width:100%;max-width:680px;padding:28px;box-sizing:border-box;background:#1f2937;border:1px solid #374151}
+h1{margin-top:0;font-size:23px}p{color:#d1d5db}
+pre{padding:12px;overflow-wrap:anywhere;white-space:pre-wrap;background:#111827;color:#fca5a5}
+button{padding:12px 18px;border:0;background:#238636;color:white;font-weight:600;cursor:pointer}
+.report{color:#d1d5db;font-size:13px}
+</style>
 </head>
-<body>
-    <main>
-        <h1>${escapeHTML(title)}</h1>
-        <p>${escapeHTML(message)}</p>
-        ${details}
-    </main>
-</body>
-</html>`;
+<body><main>
+<h1>${escapeHTML(title)}</h1>
+<p>${escapeHTML(message)}</p>
+${details}
+<h2>Diagnóstico</h2>
+<pre id="oauth-diagnostic" class="report">${escapeHTML(report || "Nenhum registro disponível nesta execução.")}</pre>
+<button type="button" id="copy-diagnostic">Copiar diagnóstico</button>
+</main>
+<script>
+document.getElementById("copy-diagnostic").addEventListener("click", async () => {
+ const value = document.getElementById("oauth-diagnostic").textContent;
+ try {
+  await navigator.clipboard.writeText(value);
+  document.getElementById("copy-diagnostic").textContent = "Copiado!";
+ } catch {
+  const area = document.createElement("textarea");
+  area.value = value;
+  document.body.appendChild(area);
+  area.select();
+  document.execCommand("copy");
+  area.remove();
+  document.getElementById("copy-diagnostic").textContent = "Copiado!";
+ }
+});
+</script>
+</body></html>`;
 }
 
 function oauthResponse(title, message, status = 200, details = "") {
-    return new Response(
-        oauthHTML(title, message, details),
-        {
-            status,
-            headers: {
-                "Content-Type": "text/html; charset=utf-8",
-                "Cache-Control": "no-store"
-            }
+    return new Response(oauthHTML(title, message, details), {
+        status,
+        headers: {
+            "Content-Type": "text/html; charset=utf-8",
+            "Cache-Control": "no-store"
         }
-    );
+    });
 }
 
 // ===============================================================
@@ -508,9 +509,23 @@ function oauthResponse(title, message, status = 200, details = "") {
 // ===============================================================
 
 async function startGitHubOAuth() {
+    oauthDiagnostics = [];
+
+    logOAuth(
+        "Início",
+        "OK",
+        "GET /teste-github recebido pelo Service Worker."
+    );
+
     const state = randomOAuthValue(32);
     const verifier = randomOAuthValue(64);
     const challenge = await createCodeChallenge(verifier);
+
+    logOAuth(
+        "PKCE",
+        "OK",
+        "state, code_verifier e code_challenge gerados."
+    );
 
     await authStorage("set", "oauth_pending", {
         state,
@@ -518,36 +533,24 @@ async function startGitHubOAuth() {
         createdAt: Date.now()
     });
 
+    logOAuth(
+        "IndexedDB",
+        "OK",
+        "Dados temporários OAuth armazenados."
+    );
+
     const authorizationURL = new URL(GITHUB_AUTHORIZE_URL);
 
-    authorizationURL.searchParams.set(
-        "client_id",
-        GITHUB_CLIENT_ID
-    );
+    authorizationURL.searchParams.set("client_id", GITHUB_CLIENT_ID);
+    authorizationURL.searchParams.set("redirect_uri", GITHUB_REDIRECT_URI);
+    authorizationURL.searchParams.set("state", state);
+    authorizationURL.searchParams.set("code_challenge", challenge);
+    authorizationURL.searchParams.set("code_challenge_method", "S256");
 
-    authorizationURL.searchParams.set(
-        "redirect_uri",
-        GITHUB_REDIRECT_URI
-    );
-
-    authorizationURL.searchParams.set(
-        "state",
-        state
-    );
-
-    authorizationURL.searchParams.set(
-        "code_challenge",
-        challenge
-    );
-
-    authorizationURL.searchParams.set(
-        "code_challenge_method",
-        "S256"
-    );
-
-    authorizationURL.searchParams.set(
-        "prompt",
-        "select_account"
+    logOAuth(
+        "Redirecionamento",
+        "302",
+        "Indo para autorização GitHub na mesma aba."
     );
 
     return Response.redirect(
@@ -561,6 +564,12 @@ async function startGitHubOAuth() {
 // ===============================================================
 
 async function exchangeGitHubCode(code, verifier) {
+    logOAuth(
+        "Proxy",
+        "ENVIANDO",
+        "POST para troca do código por token."
+    );
+
     const body = new URLSearchParams({
         client_id: GITHUB_CLIENT_ID,
         code,
@@ -579,13 +588,19 @@ async function exchangeGitHubCode(code, verifier) {
 
     const responseText = await response.text();
 
+    logOAuth(
+        "Proxy",
+        `HTTP ${response.status}`,
+        response.ok ? "Resposta recebida." : "Resposta com erro."
+    );
+
     let result;
 
     try {
         result = JSON.parse(responseText);
     } catch {
         throw new Error(
-            `Resposta inválida do endpoint de token: HTTP ${response.status}`
+            `Resposta não JSON (HTTP ${response.status}): ${responseText.slice(0, 1000)}`
         );
     }
 
@@ -593,9 +608,16 @@ async function exchangeGitHubCode(code, verifier) {
         throw new Error(
             result.error_description ||
             result.error ||
-            `Falha na troca do código. HTTP ${response.status}`
+            result.message ||
+            `Falha HTTP ${response.status}: ${responseText.slice(0, 1000)}`
         );
     }
+
+    logOAuth(
+        "Token",
+        "OK",
+        "Token recebido; conteúdo omitido."
+    );
 
     return result;
 }
@@ -605,6 +627,12 @@ async function exchangeGitHubCode(code, verifier) {
 // ===============================================================
 
 async function getGitHubUser(accessToken) {
+    logOAuth(
+        "GitHub /user",
+        "ENVIANDO",
+        "Consultando identidade."
+    );
+
     const response = await fetch(GITHUB_API_USER, {
         method: "GET",
         headers: {
@@ -616,8 +644,16 @@ async function getGitHubUser(accessToken) {
     });
 
     if (!response.ok) {
+        const body = await response.text();
+
+        logOAuth(
+            "GitHub /user",
+            `HTTP ${response.status}`,
+            "Consulta de identidade falhou."
+        );
+
         throw new Error(
-            `Falha ao consultar GitHub /user: HTTP ${response.status}`
+            `GitHub /user HTTP ${response.status}: ${body.slice(0, 1000)}`
         );
     }
 
@@ -625,9 +661,15 @@ async function getGitHubUser(accessToken) {
 
     if (!user || !user.id || !user.login) {
         throw new Error(
-            "O GitHub não retornou uma identidade de usuário válida."
+            "O GitHub não retornou uma identidade válida."
         );
     }
+
+    logOAuth(
+        "GitHub /user",
+        "OK",
+        `Conta identificada: ${user.login}.`
+    );
 
     return user;
 }
@@ -637,62 +679,84 @@ async function getGitHubUser(accessToken) {
 // ===============================================================
 
 async function handleGitHubCallback(url) {
-    const code = url.searchParams.get("code");
-    const returnedState = url.searchParams.get("state");
-
-    if (!code) {
-        return oauthResponse(
-            "Autenticação não concluída",
-            "O GitHub não retornou um código de autorização.",
-            400
-        );
-    }
-
-    if (!returnedState) {
-        return oauthResponse(
-            "Autenticação recusada",
-            "O parâmetro state não foi recebido. O processo foi interrompido.",
-            400
-        );
-    }
-
-    const pending = await authStorage(
-        "get",
-        "oauth_pending"
+    logOAuth(
+        "Callback",
+        "INÍCIO",
+        "Retorno do GitHub recebido."
     );
 
-    if (!pending || !pending.state || !pending.verifier) {
-        return oauthResponse(
-            "Solicitação expirada",
-            "Não foi encontrada uma solicitação de autenticação pendente. Inicie o processo novamente.",
-            400
-        );
-    }
-
-    if (Date.now() - pending.createdAt > 10 * 60 * 1000) {
-        await authStorage("delete", "oauth_pending");
-
-        return oauthResponse(
-            "Solicitação expirada",
-            "O prazo da solicitação de autenticação terminou. Inicie novamente.",
-            400
-        );
-    }
-
-    if (returnedState !== pending.state) {
-        await authStorage("delete", "oauth_pending");
-
-        return oauthResponse(
-            "Falha na validação",
-            "O parâmetro state recebido não corresponde à solicitação original.",
-            400
-        );
-    }
-
-    // O estado pendente é consumido antes da troca do código.
-    await authStorage("delete", "oauth_pending");
-
     try {
+        const code = url.searchParams.get("code");
+        const returnedState = url.searchParams.get("state");
+
+        if (url.searchParams.get("error")) {
+            throw new Error(
+                url.searchParams.get("error_description") ||
+                url.searchParams.get("error")
+            );
+        }
+
+        if (!code) {
+            throw new Error("O GitHub não retornou o código.");
+        }
+
+        if (!returnedState) {
+            throw new Error("O parâmetro state não foi recebido.");
+        }
+
+        logOAuth(
+            "Callback",
+            "OK",
+            "code e state recebidos; code omitido."
+        );
+
+        const pending = await authStorage(
+            "get",
+            "oauth_pending"
+        );
+
+        logOAuth(
+            "IndexedDB",
+            pending ? "OK" : "FALHA",
+            "Leitura dos dados temporários."
+        );
+
+        if (!pending || !pending.state || !pending.verifier) {
+            throw new Error(
+                "Solicitação pendente não encontrada no IndexedDB."
+            );
+        }
+
+        if (Date.now() - pending.createdAt > 10 * 60 * 1000) {
+            await authStorage("delete", "oauth_pending");
+
+            throw new Error(
+                "Solicitação OAuth expirada (10 minutos)."
+            );
+        }
+
+        if (returnedState !== pending.state) {
+            await authStorage("delete", "oauth_pending");
+
+            throw new Error(
+                "O state retornado não corresponde ao original."
+            );
+        }
+
+        logOAuth(
+            "Validação state",
+            "OK",
+            "Correspondência confirmada."
+        );
+
+        await authStorage("delete", "oauth_pending");
+
+        logOAuth(
+            "IndexedDB",
+            "OK",
+            "Dados temporários removidos após validação."
+        );
+
         const token = await exchangeGitHubCode(
             code,
             pending.verifier
@@ -725,21 +789,26 @@ async function handleGitHubCallback(url) {
             session
         );
 
-        const details = `
-            <p>Conta autenticada:</p>
-            <pre>${escapeHTML(user.login)}</pre>
-            <p>Identidade confirmada pelo endpoint GitHub /user.</p>
-            <a href="/teste-github">Ver estado da autenticação</a>
-        `;
+        logOAuth(
+            "Sessão",
+            "OK",
+            "Sessão armazenada; token omitido."
+        );
 
         return oauthResponse(
             "Autenticação concluída",
             "O Service Worker recebeu o token e identificou a conta GitHub.",
             200,
-            details
+            `<p>Conta autenticada:</p><pre>${escapeHTML(user.login)}</pre>`
         );
 
     } catch (error) {
+        logOAuth(
+            "Falha",
+            "ERRO",
+            error?.message || String(error)
+        );
+
         console.error(
             "[SW] Falha na autenticação GitHub:",
             error
@@ -747,7 +816,7 @@ async function handleGitHubCallback(url) {
 
         return oauthResponse(
             "Falha na autenticação",
-            error?.message || "Não foi possível concluir a autenticação.",
+            error?.message || "Erro desconhecido.",
             502
         );
     }
@@ -760,74 +829,55 @@ async function handleGitHubCallback(url) {
 async function handleGitHubOAuth(request) {
     const url = new URL(request.url);
 
-    // O GitHub pode devolver um erro se o usuário cancelar.
-    const oauthError = url.searchParams.get("error");
+    try {
+        if (url.searchParams.get("logout") === "1") {
+            await authStorage(
+                "delete",
+                "github_session"
+            );
 
-    if (oauthError) {
-        return oauthResponse(
-            "Autorização não concedida",
-            url.searchParams.get("error_description") ||
-            oauthError,
-            400
-        );
-    }
+            logOAuth(
+                "Sessão",
+                "ENCERRADA",
+                "Sessão local removida."
+            );
 
-    // Inicia o fluxo quando o usuário aciona o link.
-    if (url.searchParams.get("login") === "1") {
-        try {
-            return await startGitHubOAuth();
-        } catch (error) {
             return oauthResponse(
-                "Não foi possível iniciar",
-                error?.message || "Falha ao iniciar a autenticação.",
-                500
+                "Sessão encerrada",
+                "A sessão GitHub local foi removida.",
+                200
             );
         }
-    }
 
-    // Callback: presença de code indica retorno do GitHub.
-    if (url.searchParams.has("code")) {
-        return handleGitHubCallback(url);
-    }
+        if (
+            url.searchParams.has("error") ||
+            url.searchParams.has("code")
+        ) {
+            return await handleGitHubCallback(url);
+        }
 
-    // Consulta a sessão existente.
-    if (url.searchParams.get("logout") === "1") {
-        await authStorage("delete", "github_session");
+        // Todo GET sem callback inicia automaticamente a autorização.
+        // Não existe botão de início nem query ?login=1.
+        return await startGitHubOAuth();
+
+    } catch (error) {
+        logOAuth(
+            "Erro não tratado",
+            "500",
+            error?.message || String(error)
+        );
+
+        console.error(
+            "[SW] Erro em /teste-github:",
+            error
+        );
 
         return oauthResponse(
-            "Sessão encerrada",
-            "A sessão GitHub local foi removida.",
-            200,
-            '<a href="/teste-github">Voltar</a>'
+            "Erro no fluxo OAuth",
+            error?.message || "Falha inesperada.",
+            500
         );
     }
-
-    const session = await authStorage(
-        "get",
-        "github_session"
-    );
-
-    if (session?.authenticated && session.user) {
-        const details = `
-            <p>Conta autenticada:</p>
-            <pre>${escapeHTML(session.user.login)}</pre>
-            <a href="/teste-github?logout=1">Encerrar sessão</a>
-        `;
-
-        return oauthResponse(
-            "GitHub conectado",
-            "Existe uma sessão GitHub armazenada pelo Service Worker.",
-            200,
-            details
-        );
-    }
-
-    return oauthResponse(
-        "Teste de autenticação GitHub",
-        "Inicie a autenticação para conectar sua conta GitHub ao Blog.",
-        200,
-        '<a href="/teste-github?login=1">Entrar com GitHub</a>'
-    );
 }
 
 RegisterRoute("/teste-github", handleGitHubOAuth);
