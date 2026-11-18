@@ -1939,3 +1939,40 @@ dc.addEventListener("click", async event => {
         // the user cancelled the share sheet
     }
 });
+// Limpa as credenciais OAuth do GitHub pelos botões mobile e desktop.
+const handleGitHubCredentialsClear = async event => {
+    const button = event.target.closest(
+        "#admin-github-credentials-clear-mobile, " +
+        "#admin-github-credentials-clear-desktop"
+    );
+
+    if (!button) return;
+
+    if (!DBMethods) {
+        console.error(
+            "[ADMIN]: IndexedDB indisponível; não foi possível limpar as credenciais."
+        );
+        return;
+    }
+
+    button.disabled = true;
+
+    try {
+        await DBMethods.delete({
+            tbn: "config",
+            tbk: "user-github"
+        });
+
+        // Recarrega o painel sem a autenticação anterior.
+        wd.location.reload();
+    } catch (error) {
+        button.disabled = false;
+
+        console.error(
+            "[ADMIN]: Não foi possível limpar as credenciais do GitHub.",
+            error
+        );
+    }
+};
+
+dc.addEventListener("click", handleGitHubCredentialsClear);

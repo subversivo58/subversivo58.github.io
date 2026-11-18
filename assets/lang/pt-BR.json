@@ -589,7 +589,9 @@
         "settings": {
             "tab": "GitHub Config",
             "title": "GitHub Config",
-            "save": "Salvar"
+            "save": "Salvar",
+            "clear_credentials": "Limpar credenciais do GitHub",
+            "clear": "Limpar"
         },
         "close_editor": "Fechar editor",
         "footoodles": {
