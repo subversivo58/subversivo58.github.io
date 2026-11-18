@@ -534,7 +534,24 @@ const SetupDOMReady = async evt => {
             // Exibe o atalho administrativo quando existe uma chave salva.
             const adminShortcut = dc.getElementById("drawer-admin");
 
-            if (adminShortcut && LocalStorage.get("github-token")) {
+            // Exibe o atalho administrativo quando existe um PAT salvo.
+            let adminPAT = false;
+
+            if (DBMethods) {
+                try {
+                    adminPAT = await DBMethods.read({
+                        tbn: "config",
+                        tbk: "github-pat"
+                    });
+                } catch (error) {
+                    console.error(
+                        "[ADMIN]: Não foi possível consultar o PAT.",
+                        error
+                    );
+                }
+            }
+
+            if (adminShortcut && adminPAT) {
                 adminShortcut.classList.remove("d-none");
             }
 
@@ -863,7 +880,7 @@ const SetupDOMReady = async evt => {
                         import("./modules/lib/GitHubAPI.mjs")
                     ]);
 
-                const TOKEN_KEY = "github-token";
+                const TOKEN_KEY = "github-pat";
                 const REPOSITORY_OWNER = "subversivo58";
                 const REPOSITORY_NAME = "subversivo58.github.io";
                 const REPOSITORY_BRANCH = "main";
@@ -882,12 +899,6 @@ const SetupDOMReady = async evt => {
                         : "";
                 };
 
-                // Mantém a chave de API para publicação e edição.
-                const clearGitHubAuth = () => {
-                    LocalStorage.del(TOKEN_KEY);
-                    GitHubAPIInstance = null;
-                };
-
                 const authenticateGitHub = async token => {
                     const api = new GitHubAPI({ token });
 
@@ -899,19 +910,35 @@ const SetupDOMReady = async evt => {
                     return response.data;
                 };
 
-                // Restaura e valida a chave de API salva.
-                const storedToken = LocalStorage.get(TOKEN_KEY);
+                // Recupera o PAT do IndexedDB.
+                let storedToken = DBMethods
+                    ? await DBMethods.read({
+                          tbn: "config",
+                          tbk: TOKEN_KEY
+                      })
+                    : false;
 
-                if (storedToken) {
+                // Preenche os campos PAT desktop e mobile.
+                const patInputs = Array.from(
+                    dc.querySelectorAll("[data-github-pat-input]")
+                );
+
+                patInputs.forEach(input => {
+                    input.value =
+                        typeof storedToken === "string" ? storedToken : "";
+                });
+
+                // Valida o PAT armazenado sem apagá-lo em caso de erro.
+                if (typeof storedToken === "string" && storedToken.trim()) {
                     try {
                         await authenticateGitHub(storedToken);
                     } catch (error) {
+                        GitHubAPIInstance = null;
+
                         console.error(
-                            "[ADMIN]: A chave de API armazenada não é válida.",
+                            "[ADMIN]: O PAT armazenado não é válido.",
                             error
                         );
-
-                        clearGitHubAuth();
                     }
                 }
 
@@ -1063,6 +1090,95 @@ const SetupDOMReady = async evt => {
                         user.login || ""
                     );
                 };
+
+                // Preenche os banners de identidade desktop e mobile.
+                const renderAdminGitHubIdentity = user => {
+                    if (!user || typeof user !== "object") return;
+
+                    const profileURL =
+                        user.profile_url || user.html_url || user.url || "";
+
+                    ["mobile", "desktop"].forEach(target => {
+                        const avatar = dc.getElementById(
+                            `admin-github-avatar-${target}`
+                        );
+
+                        const name = dc.getElementById(
+                            `admin-github-name-${target}`
+                        );
+
+                        const login = dc.getElementById(
+                            `admin-github-login-${target}`
+                        );
+
+                        const id = dc.getElementById(
+                            `admin-github-id-${target}`
+                        );
+
+                        const profile = dc.getElementById(
+                            `admin-github-profile-${target}`
+                        );
+
+                        const email = dc.getElementById(
+                            `admin-github-email-${target}`
+                        );
+
+                        if (avatar) {
+                            avatar.dataset.src = user.avatar_url || "";
+                            avatar.alt = user.name || user.login || "GitHub";
+
+                            if (user.avatar_url) {
+                                lazyLoad.observe([avatar]);
+                            }
+                        }
+
+                        if (name) {
+                            name.textContent = user.name || user.login || "";
+                        }
+
+                        if (login) {
+                            login.textContent = user.login
+                                ? `@${user.login}`
+                                : "";
+                        }
+
+                        if (id) {
+                            id.textContent = String(user.id ?? "");
+                        }
+
+                        if (profile) {
+                            profile.textContent = profileURL;
+                            profile.href = profileURL || "#";
+                        }
+
+                        if (email) {
+                            email.textContent = user.email || "";
+                        }
+                    });
+                };
+
+                // Recupera a identidade confirmada no IndexedDB.
+                const loadAdminGitHubIdentity = async () => {
+                    if (!DBMethods) return;
+
+                    const user = await DBMethods.read({
+                        tbn: "config",
+                        tbk: "user-github"
+                    });
+
+                    if (user) {
+                        renderAdminGitHubIdentity(user);
+                    }
+                };
+
+                // Carrega a identidade ao abrir o painel.
+                loadAdminGitHubIdentity().catch(error => {
+                    console.error(
+                        "[ADMIN]: Não foi possível carregar a identidade.",
+                        error
+                    );
+                });
+
                 // Verifica o estado atual antes de decidir se abre o modal.
 
                 statusElement.textContent = authMessage(
@@ -1137,6 +1253,13 @@ const SetupDOMReady = async evt => {
 
                         // Fecha o modal somente após o Service Worker
                         // confirmar que a gravação foi concluída.
+                        loadAdminGitHubIdentity().catch(error => {
+                            console.error(
+                                "[ADMIN]: Não foi possível atualizar a identidade.",
+                                error
+                            );
+                        });
+
                         githubAuthModal.hide();
                     } catch (error) {
                         showAuthError(error);
@@ -1160,6 +1283,68 @@ const SetupDOMReady = async evt => {
                         );
                     }
                 });
+
+                // Salva o PAT no IndexedDB e atualiza a instância da API.
+                const saveGitHubPAT = async input => {
+                    const token = input.value.trim();
+
+                    // Campo vazio não substitui nem apaga o PAT existente.
+                    if (!token) {
+                        input.value =
+                            typeof storedToken === "string" ? storedToken : "";
+                        return;
+                    }
+
+                    if (!DBMethods) {
+                        throw new Error(
+                            "IndexedDB indisponível. O PAT não foi salvo."
+                        );
+                    }
+
+                    // Valida a credencial antes de substituir a anterior.
+                    const api = new GitHubAPI({ token });
+
+                    await api.GHInstance.getUser().getProfile();
+
+                    await DBMethods.update([
+                        {
+                            tbn: "config",
+                            tbk: TOKEN_KEY,
+                            tbv: token
+                        }
+                    ]);
+
+                    storedToken = token;
+                    GitHubAPIInstance = api;
+
+                    patInputs.forEach(field => {
+                        field.value = token;
+                    });
+
+                    console.info("[ADMIN]: PAT salvo e validado.");
+                };
+
+                // Liga os botões Salvar das versões desktop e mobile.
+                dc.querySelectorAll("[data-github-pat-save]").forEach(
+                    button => {
+                        button.addEventListener("click", async () => {
+                            const input = button
+                                .closest(".input-group")
+                                ?.querySelector("[data-github-pat-input]");
+
+                            if (!input) return;
+
+                            try {
+                                await saveGitHubPAT(input);
+                            } catch (error) {
+                                console.error(
+                                    "[ADMIN]: Não foi possível salvar o PAT.",
+                                    error
+                                );
+                            }
+                        });
+                    }
+                );
 
                 SlideMenus();
                 AnchorScrool();
