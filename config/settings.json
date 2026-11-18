@@ -14,6 +14,10 @@
             "revisions": []
         }
     },
+    "github_auth": {
+        "repository_owner": "subversivo58",
+        "repository_name": "subversivo58.github.io"
+    },
     "articles": {
         "storage": [
             {
