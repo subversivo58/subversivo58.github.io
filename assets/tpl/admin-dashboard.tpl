@@ -435,19 +435,7 @@
                                   rounded-0 mr-2 d-md-none"
                             aria-label="GitHub Config">
 
-                            <span aria-hidden="true">&#9881;</span>
-
-                        </a>
-
-                        <!-- DESKTOP SETTINGS BUTTON -->
-                        <a href="#admin-settings-pane"
-                            id="admin-settings-shortcut"
-                            class="btn btn-outline-secondary btn-sm
-                                  rounded-0 mr-2 d-none d-md-inline-flex"
-                            data-toggle="tab"
-                            aria-label="GitHub Config">
-
-                            <span aria-hidden="true">&#9881;</span>
+                            <span aria-hidden="true">⚙️</span>
 
                         </a>
 
@@ -458,6 +446,20 @@
                             class="i18n btn btn-info btn-sm rounded-0
                                    flex-fill flex-md-grow-0"
                             data-i18n-html="admin_dashboard.new_post">
+                        </button>
+
+                        <!-- DESKTOP SETTINGS BUTTON -->
+                        <button
+                            type="button"
+                            id="admin-settings-shortcut"
+                            class="btn btn-outline-secondary btn-sm
+                                   rounded-0 ml-2 d-none d-md-inline-flex"
+                            aria-label="GitHub Config"
+                            title="GitHub Config"
+                            onclick="document.getElementById('admin-settings-tab').click()">
+
+                            <span aria-hidden="true">⚙️</span>
+
                         </button>
 
                     </div>
