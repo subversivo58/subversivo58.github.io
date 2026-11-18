@@ -36,7 +36,7 @@ const AdminHTML = `<!--
     <meta name="description" content="Subversivo58 Personal Blog Page">
     <meta name="keywords" content="blog, news, projects, tech, tendences, cyberculture, subversivo58">
     <meta name="author" content="Subversivo58">
-    <meta name="DEBUG" content="false">
+    <meta name="DEBUG" content="true">
     <meta name="reply-to" content="https://github.com/subversivo58/subversivo58.github.io/issues/new">
     <link rel="copyright" href="copyright.html">
     <meta name="robots" content="noindex">
