@@ -1,3 +1,4 @@
+
 <!-- MODALS -->
 
 <!-- LANGUAGE SELECTOR MODAL -->
@@ -290,7 +291,7 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <form id="fats-notes-form" action="./notes" method="post" accept-charset="utf-8">
+                        <form id="fats-notes-form" action="/notes" method="post" accept-charset="utf-8">
                             <p id="fats-notes-form-status" class="small mt-2 mb-0" role="status" hidden></p>
                             <div class="col px-0">
                                 <div class="col px-0">
@@ -373,7 +374,7 @@
             </div>
             <div class="modal-footer">
                 <div class="col px-0">
-                    <a href="{{adjust_dirs=./docs}}" target="_blank" class="tdu sky cp">
+                    <a href="/docs" target="_blank" class="tdu sky cp">
                         <small class="i18n" data-i18n-html="modals.offline.about"></small>
                     </a>
                 </div>
@@ -416,7 +417,7 @@
                     <div class="col-12 alert alert-success rounded-0 px-2 mt-3">
                         <p data-i18n-html="modals.version.text1" class="i18n-prepend"><a href='https://github.com/subversivo58/subversivo58.github.io/blob/master/CONTRIBUTORS.md' target="about:blank" rel="noopener" data-i18n-html="modals.version.text2" class="i18n ext-link-icon"></a></p>
                         <p data-i18n-html="modals.version.text3" class="i18n"></p>
-                        <a href="./copyright.html" target="about:blank" class="tdu ext-link-icon">
+                        <a href="/copyright.html" target="about:blank" class="tdu ext-link-icon">
                             <small data-i18n-html="combo.seelicenses" class="i18n"></small>
                         </a>
                     </div>
@@ -462,7 +463,7 @@
                             </div>
 
                             <div class="d-flex w-100 mt-2">
-                                <form class="col-12 d-inline-block px-0" id="feedback-form" action="./feedback" method="post" accept-charset="utf-8">
+                                <form class="col-12 d-inline-block px-0" id="feedback-form" action="/feedback" method="post" accept-charset="utf-8">
                                     <p id="feedback-form-status" class="small mt-2 mb-0" role="status" hidden></p>
                                     <input type="hidden" id="feedback-rating" name="rating" form="feedback-form" disabled>
                                     <div class="form-group mt-1 mb-2">
@@ -501,7 +502,7 @@
             <div class="modal-body pt-0">
                 <div class="row">
                     <div class="col-12">
-                        <form id="bugs-report-form" action="./bugs" method="post" accept-charset="utf-8">
+                        <form id="bugs-report-form" action="/bugs" method="post" accept-charset="utf-8">
                             <p id="bugs-report-form-status" class="small mt-2 mb-0" role="status" hidden></p>
                             <div class="col px-0">
                                 <div class="col px-0">

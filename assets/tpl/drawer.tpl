@@ -61,7 +61,7 @@
             </div>
             <!-- LABORATORY -->
             <div class="p-2 col-4 ct cp">
-                <a href="./lab/" class="tdu-none">
+                <a href="/lab/" class="tdu-none">
                     <span class="d-block p-1">🧪</span>
                     <span data-i18n-html="drawer.words.lab" class="i18n d-block"></span>
                 </a>
