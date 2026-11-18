@@ -7,6 +7,27 @@
 
 import AWIndexedDB from "./assets/js/modules/lib/AwesomeIndexedDB.mjs";
 
+// ===============================================================
+// CONFIGURAÇÃO GITHUB OAUTH
+// ===============================================================
+
+const GITHUB_CLIENT_ID = "Ov23limwScBObcEQ2q8m";
+const GITHUB_REDIRECT_URI =
+    "https://subversivo58.github.io/teste-github";
+
+const GITHUB_AUTHORIZE_URL =
+    "https://github.com/login/oauth/authorize";
+
+const GITHUB_TOKEN_URL =
+    "https://webpush-proxy.dib.workers.dev/https://github.com/login/oauth/access_token";
+
+const GITHUB_API_USER =
+    "https://api.github.com/user";
+
+// ===============================================================
+// ADMIN HTML
+// ===============================================================
+
 const AdminHTML = `<!--
   @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/main/LICENSE]
   @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
@@ -190,6 +211,10 @@ const AdminHTML = `<!--
 </body>
 </html>`;
 
+// ===============================================================
+// ROTAS
+// ===============================================================
+
 const Routes = new Map();
 
 function RegisterRoute(path, handler) {
@@ -199,7 +224,9 @@ function RegisterRoute(path, handler) {
 function Router(request) {
     const url = new URL(request.url);
     const handler = Routes.get(url.pathname);
+
     if (!handler) return null;
+
     return handler(request);
 }
 
@@ -215,9 +242,9 @@ RegisterRoute(
         })
 );
 
-// ---------------------------------------------------------------
-// IndexedDB
-// ---------------------------------------------------------------
+// ===============================================================
+// INDEXEDDB EXISTENTE DO BLOG
+// ===============================================================
 
 let settingsPromise = null;
 let databasePromise = null;
@@ -231,6 +258,7 @@ function loadSettings() {
             if (!response.ok) {
                 throw new Error(`settings.json (${response.status})`);
             }
+
             return response.json();
         });
 
@@ -246,11 +274,13 @@ function getDatabase() {
     if (!databasePromise) {
         databasePromise = loadSettings().then(settings => {
             const database = settings.database;
+
             const connection = new AWIndexedDB(
                 database.name,
                 database.version,
                 false
             );
+
             return connection.open(database.indexed);
         });
 
@@ -278,171 +308,534 @@ async function appendSubmission(store, key, entry) {
     ]);
 }
 
-// ---------------------------------------------------------------
-// Teste CORS do endpoint OAuth do GitHub através do proxy
-// ---------------------------------------------------------------
+// ===============================================================
+// ARMAZENAMENTO DA AUTENTICAÇÃO OAUTH
+// ===============================================================
 
-async function runGitHubCorsTest() {
-    const upstreamEndpoint = "https://github.com/login/oauth/access_token";
-    const endpoint = `https://webpush-proxy.dib.workers.dev/${upstreamEndpoint}`;
-    const startedAt = new Date().toISOString();
+const AUTH_DB_NAME = "Subversivo58GitHubAuth";
+const AUTH_DB_VERSION = 1;
+const AUTH_STORE_NAME = "auth";
 
-    const body = new URLSearchParams({
-        client_id: "00000000000000000000",
-        client_secret: "invalid-test-secret",
-        code: "invalid-test-authorization-code",
-        redirect_uri: new URL("/teste-github", self.location.origin).href
-    });
+let authDatabasePromise = null;
 
-    const result = {
-        test: "GitHub OAuth token endpoint - CORS via Cloudflare proxy",
-        startedAt,
-        request: {
-            method: "POST",
-            endpoint,
-            upstreamEndpoint,
-            origin: self.location.origin,
-            contentType: "application/x-www-form-urlencoded",
-            credentials: "fictitious"
-        },
-        outcome: null,
-        response: null,
-        error: null,
-        database: {
-            saved: false,
-            store: "analytics",
-            key: "github-oauth-cors-test"
-        }
-    };
+function openAuthDatabase() {
+    if (!authDatabasePromise) {
+        authDatabasePromise = new Promise((resolve, reject) => {
+            const request = indexedDB.open(
+                AUTH_DB_NAME,
+                AUTH_DB_VERSION
+            );
 
-    try {
-        const response = await fetch(endpoint, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body
+            request.onupgradeneeded = () => {
+                const database = request.result;
+
+                if (!database.objectStoreNames.contains(AUTH_STORE_NAME)) {
+                    database.createObjectStore(AUTH_STORE_NAME);
+                }
+            };
+
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
         });
 
-        const headers = Object.fromEntries(response.headers.entries());
-
-        let responseBody = "";
-        let parsedBody = null;
-        let bodyReadError = null;
-
-        try {
-            responseBody = await response.text();
-
-            try {
-                parsedBody = JSON.parse(responseBody);
-            } catch {
-                parsedBody = null;
-            }
-        } catch (error) {
-            bodyReadError = String(error);
-        }
-
-        result.outcome = "http-response";
-        result.response = {
-            status: response.status,
-            statusText: response.statusText,
-            ok: response.ok,
-            type: response.type,
-            url: response.url,
-            redirected: response.redirected,
-            headers,
-            body: parsedBody ?? responseBody,
-            bodyReadError
-        };
-    } catch (error) {
-        result.outcome = "fetch-blocked";
-        result.error = {
-            name: error?.name || "Error",
-            message: String(error?.message || error),
-            explanation:
-                "O navegador não permitiu que o Service Worker obtivesse uma resposta legível do proxy. Isso pode ocorrer por CORS ou por uma falha de rede. Sem uma resposta HTTP acessível, não é possível identificar o servidor responsável pelo bloqueio."
-        };
+        authDatabasePromise.catch(() => {
+            authDatabasePromise = null;
+        });
     }
 
-    result.finishedAt = new Date().toISOString();
-
-    try {
-        await appendSubmission(
-            "analytics",
-            "github-oauth-cors-test",
-            result
-        );
-
-        result.database.saved = true;
-    } catch (error) {
-        result.database.error = String(error?.message || error);
-    }
-
-    return result;
+    return authDatabasePromise;
 }
 
-function testHTML(result) {
-    const serialized = JSON.stringify(result).replace(/</g, "\\u003c");
+async function authStorage(action, key, value) {
+    const database = await openAuthDatabase();
 
+    return new Promise((resolve, reject) => {
+        const transaction = database.transaction(
+            AUTH_STORE_NAME,
+            "readwrite"
+        );
+
+        const store = transaction.objectStore(AUTH_STORE_NAME);
+        let request;
+
+        if (action === "get") {
+            request = store.get(key);
+        } else if (action === "set") {
+            request = store.put(value, key);
+        } else if (action === "delete") {
+            request = store.delete(key);
+        } else {
+            reject(new Error("Operação de armazenamento inválida."));
+            return;
+        }
+
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+// ===============================================================
+// FUNÇÕES CRIPTOGRÁFICAS — PKCE
+// ===============================================================
+
+function base64UrlEncode(bytes) {
+    let binary = "";
+
+    for (const byte of bytes) {
+        binary += String.fromCharCode(byte);
+    }
+
+    return btoa(binary)
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_")
+        .replace(/=+$/g, "");
+}
+
+function randomOAuthValue(size = 32) {
+    const bytes = crypto.getRandomValues(
+        new Uint8Array(size)
+    );
+
+    return base64UrlEncode(bytes);
+}
+
+async function createCodeChallenge(verifier) {
+    const data = new TextEncoder().encode(verifier);
+
+    const digest = await crypto.subtle.digest(
+        "SHA-256",
+        data
+    );
+
+    return base64UrlEncode(
+        new Uint8Array(digest)
+    );
+}
+
+// ===============================================================
+// RESPOSTAS HTML DO TESTE
+// ===============================================================
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+function oauthHTML(title, message, details = "") {
     return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex">
-    <title>Teste GitHub OAuth / CORS</title>
+    <title>${escapeHTML(title)}</title>
     <style>
         body {
             margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
+            box-sizing: border-box;
             background: #111827;
             color: #e5e7eb;
-            font: 14px/1.5 monospace;
+            font: 16px/1.5 sans-serif;
         }
-        h1 {
-            font: 600 20px/1.3 sans-serif;
-        }
-        pre {
-            padding: 16px;
-            overflow-wrap: anywhere;
-            white-space: pre-wrap;
+        main {
+            width: 100%;
+            max-width: 520px;
+            padding: 28px;
+            box-sizing: border-box;
             background: #1f2937;
             border: 1px solid #374151;
-            border-radius: 6px;
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 23px;
+        }
+        p {
+            color: #d1d5db;
+        }
+        a {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 12px 20px;
+            background: #238636;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        pre {
+            padding: 12px;
+            overflow-wrap: anywhere;
+            white-space: pre-wrap;
+            background: #111827;
+            color: #fca5a5;
         }
     </style>
 </head>
 <body>
-    <h1>Resultado do teste GitHub OAuth / CORS</h1>
-    <pre id="result">Carregando resultado...</pre>
-    <script>
-        const result = ${serialized};
-        document.getElementById("result").textContent =
-            JSON.stringify(result, null, 2);
-    </script>
+    <main>
+        <h1>${escapeHTML(title)}</h1>
+        <p>${escapeHTML(message)}</p>
+        ${details}
+    </main>
 </body>
 </html>`;
 }
 
-async function handleGitHubCorsTest() {
-    const result = await runGitHubCorsTest();
-
-    return new Response(testHTML(result), {
-        status: 200,
-        headers: {
-            "Content-Type": "text/html; charset=utf-8",
-            "Cache-Control": "no-store"
+function oauthResponse(title, message, status = 200, details = "") {
+    return new Response(
+        oauthHTML(title, message, details),
+        {
+            status,
+            headers: {
+                "Content-Type": "text/html; charset=utf-8",
+                "Cache-Control": "no-store"
+            }
         }
-    });
+    );
 }
 
-RegisterRoute("/teste-github", handleGitHubCorsTest);
-RegisterRoute("/teste-github/", handleGitHubCorsTest);
+// ===============================================================
+// INÍCIO DO FLUXO OAUTH
+// ===============================================================
 
-// ---------------------------------------------------------------
-// Envios de formulário (POST) interceptados pelo Service Worker.
-// ---------------------------------------------------------------
+async function startGitHubOAuth() {
+    const state = randomOAuthValue(32);
+    const verifier = randomOAuthValue(64);
+    const challenge = await createCodeChallenge(verifier);
+
+    await authStorage("set", "oauth_pending", {
+        state,
+        verifier,
+        createdAt: Date.now()
+    });
+
+    const authorizationURL = new URL(GITHUB_AUTHORIZE_URL);
+
+    authorizationURL.searchParams.set(
+        "client_id",
+        GITHUB_CLIENT_ID
+    );
+
+    authorizationURL.searchParams.set(
+        "redirect_uri",
+        GITHUB_REDIRECT_URI
+    );
+
+    authorizationURL.searchParams.set(
+        "state",
+        state
+    );
+
+    authorizationURL.searchParams.set(
+        "code_challenge",
+        challenge
+    );
+
+    authorizationURL.searchParams.set(
+        "code_challenge_method",
+        "S256"
+    );
+
+    authorizationURL.searchParams.set(
+        "prompt",
+        "select_account"
+    );
+
+    return Response.redirect(
+        authorizationURL.toString(),
+        302
+    );
+}
+
+// ===============================================================
+// TROCA DO CÓDIGO PELO TOKEN
+// ===============================================================
+
+async function exchangeGitHubCode(code, verifier) {
+    const body = new URLSearchParams({
+        client_id: GITHUB_CLIENT_ID,
+        code,
+        redirect_uri: GITHUB_REDIRECT_URI,
+        code_verifier: verifier
+    });
+
+    const response = await fetch(GITHUB_TOKEN_URL, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body
+    });
+
+    const responseText = await response.text();
+
+    let result;
+
+    try {
+        result = JSON.parse(responseText);
+    } catch {
+        throw new Error(
+            `Resposta inválida do endpoint de token: HTTP ${response.status}`
+        );
+    }
+
+    if (!response.ok || result.error || !result.access_token) {
+        throw new Error(
+            result.error_description ||
+            result.error ||
+            `Falha na troca do código. HTTP ${response.status}`
+        );
+    }
+
+    return result;
+}
+
+// ===============================================================
+// IDENTIFICAÇÃO DA CONTA AUTENTICADA
+// ===============================================================
+
+async function getGitHubUser(accessToken) {
+    const response = await fetch(GITHUB_API_USER, {
+        method: "GET",
+        headers: {
+            "Accept": "application/vnd.github+json",
+            "Authorization": `Bearer ${accessToken}`,
+            "X-GitHub-Api-Version": "2022-11-28"
+        },
+        cache: "no-store"
+    });
+
+    if (!response.ok) {
+        throw new Error(
+            `Falha ao consultar GitHub /user: HTTP ${response.status}`
+        );
+    }
+
+    const user = await response.json();
+
+    if (!user || !user.id || !user.login) {
+        throw new Error(
+            "O GitHub não retornou uma identidade de usuário válida."
+        );
+    }
+
+    return user;
+}
+
+// ===============================================================
+// CALLBACK OAUTH
+// ===============================================================
+
+async function handleGitHubCallback(url) {
+    const code = url.searchParams.get("code");
+    const returnedState = url.searchParams.get("state");
+
+    if (!code) {
+        return oauthResponse(
+            "Autenticação não concluída",
+            "O GitHub não retornou um código de autorização.",
+            400
+        );
+    }
+
+    if (!returnedState) {
+        return oauthResponse(
+            "Autenticação recusada",
+            "O parâmetro state não foi recebido. O processo foi interrompido.",
+            400
+        );
+    }
+
+    const pending = await authStorage(
+        "get",
+        "oauth_pending"
+    );
+
+    if (!pending || !pending.state || !pending.verifier) {
+        return oauthResponse(
+            "Solicitação expirada",
+            "Não foi encontrada uma solicitação de autenticação pendente. Inicie o processo novamente.",
+            400
+        );
+    }
+
+    if (Date.now() - pending.createdAt > 10 * 60 * 1000) {
+        await authStorage("delete", "oauth_pending");
+
+        return oauthResponse(
+            "Solicitação expirada",
+            "O prazo da solicitação de autenticação terminou. Inicie novamente.",
+            400
+        );
+    }
+
+    if (returnedState !== pending.state) {
+        await authStorage("delete", "oauth_pending");
+
+        return oauthResponse(
+            "Falha na validação",
+            "O parâmetro state recebido não corresponde à solicitação original.",
+            400
+        );
+    }
+
+    // O estado pendente é consumido antes da troca do código.
+    await authStorage("delete", "oauth_pending");
+
+    try {
+        const token = await exchangeGitHubCode(
+            code,
+            pending.verifier
+        );
+
+        const user = await getGitHubUser(
+            token.access_token
+        );
+
+        const session = {
+            authenticated: true,
+            provider: "github",
+            user: {
+                id: user.id,
+                login: user.login,
+                name: user.name || user.login,
+                avatar_url: user.avatar_url,
+                html_url: user.html_url
+            },
+            access_token: token.access_token,
+            token_type: token.token_type || "bearer",
+            scope: token.scope || "",
+            createdAt: Date.now(),
+            expiresIn: token.expires_in || null
+        };
+
+        await authStorage(
+            "set",
+            "github_session",
+            session
+        );
+
+        const details = `
+            <p>Conta autenticada:</p>
+            <pre>${escapeHTML(user.login)}</pre>
+            <p>Identidade confirmada pelo endpoint GitHub /user.</p>
+            <a href="/teste-github">Ver estado da autenticação</a>
+        `;
+
+        return oauthResponse(
+            "Autenticação concluída",
+            "O Service Worker recebeu o token e identificou a conta GitHub.",
+            200,
+            details
+        );
+
+    } catch (error) {
+        console.error(
+            "[SW] Falha na autenticação GitHub:",
+            error
+        );
+
+        return oauthResponse(
+            "Falha na autenticação",
+            error?.message || "Não foi possível concluir a autenticação.",
+            502
+        );
+    }
+}
+
+// ===============================================================
+// PÁGINA DE TESTE E CONTROLE DA AUTENTICAÇÃO
+// ===============================================================
+
+async function handleGitHubOAuth(request) {
+    const url = new URL(request.url);
+
+    // O GitHub pode devolver um erro se o usuário cancelar.
+    const oauthError = url.searchParams.get("error");
+
+    if (oauthError) {
+        return oauthResponse(
+            "Autorização não concedida",
+            url.searchParams.get("error_description") ||
+            oauthError,
+            400
+        );
+    }
+
+    // Inicia o fluxo quando o usuário aciona o link.
+    if (url.searchParams.get("login") === "1") {
+        try {
+            return await startGitHubOAuth();
+        } catch (error) {
+            return oauthResponse(
+                "Não foi possível iniciar",
+                error?.message || "Falha ao iniciar a autenticação.",
+                500
+            );
+        }
+    }
+
+    // Callback: presença de code indica retorno do GitHub.
+    if (url.searchParams.has("code")) {
+        return handleGitHubCallback(url);
+    }
+
+    // Consulta a sessão existente.
+    if (url.searchParams.get("logout") === "1") {
+        await authStorage("delete", "github_session");
+
+        return oauthResponse(
+            "Sessão encerrada",
+            "A sessão GitHub local foi removida.",
+            200,
+            '<a href="/teste-github">Voltar</a>'
+        );
+    }
+
+    const session = await authStorage(
+        "get",
+        "github_session"
+    );
+
+    if (session?.authenticated && session.user) {
+        const details = `
+            <p>Conta autenticada:</p>
+            <pre>${escapeHTML(session.user.login)}</pre>
+            <a href="/teste-github?logout=1">Encerrar sessão</a>
+        `;
+
+        return oauthResponse(
+            "GitHub conectado",
+            "Existe uma sessão GitHub armazenada pelo Service Worker.",
+            200,
+            details
+        );
+    }
+
+    return oauthResponse(
+        "Teste de autenticação GitHub",
+        "Inicie a autenticação para conectar sua conta GitHub ao Blog.",
+        200,
+        '<a href="/teste-github?login=1">Entrar com GitHub</a>'
+    );
+}
+
+RegisterRoute("/teste-github", handleGitHubOAuth);
+RegisterRoute("/teste-github/", handleGitHubOAuth);
+
+// ===============================================================
+// ENVIOS DE FORMULÁRIO (POST) INTERCEPTADOS PELO SERVICE WORKER
+// ===============================================================
 
 async function handlePost(request) {
     const url = new URL(request.url);
@@ -461,14 +854,23 @@ async function handlePost(request) {
     try {
         const form = await request.formData();
 
-        await appendSubmission(route.store, route.key, {
-            ...Object.fromEntries(form.entries()),
-            sentAt: new Date().toISOString()
-        });
+        await appendSubmission(
+            route.store,
+            route.key,
+            {
+                ...Object.fromEntries(form.entries()),
+                sentAt: new Date().toISOString()
+            }
+        );
 
         return jsonResponse({ ok: true }, 200);
+
     } catch (error) {
-        console.error("[SW] Falha ao guardar o envio:", error);
+        console.error(
+            "[SW] Falha ao guardar o envio:",
+            error
+        );
+
         return jsonResponse({ ok: false }, 500);
     }
 }
@@ -482,9 +884,9 @@ function jsonResponse(body, status) {
     });
 }
 
-// ---------------------------------------------------------------
-// Ciclo de vida e interceptação
-// ---------------------------------------------------------------
+// ===============================================================
+// CICLO DE VIDA E INTERCEPTAÇÃO
+// ===============================================================
 
 self.addEventListener("install", event => {
     event.waitUntil(self.skipWaiting());
@@ -519,4 +921,8 @@ self.addEventListener("fetch", event => {
     }
 });
 
-export { Router, RegisterRoute, Routes };
+export {
+    Router,
+    RegisterRoute,
+    Routes
+};
