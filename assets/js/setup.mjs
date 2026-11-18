@@ -1093,7 +1093,7 @@ const SetupDOMReady = async evt => {
                 };
 
                 // Abre o modal e verifica o estado atual da autenticação.
-                githubAuthModal.show();
+               // githubAuthModal.show();
 
                 statusElement.textContent = authMessage(
                     "github_auth_verifying"
