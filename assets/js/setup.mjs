@@ -8,7 +8,6 @@
 // Console de depuração (liga sozinho quando <meta name="DEBUG" content="true">).
 // Fica como primeiro import para registrar os erros dos módulos seguintes.
 import "./modules/lib/DebugConsole.mjs";
-console.log("[TESTE] Setup carregado e DebugConsole importado.");
 
 // Carrega as configurações sempre com dados atualizados do servidor.
 const settingsResponse = await fetch(
@@ -265,10 +264,6 @@ const Policy = Activity.create(
     new PolicyHandler("Subversivo58_Policy", SetupLog)
 );
 
-Policy.onchange(data => {
-    console.log(data);
-});
-
 Policy.resume();
 
 let BaseRootRegExp = new RegExp(BaseRoot),
@@ -437,7 +432,6 @@ const SetupDOMReady = async evt => {
             });
             // action event
             DSNotify.on("click", data => {
-                //console.log(data)
                 if ("action" in data) {
                     switch (data.action) {
                         case "cookie-agree":
@@ -546,8 +540,6 @@ const SetupDOMReady = async evt => {
             }
 
             if (router === "index") {
-                console.log("[TESTE] Entrou na rota index.");
-
                 renderIndexCarousel(
                     settings,
                     document.getElementById("index-central-block"),
@@ -1247,7 +1239,7 @@ const SetupDOMReady = async evt => {
                     if (popup) {
                         popup.document.write(`
                             <!DOCTYPE html>
-                            <html lang="${document.lang || "en-US"}">
+                            <html lang="${document.documentElement.lang || "en-US"}">
                             <head>
                                 <title>${document.title}</title>
                                 <meta charset="UTF-8">
@@ -1309,12 +1301,10 @@ const SetupDOMReady = async evt => {
 
                     await Promise.resolve(policies).then(result => {
                         let AllPolicyContentHTML = ``,
-                            // @revise - get terms definition from `json` language interface library
-                            // @priority: HIGH
                             PolicyHeaders = [
-                                "<h2>Privacidade</h2>",
-                                "<h2>Termos</h2>",
-                                "<h2>Politica Geral</h2>"
+                                `<h2>${i18n.getWord("pages.policy.privacy.heading")}</h2>`,
+                                `<h2>${i18n.getWord("pages.policy.terms.heading")}</h2>`,
+                                `<h2>${i18n.getWord("pages.policy.general.heading")}</h2>`
                             ];
                         [
                             PrivacyPolicyBox,
@@ -1332,9 +1322,9 @@ const SetupDOMReady = async evt => {
                                       elm.insertAdjacentHTML(
                                           "afterbegin",
                                           `
-                                    <div class="col-12 my-2 px-0"><span class="badge badge-light border-def contrast" title="Extimated time to reading this document">Reading: ${ReadingTextTime(result[idx]).time} min</span>
-                                    <span class="badge badge-dark" title="Document version">Versão: 1.0.0</span>
-                                    <span class="badge badge-light border-def contrast mt-1 cp printable-launcher" title="Print">Imprimir&nbsp;🖨️</span>`
+                                    <div class="col-12 my-2 px-0"><span class="badge badge-light border-def contrast" title="${i18n.getWord("pages.policy.badges.reading_title")}">${i18n.getWord("blog.read_time").replace("{minutes}", ReadingTextTime(result[idx]).time)}</span>
+                                    <span class="badge badge-dark" title="${i18n.getWord("pages.policy.badges.version_title")}">${i18n.getWord("pages.policy.badges.version").replace("{version}", "1.0.0")}</span>
+                                    <span class="badge badge-light border-def contrast mt-1 cp printable-launcher" title="${i18n.getWord("pages.policy.badges.print_title")}">${i18n.getWord("pages.policy.badges.print")}</span>`
                                       );
                                       // printer
                                       elm.querySelector(
@@ -1401,7 +1391,7 @@ const SetupDOMReady = async evt => {
                 } else {
                     // @revise - Notify error in request documents
                     // @priority: MODERATE
-                    console.log("oooops...");
+                    console.error("[POLICY]: could not load the policy documents");
                 }
             })();
 
@@ -1449,57 +1439,36 @@ const SetupDOMReady = async evt => {
                                         if (
                                             btn.id === "clear-all-data-storage"
                                         ) {
-                                            console.log(btn.id);
                                             Policy.refuseStoragement(
                                                 true /*force clear-all-data but, not cookie*/
                                             )
                                                 .then(success => {
-                                                    console.log(
-                                                        "all data-storagement clear!",
-                                                        Policy.permission
-                                                    );
                                                     RemoveAttr();
                                                     wd.location.reload(true);
                                                     // notify
                                                 })
                                                 .catch(error => {
-                                                    console.log(
-                                                        "error in clear storagement ... sorry"
-                                                    );
+                                                    console.error("[POLICY]: could not clear the data storage", error);
                                                     // notify
                                                 });
                                         } else if (
                                             btn.id === "refuse-cookie-storage"
                                         ) {
-                                            console.log(btn.id);
                                             Policy.refuseStoragement()
                                                 .then(success => {
-                                                    console.log(
-                                                        "cookies has been disabled",
-                                                        Policy.permission
-                                                    );
                                                     RemoveAttr();
                                                     wd.location.reload(true);
                                                     // notify
                                                 })
                                                 .catch(error => {
-                                                    console.log(
-                                                        "error in cookies disabling ... sorry",
-                                                        error
-                                                    );
+                                                    console.error("[POLICY]: could not disable cookies", error);
                                                     // notify
                                                 });
                                         }
                                         //finish = false
-                                    } else {
-                                        console.log("BUSTA HINE");
                                     }
                                 },
                                 complete => {
-                                    console.log(
-                                        "pressHold event fired!",
-                                        btn.id
-                                    );
                                     finish = true;
                                 },
                                 100
@@ -1526,7 +1495,6 @@ const SetupDOMReady = async evt => {
                         complete => {
                             Policy.acceptStoragement()
                                 .then(success => {
-                                    console.log("cookies has been actived");
                                     AcceptCookiesBtn.classList.remove(
                                         "background-charge-success"
                                     );
@@ -1534,9 +1502,7 @@ const SetupDOMReady = async evt => {
                                     // notify
                                 })
                                 .catch(error => {
-                                    console.log(
-                                        "error in cookies activaction ... sorry"
-                                    );
+                                    console.error("[POLICY]: could not enable cookies", error);
                                     // notify
                                 });
                         },
@@ -1548,7 +1514,6 @@ const SetupDOMReady = async evt => {
             break;
 
         default:
-            console.log(router);
             break;
     }
 
@@ -1784,7 +1749,9 @@ const bindClearAllButton = button => {
             completed = false;
             Policy.refuseStoragement(true)
                 .then(() => wd.location.reload())
-                .catch(error => console.log("clear all data failed", error));
+                .catch(error =>
+                    console.error("[SETUP]: clear all data failed", error)
+                );
         },
         () => {
             completed = true;

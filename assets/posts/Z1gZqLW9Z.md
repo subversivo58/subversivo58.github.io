@@ -21,7 +21,7 @@ Aqui você vai encontrar um pouco de tudo o que passa pela minha cabeça e pelas
 
 A ideia é simples: transformar curiosidade em descoberta. E você é bem-vindo para acompanhar essa jornada. Não precisa concordar com tudo, não precisa entender tudo de primeira e muito menos precisa saber programar. Se você gosta de aprender, testar, quebrar a cabeça e rir do processo, já é meio caminho andado.
 
-Este blog também é uma extensão do que eu já venho fazendo por aí. Quem quiser dar uma olhada no lado mais "mão na massa" do projeto pode visitar o laboratório: [**Subversivo58 / Lab**](https://subversivo58.github.io/lab.html). Lá tem código, experimentos e o tipo de coisa que não cabe em um post bonitinho - ou que ainda não decidiu se vai caber.
+Este blog também é uma extensão do que eu já venho fazendo por aí. Quem quiser dar uma olhada no lado mais "mão na massa" do projeto pode visitar o laboratório: [**Subversivo58 / Lab**](https://subversivo58.github.io/lab/). Lá tem código, experimentos e o tipo de coisa que não cabe em um post bonitinho - ou que ainda não decidiu se vai caber.
 
 Se você chegou até aqui, obrigado pela companhia. Este é só o começo. Ainda tem muita ideia para organizar, muito código para testar, muito filme para comentar, muita música para tocar no fundo enquanto o projeto compila - e, claro, muito erro de digitação para corrigir depois.
 

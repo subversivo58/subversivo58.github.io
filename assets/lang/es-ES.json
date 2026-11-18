@@ -444,6 +444,13 @@
             }
         },
         "policy": {
+            "badges": {
+                "reading_title": "Tiempo estimado de lectura de este documento",
+                "version": "Versión: {version}",
+                "version_title": "Versión del documento",
+                "print": "Imprimir&nbsp;🖨️",
+                "print_title": "Imprimir"
+            },
             "cards": {
                 "introduction": {
                     "title": "Introducción",

@@ -51,14 +51,14 @@
 <section class="markdown-editor">
 
     <p class="i18n small text-muted mb-3"
-       id="post-editor-status"
-       role="status"
-       aria-live="polite"
-       data-i18n-html="admin_dashboard.editor.status_ready"></p>
+        id="post-editor-status"
+        role="status"
+        aria-live="polite"
+        data-i18n-html="admin_dashboard.editor.status_ready"></p>
 
     <div class="form-group">
         <label for="post-title" class="i18n"
-               data-i18n-html="admin_dashboard.editor.title_label"></label>
+            data-i18n-html="admin_dashboard.editor.title_label"></label>
 
         <input
             type="text"
@@ -71,38 +71,38 @@
 
     <div class="form-group">
         <label for="post-summary" class="i18n"
-               data-i18n-html="admin_dashboard.editor.summary_label"></label>
+            data-i18n-html="admin_dashboard.editor.summary_label"></label>
 
-            <textarea
-                id="post-summary"
-                class="form-control rounded-0"
-                rows="4"
-                data-i18n-place="admin_dashboard.editor.summary_placeholder"
-            ></textarea>
+        <textarea
+            id="post-summary"
+            class="form-control rounded-0"
+            rows="4"
+            data-i18n-place="admin_dashboard.editor.summary_placeholder"
+        ></textarea>
 
-            <button
-                type="button"
-                id="post-summary-restore"
-                class="i18n btn btn-sm btn-outline-secondary rounded-0 cp mt-2"
-                data-i18n-title="admin_dashboard.editor.summary_restore"
-                data-i18n-html="admin_dashboard.editor.summary_restore">
-            </button>
+        <button
+            type="button"
+            id="post-summary-restore"
+            class="i18n btn btn-sm btn-outline-secondary rounded-0 cp mt-2"
+            data-i18n-title="admin_dashboard.editor.summary_restore"
+            data-i18n-html="admin_dashboard.editor.summary_restore">
+        </button>
 
         <small class="i18n form-text text-muted"
-               data-i18n-html="admin_dashboard.editor.summary_help"></small>
+            data-i18n-html="admin_dashboard.editor.summary_help"></small>
     </div>
 
     <div class="form-group">
         <label for="post-content" class="i18n"
-               data-i18n-html="admin_dashboard.editor.content_label"></label>
+            data-i18n-html="admin_dashboard.editor.content_label"></label>
 
         <div class="card rounded-0">
 
             <div class="card-header bg-transparent p-2">
                 <div class="btn-toolbar align-items-center"
-                     id="post-editor-toolbar"
-                     role="toolbar"
-                     data-i18n-title="admin_dashboard.editor.toolbar_label">
+                    id="post-editor-toolbar"
+                    role="toolbar"
+                    data-i18n-title="admin_dashboard.editor.toolbar_label">
 
                     <div class="btn-group btn-group-sm mr-2 mb-1" role="group">
                         <button type="button" class="btn btn-sm btn-outline-secondary rounded-0 cp"
@@ -157,7 +157,7 @@
 
                     <div class="d-flex align-items-center mr-2 mb-1">
                         <label for="post-font-size" class="i18n small mb-0 mr-2"
-                               data-i18n-html="admin_dashboard.editor.font_size"></label>
+                            data-i18n-html="admin_dashboard.editor.font_size"></label>
 
                         <select
                             id="post-font-size"
@@ -233,7 +233,7 @@
 
     <div class="form-group">
         <label for="post-tags" class="i18n"
-               data-i18n-html="admin_dashboard.editor.tags_label"></label>
+            data-i18n-html="admin_dashboard.editor.tags_label"></label>
 
         <input
             type="text"

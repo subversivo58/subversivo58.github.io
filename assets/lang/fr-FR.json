@@ -493,6 +493,13 @@
             }
         },
         "policy": {
+            "badges": {
+                "reading_title": "Temps de lecture estimé de ce document",
+                "version": "Version : {version}",
+                "version_title": "Version du document",
+                "print": "Imprimer&nbsp;🖨️",
+                "print_title": "Imprimer"
+            },
             "cards": {
                 "introduction": {
                     "title": "Introduction",

@@ -493,6 +493,13 @@
             }
         },
         "policy": {
+            "badges": {
+                "reading_title": "この文書の推定読了時間",
+                "version": "バージョン: {version}",
+                "version_title": "文書のバージョン",
+                "print": "印刷&nbsp;🖨️",
+                "print_title": "印刷"
+            },
             "cards": {
                 "introduction": {
                     "title": "はじめに",
