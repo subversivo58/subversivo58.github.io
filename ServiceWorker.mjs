@@ -1010,7 +1010,6 @@ async function logoutGitHub(request) {
     }
 
     try {
-        await authStorage("delete", "github_user_pending");
         await authStorage("delete", "oauth_pending");
 
         // Logout remove também a identidade definitiva.
@@ -1086,8 +1085,6 @@ async function getAuthDiagnostics(request) {
 
 RegisterRoute("/admin.html", handleAdminPage);
 RegisterRoute("/admin-auth/start", startGitHubOAuth);
-RegisterRoute("/admin-auth/status", getAuthStatus);
-RegisterRoute("/admin-auth/confirm", confirmGitHubIdentity);
 RegisterRoute("/admin-auth/logout", logoutGitHub);
 RegisterRoute("/admin-auth/diagnostics", getAuthDiagnostics);
 
