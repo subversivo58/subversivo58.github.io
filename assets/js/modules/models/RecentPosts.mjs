@@ -67,7 +67,7 @@ const latest = (settings, limit) => [...settings.articles.storage]
     .slice(0, limit)
 
 // Mesmo formato de link da lista do blog (a página do blog abre o post pelo #id).
-const postURL = id => `./blog.html#${encodeURIComponent(id)}`
+const postURL = id => `/blog.html#${encodeURIComponent(id)}`
 
 // Ícones (SVG embutido, herdam a cor do texto).
 const ICON_DATE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'
