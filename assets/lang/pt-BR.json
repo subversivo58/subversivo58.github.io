@@ -1,4 +1,3 @@
-
 {
     "404": {
         "general": "Ooops... Não encontrado!",
@@ -587,6 +586,11 @@
         "description": "Gerencie as postagens do seu blog.",
         "menu": "Menu",
         "new_post": "Nova Postagem",
+        "settings": {
+            "tab": "GitHub Config",
+            "title": "GitHub Config",
+            "save": "Salvar"
+        },
         "close_editor": "Fechar editor",
         "footoodles": {
             "tab": "Footoodles",
