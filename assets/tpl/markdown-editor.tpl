@@ -209,7 +209,7 @@
                         <button
                             type="button"
                             id="post-preview-toggle"
-                            class="i18n btn btn-sm btn-outline-primary rounded-0 cp"
+                            class="btn btn-sm btn-outline-primary rounded-0 cp"
                             aria-expanded="false"
                             aria-controls="post-preview-panel">
                             <span aria-hidden="true">◉</span>
