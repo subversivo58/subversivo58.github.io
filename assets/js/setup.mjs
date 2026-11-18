@@ -534,24 +534,29 @@ const SetupDOMReady = async evt => {
             // Exibe o atalho administrativo quando existe uma chave salva.
             const adminShortcut = dc.getElementById("drawer-admin");
 
-            // Exibe o atalho administrativo quando existe um PAT salvo.
-            let adminPAT = false;
+                // Exibe o atalho administrativo quando existe uma autenticação OAuth.
+            let adminAuth = false;
 
             if (DBMethods) {
                 try {
-                    adminPAT = await DBMethods.read({
+                    const storedAuth = await DBMethods.read({
                         tbn: "config",
-                        tbk: "github-pat"
+                        tbk: "user-github"
                     });
+
+                    adminAuth = Boolean(
+                        storedAuth?.user &&
+                        storedAuth?.tokens?.access_token
+                    );
                 } catch (error) {
                     console.error(
-                        "[ADMIN]: Não foi possível consultar o PAT.",
+                        "[ADMIN]: Não foi possível consultar a autenticação.",
                         error
                     );
                 }
             }
 
-            if (adminShortcut && adminPAT) {
+            if (adminShortcut && adminAuth) {
                 adminShortcut.classList.remove("d-none");
             }
 
@@ -881,8 +886,8 @@ const SetupDOMReady = async evt => {
                     ]);
 
                 const TOKEN_KEY = "github-pat";
-                const REPOSITORY_OWNER = "subversivo58";
-                const REPOSITORY_NAME = "subversivo58.github.io";
+                const REPOSITORY_OWNER = settings.github_auth.repository_owner;
+                const REPOSITORY_NAME = settings.github_auth.repository_name;
                 const REPOSITORY_BRANCH = "main";
 
                 // Mensagens do modal vêm do template github-auth.tpl.
