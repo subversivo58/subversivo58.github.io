@@ -295,10 +295,9 @@ const Notify = new NotifyJS({
     // only for "bootstraped" template
     gui: {
         /**
-         * Axis direction: mobile as detected by `isMobile()` detection or all screen less than 576 width
+         * Axis direction: as detected by `isMobile()` detection or all screen less than 576 width
          * rb = right & bottom (default) [for non-mobile view]
-         * rt = right & top (default for mobile view)[mobile/desktop]
-         * lb = left & bottom [for non-mobile view]
+         * rt = right & top (default for mobile view)[mobile/desktop]         * lb = left & bottom [for non-mobile view]
          * lt = left & top [mobile/desktop]
          * @type {String}
          */
@@ -597,8 +596,7 @@ const SetupDOMReady = async evt => {
                     const timestamp = Number(post.timestamp);
                     if (Number.isFinite(timestamp) && timestamp > 0) {
                         return timestamp > 1e12 ? timestamp : timestamp * 1000;
-                    }
-                    const date = Number(post.date);
+                    }                    const date = Number(post.date);
                     return Number.isFinite(date) && date > 0 ? date * 1000 : 0;
                 };
 
@@ -857,24 +855,23 @@ const SetupDOMReady = async evt => {
                 await drawBlog();
             }
 
-            if (router === "admin") {
-                const [{ default: MarkdownEditor }, { default: GitHubAPI }] =
+            if (router === "admin") {                const [{ default: MarkdownEditor }, { default: GitHubAPI }] =
                     await Promise.all([
                         import("./modules/models/MarkdownEditor.mjs"),
                         import("./modules/lib/GitHubAPI.mjs")
                     ]);
 
                 const TOKEN_KEY = "github-token";
-                const AUTH_KEY = "github-authenticated";
                 const REPOSITORY_OWNER = "subversivo58";
                 const REPOSITORY_NAME = "subversivo58.github.io";
                 const REPOSITORY_BRANCH = "main";
 
-                // Mensagens do pop-up vêm do template github-auth.tpl (já traduzidas pelo i18n).
+                // Mensagens do modal vêm do template github-auth.tpl.
                 const authMessage = (id, value = "") => {
-                    const item = document.querySelector(
+                    const item = dc.querySelector(
                         `#github-auth-messages [data-msg="${id}"]`
                     );
+
                     return item
                         ? item.textContent
                               .trim()
@@ -883,86 +880,337 @@ const SetupDOMReady = async evt => {
                         : "";
                 };
 
+                // Mantém a chave de API para publicação e edição.
                 const clearGitHubAuth = () => {
                     LocalStorage.del(TOKEN_KEY);
-                    LocalStorage.del(AUTH_KEY);
                     GitHubAPIInstance = null;
                 };
 
                 const authenticateGitHub = async token => {
                     const api = new GitHubAPI({ token });
+
                     const response =
                         await api.GHInstance.getUser().getProfile();
+
                     GitHubAPIInstance = api;
+
                     return response.data;
                 };
 
-                // Restaura e valida o token salvo no navegador.
+                // Restaura e valida a chave de API salva.
                 const storedToken = LocalStorage.get(TOKEN_KEY);
+
                 if (storedToken) {
                     try {
                         await authenticateGitHub(storedToken);
-                        LocalStorage.set(AUTH_KEY, "true");
                     } catch (error) {
                         console.error(
-                            "[ADMIN]: A autenticação armazenada não é válida.",
+                            "[ADMIN]: A chave de API armazenada não é válida.",
                             error
                         );
+
                         clearGitHubAuth();
                     }
                 }
 
-                if (!GitHubAPIInstance) {
-                    const modal = document.querySelector("#modal-github-auth");
-                    const input = document.querySelector("#github-auth-key");
-                    const button = document.querySelector(
-                        "#github-auth-verify"
+                // Autenticação administrativa pelo Service Worker.
+                const modal = dc.getElementById("modal-github-auth");
+
+                const statusElement = dc.getElementById(
+                    "github-auth-status"
+                );
+
+                const introElement = dc.getElementById(
+                    "github-auth-intro"
+                );
+
+                const identityElement = dc.getElementById(
+                    "github-auth-identity"
+                );
+
+                const errorElement = dc.getElementById(
+                    "github-auth-error"
+                );
+
+                const diagnosticsElement = dc.getElementById(
+                    "github-auth-diagnostics"
+                );
+
+                const confirmButton = dc.getElementById(
+                    "github-auth-confirm"
+                );
+
+                const copyDiagnosticsButton = dc.getElementById(
+                    "github-auth-copy-diagnostics"
+                );
+
+                if (
+                    !modal ||
+                    !statusElement ||
+                    !introElement ||
+                    !identityElement ||
+                    !errorElement ||
+                    !diagnosticsElement ||
+                    !confirmButton ||
+                    !copyDiagnosticsButton
+                ) {
+                    throw new Error(
+                        "[ADMIN]: Elementos do modal de autenticação do GitHub não encontrados."
                     );
-                    const status = document.querySelector(
-                        "#github-auth-status"
+                }
+
+                const githubAuthModal = new BootstrapNative.Modal(modal);
+
+                // Apresenta o erro no próprio modal e mantém o modal aberto.
+                const showAuthError = (error, details = null) => {
+                    const message =
+                        error instanceof Error
+                            ? error.message
+                            : String(error);
+
+                    statusElement.textContent = authMessage(
+                        "github_auth_save_failed"
                     );
 
-                    if (!modal || !input || !button || !status) {
+                    diagnosticsElement.textContent = [
+                        message,
+                        details
+                            ? JSON.stringify(details, null, 2)
+                            : ""
+                    ]
+                        .filter(Boolean)
+                        .join("\n\n");
+
+                    errorElement.hidden = false;
+
+                    console.error("[ADMIN AUTH]:", error, details);
+                };
+
+                // Lê e valida a resposta JSON do Service Worker.
+                const readAuthResponse = async response => {
+                    let result;
+
+                    try {
+                        result = await response.json();
+                    } catch (error) {
                         throw new Error(
-                            "[ADMIN]: Elementos do modal de autenticação não encontrados."
+                            `Resposta inválida do Service Worker (HTTP ${response.status}).`
                         );
                     }
 
-                    const githubAuthModal = new BootstrapNative.Modal(modal);
-                    githubAuthModal.show();
+                    if (!response.ok || result?.ok === false) {
+                        throw new Error(
+                            result?.error ||
+                                result?.message ||
+                                `Falha na requisição (HTTP ${response.status}).`
+                        );
+                    }
 
-                    button.addEventListener("click", async () => {
-                        const apiKey = input.value.trim();
-                        if (!apiKey) {
-                            status.textContent =
-                                authMessage("github_auth_empty");
-                            return;
+                    return result;
+                };
+
+                // Apresenta a identidade pública retornada pelo GitHub.
+                const renderGitHubIdentity = user => {
+                    if (!user || typeof user !== "object") {
+                        throw new Error(
+                            "O Service Worker não retornou os dados da identidade do GitHub."
+                        );
+                    }
+
+                    const avatar = dc.getElementById(
+                        "github-auth-avatar"
+                    );
+
+                    const name = dc.getElementById(
+                        "github-auth-name"
+                    );
+
+                    const login = dc.getElementById(
+                        "github-auth-login"
+                    );
+
+                    const id = dc.getElementById(
+                        "github-auth-id"
+                    );
+
+                    const profile = dc.getElementById(
+                        "github-auth-profile"
+                    );
+
+                    const emailContainer = dc.getElementById(
+                        "github-auth-email-container"
+                    );
+
+                    const email = dc.getElementById(
+                        "github-auth-email"
+                    );
+
+                    const profileURL =
+                        user.profile_url || user.html_url || "";
+
+                    if (avatar) {
+                        avatar.src = user.avatar_url || "";
+                        avatar.alt = user.name || user.login || "GitHub";
+                    }
+
+                    if (name) {
+                        name.textContent =
+                            user.name || user.login || "";
+                    }
+
+                    if (login) {
+                        login.textContent = user.login
+                            ? `@${user.login}`
+                            : "";
+                    }
+
+                    if (id) {
+                        id.textContent = String(user.id ?? "");
+                    }
+
+                    if (profile) {
+                        profile.textContent = profileURL;
+                        profile.href = profileURL || "#";
+                    }
+
+                    if (emailContainer && email) {
+                        const hasEmail = Boolean(user.email);
+
+                        emailContainer.hidden = !hasEmail;
+                        email.textContent = hasEmail
+                            ? user.email
+                            : "";
+                    }
+
+                    introElement.hidden = true;
+                    identityElement.hidden = false;
+                    errorElement.hidden = true;
+
+                    statusElement.textContent = authMessage(
+                        "github_auth_authenticated",
+                        user.login || ""
+                    );
+                };
+
+                // Abre o modal e verifica o estado atual da autenticação.
+                githubAuthModal.show();
+
+                statusElement.textContent = authMessage(
+                    "github_auth_verifying"
+                );
+
+                try {
+                    const response = await fetch(
+                        "/admin-auth/status",
+                        {
+                            method: "GET",
+                            credentials: "same-origin",
+                            cache: "no-store",
+                            headers: {
+                                Accept: "application/json"
+                            }
                         }
+                    );
 
-                        button.disabled = true;
-                        status.textContent = authMessage(
-                            "github_auth_verifying"
+                    const result = await readAuthResponse(response);
+
+                    if (result.status === "authenticated") {
+                        // O Service Worker já confirmou a autenticação.
+                        githubAuthModal.hide();
+                    } else if (
+                        result.status === "pending_confirmation"
+                    ) {
+                        // Exibe a identidade e aguarda confirmação explícita.
+                        renderGitHubIdentity(
+                            result.user || result.identity
+                        );
+                    } else if (
+                        result.status === "unauthenticated"
+                    ) {
+                        introElement.hidden = false;
+                        identityElement.hidden = true;
+                        statusElement.textContent = "";
+                    } else {
+                        throw new Error(
+                            `Estado de autenticação desconhecido: ${result.status}`
+                        );
+                    }
+                } catch (error) {
+                    showAuthError(error);
+                }
+
+                // O usuário confirma a identidade.
+                // A confirmação só libera o painel depois do sucesso do POST.
+                confirmButton.addEventListener(
+                    "click",
+                    async () => {
+                        if (confirmButton.disabled) return;
+
+                        confirmButton.disabled = true;
+
+                        statusElement.textContent = authMessage(
+                            "github_auth_saving"
                         );
 
+                        errorElement.hidden = true;
+                        diagnosticsElement.textContent = "";
+
                         try {
-                            const profile = await authenticateGitHub(apiKey);
-                            LocalStorage.set(TOKEN_KEY, apiKey);
-                            LocalStorage.set(AUTH_KEY, "true");
-                            status.textContent = authMessage(
-                                "github_auth_authenticated",
-                                profile.login
+                            const response = await fetch(
+                                "/admin-auth/confirm",
+                                {
+                                    method: "POST",
+                                    credentials: "same-origin",
+                                    cache: "no-store",
+                                    headers: {
+                                        Accept: "application/json"
+                                    }
+                                }
                             );
+
+                            const result =
+                                await readAuthResponse(response);
+
+                            if (result.ok !== true) {
+                                throw new Error(
+                                    result.error ||
+                                        result.message ||
+                                        "O Service Worker não confirmou a gravação da identidade."
+                                );
+                            }
+
+                            // Fecha o modal somente após o Service Worker
+                            // confirmar que a gravação foi concluída.
                             githubAuthModal.hide();
                         } catch (error) {
-                            GitHubAPIInstance = null;
-                            status.textContent =
-                                authMessage("github_auth_failed");
-                            console.error("[ADMIN]:", error);
+                            showAuthError(error);
                         } finally {
-                            button.disabled = false;
+                            confirmButton.disabled = false;
                         }
-                    });
-                }
+                    }
+                );
+
+                // Copia o diagnóstico exibido no modal.
+                copyDiagnosticsButton.addEventListener(
+                    "click",
+                    async () => {
+                        const diagnostics =
+                            diagnosticsElement.textContent || "";
+
+                        if (!diagnostics) return;
+
+                        try {
+                            await navigator.clipboard.writeText(
+                                diagnostics
+                            );
+                        } catch (error) {
+                            console.error(
+                                "[ADMIN AUTH]: Não foi possível copiar o diagnóstico.",
+                                error
+                            );
+                        }
+                    }
+                );
 
                 SlideMenus();
                 AnchorScrool();
@@ -970,6 +1218,7 @@ const SetupDOMReady = async evt => {
                 const editorContainer = document.getElementById(
                     "admin-post-editor-container"
                 );
+
                 const editorRoot = document.getElementById("admin-post-editor");
                 const openEditorButton =
                     document.getElementById("admin-new-post");
@@ -1117,9 +1366,7 @@ const SetupDOMReady = async evt => {
                     i18n.transcript();
                 }
             })();
-            break;
-
-        case "copyright":
+            break;        case "copyright":
             await TemplatesReady.import;
             //
             (async () => {
@@ -1515,9 +1762,7 @@ const SetupDOMReady = async evt => {
 
         default:
             break;
-    }
-
-    // Rodapé: últimas postagens (limite: settings.articles['footer-max-list'])
+    }    // Rodapé: últimas postagens (limite: settings.articles['footer-max-list'])
     renderFooterNews(
         settings,
         document.getElementById("dinamic-footer-news"),
