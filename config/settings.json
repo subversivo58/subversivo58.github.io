@@ -192,7 +192,7 @@
             "source": "/lab/",
             "files": [
                 {
-                    "file": "/lab/assets/tpl/fixed-navibar-lab.tpl",
+                    "file": "/lab/assets/tpl/fixed-navbar-lab.tpl",
                     "mode": "append",
                     "target": "#body"
                 }
