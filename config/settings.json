@@ -22,6 +22,7 @@
         "storage": [
             {
                 "id": "o2nabj6W6",
+                "author": "6475273",
                 "title": "WebRTC no Front-End Moderno",
                 "summary": "Houve um tempo em que fazer uma chamada de vídeo ou transmitir áudio pelo navegador exigia a instalação de...",
                 "path": "assets/posts/o2nabj6W6.md",
@@ -36,6 +37,7 @@
             },
             {
                 "id": "GNWYARPre",
+                "author": "6475273",
                 "title": "Descentralização na Web e no Front-End",
                 "summary": "A arquitetura da internet como conhecemos está passando por uma transformação profunda e estrutural. Historicamente, a web tem sido construída sobre...",
                 "path": "assets/posts/GNWYARPre.md",
@@ -50,6 +52,7 @@
             },
             {
                 "id": "p2nWg3jjQ",
+                "author": "6475273",
                 "title": "Subversivo58: ideias, tecnologia e experimentação",
                 "summary": "Subversivo58 — Um espaço nerd dedicado à troca de ideias, experimentações e tecnologia...",
                 "path": "assets/posts/p2nWg3jjQ.md",
@@ -64,6 +67,7 @@
             },
             {
                 "id": "yxbneQ88N",
+                "author": "6475273",
                 "title": "Blockchain Além das Criptomoedas",
                 "summary": "Quando o assunto é blockchain, a associação imediata costuma ser com Bitcoin e outras criptomoedas.",
                 "path": "assets/posts/yxbneQ88N.md",
@@ -78,6 +82,7 @@
             },
             {
                 "id": "Z1gZqLW9Z",
+                "author": "6475273",
                 "title": "Assim surge: A teoria do caos",
                 "summary": "Muito mais que um blog Tem gente que coleciona disco, tem gente que coleciona meme, tem gente que coleciona projeto inacabado no GitHub. Eu me encaixo tranquilo",
                 "path": "assets/posts/Z1gZqLW9Z.md",
