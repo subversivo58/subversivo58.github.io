@@ -281,7 +281,6 @@ const AUTH_DB_NAME = "Subversivo58GitHubAuth";
 const AUTH_DB_VERSION = 1;
 const AUTH_STORE_NAME = "auth";
 const OAUTH_PENDING_TTL = 10 * 60 * 1000;
-const OAUTH_USER_TTL = 10 * 60 * 1000;
 
 let authDatabasePromise = null;
 
@@ -456,15 +455,30 @@ function publicUser(user) {
     };
 }
 
-// Formato definitivo persistido no banco principal.
-function storedGitHubUser(user) {
+// Formato definitivo da autenticação persistida no banco principal.
+function storedGitHubAuth(user, token) {
+    if (!isValidGitHubUser(user)) {
+        throw new Error("GITHUB_IDENTITY_INVALID");
+    }
+
+    if (
+        !token ||
+        typeof token.access_token !== "string" ||
+        !token.access_token
+    ) {
+        throw new Error("TOKEN_RESPONSE_INVALID");
+    }
+
     return {
-        id: user.id,
-        login: user.login,
-        name: user.name || user.login,
-        avatar_url: user.avatar_url || null,
-        profile_url: user.profile_url || user.html_url || null,
-        email: user.email || null
+        user: publicUser(user),
+        tokens: {
+            access_token: token.access_token,
+            refresh_token: token.refresh_token,
+            expires_in: token.expires_in,
+            refresh_token_expires_in: token.refresh_token_expires_in,
+            token_type: token.token_type,
+            scope: token.scope
+        }
     };
 }
 
@@ -479,36 +493,22 @@ function isValidGitHubUser(user) {
 }
 
 // ===============================================================
-// LEITURA E GRAVAÇÃO DA IDENTIDADE NO BANCO PRINCIPAL
+// GRAVAÇÃO DA AUTENTICAÇÃO NO BANCO PRINCIPAL
 // ===============================================================
 
-async function getStoredGitHubUser() {
-    const db = await getDatabase();
-    const user = await db.read({
-        tbn: "config",
-        tbk: "user-github"
-    });
-
-    if (!isValidGitHubUser(user)) return null;
-
-    return storedGitHubUser(user);
-}
-
-async function saveStoredGitHubUser(user) {
-    if (!isValidGitHubUser(user)) {
-        throw new Error("GITHUB_IDENTITY_INVALID");
-    }
-
+async function saveStoredGitHubAuth(user, token) {
+    const auth = storedGitHubAuth(user, token);
     const db = await getDatabase();
 
     await db.create([{
         tbn: "config",
         tbk: "user-github",
-        tbv: storedGitHubUser(user)
+        tbv: auth
     }]);
 
     return true;
 }
+
 
 // ===============================================================
 // INÍCIO DO OAUTH — POST /admin-auth/start
@@ -524,9 +524,6 @@ async function startGitHubOAuth(request) {
 
     try {
         oauthDiagnostics = [];
-
-        // Remove eventual identidade temporária de uma tentativa anterior.
-        await authStorage("delete", "github_user_pending");
 
         logOAuth(
             "Início",
@@ -695,7 +692,6 @@ async function handleGitHubCallback(url) {
 
         if (oauthError) {
             await authStorage("delete", "oauth_pending");
-            await authStorage("delete", "github_user_pending");
 
             throw new Error("GITHUB_AUTHORIZATION_DENIED");
         }
@@ -733,26 +729,22 @@ async function handleGitHubCallback(url) {
         // antes de iniciar a troca do código.
         await authStorage("delete", "oauth_pending");
 
-        // O token existe somente nesta execução do callback.
-        const token = await exchangeGitHubCode(
+        // Troca o código pelos tokens OAuth.
+        const tokens = await exchangeGitHubCode(
             code,
             pending.verifier
         );
 
-        const user = await getGitHubUser(token.access_token);
-        const identity = publicUser(user);
+        // Consulta a identidade da conta autenticada.
+        const user = await getGitHubUser(tokens.access_token);
 
-        // Não persistimos access_token, token_type, scope ou sessão.
-        // Somente a identidade pública aguarda a confirmação do usuário.
-        await authStorage("set", "github_user_pending", {
-            user: identity,
-            createdAt: Date.now()
-        });
+        // Persiste identidade e todos os campos de token no banco principal.
+        await saveStoredGitHubAuth(user, tokens);
 
         logOAuth(
-            "Identidade",
-            "PENDENTE",
-            "Identidade pública armazenada temporariamente; aguardando confirmação."
+            "Autenticação",
+            "OK",
+            "Identidade e credenciais OAuth gravadas no banco principal."
         );
 
         await saveDiagnostics();
@@ -799,18 +791,17 @@ async function handleGitHubCallback(url) {
         console.error("[SW] Falha no callback OAuth:", code);
 
         await authStorage("delete", "oauth_pending").catch(() => {});
-        await authStorage("delete", "github_user_pending").catch(() => {});
 
         await saveDiagnostics().catch(() => {});
     }
 
     // O callback sempre retorna à página administrativa.
-    // A página consulta /admin-auth/status para descobrir o resultado.
     return Response.redirect(
         new URL("/admin.html", url.origin).toString(),
         303
     );
 }
+
 
 // ===============================================================
 // PÁGINA ADMINISTRATIVA
@@ -828,173 +819,6 @@ async function handleAdminPage(request) {
     }
 
     return htmlResponse(AdminHTML);
-}
-
-// ===============================================================
-// STATUS DA AUTENTICAÇÃO — GET /admin-auth/status
-// ===============================================================
-
-async function getAuthStatus(request) {
-    if (request.method !== "GET" || !isSameOrigin(request)) {
-        return jsonResponse({
-            ok: false,
-            error: "invalid_request"
-        }, 405);
-    }
-
-    try {
-        // Primeiro verifica se existe uma identidade aguardando confirmação.
-        const pending = await authStorage(
-            "get",
-            "github_user_pending"
-        );
-
-        if (pending) {
-            const expired =
-                !pending.createdAt ||
-                Date.now() - pending.createdAt > OAUTH_USER_TTL;
-
-            if (expired) {
-                await authStorage(
-                    "delete",
-                    "github_user_pending"
-                );
-            } else if (isValidGitHubUser(pending.user)) {
-                return jsonResponse({
-                    ok: true,
-                    status: "pending_confirmation",
-                    user: publicUser(pending.user)
-                });
-            } else {
-                await authStorage(
-                    "delete",
-                    "github_user_pending"
-                );
-            }
-        }
-
-        // Sem confirmação pendente, consulta a identidade definitiva.
-        // A identidade salva permite reconhecer o administrador após recargas.
-        const storedUser = await getStoredGitHubUser();
-
-        if (storedUser) {
-            return jsonResponse({
-                ok: true,
-                status: "authenticated",
-                user: publicUser(storedUser)
-            });
-        }
-
-        return jsonResponse({
-            ok: true,
-            status: "unauthenticated",
-            user: null
-        });
-
-    } catch (error) {
-        console.error(
-            "[SW] Falha ao consultar estado da autenticação:",
-            error
-        );
-
-        return jsonResponse({
-            ok: false,
-            error: "AUTH_STATUS_FAILED",
-            message: "Não foi possível consultar o estado da autenticação."
-        }, 500);
-    }
-}
-
-// ===============================================================
-// CONFIRMAÇÃO — POST /admin-auth/confirm
-// ===============================================================
-
-async function confirmGitHubIdentity(request) {
-    if (request.method !== "POST" || !isSameOrigin(request)) {
-        return jsonResponse({
-            ok: false,
-            error: "invalid_request"
-        }, 405);
-    }
-
-    try {
-        const pending = await authStorage(
-            "get",
-            "github_user_pending"
-        );
-
-        if (!pending || !pending.user) {
-            return jsonResponse({
-                ok: false,
-                error: "IDENTITY_NOT_FOUND",
-                message: "Não existe uma identidade pendente para confirmar."
-            }, 401);
-        }
-
-        if (
-            !pending.createdAt ||
-            Date.now() - pending.createdAt > OAUTH_USER_TTL
-        ) {
-            await authStorage(
-                "delete",
-                "github_user_pending"
-            );
-
-            return jsonResponse({
-                ok: false,
-                error: "IDENTITY_EXPIRED",
-                message: "A confirmação expirou. Inicie novamente a autenticação."
-            }, 401);
-        }
-
-        if (!isValidGitHubUser(pending.user)) {
-            await authStorage(
-                "delete",
-                "github_user_pending"
-            );
-
-            return jsonResponse({
-                ok: false,
-                error: "GITHUB_IDENTITY_INVALID",
-                message: "Os dados da identidade estão incompletos."
-            }, 400);
-        }
-
-        // A gravação definitiva acontece somente após o clique em confirmar.
-        await saveStoredGitHubUser(pending.user);
-
-        logOAuth(
-            "Confirmação",
-            "OK",
-            "Identidade pública gravada no banco principal."
-        );
-
-        await saveDiagnostics();
-
-        // Remove os dados temporários após a gravação definitiva.
-        await authStorage(
-            "delete",
-            "github_user_pending"
-        );
-
-        return jsonResponse({
-            ok: true,
-            status: "authenticated",
-            user: publicUser(pending.user)
-        });
-
-    } catch (error) {
-        console.error(
-            "[SW] Falha ao confirmar identidade:",
-            error
-        );
-
-        return jsonResponse({
-            ok: false,
-            error: "AUTH_CONFIRM_FAILED",
-            message: "Não foi possível confirmar e salvar a identidade."
-        }, 500);
-    }
 }
 
 // ===============================================================
