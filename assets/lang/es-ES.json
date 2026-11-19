@@ -276,7 +276,15 @@
                 "viernes",
                 "sábado"
             ],
-            "short": ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"]
+            "short": [
+                "dom",
+                "lun",
+                "mar",
+                "mié",
+                "jue",
+                "vie",
+                "sáb"
+            ]
         },
         "months": {
             "long": [
@@ -735,6 +743,13 @@
             "discard_changes": "¿Descartar los cambios de este Footoodle?",
             "operation_error": "Se produjo un error al procesar el Footoodle.",
             "github_error": "No se pudo completar la operación en GitHub."
+        },
+        "settings": {
+            "tab": "Config. de GitHub",
+            "title": "Config. de GitHub",
+            "save": "Guardar",
+            "clear_credentials": "Borrar credenciales de GitHub",
+            "clear": "Borrar"
         }
     },
     "github_auth": {
@@ -747,7 +762,18 @@
             "empty": "Introduce tu clave API.",
             "verifying": "Verificando autenticación...",
             "failed": "Error de autenticación. Revisa tu clave API.",
-            "authenticated": "Autenticado como {0}."
+            "authenticated": "Autenticado como {0}.",
+            "saving": "Guardando identidad...",
+            "save_failed": "No se pudo guardar la identidad. Inténtalo de nuevo."
+        },
+        "start": "Autenticar con GitHub",
+        "confirm": "Confirmar y continuar",
+        "copy_diagnostics": "Copiar diagnóstico",
+        "identity": {
+            "id_label": "ID:",
+            "profile_label": "Perfil:",
+            "email_label": "Correo público:",
+            "confirmation": "Confirma que deseas usar esta identidad en el panel de administración."
         }
     },
     "blog": {

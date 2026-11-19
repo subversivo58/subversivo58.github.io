@@ -276,7 +276,15 @@
                 "金曜日",
                 "土曜日"
             ],
-            "short": ["日", "月", "火", "水", "木", "金", "土"]
+            "short": [
+                "日",
+                "月",
+                "火",
+                "水",
+                "木",
+                "金",
+                "土"
+            ]
         },
         "months": {
             "long": [
@@ -746,6 +754,13 @@
             "discard_changes": "この Footoodle の変更を破棄しますか？",
             "operation_error": "Footoodle の処理中にエラーが発生しました。",
             "github_error": "GitHub での操作を完了できませんでした。"
+        },
+        "settings": {
+            "tab": "GitHub設定",
+            "title": "GitHub設定",
+            "save": "保存",
+            "clear_credentials": "GitHubの認証情報を消去",
+            "clear": "消去"
         }
     },
     "github_auth": {
@@ -758,7 +773,18 @@
             "empty": "APIキーを入力してください。",
             "verifying": "認証を確認しています...",
             "failed": "認証に失敗しました。APIキーを確認してください。",
-            "authenticated": "{0} として認証されました。"
+            "authenticated": "{0} として認証されました。",
+            "saving": "ID情報を保存中...",
+            "save_failed": "ID情報を保存できませんでした。もう一度お試しください。"
+        },
+        "start": "GitHubで認証",
+        "confirm": "確認して続行",
+        "copy_diagnostics": "診断情報をコピー",
+        "identity": {
+            "id_label": "ID:",
+            "profile_label": "プロフィール:",
+            "email_label": "公開メール:",
+            "confirmation": "この識別情報を管理パネルで使用するか確認してください。"
         }
     }
 }

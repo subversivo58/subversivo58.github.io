@@ -276,7 +276,15 @@
                 "Freitag",
                 "Samstag"
             ],
-            "short": ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
+            "short": [
+                "So",
+                "Mo",
+                "Di",
+                "Mi",
+                "Do",
+                "Fr",
+                "Sa"
+            ]
         },
         "months": {
             "long": [
@@ -746,6 +754,13 @@
             "discard_changes": "Änderungen an diesem Footoodle verwerfen?",
             "operation_error": "Bei der Verarbeitung des Footoodles ist ein Fehler aufgetreten.",
             "github_error": "Der Vorgang konnte auf GitHub nicht abgeschlossen werden."
+        },
+        "settings": {
+            "tab": "GitHub-Konfig.",
+            "title": "GitHub-Konfig.",
+            "save": "Speichern",
+            "clear_credentials": "GitHub-Zugangsdaten löschen",
+            "clear": "Löschen"
         }
     },
     "github_auth": {
@@ -758,7 +773,18 @@
             "empty": "Geben Sie Ihren API-Schlüssel ein.",
             "verifying": "Authentifizierung wird überprüft...",
             "failed": "Authentifizierung fehlgeschlagen. Prüfen Sie Ihren API-Schlüssel.",
-            "authenticated": "Angemeldet als {0}."
+            "authenticated": "Angemeldet als {0}.",
+            "saving": "Identität wird gespeichert...",
+            "save_failed": "Die Identität konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+        },
+        "start": "Mit GitHub authentifizieren",
+        "confirm": "Bestätigen und fortfahren",
+        "copy_diagnostics": "Diagnose kopieren",
+        "identity": {
+            "id_label": "ID:",
+            "profile_label": "Profil:",
+            "email_label": "Öffentliche E-Mail:",
+            "confirmation": "Bestätigen Sie, dass Sie diese Identität im Admin-Bereich verwenden möchten."
         }
     }
 }

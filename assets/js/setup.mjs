@@ -613,6 +613,79 @@ const SetupDOMReady = async evt => {
                         console.error("[BLOG]: Failed to copy code.", error);
                     }
                 });
+                // Autor da postagem (GitHub): busca pelo ID numérico na API pública.
+                // Cache na sessionStorage: não é gravado no settings.json e sobrevive à navegação dentro do site.
+                const AUTHOR_CACHE_PREFIX = "subversivo58:author:";
+
+                const readAuthorCache = key => {
+                    try {
+                        const raw = sessionStorage.getItem(AUTHOR_CACHE_PREFIX + key);
+                        return raw ? JSON.parse(raw) : null;
+                    } catch (error) {
+                        return null;
+                    }
+                };
+
+                const writeAuthorCache = (key, author) => {
+                    try {
+                        sessionStorage.setItem(AUTHOR_CACHE_PREFIX + key, JSON.stringify(author));
+                    } catch (error) {
+                        // Armazenamento indisponível: segue sem cache.
+                    }
+                };
+
+                const fetchAuthor = id => {
+                    if (!id) return Promise.resolve(null);
+
+                    const key = String(id);
+
+                    const cached = readAuthorCache(key);
+
+                    if (cached) return Promise.resolve(cached);
+
+                    const request = fetch(
+                        `https://api.github.com/user/${encodeURIComponent(key)}`,
+                        { headers: { Accept: "application/vnd.github+json" } }
+                    )
+                        .then(response => (response.ok ? response.json() : null))
+                        .then(user => {
+                            if (!user || !user.login) return null;
+
+                            const profile = String(user.html_url || "");
+
+                            return {
+                                login: String(user.login),
+                                avatar: String(user.avatar_url || ""),
+                                url: /^https:\/\/github\.com\//.test(profile)
+                                    ? profile
+                                    : `https://github.com/${encodeURIComponent(user.login)}`
+                            };
+                        })
+                        .catch(error => {
+                            console.error("[BLOG]: Failed to load author.", error);
+                            return null;
+                        });
+
+                    request.then(author => {
+                        if (author) writeAuthorCache(key, author);
+                    });
+
+                    return request;
+                };
+
+                // Badge simples: foto e nome (link para o perfil no GitHub).
+                const authorHTML = author => {
+                    if (!author) return "";
+
+                    return `
+                <div class="d-flex align-items-center mb-4 post-author">
+                    <img src="${esc(author.avatar)}" alt="" width="40" height="40"
+                         class="rounded-circle mr-2" loading="lazy">
+                    <a href="${esc(author.url)}" target="_blank" rel="noopener noreferrer"
+                       class="font-weight-bold">${esc(author.login)}</a>
+                </div>`;
+                };
+
                 // Compatibilidade: timestamp novo em milissegundos e date legado em segundos.
                 const getPostTimestamp = post => {
                     const timestamp = Number(post.timestamp);
@@ -736,6 +809,11 @@ const SetupDOMReady = async evt => {
                         }
                     }
 
+                    // Badge do autor (foto e nome); só existe quando há postagem.
+                    const authorBlock = post
+                        ? authorHTML(await fetchAuthor(post.author))
+                        : "";
+
                     if (run !== drawing) return;
 
                     if (posts.length === 0) {
@@ -839,6 +917,7 @@ const SetupDOMReady = async evt => {
                     box.innerHTML = `
             <div class="container">
                 ${postHeader}
+                ${authorBlock}
                 <article class="text-break markdown-body">${article}</article>
                 ${postLicense}
                 ${postFooter}
