@@ -1,296 +1,273 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <title>Cookie check</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        color-scheme: light dark;
-      }
+<!--
+  @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+  @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
+  @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+-->
+<!DOCTYPE html>
+<html lang="pt-BR" class="i18n-loading">
+<head>
+    <title>Subversivo58 | Blockchain Além das Criptomoedas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Quando o assunto é blockchain, a associação imediata costuma ser com Bitcoin e outras criptomoedas.">
+    <meta name="keywords" content="blockchain, javascript, node, ledger, p2p">
+    <meta name="author" content="Subversivo58">
+    <meta name="route" content="post">
+    <meta name="post-slug" content="blockchain-alem-das-criptomoedas">
+    <meta name="post-author" content="6475273">
+    <meta name="DEBUG" content="false">
+    <meta name="reply-to" content="https://github.com/subversivo58/subversivo58.github.io/issues/new">
+    <link rel="copyright" href="/copyright.html">
+    <link rel="canonical" href="https://subversivo58.github.io/posts/blockchain-alem-das-criptomoedas.html">
+    <!-- Twitter Open Graph -->
+    <meta name="twitter:site" content="@subversivo58">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Subversivo58 | Blockchain Além das Criptomoedas">
+    <meta name="twitter:description" content="Quando o assunto é blockchain, a associação imediata costuma ser com Bitcoin e outras criptomoedas.">
+    <meta name="twitter:image" content="https://subversivo58.github.io/assets/posts/images/9a1e0dbd20531c57a892aaac8a2a676428b317604825eb24fea57b29544a9cf4.webp">
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://subversivo58.github.io/posts/blockchain-alem-das-criptomoedas.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Subversivo58 | Blockchain Além das Criptomoedas">
+    <meta property="og:description" content="Quando o assunto é blockchain, a associação imediata costuma ser com Bitcoin e outras criptomoedas.">
+    <meta property="og:image" content="https://subversivo58.github.io/assets/posts/images/9a1e0dbd20531c57a892aaac8a2a676428b317604825eb24fea57b29544a9cf4.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="720">
+    <meta property="article:published_time" content="2026-11-15T12:56:05.702Z">
+    <meta property="article:modified_time" content="2026-11-15T12:56:05.702Z">
+    <link rel="icon" href="/favicon.ico" type="image/webp">
+    <!-- Preload -->
+    <link rel="modulepreload" href="/assets/js/setup.mjs">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrapv4/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1ebfff">
+    <!-- NOSCRIPT -->
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=/nojs.html">
+    </noscript>
+</head>
+<body id="body">
+    <!-- CONTENT CONTAINER -->
+    <section id="index-central-block" class="container-fluid px-0 py-5 fill-height">
+        <div class="container">
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb bg-transparent px-0 py-1 mb-0 small">
+                    <li class="breadcrumb-item">
+                        <a href="/" class="i18n" data-i18n-html="navbar.home">Início</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/blog.html" class="i18n" data-i18n-html="navbar.blog">Blog</a>
+                    </li>
+                    <li class="breadcrumb-item active text-truncate" aria-current="page">Blockchain Além das Criptomoedas</li>
+                </ol>
+            </nav>
 
-      body {
-        font-family: 'Inter', Helvetica, Arial, sans-serif;
-        background: light-dark(#F8F8F7, #191919);
-        color: light-dark(#1f1f1f, #e3e3e3);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-        min-height: 100vh;
-        margin: 0;
-        padding: 20px;
-        text-align: center;
-      }
+            <header class="mb-4">
+                <h1 class="h2 font-weight-bold mb-2">Blockchain Além das Criptomoedas</h1>
+                <p class="small text-muted mb-0">
+                    <time datetime="2026-11-15T12:56:05.702Z">15 de nov. de 2026</time>
+                    <span class="mx-1" aria-hidden="true">·</span>
+                    <span data-post-reading-time="5">5 min de leitura</span>
+                </p>
+            </header>
 
-      .container {
-        background: light-dark(#FFFFFF, #1F1F1F);
-        padding: 32px;
-        border-radius: 16px;
-        border: 1px solid light-dark(#E2E3E4, #3E3E3E);
-        max-width: min(80%, 500px);
-        width: 100%;
-        color: light-dark(#2B2D31, #D4D4D4);
-      }
+            <div id="post-author-container" data-author-id="6475273"></div>
 
-      h1 {
-        font-size: 20px;
-        font-weight: 500;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        color: light-dark(#2B2D31, #D4D4D4);
-      }
+            <article class="text-break markdown-body post-content">
+<!-- POST_CONTENT_START -->
+<figure class="post-figure post-image-center">
+    <picture>
+        <img src="/assets/media/image/1x1.gif"
+             data-src="/assets/posts/images/9a1e0dbd20531c57a892aaac8a2a676428b317604825eb24fea57b29544a9cf4.webp"
+             data-lazy-target
+             alt="Blockchain Além das Criptomoedas"
+             class="img-fluid">
+    </picture>
+</figure>
+<div class="alert alert-warning rounded-0 small" role="note">
+    <strong>Versão temporária restaurada:</strong> esta página foi reconstruída a partir dos metadados e imagem originais em <code>/config/settings.json</code>. Você pode editar e publicar o texto definitivo diretamente pelo painel administrativo.
+</div>
+<p>Quando o assunto é <strong>blockchain</strong>, a associação imediata costuma ser com Bitcoin e outras criptomoedas. Porém, na sua essência computacional, trata-se de uma estrutura de dados encadeada, verificável por hashes criptográficos e pensada para garantir integridade sem depender de uma autoridade única.</p>
+<h2>Aplicações Práticas em JavaScript e Redes P2P</h2>
+<p>Em projetos com Node.js e aplicações front-end modernas, ledgers imutáveis e árvores de Merkle podem resolver problemas de rastreabilidade, registro de auditoria, prova de autoria e sincronização distribuída entre pares.</p>
+<ul>
+    <li><strong>Integridade verificável:</strong> cada bloco referencia o hash do estado anterior.</li>
+    <li><strong>Registros distribuídos:</strong> histórico auditável sem ponto central de confiança.</li>
+    <li><strong>Prototipagem simples:</strong> algoritmos criptográficos nativos em Node e na Web Crypto API.</li>
+</ul>
+<!-- POST_CONTENT_END -->
+            </article>
 
-      p {
-        font-size: 14px;
-        color: light-dark(#2B2D31, #D4D4D4);
-        line-height: 21px;
-        margin: 0 0 1.5rem 0;
-      }
+            <div class="alert alert-light border small d-flex align-items-center mt-4 mb-0" role="note">
+                <picture class="mr-3 flex-shrink-0">
+                    <img src="/assets/media/image/1x1.gif"
+                         data-src="/assets/media/image/logos/cc-by-sa-4.0.png"
+                         data-lazy-target
+                         alt="CC BY-SA 4.0"
+                         width="88"
+                         height="31">
+                </picture>
+                <span class="i18n" data-i18n-html="blog.license"></span>
+            </div>
 
-      .icon {
-        margin-bottom: 1rem;
-        line-height: 0;
-      }
+            <footer class="mt-4">
+                
+                <div class="d-flex flex-wrap align-items-center"><span class="border rounded-pill px-2 py-1 mr-2 mb-2 small">blockchain</span><span class="border rounded-pill px-2 py-1 mr-2 mb-2 small">javascript</span><span class="border rounded-pill px-2 py-1 mr-2 mb-2 small">node</span><span class="border rounded-pill px-2 py-1 mr-2 mb-2 small">ledger</span><span class="border rounded-pill px-2 py-1 mr-2 mb-2 small">p2p</span></div>
+            </footer>
 
-      .button-container {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 2rem;
-      }
-
-      button {
-        background-color: light-dark(#fff, #323232);
-        color: light-dark(#2B2D31, #FCFCFC);
-        border: 1px solid light-dark(#E2E3E4, #3E3E3E);
-        border-radius: 12px;
-        padding: 8px 12px;
-        font-size: 14px;
-        line-height: 21px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-        font-weight: 400;
-        font-family: 'Inter', Helvetica, Arial, sans-serif;
-        width: 100%;
-      }
-
-      button:hover {
-        background-color: light-dark(#EAEAEB, #424242);
-      }
-
-      .hidden {
-        display: none;
-      }
-
-      /* Loading Spinner Animation */
-      .spinner {
-        margin: 0 auto 1.5rem auto;
-        width: 40px;
-        height: 40px;
-        border: 4px solid light-dark(#f0f0f0, #262626);
-        border-top: 4px solid light-dark(#076eff, #87a9ff); /* Blue color */
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-
-      .logo {
-        border-radius: 10px;
-        display: block;
-        margin: 0 auto 2rem auto;
-      }
-
-      .logo.hidden {
-        display: none;
-      }
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <img
-        class="logo"
-        src="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-512dp/logo_ai_studio_color_1x_web_512dp.png"
-        alt="AI Studio Logo"
-        width="256"
-        height="256"
-      />
-      <div class="spinner"></div>
-      <div id="error-ui" class="hidden">
-        <div class="icon">
-          <svg
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="48px"
-            height="48px"
-            fill="#D73A49"
-          >
-            <path
-              d="M12,2C6.486,2,2,6.486,2,12s4.486,10,10,10s10-4.486,10-10S17.514,2,12,2z M13,17h-2v-2h2V17z M13,13h-2V7h2V13z"
-            />
-          </svg>
+            <hr class="my-4">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <a href="/blog.html" class="i18n btn btn-outline-secondary btn-sm rounded-0" data-i18n-html="blog.back_to_blog">Voltar para o blog</a>
+            </div>
         </div>
-        <div id="stepOne" class="text-container">
-          <h1>Action required to load your app</h1>
-          <p>
-            It looks like your browser is blocking a required security cookie, which is common on
-            older versions of iOS and Safari.
-          </p>
-          <div class="button-container">
-            <button id="authInSeparateWindowButton" onclick="redirectToReturnUrl(true)">Authenticate in new window</button>
-          </div>
+    </section>
+
+    <!-- CODE COPY TEMPLATE -->
+    <template id="code-copy-wrapper-template">
+        <div class="code-container">
+            <button type="button" class="i18n code-copy-button" data-code-copy data-i18n-title="blog.copy_code" title="Copiar código">⧉</button>
         </div>
-        <div id="stepTwo" class="text-container hidden">
-          <h1>Action required to load your app</h1>
-          <p>
-            It looks like your browser is blocking a required security cookie, which is common on
-            older versions of iOS and Safari.
-          </p>
-          <div class="button-container">
-            <button id="interactButton" onclick="redirectToReturnUrl(false)">Close and continue</button>
-          </div>
-        </div>
-        <div id="stepThree" class="text-container hidden">
-          <h1>Almost there!</h1>
-          <p>
-            Grant permission for the required security cookie below.
-          </p>
-          <div class="button-container">
-            <button id="grantPermissionButton" onclick="grantStorageAccess()">Grant permission</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script>
-      const AUTH_FLOW_TEST_COOKIE_NAME = '__SECURE-aistudio_auth_flow_may_set_cookies';
-      const COOKIE_VALUE = 'true';
+    </template>
 
-      function getCookie(name) {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-          let cookie = cookies[i].trim();
-          if (cookie.startsWith(name + '=')) {
-            return cookie.substring(name.length + 1);
-          }
-        }
-        return null;
-      }
+    <section class="row container-fluid px-0 mx-0">
+        <span class="bg-green-special col progress-slim-0 m-0 lh-75"></span>
+        <span class="bg-blue col progress-slim"></span>
+        <span class="bg-red col progress-slim"></span>
+        <span class="bg-aqua col progress-slim"></span>
+        <span class="bg-yellowgreen col progress-slim"></span>
+    </section>
 
-      function setAuthFlowTestCookie() {
-        // Set the cookie's TTL to 1 minute. This is a short lived cookie because it is only used
-        // when the user does not have an auth token or their auth token needs to be reset.
-        // Making this cookie too long-lived allows the user to get into a state where they can't
-        // mint a new auth token.
-        document.cookie = `${AUTH_FLOW_TEST_COOKIE_NAME}=${COOKIE_VALUE}; Path=/; Secure; SameSite=None; Domain=${window.location.hostname}; Partitioned; Max-Age=60;`;
-      }
-
-      /**
-       * Returns true if the test cookie is set, false otherwise.
-       */
-      function authFlowTestCookieIsSet() {
-        return getCookie(AUTH_FLOW_TEST_COOKIE_NAME) === COOKIE_VALUE;
-      }
-
-      /**
-       * Redirects to the return url. If autoClose is true, then the return url will be opened in a
-       * new window, and it will be closed automatically when the page loads.
-       * Options:
-       *   storageAccessGranted: if true, appends __storage_access_granted=1 to
-       *   the return url so the Lua auth script can set the test cookie
-       *   server-side (needed for Safari/iOS where document.cookie is blocked).
-       */
-      async function redirectToReturnUrl(autoClose, storageAccessGranted = false) {
-        const initialReturnUrlStr = new URLSearchParams(window.location.search).get('return_url');
-        const returnUrl = initialReturnUrlStr ? new URL(initialReturnUrlStr) : null;
-
-        // Prevent potentially malicious URLs from being used
-        if (returnUrl.protocol.toLowerCase() === 'javascript:') {
-          console.error('Potentially malicious return URL blocked');
-          return;
-        }
-
-        if (storageAccessGranted) {
-          returnUrl.searchParams.set('__storage_access_granted', '1');
-        }
-
-        if (autoClose) {
-          returnUrl.searchParams.set('__auto_close', '1');
-          const url = new URL(window.location.href);
-          url.searchParams.set('return_url', returnUrl.toString());
-          // Land on the cookie check page first, so the user can interact with it before proceeding
-          // to the return url where cookies can be set.
-          window.open(url.toString(), '_blank');
-          const hasAccess = await document.hasStorageAccess();
-          document.querySelector('#stepOne').classList.add('hidden');
-          if (!hasAccess) {
-            document.querySelector('#stepThree').classList.remove('hidden');
-          } else {
-            window.location.reload();
-          }
-        } else {
-          window.location.href = returnUrl.toString();
-        }
-      }
-
-      /**
-       * Grants the browser permission to set cookies. If successful, then it redirects to the
-       * return url.
-       */
-      async function grantStorageAccess() {
-        try {
-          await document.requestStorageAccess();
-          // Recent Safari/iOS versions block document.cookie entirely in
-          // cross-site iframes, even after requestStorageAccess(). Only
-          // server-side Set-Cookie headers work. Signal to the Lua auth script
-          // via query param so it can set the test cookie server-side.
-          redirectToReturnUrl(false, /* storageAccessGranted= */ true);
-        } catch (err) {
-          console.log('error after button click: ', err);
-        }
-      }
-
-      /**
-       * Verifies that the browser can set cookies. If it can, then it redirects to the return url.
-       * If it can't, then it shows the error UI.
-       */
-      function verifyCanSetCookies() {
-        setAuthFlowTestCookie();
-        if (authFlowTestCookieIsSet()) {
-          // Check if we are on the auto-close flow, and if so show the interact button.
-          const returnUrl = new URLSearchParams(window.location.search).get('return_url');
-          const autoClose = new URL(returnUrl).searchParams.has('__auto_close');
-          if (autoClose) {
-            document.querySelector('#stepOne').classList.add('hidden');
-            document.querySelector('#stepTwo').classList.remove('hidden');
-          } else {
-            redirectToReturnUrl(false);
-            return;
-          }
-        }
-        // The cookie could not be set, so initiate the recovery flow.
-        document.querySelector('.logo').classList.add('hidden');
-        document.querySelector('.spinner').classList.add('hidden');
-        document.querySelector('#error-ui').classList.remove('hidden');
-      }
-
-      // Start the cookie verification process.
-      verifyCanSetCookies();
-    </script>
-  </body>
+    <!-- FOOTER -->
+    <footer id="footer-container" class="container-fluid px-0">
+        <section id="foothead" class="container-fluid d-none">
+            <div class="row">
+                <h2 id="footer-fh-title" class="col-12 h3 ct"></h2>
+                <p id="footer-fh-content" class="mt-2 col-md-10 mx-auto ct"></p>
+            </div>
+            <div class="mt-3 row">
+                <div id="footer-fh-img" data-lazy-target class="col-12 col-md-10 col-lg-8 mx-auto"></div>
+            </div>
+        </section>
+        <section id="footbody" data-lazy-target class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                    <div class="row">
+                        <picture class="col">
+                            <img alt="Brand" src="/assets/media/image/1x1.gif"
+                                 data-src="/assets/media/image/logos/site-logo@500x100.webp"
+                                 data-lazy-target width="300" height="50"
+                                 class="img-fluid w-100 cp">
+                        </picture>
+                    </div>
+                    <div class="mt-2 row">
+                        <p class="col white ct">©️ 2010 - 2026 Subversivo58 ®️</p>
+                    </div>
+                    <div class="mt-3 row">
+                        <p data-i18n-html="footer.content.desc1" class="i18n col-12 ct"></p>
+                        <div class="col alert alert-info rounded-0 mx-3 p-2 ct">
+                            <small data-i18n-html="footer.content.desc2" class="i18n mb-0"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 my-5 d-sm-none dropdown-divider"></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                    <span id="general-contact" data-i18n-html="footer.content.contactnf" class="i18n white"></span>
+                    <div class="mt-3 col px-0">
+                        <small class="col-1 ct pl-0">🏢</small>
+                        <small class="col pl-0"><a href="https://www.google.com/search?q=@subversivo58" target="_blank" rel="noopener">Subversivo58</a></small>
+                    </div>
+                    <div class="col mt-3 px-0">
+                        <small class="col-1 ct pl-0">🗺️</small>
+                        <small class="col pl-0"><a href="geo:Porto Alegre, RS - Brasil">Porto Alegre, RS - Brasil</a></small>
+                    </div>
+                    <div class="col mt-3 px-0">
+                        <small class="col-1 ct pl-0">📧</small>
+                        <small class="col pl-0"><a href="mailto:subversivo58@gmail.com?subject=Contact" rel="nofollow">subversivo58@gmail.com</a></small>
+                    </div>
+                    <div class="col mt-3 px-0">
+                        <small class="col-1 ct pl-0">📱</small>
+                        <small class="col pl-0"><a href="tel:+5551984419162">+55 (51) 98441-9162</a></small>
+                    </div>
+                    <div class="col mt-3 px-0">
+                        <small class="col-1 ct pl-0">🧭</small>
+                        <small class="col pl-0"><a href="geo:-30.0397,-51.2382">-30.0397,-51.2382</a></small>
+                    </div>
+                    <div class="mt-3 row ct">
+                        <figure class="col mb-0">
+                            <a href="https://www.openstreetmap.org/#map=12/-30.0397/-51.2382" target="_blank" rel="noopener">
+                                <img alt="geo map" src="/assets/media/image/1x1.gif"
+                                     data-src="/assets/media/image/poa-osm-print.webp"
+                                     data-lazy-target width="285" height="165"
+                                     class="img-fluid w-100 cp">
+                            </a>
+                            <figcaption class="bg-white">
+                                ©️ <a class="tdu contrast" href="//www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-12 my-5 d-md-none dropdown-divider"></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                    <span data-i18n-html="footer.content.blognew" class="i18n white"></span>
+                    <div id="dinamic-footer-news" class="col px-0"></div>
+                </div>
+                <div class="col-12 my-5 d-sm-none d-md-block d-lg-none dropdown-divider"></div>
+                <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
+                    <span data-i18n-html="footer.content.uselink" class="i18n white"></span>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="/about.html">
+                            <small class="col-1 px-0">❔</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.about"></small>
+                        </a>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="/copyright.html">
+                            <small class="col-1 px-0">©️</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="combo.copyr"></small>
+                        </a>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="/docs/">
+                            <small class="col-1 px-0">📖</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.docs"></small>
+                        </a>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="/policy.html">
+                            <small class="col-1 px-0">📃</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.policies"></small>
+                        </a>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="/dpo.html">
+                            <small class="col-1 px-0">🛡️</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.dpo"></small>
+                        </a>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="::" data-fix-modal="#modal-feedback">
+                            <small class="col-1 px-0">📣</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.feedback"></small>
+                        </a>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="https://github.com/subversivo58/subversivo58.github.io" target="_blank" rel="noopener">
+                            <small class="col-1 px-0">🍴</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.source"></small>
+                        </a>
+                    </div>
+                    <div class="col mt-3 footer-column-bb px-0">
+                        <a class="row mx-0 cp" href="::" data-fix-modal="#modal-bugs-report">
+                            <small class="col-1 px-0">🐛</small>
+                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.bugs"></small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <!-- JAVASCRIPT RESOURCES -->
+    <script type="module" src="/assets/js/setup.mjs"></script>
+</body>
 </html>
