@@ -2388,10 +2388,19 @@ ADMIN DASHBOARD, EDITOR WYSIWYG E POSTS
 }
 
 .post-content pre {
-    background: #f6f8fa;
+    background: #fafcff;
     padding: 1rem;
     overflow-x: auto;
     border: 1px solid #e1e4e8;
+    white-space: pre;
+    word-wrap: normal;
+    word-break: normal;
+}
+
+.post-content pre code {
+    white-space: pre;
+    word-break: normal;
+    font-size: 0.95em;
 }
 
 .post-content code {

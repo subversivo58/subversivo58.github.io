@@ -717,6 +717,9 @@ const SetupDOMReady = async evt => {
                         }
                     }
 
+                    const { highlightCodeBlocks } = await import("./modules/lib/Highlight.mjs");
+                    highlightCodeBlocks(box, { autoDetect: true, normalizeBarePre: true });
+
                     const { default: CodeCopy } = await import("./modules/lib/CodeCopy.mjs");
                     const codeCopy = CodeCopy("#index-central-block", "#code-copy-wrapper-template");
                     codeCopy();

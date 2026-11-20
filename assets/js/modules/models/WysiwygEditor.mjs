@@ -12,6 +12,11 @@
 import PostManager from './PostManager.mjs'
 import AdminPosts from './AdminPosts.mjs'
 import ImageProcessor from '../lib/ImageProcessor.mjs'
+import {
+    highlightCodeBlocks,
+    stripCodeHighlight,
+    readCodeText
+} from '../lib/Highlight.mjs'
 
 const DRAFTS_STORE = 'drafts'
 const AUTOSAVE_KEY = 'autosave'
@@ -79,6 +84,7 @@ class WysiwygEditor {
 
         this.selectedImage = null
         this.savedRange = null
+        this.highlightTimer = null
 
         this.recognition = null
         this.isRecognizing = false
@@ -307,6 +313,7 @@ class WysiwygEditor {
         el.content.addEventListener('input', () => {
             this.saveSelection()
             this.markAsChanged()
+            this.scheduleCodeHighlight()
             this.updateDerivedMetadata()
             if (this.previewVisible) this.updatePreview()
             this.refreshToolbarState()
@@ -665,6 +672,7 @@ class WysiwygEditor {
             this.elements.content.append(pre, after)
         }
 
+        this.highlightEditorCodeBlocks({ preserveCaret: true })
         this.saveSelection()
         this.markAsChanged()
         if (this.previewVisible) this.updatePreview()
@@ -889,6 +897,38 @@ class WysiwygEditor {
                 event.preventDefault()
                 document.execCommand('insertText', false, '    ')
                 this.markAsChanged()
+                this.scheduleCodeHighlight()
+                if (this.previewVisible) this.updatePreview()
+            }
+            return
+        }
+
+        if (event.key === 'Enter') {
+            const selection = window.getSelection()
+            const pre = selection?.anchorNode
+                ? (selection.anchorNode.nodeType === 1 ? selection.anchorNode : selection.anchorNode.parentElement)?.closest('pre')
+                : null
+            if (pre) {
+                event.preventDefault()
+                if (event.ctrlKey || event.metaKey || event.shiftKey) {
+                    let next = pre.nextElementSibling
+                    if (!next) {
+                        next = document.createElement('p')
+                        next.innerHTML = '<br>'
+                        pre.after(next)
+                    }
+                    const exitRange = document.createRange()
+                    exitRange.selectNodeContents(next)
+                    exitRange.collapse(true)
+                    selection.removeAllRanges()
+                    selection.addRange(exitRange)
+                    this.saveSelection()
+                } else {
+                    document.execCommand('insertText', false, '\n')
+                    this.markAsChanged()
+                    this.scheduleCodeHighlight()
+                    if (this.previewVisible) this.updatePreview()
+                }
             }
         }
     }
@@ -896,6 +936,25 @@ class WysiwygEditor {
     async handlePaste(event) {
         const clipboard = event.clipboardData
         if (!clipboard) return
+
+        // 0. Dentro de <pre>: cola sempre texto puro preservando quebras de linha (\n)
+        const selection = window.getSelection()
+        const insidePre = selection?.anchorNode
+            ? (selection.anchorNode.nodeType === 1 ? selection.anchorNode : selection.anchorNode.parentElement)?.closest('pre')
+            : null
+        if (insidePre && this.elements.content.contains(insidePre)) {
+            const plain = clipboard.getData('text/plain')
+            if (plain !== undefined) {
+                event.preventDefault()
+                document.execCommand('insertText', false, String(plain).replace(/\r\n?/g, '\n'))
+                this.saveSelection()
+                this.markAsChanged()
+                this.highlightEditorCodeBlocks({ preserveCaret: true })
+                this.updateDerivedMetadata()
+                if (this.previewVisible) this.updatePreview()
+                return
+            }
+        }
 
         // 1. Arquivos de imagem colados diretamente
         const imageFiles = Array.from(clipboard.files || []).filter(
@@ -913,6 +972,7 @@ class WysiwygEditor {
             event.preventDefault()
             const clean = this.sanitizePastedHTML(html)
             document.execCommand('insertHTML', false, clean)
+            this.highlightEditorCodeBlocks({ preserveCaret: true })
             this.saveSelection()
             this.markAsChanged()
             this.updateDerivedMetadata()
@@ -941,6 +1001,20 @@ class WysiwygEditor {
 
                 if (!ALLOWED_TAGS.has(tag)) {
                     walk(child, targetParent)
+                    continue
+                }
+
+                if (tag === 'PRE') {
+                    const cleanPre = document.createElement('pre')
+                    const innerCode = child.querySelector('code')
+                    const langMatch = /(?:^|\s)(language-\S+)/.exec(innerCode?.className || '')
+                    const cleanCode = document.createElement('code')
+                    if (langMatch) {
+                        cleanCode.className = langMatch[1]
+                    }
+                    cleanCode.textContent = readCodeText(innerCode || child)
+                    cleanPre.appendChild(cleanCode)
+                    targetParent.appendChild(cleanPre)
                     continue
                 }
 
@@ -1191,12 +1265,140 @@ class WysiwygEditor {
         clone.querySelectorAll('.wysiwyg-img-selected').forEach(node => {
             node.classList.remove('wysiwyg-img-selected')
         })
+        clone.querySelectorAll('pre > code').forEach(code => {
+            code.textContent = readCodeText(code)
+        })
+        stripCodeHighlight(clone)
         return clone.innerHTML
+    }
+
+    measureCaretInCode(codeEl) {
+        const selection = window.getSelection()
+        if (!selection || !selection.rangeCount) return null
+        const range = selection.getRangeAt(0)
+        if (!codeEl.contains(range.startContainer) || !codeEl.contains(range.endContainer)) {
+            return null
+        }
+
+        const offsetAt = (targetNode, targetOffset) => {
+            let count = 0
+            let done = false
+            const walk = node => {
+                if (done) return
+                if (node === targetNode) {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        count += Math.min(targetOffset, (node.nodeValue || '').length)
+                    } else {
+                        const children = Array.from(node.childNodes)
+                        for (let idx = 0; idx < Math.min(targetOffset, children.length); idx++) {
+                            walk(children[idx])
+                            if (done) return
+                        }
+                    }
+                    done = true
+                    return
+                }
+                if (node.nodeType === Node.TEXT_NODE) {
+                    count += (node.nodeValue || '').length
+                    return
+                }
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    const tag = node.tagName.toUpperCase()
+                    if (tag === 'BR') {
+                        count += 1
+                        return
+                    }
+                    for (const child of node.childNodes) {
+                        walk(child)
+                        if (done) return
+                    }
+                }
+            }
+            walk(codeEl)
+            return count
+        }
+
+        return {
+            start: offsetAt(range.startContainer, range.startOffset),
+            end: offsetAt(range.endContainer, range.endOffset)
+        }
+    }
+
+    restoreCaretInCode(codeEl, offsets) {
+        if (!offsets) return
+        const selection = window.getSelection()
+        if (!selection) return
+
+        const locate = charIndex => {
+            let remaining = Math.max(0, charIndex)
+            let lastText = null
+            const walker = document.createTreeWalker(codeEl, NodeFilter.SHOW_TEXT)
+            let node
+            while ((node = walker.nextNode())) {
+                lastText = node
+                const len = (node.nodeValue || '').length
+                if (remaining <= len) {
+                    return { node, offset: remaining }
+                }
+                remaining -= len
+            }
+            if (lastText) {
+                return { node: lastText, offset: (lastText.nodeValue || '').length }
+            }
+            return { node: codeEl, offset: codeEl.childNodes.length }
+        }
+
+        const startPos = locate(offsets.start)
+        const endPos = locate(offsets.end)
+        const range = document.createRange()
+        range.setStart(startPos.node, startPos.offset)
+        range.setEnd(endPos.node, endPos.offset)
+        selection.removeAllRanges()
+        selection.addRange(range)
+    }
+
+    highlightEditorCodeBlocks({ preserveCaret = true } = {}) {
+        if (!this.elements.content || this.sourceMode) return
+
+        const selection = window.getSelection()
+        const activeCode = preserveCaret && selection?.rangeCount
+            ? (selection.anchorNode?.nodeType === 1
+                ? selection.anchorNode
+                : selection.anchorNode?.parentElement)?.closest('pre > code')
+            : null
+
+        const caretOffsets = activeCode && this.elements.content.contains(activeCode)
+            ? this.measureCaretInCode(activeCode)
+            : null
+
+        highlightCodeBlocks(this.elements.content, {
+            autoDetect: true,
+            normalizeBarePre: true
+        })
+
+        if (activeCode && caretOffsets && this.elements.content.contains(activeCode)) {
+            this.restoreCaretInCode(activeCode, caretOffsets)
+            this.saveSelection()
+        }
+    }
+
+    scheduleCodeHighlight() {
+        if (this.highlightTimer) {
+            clearTimeout(this.highlightTimer)
+        }
+        if (!this.elements.content || this.sourceMode || !this.elements.content.querySelector('pre')) {
+            return
+        }
+        this.highlightTimer = setTimeout(() => {
+            this.highlightTimer = null
+            this.highlightEditorCodeBlocks({ preserveCaret: true })
+        }, 140)
     }
 
     setEditorHTML(html) {
         const normalized = this.unwrapPicturesForEditor(String(html || ''))
         this.elements.content.innerHTML = normalized
+        this.highlightEditorCodeBlocks({ preserveCaret: false })
 
         const missing = []
         this.elements.content.querySelectorAll('img[data-media-hash]').forEach(img => {
@@ -1221,6 +1423,18 @@ class WysiwygEditor {
         const parser = new DOMParser()
         const doc = parser.parseFromString(html, 'text/html')
 
+        doc.querySelectorAll('pre').forEach(pre => {
+            const code = pre.querySelector('code')
+            if (code) {
+                code.textContent = readCodeText(code)
+            } else {
+                const newCode = doc.createElement('code')
+                newCode.textContent = readCodeText(pre)
+                pre.replaceChildren(newCode)
+            }
+        })
+        stripCodeHighlight(doc.body)
+
         doc.querySelectorAll('img').forEach(img => {
             const dataSrc = img.getAttribute('data-src')
             if (dataSrc && (!img.getAttribute('src') || img.getAttribute('src').includes('1x1.gif'))) {
@@ -1239,6 +1453,10 @@ class WysiwygEditor {
         const html = this.getCleanEditorHTML()
         if (this.elements.preview) {
             this.elements.preview.innerHTML = this.unwrapPicturesForEditor(html)
+            highlightCodeBlocks(this.elements.preview, {
+                autoDetect: true,
+                normalizeBarePre: true
+            })
         }
         this.updateDerivedMetadata()
     }
@@ -1526,6 +1744,7 @@ class WysiwygEditor {
         doc.querySelectorAll('.wysiwyg-img-selected').forEach(node => {
             node.classList.remove('wysiwyg-img-selected')
         })
+        stripCodeHighlight(doc.body)
 
         const images = []
         const seenPath = new Set()
@@ -2076,6 +2295,10 @@ class WysiwygEditor {
     }
 
     destroy() {
+        if (this.highlightTimer) {
+            clearTimeout(this.highlightTimer)
+            this.highlightTimer = null
+        }
         if (this.autoSaveTimer) {
             clearInterval(this.autoSaveTimer)
             this.autoSaveTimer = null
