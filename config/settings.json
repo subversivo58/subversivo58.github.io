@@ -21,11 +21,11 @@
     "articles": {
         "storage": [
             {
-                "id": "o2nabj6W6",
+                "slug": "webrtc-no-front-end-moderno",
                 "author": "6475273",
                 "title": "WebRTC no Front-End Moderno",
                 "summary": "Houve um tempo em que fazer uma chamada de vídeo ou transmitir áudio pelo navegador exigia a instalação de...",
-                "path": "assets/posts/o2nabj6W6.md",
+                "path": "posts/webrtc-no-front-end-moderno.html",
                 "cover": "assets/posts/images/7785505f19139808966fee756e43be6cec41db97788d6fcc6f7cd0fd17c3502e.webp",
                 "images": [
                     "assets/posts/images/7785505f19139808966fee756e43be6cec41db97788d6fcc6f7cd0fd17c3502e.webp"
@@ -36,11 +36,11 @@
                 "readingTime": 6
             },
             {
-                "id": "GNWYARPre",
+                "slug": "descentralizacao-na-web-e-no-front-end",
                 "author": "6475273",
                 "title": "Descentralização na Web e no Front-End",
                 "summary": "A arquitetura da internet como conhecemos está passando por uma transformação profunda e estrutural. Historicamente, a web tem sido construída sobre...",
-                "path": "assets/posts/GNWYARPre.md",
+                "path": "posts/descentralizacao-na-web-e-no-front-end.html",
                 "cover": "assets/posts/images/5e2b2a672acf175f4b6c7bd0a4432e6e8f33d7445ce09f60ca7ba1a03ff4bb17.webp",
                 "images": [
                     "assets/posts/images/5e2b2a672acf175f4b6c7bd0a4432e6e8f33d7445ce09f60ca7ba1a03ff4bb17.webp"
@@ -51,11 +51,11 @@
                 "readingTime": 4
             },
             {
-                "id": "p2nWg3jjQ",
+                "slug": "subversivo58-ideias-tecnologia-e-experimentacao",
                 "author": "6475273",
                 "title": "Subversivo58: ideias, tecnologia e experimentação",
                 "summary": "Subversivo58 — Um espaço nerd dedicado à troca de ideias, experimentações e tecnologia...",
-                "path": "assets/posts/p2nWg3jjQ.md",
+                "path": "posts/subversivo58-ideias-tecnologia-e-experimentacao.html",
                 "cover": "assets/posts/images/f942b77456165eda25fc066111c9eced1c983d5558c1eb0bada85dfc405f0bbf.webp",
                 "images": [
                     "assets/posts/images/f942b77456165eda25fc066111c9eced1c983d5558c1eb0bada85dfc405f0bbf.webp"
@@ -66,11 +66,11 @@
                 "readingTime": 4
             },
             {
-                "id": "yxbneQ88N",
+                "slug": "blockchain-alem-das-criptomoedas",
                 "author": "6475273",
                 "title": "Blockchain Além das Criptomoedas",
                 "summary": "Quando o assunto é blockchain, a associação imediata costuma ser com Bitcoin e outras criptomoedas.",
-                "path": "assets/posts/yxbneQ88N.md",
+                "path": "posts/blockchain-alem-das-criptomoedas.html",
                 "cover": "assets/posts/images/9a1e0dbd20531c57a892aaac8a2a676428b317604825eb24fea57b29544a9cf4.webp",
                 "images": [
                     "assets/posts/images/9a1e0dbd20531c57a892aaac8a2a676428b317604825eb24fea57b29544a9cf4.webp"
@@ -81,11 +81,11 @@
                 "readingTime": 5
             },
             {
-                "id": "Z1gZqLW9Z",
+                "slug": "assim-surge-a-teoria-do-caos",
                 "author": "6475273",
                 "title": "Assim surge: A teoria do caos",
                 "summary": "Muito mais que um blog Tem gente que coleciona disco, tem gente que coleciona meme, tem gente que coleciona projeto inacabado no GitHub. Eu me encaixo tranquilo",
-                "path": "assets/posts/Z1gZqLW9Z.md",
+                "path": "posts/assim-surge-a-teoria-do-caos.html",
                 "cover": "assets/posts/images/6aca0b4283da10a24ef5e55e426103a3b04d3473d24f9e61619de5f65d73db23.webp",
                 "images": [
                     "assets/posts/images/6aca0b4283da10a24ef5e55e426103a3b04d3473d24f9e61619de5f65d73db23.webp"
@@ -175,6 +175,7 @@
                 "/404",
                 "/nocookie",
                 "/blog",
+                "/post",
                 "/copyright",
                 "/donations",
                 "/you-in-control-of-your-data"
@@ -235,14 +236,14 @@
                     "target": "#index-central-block"
                 },
                 {
-                    "file": "/assets/tpl/markdown-editor.tpl",
+                    "file": "/assets/tpl/wysiwyg-editor.tpl",
                     "mode": "append",
                     "target": "#admin-post-editor"
                 },
                 {
                     "file": "/assets/tpl/admin-post-item.tpl",
                     "mode": "append",
-                    "target": "#admin-dashboard-content"
+                    "target": "#admin-dashboard"
                 },
                 {
                     "file": "/assets/tpl/admin-delete-modal.tpl",
@@ -252,7 +253,7 @@
                 {
                     "file": "/assets/tpl/footoodles-editor.tpl",
                     "mode": "append",
-                    "target": "#admin-post-editor-container"
+                    "target": "#admin-footoodles-editor-panel"
                 }
             ]
         }

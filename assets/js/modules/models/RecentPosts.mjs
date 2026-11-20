@@ -1,4 +1,3 @@
-
 /**
  * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
@@ -6,85 +5,74 @@
 'use strict'
 
 // Listas de postagens recentes: carrossel da página inicial e resumo no rodapé.
-// Utiliza os metadados do settings.json, mantendo compatibilidade com registros antigos.
+// Utiliza os metadados do settings.json e aponta diretamente para /posts/<slug>.html.
 
 const esc = text => String(text).replace(
     /[&<>"]/g,
     char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char])
 )
 
-// Obtém o timestamp de criação em milissegundos.
-// Registros antigos utilizam date em segundos.
 const getTimestamp = post => {
     const timestamp = Number(post.timestamp)
-
     if (Number.isFinite(timestamp) && timestamp > 0) {
-        return timestamp
+        return timestamp > 1e12 ? timestamp : timestamp * 1000
     }
-
     const legacyDate = Number(post.date)
-
-    return Number.isFinite(legacyDate) && legacyDate > 0
-        ? legacyDate * 1000
-        : NaN
+    return Number.isFinite(legacyDate) && legacyDate > 0 ? legacyDate * 1000 : NaN
 }
 
 const formatDate = (timestamp, locale) => {
     const date = new Date(timestamp)
-
     return Number.isNaN(date.getTime())
         ? ''
         : date.toLocaleDateString(locale, { dateStyle: 'medium' })
 }
 
-// Data no formato AAAA-MM-DD (atributo datetime); vazio se inválida.
 const isoDate = timestamp => {
     const date = new Date(timestamp)
-
     return Number.isNaN(date.getTime())
         ? ''
         : date.toISOString().slice(0, 10)
 }
 
-// Obtém o tempo de leitura atual ou utiliza o campo legado minutes.
 const getReadingTime = post => {
     const value = Number(post.readingTime ?? post.minutes)
-
-    return Number.isFinite(value) && value > 0
-        ? Math.round(value)
-        : 0
+    return Number.isFinite(value) && value > 0 ? Math.round(value) : 0
 }
 
-// Troca {nome} pelo valor de vars.nome.
 const fill = (text, vars) => text.replace(
     /\{(\w+)\}/g,
     (match, name) => name in vars ? vars[name] : match
 )
 
-// Mais recentes primeiro, utilizando timestamp em milissegundos.
 const latest = (settings, limit) => [...settings.articles.storage]
     .sort((a, b) => getTimestamp(b) - getTimestamp(a))
     .slice(0, limit)
 
-// Mesmo formato de link da lista do blog (a página do blog abre o post pelo #id).
-const postURL = id => `/blog.html#${encodeURIComponent(id)}`
+const toRootRelative = path => `/${String(path || '').replace(/^\/+/, '')}`
 
-// Ícones (SVG embutido, herdam a cor do texto).
+const postURL = post => {
+    if (post && typeof post.path === 'string' && post.path.trim()) {
+        return toRootRelative(post.path)
+    }
+    if (post && post.slug) {
+        return `/posts/${encodeURIComponent(post.slug)}.html`
+    }
+    return '/blog.html'
+}
+
 const ICON_DATE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'
 const ICON_TIME = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>'
 
-// Tom do selo de categoria (0, 1 ou 2), sempre o mesmo para a mesma categoria.
 const tone = text => [...String(text)].reduce(
     (sum, char) => sum + char.charCodeAt(0),
     0
 ) % 3
 
-// Intervalo da troca automática de slide (ms).
 const INTERVAL = 6000
 
 /**
- * Rodapé: substitui os itens fixos de #dinamic-footer-news (ícone, título e data).
- * Limite: settings.articles['footer-max-list'].
+ * Rodapé: últimas postagens no #dinamic-footer-news com links /posts/<slug>.html.
  */
 export function renderFooterNews(
     settings,
@@ -105,10 +93,9 @@ export function renderFooterNews(
 
     container.innerHTML = posts.map(post => {
         const timestamp = getTimestamp(post)
-
         return `
         <div class="mt-3 col footer-column-bb">
-            <a href="${postURL(post.id)}" class="row">
+            <a href="${esc(postURL(post))}" class="row">
                 <small>📰 ${esc(post.title)}</small>
             </a>
             <small class="row">${formatDate(timestamp, locale)}</small>
@@ -117,12 +104,10 @@ export function renderFooterNews(
 }
 
 /**
- * Página inicial: carrossel de cards (imagem, categoria, título, resumo, data e tempo de leitura).
- * Limite: settings.articles['index-max-list']. Troca de slide automática.
- * Opções: image (padrão), locale (datas) e translate(chave, textoPadrao) (textos fixos).
+ * Página inicial: carrossel de cards com caminhos raiz / e links diretos /posts/<slug>.html.
  */
 export function renderIndexCarousel(settings, container, {
-    image = './assets/media/image/graph.webp',
+    image = '/assets/media/image/graph.webp',
     locale = navigator.language,
     translate = (key, fallback) => fallback
 } = {}) {
@@ -136,10 +121,7 @@ export function renderIndexCarousel(settings, container, {
     if (!posts.length) return
 
     const slides = posts.map(post => {
-        const category = post.tags && post.tags.length
-            ? String(post.tags[0])
-            : ''
-
+        const category = post.tags && post.tags.length ? String(post.tags[0]) : ''
         const readingTime = getReadingTime(post)
         const timestamp = getTimestamp(post)
         const iso = isoDate(timestamp)
@@ -154,22 +136,25 @@ export function renderIndexCarousel(settings, container, {
 
         const readTime = readingTime > 0
             ? `<span>${ICON_TIME}${esc(fill(
-                translate(
-                    'blog.read_time',
-                    '{minutes} min de leitura'
-                ),
+                translate('blog.read_time', '{minutes} min de leitura'),
                 { minutes: readingTime }
             ))}</span>`
             : ''
 
+        const coverSrc = post.cover ? toRootRelative(post.cover) : toRootRelative(image)
+
         return `
         <div class="posts-slide">
-            <a class="posts-card" href="${postURL(post.id)}">
+            <a class="posts-card" href="${esc(postURL(post))}">
                 <span class="posts-card-media${post.cover ? ' posts-card-media-cover' : ''}">
-                    <img alt=""
-                         src="./assets/media/image/1x1.gif"
-                         data-src="${esc(post.cover || image)}" data-lazy-target
-                         width="1200" height="720" class="posts-card-img">
+                    <picture>
+                        <img alt="${esc(post.title || '')}"
+                             src="/assets/media/image/1x1.gif"
+                             data-src="${esc(coverSrc)}"
+                             data-lazy-target
+                             width="1200" height="720"
+                             class="posts-card-img">
+                    </picture>
                     ${badge}
                 </span>
                 <span class="posts-card-body">
@@ -193,33 +178,22 @@ export function renderIndexCarousel(settings, container, {
         <div id="posts-dots" class="posts-dots">${dots}</div>`
 
     const track = container.querySelector('#posts-carousel')
-
     const buttons = [...container.querySelectorAll('#posts-dots button')]
-
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
-    // Slide que está à vista.
-    const current = () => Math.round(
-        track.scrollLeft / (track.clientWidth || 1)
-    )
+    const current = () => Math.round(track.scrollLeft / (track.clientWidth || 1))
 
     const goTo = (index, smooth = true) => {
         track.scrollTo({
             left: index * track.clientWidth,
-            behavior: smooth && !reduceMotion.matches
-                ? 'smooth'
-                : 'auto'
+            behavior: smooth && !reduceMotion.matches ? 'smooth' : 'auto'
         })
     }
 
-    // Marca o ponto do slide que está à vista.
     let frame = null
-
     const sync = () => {
         frame = null
-
         const index = current()
-
         buttons.forEach((button, position) => {
             if (position === index) {
                 button.setAttribute('aria-current', 'true')
@@ -230,15 +204,10 @@ export function renderIndexCarousel(settings, container, {
     }
 
     track.addEventListener('scroll', () => {
-        if (frame === null) {
-            frame = requestAnimationFrame(sync)
-        }
+        if (frame === null) frame = requestAnimationFrame(sync)
     }, { passive: true })
 
-    // Troca automática: pausa com o mouse, teclado ou dedo sobre o carrossel,
-    // com a aba escondida, fora da tela ou quando o usuário prefere menos movimento.
     const hold = new Set()
-
     let timer = null
     let visible = true
 
@@ -249,34 +218,17 @@ export function renderIndexCarousel(settings, container, {
 
     const play = () => {
         stop()
-
-        if (
-            posts.length < 2 ||
-            hold.size ||
-            !visible ||
-            document.hidden ||
-            reduceMotion.matches
-        ) {
+        if (posts.length < 2 || hold.size || !visible || document.hidden || reduceMotion.matches) {
             return
         }
-
         timer = setInterval(() => {
             const next = current() + 1
-
-            // Depois do último volta ao primeiro, sem rebobinar todos os slides.
             goTo(next % posts.length, next < posts.length)
         }, INTERVAL)
     }
 
-    const holdOn = reason => {
-        hold.add(reason)
-        play()
-    }
-
-    const holdOff = reason => {
-        hold.delete(reason)
-        play()
-    }
+    const holdOn = reason => { hold.add(reason); play() }
+    const holdOff = reason => { hold.delete(reason); play() }
 
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
@@ -286,32 +238,17 @@ export function renderIndexCarousel(settings, container, {
     })
 
     container.addEventListener('pointerenter', event => {
-        if (event.pointerType === 'mouse') {
-            holdOn('hover')
-        }
+        if (event.pointerType === 'mouse') holdOn('hover')
     })
-
-    container.addEventListener('pointerleave', () => {
-        holdOff('hover')
-    })
-
+    container.addEventListener('pointerleave', () => holdOff('hover'))
     track.addEventListener('pointerdown', () => holdOn('touch'))
     track.addEventListener('pointerup', () => holdOff('touch'))
     track.addEventListener('pointercancel', () => holdOff('touch'))
-
-    // Foco só pausa quando vem do teclado.
-    const onFocusIn = event => {
-        if (event.target.matches(':focus-visible')) {
-            holdOn('focus')
-        }
-    }
-
-    container.addEventListener('focusin', onFocusIn)
-
+    container.addEventListener('focusin', event => {
+        if (event.target.matches(':focus-visible')) holdOn('focus')
+    })
     container.addEventListener('focusout', () => holdOff('focus'))
-
     document.addEventListener('visibilitychange', play)
-
     reduceMotion.addEventListener('change', play)
 
     if ('IntersectionObserver' in window) {
@@ -321,6 +258,5 @@ export function renderIndexCarousel(settings, container, {
         }, { threshold: .25 }).observe(container)
     }
 
-    // Início automático.
     play()
 }

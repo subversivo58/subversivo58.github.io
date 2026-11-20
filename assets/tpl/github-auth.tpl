@@ -16,7 +16,7 @@
             <div class="modal-header">
                 <h5
                     id="github-auth-title"
-                    class="modal-title i18n"
+                    class="i18n modal-title"
                     data-i18n-html="github_auth.title">
                 </h5>
             </div>
@@ -39,7 +39,7 @@
                         <button
                             type="submit"
                             id="github-auth-start"
-                            class="btn btn-info btn-block rounded-0 cp i18n"
+                            class="i18n btn btn-info btn-block rounded-0 cp"
                             data-i18n-html="github_auth.start">
                         </button>
 
@@ -72,7 +72,7 @@
                     <button
                         type="button"
                         id="github-auth-copy-diagnostics"
-                        class="btn btn-secondary btn-block rounded-0 cp i18n"
+                        class="i18n btn btn-secondary btn-block rounded-0 cp"
                         data-i18n-html="github_auth.copy_diagnostics">
                     </button>
 

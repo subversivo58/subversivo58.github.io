@@ -91,8 +91,6 @@ import {
     PressHoldCollorCharger
 } from "./modules/functions/Functions.mjs";
 
-import { loadMarkdown } from "./modules/lib/MarkdownKit.mjs";
-
 let GitHubAPIInstance = null;
 
 // vendors
@@ -393,7 +391,7 @@ const SetupDOMReady = async evt => {
 
     PolicyHandler.supported = settings.source.language;
     dc.documentElement.lang = PolicyHandler.language;
-    await i18n.get(`${BaseRoot}assets/lang/${PolicyHandler.language}.json`, {
+    await i18n.get(`/assets/lang/${PolicyHandler.language}.json`, {
         credentials: "include",
         cache: "reload"
     });
@@ -434,13 +432,13 @@ const SetupDOMReady = async evt => {
                 if ("action" in data) {
                     switch (data.action) {
                         case "cookie-agree":
-                            Redirect("policy.html#cookie-agree");
+                            Redirect("/policy.html#cookie-agree");
                             break;
                         case "cookie-policy":
-                            Redirect("policy.html#policy-general");
+                            Redirect("/policy.html#policy-general");
                             break;
                         case "terms-policy":
-                            Redirect("policy.html#policy-terms");
+                            Redirect("/policy.html#policy-terms");
                             break;
                     }
                 }
@@ -453,7 +451,7 @@ const SetupDOMReady = async evt => {
             DSNotify.create({
                 title: NotifyI18nStorage.title,
                 body: NotifyI18nStorage.body,
-                badage: "assets/media/image/icons/badage-monochrome.webp",
+                badage: "/assets/media/image/icons/badage-monochrome.webp",
                 actions: NotifyI18nStorage.actions,
                 tag: DSNoticeTag,
                 bootstrap: {
@@ -523,18 +521,17 @@ const SetupDOMReady = async evt => {
         case "about":
         case "admin":
         case "blog":
+        case "post":
         case "404":
-        case "nocookie":
+        case "nocookie": {
             // check URI "search" fragment
             if (location.search === "?utm_source=homescreen") {
                 // is pwa launch ... register log
             }
 
             await TemplatesReady.import;
-            // Exibe o atalho administrativo quando existe uma chave salva.
+            // Exibe o atalho administrativo quando existe uma autenticação OAuth.
             const adminShortcut = dc.getElementById("drawer-admin");
-
-                // Exibe o atalho administrativo quando existe uma autenticação OAuth.
             let adminAuth = false;
 
             if (DBMethods) {
@@ -571,122 +568,179 @@ const SetupDOMReady = async evt => {
                 );
             }
 
-            if (router === "blog") {
-                const box = document.getElementById("index-central-block");
-                const { renderMarkdownURL } = await loadMarkdown();
+            // Utilitários compartilhados entre postagens e blog
+            const escHTML = text =>
+                String(text ?? "").replace(
+                    /[&<>"]/g,
+                    char =>
+                        ({
+                            "&": "&amp;",
+                            "<": "&lt;",
+                            ">": "&gt;",
+                            '"': "&quot;"
+                        })[char]
+                );
 
-                const mdOptions = {
-                    extensions: [
-                        "tables",
-                        "images",
-                        "anchors",
-                        "externalLinks",
-                        "blockAttributes",
-                        "highlight"
-                    ]
-                };
-                let codeCopy = null;
-                // Copy code blocks.
-                box.addEventListener("click", async event => {
-                    const button = event.target.closest("[data-code-copy]");
+            const AUTHOR_CACHE_PREFIX = "subversivo58:author:";
 
-                    if (!button || !box.contains(button)) return;
+            const readAuthorCache = key => {
+                try {
+                    const raw = sessionStorage.getItem(AUTHOR_CACHE_PREFIX + key);
+                    return raw ? JSON.parse(raw) : null;
+                } catch {
+                    return null;
+                }
+            };
 
-                    const wrapper = button.closest(".code-container");
-                    const code = wrapper?.querySelector("pre code");
+            const writeAuthorCache = (key, author) => {
+                try {
+                    sessionStorage.setItem(AUTHOR_CACHE_PREFIX + key, JSON.stringify(author));
+                } catch {
+                    // Armazenamento indisponível: segue sem cache.
+                }
+            };
 
-                    if (!code) return;
+            const authorRequests = new Map();
 
-                    try {
-                        await navigator.clipboard.writeText(code.textContent);
+            const fetchAuthor = id => {
+                if (!id) return Promise.resolve(null);
 
-                        const originalContent = button.textContent;
+                const key = String(id);
+                const cached = readAuthorCache(key);
+                if (cached) return Promise.resolve(cached);
 
-                        button.textContent = "✓";
-                        button.classList.add("is-copied");
+                if (authorRequests.has(key)) {
+                    return authorRequests.get(key);
+                }
 
-                        setTimeout(() => {
-                            button.textContent = originalContent;
-                            button.classList.remove("is-copied");
-                        }, 1200);
-                    } catch (error) {
-                        console.error("[BLOG]: Failed to copy code.", error);
-                    }
-                });
-                // Autor da postagem (GitHub): busca pelo ID numérico na API pública.
-                // Cache na sessionStorage: não é gravado no settings.json e sobrevive à navegação dentro do site.
-                const AUTHOR_CACHE_PREFIX = "subversivo58:author:";
-
-                const readAuthorCache = key => {
-                    try {
-                        const raw = sessionStorage.getItem(AUTHOR_CACHE_PREFIX + key);
-                        return raw ? JSON.parse(raw) : null;
-                    } catch (error) {
+                const request = fetch(
+                    `https://api.github.com/user/${encodeURIComponent(key)}`,
+                    { headers: { Accept: "application/vnd.github+json" } }
+                )
+                    .then(response => (response.ok ? response.json() : null))
+                    .then(user => {
+                        if (!user || !user.login) return null;
+                        const profile = String(user.html_url || "");
+                        return {
+                            login: String(user.login),
+                            name: String(user.name || user.login),
+                            avatar: String(user.avatar_url || ""),
+                            url: /^https:\/\/github\.com\//.test(profile)
+                                ? profile
+                                : `https://github.com/${encodeURIComponent(user.login)}`
+                        };
+                    })
+                    .catch(error => {
+                        console.error("[BLOG]: Failed to load author.", error);
                         return null;
-                    }
-                };
-
-                const writeAuthorCache = (key, author) => {
-                    try {
-                        sessionStorage.setItem(AUTHOR_CACHE_PREFIX + key, JSON.stringify(author));
-                    } catch (error) {
-                        // Armazenamento indisponível: segue sem cache.
-                    }
-                };
-
-                const fetchAuthor = id => {
-                    if (!id) return Promise.resolve(null);
-
-                    const key = String(id);
-
-                    const cached = readAuthorCache(key);
-
-                    if (cached) return Promise.resolve(cached);
-
-                    const request = fetch(
-                        `https://api.github.com/user/${encodeURIComponent(key)}`,
-                        { headers: { Accept: "application/vnd.github+json" } }
-                    )
-                        .then(response => (response.ok ? response.json() : null))
-                        .then(user => {
-                            if (!user || !user.login) return null;
-
-                            const profile = String(user.html_url || "");
-
-                            return {
-                                login: String(user.login),
-                                avatar: String(user.avatar_url || ""),
-                                url: /^https:\/\/github\.com\//.test(profile)
-                                    ? profile
-                                    : `https://github.com/${encodeURIComponent(user.login)}`
-                            };
-                        })
-                        .catch(error => {
-                            console.error("[BLOG]: Failed to load author.", error);
-                            return null;
-                        });
-
-                    request.then(author => {
-                        if (author) writeAuthorCache(key, author);
+                    })
+                    .finally(() => {
+                        authorRequests.delete(key);
                     });
 
-                    return request;
-                };
+                authorRequests.set(key, request);
 
-                // Badge simples: foto e nome (link para o perfil no GitHub).
-                const authorHTML = author => {
-                    if (!author) return "";
+                request.then(author => {
+                    if (author) writeAuthorCache(key, author);
+                });
 
-                    return `
-                <div class="d-flex align-items-center mb-4 post-author">
-                    <img src="${esc(author.avatar)}" alt="" width="40" height="40"
-                         class="rounded-circle mr-2" loading="lazy">
-                    <a href="${esc(author.url)}" target="_blank" rel="noopener noreferrer"
-                       class="font-weight-bold">${esc(author.login)}</a>
-                </div>`;
-                };
+                return request;
+            };
 
-                // Compatibilidade: timestamp novo em milissegundos e date legado em segundos.
+            const formatDateLocale = timestamp => {
+                if (!timestamp) return "";
+                const date = new Date(timestamp);
+                if (Number.isNaN(date.getTime())) return "";
+                return date.toLocaleDateString(PolicyHandler.language, {
+                    dateStyle: "medium"
+                });
+            };
+
+            if (router === "post") {
+                const box = document.getElementById("index-central-block");
+
+                if (box) {
+                    box.querySelectorAll("time[datetime]").forEach(el => {
+                        const formatted = formatDateLocale(el.getAttribute("datetime"));
+                        if (formatted) el.textContent = formatted;
+                    });
+
+                    box.querySelectorAll("[data-post-reading-time]").forEach(el => {
+                        const mins = Number(el.dataset.postReadingTime);
+                        if (Number.isFinite(mins) && mins > 0) {
+                            el.textContent = i18n
+                                .getWord("blog.read_time")
+                                .replace("{minutes}", Math.ceil(mins));
+                        }
+                    });
+
+                    box.querySelectorAll("[data-post-updated]").forEach(el => {
+                        const formatted = formatDateLocale(el.dataset.postUpdated);
+                        if (formatted) {
+                            el.textContent = i18n
+                                .getWord("blog.updated")
+                                .replace("{date}", formatted);
+                        }
+                    });
+
+                    const authorBox = document.getElementById("post-author-container");
+                    const metaAuthor = document.querySelector('meta[name="post-author"]')?.content;
+                    const authorId = authorBox?.dataset.authorId || metaAuthor || "";
+
+                    if (authorBox && authorId) {
+                        const author = await fetchAuthor(authorId);
+                        if (author) {
+                            authorBox.innerHTML = `
+                                <div class="d-flex align-items-center mb-4 post-author">
+                                    <picture class="mr-2 flex-shrink-0">
+                                        <img src="/assets/media/image/1x1.gif"
+                                             data-src="${escHTML(author.avatar)}"
+                                             data-lazy-target
+                                             alt="${escHTML(author.login)}"
+                                             width="40"
+                                             height="40"
+                                             class="rounded-circle">
+                                    </picture>
+                                    <a href="${escHTML(author.url)}" target="_blank" rel="noopener noreferrer"
+                                       class="font-weight-bold">${escHTML(author.login)}</a>
+                                </div>`;
+                            lazyLoad.observe(authorBox);
+                        }
+                    }
+
+                    const { default: CodeCopy } = await import("./modules/lib/CodeCopy.mjs");
+                    const codeCopy = CodeCopy("#index-central-block", "#code-copy-wrapper-template");
+                    codeCopy();
+
+                    box.addEventListener("click", async event => {
+                        const button = event.target.closest("[data-code-copy]");
+                        if (!button || !box.contains(button)) return;
+
+                        const wrapper = button.closest(".code-container");
+                        const code = wrapper?.querySelector("pre code");
+                        if (!code) return;
+
+                        try {
+                            await navigator.clipboard.writeText(code.textContent);
+                            const originalContent = button.textContent;
+                            button.textContent = "✓";
+                            button.classList.add("is-copied");
+                            setTimeout(() => {
+                                button.textContent = originalContent;
+                                button.classList.remove("is-copied");
+                            }, 1200);
+                        } catch (error) {
+                            console.error("[POST]: Failed to copy code.", error);
+                        }
+                    });
+
+                    lazyLoad.observe(box);
+                }
+            }
+
+            if (router === "blog") {
+                const box = document.getElementById("index-central-block");
+
                 const getPostTimestamp = post => {
                     const timestamp = Number(post.timestamp);
                     if (Number.isFinite(timestamp) && timestamp > 0) {
@@ -696,279 +750,258 @@ const SetupDOMReady = async evt => {
                     return Number.isFinite(date) && date > 0 ? date * 1000 : 0;
                 };
 
-                // Recupera a data da última modificação.
-                const getLastModifiedTimestamp = post => {
-                    const timestamp = Number(post.lastModified);
-
-                    if (!Number.isFinite(timestamp) || timestamp <= 0) {
-                        return 0;
-                    }
-
-                    return timestamp > 1e12 ? timestamp : timestamp * 1000;
-                };
-
                 const posts = [...settings.articles.storage].sort(
                     (a, b) => getPostTimestamp(b) - getPostTimestamp(a)
                 );
-                const maxList = settings.articles["blog-max-list"];
+                const maxList = Number(settings.articles["blog-max-list"]) || 10;
 
-                const esc = text =>
-                    String(text ?? "").replace(
-                        /[&<>\"]/g,
-                        char =>
-                            ({
-                                "&": "&amp;",
-                                "<": "&lt;",
-                                ">": "&gt;",
-                                '\"': "&quot;"
-                            })[char]
-                    );
+                const allTags = [...new Set(
+                    posts.flatMap(p => Array.isArray(p.tags) ? p.tags : [])
+                        .map(t => String(t).trim().toLowerCase())
+                        .filter(Boolean)
+                )].sort();
 
-                const formatDate = timestamp => {
-                    if (!timestamp) return "";
-                    const date = new Date(timestamp);
-                    if (Number.isNaN(date.getTime())) return "";
-                    return date.toLocaleDateString(PolicyHandler.language, {
-                        dateStyle: "medium"
-                    });
-                };
-
-                const getReadingTime = post => {
-                    const value = Number(post.readingTime);
-                    return Number.isFinite(value) && value > 0
-                        ? Math.ceil(value)
-                        : null;
-                };
-
-                let drawing = 0;
+                let activeTag = "";
+                let searchQuery = "";
                 let visible = maxList;
-                let currentId = null;
 
-                const itemHTML = item => {
-                    const date = formatDate(getPostTimestamp(item));
-                    return `
-        <a href="#${encodeURIComponent(item.id)}"
-           class="list-group-item list-group-item-action rounded-0${item.id === currentId ? " active" : ""}">
-            ${esc(item.title)}
+                if (posts.length === 0) {
+                    box.innerHTML = `
+                        <div class="container d-flex align-items-center justify-content-center text-center py-5">
+                            <div>
+                                <div class="display-3 mb-3" aria-hidden="true">📰</div>
+                                <p class="i18n lead text-muted mb-0" data-i18n-html="blog.empty">${escHTML(i18n.getWord("blog.empty"))}</p>
+                            </div>
+                        </div>`;
+                } else {
+                    const getFiltered = () => posts.filter(post => {
+                        const tags = Array.isArray(post.tags) ? post.tags.map(t => String(t).toLowerCase()) : [];
+                        if (activeTag && !tags.includes(activeTag)) return false;
+                        if (!searchQuery) return true;
+                        const haystack = [post.title, post.summary, post.slug, ...tags].join(" ").toLowerCase();
+                        return haystack.includes(searchQuery);
+                    });
 
-            ${date ? `<small class="d-block">${date}</small>` : ""}
-        </a>`;
-                };
+                    const normalizeMs = value => {
+                        const num = Number(value);
+                        if (!Number.isFinite(num) || num <= 0) return 0;
+                        return num > 1e12 ? num : num * 1000;
+                    };
 
-                const updateMore = () => {
-                    const count = document.getElementById("blog-count");
-                    const more = document.getElementById("blog-more");
-                    if (!count || !more) return;
-                    const shown = Math.min(visible, posts.length);
-                    count.textContent = i18n
-                        .getWord("blog.showing")
-                        .replace("{shown}", shown)
-                        .replace("{total}", posts.length);
-                    count.hidden = posts.length <= maxList;
-                    more.hidden = shown >= posts.length;
-                };
+                    const cardHTML = post => {
+                        const postPath = `/${String(post.path || `posts/${post.slug}.html`).replace(/^\/+/, "")}`;
+                        const rawCover = post.cover || (Array.isArray(post.images) ? post.images[0] : "");
+                        const coverUrl = rawCover
+                            ? `/${String(rawCover).replace(/^\/+/, "")}`
+                            : "/assets/media/image/graph.webp";
+                        const publishedMs = getPostTimestamp(post);
+                        const modifiedMs = normalizeMs(post.lastModified);
+                        const publishedIso = publishedMs ? new Date(publishedMs).toISOString() : "";
+                        const modifiedIso = modifiedMs ? new Date(modifiedMs).toISOString() : "";
+                        const dateText = formatDateLocale(publishedMs);
+                        const updatedFormatted = modifiedMs && publishedMs && modifiedMs !== publishedMs
+                            ? formatDateLocale(modifiedMs)
+                            : "";
+                        const updatedText = updatedFormatted
+                            ? i18n.getWord("blog.updated").replace("{date}", updatedFormatted)
+                            : "";
+                        const mins = Number(post.readingTime) > 0 ? Math.ceil(Number(post.readingTime)) : 1;
+                        const readText = i18n.getWord("blog.read_time").replace("{minutes}", mins);
+                        const tags = Array.isArray(post.tags) ? post.tags : [];
+                        const authorId = post.author ? String(post.author) : "";
 
-                const loadMore = () => {
-                    const list = document.getElementById("blog-list");
-                    if (!list) return;
-                    const from = Math.min(visible, posts.length);
-                    visible = Math.min(visible + maxList, posts.length);
-                    list.insertAdjacentHTML(
-                        "beforeend",
-                        posts.slice(from, visible).map(itemHTML).join("")
-                    );
-                    updateMore();
-                };
-
-                const drawBlog = async () => {
-                    const run = ++drawing;
-                    const id = decodeURIComponent(location.hash.slice(1));
-                    const post = id
-                        ? posts.find(item => item.id === id)
-                        : posts[0];
-                    currentId = post ? post.id : null;
-
-                    const index = post ? posts.indexOf(post) : -1;
-                    if (index >= visible)
-                        visible = Math.ceil((index + 1) / maxList) * maxList;
-
-                    let article = `<p class="ct my-5">${i18n.getWord("blog.empty")}</p>`;
-                    if (posts.length && !post) {
-                        article = `<p class="ct my-5">${i18n.getWord("blog.not_found")}</p>`;
-                    }
-
-                    if (post) {
-                        try {
-                            article = await renderMarkdownURL(
-                                `assets/posts/${encodeURIComponent(post.id)}.md`,
-                                mdOptions
-                            );
-                        } catch (error) {
-                            console.error("[BLOG]:", error);
-                            article = `<p class="ct my-5">${i18n.getWord("blog.load_error")}</p>`;
-                        }
-                    }
-
-                    // Badge do autor (foto e nome); só existe quando há postagem.
-                    const authorBlock = post
-                        ? authorHTML(await fetchAuthor(post.author))
-                        : "";
-
-                    if (run !== drawing) return;
-
-                    if (posts.length === 0) {
-                        box.innerHTML = `
-            <div class="container d-flex align-items-center justify-content-center text-center py-5">
-                <div>
-                    <div class="display-3 mb-3" aria-hidden="true">📰</div>
-                    <p class="lead text-muted mb-0">${i18n.getWord("blog.empty")}</p>
-                </div>
-            </div>`;
-                        return;
-                    }
-
-                    let postHeader = "";
-                    let postFooter = "";
-                    let postLicense = "";
-
-                    if (post) {
-                        const date = formatDate(getPostTimestamp(post));
-                        const readingTime = getReadingTime(post);
-                        const metadata = [
-                            date,
-                            readingTime
-                                ? i18n
-                                      .getWord("blog.read_time")
-                                      .replace("{minutes}", readingTime)
-                                : ""
-                        ].filter(Boolean);
-
-                        // Licença do conteúdo (CC BY-SA 4.0), logo após a postagem.
-                        postLicense = `
-                <div class="alert alert-light border small d-flex align-items-center mt-4 mb-0" role="note">
-                    <img src="assets/media/image/logos/cc-by-sa-4.0.png"
-                         alt="CC BY-SA 4.0" width="88" height="31"
-                         class="mr-3 flex-shrink-0">
-                    <span>${i18n.getWord("blog.license")}</span>
-                </div>`;
-
-                        postHeader = `
-                <header class="mb-4">
-                    <h3>${esc(post.title)}</h3>
-
-                    ${metadata.length ? `<p class="small text-muted">${metadata.join(" · ")}</p>` : ""}
-                </header>`;
-
-                        // Exibe a atualização somente quando a data for diferente da criação.
-                        const createdTimestamp = getPostTimestamp(post);
-                        const modifiedTimestamp =
-                            getLastModifiedTimestamp(post);
-
-                        const updatedDate =
-                            createdTimestamp &&
-                            modifiedTimestamp &&
-                            createdTimestamp !== modifiedTimestamp
-                                ? formatDate(modifiedTimestamp)
-                                : "";
-
-                        // Tags em pílulas com contorno, sem # e sem funcionalidade por enquanto.
-                        const tags = Array.isArray(post.tags)
-                            ? post.tags
-                                  .map(tag => String(tag).trim())
-                                  .filter(Boolean)
-                            : [];
-
-                        const footerContent = [];
-
-                        if (updatedDate) {
-                            footerContent.push(`
-                    <p class="small text-danger text-right mb-2">
-                        ${esc(
-                            i18n
-                                .getWord("blog.updated")
-                                .replace("{date}", updatedDate)
-                        )}
-                    </p>`);
-                        }
-
-                        if (tags.length) {
-                            footerContent.push(`
-                    <div class="d-flex flex-wrap align-items-center">
-                        ${tags
-                            .map(
-                                tag => `
-                            <span class="border rounded-pill px-2 py-1 mr-2 mb-2 small">
-                                ${esc(tag)}
-                            </span>
-                        `
-                            )
-                            .join("")}
-                    </div>`);
-                        }
-
-                        if (footerContent.length) {
-                            postFooter = `
-                    <footer class="mt-4">
-                        ${footerContent.join("")}
-                    </footer>`;
-                        }
-                    }
+                        return `
+                            <div class="col-12 col-md-6 mb-4">
+                                <article class="card rounded-0 h-100 border blog-post-card">
+                                    <a href="${escHTML(postPath)}" class="d-block blog-post-media">
+                                        <picture class="d-block w-100 h-100">
+                                            <img src="/assets/media/image/1x1.gif"
+                                                 data-src="${escHTML(coverUrl)}"
+                                                 data-lazy-target
+                                                 alt="${escHTML(post.title)}"
+                                                 class="w-100 h-100">
+                                        </picture>
+                                    </a>
+                                    <div class="card-body d-flex flex-column">
+                                        ${authorId ? `<div class="mb-2 d-none" data-blog-author="${escHTML(authorId)}"></div>` : ""}
+                                        <div class="small text-muted mb-2 blog-post-meta">
+                                            <div>
+                                                ${dateText ? `<time datetime="${escHTML(publishedIso)}">${escHTML(dateText)}</time>` : ""}
+                                                ${dateText ? `<span class="mx-1" aria-hidden="true">&middot;</span>` : ""}
+                                                <span>${escHTML(readText)}</span>
+                                            </div>
+                                            ${updatedText ? `<div class="blog-post-updated" data-post-updated="${escHTML(modifiedIso)}">${escHTML(updatedText)}</div>` : ""}
+                                        </div>
+                                        <h2 class="h5 font-weight-bold mb-2">
+                                            <a href="${escHTML(postPath)}" class="text-dark">${escHTML(post.title)}</a>
+                                        </h2>
+                                        <p class="small text-muted mb-3 flex-grow-1">${escHTML(post.summary || "")}</p>
+                                        ${tags.length ? `
+                                            <div class="d-flex flex-wrap mb-3">
+                                                ${tags.map(tag => `<span class="badge badge-light border mr-1 mb-1 font-weight-normal">${escHTML(tag)}</span>`).join("")}
+                                            </div>` : ""}
+                                        <div class="mt-auto pt-2 border-top">
+                                            <a href="${escHTML(postPath)}" class="i18n btn btn-sm btn-outline-info rounded-0 cp" data-i18n-html="blog.read_article">${escHTML(i18n.getWord("blog.read_article"))}</a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>`;
+                    };
 
                     box.innerHTML = `
-            <div class="container">
-                ${postHeader}
-                ${authorBlock}
-                <article class="text-break markdown-body">${article}</article>
-                ${postLicense}
-                ${postFooter}
-                <hr class="my-4">
-                <h4 class="mt-5">${i18n.getWord("blog.more_posts")}</h4>
-                <div id="blog-list" class="list-group">
-                    ${posts.slice(0, visible).map(itemHTML).join("")}
-                </div>
-                <p id="blog-count" class="small text-muted ct mt-3 mb-0" hidden></p>
-                <button type="button"
-                        id="blog-more"
-                        class="btn btn-outline-secondary btn-block rounded-0 cp mt-3 i18n"
-                        data-i18n-html="blog.load_more"
-                        hidden>Carregar mais</button>
-                <div class="mb-5"></div>
-            </div>`;
+                        <div class="container py-3">
+                            <header class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 pb-3 border-bottom">
+                                <div class="mb-2 mb-md-0">
+                                    <h1 class="i18n h3 mb-0 tc" data-i18n-html="navbar.blog">${escHTML(i18n.getWord("navbar.blog"))}</h1>
+                                </div>
+                                <div class="w-100" style="max-width: 340px;">
+                                    <input type="search"
+                                           id="blog-search-input"
+                                           class="i18n form-control form-control-sm rounded-0"
+                                           data-i18n-place="blog.search_placeholder"
+                                           placeholder="${escHTML(i18n.getWord("blog.search_placeholder"))}"
+                                           autocomplete="off">
+                                </div>
+                            </header>
 
-                    if (!codeCopy) {
-                        const { default: CodeCopy } =
-                            await import("./modules/lib/CodeCopy.mjs");
+                            ${allTags.length ? `
+                                <div id="blog-tag-filters" class="d-flex flex-wrap align-items-center mb-4">
+                                    <button type="button"
+                                            data-blog-tag=""
+                                            class="i18n btn btn-sm btn-outline-secondary rounded-0 mr-2 mb-2 blog-tag-filter active cp"
+                                            data-i18n-html="blog.all_tags">${escHTML(i18n.getWord("blog.all_tags"))}</button>
+                                    ${allTags.map(tag => `
+                                        <button type="button"
+                                                data-blog-tag="${escHTML(tag)}"
+                                                class="btn btn-sm btn-outline-secondary rounded-0 mr-2 mb-2 blog-tag-filter cp">${escHTML(tag)}</button>
+                                    `).join("")}
+                                </div>` : ""}
 
-                        codeCopy = CodeCopy(
-                            "#index-central-block",
-                            "#code-copy-wrapper-template"
-                        );
+                            <div id="blog-empty-filter" class="p-4 text-center border bg-light text-muted mb-4" hidden>
+                                <span class="i18n" data-i18n-html="blog.no_results">${escHTML(i18n.getWord("blog.no_results"))}</span>
+                            </div>
+
+                            <div id="blog-list" class="row"></div>
+
+                            <p id="blog-count" class="small text-muted ct mt-2 mb-0" hidden></p>
+                            <button type="button"
+                                    id="blog-more"
+                                    class="i18n btn btn-outline-secondary btn-block rounded-0 cp mt-3"
+                                    data-i18n-html="blog.load_more"
+                                    hidden>${escHTML(i18n.getWord("blog.load_more"))}</button>
+                        </div>`;
+
+                    const listEl = document.getElementById("blog-list");
+                    const emptyEl = document.getElementById("blog-empty-filter");
+                    const countEl = document.getElementById("blog-count");
+                    const moreEl = document.getElementById("blog-more");
+                    const searchInput = document.getElementById("blog-search-input");
+                    const tagsWrap = document.getElementById("blog-tag-filters");
+
+                    const hydrateCardAuthors = () => {
+                        const slots = [...listEl.querySelectorAll("[data-blog-author]")];
+                        const uniqueIds = [...new Set(slots.map(el => el.dataset.blogAuthor).filter(Boolean))];
+
+                        uniqueIds.forEach(async id => {
+                            const author = await fetchAuthor(id);
+                            if (!author) return;
+
+                            const displayName = author.name || author.login;
+                            const badgeHTML = `
+                                <span class="blog-author-badge">
+                                    <picture class="blog-author-avatar-wrap flex-shrink-0">
+                                        <img src="/assets/media/image/1x1.gif"
+                                             data-src="${escHTML(author.avatar)}"
+                                             data-lazy-target
+                                             alt="${escHTML(displayName)}"
+                                             width="22"
+                                             height="22"
+                                             class="blog-author-avatar">
+                                    </picture>
+                                    <a href="${escHTML(author.url)}"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       title="@${escHTML(author.login)}"
+                                       class="ext-link-icon blog-author-link">${escHTML(displayName)}</a>
+                                </span>`;
+
+                            listEl.querySelectorAll("[data-blog-author]").forEach(slot => {
+                                if (slot.dataset.blogAuthor !== id) return;
+                                slot.innerHTML = badgeHTML;
+                                slot.classList.remove("d-none");
+                            });
+
+                            lazyLoad.observe(listEl);
+                        });
+                    };
+
+                    const renderCatalog = () => {
+                        const filtered = getFiltered();
+                        const shown = Math.min(visible, filtered.length);
+
+                        if (emptyEl) emptyEl.hidden = filtered.length > 0;
+                        listEl.innerHTML = filtered.slice(0, shown).map(cardHTML).join("");
+
+                        if (countEl) {
+                            countEl.textContent = i18n
+                                .getWord("blog.showing")
+                                .replace("{shown}", shown)
+                                .replace("{total}", filtered.length);
+                            countEl.hidden = filtered.length <= maxList;
+                        }
+
+                        if (moreEl) {
+                            moreEl.hidden = shown >= filtered.length;
+                        }
+
+                        hydrateCardAuthors();
+                        lazyLoad.observe(listEl);
+                    };
+
+                    if (searchInput) {
+                        searchInput.addEventListener("input", () => {
+                            searchQuery = searchInput.value.trim().toLowerCase();
+                            visible = maxList;
+                            renderCatalog();
+                        });
                     }
 
-                    codeCopy();
-                    document
-                        .getElementById("blog-more")
-                        .addEventListener("click", loadMore);
-                    updateMore();
-                    window.scrollTo(0, 0);
-                };
+                    if (tagsWrap) {
+                        tagsWrap.addEventListener("click", evt => {
+                            const btn = evt.target.closest("[data-blog-tag]");
+                            if (!btn) return;
+                            activeTag = btn.dataset.blogTag || "";
+                            tagsWrap.querySelectorAll("[data-blog-tag]").forEach(el => {
+                                el.classList.toggle("active", el === btn);
+                            });
+                            visible = maxList;
+                            renderCatalog();
+                        });
+                    }
 
-                window.addEventListener("hashchange", drawBlog);
-                await drawBlog();
+                    if (moreEl) {
+                        moreEl.addEventListener("click", () => {
+                            visible += maxList;
+                            renderCatalog();
+                        });
+                    }
+
+                    renderCatalog();
+                }
             }
 
             if (router === "admin") {
-                const [{ default: MarkdownEditor }, { default: GitHubAPI }] =
+                const [{ default: WysiwygEditor }, { default: GitHubAPI }] =
                     await Promise.all([
-                        import("./modules/models/MarkdownEditor.mjs"),
+                        import("./modules/models/WysiwygEditor.mjs"),
                         import("./modules/lib/GitHubAPI.mjs")
                     ]);
 
                 const REPOSITORY_OWNER = settings.github_auth.repository_owner;
                 const REPOSITORY_NAME = settings.github_auth.repository_name;
                 const REPOSITORY_BRANCH = "main";
+                const TOKEN_REFRESH_MARGIN_MS = 5 * 60 * 1000;
 
-                // Mensagens do modal vêm do template github-auth.tpl.
                 const authMessage = (id, value = "") => {
                     const item = dc.querySelector(
                         `#github-auth-messages [data-msg="${id}"]`
@@ -982,20 +1015,20 @@ const SetupDOMReady = async evt => {
                         : "";
                 };
 
-                // Elementos do modal de autenticação.
+                const dashMessage = id => {
+                    const item = dc.querySelector(
+                        `#admin-dashboard-messages [data-msg="${id}"]`
+                    );
+                    return item ? item.textContent.trim() : "";
+                };
+
                 const modal = dc.getElementById("modal-github-auth");
                 const statusElement = dc.getElementById("github-auth-status");
                 const introElement = dc.getElementById("github-auth-intro");
-                const identityElement = dc.getElementById(
-                    "github-auth-identity"
-                );
+                const identityElement = dc.getElementById("github-auth-identity");
                 const errorElement = dc.getElementById("github-auth-error");
-                const diagnosticsElement = dc.getElementById(
-                    "github-auth-diagnostics"
-                );
-                const copyDiagnosticsButton = dc.getElementById(
-                    "github-auth-copy-diagnostics"
-                );
+                const diagnosticsElement = dc.getElementById("github-auth-diagnostics");
+                const copyDiagnosticsButton = dc.getElementById("github-auth-copy-diagnostics");
 
                 if (
                     !modal ||
@@ -1012,105 +1045,273 @@ const SetupDOMReady = async evt => {
                 }
 
                 const githubAuthModal = new BootstrapNative.Modal(modal);
+                let currentGitHubUser = null;
+                let refreshInFlight = null;
 
-                // Apresenta o erro no modal sem apagar a credencial armazenada.
                 const showAuthError = error => {
-                    const message =
-                        error instanceof Error ? error.message : String(error);
-
-                    statusElement.textContent = authMessage(
-                        "github_auth_failed"
-                    );
-
+                    const message = error instanceof Error ? error.message : String(error);
+                    statusElement.textContent = authMessage("github_auth_failed");
                     diagnosticsElement.textContent = message;
                     errorElement.hidden = false;
-
                     console.error("[ADMIN AUTH]:", error);
                 };
 
-                // Copia o diagnóstico exibido no modal.
                 copyDiagnosticsButton.addEventListener("click", async () => {
                     const diagnostics = diagnosticsElement.textContent || "";
-
                     if (!diagnostics) return;
-
                     try {
                         await navigator.clipboard.writeText(diagnostics);
                     } catch (error) {
-                        console.error(
-                            "[ADMIN AUTH]: Não foi possível copiar o diagnóstico.",
-                            error
-                        );
+                        console.error("[ADMIN AUTH]: Não foi possível copiar o diagnóstico.", error);
                     }
                 });
 
-                // Preenche os banners de identidade desktop e mobile.
                 const renderAdminGitHubIdentity = user => {
                     if (!user || typeof user !== "object") return;
+                    currentGitHubUser = user;
 
-                    const profileURL =
-                        user.profile_url || user.html_url || user.url || "";
+                    const profileURL = user.profile_url || user.html_url || user.url || "";
 
-                    ["mobile", "desktop"].forEach(target => {
-                        const avatar = dc.getElementById(
-                            `admin-github-avatar-${target}`
-                        );
+                    const sideAvatar = dc.getElementById("admin-github-avatar");
+                    const sideName = dc.getElementById("admin-github-name");
+                    const sideLogin = dc.getElementById("admin-github-login");
 
-                        const name = dc.getElementById(
-                            `admin-github-name-${target}`
-                        );
+                    if (sideAvatar) {
+                        sideAvatar.dataset.src = user.avatar_url || "";
+                        sideAvatar.alt = user.name || user.login || "GitHub";
+                        if (user.avatar_url) lazyLoad.observe([sideAvatar]);
+                    }
+                    if (sideName) sideName.textContent = user.name || user.login || "";
+                    if (sideLogin) sideLogin.textContent = user.login ? `@${user.login}` : "";
 
-                        const login = dc.getElementById(
-                            `admin-github-login-${target}`
-                        );
+                    const sessAvatar = dc.getElementById("admin-session-avatar");
+                    const sessName = dc.getElementById("admin-session-name");
+                    const sessLogin = dc.getElementById("admin-session-login");
+                    const sessId = dc.getElementById("admin-session-id");
+                    const sessProfile = dc.getElementById("admin-session-profile");
+                    const sessEmail = dc.getElementById("admin-session-email");
 
-                        const id = dc.getElementById(
-                            `admin-github-id-${target}`
-                        );
+                    if (sessAvatar) {
+                        sessAvatar.dataset.src = user.avatar_url || "";
+                        sessAvatar.alt = user.name || user.login || "GitHub";
+                        if (user.avatar_url) lazyLoad.observe([sessAvatar]);
+                    }
+                    if (sessName) sessName.textContent = user.name || user.login || "";
+                    if (sessLogin) sessLogin.textContent = user.login ? `@${user.login}` : "";
+                    if (sessId) sessId.textContent = String(user.id ?? "");
+                    if (sessProfile) {
+                        sessProfile.textContent = profileURL;
+                        sessProfile.href = profileURL || "#";
+                    }
+                    if (sessEmail) sessEmail.textContent = user.email || "—";
+                };
 
-                        const profile = dc.getElementById(
-                            `admin-github-profile-${target}`
-                        );
+                const renderSessionDetails = storedAuth => {
+                    const tokens = storedAuth?.tokens || {};
+                    const scopeEl = dc.getElementById("admin-session-scope");
+                    const obtainedEl = dc.getElementById("admin-session-obtained");
+                    const expiresEl = dc.getElementById("admin-session-expires");
+                    const statusBadge = dc.getElementById("admin-session-status-badge");
+                    const navDot = dc.getElementById("admin-session-nav-dot");
 
-                        const email = dc.getElementById(
-                            `admin-github-email-${target}`
-                        );
+                    if (scopeEl) scopeEl.textContent = tokens.scope || "default";
 
-                        if (avatar) {
-                            avatar.dataset.src = user.avatar_url || "";
-                            avatar.alt = user.name || user.login || "GitHub";
+                    const obtainedAt = Number(tokens.obtained_at);
+                    const expiresIn = Number(tokens.expires_in);
 
-                            if (user.avatar_url) {
-                                lazyLoad.observe([avatar]);
+                    if (obtainedEl) {
+                        obtainedEl.textContent = Number.isFinite(obtainedAt) && obtainedAt > 0
+                            ? new Date(obtainedAt).toLocaleString(PolicyHandler.language)
+                            : "—";
+                    }
+
+                    let dotClass = "is-ok";
+                    let badgeClass = "badge-success";
+                    let statusKey = "status_active";
+
+                    if (Number.isFinite(expiresIn) && expiresIn > 0 && Number.isFinite(obtainedAt) && obtainedAt > 0) {
+                        const expiresAt = obtainedAt + expiresIn * 1000;
+                        if (expiresEl) {
+                            expiresEl.textContent = new Date(expiresAt).toLocaleString(PolicyHandler.language);
+                        }
+                        const remaining = expiresAt - Date.now();
+                        if (remaining <= 0) {
+                            dotClass = "is-err";
+                            badgeClass = "badge-danger";
+                            statusKey = "status_expired";
+                        } else if (remaining <= TOKEN_REFRESH_MARGIN_MS) {
+                            dotClass = "is-warn";
+                            badgeClass = "badge-warning";
+                            statusKey = "status_expiring";
+                        }
+                    } else {
+                        if (expiresEl) expiresEl.textContent = dashMessage("status_no_expiry") || "—";
+                    }
+
+                    if (statusBadge) {
+                        statusBadge.className = `badge ${badgeClass}`;
+                        statusBadge.textContent = dashMessage(statusKey);
+                    }
+                    if (navDot) {
+                        navDot.className = `admin-status-dot ml-auto ${dotClass}`;
+                    }
+                };
+
+                const loadSessionDiagnostics = async () => {
+                    const diagPre = dc.getElementById("admin-session-diagnostics");
+                    if (!diagPre) return;
+
+                    try {
+                        const response = await fetch("/admin-auth/diagnostics", {
+                            cache: "no-store",
+                            credentials: "same-origin"
+                        });
+                        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                        const payload = await response.json();
+                        const entries = Array.isArray(payload?.entries) ? payload.entries : [];
+
+                        if (!entries.length) {
+                            diagPre.textContent = dashMessage("diagnostics_empty");
+                            return;
+                        }
+
+                        diagPre.textContent = entries
+                            .slice(-40)
+                            .map(entry => `[${entry.time}] ${entry.stage} (${entry.status}): ${entry.details}`)
+                            .join("\n");
+                    } catch {
+                        diagPre.textContent = dashMessage("diagnostics_error");
+                    }
+                };
+
+                const openReauthModal = messageText => {
+                    GitHubAPIInstance = null;
+                    introElement.hidden = false;
+                    identityElement.hidden = true;
+                    if (messageText) {
+                        statusElement.textContent = messageText;
+                    }
+                    githubAuthModal.show();
+                };
+
+                const performTokenRefresh = async () => {
+                    const response = await fetch("/admin-auth/refresh", {
+                        method: "POST",
+                        credentials: "same-origin",
+                        cache: "no-store"
+                    });
+
+                    let payload = null;
+                    try {
+                        payload = await response.json();
+                    } catch {
+                        payload = null;
+                    }
+
+                    if (!response.ok || !payload?.ok) {
+                        const err = new Error(payload?.message || `HTTP ${response.status}`);
+                        err.reauthRequired = Boolean(payload?.reauth_required || response.status === 401);
+                        throw err;
+                    }
+
+                    const updatedAuth = await DBMethods.read({
+                        tbn: "config",
+                        tbk: "user-github"
+                    });
+
+                    if (!updatedAuth?.user || !updatedAuth?.tokens?.access_token) {
+                        const err = new Error("Credenciais renovadas não encontradas no IndexedDB.");
+                        err.reauthRequired = true;
+                        throw err;
+                    }
+
+                    GitHubAPIInstance = new GitHubAPI({ token: updatedAuth.tokens.access_token });
+                    renderAdminGitHubIdentity(updatedAuth.user);
+                    renderSessionDetails(updatedAuth);
+                    return true;
+                };
+
+                const ensureValidGitHubSession = async (forceRefresh = false) => {
+                    if (!DBMethods) return false;
+
+                    const run = async () => {
+                        const storedAuth = await DBMethods.read({
+                            tbn: "config",
+                            tbk: "user-github"
+                        });
+
+                        const user = storedAuth?.user;
+                        const tokens = storedAuth?.tokens;
+                        const token = tokens?.access_token;
+
+                        if (!user || !token) {
+                            openReauthModal(authMessage("github_auth_failed"));
+                            return false;
+                        }
+
+                        const obtainedAt = Number(tokens.obtained_at);
+                        const expiresIn = Number(tokens.expires_in);
+                        const isExpiring =
+                            Number.isFinite(expiresIn) &&
+                            expiresIn > 0 &&
+                            Number.isFinite(obtainedAt) &&
+                            obtainedAt > 0 &&
+                            Date.now() >= obtainedAt + expiresIn * 1000 - TOKEN_REFRESH_MARGIN_MS;
+
+                        if (forceRefresh || isExpiring) {
+                            if (!tokens.refresh_token) {
+                                if (forceRefresh) {
+                                    openReauthModal(dashMessage("reauth_needed"));
+                                    return false;
+                                }
+                            } else {
+                                try {
+                                    return await performTokenRefresh();
+                                } catch (error) {
+                                    console.error("[ADMIN AUTH REFRESH]:", error);
+                                    if (error.reauthRequired) {
+                                        openReauthModal(dashMessage("reauth_needed"));
+                                    }
+                                    return false;
+                                }
                             }
                         }
 
-                        if (name) {
-                            name.textContent = user.name || user.login || "";
+                        if (!GitHubAPIInstance) {
+                            const api = new GitHubAPI({ token });
+                            try {
+                                await api.GHInstance.getUser().getProfile();
+                                GitHubAPIInstance = api;
+                                renderAdminGitHubIdentity(user);
+                                renderSessionDetails(storedAuth);
+                            } catch (error) {
+                                if (error?.response?.status === 401 && tokens.refresh_token) {
+                                    try {
+                                        return await performTokenRefresh();
+                                    } catch (refreshErr) {
+                                        openReauthModal(dashMessage("reauth_needed"));
+                                        return false;
+                                    }
+                                }
+                                if (error?.response?.status === 401) {
+                                    openReauthModal(dashMessage("reauth_needed"));
+                                    return false;
+                                }
+                                throw error;
+                            }
                         }
 
-                        if (login) {
-                            login.textContent = user.login
-                                ? `@${user.login}`
-                                : "";
-                        }
+                        return Boolean(GitHubAPIInstance);
+                    };
 
-                        if (id) {
-                            id.textContent = String(user.id ?? "");
-                        }
+                    if (refreshInFlight) return refreshInFlight;
 
-                        if (profile) {
-                            profile.textContent = profileURL;
-                            profile.href = profileURL || "#";
-                        }
-
-                        if (email) {
-                            email.textContent = user.email || "";
-                        }
+                    refreshInFlight = run().finally(() => {
+                        refreshInFlight = null;
                     });
+                    return refreshInFlight;
                 };
 
-                // Recupera e valida a autenticação OAuth armazenada.
                 const loadAdminGitHubAuth = async () => {
                     if (!DBMethods) {
                         throw new Error(
@@ -1126,82 +1327,154 @@ const SetupDOMReady = async evt => {
                     const user = storedAuth?.user;
                     const token = storedAuth?.tokens?.access_token;
 
-                    // Sem identidade ou token, solicita autenticação OAuth.
                     if (!user || !token) {
                         GitHubAPIInstance = null;
-
                         introElement.hidden = false;
                         identityElement.hidden = true;
-
                         githubAuthModal.show();
                         return;
                     }
 
-                    // Valida o token antes de liberar a API do GitHub.
-                    const api = new GitHubAPI({ token });
-
-                    await api.GHInstance.getUser().getProfile();
-
-                    GitHubAPIInstance = api;
-
-                    renderAdminGitHubIdentity(user);
-
-                    statusElement.textContent = authMessage(
-                        "github_auth_authenticated",
-                        user.login || ""
-                    );
+                    const ok = await ensureValidGitHubSession(false);
+                    if (ok && currentGitHubUser) {
+                        statusElement.textContent = authMessage(
+                            "github_auth_authenticated",
+                            currentGitHubUser.login || ""
+                        );
+                    }
                 };
 
-                // Inicializa a autenticação administrativa.
-                statusElement.textContent = authMessage(
-                    "github_auth_verifying"
-                );
+                statusElement.textContent = authMessage("github_auth_verifying");
 
                 try {
                     await loadAdminGitHubAuth();
                 } catch (error) {
                     GitHubAPIInstance = null;
-
                     githubAuthModal.show();
                     showAuthError(error);
+                }
+
+                // Navegação do Dashboard Unificado + Sidebar Responsiva
+                const sidebar = dc.getElementById("admin-sidebar");
+                const sidebarToggle = dc.getElementById("admin-sidebar-toggle");
+                const sidebarClose = dc.getElementById("admin-sidebar-close");
+                const sidebarBackdrop = dc.getElementById("admin-sidebar-backdrop");
+
+                const setSidebarOpen = open => {
+                    if (!sidebar) return;
+                    sidebar.classList.toggle("is-open", open);
+                    if (sidebarBackdrop) sidebarBackdrop.hidden = !open;
+                    if (sidebarToggle) sidebarToggle.setAttribute("aria-expanded", String(open));
+                };
+
+                if (sidebarToggle) {
+                    sidebarToggle.addEventListener("click", () => {
+                        setSidebarOpen(!sidebar?.classList.contains("is-open"));
+                    });
+                }
+                if (sidebarClose) {
+                    sidebarClose.addEventListener("click", () => setSidebarOpen(false));
+                }
+                if (sidebarBackdrop) {
+                    sidebarBackdrop.addEventListener("click", () => setSidebarOpen(false));
+                }
+
+                const views = {
+                    posts: dc.getElementById("admin-view-posts"),
+                    editor: dc.getElementById("admin-view-editor"),
+                    footoodles: dc.getElementById("admin-view-footoodles"),
+                    session: dc.getElementById("admin-view-session")
+                };
+
+                const showAdminView = viewName => {
+                    const target = views[viewName] ? viewName : "posts";
+                    Object.entries(views).forEach(([key, section]) => {
+                        if (section) section.hidden = key !== target;
+                    });
+
+                    const activeNavKey = target === "editor" ? "posts" : target;
+                    dc.querySelectorAll("[data-admin-nav]").forEach(btn => {
+                        const isMatch = btn.dataset.adminNav === activeNavKey;
+                        btn.classList.toggle("active", isMatch);
+                        btn.setAttribute("aria-selected", String(isMatch));
+                    });
+
+                    setSidebarOpen(false);
+
+                    if (target === "session") {
+                        DBMethods?.read({ tbn: "config", tbk: "user-github" })
+                            .then(stored => stored && renderSessionDetails(stored))
+                            .catch(() => {});
+                        loadSessionDiagnostics();
+                    }
+                };
+
+                window.__adminShowView = showAdminView;
+
+                dc.querySelectorAll("[data-admin-nav]").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        showAdminView(btn.dataset.adminNav);
+                    });
+                });
+
+                const mobileNewPost = dc.getElementById("admin-mobile-new-post");
+                if (mobileNewPost) {
+                    mobileNewPost.addEventListener("click", () => {
+                        dc.getElementById("admin-new-post")?.click();
+                    });
+                }
+
+                const sessionRefreshBtn = dc.getElementById("admin-session-refresh");
+                const sessionRefreshStatus = dc.getElementById("admin-session-refresh-status");
+                if (sessionRefreshBtn) {
+                    sessionRefreshBtn.addEventListener("click", async () => {
+                        sessionRefreshBtn.disabled = true;
+                        if (sessionRefreshStatus) {
+                            sessionRefreshStatus.hidden = false;
+                            sessionRefreshStatus.className = "small mt-2 mb-0 text-muted";
+                            sessionRefreshStatus.textContent = dashMessage("refreshing");
+                        }
+
+                        const ok = await ensureValidGitHubSession(true);
+                        sessionRefreshBtn.disabled = false;
+
+                        if (sessionRefreshStatus) {
+                            sessionRefreshStatus.hidden = false;
+                            sessionRefreshStatus.className = `small mt-2 mb-0 ${ok ? "text-success" : "text-danger"}`;
+                            sessionRefreshStatus.textContent = ok
+                                ? dashMessage("refreshed")
+                                : dashMessage("refresh_failed");
+                        }
+                        loadSessionDiagnostics();
+                    });
+                }
+
+                const diagRefreshBtn = dc.getElementById("admin-session-diagnostics-refresh");
+                if (diagRefreshBtn) {
+                    diagRefreshBtn.addEventListener("click", loadSessionDiagnostics);
                 }
 
                 SlideMenus();
                 AnchorScrool();
 
-                const editorContainer = document.getElementById(
-                    "admin-post-editor-container"
-                );
+                const editorRoot = dc.getElementById("admin-post-editor");
 
-                const editorRoot = document.getElementById("admin-post-editor");
-                const openEditorButton =
-                    document.getElementById("admin-new-post");
-                const closeEditorButton = document.getElementById(
-                    "admin-close-post-editor"
-                );
-
-                const markdownEditor = new MarkdownEditor({
+                const wysiwygEditor = new WysiwygEditor({
                     root: editorRoot,
                     db: DBMethods,
                     permissions: BrowserPermissions,
                     translate: () => i18n.transcript(),
+                    getAuthorId: () => (currentGitHubUser?.id ? String(currentGitHubUser.id) : ""),
 
                     onCreate: async post => {
                         try {
-                            if (!GitHubAPIInstance) {
-                                throw new Error(
-                                    "Autenticação do GitHub indisponível."
-                                );
+                            const sessionOk = await ensureValidGitHubSession(false);
+                            if (!sessionOk || !GitHubAPIInstance) {
+                                throw new Error("Autenticação do GitHub indisponível.");
                             }
 
-                            if (
-                                !post ||
-                                !Array.isArray(post.files) ||
-                                !post.files.length
-                            ) {
-                                throw new Error(
-                                    "A postagem não contém arquivos para publicação."
-                                );
+                            if (!post || !Array.isArray(post.files) || !post.files.length) {
+                                throw new Error("A postagem não contém arquivos para publicação.");
                             }
 
                             for (const file of post.files) {
@@ -1211,44 +1484,51 @@ const SetupDOMReady = async evt => {
                                     !file.path.trim() ||
                                     !("content" in file)
                                 ) {
-                                    throw new Error(
-                                        "A lista de arquivos contém um item inválido."
-                                    );
+                                    throw new Error("A lista de arquivos contém um item inválido.");
                                 }
                             }
 
-                            const api = GitHubAPIInstance;
-                            api.setRepo(REPOSITORY_OWNER, REPOSITORY_NAME);
-                            await api.setBranch(REPOSITORY_BRANCH);
+                            const executeCommit = async () => {
+                                const api = GitHubAPIInstance;
+                                api.setRepo(REPOSITORY_OWNER, REPOSITORY_NAME);
+                                await api.setBranch(REPOSITORY_BRANCH);
+                                return api.pushFiles(
+                                    `Publicação: ${post.title || post.slug}`,
+                                    post.files
+                                );
+                            };
 
-                            const response = await api.pushFiles(
-                                `Publicação: ${post.title || post.id}`,
-                                post.files
-                            );
+                            let response;
+                            try {
+                                response = await executeCommit();
+                            } catch (commitError) {
+                                if (commitError?.response?.status === 401) {
+                                    const renewed = await ensureValidGitHubSession(true);
+                                    if (!renewed) {
+                                        throw new Error(dashMessage("reauth_needed") || "Sessão expirada.");
+                                    }
+                                    response = await executeCommit();
+                                } else {
+                                    throw commitError;
+                                }
+                            }
 
-                            console.log(
-                                "[ADMIN]: Publicação concluída.",
-                                response
-                            );
                             return { published: true, post, response };
                         } catch (error) {
-                            console.error(
-                                "[ADMIN]: Falha ao publicar postagem.",
-                                error
-                            );
+                            console.error("[ADMIN]: Falha ao publicar postagem.", error);
                             throw error;
                         }
                     }
                 });
 
-                markdownEditor.mount();
+                wysiwygEditor.mount();
 
-                // Footoodles admin: editor and lists share the post editor container.
-                const { default: Footoodles } =
-                    await import("./modules/models/Footoodles.mjs");
+                // Footoodles admin em painel isolado
+                const { default: Footoodles } = await import("./modules/models/Footoodles.mjs");
 
                 const footoodles = new Footoodles({
                     getApi: () => GitHubAPIInstance,
+                    ensureSession: ensureValidGitHubSession,
                     repo: { owner: REPOSITORY_OWNER, name: REPOSITORY_NAME },
                     branch: REPOSITORY_BRANCH,
                     translate: path =>
@@ -1261,184 +1541,61 @@ const SetupDOMReady = async evt => {
                 });
 
                 await footoodles.mount({
-                    container: editorContainer,
-                    postRoot: editorRoot,
-                    lists: [
-                        document.getElementById(
-                            "admin-footoodles-list-desktop"
-                        ),
-                        document.getElementById("admin-footoodles-list-mobile")
-                    ]
-                });
-
-                openEditorButton.addEventListener("click", () => {
-                    editorContainer.classList.remove("d-none");
-                    editorContainer.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
-                });
-
-                closeEditorButton.addEventListener("click", () => {
-                    editorContainer.classList.add("d-none");
+                    listEl: dc.getElementById("admin-footoodles-list"),
+                    badgeEl: dc.getElementById("admin-footoodles-badge"),
+                    emptyEl: dc.getElementById("admin-footoodles-empty"),
+                    editorRoot: dc.getElementById("admin-footoodle-editor")
                 });
             }
             break;
+        }
 
         case "control":
             break;
 
         case "donations":
             await TemplatesReady.import;
-            //
-            (async () => {
-                const { renderMarkdownURL, ParseFlags } = await loadMarkdown();
-
-                let WhitePaperBox = _.DOM.getById("copyright-container");
-
-                if (WhitePaperBox) {
-                    const outputHTML = await renderMarkdownURL(
-                        "./docs/donations.md",
-                        {
-                            // HTML cru em bloco é permitido nestes documentos
-                            parseFlags: ParseFlags.DEFAULT,
-                            extensions: [
-                                "tables",
-                                "images",
-                                "anchors",
-                                "externalLinks",
-                                "blockAttributes"
-                            ]
-                        }
-                    );
-
-                    WhitePaperBox.insertAdjacentHTML("afterbegin", outputHTML);
-
-                    // @revise - revise support for anchor get dinamic elements on Functions.mjs file
-                    // @priority: MEDIUM
-                    setTimeout(AnchorScrool, 2000);
-                    i18n.transcript();
-                }
-            })();
+            setTimeout(AnchorScrool, 500);
+            i18n.transcript();
             break;
+
         case "copyright":
             await TemplatesReady.import;
-            //
-            (async () => {
-                const { renderMarkdownURL, ParseFlags } = await loadMarkdown();
-
-                let WhitePaperBox = _.DOM.getById("copyright-container");
-
-                if (WhitePaperBox) {
-                    const outputHTML = await renderMarkdownURL(
-                        "./docs/licenses.md",
-                        {
-                            // HTML cru em bloco é permitido nestes documentos
-                            parseFlags: ParseFlags.DEFAULT,
-                            extensions: [
-                                "tables",
-                                "images",
-                                "anchors",
-                                "externalLinks",
-                                "blockAttributes"
-                            ]
-                        }
-                    );
-
-                    WhitePaperBox.insertAdjacentHTML("afterbegin", outputHTML);
-
-                    // @revise - revise support for anchor get dinamic elements on Functions.mjs file
-                    // @priority: MEDIUM
-                    setTimeout(AnchorScrool, 2000);
-                    i18n.transcript();
-                }
-            })();
+            setTimeout(AnchorScrool, 500);
+            i18n.transcript();
             break;
 
-        case "you-in-control-of-your-data":
+        case "you-in-control-of-your-data": {
             await TemplatesReady.import;
-            //
-            (async () => {
-                const { renderMarkdownURL, ParseFlags } = await loadMarkdown();
-
-                let WhitePaperBox = _.DOM.getById("white-paper-container");
-
-                if (WhitePaperBox) {
-                    const outputHTML = await renderMarkdownURL(
-                        "./docs/white-paper.md",
-                        {
-                            // HTML cru em bloco é permitido nestes documentos
-                            parseFlags: ParseFlags.DEFAULT,
-                            extensions: [
-                                "images",
-                                "anchors",
-                                "externalLinks",
-                                "blockAttributes"
-                            ]
-                        }
-                    );
-
-                    WhitePaperBox.insertAdjacentHTML("afterbegin", outputHTML);
-
-                    // @revise - revise support for anchor get dinamic elements on Functions.mjs file
-                    // @priority: MEDIUM
-                    setTimeout(AnchorScrool, 2000);
+            const targetHash = location.hash.slice(1);
+            if (targetHash === "self-security-hosted") {
+                const target = _.DOM.getById("self-security-hosted");
+                if (target) {
+                    const vertical = target.getBoundingClientRect().y - 120;
+                    wd.scrollTo({
+                        top: vertical,
+                        left: 0,
+                        behavior: "smooth"
+                    });
                 }
-
-                const targetHash = location.hash.slice(1);
-                if (
-                    location.hash !== "" &&
-                    ["self-security-hosted"].includes(targetHash)
-                ) {
-                    // @deprecated - wd.history.pushState('', dc.title, wd.location.href.replace(wd.location.hash, ''));
-                    let target = null;
-                    switch (targetHash) {
-                        case "self-security-hosted":
-                            target = _.DOM.getById("self-security-hosted");
-                            break;
-                    }
-                    if (target) {
-                        let vertical = target.getBoundingClientRect().y - 120;
-                        wd.scrollTo({
-                            top: vertical, // could be negative value
-                            left: 0,
-                            behavior: "smooth" // @see support {@link https://caniuse.com/#feat=css-scroll-behavior}
-                        });
-                    }
-                }
-                // @revise - revise support for anchor get dinamic elements on Functions.mjs file
-                // @priority: MEDIUM
-                AnchorScrool();
-            })();
+            }
+            AnchorScrool();
             break;
+        }
 
-        case "policy":
+        case "policy": {
             await TemplatesReady.import;
-            //
-            (async () => {
-                // get policies containers
-                let GeneralPolicyBox = _.DOM.getById(
-                    "policy-container-general"
-                );
-                let DataStoragePolicyBox = _.DOM.getById(
-                    "policy-container-storage"
-                );
+            (() => {
+                let GeneralPolicyBox = _.DOM.getById("policy-container-general");
+                let DataStoragePolicyBox = _.DOM.getById("policy-container-storage");
                 let TermsPolicyBox = _.DOM.getById("policy-container-terms");
-                let PrivacyPolicyBox = _.DOM.getById(
-                    "policy-container-privacy"
-                );
+                let PrivacyPolicyBox = _.DOM.getById("policy-container-privacy");
 
-                // @revise - move this to Functions.mjs
-                // @priority: MODERATE
                 const PrinterJS = (_html, _injectHeader = "") => {
-                    let popup = window.open(
-                        "about:blank",
-                        "PRINT",
-                        "rel=noopener"
-                    );
-                    popup.opener = null;
-                    popup.location = location.origin;
+                    let popup = window.open("about:blank", "PRINT", "rel=noopener");
                     if (popup) {
+                        popup.opener = null;
+                        popup.location = location.origin;
                         popup.document.write(`
                             <!DOCTYPE html>
                             <html lang="${document.documentElement.lang || "en-US"}">
@@ -1446,11 +1603,11 @@ const SetupDOMReady = async evt => {
                                 <title>${document.title}</title>
                                 <meta charset="UTF-8">
                                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                                <link type="text/css" rel="stylesheet" href="${new URL("assets/vendor/bootstrapv4/bootstrap.min.css", document.baseURI).href}">
-                                <link type="text/css" rel="stylesheet" href="${new URL("assets/css/main.css", document.baseURI).href}">
+                                <link type="text/css" rel="stylesheet" href="/assets/vendor/bootstrapv4/bootstrap.min.css">
+                                <link type="text/css" rel="stylesheet" href="/assets/css/main.css">
                                 ${_injectHeader}
                             </head>
-                            <body class="markdown-body">
+                            <body class="markdown-body post-content">
                                 <h1>${document.title}</h1>
                                 ${_html}
                                 <script>
@@ -1458,7 +1615,7 @@ const SetupDOMReady = async evt => {
                                         window.print();
                                         window.close();
                                     }, false);
-                                </script>
+                                <\/script>
                             </body>
                             </html>
                         `);
@@ -1467,135 +1624,85 @@ const SetupDOMReady = async evt => {
                     }
                     return true;
                 };
-                //
+
                 if (
                     GeneralPolicyBox &&
                     !DataStoragePolicyBox &&
                     TermsPolicyBox &&
                     PrivacyPolicyBox
                 ) {
-                    // @revise - get terms definition from `json` language interface library
-                    // @priority: HIGH
-                    const { renderMarkdownURL, ParseFlags } =
-                        await loadMarkdown();
+                    const PolicyHeaders = [
+                        `<h2>${i18n.getWord("pages.policy.privacy.heading")}</h2>`,
+                        `<h2>${i18n.getWord("pages.policy.terms.heading")}</h2>`,
+                        `<h2>${i18n.getWord("pages.policy.general.heading")}</h2>`
+                    ];
+                    const boxes = [PrivacyPolicyBox, TermsPolicyBox, GeneralPolicyBox];
+                    const AllPolicyContentHTML = boxes
+                        .map((elm, idx) => PolicyHeaders[idx] + elm.innerHTML)
+                        .join("");
 
-                    const mdOptions = {
-                        // HTML cru em bloco é permitido nestes documentos
-                        parseFlags: ParseFlags.DEFAULT,
-                        extensions: [
-                            "tables",
-                            "anchors",
-                            "externalLinks",
-                            "blockAttributes"
-                        ]
-                    };
-
-                    // Em sequência, para não misturar chamadas ao parser
-                    const policies = [];
-
-                    for (const url of [
-                        "./docs/policies/privacy.md",
-                        "./docs/policies/terms.md",
-                        "./docs/policies/policy.md"
-                    ]) {
-                        policies.push(await renderMarkdownURL(url, mdOptions));
+                    if (!GeneralPolicyBox.querySelector(".printable-launcher")) {
+                        const generalText = GeneralPolicyBox.textContent || "";
+                        GeneralPolicyBox.insertAdjacentHTML(
+                            "afterbegin",
+                            `
+                            <div class="col-12 my-2 px-0">
+                                <span class="badge badge-light border-def contrast" title="${i18n.getWord("pages.policy.badges.reading_title")}">${i18n.getWord("blog.read_time").replace("{minutes}", ReadingTextTime(generalText).time)}</span>
+                                <span class="badge badge-dark" title="${i18n.getWord("pages.policy.badges.version_title")}">${i18n.getWord("pages.policy.badges.version").replace("{version}", "1.0.0")}</span>
+                                <span class="badge badge-light border-def contrast mt-1 cp printable-launcher" title="${i18n.getWord("pages.policy.badges.print_title")}">${i18n.getWord("pages.policy.badges.print")}</span>
+                            </div>`
+                        );
                     }
 
-                    await Promise.resolve(policies).then(result => {
-                        let AllPolicyContentHTML = ``,
-                            PolicyHeaders = [
-                                `<h2>${i18n.getWord("pages.policy.privacy.heading")}</h2>`,
-                                `<h2>${i18n.getWord("pages.policy.terms.heading")}</h2>`,
-                                `<h2>${i18n.getWord("pages.policy.general.heading")}</h2>`
-                            ];
+                    const printBtn = GeneralPolicyBox.querySelector(".printable-launcher");
+                    if (printBtn) {
+                        printBtn.addEventListener(
+                            "click",
+                            () => {
+                                PrinterJS(AllPolicyContentHTML);
+                            },
+                            false
+                        );
+                    }
+
+                    const targetHash = location.hash.slice(1);
+                    if (
+                        location.hash !== "" &&
                         [
-                            PrivacyPolicyBox,
-                            TermsPolicyBox,
-                            GeneralPolicyBox
-                        ].forEach((elm, idx, arr) => {
-                            let outputHTML = result[idx];
-                            AllPolicyContentHTML +=
-                                PolicyHeaders[idx] + outputHTML;
-                            elm.insertAdjacentHTML("afterbegin", outputHTML);
-
-                            // in last iteraction
-                            idx === arr.length - 1
-                                ? (() => {
-                                      elm.insertAdjacentHTML(
-                                          "afterbegin",
-                                          `
-                                    <div class="col-12 my-2 px-0"><span class="badge badge-light border-def contrast" title="${i18n.getWord("pages.policy.badges.reading_title")}">${i18n.getWord("blog.read_time").replace("{minutes}", ReadingTextTime(result[idx]).time)}</span>
-                                    <span class="badge badge-dark" title="${i18n.getWord("pages.policy.badges.version_title")}">${i18n.getWord("pages.policy.badges.version").replace("{version}", "1.0.0")}</span>
-                                    <span class="badge badge-light border-def contrast mt-1 cp printable-launcher" title="${i18n.getWord("pages.policy.badges.print_title")}">${i18n.getWord("pages.policy.badges.print")}</span>`
-                                      );
-                                      // printer
-                                      elm.querySelector(
-                                          ".printable-launcher"
-                                      ).addEventListener(
-                                          "click",
-                                          evt => {
-                                              PrinterJS(AllPolicyContentHTML);
-                                          },
-                                          false
-                                      );
-                                  })()
-                                : null;
-                        });
-
-                        const targetHash = location.hash.slice(1);
-                        if (
-                            location.hash !== "" &&
-                            [
-                                "policy-general",
-                                "policy-terms",
-                                "policy-privacy",
-                                "cookie-agree"
-                            ].includes(targetHash)
-                        ) {
-                            // @deprecated - wd.history.pushState('', dc.title, wd.location.href.replace(wd.location.hash, ''));
-                            let target = null;
-                            switch (targetHash) {
-                                case "policy-privacy":
-                                    target = _.DOM.getById(
-                                        "policy-container-privacy"
-                                    );
-                                    break;
-                                case "policy-terms":
-                                    target = _.DOM.getById(
-                                        "policy-container-terms"
-                                    );
-                                    break;
-                                case "policy-general":
-                                    target = _.DOM.getById(
-                                        "policy-container-general"
-                                    );
-                                    break;
-                                case "cookie-agree":
-                                    target = _.DOM.getById(
-                                        "policy-cookie-agree"
-                                    );
-                                    break;
-                            }
-                            if (target) {
-                                let vertical =
-                                    target.getBoundingClientRect().y - 120;
-                                wd.scrollTo({
-                                    top: vertical, // could be negative value
-                                    left: 0,
-                                    behavior: "smooth" // @see support {@link https://caniuse.com/#feat=css-scroll-behavior}
-                                });
-                            }
+                            "policy-general",
+                            "policy-terms",
+                            "policy-privacy",
+                            "cookie-agree"
+                        ].includes(targetHash)
+                    ) {
+                        let target = null;
+                        switch (targetHash) {
+                            case "policy-privacy":
+                                target = _.DOM.getById("policy-container-privacy");
+                                break;
+                            case "policy-terms":
+                                target = _.DOM.getById("policy-container-terms");
+                                break;
+                            case "policy-general":
+                                target = _.DOM.getById("policy-container-general");
+                                break;
+                            case "cookie-agree":
+                                target = _.DOM.getById("policy-cookie-agree");
+                                break;
                         }
-                        // @revise - revise support for anchor get dinamic elements on Functions.mjs file
-                        // @priority: MEDIUM
-                        AnchorScrool();
-                    });
+                        if (target) {
+                            let vertical = target.getBoundingClientRect().y - 120;
+                            wd.scrollTo({
+                                top: vertical,
+                                left: 0,
+                                behavior: "smooth"
+                            });
+                        }
+                    }
+
+                    AnchorScrool();
                 } else {
-                    // @revise - Notify error in request documents
-                    // @priority: MODERATE
-                    console.error(
-                        "[POLICY]: could not load the policy documents"
-                    );
+                    console.error("[POLICY]: policy containers not found");
                 }
             })();
 
@@ -1725,6 +1832,7 @@ const SetupDOMReady = async evt => {
             }
 
             break;
+        }
 
         default:
             break;
@@ -1994,7 +2102,7 @@ const injectFootoodle = () => {
 
     if (title) title.textContent = item.title;
     if (content) content.textContent = item.content;
-    if (image) image.style.backgroundImage = `url("${item.image}")`;
+    if (image) image.style.backgroundImage = `url("/${String(item.image || "").replace(/^\/+/, "")}")`;
 
     // Shows the section only when there is something to show.
     document.getElementById("foothead")?.classList.remove("d-none");
@@ -2018,14 +2126,20 @@ dc.addEventListener("click", async event => {
         // the user cancelled the share sheet
     }
 });
-// Limpa as credenciais OAuth do GitHub pelos botões mobile e desktop.
+// Limpa as credenciais OAuth do GitHub pelos botões da sidebar e da visão de sessão.
 const handleGitHubCredentialsClear = async event => {
     const button = event.target.closest(
-        "#admin-github-credentials-clear-mobile, " +
-        "#admin-github-credentials-clear-desktop"
+        "#admin-github-credentials-clear, " +
+        "#admin-session-credentials-clear"
     );
 
     if (!button) return;
+
+    const confirmText =
+        dc.querySelector('#admin-dashboard-messages [data-msg="clear_confirm"]')
+            ?.textContent?.trim() || "Clear GitHub credentials?";
+
+    if (!wd.confirm(confirmText)) return;
 
     if (!DBMethods) {
         console.error(
@@ -2037,6 +2151,11 @@ const handleGitHubCredentialsClear = async event => {
     button.disabled = true;
 
     try {
+        await fetch("/admin-auth/logout", {
+            method: "POST",
+            credentials: "same-origin"
+        }).catch(() => null);
+
         await DBMethods.delete({
             tbn: "config",
             tbk: "user-github"

@@ -100,7 +100,8 @@
         "policies": "ポリシー",
         "donations": "寄付",
         "signin": "ログイン",
-        "docs": "ドキュメント"
+        "docs": "ドキュメント",
+        "home": "ホーム"
     },
     "footer": {
         "content": {
@@ -128,7 +129,7 @@
         "privacci": "プライバシー",
         "footoodle": {
             "title": "Collaboreに参加する",
-            "description": "<p>Collaboreは開発者や愛好家に門戸を開いています。静的ページのサービスを動的なものへと変えましょう。</p><p>シンプルでありながら強力なインターフェースを通じて、投稿の編集、レビュー、新規作成、ページへのプラグインやアプリの追加、独自の拡張機能の組み込みができます。</p><p>これらすべてを、拡張性を考慮して設計されたオープンソースコードで実現できます。統合認証システムを利用すれば、Collaboreのユーザーは数回のクリックであなたのページに登録でき、ページ上のプラグインやアプリにも自動的に認証されます。</p><p class='mt-5 ct'>この協働システムに参加しましょう。<a href='./signup' class='white tdu'>今すぐ登録！</a></p>"
+            "description": "<p>Collaboreは開発者や愛好家に門戸を開いています。静的ページのサービスを動的なものへと変えましょう。</p><p>シンプルでありながら強力なインターフェースを通じて、投稿の編集、レビュー、新規作成、ページへのプラグインやアプリの追加、独自の拡張機能の組み込みができます。</p><p>これらすべてを、拡張性を考慮して設計されたオープンソースコードで実現できます。統合認証システムを利用すれば、Collaboreのユーザーは数回のクリックであなたのページに登録でき、ページ上のプラグインやアプリにも自動的に認証されます。</p><p class='mt-5 ct'>この協働システムに参加しましょう。<a href='/signup' class='white tdu'>今すぐ登録！</a></p>"
         }
     },
     "api": {
@@ -150,7 +151,7 @@
     "cookies": {
         "agree": {
             "description_1": "このサイトでは、情報を保存するためにCookieやその他の技術を使用しています。このサイトを引き続き利用することで、これらの使用および関連する「ポリシー」に同意したものとみなされます。",
-            "description_2": "詳しい情報については、当サイトの<a href='./policies.html#cookies' target='blank_' rel='nofollow' class='tdu sky'>クッキーポリシー</a>をご覧ください。",
+            "description_2": "詳しい情報については、当サイトの<a href='/policy.html#cookie-agree' target='blank_' rel='nofollow' class='tdu sky'>クッキーポリシー</a>をご覧ください。",
             "close_banner_info": "閉じるには、下のボタンをクリックしてください。"
         }
     },
@@ -252,7 +253,7 @@
         "title": "サポート対象外",
         "p1": "申し訳ありませんが、「Cookieなし」でのブラウジングには対応していません。",
         "p2": "このサイトではCookieやその他の保存技術を使用していますが、<strong>明示的な許可なくブラウザーにデータを保存することはありません</strong>！",
-        "p3": "「Cookieなし」のブラウジングに対応しないのには、正当な理由があると考えています。詳しくは、<a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">ホワイトペーパー</a>をご覧ください。残念ながら、Cookieを有効にして閲覧する必要があります。"
+        "p3": "「Cookieなし」のブラウジングに対応しないのには、正当な理由があると考えています。詳しくは、<a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">ホワイトペーパー</a>をご覧ください。残念ながら、Cookieを有効にして閲覧する必要があります。"
     },
     "twofactory": {
         "security_slide": {
@@ -462,7 +463,7 @@
             "list1": "氏名",
             "list2": "行使したい権利（例：データの削除、アクセスなど）",
             "list3": "システム内でお客様のデータを特定するために役立つ情報",
-            "policies": "データの取り扱いについて詳しくは、<a href=\"./policy.html#policy-general\">一般ポリシー</a>および<a href=\"./policy.html#policy-privacy\">プライバシーポリシー</a>をご覧ください。"
+            "policies": "データの取り扱いについて詳しくは、<a href=\"/policy.html#policy-general\">一般ポリシー</a>および<a href=\"/policy.html#policy-privacy\">プライバシーポリシー</a>をご覧ください。"
         },
         "home": {
             "intro": {
@@ -561,7 +562,7 @@
                 "heading": "Cookieを受け入れる",
                 "paragraph1": "もし<strong>本当にCookieとデータ保存を受け入れる必要があるのか</strong>と思われたら、簡単に言えば、<strong>いいえ、必要ありません</strong>！サイトの多くのツールや機能は引き続きご利用いただけますが、最良の体験は得られないかもしれません 🙁",
                 "paragraph2": "たとえば、言語を選んだり、お気に入りの色を保存したり、設定を変更したりしても、サイトにアクセスまたは移動するたびにその選択をやり直す必要があります ... 選択を「保持」する唯一の方法は、ローカルに保存することです。",
-                "paragraph3": "<a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">あなたのデータを所有できるのはあなただけ</a>という私たちの理念に基づき、あなたには選択肢があると考えています。下のボタンを<strong>クリックして押す</strong>ことでCookieの使用を受け入れた場合でも、ここまたはユーザータブからいつでも<strong>無効にする</strong>ことができ、すでに保存されているものをすべて一度に削除することもできます 😎",
+                "paragraph3": "<a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">あなたのデータを所有できるのはあなただけ</a>という私たちの理念に基づき、あなたには選択肢があると考えています。下のボタンを<strong>クリックして押す</strong>ことでCookieの使用を受け入れた場合でも、ここまたはユーザータブからいつでも<strong>無効にする</strong>ことができ、すでに保存されているものをすべて一度に削除することもできます 😎",
                 "button": "🍪 長押しでCookieを有効にする",
                 "disable": "😮 クリックしてCookieを無効にする！"
             }
@@ -595,7 +596,13 @@
         "read_time": "読了時間：約{minutes}分",
         "updated": "最終更新: {date}",
         "more_posts": "その他の投稿",
-        "license": "このコンテンツは<a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.ja\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>の下でライセンスされています"
+        "license": "このコンテンツは<a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.ja\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>の下でライセンスされています",
+        "search_placeholder": "投稿を検索...",
+        "all_tags": "すべて",
+        "no_results": "選択したフィルターに一致する投稿はありません。",
+        "read_article": "記事を読む",
+        "back_to_blog": "ブログへ戻る",
+        "copy_code": "コードをコピー"
     },
     "admin_dashboard": {
         "posts": "投稿",
@@ -643,7 +650,117 @@
             "draft_select_default": "下書きを選択",
             "draft_open": "下書きを開く",
             "draft_save": "下書きを保存",
-            "generate": "投稿を生成"
+            "generate": "投稿を生成",
+            "slug_label": "URL スラッグ",
+            "slug_placeholder": "my-article",
+            "slug_unlock_title": "スラッグ編集のロック／ロック解除",
+            "summary_restore_title": "自動要約を復元",
+            "undo_title": "元に戻す (Ctrl+Z)",
+            "redo_title": "やり直す (Ctrl+Y)",
+            "block_format_title": "ブロックスタイル",
+            "block_paragraph": "段落",
+            "heading1": "見出し 1",
+            "heading2": "見出し 2",
+            "heading3": "見出し 3",
+            "heading4": "見出し 4",
+            "heading5": "見出し 5",
+            "heading6": "見出し 6",
+            "code_block": "コードブロック",
+            "bold_title": "太字 (Ctrl+B)",
+            "italic_title": "斜体 (Ctrl+I)",
+            "underline_title": "下線 (Ctrl+U)",
+            "strike_title": "取り消し線",
+            "inline_code_title": "インラインコード",
+            "clear_format_title": "書式をクリア",
+            "fore_color_title": "文字色",
+            "back_color_title": "背景色",
+            "unordered_list_title": "箇条書きリスト",
+            "ordered_list_title": "番号付きリスト",
+            "align_left_title": "左揃え",
+            "align_center_title": "中央揃え",
+            "align_right_title": "右揃え",
+            "align_justify_title": "両端揃え",
+            "link_title": "リンクを挿入または編集 (Ctrl+K)",
+            "quote_title": "引用",
+            "code_title": "コードブロックを挿入",
+            "hr_title": "水平線",
+            "table_title": "表を挿入",
+            "source_btn": "HTML",
+            "source_title": "HTMLソース表示を切り替え",
+            "preview": "プレビュー",
+            "link_url_placeholder": "https://example.com または /posts/...",
+            "link_text_placeholder": "リンクテキスト（任意）",
+            "link_new_tab": "新しいタブで開く",
+            "apply": "適用",
+            "unlink": "リンクを解除",
+            "cancel": "キャンセル",
+            "table_rows": "行数",
+            "table_cols": "列数",
+            "table_insert": "表を挿入",
+            "img_width": "幅",
+            "img_align": "配置",
+            "img_align_left": "左寄せ",
+            "img_align_center": "中央",
+            "img_align_right": "右寄せ",
+            "img_align_full": "全幅",
+            "img_remove": "画像を削除",
+            "img_alt_placeholder": "代替テキスト (alt)",
+            "img_caption_placeholder": "画像キャプション（任意）",
+            "save_draft": "下書きを保存",
+            "drafts_placeholder": "下書きを選択...",
+            "open_draft": "開く",
+            "delete_draft": "削除",
+            "reading_stats": "{words}語 · 読了時間：約{minutes}分",
+            "msg": {
+                "speech_error": "音声認識エラー: {0}",
+                "speech_unavailable": "このブラウザーでは音声認識を利用できません。",
+                "speech_start_error": "音声認識を開始できませんでした: {0}",
+                "pending_changes": "未保存の変更があります。",
+                "images_db_unavailable": "データベースを利用できないため、画像を保存できませんでした。",
+                "images_optimized": "画像を最適化しました: {0} → {1}",
+                "images_added": "画像を追加しました。サイズは縮小されませんでした。",
+                "image_save_error": "画像をデータベースに保存できませんでした。",
+                "drafts_db_unavailable": "データベースを利用できないため、下書きは保存されません。",
+                "autosave_ok": "変更を自動保存しました。",
+                "autosave_error": "自動保存できませんでした。",
+                "nothing_to_save": "保存する前にタイトルか本文を入力してください。",
+                "db_unavailable": "データベースを利用できません。",
+                "draft_updated": "下書きを更新しました。",
+                "draft_saved": "下書きを保存しました。",
+                "draft_save_error": "下書きの保存中にエラーが発生しました。",
+                "changes_recovered": "前回の変更を復元しました。",
+                "draft_select": "開く下書きを選択してください。",
+                "draft_not_found": "下書きが見つかりません。",
+                "draft_opened": "下書きを開きました。",
+                "draft_open_error": "下書きを開く際にエラーが発生しました。",
+                "editor_ready_new": "新しい投稿の準備ができました。",
+                "need_title": "投稿のタイトルを入力してください。",
+                "need_content": "投稿の本文を入力してください。",
+                "preparing": "投稿を準備しています...",
+                "published": "投稿を公開しました。",
+                "prepared": "投稿を準備しました。内容はエディターに保持されています。",
+                "publish_stage_error": "「{0}」でエラーが発生しました: {1}。内容は保持されています。",
+                "publishing": "公開中...",
+                "stage_init": "公開の初期化",
+                "stage_preview": "プレビューの更新",
+                "stage_read": "エディターのデータの読み取り",
+                "stage_autosave": "自動保存",
+                "stage_images": "画像の準備",
+                "stage_files": "投稿ファイルの作成",
+                "stage_publish": "GitHubへの公開",
+                "stage_confirm": "公開の確認",
+                "discard_changes": "編集中の投稿の変更を破棄しますか？",
+                "post_updated": "投稿を更新しました。",
+                "post_loaded": "編集用に投稿を読み込みました。",
+                "post_load_error": "編集用に投稿を読み込めませんでした。",
+                "delete_prepare_error": "削除の準備ができませんでした: {0}",
+                "delete_error": "投稿の削除に失敗しました: {0}",
+                "draft_untitled": "無題の下書き",
+                "need_slug": "投稿の有効なURLスラッグを入力してください。",
+                "draft_deleted": "下書きを削除しました。",
+                "content_placeholder": "投稿の本文を入力してください...",
+                "reading_stats": "{words}語 · 読了時間：約{minutes}分"
+            }
         },
         "posts_list": {
             "untitled": "無題の投稿",
@@ -713,7 +830,11 @@
             "post_missing": "投稿が登録簿に存在しません。更新を取り消しました。",
             "post_missing_delete": "投稿が登録簿に存在しません。",
             "github_not_confirmed": "GitHubで削除が確認されませんでした。",
-            "markdown_fetch_error": "Markdownを読み込めませんでした。"
+            "markdown_fetch_error": "Markdownを読み込めませんでした。",
+            "need_slug": "投稿の有効なURLスラッグを入力してください。",
+            "draft_deleted": "下書きを削除しました。",
+            "content_placeholder": "投稿の本文を入力してください...",
+            "reading_stats": "{words}語 · 読了時間：約{minutes}分"
         },
         "footoodles": {
             "tab": "Footoodles",
@@ -753,7 +874,8 @@
             "editor_edit": "Footoodle を編集中。",
             "discard_changes": "この Footoodle の変更を破棄しますか？",
             "operation_error": "Footoodle の処理中にエラーが発生しました。",
-            "github_error": "GitHub での操作を完了できませんでした。"
+            "github_error": "GitHub での操作を完了できませんでした。",
+            "subtitle": "フッター用の画像付きクイックノートを作成・管理します。"
         },
         "settings": {
             "tab": "GitHub設定",
@@ -761,6 +883,37 @@
             "save": "保存",
             "clear_credentials": "GitHubの認証情報を消去",
             "clear": "消去"
+        },
+        "nav": {
+            "session": "GitHub セッション"
+        },
+        "posts_view": {
+            "subtitle": "公開済みのHTML投稿を管理・編集・削除します。",
+            "search_placeholder": "タイトル、スラッグ、タグで絞り込む...",
+            "empty": "投稿が見つかりません。",
+            "back": "← 投稿一覧に戻る",
+            "view": "ページを開く"
+        },
+        "session": {
+            "title": "GitHub セッション",
+            "subtitle": "OAuth認証とアクセストークンの有効期限を管理します。",
+            "scope_label": "スコープ：",
+            "obtained_label": "認証日時：",
+            "expires_label": "有効期限：",
+            "refresh_btn": "セッションを再検証",
+            "diagnostics_title": "OAuth 診断",
+            "reload_diagnostics": "更新",
+            "clear_confirm": "このブラウザに保存されたGitHub認証情報を削除しますか？",
+            "status_active": "有効",
+            "status_expiring": "間もなく期限切れ",
+            "status_expired": "期限切れ",
+            "status_no_expiry": "有効期限なしのトークン",
+            "refreshing": "GitHubでセッションを再検証しています...",
+            "refreshed": "セッションを再検証しました。",
+            "refresh_failed": "トークンを自動的に更新できませんでした。",
+            "reauth_needed": "GitHubセッションの有効期限が切れました。続行するには再認証してください。",
+            "diagnostics_empty": "診断情報はありません。",
+            "diagnostics_error": "診断情報の読み込みに失敗しました。"
         }
     },
     "github_auth": {

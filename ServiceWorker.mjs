@@ -38,7 +38,7 @@ const AdminHTML = `<!--
     <meta name="author" content="Subversivo58">
     <meta name="DEBUG" content="true">
     <meta name="reply-to" content="https://github.com/subversivo58/subversivo58.github.io/issues/new">
-    <link rel="copyright" href="copyright.html">
+    <link rel="copyright" href="/copyright.html">
     <meta name="robots" content="noindex">
     <meta name="twitter:site" content="@subversivo58">
     <meta name="twitter:card" content="summary_large_image">
@@ -49,18 +49,18 @@ const AdminHTML = `<!--
     <meta property="og:image" content="https://subversivo58.github.io/assets/media/image/graph.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="720">
-    <link rel="icon" href="favicon.ico">
-    <link rel="modulepreload" href="assets/js/setup.mjs">
-    <link rel="stylesheet" href="./assets/vendor/bootstrapv4/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="modulepreload" href="/assets/js/setup.mjs">
+    <link rel="stylesheet" href="/assets/vendor/bootstrapv4/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#1ebfff">
     <noscript>
-        <meta http-equiv="refresh" content="0;url=nojs.html">
+        <meta http-equiv="refresh" content="0;url=/nojs.html">
     </noscript>
 </head>
 <body id="body">
-    <section id="index-central-block" class="container-fluid px-0 py-5 fill-height">
+    <section id="index-central-block" class="container-fluid px-0 pt-5 fill-height">
     </section>
     <section class="row container-fluid px-0 mx-0">
         <span class="bg-green-special col progress-slim-0 m-0 lh-75"></span>
@@ -84,8 +84,8 @@ const AdminHTML = `<!--
                 <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
                     <div class="row">
                         <picture class="col">
-                            <img alt="Brand" src="./assets/media/image/1x1.gif"
-                                 data-src="./assets/media/image/logos/site-logo@500x100.webp"
+                            <img alt="Brand" src="/assets/media/image/1x1.gif"
+                                 data-src="/assets/media/image/logos/site-logo@500x100.webp"
                                  data-lazy-target width="300" height="50"
                                  class="img-fluid w-100 cp">
                         </picture>
@@ -126,8 +126,8 @@ const AdminHTML = `<!--
                     <div class="mt-3 row ct">
                         <figure class="col mb-0">
                             <a href="https://www.openstreetmap.org/#map=12/-30.0397/-51.2382" target="_blank" rel="noopener">
-                                <img alt="geo map" src="./assets/media/image/1x1.gif"
-                                     data-src="assets/media/image/poa-osm-print.webp"
+                                <img alt="geo map" src="/assets/media/image/1x1.gif"
+                                     data-src="/assets/media/image/poa-osm-print.webp"
                                      data-lazy-target width="285" height="165"
                                      class="img-fluid w-100 cp">
                             </a>
@@ -146,31 +146,31 @@ const AdminHTML = `<!--
                 <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
                     <span data-i18n-html="footer.content.uselink" class="i18n white"></span>
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="./about.html">
+                        <a class="row mx-0 cp" href="/about.html">
                             <small class="col-1 px-0">❔</small>
                             <small class="i18n col px-0 ml-2" data-i18n-html="footer.about"></small>
                         </a>
                     </div>
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="copyright.html">
+                        <a class="row mx-0 cp" href="/copyright.html">
                             <small class="col-1 px-0">©️</small>
                             <small class="i18n col px-0 ml-2" data-i18n-html="combo.copyr"></small>
                         </a>
                     </div>
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="docs/">
+                        <a class="row mx-0 cp" href="/docs/">
                             <small class="col-1 px-0">📖</small>
                             <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.docs"></small>
                         </a>
                     </div>
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="policy.html">
+                        <a class="row mx-0 cp" href="/policy.html">
                             <small class="col-1 px-0">📃</small>
                             <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.policies"></small>
                         </a>
                     </div>
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="./dpo.html">
+                        <a class="row mx-0 cp" href="/dpo.html">
                             <small class="col-1 px-0">🛡️</small>
                             <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.dpo"></small>
                         </a>
@@ -197,7 +197,7 @@ const AdminHTML = `<!--
             </div>
         </section>
     </footer>
-    <script type="module" src="./assets/js/setup.mjs"></script>
+    <script type="module" src="/assets/js/setup.mjs"></script>
 </body>
 </html>`;
 
@@ -238,7 +238,7 @@ let databasePromise = null;
 function loadSettings() {
     if (!settingsPromise) {
         settingsPromise = fetch(
-            new URL("config/settings.json", self.location.href),
+            new URL("/config/settings.json", self.location.origin),
             { cache: "no-store" }
         ).then(response => {
             if (!response.ok) throw new Error(`settings.json (${response.status})`);
@@ -476,6 +476,7 @@ function storedGitHubAuth(user, token) {
             refresh_token: token.refresh_token,
             expires_in: token.expires_in,
             refresh_token_expires_in: token.refresh_token_expires_in,
+            obtained_at: token.obtained_at || Date.now(),
             token_type: token.token_type,
             scope: token.scope
         }
@@ -872,6 +873,159 @@ async function logoutGitHub(request) {
 }
 
 // ===============================================================
+// REVALIDAÇÃO DO TOKEN — POST /admin-auth/refresh
+// ===============================================================
+
+async function refreshGitHubToken(request) {
+    if (request.method !== "POST" || !isSameOrigin(request)) {
+        return jsonResponse({
+            ok: false,
+            error: "invalid_request"
+        }, 405);
+    }
+
+    try {
+        const db = await getDatabase();
+        const stored = await db.read({
+            tbn: "config",
+            tbk: "user-github"
+        });
+
+        const refreshToken = stored?.tokens?.refresh_token;
+
+        if (!refreshToken) {
+            safeFailure(
+                "REFRESH_TOKEN_MISSING",
+                "Não há refresh_token disponível para renovar a sessão."
+            );
+            await saveDiagnostics().catch(() => {});
+
+            return jsonResponse({
+                ok: false,
+                reauth_required: true,
+                code: "REFRESH_TOKEN_MISSING",
+                message: "É necessário autenticar novamente no GitHub."
+            }, 401);
+        }
+
+        logOAuth(
+            "Refresh",
+            "ENVIANDO",
+            "Solicitando renovação do token OAuth."
+        );
+
+        const body = new URLSearchParams({
+            client_id: GITHUB_CLIENT_ID,
+            grant_type: "refresh_token",
+            refresh_token: refreshToken
+        });
+
+        const response = await fetch(GITHUB_TOKEN_URL, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body,
+            cache: "no-store"
+        });
+
+        let result;
+        try {
+            result = await response.json();
+        } catch {
+            return jsonResponse({
+                ok: false,
+                reauth_required: false,
+                code: "TOKEN_REFRESH_INVALID",
+                message: "Resposta inválida do proxy durante a renovação."
+            }, 502);
+        }
+
+        if (!response.ok || result.error || !result.access_token) {
+            const code = result?.error || "TOKEN_REFRESH_FAILED";
+            const permanent = [
+                "bad_refresh_token",
+                "incorrect_client_credentials",
+                "unsupported_grant_type",
+                "invalid_grant"
+            ].includes(code) || response.status === 401;
+
+            safeFailure(
+                code,
+                result?.error_description || "Falha ao renovar o token OAuth."
+            );
+            await saveDiagnostics().catch(() => {});
+
+            return jsonResponse({
+                ok: false,
+                reauth_required: permanent,
+                code,
+                message: result?.error_description || "Não foi possível renovar a sessão do GitHub."
+            }, permanent ? 401 : 502);
+        }
+
+        const obtainedAt = Date.now();
+        const mergedTokens = {
+            access_token: result.access_token,
+            refresh_token: result.refresh_token || refreshToken,
+            expires_in: result.expires_in ?? stored?.tokens?.expires_in,
+            refresh_token_expires_in:
+                result.refresh_token_expires_in ?? stored?.tokens?.refresh_token_expires_in,
+            obtained_at: obtainedAt,
+            token_type: result.token_type || stored?.tokens?.token_type || "bearer",
+            scope: result.scope ?? stored?.tokens?.scope ?? ""
+        };
+
+        let user = stored?.user;
+        try {
+            user = await getGitHubUser(mergedTokens.access_token);
+        } catch (userError) {
+            if (!isValidGitHubUser(user)) {
+                return jsonResponse({
+                    ok: false,
+                    reauth_required: true,
+                    code: "GITHUB_IDENTITY_FAILED",
+                    message: "Não foi possível confirmar a conta no GitHub."
+                }, 401);
+            }
+        }
+
+        await saveStoredGitHubAuth(user, mergedTokens);
+
+        logOAuth(
+            "Refresh",
+            "OK",
+            "Token OAuth renovado com sucesso; valor omitido."
+        );
+        await saveDiagnostics();
+
+        return jsonResponse({
+            ok: true,
+            user: publicUser(user),
+            tokens: {
+                expires_in: mergedTokens.expires_in,
+                refresh_token_expires_in: mergedTokens.refresh_token_expires_in,
+                obtained_at: mergedTokens.obtained_at,
+                scope: mergedTokens.scope,
+                token_type: mergedTokens.token_type
+            }
+        });
+    } catch (error) {
+        console.error("[SW] Falha ao renovar token:", error);
+        safeFailure("TOKEN_REFRESH_EXCEPTION", "Erro inesperado ao renovar sessão.");
+        await saveDiagnostics().catch(() => {});
+
+        return jsonResponse({
+            ok: false,
+            reauth_required: false,
+            code: "TOKEN_REFRESH_EXCEPTION",
+            message: "Falha inesperada ao renovar a sessão."
+        }, 500);
+    }
+}
+
+// ===============================================================
 // DIAGNÓSTICO — GET /admin-auth/diagnostics
 // ===============================================================
 
@@ -909,6 +1063,7 @@ async function getAuthDiagnostics(request) {
 
 RegisterRoute("/admin.html", handleAdminPage);
 RegisterRoute("/admin-auth/start", startGitHubOAuth);
+RegisterRoute("/admin-auth/refresh", refreshGitHubToken);
 RegisterRoute("/admin-auth/logout", logoutGitHub);
 RegisterRoute("/admin-auth/diagnostics", getAuthDiagnostics);
 

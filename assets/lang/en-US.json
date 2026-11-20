@@ -100,7 +100,8 @@
         "policies": "policies",
         "donations": "donations",
         "signin": "Sign in",
-        "docs": "docs"
+        "docs": "docs",
+        "home": "Home"
     },
     "footer": {
         "content": {
@@ -128,7 +129,7 @@
         "privacci": "privacy",
         "footoodle": {
             "title": "Subscribe to Collabore",
-            "description": "<p>Collabore opens the doors to developers and enthusiasts. Turn your static pages service into dynamic ones.</p><p>Through a simple yet powerful interface you can modify, review and create new posts, add plugins and apps to your pages or embed your own extensions.</p><p>All of this through open source code designed to be extended. Use the built-in authentication system so Collabore users can sign up on your page in a few clicks and, best of all, authenticate automatically in your page's plugins and apps.</p><p class='mt-5 ct'>Be part of this collaborative system, <a href='./signup' class='white tdu'>sign up now!</a></p>"
+            "description": "<p>Collabore opens the doors to developers and enthusiasts. Turn your static pages service into dynamic ones.</p><p>Through a simple yet powerful interface you can modify, review and create new posts, add plugins and apps to your pages or embed your own extensions.</p><p>All of this through open source code designed to be extended. Use the built-in authentication system so Collabore users can sign up on your page in a few clicks and, best of all, authenticate automatically in your page's plugins and apps.</p><p class='mt-5 ct'>Be part of this collaborative system, <a href='/signup' class='white tdu'>sign up now!</a></p>"
         }
     },
     "api": {
@@ -150,7 +151,7 @@
     "cookies": {
         "agree": {
             "description_1": "This site uses cookies and other technologies to store information. By continuing on this site you agree to this use and to our \"policy\" regarding it.",
-            "description_2": "For more detailed information see our <a href='./policies.html#cookies' target='blank_' rel='nofollow' class='tdu sky'>Cookie Policy</a>.",
+            "description_2": "For more detailed information see our <a href='/policy.html#cookie-agree' target='blank_' rel='nofollow' class='tdu sky'>Cookie Policy</a>.",
             "close_banner_info": "To close, click the button below."
         }
     },
@@ -252,7 +253,7 @@
         "title": "Unsupported",
         "p1": "Sorry, we do not support the \"cookie free\" browsing mode.",
         "p2": "Although this website uses cookies and other storage technologies, \"<strong>we do not store any data in your browser without your express permission</strong>\"!",
-        "p3": "We believe we have good reasons for not supporting \"cookies-free\" browsing. You may want to take a look at our <a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a> for more information. Unfortunately you will need to browse with cookies enabled"
+        "p3": "We believe we have good reasons for not supporting \"cookies-free\" browsing. You may want to take a look at our <a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a> for more information. Unfortunately you will need to browse with cookies enabled"
     },
     "twofactory": {
         "security_slide": {
@@ -462,7 +463,7 @@
             "list1": "Your full name;",
             "list2": "The right you wish to exercise (e.g. data deletion, access, etc.);",
             "list3": "Details that may help us locate your data in our systems.",
-            "policies": "For more details on how we handle your data, see our <a href=\"./policy.html#policy-general\">General Policy</a> and our <a href=\"./policy.html#policy-privacy\">Privacy Policy</a>."
+            "policies": "For more details on how we handle your data, see our <a href=\"/policy.html#policy-general\">General Policy</a> and our <a href=\"/policy.html#policy-privacy\">Privacy Policy</a>."
         },
         "home": {
             "intro": {
@@ -561,7 +562,7 @@
                 "heading": "Accept Cookies",
                 "paragraph1": "If you are wondering whether you <strong>really need to accept cookies and data storage</strong>, the short answer is: <strong>no, you do not</strong>! You will still be able to browse and use many of the Site's tools and features, although you may not have the best experience 🙁",
                 "paragraph2": "For example, when you choose a language, save a favorite color, or change a setting, you will have to make that choice again every time you visit or browse the site... the only way to \"persist\" your choices is to store them locally.",
-                "paragraph3": "Following our philosophy that <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">you are the sole owner of your data</a>, we believe you have choices. If you choose to accept cookies by <strong>clicking and pressing</strong> the button below, you can also <strong>disable them</strong> whenever you want here or in the User tab, and remove everything already stored at once 😎",
+                "paragraph3": "Following our philosophy that <a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">you are the sole owner of your data</a>, we believe you have choices. If you choose to accept cookies by <strong>clicking and pressing</strong> the button below, you can also <strong>disable them</strong> whenever you want here or in the User tab, and remove everything already stored at once 😎",
                 "button": "🍪 press to enable cookies",
                 "disable": "😮 click to disable cookies!"
             }
@@ -595,7 +596,13 @@
         "read_time": "{minutes} min read",
         "updated": "Last updated: {date}",
         "more_posts": "More posts",
-        "license": "This content is licensed under <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.en\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>"
+        "license": "This content is licensed under <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.en\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>",
+        "search_placeholder": "Search posts...",
+        "all_tags": "All",
+        "no_results": "No posts match the selected filters.",
+        "read_article": "Read article",
+        "back_to_blog": "Back to blog",
+        "copy_code": "Copy code"
     },
     "admin_dashboard": {
         "posts": "Posts",
@@ -643,7 +650,117 @@
             "draft_select_default": "Select draft",
             "draft_open": "Open draft",
             "draft_save": "Save draft",
-            "generate": "Generate post"
+            "generate": "Generate post",
+            "slug_label": "URL Slug",
+            "slug_placeholder": "my-article",
+            "slug_unlock_title": "Lock or unlock slug editing",
+            "summary_restore_title": "Restore automatic summary",
+            "undo_title": "Undo (Ctrl+Z)",
+            "redo_title": "Redo (Ctrl+Y)",
+            "block_format_title": "Block format",
+            "block_paragraph": "Paragraph",
+            "heading1": "Heading 1",
+            "heading2": "Heading 2",
+            "heading3": "Heading 3",
+            "heading4": "Heading 4",
+            "heading5": "Heading 5",
+            "heading6": "Heading 6",
+            "code_block": "Code block",
+            "bold_title": "Bold (Ctrl+B)",
+            "italic_title": "Italic (Ctrl+I)",
+            "underline_title": "Underline (Ctrl+U)",
+            "strike_title": "Strikethrough",
+            "inline_code_title": "Inline code",
+            "clear_format_title": "Clear formatting",
+            "fore_color_title": "Text color",
+            "back_color_title": "Highlight color",
+            "unordered_list_title": "Bulleted list",
+            "ordered_list_title": "Numbered list",
+            "align_left_title": "Align left",
+            "align_center_title": "Center",
+            "align_right_title": "Align right",
+            "align_justify_title": "Justify",
+            "link_title": "Insert or edit link (Ctrl+K)",
+            "quote_title": "Blockquote",
+            "code_title": "Insert code block",
+            "hr_title": "Horizontal rule",
+            "table_title": "Insert table",
+            "source_btn": "HTML",
+            "source_title": "Toggle HTML source",
+            "preview": "Preview",
+            "link_url_placeholder": "https://example.com or /posts/...",
+            "link_text_placeholder": "Link text (optional)",
+            "link_new_tab": "New tab",
+            "apply": "Apply",
+            "unlink": "Remove link",
+            "cancel": "Cancel",
+            "table_rows": "Rows",
+            "table_cols": "Columns",
+            "table_insert": "Insert table",
+            "img_width": "Width",
+            "img_align": "Alignment",
+            "img_align_left": "Left",
+            "img_align_center": "Center",
+            "img_align_right": "Right",
+            "img_align_full": "Full width",
+            "img_remove": "Remove image",
+            "img_alt_placeholder": "Alternative text (alt)",
+            "img_caption_placeholder": "Image caption (optional)",
+            "save_draft": "Save draft",
+            "drafts_placeholder": "Select draft...",
+            "open_draft": "Open",
+            "delete_draft": "Delete",
+            "reading_stats": "{words} words · {minutes} min read",
+            "msg": {
+                "speech_error": "Speech recognition error: {0}.",
+                "speech_unavailable": "Speech recognition is not available in this browser.",
+                "speech_start_error": "Could not start speech recognition: {0}",
+                "pending_changes": "Pending changes.",
+                "images_db_unavailable": "Database unavailable: the images could not be saved.",
+                "images_optimized": "Images optimized: {0} → {1}.",
+                "images_added": "Images added. The size was not reduced.",
+                "image_save_error": "Could not save the image to the database.",
+                "drafts_db_unavailable": "Database unavailable: drafts will not be saved.",
+                "autosave_ok": "Changes saved automatically.",
+                "autosave_error": "Could not save automatically.",
+                "nothing_to_save": "Enter a title or content before saving.",
+                "db_unavailable": "Database unavailable.",
+                "draft_updated": "Draft updated.",
+                "draft_saved": "Draft saved successfully.",
+                "draft_save_error": "Error saving the draft.",
+                "changes_recovered": "Previous changes recovered.",
+                "draft_select": "Select a draft to open.",
+                "draft_not_found": "Draft not found.",
+                "draft_opened": "Draft opened successfully.",
+                "draft_open_error": "Error opening the draft.",
+                "editor_ready_new": "Editor ready for a new post.",
+                "need_title": "Enter the post title.",
+                "need_content": "Enter the post content.",
+                "preparing": "Preparing post...",
+                "published": "Post published successfully.",
+                "prepared": "Post prepared. The content was kept in the editor.",
+                "publish_stage_error": "Failed at step \"{0}\": {1}. The content was kept.",
+                "publishing": "Publishing...",
+                "stage_init": "Publishing setup",
+                "stage_preview": "Updating the preview",
+                "stage_read": "Reading editor data",
+                "stage_autosave": "Automatic saving",
+                "stage_images": "Preparing images",
+                "stage_files": "Creating the post files",
+                "stage_publish": "Publishing to GitHub",
+                "stage_confirm": "Confirming publication",
+                "discard_changes": "Discard the changes to the post being edited?",
+                "post_updated": "Post updated successfully.",
+                "post_loaded": "Post loaded for editing.",
+                "post_load_error": "Could not load the post for editing.",
+                "delete_prepare_error": "Could not prepare the deletion: {0}",
+                "delete_error": "Failed to delete post: {0}",
+                "draft_untitled": "Untitled draft",
+                "need_slug": "Please provide a valid URL slug for the post.",
+                "draft_deleted": "Draft deleted.",
+                "content_placeholder": "Write the post content...",
+                "reading_stats": "{words} words · {minutes} min read"
+            }
         },
         "posts_list": {
             "untitled": "Untitled post",
@@ -713,7 +830,11 @@
             "post_missing": "The post no longer exists in the registry. Update cancelled.",
             "post_missing_delete": "The post no longer exists in the registry.",
             "github_not_confirmed": "GitHub did not confirm the deletion.",
-            "markdown_fetch_error": "Could not load the Markdown."
+            "markdown_fetch_error": "Could not load the Markdown.",
+            "need_slug": "Please provide a valid URL slug for the post.",
+            "draft_deleted": "Draft deleted.",
+            "content_placeholder": "Write the post content...",
+            "reading_stats": "{words} words · {minutes} min read"
         },
         "footoodles": {
             "tab": "Footoodles",
@@ -753,7 +874,8 @@
             "editor_edit": "Editing Footoodle.",
             "discard_changes": "Discard the changes to this Footoodle?",
             "operation_error": "An error occurred while processing the Footoodle.",
-            "github_error": "Could not complete the operation on GitHub."
+            "github_error": "Could not complete the operation on GitHub.",
+            "subtitle": "Create and manage quick footer notes with images."
         },
         "settings": {
             "tab": "GitHub Config",
@@ -761,6 +883,37 @@
             "save": "Save",
             "clear_credentials": "Clear GitHub credentials",
             "clear": "Clear"
+        },
+        "nav": {
+            "session": "GitHub Session"
+        },
+        "posts_view": {
+            "subtitle": "Manage, edit, or delete your published HTML posts.",
+            "search_placeholder": "Filter by title, slug, or tag...",
+            "empty": "No posts found.",
+            "back": "← Back to posts",
+            "view": "Open page"
+        },
+        "session": {
+            "title": "GitHub Session",
+            "subtitle": "Manage OAuth authentication and access token validity.",
+            "scope_label": "Scopes:",
+            "obtained_label": "Authenticated at:",
+            "expires_label": "Expires at:",
+            "refresh_btn": "Refresh session",
+            "diagnostics_title": "OAuth Diagnostics",
+            "reload_diagnostics": "Refresh",
+            "clear_confirm": "Remove saved GitHub credentials from this browser?",
+            "status_active": "Active",
+            "status_expiring": "Expiring soon",
+            "status_expired": "Expired",
+            "status_no_expiry": "Token without expiration",
+            "refreshing": "Refreshing session with GitHub...",
+            "refreshed": "Session refreshed successfully.",
+            "refresh_failed": "Could not refresh token automatically.",
+            "reauth_needed": "Your GitHub session has expired. Please authenticate again to continue.",
+            "diagnostics_empty": "No diagnostics available.",
+            "diagnostics_error": "Failed to load diagnostics."
         }
     },
     "github_auth": {

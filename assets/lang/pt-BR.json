@@ -100,7 +100,8 @@
         "policies": "políticas",
         "donations": "doações",
         "signin": "Entrar",
-        "docs": "documentação"
+        "docs": "documentação",
+        "home": "Início"
     },
     "footer": {
         "content": {
@@ -128,7 +129,7 @@
         "privacci": "privacidade",
         "footoodle": {
             "title": "Inscreva-se em Collabore",
-            "description": "<p>Collabore abre as portas para desenvolvedores e entusiastas. Transforme seu serviço de páginas staticas em dinãmicas.</p><p>Através de uma interface simples más poderosa você poderá modificar, revisar e criar novas publicações, adicionar plugins e apps em suas páginas ou incorporar suas próprias extensões.</p><p>Tudo isto através de um código fonte aberto projetado para expandir. Utilize o sistema de autenticação integrado fazendo com que usuários Collabore possam se registrar em sua página em poucos cliques e o melhor autenticando-se automaticamente nos plugins e apps de sua página.</p><p class='mt-5 ct'>Faça parte deste sistema colaborativo, <a href='./signup' class='white tdu'>registre-se agora!</a></p>"
+            "description": "<p>Collabore abre as portas para desenvolvedores e entusiastas. Transforme seu serviço de páginas staticas em dinãmicas.</p><p>Através de uma interface simples más poderosa você poderá modificar, revisar e criar novas publicações, adicionar plugins e apps em suas páginas ou incorporar suas próprias extensões.</p><p>Tudo isto através de um código fonte aberto projetado para expandir. Utilize o sistema de autenticação integrado fazendo com que usuários Collabore possam se registrar em sua página em poucos cliques e o melhor autenticando-se automaticamente nos plugins e apps de sua página.</p><p class='mt-5 ct'>Faça parte deste sistema colaborativo, <a href='/signup' class='white tdu'>registre-se agora!</a></p>"
         }
     },
     "api": {
@@ -150,7 +151,7 @@
     "cookies": {
         "agree": {
             "description_1": "Este site utiliza cookies e outras tecnologias para guardar informações. Ao continuar neste site você estará concordando com este uso e nossa \"politica\" arespeito deste uso.",
-            "description_2": "Para informações mais detalhadas veja a nossa <a href='./policies.html#cookies' target='blank_' rel='nofollow' class='tdu sky'>Politica de Cookies</a>.",
+            "description_2": "Para informações mais detalhadas veja a nossa <a href='/policy.html#cookie-agree' target='blank_' rel='nofollow' class='tdu sky'>Politica de Cookies</a>.",
             "close_banner_info": "Para fechar clique no botão abaixo."
         }
     },
@@ -252,7 +253,7 @@
         "title": "Não suportado",
         "p1": "Desculpe, não oferecemos suporte à navegação \"sem cookies\".",
         "p2": "Embora este site use cookies e outras tecnologias de armazenamento, \"<strong>não guardamos nenhum dado no seu navegador sem a sua permissão expressa</strong>\"!",
-        "p3": "Acreditamos ter bons motivos para não oferecer suporte à navegação \"sem cookies\". Dê uma olhada no nosso <a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a> para mais informações. Infelizmente, você precisará navegar com os cookies ativados."
+        "p3": "Acreditamos ter bons motivos para não oferecer suporte à navegação \"sem cookies\". Dê uma olhada no nosso <a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a> para mais informações. Infelizmente, você precisará navegar com os cookies ativados."
     },
     "twofactory": {
         "security_slide": {
@@ -276,7 +277,15 @@
                 "Sexta-feira",
                 "Sábado"
             ],
-            "short": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
+            "short": [
+                "Dom",
+                "Seg",
+                "Ter",
+                "Qua",
+                "Qui",
+                "Sex",
+                "Sáb"
+            ]
         },
         "months": {
             "long": [
@@ -454,7 +463,7 @@
             "list1": "Seu nome completo;",
             "list2": "O direito que deseja exercer (ex: exclusão de dados, acesso, etc.);",
             "list3": "Detalhes que possam nos ajudar a localizar seus dados em nossos sistemas.",
-            "policies": "Para mais detalhes sobre como tratamos seus dados, consulte nossa <a href=\"./policy.html#policy-general\">Política Geral</a> e nossa <a href=\"./policy.html#policy-privacy\">Política de Privacidade</a>."
+            "policies": "Para mais detalhes sobre como tratamos seus dados, consulte nossa <a href=\"/policy.html#policy-general\">Política Geral</a> e nossa <a href=\"/policy.html#policy-privacy\">Política de Privacidade</a>."
         },
         "home": {
             "intro": {
@@ -553,7 +562,7 @@
                 "heading": "Aceitar cookies",
                 "paragraph1": "Se você se perguntar se: <strong>realmente precisa aceitar cookies e armazenamento de dados</strong>? A resposta curta é: <strong>não, você não precisa</strong>! Você ainda vai poder navegar e usar várias ferramentas e funcionalidades do Site porém, talvez não obtenha a melhor experiência 🙁",
                 "paragraph2": "Por exemplo: quando você escolhe um idioma, salva uma cor favorita ou define uma configuração terá de refazer esta escolha a cada vez que acessa ou navega no site ... o único modo de \"persistir\" suas escolhas é armazenando-as localmente.",
-                "paragraph3": "Seguindo nossa filisofia de que <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">você é o único detentor de seus dados</a>, acreditamos que você tem escolhas. Se escolher aceitar o uso de cookies \"<strong>clicando e pressionando</strong> o botão abaixo, também poderá escolher <strong>desativá-los</strong> sempre que quiser por aqui ou na guia de Usuário, assim como também poderá remover tudo que já tiver armazenado de uma só vez 😎",
+                "paragraph3": "Seguindo nossa filisofia de que <a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">você é o único detentor de seus dados</a>, acreditamos que você tem escolhas. Se escolher aceitar o uso de cookies \"<strong>clicando e pressionando</strong> o botão abaixo, também poderá escolher <strong>desativá-los</strong> sempre que quiser por aqui ou na guia de Usuário, assim como também poderá remover tudo que já tiver armazenado de uma só vez 😎",
                 "button": "🍪 segure para ativar cookies",
                 "disable": "😮 clique para desativar cookies!"
             }
@@ -632,7 +641,8 @@
             "editor_edit": "Editando Footoodle.",
             "discard_changes": "Descartar as alterações deste Footoodle?",
             "operation_error": "Ocorreu um erro ao processar o Footoodle.",
-            "github_error": "Não foi possível concluir a operação no GitHub."
+            "github_error": "Não foi possível concluir a operação no GitHub.",
+            "subtitle": "Crie e gerencie notas rápidas com imagens no rodapé."
         },
         "editor": {
             "status_ready": "Pronto para editar.",
@@ -671,7 +681,117 @@
             "draft_select_default": "Selecionar rascunho",
             "draft_open": "Abrir rascunho",
             "draft_save": "Salvar rascunho",
-            "generate": "Gerar postagem"
+            "generate": "Gerar postagem",
+            "slug_label": "Slug da URL",
+            "slug_placeholder": "meu-artigo",
+            "slug_unlock_title": "Desbloquear ou bloquear edição do slug",
+            "summary_restore_title": "Restaurar resumo automático",
+            "undo_title": "Desfazer (Ctrl+Z)",
+            "redo_title": "Refazer (Ctrl+Y)",
+            "block_format_title": "Estilo de bloco",
+            "block_paragraph": "Parágrafo",
+            "heading1": "Título 1",
+            "heading2": "Título 2",
+            "heading3": "Título 3",
+            "heading4": "Título 4",
+            "heading5": "Título 5",
+            "heading6": "Título 6",
+            "code_block": "Bloco de código",
+            "bold_title": "Negrito (Ctrl+B)",
+            "italic_title": "Itálico (Ctrl+I)",
+            "underline_title": "Sublinhado (Ctrl+U)",
+            "strike_title": "Tachado",
+            "inline_code_title": "Código em linha",
+            "clear_format_title": "Limpar formatação",
+            "fore_color_title": "Cor do texto",
+            "back_color_title": "Cor de destaque",
+            "unordered_list_title": "Lista com marcadores",
+            "ordered_list_title": "Lista numerada",
+            "align_left_title": "Alinhar à esquerda",
+            "align_center_title": "Centralizar",
+            "align_right_title": "Alinhar à direita",
+            "align_justify_title": "Justificar",
+            "link_title": "Inserir ou editar link (Ctrl+K)",
+            "quote_title": "Bloco de citação",
+            "code_title": "Inserir bloco de código",
+            "hr_title": "Linha horizontal",
+            "table_title": "Inserir tabela",
+            "source_btn": "HTML",
+            "source_title": "Alternar código-fonte HTML",
+            "preview": "Pré-visualizar",
+            "link_url_placeholder": "https://exemplo.com ou /posts/...",
+            "link_text_placeholder": "Texto do link (opcional)",
+            "link_new_tab": "Nova aba",
+            "apply": "Aplicar",
+            "unlink": "Remover link",
+            "cancel": "Cancelar",
+            "table_rows": "Linhas",
+            "table_cols": "Colunas",
+            "table_insert": "Inserir tabela",
+            "img_width": "Largura",
+            "img_align": "Alinhamento",
+            "img_align_left": "Esquerda",
+            "img_align_center": "Centro",
+            "img_align_right": "Direita",
+            "img_align_full": "Largura total",
+            "img_remove": "Remover imagem",
+            "img_alt_placeholder": "Texto alternativo (alt)",
+            "img_caption_placeholder": "Legenda da imagem (opcional)",
+            "save_draft": "Salvar rascunho",
+            "drafts_placeholder": "Selecionar rascunho...",
+            "open_draft": "Abrir",
+            "delete_draft": "Excluir",
+            "reading_stats": "{words} palavras · {minutes} min de leitura",
+            "msg": {
+                "speech_error": "Erro no reconhecimento de voz: {0}.",
+                "speech_unavailable": "Reconhecimento de voz indisponível neste navegador.",
+                "speech_start_error": "Não foi possível iniciar o reconhecimento: {0}",
+                "pending_changes": "Alterações pendentes.",
+                "images_db_unavailable": "Banco de dados indisponível: não foi possível guardar as imagens.",
+                "images_optimized": "Imagens otimizadas: {0} → {1}.",
+                "images_added": "Imagens adicionadas. Não houve redução de tamanho.",
+                "image_save_error": "Não foi possível guardar a imagem no banco de dados.",
+                "drafts_db_unavailable": "Banco de dados indisponível: os rascunhos não serão salvos.",
+                "autosave_ok": "Alterações salvas automaticamente.",
+                "autosave_error": "Não foi possível salvar automaticamente.",
+                "nothing_to_save": "Digite um título ou conteúdo antes de salvar.",
+                "db_unavailable": "Banco de dados indisponível.",
+                "draft_updated": "Rascunho atualizado.",
+                "draft_saved": "Rascunho salvo com sucesso.",
+                "draft_save_error": "Erro ao salvar o rascunho.",
+                "changes_recovered": "Alterações anteriores recuperadas.",
+                "draft_select": "Selecione um rascunho para abrir.",
+                "draft_not_found": "Rascunho não encontrado.",
+                "draft_opened": "Rascunho aberto com sucesso.",
+                "draft_open_error": "Erro ao abrir o rascunho.",
+                "editor_ready_new": "Editor pronto para uma nova postagem.",
+                "need_title": "Informe o título da postagem.",
+                "need_content": "Informe o conteúdo da postagem.",
+                "preparing": "Preparando postagem...",
+                "published": "Postagem publicada com sucesso.",
+                "prepared": "Postagem preparada. O conteúdo foi preservado no editor.",
+                "publish_stage_error": "Falha na etapa \"{0}\": {1}. O conteúdo foi preservado.",
+                "publishing": "Publicando...",
+                "stage_init": "Inicialização da publicação",
+                "stage_preview": "Atualização da pré-visualização",
+                "stage_read": "Leitura dos dados do editor",
+                "stage_autosave": "Salvamento automático",
+                "stage_images": "Preparação das imagens",
+                "stage_files": "Criação dos arquivos da postagem",
+                "stage_publish": "Publicação no GitHub",
+                "stage_confirm": "Confirmação da publicação",
+                "discard_changes": "Descartar as alterações da postagem em edição?",
+                "post_updated": "Postagem atualizada com sucesso.",
+                "post_loaded": "Postagem carregada para edição.",
+                "post_load_error": "Não foi possível carregar a postagem para edição.",
+                "delete_prepare_error": "Não foi possível preparar a exclusão: {0}",
+                "delete_error": "Falha ao excluir postagem: {0}",
+                "draft_untitled": "Rascunho sem título",
+                "need_slug": "Informe um slug válido para a URL da postagem.",
+                "draft_deleted": "Rascunho excluído.",
+                "content_placeholder": "Escreva o conteúdo da postagem...",
+                "reading_stats": "{words} palavras · {minutes} min de leitura"
+            }
         },
         "posts_list": {
             "untitled": "Postagem sem título",
@@ -741,7 +861,42 @@
             "post_missing": "A postagem não existe mais no cadastro. Atualização cancelada.",
             "post_missing_delete": "A postagem não existe mais no cadastro.",
             "github_not_confirmed": "O GitHub não confirmou a exclusão.",
-            "markdown_fetch_error": "Não foi possível carregar o Markdown."
+            "markdown_fetch_error": "Não foi possível carregar o Markdown.",
+            "need_slug": "Informe um slug válido para a URL da postagem.",
+            "draft_deleted": "Rascunho excluído.",
+            "content_placeholder": "Escreva o conteúdo da postagem...",
+            "reading_stats": "{words} palavras · {minutes} min de leitura"
+        },
+        "nav": {
+            "session": "Sessão GitHub"
+        },
+        "posts_view": {
+            "subtitle": "Gerencie, edite ou remova suas postagens HTML publicadas.",
+            "search_placeholder": "Filtrar por título, slug ou tag...",
+            "empty": "Nenhuma postagem encontrada.",
+            "back": "← Voltar para postagens",
+            "view": "Abrir página"
+        },
+        "session": {
+            "title": "Sessão GitHub",
+            "subtitle": "Gerencie a autenticação OAuth e a validade do token de acesso.",
+            "scope_label": "Escopos:",
+            "obtained_label": "Autenticado em:",
+            "expires_label": "Expira em:",
+            "refresh_btn": "Revalidar sessão",
+            "diagnostics_title": "Diagnóstico OAuth",
+            "reload_diagnostics": "Atualizar",
+            "clear_confirm": "Deseja remover as credenciais do GitHub salvas neste navegador?",
+            "status_active": "Ativa",
+            "status_expiring": "Expirando em breve",
+            "status_expired": "Expirada",
+            "status_no_expiry": "Token sem expiração definida",
+            "refreshing": "Revalidando sessão com o GitHub...",
+            "refreshed": "Sessão revalidada com sucesso.",
+            "refresh_failed": "Não foi possível revalidar o token automaticamente.",
+            "reauth_needed": "Sua sessão do GitHub expirou. Autentique-se novamente para continuar.",
+            "diagnostics_empty": "Nenhum diagnóstico disponível.",
+            "diagnostics_error": "Erro ao carregar diagnóstico."
         }
     },
     "github_auth": {
@@ -774,6 +929,12 @@
         "read_time": "{minutes} min de leitura",
         "updated": "Última atualização: {date}",
         "more_posts": "Mais postagens",
-        "license": "Este conteúdo está licenciado sob a <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>"
+        "license": "Este conteúdo está licenciado sob a <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>",
+        "search_placeholder": "Buscar postagens...",
+        "all_tags": "Todas",
+        "no_results": "Nenhuma postagem corresponde aos filtros selecionados.",
+        "read_article": "Ler artigo",
+        "back_to_blog": "Voltar para o blog",
+        "copy_code": "Copiar código"
     }
 }

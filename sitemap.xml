@@ -9,7 +9,7 @@
         <loc>https://subversivo58.github.io/blog.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <lastmod>2026-11-16</lastmod>
+        <lastmod>2026-11-19</lastmod>
     </url>
     <url>
         <loc>https://subversivo58.github.io/about.html</loc>
@@ -45,5 +45,35 @@
         <loc>https://subversivo58.github.io/you-in-control-of-your-data.html</loc>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://subversivo58.github.io/posts/webrtc-no-front-end-moderno.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+        <loc>https://subversivo58.github.io/posts/descentralizacao-na-web-e-no-front-end.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+        <loc>https://subversivo58.github.io/posts/subversivo58-ideias-tecnologia-e-experimentacao.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+        <loc>https://subversivo58.github.io/posts/blockchain-alem-das-criptomoedas.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <lastmod>2026-11-15</lastmod>
+    </url>
+    <url>
+        <loc>https://subversivo58.github.io/posts/assim-surge-a-teoria-do-caos.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <lastmod>2026-11-15</lastmod>
     </url>
 </urlset>

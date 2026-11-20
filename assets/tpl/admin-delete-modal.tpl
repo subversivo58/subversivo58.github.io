@@ -7,7 +7,7 @@
                 <h5 id="admin-delete-title" class="i18n modal-title"
                     data-i18n-html="admin_dashboard.delete_modal.title"></h5>
 
-                <button type="button" class="close i18n" data-modal-close
+                <button type="button" class="i18n close cp" data-modal-close
                     data-i18n-title="admin_dashboard.delete_modal.close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -23,10 +23,10 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="i18n btn btn-outline-secondary rounded-0" data-modal-close
+                <button type="button" class="i18n btn btn-outline-secondary rounded-0 cp" data-modal-close
                     data-i18n-html="admin_dashboard.delete_modal.cancel"></button>
 
-                <button type="button" class="i18n btn btn-danger rounded-0" data-modal-confirm
+                <button type="button" class="i18n btn btn-danger rounded-0 cp" data-modal-confirm
                     data-i18n-html="admin_dashboard.delete_modal.confirm"></button>
             </div>
 

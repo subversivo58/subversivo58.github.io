@@ -100,7 +100,8 @@
         "policies": "Richtlinien",
         "donations": "Spenden",
         "signin": "Anmelden",
-        "docs": "Dokumentation"
+        "docs": "Dokumentation",
+        "home": "Startseite"
     },
     "footer": {
         "content": {
@@ -128,7 +129,7 @@
         "privacci": "Datenschutz",
         "footoodle": {
             "title": "Bei Collabore anmelden",
-            "description": "<p>Collabore öffnet Entwicklern und Technikbegeisterten neue Möglichkeiten. Verwandle deinen Dienst für statische Seiten in dynamische Seiten.</p><p>Über eine einfache, aber leistungsstarke Benutzeroberfläche kannst du Beiträge bearbeiten, überprüfen und erstellen, Plugins und Apps zu deinen Seiten hinzufügen oder eigene Erweiterungen integrieren.</p><p>All dies basiert auf offenem Quellcode, der für Erweiterungen entwickelt wurde. Nutze das integrierte Authentifizierungssystem, damit sich Collabore-Benutzer mit wenigen Klicks auf deiner Seite registrieren und sich automatisch bei den Plugins und Apps deiner Seite anmelden können.</p><p class='mt-5 ct'>Werde Teil dieses kollaborativen Systems, <a href='./signup' class='white tdu'>registriere dich jetzt!</a></p>"
+            "description": "<p>Collabore öffnet Entwicklern und Technikbegeisterten neue Möglichkeiten. Verwandle deinen Dienst für statische Seiten in dynamische Seiten.</p><p>Über eine einfache, aber leistungsstarke Benutzeroberfläche kannst du Beiträge bearbeiten, überprüfen und erstellen, Plugins und Apps zu deinen Seiten hinzufügen oder eigene Erweiterungen integrieren.</p><p>All dies basiert auf offenem Quellcode, der für Erweiterungen entwickelt wurde. Nutze das integrierte Authentifizierungssystem, damit sich Collabore-Benutzer mit wenigen Klicks auf deiner Seite registrieren und sich automatisch bei den Plugins und Apps deiner Seite anmelden können.</p><p class='mt-5 ct'>Werde Teil dieses kollaborativen Systems, <a href='/signup' class='white tdu'>registriere dich jetzt!</a></p>"
         }
     },
     "api": {
@@ -150,7 +151,7 @@
     "cookies": {
         "agree": {
             "description_1": "Diese Website verwendet Cookies und andere Technologien zum Speichern von Informationen. Wenn du diese Website weiterhin nutzt, stimmst du dieser Verwendung und unserer entsprechenden \"Richtlinie\" zu.",
-            "description_2": "Ausführlichere Informationen findest du in unserer <a href='./policies.html#cookies' target='blank_' rel='nofollow' class='tdu sky'>Cookie-Richtlinie</a>.",
+            "description_2": "Ausführlichere Informationen findest du in unserer <a href='/policy.html#cookie-agree' target='blank_' rel='nofollow' class='tdu sky'>Cookie-Richtlinie</a>.",
             "close_banner_info": "Klicke zum Schließen auf die Schaltfläche unten."
         }
     },
@@ -252,7 +253,7 @@
         "title": "Nicht unterstützt",
         "p1": "Entschuldigung, das Surfen ohne Cookies wird nicht unterstützt.",
         "p2": "Obwohl diese Website Cookies und andere Speichertechnologien verwendet, \"<strong>speichern wir ohne deine ausdrückliche Zustimmung keine Daten in deinem Browser</strong>\"!",
-        "p3": "Wir sind der Ansicht, gute Gründe dafür zu haben, das Surfen ohne Cookies nicht zu unterstützen. Weitere Informationen findest du in unserem <a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a>. Leider musst du Cookies in deinem Browser aktivieren."
+        "p3": "Wir sind der Ansicht, gute Gründe dafür zu haben, das Surfen ohne Cookies nicht zu unterstützen. Weitere Informationen findest du in unserem <a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a>. Leider musst du Cookies in deinem Browser aktivieren."
     },
     "twofactory": {
         "security_slide": {
@@ -462,7 +463,7 @@
             "list1": "Deinen vollständigen Namen;",
             "list2": "Das Recht, das du ausüben möchtest (z. B. Datenlöschung, Auskunft usw.);",
             "list3": "Angaben, die uns helfen können, deine Daten in unseren Systemen zu finden.",
-            "policies": "Weitere Informationen zur Verarbeitung deiner Daten findest du in unserer <a href=\"./policy.html#policy-general\">Allgemeinen Richtlinie</a> und unserer <a href=\"./policy.html#policy-privacy\">Datenschutzrichtlinie</a>."
+            "policies": "Weitere Informationen zur Verarbeitung deiner Daten findest du in unserer <a href=\"/policy.html#policy-general\">Allgemeinen Richtlinie</a> und unserer <a href=\"/policy.html#policy-privacy\">Datenschutzrichtlinie</a>."
         },
         "home": {
             "intro": {
@@ -561,7 +562,7 @@
                 "heading": "Cookies akzeptieren",
                 "paragraph1": "Wenn Sie sich fragen: <strong>Muss ich wirklich Cookies und Datenspeicherung akzeptieren</strong>? Die kurze Antwort lautet: <strong>Nein, müssen Sie nicht</strong>! Sie können weiterhin viele Werkzeuge und Funktionen der Website nutzen, haben jedoch möglicherweise nicht die beste Erfahrung 🙁",
                 "paragraph2": "Zum Beispiel: Wenn Sie eine Sprache auswählen, eine Lieblingsfarbe speichern oder eine Einstellung festlegen, müssen Sie diese Auswahl bei jedem Besuch oder jeder Navigation auf der Website erneut treffen ... die einzige Möglichkeit, Ihre Auswahl zu „speichern“, ist, sie lokal abzulegen.",
-                "paragraph3": "Gemäß unserer Philosophie, dass <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">Sie der alleinige Inhaber Ihrer Daten sind</a>, glauben wir, dass Sie die Wahl haben. Wenn Sie die Verwendung von Cookies akzeptieren, indem Sie auf die Schaltfläche unten <strong>klicken und drücken</strong>, können Sie sie auch jederzeit hier oder im Reiter „Benutzer“ <strong>deaktivieren</strong> und außerdem alles, was bereits gespeichert wurde, auf einmal entfernen 😎",
+                "paragraph3": "Gemäß unserer Philosophie, dass <a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">Sie der alleinige Inhaber Ihrer Daten sind</a>, glauben wir, dass Sie die Wahl haben. Wenn Sie die Verwendung von Cookies akzeptieren, indem Sie auf die Schaltfläche unten <strong>klicken und drücken</strong>, können Sie sie auch jederzeit hier oder im Reiter „Benutzer“ <strong>deaktivieren</strong> und außerdem alles, was bereits gespeichert wurde, auf einmal entfernen 😎",
                 "button": "🍪 gedrückt halten, um Cookies zu aktivieren",
                 "disable": "😮 klicken, um Cookies zu deaktivieren!"
             }
@@ -595,7 +596,13 @@
         "read_time": "{minutes} Min. Lesezeit",
         "updated": "Zuletzt aktualisiert: {date}",
         "more_posts": "Weitere Beiträge",
-        "license": "Dieser Inhalt steht unter der Lizenz <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.de\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>"
+        "license": "Dieser Inhalt steht unter der Lizenz <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.de\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>",
+        "search_placeholder": "Beiträge suchen...",
+        "all_tags": "Alle",
+        "no_results": "Keine Beiträge entsprechen den ausgewählten Filtern.",
+        "read_article": "Artikel lesen",
+        "back_to_blog": "Zurück zum Blog",
+        "copy_code": "Code kopieren"
     },
     "admin_dashboard": {
         "posts": "Beiträge",
@@ -643,7 +650,117 @@
             "draft_select_default": "Entwurf auswählen",
             "draft_open": "Entwurf öffnen",
             "draft_save": "Entwurf speichern",
-            "generate": "Beitrag erstellen"
+            "generate": "Beitrag erstellen",
+            "slug_label": "URL-Slug",
+            "slug_placeholder": "mein-artikel",
+            "slug_unlock_title": "Slug-Bearbeitung sperren oder entsperren",
+            "summary_restore_title": "Automatische Zusammenfassung wiederherstellen",
+            "undo_title": "Rückgängig (Strg+Z)",
+            "redo_title": "Wiederholen (Strg+Y)",
+            "block_format_title": "Blockformat",
+            "block_paragraph": "Absatz",
+            "heading1": "Überschrift 1",
+            "heading2": "Überschrift 2",
+            "heading3": "Überschrift 3",
+            "heading4": "Überschrift 4",
+            "heading5": "Überschrift 5",
+            "heading6": "Überschrift 6",
+            "code_block": "Codeblock",
+            "bold_title": "Fett (Strg+B)",
+            "italic_title": "Kursiv (Strg+I)",
+            "underline_title": "Unterstrichen (Strg+U)",
+            "strike_title": "Durchgestrichen",
+            "inline_code_title": "Inline-Code",
+            "clear_format_title": "Formatierung entfernen",
+            "fore_color_title": "Textfarbe",
+            "back_color_title": "Hervorhebungsfarbe",
+            "unordered_list_title": "Aufzählungsliste",
+            "ordered_list_title": "Nummerierte Liste",
+            "align_left_title": "Linksbündig",
+            "align_center_title": "Zentriert",
+            "align_right_title": "Rechtsbündig",
+            "align_justify_title": "Blocksatz",
+            "link_title": "Link einfügen oder bearbeiten (Strg+K)",
+            "quote_title": "Zitat",
+            "code_title": "Codeblock einfügen",
+            "hr_title": "Horizontale Linie",
+            "table_title": "Tabelle einfügen",
+            "source_btn": "HTML",
+            "source_title": "HTML-Quellcode umschalten",
+            "preview": "Vorschau",
+            "link_url_placeholder": "https://beispiel.de oder /posts/...",
+            "link_text_placeholder": "Linktext (optional)",
+            "link_new_tab": "Neuer Tab",
+            "apply": "Anwenden",
+            "unlink": "Link entfernen",
+            "cancel": "Abbrechen",
+            "table_rows": "Zeilen",
+            "table_cols": "Spalten",
+            "table_insert": "Tabelle einfügen",
+            "img_width": "Breite",
+            "img_align": "Ausrichtung",
+            "img_align_left": "Links",
+            "img_align_center": "Mitte",
+            "img_align_right": "Rechts",
+            "img_align_full": "Volle Breite",
+            "img_remove": "Bild entfernen",
+            "img_alt_placeholder": "Alternativtext (alt)",
+            "img_caption_placeholder": "Bildunterschrift (optional)",
+            "save_draft": "Entwurf speichern",
+            "drafts_placeholder": "Entwurf auswählen...",
+            "open_draft": "Öffnen",
+            "delete_draft": "Löschen",
+            "reading_stats": "{words} Wörter · {minutes} Min. Lesezeit",
+            "msg": {
+                "speech_error": "Fehler bei der Spracherkennung: {0}.",
+                "speech_unavailable": "Spracherkennung ist in diesem Browser nicht verfügbar.",
+                "speech_start_error": "Spracherkennung konnte nicht gestartet werden: {0}",
+                "pending_changes": "Ausstehende Änderungen.",
+                "images_db_unavailable": "Datenbank nicht verfügbar: Die Bilder konnten nicht gespeichert werden.",
+                "images_optimized": "Bilder optimiert: {0} → {1}.",
+                "images_added": "Bilder hinzugefügt. Die Größe wurde nicht verringert.",
+                "image_save_error": "Das Bild konnte nicht in der Datenbank gespeichert werden.",
+                "drafts_db_unavailable": "Datenbank nicht verfügbar: Entwürfe werden nicht gespeichert.",
+                "autosave_ok": "Änderungen automatisch gespeichert.",
+                "autosave_error": "Automatisches Speichern fehlgeschlagen.",
+                "nothing_to_save": "Geben Sie vor dem Speichern einen Titel oder Inhalt ein.",
+                "db_unavailable": "Datenbank nicht verfügbar.",
+                "draft_updated": "Entwurf aktualisiert.",
+                "draft_saved": "Entwurf erfolgreich gespeichert.",
+                "draft_save_error": "Fehler beim Speichern des Entwurfs.",
+                "changes_recovered": "Vorherige Änderungen wiederhergestellt.",
+                "draft_select": "Wählen Sie einen Entwurf zum Öffnen aus.",
+                "draft_not_found": "Entwurf nicht gefunden.",
+                "draft_opened": "Entwurf erfolgreich geöffnet.",
+                "draft_open_error": "Fehler beim Öffnen des Entwurfs.",
+                "editor_ready_new": "Editor bereit für einen neuen Beitrag.",
+                "need_title": "Geben Sie den Titel des Beitrags ein.",
+                "need_content": "Geben Sie den Inhalt des Beitrags ein.",
+                "preparing": "Beitrag wird vorbereitet...",
+                "published": "Beitrag erfolgreich veröffentlicht.",
+                "prepared": "Beitrag vorbereitet. Der Inhalt wurde im Editor beibehalten.",
+                "publish_stage_error": "Fehler im Schritt \"{0}\": {1}. Der Inhalt wurde beibehalten.",
+                "publishing": "Wird veröffentlicht...",
+                "stage_init": "Initialisierung der Veröffentlichung",
+                "stage_preview": "Aktualisierung der Vorschau",
+                "stage_read": "Lesen der Editor-Daten",
+                "stage_autosave": "Automatisches Speichern",
+                "stage_images": "Vorbereitung der Bilder",
+                "stage_files": "Erstellen der Beitragsdateien",
+                "stage_publish": "Veröffentlichung auf GitHub",
+                "stage_confirm": "Bestätigung der Veröffentlichung",
+                "discard_changes": "Änderungen am bearbeiteten Beitrag verwerfen?",
+                "post_updated": "Beitrag erfolgreich aktualisiert.",
+                "post_loaded": "Beitrag zum Bearbeiten geladen.",
+                "post_load_error": "Der Beitrag konnte nicht zum Bearbeiten geladen werden.",
+                "delete_prepare_error": "Löschen konnte nicht vorbereitet werden: {0}",
+                "delete_error": "Beitrag konnte nicht gelöscht werden: {0}",
+                "draft_untitled": "Entwurf ohne Titel",
+                "need_slug": "Bitte gib einen gültigen URL-Slug für den Beitrag ein.",
+                "draft_deleted": "Entwurf gelöscht.",
+                "content_placeholder": "Schreiben Sie den Inhalt des Beitrags...",
+                "reading_stats": "{words} Wörter · {minutes} Min. Lesezeit"
+            }
         },
         "posts_list": {
             "untitled": "Beitrag ohne Titel",
@@ -713,7 +830,11 @@
             "post_missing": "Der Beitrag existiert nicht mehr im Verzeichnis. Aktualisierung abgebrochen.",
             "post_missing_delete": "Der Beitrag existiert nicht mehr im Verzeichnis.",
             "github_not_confirmed": "GitHub hat die Löschung nicht bestätigt.",
-            "markdown_fetch_error": "Das Markdown konnte nicht geladen werden."
+            "markdown_fetch_error": "Das Markdown konnte nicht geladen werden.",
+            "need_slug": "Bitte gib einen gültigen URL-Slug für den Beitrag ein.",
+            "draft_deleted": "Entwurf gelöscht.",
+            "content_placeholder": "Schreiben Sie den Inhalt des Beitrags...",
+            "reading_stats": "{words} Wörter · {minutes} Min. Lesezeit"
         },
         "footoodles": {
             "tab": "Footoodles",
@@ -753,7 +874,8 @@
             "editor_edit": "Footoodle wird bearbeitet.",
             "discard_changes": "Änderungen an diesem Footoodle verwerfen?",
             "operation_error": "Bei der Verarbeitung des Footoodles ist ein Fehler aufgetreten.",
-            "github_error": "Der Vorgang konnte auf GitHub nicht abgeschlossen werden."
+            "github_error": "Der Vorgang konnte auf GitHub nicht abgeschlossen werden.",
+            "subtitle": "Erstelle und verwalte kurze Fußzeilen-Notizen mit Bildern."
         },
         "settings": {
             "tab": "GitHub-Konfig.",
@@ -761,6 +883,37 @@
             "save": "Speichern",
             "clear_credentials": "GitHub-Zugangsdaten löschen",
             "clear": "Löschen"
+        },
+        "nav": {
+            "session": "GitHub-Sitzung"
+        },
+        "posts_view": {
+            "subtitle": "Verwalte, bearbeite oder lösche deine veröffentlichten HTML-Beiträge.",
+            "search_placeholder": "Nach Titel, Slug oder Tag filtern...",
+            "empty": "Keine Beiträge gefunden.",
+            "back": "← Zurück zu den Beiträgen",
+            "view": "Seite öffnen"
+        },
+        "session": {
+            "title": "GitHub-Sitzung",
+            "subtitle": "OAuth-Authentifizierung und Gültigkeit des Zugriffstokens verwalten.",
+            "scope_label": "Berechtigungen:",
+            "obtained_label": "Authentifiziert am:",
+            "expires_label": "Läuft ab am:",
+            "refresh_btn": "Sitzung erneuern",
+            "diagnostics_title": "OAuth-Diagnose",
+            "reload_diagnostics": "Aktualisieren",
+            "clear_confirm": "Gespeicherte GitHub-Anmeldedaten aus diesem Browser entfernen?",
+            "status_active": "Aktiv",
+            "status_expiring": "Läuft bald ab",
+            "status_expired": "Abgelaufen",
+            "status_no_expiry": "Token ohne Ablaufdatum",
+            "refreshing": "Sitzung wird mit GitHub erneuert...",
+            "refreshed": "Sitzung erfolgreich erneuert.",
+            "refresh_failed": "Token konnte nicht automatisch erneuert werden.",
+            "reauth_needed": "Deine GitHub-Sitzung ist abgelaufen. Bitte authentifiziere dich erneut.",
+            "diagnostics_empty": "Keine Diagnosedaten verfügbar.",
+            "diagnostics_error": "Fehler beim Laden der Diagnose."
         }
     },
     "github_auth": {

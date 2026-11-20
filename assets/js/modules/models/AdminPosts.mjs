@@ -1,107 +1,111 @@
-
 /**
  * @license The MIT License (MIT)
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
  *
  * @file AdminPosts.mjs
- * @description Gerenciamento das postagens na administração.
+ * @description Gerenciamento de postagens HTML (/posts/<slug>.html) no painel administrativo.
  */
 
 class AdminPosts {
-
     constructor(editor) {
-
         this.editor = editor
         this.postManager = editor.postManager
 
         this.posts = []
-        this.lists = []
+        this.filterQuery = ''
 
         this.modal = null
         this.modalBackdrop = null
         this.modalBusy = false
 
         this.settingsPath = this.postManager.settingsPath
+        this.sitemapPath = this.postManager.sitemapPath
 
         this.installEditorIntegration()
-
     }
 
     mount() {
+        this.listEl = document.getElementById('admin-posts-list')
+        this.searchEl = document.getElementById('admin-posts-search')
+        this.countBadge = document.getElementById('admin-posts-badge')
+        this.emptyEl = document.getElementById('admin-posts-empty')
 
-        this.lists = [
-            document.getElementById('admin-posts-list-mobile'),
-            document.getElementById('admin-posts-list-desktop')
-        ].filter(Boolean)
-
-        this.lists.forEach(list => {
-            list.addEventListener('click', event => {
-                this.handleListClick(event, list)
+        if (this.listEl) {
+            this.listEl.addEventListener('click', event => {
+                this.handleListClick(event)
             })
-        })
+        }
+
+        if (this.searchEl) {
+            this.searchEl.addEventListener('input', () => {
+                this.filterQuery = this.searchEl.value.trim().toLowerCase()
+                this.renderList()
+                this.translate()
+            })
+        }
 
         const newPostButton = document.getElementById('admin-new-post')
-
         if (newPostButton) {
             newPostButton.addEventListener('click', () => {
+                if (
+                    this.editor.editingPost &&
+                    this.editor.hasChanges &&
+                    !window.confirm(this.editor.message('discard_changes'))
+                ) {
+                    return
+                }
+                this.editor.resetEditor()
+                this.showView('editor')
+            })
+        }
 
-                if (!this.editor.editingPost) return
-
+        const backButton = document.getElementById('admin-back-to-posts')
+        if (backButton) {
+            backButton.addEventListener('click', () => {
                 if (
                     this.editor.hasChanges &&
                     !window.confirm(this.editor.message('discard_changes'))
                 ) {
                     return
                 }
-
-                this.editor.resetEditor()
-
+                if (this.editor.editingPost) {
+                    this.editor.resetEditor()
+                }
+                this.showView('posts')
             })
         }
 
         return this.refresh()
+    }
 
+    showView(viewName) {
+        if (typeof window.__adminShowView === 'function') {
+            window.__adminShowView(viewName)
+        }
     }
 
     installEditorIntegration() {
-
         const editor = this.editor
         const manager = this.postManager
 
         editor.editingPost = null
         editor.adminPosts = this
 
-        // Intercepta a criação para transformar a operação
-        // em atualização quando houver uma postagem em edição.
         const createPost = manager.createPost.bind(manager)
 
         manager.createPost = data => {
-
             if (editor.editingPost) {
-                return this.prepareUpdatePost(
-                    editor.editingPost,
-                    data
-                )
+                return this.prepareUpdatePost(editor.editingPost, data)
             }
-
             return createPost(data)
-
         }
 
-        // Mantém o estado do editor sincronizado com o modo
-        // de criação ou edição.
         const resetEditor = editor.resetEditor.bind(editor)
-
         editor.resetEditor = (...args) => {
-
             const result = resetEditor(...args)
-
             editor.editingPost = null
 
-            const heading = document.querySelector(
-                '#admin-post-editor-container .card-header h3'
-            )
-
+            const heading = document.getElementById('admin-editor-heading')
             if (heading) {
                 this.setKey(heading, 'admin_dashboard.new_post')
             }
@@ -111,46 +115,35 @@ class AdminPosts {
             }
 
             return result
-
         }
 
-        // Atualiza a listagem depois de uma publicação.
         const confirmPublication = editor.confirmPublication.bind(editor)
-
         editor.confirmPublication = async (...args) => {
-
             const result = await confirmPublication(...args)
-
             await this.refresh()
-
             return result
-
         }
 
-        // Ajusta a mensagem quando a operação é uma atualização.
         const generatePost = editor.generatePost.bind(editor)
-
         editor.generatePost = async (...args) => {
-
             const updating = !!editor.editingPost
-
             const result = await generatePost(...args)
 
-            if (
-                updating &&
-                result &&
-                result.published !== false
-            ) {
-                editor.setStatus('post_updated')
+            if (result && result.published !== false) {
+                manager.markCommitted({
+                    settings: result.updatedSettings,
+                    sitemap: result.updatedSitemap
+                })
+                if (updating) {
+                    editor.setStatus('post_updated')
+                }
+                await this.refresh()
             }
 
             return result
-
         }
 
-        // Carrega uma postagem publicada no editor.
-        editor.loadPublishedPost = (post, markdown) => {
-
+        editor.loadPublishedPost = (post, contentHtml) => {
             editor.resetEditor()
 
             const path = this.getPostPath(post)
@@ -158,56 +151,42 @@ class AdminPosts {
             editor.editingPost = {
                 ...post,
                 path,
-                markdown
+                html: contentHtml
             }
 
             editor.elements.title.value = post.title || ''
-            editor.elements.summary.value = post.summary || ''
-            editor.elements.content.value = markdown || ''
+            editor.elements.slug.value = post.slug || ''
+            editor.elements.slug.readOnly = true
+            if (editor.elements.slugLock) {
+                editor.elements.slugLock.textContent = '🔒'
+                editor.elements.slugLock.setAttribute('aria-pressed', 'false')
+            }
+            editor.slugManual = true
+            editor.updateSlugPreview()
 
+            editor.elements.summary.value = post.summary || ''
             editor.elements.tags.value = Array.isArray(post.tags)
                 ? post.tags.join(', ')
                 : (post.tags || '')
 
             editor.summaryManual = !!post.summary
+            editor.readingTime = Number(post.readingTime) > 0 ? Number(post.readingTime) : 1
 
-            editor.readingTime = Number(post.readingTime) > 0
-                ? Number(post.readingTime)
-                : 1
-
+            editor.setEditorHTML(contentHtml || '')
             editor.currentDraftKey = null
             editor.hasChanges = false
 
-            const heading = document.querySelector(
-                '#admin-post-editor-container .card-header h3'
-            )
-
+            const heading = document.getElementById('admin-editor-heading')
             if (heading) {
                 this.setKey(heading, 'admin_dashboard.edit_post')
             }
 
             this.setKey(editor.elements.generate, 'admin_dashboard.update_post')
 
-            const container = document.getElementById(
-                'admin-post-editor-container'
-            )
-
-            if (container) {
-                container.classList.remove('d-none')
-                container.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                })
-            }
-
-            editor.updatePreview()
-
+            this.showView('editor')
             editor.setStatus('post_loaded')
-
             editor.elements.title.focus()
-
         }
-
     }
 
     translate() {
@@ -218,604 +197,440 @@ class AdminPosts {
 
     setKey(element, key) {
         if (!element) return
+        element.classList.remove('i18n', 'i18n-append', 'i18n-prepend', 'i18n-pure')
         element.classList.add('i18n')
+        const existingClasses = [...element.classList].filter(c => c !== 'i18n')
+        element.className = ['i18n', ...existingClasses].join(' ')
         element.setAttribute('data-i18n-html', key)
         element.removeAttribute('translated')
         this.translate()
     }
 
     async refresh() {
-
         try {
-
             const settings = await this.postManager.loadSettings()
 
             this.posts = [...settings.articles.storage].sort(
                 (a, b) => this.getPostTimestamp(b) - this.getPostTimestamp(a)
             )
 
-            this.renderLists()
+            if (this.countBadge) {
+                this.countBadge.textContent = String(this.posts.length)
+            }
+
+            this.renderList()
             this.translate()
-
             return true
-
         } catch (error) {
-
             console.error('[ADMIN POSTS]:', error)
             return false
-
         }
-
     }
 
-    renderMessage(message) {
+    renderList() {
+        if (!this.listEl) return
+        this.listEl.replaceChildren()
 
-        this.lists.forEach(list => {
-
-            list.replaceChildren()
-
-            const item = document.createElement('div')
-
-            item.className = 'list-group-item small text-muted'
-            item.textContent = message
-
-            list.appendChild(item)
-
-        })
-
-    }
-
-    renderLists() {
-
-        if (!this.posts.length) {
-            return
-        }
-
-        this.lists.forEach(list => {
-
-            list.replaceChildren()
-
-            this.posts.forEach(post => {
-
-                list.appendChild(this.createPostItem(post))
-
+        const query = this.filterQuery
+        const filtered = query
+            ? this.posts.filter(post => {
+                const haystack = [
+                    post.title,
+                    post.slug,
+                    ...(Array.isArray(post.tags) ? post.tags : [])
+                ].join(' ').toLowerCase()
+                return haystack.includes(query)
             })
+            : this.posts
 
+        if (this.emptyEl) {
+            this.emptyEl.hidden = filtered.length > 0
+        }
+
+        filtered.forEach(post => {
+            this.listEl.appendChild(this.createPostItem(post))
         })
-
     }
 
- 
-createPostItem(post) {
-
-        const fragment = document.getElementById(
-            'admin-post-item-template'
-        ).content.cloneNode(true)
+    createPostItem(post) {
+        const fragment = document.getElementById('admin-post-item-template').content.cloneNode(true)
 
         const item = fragment.querySelector('[data-post-item]')
         const cover = item.querySelector('[data-post-cover]')
         const title = item.querySelector('[data-post-title]')
+        const slugEl = item.querySelector('[data-post-slug]')
         const date = item.querySelector('[data-post-date]')
+        const reading = item.querySelector('[data-post-reading]')
+        const tagsWrap = item.querySelector('[data-post-tags]')
+        const view = item.querySelector('[data-post-action="view"]')
         const edit = item.querySelector('[data-post-action="edit"]')
         const remove = item.querySelector('[data-post-action="delete"]')
 
-        // MINIATURA (dinâmica: depende dos dados da postagem)
-        cover.className = 'mr-2 flex-shrink-0'
-        cover.style.width = '48px'
-        cover.style.height = '48px'
-        cover.style.display = 'flex'
-        cover.style.alignItems = 'center'
-        cover.style.justifyContent = 'center'
-        cover.style.backgroundColor = '#e9ecef'
-        cover.style.color = '#6c757d'
-
-        const coverPath = (
-            post.cover ||
-            (Array.isArray(post.images) ? post.images[0] : null)
-        )
-
-        if (
-            typeof coverPath === 'string' &&
-            coverPath.startsWith('assets/posts/images/')
-        ) {
-
-            const image = document.createElement('img')
-
-            image.src = coverPath
-            image.alt = ''
-            image.loading = 'lazy'
-            image.style.width = '48px'
-            image.style.height = '48px'
-            image.style.objectFit = 'cover'
-            image.style.display = 'block'
-
-            image.onerror = () => {
-                cover.textContent = '▧'
+        const coverPath = post.cover || (Array.isArray(post.images) ? post.images[0] : null)
+        if (typeof coverPath === 'string' && coverPath.replace(/^\/+/, '').startsWith('assets/posts/images/')) {
+            const img = document.createElement('img')
+            img.src = `/${coverPath.replace(/^\/+/, '')}`
+            img.alt = post.title || ''
+            img.className = 'admin-post-thumb-img'
+            img.onerror = () => {
+                cover.textContent = '📰'
             }
-
-            cover.appendChild(image)
-
+            cover.appendChild(img)
         } else {
-
-            cover.textContent = '▧'
-
+            cover.textContent = '📰'
         }
 
-        // TÍTULO (fallback traduzível pelo template)
         if (post.title) {
             title.textContent = post.title
         } else {
             this.setKey(title, 'admin_dashboard.posts_list.untitled')
         }
 
-        // DATA (locale do documento, não fixo em pt-BR)
-        const timestamp = this.getPostTimestamp(post)
+        const postUrl = `/${this.getPostPath(post)}`
+        if (slugEl) {
+            slugEl.textContent = postUrl
+        }
 
-        if (timestamp) {
+        const timestamp = this.getPostTimestamp(post)
+        if (date && timestamp) {
             date.textContent = new Date(timestamp).toLocaleDateString(
-                document.documentElement.lang || undefined
+                document.documentElement.lang || undefined,
+                { dateStyle: 'medium' }
             )
         }
 
-        // AÇÕES (textos vêm do template com data-i18n-html)
-        edit.dataset.postId = post.id
-        remove.dataset.postId = post.id
+        if (reading && post.readingTime) {
+            reading.textContent = `${post.readingTime} min`
+        }
+
+        if (tagsWrap && Array.isArray(post.tags) && post.tags.length) {
+            post.tags.slice(0, 5).forEach(tag => {
+                const badge = document.createElement('span')
+                badge.className = 'badge badge-light border mr-1 mb-1 font-weight-normal'
+                badge.textContent = tag
+                tagsWrap.appendChild(badge)
+            })
+        }
+
+        if (view) {
+            view.href = postUrl
+        }
+
+        edit.dataset.postSlug = post.slug
+        remove.dataset.postSlug = post.slug
 
         return item
-
     }
 
-    async handleListClick(event, list) {
+    async handleListClick(event) {
+        const button = event.target.closest('button[data-post-action]')
+        if (!button || !this.listEl.contains(button)) return
 
-        const button = event.target.closest('[data-post-action]')
-
-        if (!button || !list.contains(button)) return
-
-        const id = button.dataset.postId
-
-        const post = this.posts.find(item => item.id === id)
-
+        const slug = button.dataset.postSlug
+        const post = this.posts.find(item => item.slug === slug)
         if (!post) return
 
         if (button.dataset.postAction === 'edit') {
-
             await this.editPost(post)
-
         } else if (button.dataset.postAction === 'delete') {
-
             await this.deletePost(post, button)
-
         }
-
     }
 
     getPostTimestamp(post) {
-
         const timestamp = Number(post.timestamp)
-
         if (Number.isFinite(timestamp) && timestamp > 0) {
             return timestamp > 1e12 ? timestamp : timestamp * 1000
         }
-
         const date = Number(post.date)
-
-        return Number.isFinite(date) && date > 0
-            ? date * 1000
-            : 0
-
+        return Number.isFinite(date) && date > 0 ? date * 1000 : 0
     }
 
     getOriginalTimestamp(post) {
-
         const timestamp = Number(post.timestamp)
-
         if (Number.isFinite(timestamp) && timestamp > 0) {
             return timestamp > 1e12 ? timestamp : timestamp * 1000
         }
-
         const date = Number(post.date)
-
-        if (Number.isFinite(date) && date > 0) {
-            return date * 1000
-        }
-
-        return Date.now()
-
+        return Number.isFinite(date) && date > 0 ? date * 1000 : Date.now()
     }
 
     getPostPath(post) {
-
-        if (
-            typeof post.path === 'string' &&
-            post.path.trim()
-        ) {
-            return post.path
+        if (typeof post.path === 'string' && post.path.trim()) {
+            return post.path.replace(/^\/+/, '')
         }
-
-        return `assets/posts/${encodeURIComponent(post.id)}.md`
-
+        return this.postManager.buildPostPath(post.slug)
     }
 
-    async fetchPostMarkdown(post) {
+    extractContentFromHTML(pageHtml) {
+        const match = String(pageHtml || '').match(
+            /<!--\s*POST_CONTENT_START\s*-->([\s\S]*?)<!--\s*POST_CONTENT_END\s*-->/
+        )
+        if (match) return match[1].trim()
 
+        const doc = new DOMParser().parseFromString(String(pageHtml || ''), 'text/html')
+        const article = doc.querySelector('article.post-content, article.markdown-body, article')
+        return article ? article.innerHTML.trim() : ''
+    }
+
+    async fetchPostContentHTML(post) {
         const path = this.getPostPath(post)
-
-        const response = await fetch(path, {
-            cache: 'no-store'
-        })
-
+        const response = await fetch(`/${path}?_=${Date.now()}`, { cache: 'no-store' })
         if (!response.ok) {
-
-            throw new Error(
-                'markdown_fetch_error'
-            )
-
+            throw new Error('post_fetch_error')
         }
-
-        return response.text()
-
+        const pageHtml = await response.text()
+        return this.extractContentFromHTML(pageHtml)
     }
 
     async editPost(post) {
-
         try {
-
-            const markdown = await this.fetchPostMarkdown(post)
-
-            this.editor.loadPublishedPost(post, markdown)
-
-            const close = document.getElementById(
-                'slide-link-admin-close'
-            )
-
-            if (
-                close &&
-                window.matchMedia('(max-width: 767px)').matches
-            ) {
-                close.click()
-            }
-
+            const contentHtml = await this.fetchPostContentHTML(post)
+            this.editor.loadPublishedPost(post, contentHtml)
         } catch (error) {
-
             console.error('[ADMIN POSTS]:', error)
-
             this.editor.setStatus('post_load_error')
-
         }
-
     }
 
-    extractImagePaths(markdown) {
-
-        const paths = new Set()
-
-        const pattern =
-            /!\[[^\]]*\]\((?:<([^>]+)>|([^\s)]+))(?:\s+[^)]*)?\)/g
-
-        let match
-
-        while ((match = pattern.exec(String(markdown || ''))) !== null) {
-
-            const path = match[1] || match[2]
-
-            if (
-                typeof path === 'string' &&
-                path.startsWith('assets/posts/images/')
-            ) {
-                paths.add(path)
-            }
-
-        }
-
-        return [...paths]
-
-    }
-
-    collectPostImages(post, markdown = '') {
-
+    collectPostImages(post, html = '') {
         const images = new Set()
 
         if (Array.isArray(post.images)) {
-
             post.images.forEach(path => {
-
-                if (
-                    typeof path === 'string' &&
-                    path.startsWith('assets/posts/images/')
-                ) {
-                    images.add(path)
+                const clean = String(path || '').replace(/^\/+/, '')
+                if (clean.startsWith('assets/posts/images/')) {
+                    images.add(clean)
                 }
-
             })
-
         }
 
-        if (
-            typeof post.cover === 'string' &&
-            post.cover.startsWith('assets/posts/images/')
-        ) {
-            images.add(post.cover)
+        if (typeof post.cover === 'string') {
+            const cleanCover = post.cover.replace(/^\/+/, '')
+            if (cleanCover.startsWith('assets/posts/images/')) {
+                images.add(cleanCover)
+            }
         }
 
-        this.extractImagePaths(markdown).forEach(path => {
-            images.add(path)
-        })
-
+        this.postManager.extractImagePaths(html).forEach(path => images.add(path))
         return [...images]
-
     }
 
-    collectOtherPostImages(posts, excludedId) {
-
+    collectOtherPostImages(posts, excludedSlug) {
         const images = new Set()
-
         posts.forEach(post => {
-
-            if (post.id === excludedId) return
-
-            this.collectPostImages(post).forEach(path => {
-                images.add(path)
-            })
-
+            if (post.slug === excludedSlug) return
+            this.collectPostImages(post).forEach(path => images.add(path))
         })
-
         return images
-
     }
 
     async prepareUpdatePost(post, data) {
-
         const settings = await this.postManager.loadSettings()
-
         const storage = settings.articles.storage
-
-        const index = storage.findIndex(
-            item => item.id === post.id
-        )
+        const index = storage.findIndex(item => item.slug === post.slug)
 
         if (index < 0) {
-
-            throw new Error(
-                'post_missing'
-            )
-
+            throw new Error('post_missing')
         }
 
         const current = storage[index]
-
         const now = Date.now()
+        const oldPath = this.getPostPath(current)
 
-        const markdown = String(data.content || '')
-
-        const path = this.getPostPath(current)
-
-        const images = this.extractImagePaths(markdown)
-
-        const imageFiles = this.postManager.orderImages(
-            markdown,
-            data.images || []
-        )
-
-        const otherImages = this.collectOtherPostImages(
+        const newSlug = this.postManager.ensureUniqueSlug(
+            data.slug || current.slug,
             storage,
-            current.id
+            current.slug
         )
+        const newPath = this.postManager.buildPostPath(newSlug)
+        const renamed = newSlug !== current.slug
 
-        const oldImages = this.collectPostImages(
-            current,
-            post.markdown
-        )
+        const contentHtml = String(data.content || '').trim()
+        const images = this.postManager.extractImagePaths(contentHtml)
+        const imageFiles = this.postManager.orderImages(contentHtml, data.images || [])
 
+        const otherImages = this.collectOtherPostImages(storage, current.slug)
+        const oldImages = this.collectPostImages(current, post.html || '')
         const newImagePaths = new Set(images)
 
         const obsoleteImages = oldImages.filter(image => (
-            !newImagePaths.has(image) &&
-            !otherImages.has(image)
+            !newImagePaths.has(image) && !otherImages.has(image)
         ))
 
         const metadata = {
-
             ...current,
-
-            id: current.id,
-
+            slug: newSlug,
+            author: current.author || String(data.author || ''),
             title: String(data.title || '').trim(),
-
             summary: String(data.summary || '').trim(),
-
-            path,
-
+            path: newPath,
             cover: images[0] || null,
-
             images,
-
             tags: this.postManager.normalizeTags(data.tags || []),
-
             timestamp: this.getOriginalTimestamp(current),
-
             lastModified: now,
-
-            readingTime: this.postManager.normalizeReadingTime(
-                data.readingTime
-            )
-
+            readingTime: this.postManager.normalizeReadingTime(data.readingTime)
         }
 
-        storage[index] = metadata
+        const fullHtml = await this.postManager.renderPostHTML({
+            ...metadata,
+            content: contentHtml
+        })
 
+        storage[index] = metadata
         settings.last_modified = now
+        const updatedSettings = JSON.stringify(settings, null, 4)
+
+        const updatedSitemap = await this.postManager.prepareSitemap(now, {
+            upsertUrl: this.postManager.buildPostURL(newSlug),
+            removeUrl: renamed ? this.postManager.buildPostURL(current.slug) : null
+        })
 
         const files = new Map()
 
         imageFiles.forEach(image => {
-
             files.set(image.path, {
                 path: image.path,
                 content: image.file
             })
-
         })
 
-        files.set(path, {
-            path,
-            content: markdown
+        files.set(newPath, {
+            path: newPath,
+            content: fullHtml
         })
+
+        if (renamed && oldPath !== newPath) {
+            files.set(oldPath, {
+                path: oldPath,
+                content: null,
+                delete: true
+            })
+        }
 
         obsoleteImages.forEach(image => {
-
             files.set(image, {
                 path: image,
                 content: null,
                 delete: true
             })
-
         })
-
-        const updatedSettings = JSON.stringify(settings, null, 4)
 
         files.set(this.settingsPath, {
             path: this.settingsPath,
             content: updatedSettings
         })
 
-        return {
-
-            ...metadata,
-
-            markdown,
-
-            imageFiles,
-
-            files: [...files.values()],
-
-            updatedSettings
-
+        if (updatedSitemap) {
+            files.set(this.sitemapPath, {
+                path: this.sitemapPath,
+                content: updatedSitemap
+            })
         }
 
+        return {
+            ...metadata,
+            html: contentHtml,
+            fullHtml,
+            imageFiles,
+            files: [...files.values()],
+            updatedSettings,
+            updatedSitemap
+        }
     }
 
-    async prepareDeletePost(post, markdown) {
-
+    async prepareDeletePost(post, contentHtml) {
         const settings = await this.postManager.loadSettings()
-
         const storage = settings.articles.storage
-
-        const index = storage.findIndex(
-            item => item.id === post.id
-        )
+        const index = storage.findIndex(item => item.slug === post.slug)
 
         if (index < 0) {
-
-            throw new Error(
-                'post_missing_delete'
-            )
-
+            throw new Error('post_missing_delete')
         }
 
         const current = storage[index]
-
-        const markdownPath = this.getPostPath(current)
-
-        const images = this.collectPostImages(
-            current,
-            markdown
-        )
-
-        const otherImages = this.collectOtherPostImages(
-            storage,
-            current.id
-        )
+        const postPath = this.getPostPath(current)
+        const images = this.collectPostImages(current, contentHtml)
+        const otherImages = this.collectOtherPostImages(storage, current.slug)
 
         storage.splice(index, 1)
 
         const now = Date.now()
-
         settings.last_modified = now
+        const updatedSettings = JSON.stringify(settings, null, 4)
+
+        const updatedSitemap = await this.postManager.prepareSitemap(now, {
+            removeUrl: this.postManager.buildPostURL(current.slug)
+        })
 
         const files = new Map()
 
-        files.set(markdownPath, {
-            path: markdownPath,
+        files.set(postPath, {
+            path: postPath,
             content: null,
             delete: true
         })
 
         images.forEach(image => {
-
             if (otherImages.has(image)) return
-
             files.set(image, {
                 path: image,
                 content: null,
                 delete: true
             })
-
         })
-
-        const updatedSettings = JSON.stringify(settings, null, 4)
 
         files.set(this.settingsPath, {
             path: this.settingsPath,
             content: updatedSettings
         })
 
-        return {
-
-            id: current.id,
-
-            title: current.title,
-
-            files: [...files.values()],
-
-            updatedSettings
-
+        if (updatedSitemap) {
+            files.set(this.sitemapPath, {
+                path: this.sitemapPath,
+                content: updatedSitemap
+            })
         }
 
+        return {
+            slug: current.slug,
+            title: current.title,
+            files: [...files.values()],
+            updatedSettings,
+            updatedSitemap
+        }
     }
 
     async deletePost(post, trigger) {
-
         if (this.modalBusy) return
-
         trigger.disabled = true
 
         try {
+            let contentHtml = ''
+            try {
+                contentHtml = await this.fetchPostContentHTML(post)
+            } catch {
+                // Mesmo se a página ainda não existir no servidor, usa os metadados.
+            }
 
-            // Recupera o conteúdo e prepara a exclusão
-            // antes de apresentar a confirmação.
-            const markdown = await this.fetchPostMarkdown(post)
-
-            const payload = await this.prepareDeletePost(
-                post,
-                markdown
-            )
-
-            this.openDeleteModal(post, payload, trigger)
-
+            const payload = await this.prepareDeletePost(post, contentHtml)
+            this.openDeleteModal(post, payload)
         } catch (error) {
-
             console.error('[ADMIN POSTS]:', error)
-
             this.editor.setStatus('delete_prepare_error', error.message)
-
         } finally {
-
             trigger.disabled = false
-
         }
-
     }
 
-    openDeleteModal(post, payload, trigger) {
-
+    openDeleteModal(post, payload) {
         if (this.modal) return
 
         const backdrop = document.createElement('div')
-
         backdrop.className = 'modal-backdrop fade show'
 
         const modal = document.createElement('section')
-
         modal.className = 'modal fade show'
         modal.tabIndex = -1
         modal.setAttribute('role', 'dialog')
@@ -824,8 +639,7 @@ createPostItem(post) {
         modal.style.display = 'block'
 
         modal.appendChild(
-            document.getElementById('admin-delete-modal-template')
-                .content.cloneNode(true)
+            document.getElementById('admin-delete-modal-template').content.cloneNode(true)
         )
 
         const titleNode = modal.querySelector('[data-post-title]')
@@ -837,7 +651,6 @@ createPostItem(post) {
 
         document.body.append(backdrop, modal)
         document.body.classList.add('modal-open')
-
         this.translate()
 
         this.modal = modal
@@ -848,49 +661,24 @@ createPostItem(post) {
         const status = modal.querySelector('[data-modal-status]')
 
         modal.querySelectorAll('[data-modal-close]').forEach(button => {
-
             button.addEventListener('click', () => {
-
-                if (!this.modalBusy) {
-                    this.closeModal()
-                }
-
+                if (!this.modalBusy) this.closeModal()
             })
-
         })
 
         modal.addEventListener('click', event => {
-
-            if (
-                event.target === modal &&
-                !this.modalBusy
-            ) {
-                this.closeModal()
-            }
-
+            if (event.target === modal && !this.modalBusy) this.closeModal()
         })
 
         this.modalKeyHandler = event => {
-
-            if (
-                event.key === 'Escape' &&
-                this.modal &&
-                !this.modalBusy
-            ) {
+            if (event.key === 'Escape' && this.modal && !this.modalBusy) {
                 this.closeModal()
             }
-
         }
-
-        document.addEventListener(
-            'keydown',
-            this.modalKeyHandler
-        )
+        document.addEventListener('keydown', this.modalKeyHandler)
 
         confirm.addEventListener('click', async () => {
-
             if (this.modalBusy) return
-
             this.modalBusy = true
 
             confirm.disabled = true
@@ -905,97 +693,55 @@ createPostItem(post) {
             this.setKey(status, 'admin_dashboard.delete_modal.deleting_status')
 
             try {
-
                 const result = await this.editor.onCreate(payload)
 
                 if (!result || result.published !== true) {
-
-                    throw new Error(
-                        'github_not_confirmed'
-                    )
-
+                    throw new Error('github_not_confirmed')
                 }
 
-                status.className =
-                    'alert alert-success rounded-0 mt-3 mb-0'
+                this.postManager.markCommitted({
+                    settings: payload.updatedSettings,
+                    sitemap: payload.updatedSitemap
+                })
 
+                status.className = 'alert alert-success rounded-0 mt-3 mb-0'
                 this.setKey(status, 'admin_dashboard.delete_modal.success')
 
-                if (
-                    this.editor.editingPost &&
-                    this.editor.editingPost.id === post.id
-                ) {
-
+                if (this.editor.editingPost && this.editor.editingPost.slug === post.slug) {
                     this.editor.resetEditor()
-
-                    const container = document.getElementById(
-                        'admin-post-editor-container'
-                    )
-
-                    if (container) {
-                        container.classList.add('d-none')
-                    }
-
+                    this.showView('posts')
                 }
 
                 window.setTimeout(async () => {
-
                     this.closeModal(true)
-
                     await this.refresh()
-
-                }, 1000)
-
+                }, 900)
             } catch (error) {
-
                 console.error('[ADMIN POSTS]:', error)
-
-                status.className =
-                    'alert alert-danger rounded-0 mt-3 mb-0'
-
+                status.className = 'alert alert-danger rounded-0 mt-3 mb-0'
                 this.setKey(status, 'admin_dashboard.delete_modal.error')
-
                 this.editor.setStatus('delete_error', error.message)
 
                 window.setTimeout(() => {
                     this.closeModal(true)
-                }, 2000)
-
+                }, 1800)
             }
-
         })
 
         confirm.focus()
-
     }
 
     closeModal(force = false) {
-
-        // O fechamento manual continua bloqueado durante a operação.
-        // O fechamento forçado é reservado ao término do processo.
         if (!this.modal || (this.modalBusy && !force)) return
-
         this.modal.remove()
-
-        if (this.modalBackdrop) {
-            this.modalBackdrop.remove()
-        }
-
+        if (this.modalBackdrop) this.modalBackdrop.remove()
         document.body.classList.remove('modal-open')
-
-        document.removeEventListener(
-            'keydown',
-            this.modalKeyHandler
-        )
-
+        document.removeEventListener('keydown', this.modalKeyHandler)
         this.modal = null
         this.modalBackdrop = null
         this.modalBusy = false
-
     }
-
 }
 
 export { AdminPosts }
-
 export default AdminPosts

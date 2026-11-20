@@ -100,7 +100,8 @@
         "policies": "politiques",
         "donations": "dons",
         "signin": "Se connecter",
-        "docs": "documentation"
+        "docs": "documentation",
+        "home": "Accueil"
     },
     "footer": {
         "content": {
@@ -128,7 +129,7 @@
         "privacci": "confidentialité",
         "footoodle": {
             "title": "Rejoindre Collabore",
-            "description": "<p>Collabore ouvre ses portes aux développeurs et aux passionnés. Transformez votre service de pages statiques en un service dynamique.</p><p>Grâce à une interface simple mais puissante, vous pouvez modifier, consulter et créer de nouveaux articles, ajouter des extensions et des applications à vos pages ou intégrer vos propres extensions.</p><p>Tout cela repose sur du code open source conçu pour être étendu. Utilisez le système d'authentification intégré afin que les utilisateurs de Collabore puissent s'inscrire sur votre page en quelques clics et, surtout, s'authentifier automatiquement dans les extensions et applications de votre page.</p><p class='mt-5 ct'>Faites partie de ce système collaboratif, <a href='./signup' class='white tdu'>inscrivez-vous dès maintenant !</a></p>"
+            "description": "<p>Collabore ouvre ses portes aux développeurs et aux passionnés. Transformez votre service de pages statiques en un service dynamique.</p><p>Grâce à une interface simple mais puissante, vous pouvez modifier, consulter et créer de nouveaux articles, ajouter des extensions et des applications à vos pages ou intégrer vos propres extensions.</p><p>Tout cela repose sur du code open source conçu pour être étendu. Utilisez le système d'authentification intégré afin que les utilisateurs de Collabore puissent s'inscrire sur votre page en quelques clics et, surtout, s'authentifier automatiquement dans les extensions et applications de votre page.</p><p class='mt-5 ct'>Faites partie de ce système collaboratif, <a href='/signup' class='white tdu'>inscrivez-vous dès maintenant !</a></p>"
         }
     },
     "api": {
@@ -150,7 +151,7 @@
     "cookies": {
         "agree": {
             "description_1": "Ce site utilise des cookies et d'autres technologies pour stocker des informations. En poursuivant votre navigation sur ce site, vous acceptez cette utilisation ainsi que notre \"politique\" à ce sujet.",
-            "description_2": "Pour plus d'informations, consultez notre <a href='./policies.html#cookies' target='blank_' rel='nofollow' class='tdu sky'>Politique relative aux cookies</a>.",
+            "description_2": "Pour plus d'informations, consultez notre <a href='/policy.html#cookie-agree' target='blank_' rel='nofollow' class='tdu sky'>Politique relative aux cookies</a>.",
             "close_banner_info": "Pour fermer, cliquez sur le bouton ci-dessous."
         }
     },
@@ -252,7 +253,7 @@
         "title": "Non pris en charge",
         "p1": "Désolé, nous ne prenons pas en charge le mode de navigation sans cookies.",
         "p2": "Bien que ce site utilise des cookies et d'autres technologies de stockage, \"<strong>nous ne stockons aucune donnée dans votre navigateur sans votre autorisation expresse</strong>\" !",
-        "p3": "Nous estimons avoir de bonnes raisons de ne pas prendre en charge la navigation sans cookies. Vous pouvez consulter notre <a href=\"./you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"Livre blanc\"</a> pour en savoir plus. Malheureusement, vous devrez naviguer avec les cookies activés."
+        "p3": "Nous estimons avoir de bonnes raisons de ne pas prendre en charge la navigation sans cookies. Vous pouvez consulter notre <a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"Livre blanc\"</a> pour en savoir plus. Malheureusement, vous devrez naviguer avec les cookies activés."
     },
     "twofactory": {
         "security_slide": {
@@ -462,7 +463,7 @@
             "list1": "Votre nom complet ;",
             "list2": "Le droit que vous souhaitez exercer (par exemple, suppression des données, accès, etc.) ;",
             "list3": "Les informations susceptibles de nous aider à localiser vos données dans nos systèmes.",
-            "policies": "Pour plus de détails sur la manière dont nous traitons vos données, consultez notre <a href=\"./policy.html#policy-general\">Politique générale</a> et notre <a href=\"./policy.html#policy-privacy\">Politique de confidentialité</a>."
+            "policies": "Pour plus de détails sur la manière dont nous traitons vos données, consultez notre <a href=\"/policy.html#policy-general\">Politique générale</a> et notre <a href=\"/policy.html#policy-privacy\">Politique de confidentialité</a>."
         },
         "home": {
             "intro": {
@@ -561,7 +562,7 @@
                 "heading": "Accepter les cookies",
                 "paragraph1": "Si vous vous demandez : <strong>ai-je vraiment besoin d'accepter les cookies et le stockage de données</strong> ? La réponse courte est : <strong>non, vous n'en avez pas besoin</strong> ! Vous pourrez toujours naviguer et utiliser plusieurs outils et fonctionnalités du site, mais vous n'aurez peut-être pas la meilleure expérience 🙁",
                 "paragraph2": "Par exemple : lorsque vous choisissez une langue, enregistrez une couleur favorite ou définissez un réglage, vous devrez refaire ce choix à chaque fois que vous accédez au site ou y naviguez ... le seul moyen de « persister » vos choix est de les stocker localement.",
-                "paragraph3": "Fidèles à notre philosophie selon laquelle <a href=\"./you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">vous êtes le seul détenteur de vos données</a>, nous pensons que vous avez le choix. Si vous choisissez d'accepter l'utilisation des cookies en <strong>cliquant et en appuyant</strong> sur le bouton ci-dessous, vous pourrez aussi choisir de les <strong>désactiver</strong> quand vous le souhaitez, ici ou dans l'onglet Utilisateur, et vous pourrez également supprimer d'un seul coup tout ce qui a déjà été stocké 😎",
+                "paragraph3": "Fidèles à notre philosophie selon laquelle <a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">vous êtes le seul détenteur de vos données</a>, nous pensons que vous avez le choix. Si vous choisissez d'accepter l'utilisation des cookies en <strong>cliquant et en appuyant</strong> sur le bouton ci-dessous, vous pourrez aussi choisir de les <strong>désactiver</strong> quand vous le souhaitez, ici ou dans l'onglet Utilisateur, et vous pourrez également supprimer d'un seul coup tout ce qui a déjà été stocké 😎",
                 "button": "🍪 maintenez pour activer les cookies",
                 "disable": "😮 cliquez pour désactiver les cookies !"
             }
@@ -595,7 +596,13 @@
         "read_time": "{minutes} min de lecture",
         "updated": "Dernière mise à jour : {date}",
         "more_posts": "Plus d'articles",
-        "license": "Ce contenu est sous licence <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.fr\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>"
+        "license": "Ce contenu est sous licence <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.fr\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>",
+        "search_placeholder": "Rechercher des articles...",
+        "all_tags": "Tous",
+        "no_results": "Aucun article ne correspond aux filtres sélectionnés.",
+        "read_article": "Lire l'article",
+        "back_to_blog": "Retour au blog",
+        "copy_code": "Copier le code"
     },
     "admin_dashboard": {
         "posts": "Publications",
@@ -643,7 +650,117 @@
             "draft_select_default": "Sélectionner un brouillon",
             "draft_open": "Ouvrir le brouillon",
             "draft_save": "Enregistrer le brouillon",
-            "generate": "Générer la publication"
+            "generate": "Générer la publication",
+            "slug_label": "Slug d'URL",
+            "slug_placeholder": "mon-article",
+            "slug_unlock_title": "Verrouiller ou déverrouiller la modification du slug",
+            "summary_restore_title": "Restaurer le résumé automatique",
+            "undo_title": "Annuler (Ctrl+Z)",
+            "redo_title": "Rétablir (Ctrl+Y)",
+            "block_format_title": "Format de bloc",
+            "block_paragraph": "Paragraphe",
+            "heading1": "Titre 1",
+            "heading2": "Titre 2",
+            "heading3": "Titre 3",
+            "heading4": "Titre 4",
+            "heading5": "Titre 5",
+            "heading6": "Titre 6",
+            "code_block": "Bloc de code",
+            "bold_title": "Gras (Ctrl+B)",
+            "italic_title": "Italique (Ctrl+I)",
+            "underline_title": "Souligné (Ctrl+U)",
+            "strike_title": "Barré",
+            "inline_code_title": "Code en ligne",
+            "clear_format_title": "Effacer la mise en forme",
+            "fore_color_title": "Couleur du texte",
+            "back_color_title": "Couleur de surbrillance",
+            "unordered_list_title": "Liste à puces",
+            "ordered_list_title": "Liste numérotée",
+            "align_left_title": "Aligner à gauche",
+            "align_center_title": "Centrer",
+            "align_right_title": "Aligner à droite",
+            "align_justify_title": "Justifier",
+            "link_title": "Insérer ou modifier un lien (Ctrl+K)",
+            "quote_title": "Citation",
+            "code_title": "Insérer un bloc de code",
+            "hr_title": "Ligne horizontale",
+            "table_title": "Insérer un tableau",
+            "source_btn": "HTML",
+            "source_title": "Basculer vers le code source HTML",
+            "preview": "Aperçu",
+            "link_url_placeholder": "https://exemple.com ou /posts/...",
+            "link_text_placeholder": "Texte du lien (optionnel)",
+            "link_new_tab": "Nouvel onglet",
+            "apply": "Appliquer",
+            "unlink": "Supprimer le lien",
+            "cancel": "Annuler",
+            "table_rows": "Lignes",
+            "table_cols": "Colonnes",
+            "table_insert": "Insérer le tableau",
+            "img_width": "Largeur",
+            "img_align": "Alignement",
+            "img_align_left": "Gauche",
+            "img_align_center": "Centre",
+            "img_align_right": "Droite",
+            "img_align_full": "Pleine largeur",
+            "img_remove": "Supprimer l'image",
+            "img_alt_placeholder": "Texte alternatif (alt)",
+            "img_caption_placeholder": "Légende de l'image (optionnel)",
+            "save_draft": "Enregistrer le brouillon",
+            "drafts_placeholder": "Sélectionner un brouillon...",
+            "open_draft": "Ouvrir",
+            "delete_draft": "Supprimer",
+            "reading_stats": "{words} mots · {minutes} min de lecture",
+            "msg": {
+                "speech_error": "Erreur de reconnaissance vocale : {0}.",
+                "speech_unavailable": "La reconnaissance vocale n'est pas disponible dans ce navigateur.",
+                "speech_start_error": "Impossible de démarrer la reconnaissance : {0}",
+                "pending_changes": "Modifications en attente.",
+                "images_db_unavailable": "Base de données indisponible : impossible d'enregistrer les images.",
+                "images_optimized": "Images optimisées : {0} → {1}.",
+                "images_added": "Images ajoutées. La taille n'a pas été réduite.",
+                "image_save_error": "Impossible d'enregistrer l'image dans la base de données.",
+                "drafts_db_unavailable": "Base de données indisponible : les brouillons ne seront pas enregistrés.",
+                "autosave_ok": "Modifications enregistrées automatiquement.",
+                "autosave_error": "Impossible d'enregistrer automatiquement.",
+                "nothing_to_save": "Saisissez un titre ou du contenu avant d'enregistrer.",
+                "db_unavailable": "Base de données indisponible.",
+                "draft_updated": "Brouillon mis à jour.",
+                "draft_saved": "Brouillon enregistré avec succès.",
+                "draft_save_error": "Erreur lors de l'enregistrement du brouillon.",
+                "changes_recovered": "Modifications précédentes récupérées.",
+                "draft_select": "Sélectionnez un brouillon à ouvrir.",
+                "draft_not_found": "Brouillon introuvable.",
+                "draft_opened": "Brouillon ouvert avec succès.",
+                "draft_open_error": "Erreur lors de l'ouverture du brouillon.",
+                "editor_ready_new": "Éditeur prêt pour une nouvelle publication.",
+                "need_title": "Saisissez le titre de la publication.",
+                "need_content": "Saisissez le contenu de la publication.",
+                "preparing": "Préparation de la publication...",
+                "published": "Publication publiée avec succès.",
+                "prepared": "Publication préparée. Le contenu a été conservé dans l'éditeur.",
+                "publish_stage_error": "Échec à l'étape « {0} » : {1}. Le contenu a été conservé.",
+                "publishing": "Publication...",
+                "stage_init": "Initialisation de la publication",
+                "stage_preview": "Mise à jour de l'aperçu",
+                "stage_read": "Lecture des données de l'éditeur",
+                "stage_autosave": "Enregistrement automatique",
+                "stage_images": "Préparation des images",
+                "stage_files": "Création des fichiers de la publication",
+                "stage_publish": "Publication sur GitHub",
+                "stage_confirm": "Confirmation de la publication",
+                "discard_changes": "Abandonner les modifications de la publication en cours ?",
+                "post_updated": "Publication mise à jour avec succès.",
+                "post_loaded": "Publication chargée pour modification.",
+                "post_load_error": "Impossible de charger la publication pour modification.",
+                "delete_prepare_error": "Impossible de préparer la suppression : {0}",
+                "delete_error": "Échec de la suppression de la publication : {0}",
+                "draft_untitled": "Brouillon sans titre",
+                "need_slug": "Veuillez indiquer un slug d'URL valide pour l'article.",
+                "draft_deleted": "Brouillon supprimé.",
+                "content_placeholder": "Rédigez le contenu de la publication...",
+                "reading_stats": "{words} mots · {minutes} min de lecture"
+            }
         },
         "posts_list": {
             "untitled": "Publication sans titre",
@@ -713,7 +830,11 @@
             "post_missing": "La publication n'existe plus dans le registre. Mise à jour annulée.",
             "post_missing_delete": "La publication n'existe plus dans le registre.",
             "github_not_confirmed": "GitHub n'a pas confirmé la suppression.",
-            "markdown_fetch_error": "Impossible de charger le Markdown."
+            "markdown_fetch_error": "Impossible de charger le Markdown.",
+            "need_slug": "Veuillez indiquer un slug d'URL valide pour l'article.",
+            "draft_deleted": "Brouillon supprimé.",
+            "content_placeholder": "Rédigez le contenu de la publication...",
+            "reading_stats": "{words} mots · {minutes} min de lecture"
         },
         "footoodles": {
             "tab": "Footoodles",
@@ -753,7 +874,8 @@
             "editor_edit": "Modification du Footoodle.",
             "discard_changes": "Abandonner les modifications de ce Footoodle ?",
             "operation_error": "Une erreur est survenue lors du traitement du Footoodle.",
-            "github_error": "Impossible de terminer l'opération sur GitHub."
+            "github_error": "Impossible de terminer l'opération sur GitHub.",
+            "subtitle": "Créez et gérez des notes rapides illustrées dans le pied de page."
         },
         "settings": {
             "tab": "Config. GitHub",
@@ -761,6 +883,37 @@
             "save": "Enregistrer",
             "clear_credentials": "Effacer les identifiants GitHub",
             "clear": "Effacer"
+        },
+        "nav": {
+            "session": "Session GitHub"
+        },
+        "posts_view": {
+            "subtitle": "Gérez, modifiez ou supprimez vos articles HTML publiés.",
+            "search_placeholder": "Filtrer par titre, slug ou tag...",
+            "empty": "Aucun article trouvé.",
+            "back": "← Retour aux articles",
+            "view": "Ouvrir la page"
+        },
+        "session": {
+            "title": "Session GitHub",
+            "subtitle": "Gérez l'authentification OAuth et la validité du jeton d'accès.",
+            "scope_label": "Portées :",
+            "obtained_label": "Authentifié le :",
+            "expires_label": "Expire le :",
+            "refresh_btn": "Revalider la session",
+            "diagnostics_title": "Diagnostics OAuth",
+            "reload_diagnostics": "Actualiser",
+            "clear_confirm": "Supprimer les identifiants GitHub enregistrés dans ce navigateur ?",
+            "status_active": "Active",
+            "status_expiring": "Expire bientôt",
+            "status_expired": "Expirée",
+            "status_no_expiry": "Jeton sans expiration",
+            "refreshing": "Revalidation de la session avec GitHub...",
+            "refreshed": "Session revalidée avec succès.",
+            "refresh_failed": "Impossible de revalider le jeton automatiquement.",
+            "reauth_needed": "Votre session GitHub a expiré. Veuillez vous réauthentifier pour continuer.",
+            "diagnostics_empty": "Aucun diagnostic disponible.",
+            "diagnostics_error": "Erreur lors du chargement des diagnostics."
         }
     },
     "github_auth": {
