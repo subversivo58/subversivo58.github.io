@@ -706,6 +706,7 @@
             "img_remove": "画像を削除",
             "img_alt_placeholder": "代替テキスト (alt)",
             "img_caption_placeholder": "画像キャプション（任意）",
+            "drafts_section": "下書き",
             "save_draft": "下書きを保存",
             "drafts_placeholder": "下書きを選択...",
             "open_draft": "開く",

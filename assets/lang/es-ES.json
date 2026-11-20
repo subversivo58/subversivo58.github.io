@@ -689,6 +689,7 @@
             "img_remove": "Eliminar imagen",
             "img_alt_placeholder": "Texto alternativo (alt)",
             "img_caption_placeholder": "Pie de imagen (opcional)",
+            "drafts_section": "Borradores",
             "save_draft": "Guardar borrador",
             "drafts_placeholder": "Seleccionar borrador...",
             "open_draft": "Abrir",

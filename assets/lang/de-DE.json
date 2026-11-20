@@ -706,6 +706,7 @@
             "img_remove": "Bild entfernen",
             "img_alt_placeholder": "Alternativtext (alt)",
             "img_caption_placeholder": "Bildunterschrift (optional)",
+            "drafts_section": "Entwürfe",
             "save_draft": "Entwurf speichern",
             "drafts_placeholder": "Entwurf auswählen...",
             "open_draft": "Öffnen",

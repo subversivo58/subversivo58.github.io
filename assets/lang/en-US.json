@@ -706,6 +706,7 @@
             "img_remove": "Remove image",
             "img_alt_placeholder": "Alternative text (alt)",
             "img_caption_placeholder": "Image caption (optional)",
+            "drafts_section": "Drafts",
             "save_draft": "Save draft",
             "drafts_placeholder": "Select draft...",
             "open_draft": "Open",

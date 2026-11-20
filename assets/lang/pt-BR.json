@@ -737,6 +737,7 @@
             "img_remove": "Remover imagem",
             "img_alt_placeholder": "Texto alternativo (alt)",
             "img_caption_placeholder": "Legenda da imagem (opcional)",
+            "drafts_section": "Rascunhos",
             "save_draft": "Salvar rascunho",
             "drafts_placeholder": "Selecionar rascunho...",
             "open_draft": "Abrir",

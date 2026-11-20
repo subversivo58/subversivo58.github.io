@@ -8,6 +8,7 @@
  */
 
 import Hashids from '../vendor/Hashids/hashids-es6.mjs'
+import { highlightCodeBlocks } from '../lib/Highlight.mjs'
 
 const SITE_ORIGIN = 'https://subversivo58.github.io'
 const DEFAULT_OG_IMAGE = 'assets/media/image/graph.webp'
@@ -163,6 +164,14 @@ export default class PostManager {
         return this.templateCache
     }
 
+    highlightPostContent(html) {
+        const raw = String(html || '').trim()
+        if (!raw || !/<pre\b/i.test(raw)) return raw
+        const doc = new DOMParser().parseFromString(raw, 'text/html')
+        highlightCodeBlocks(doc.body, { autoDetect: true, normalizeBarePre: true })
+        return doc.body.innerHTML.trim()
+    }
+
     async renderPostHTML({
         title,
         slug,
@@ -183,6 +192,7 @@ export default class PostManager {
         const modifiedIso = new Date(lastModified).toISOString()
         const formattedDate = new Date(timestamp).toLocaleDateString('pt-BR', { dateStyle: 'medium' })
         const minutes = this.normalizeReadingTime(readingTime)
+        const highlightedContent = this.highlightPostContent(content)
 
         const updatedHtml = lastModified && timestamp && lastModified !== timestamp
             ? `<div class="blog-post-updated" data-post-updated="${esc(modifiedIso)}">Atualizado em ${esc(new Date(lastModified).toLocaleDateString('pt-BR', { dateStyle: 'medium' }))}</div>`
@@ -206,7 +216,7 @@ export default class PostManager {
             '{{post_date_formatted}}': esc(formattedDate),
             '{{post_reading_time}}': esc(String(minutes)),
             '{{post_reading_time_text}}': esc(`${minutes} min de leitura`),
-            '{{post_content}}': String(content || '').trim(),
+            '{{post_content}}': highlightedContent,
             '{{post_updated_html}}': updatedHtml,
             '{{post_tags_html}}': tagsHtml
         }

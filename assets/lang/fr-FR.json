@@ -706,6 +706,7 @@
             "img_remove": "Supprimer l'image",
             "img_alt_placeholder": "Texte alternatif (alt)",
             "img_caption_placeholder": "Légende de l'image (optionnel)",
+            "drafts_section": "Brouillons",
             "save_draft": "Enregistrer le brouillon",
             "drafts_placeholder": "Sélectionner un brouillon...",
             "open_draft": "Ouvrir",

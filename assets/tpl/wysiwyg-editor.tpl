@@ -412,29 +412,33 @@
             data-i18n-place="admin_dashboard.editor.tags_placeholder">
     </div>
 
-    <!-- RASCUNHOS E PUBLICAÇÃO -->
-    <div class="d-flex flex-wrap align-items-center justify-content-between border-top pt-3">
-        <div class="d-flex flex-wrap align-items-center mb-2 mb-md-0">
+    <!-- RASCUNHOS -->
+    <div class="border bg-light p-3 mt-3 mb-3">
+        <div class="i18n small font-weight-bold mb-2" data-i18n-html="admin_dashboard.editor.drafts_section">Rascunhos</div>
+        <div class="d-flex flex-wrap align-items-center">
             <button
                 type="button"
                 id="post-save-draft"
-                class="i18n btn btn-sm btn-outline-secondary rounded-0 mr-2 cp"
+                class="i18n btn btn-sm btn-outline-secondary rounded-0 mr-2 mb-2 mb-sm-0 cp"
                 data-i18n-html="admin_dashboard.editor.save_draft"></button>
-            <select id="post-draft-list" class="form-control form-control-sm rounded-0 mr-2" style="width: auto; max-width: 220px;">
+            <select id="post-draft-list" class="form-control form-control-sm rounded-0 mr-2 mb-2 mb-sm-0" style="width: auto; min-width: 180px; max-width: 260px;">
                 <option value="" class="i18n" data-i18n-html="admin_dashboard.editor.drafts_placeholder"></option>
             </select>
             <button
                 type="button"
                 id="post-open-draft"
-                class="i18n btn btn-sm btn-outline-info rounded-0 mr-2 cp"
+                class="i18n btn btn-sm btn-outline-info rounded-0 mr-2 mb-2 mb-sm-0 cp"
                 data-i18n-html="admin_dashboard.editor.open_draft"></button>
             <button
                 type="button"
                 id="post-delete-draft"
-                class="i18n btn btn-sm btn-outline-danger rounded-0 cp"
+                class="i18n btn btn-sm btn-outline-danger rounded-0 mb-2 mb-sm-0 cp"
                 data-i18n-html="admin_dashboard.editor.delete_draft"></button>
         </div>
+    </div>
 
+    <!-- PUBLICAÇÃO -->
+    <div class="d-flex flex-wrap align-items-center justify-content-end border-top pt-3">
         <button
             type="button"
             id="post-generate"

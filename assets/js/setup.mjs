@@ -389,6 +389,47 @@ const SetupDOMReady = async evt => {
     // this route
     const router = PathName(true);
 
+    // Destaca blocos de código imediatamente sem depender de i18n, templates ou API do GitHub.
+    const postCodeEnhancementsPromise = router === "post"
+        ? (async () => {
+            const box = dc.getElementById("index-central-block");
+            if (!box) return;
+            try {
+                const [{ highlightCodeBlocks }, { default: CodeCopy }] = await Promise.all([
+                    import("./modules/lib/Highlight.mjs"),
+                    import("./modules/lib/CodeCopy.mjs")
+                ]);
+                highlightCodeBlocks(box, { autoDetect: true, normalizeBarePre: true });
+                const codeCopy = CodeCopy("#index-central-block", "#code-copy-wrapper-template");
+                codeCopy();
+            } catch (error) {
+                console.error("[POST]: Failed to highlight code blocks.", error);
+            }
+
+            box.addEventListener("click", async event => {
+                const button = event.target.closest("[data-code-copy]");
+                if (!button || !box.contains(button)) return;
+
+                const wrapper = button.closest(".code-container");
+                const code = wrapper?.querySelector("pre code");
+                if (!code) return;
+
+                try {
+                    await navigator.clipboard.writeText(code.textContent);
+                    const originalContent = button.textContent;
+                    button.textContent = "✓";
+                    button.classList.add("is-copied");
+                    setTimeout(() => {
+                        button.textContent = originalContent;
+                        button.classList.remove("is-copied");
+                    }, 1200);
+                } catch (error) {
+                    console.error("[POST]: Failed to copy code.", error);
+                }
+            });
+        })()
+        : Promise.resolve();
+
     PolicyHandler.supported = settings.source.language;
     dc.documentElement.lang = PolicyHandler.language;
     await i18n.get(`/assets/lang/${PolicyHandler.language}.json`, {
@@ -717,34 +758,7 @@ const SetupDOMReady = async evt => {
                         }
                     }
 
-                    const { highlightCodeBlocks } = await import("./modules/lib/Highlight.mjs");
-                    highlightCodeBlocks(box, { autoDetect: true, normalizeBarePre: true });
-
-                    const { default: CodeCopy } = await import("./modules/lib/CodeCopy.mjs");
-                    const codeCopy = CodeCopy("#index-central-block", "#code-copy-wrapper-template");
-                    codeCopy();
-
-                    box.addEventListener("click", async event => {
-                        const button = event.target.closest("[data-code-copy]");
-                        if (!button || !box.contains(button)) return;
-
-                        const wrapper = button.closest(".code-container");
-                        const code = wrapper?.querySelector("pre code");
-                        if (!code) return;
-
-                        try {
-                            await navigator.clipboard.writeText(code.textContent);
-                            const originalContent = button.textContent;
-                            button.textContent = "✓";
-                            button.classList.add("is-copied");
-                            setTimeout(() => {
-                                button.textContent = originalContent;
-                                button.classList.remove("is-copied");
-                            }, 1200);
-                        } catch (error) {
-                            console.error("[POST]: Failed to copy code.", error);
-                        }
-                    });
+                    await postCodeEnhancementsPromise;
 
                     lazyLoad.observe(box);
                 }
