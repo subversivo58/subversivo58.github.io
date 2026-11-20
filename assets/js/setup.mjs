@@ -683,6 +683,27 @@ const SetupDOMReady = async evt => {
                         }
                     });
 
+                    const renderAuthorBadge = author => {
+                        const displayName = author.name || author.login;
+                        return `
+                            <span class="blog-author-badge">
+                                <picture class="blog-author-avatar-wrap flex-shrink-0">
+                                    <img src="/assets/media/image/1x1.gif"
+                                         data-src="${escHTML(author.avatar)}"
+                                         data-lazy-target
+                                         alt="${escHTML(displayName)}"
+                                         width="22"
+                                         height="22"
+                                         class="blog-author-avatar">
+                                </picture>
+                                <a href="${escHTML(author.url)}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   title="@${escHTML(author.login)}"
+                                   class="ext-link-icon blog-author-link">${escHTML(displayName)}</a>
+                            </span>`;
+                    };
+
                     const authorBox = document.getElementById("post-author-container");
                     const metaAuthor = document.querySelector('meta[name="post-author"]')?.content;
                     const authorId = authorBox?.dataset.authorId || metaAuthor || "";
@@ -690,20 +711,8 @@ const SetupDOMReady = async evt => {
                     if (authorBox && authorId) {
                         const author = await fetchAuthor(authorId);
                         if (author) {
-                            authorBox.innerHTML = `
-                                <div class="d-flex align-items-center mb-4 post-author">
-                                    <picture class="mr-2 flex-shrink-0">
-                                        <img src="/assets/media/image/1x1.gif"
-                                             data-src="${escHTML(author.avatar)}"
-                                             data-lazy-target
-                                             alt="${escHTML(author.login)}"
-                                             width="40"
-                                             height="40"
-                                             class="rounded-circle">
-                                    </picture>
-                                    <a href="${escHTML(author.url)}" target="_blank" rel="noopener noreferrer"
-                                       class="font-weight-bold">${escHTML(author.login)}</a>
-                                </div>`;
+                            authorBox.innerHTML = renderAuthorBadge(author);
+                            authorBox.classList.remove("d-none");
                             lazyLoad.observe(authorBox);
                         }
                     }

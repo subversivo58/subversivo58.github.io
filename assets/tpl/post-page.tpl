@@ -65,14 +65,16 @@
 
             <header class="mb-4">
                 <h1 class="h2 font-weight-bold mb-2">{{post_title}}</h1>
-                <p class="small text-muted mb-0">
-                    <time datetime="{{post_published_iso}}">{{post_date_formatted}}</time>
-                    <span class="mx-1" aria-hidden="true">·</span>
-                    <span data-post-reading-time="{{post_reading_time}}">{{post_reading_time_text}}</span>
-                </p>
+                <div id="post-author-container" class="mb-2 d-none" data-author-id="{{post_author}}"></div>
+                <div class="small text-muted blog-post-meta">
+                    <div>
+                        <time datetime="{{post_published_iso}}">{{post_date_formatted}}</time>
+                        <span class="mx-1" aria-hidden="true">·</span>
+                        <span data-post-reading-time="{{post_reading_time}}">{{post_reading_time_text}}</span>
+                    </div>
+                    {{post_updated_html}}
+                </div>
             </header>
-
-            <div id="post-author-container" data-author-id="{{post_author}}"></div>
 
             <article class="text-break markdown-body post-content">
 <!-- POST_CONTENT_START -->
@@ -93,7 +95,6 @@
             </div>
 
             <footer class="mt-4">
-                {{post_updated_html}}
                 {{post_tags_html}}
             </footer>
 

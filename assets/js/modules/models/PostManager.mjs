@@ -185,7 +185,7 @@ export default class PostManager {
         const minutes = this.normalizeReadingTime(readingTime)
 
         const updatedHtml = lastModified && timestamp && lastModified !== timestamp
-            ? `<p class="small text-danger text-right mb-2" data-post-updated="${esc(modifiedIso)}">Atualizado em ${esc(new Date(lastModified).toLocaleDateString('pt-BR', { dateStyle: 'medium' }))}</p>`
+            ? `<div class="blog-post-updated" data-post-updated="${esc(modifiedIso)}">Atualizado em ${esc(new Date(lastModified).toLocaleDateString('pt-BR', { dateStyle: 'medium' }))}</div>`
             : ''
 
         const cleanTags = this.normalizeTags(tags)
