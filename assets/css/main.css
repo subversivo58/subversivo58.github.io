@@ -2164,6 +2164,29 @@ ADMIN DASHBOARD, EDITOR WYSIWYG E POSTS
     gap: 1rem;
 }
 
+#admin-dashboard .min-w-0 {
+    min-width: 0;
+}
+
+#admin-dashboard .admin-post-card {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+#admin-dashboard .admin-post-card .card-body,
+#admin-dashboard .admin-post-card .d-flex {
+    min-width: 0;
+}
+
+#admin-dashboard .admin-post-card [data-post-slug] {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 #admin-dashboard .admin-post-thumb {
     width: 56px;
     height: 56px;

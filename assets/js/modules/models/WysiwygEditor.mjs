@@ -1141,22 +1141,32 @@ class WysiwygEditor {
     // ---------- Fonte HTML / Pré-visualização ----------
 
     toggleSourceMode(enable = !this.sourceMode) {
-        this.clearImageSelection()
-        this.sourceMode = Boolean(enable)
+        const nextMode = Boolean(enable)
+        if (nextMode === this.sourceMode) return
 
-        if (this.sourceMode) {
-            this.elements.htmlSource.value = this.getCleanEditorHTML()
+        this.clearImageSelection()
+
+        if (nextMode) {
+            const html = this.getCleanEditorHTML()
+            this.sourceMode = true
+            this.elements.htmlSource.value = html
             this.elements.content.hidden = true
             this.elements.htmlSource.hidden = false
             this.elements.sourceToggle?.classList.add('active')
             this.elements.sourceToggle?.setAttribute('aria-pressed', 'true')
+            this.elements.htmlSource.focus()
         } else {
-            this.setEditorHTML(this.elements.htmlSource.value)
+            const html = this.elements.htmlSource.value
+            this.sourceMode = false
             this.elements.htmlSource.hidden = true
             this.elements.content.hidden = false
+            this.setEditorHTML(html)
             this.elements.sourceToggle?.classList.remove('active')
             this.elements.sourceToggle?.setAttribute('aria-pressed', 'false')
+            this.elements.content.focus()
         }
+
+        if (this.previewVisible) this.updatePreview()
     }
 
     togglePreview(visible = !this.previewVisible) {
@@ -1228,7 +1238,7 @@ class WysiwygEditor {
         if (!this.elements.content) return
         const html = this.getCleanEditorHTML()
         if (this.elements.preview) {
-            this.elements.preview.innerHTML = html
+            this.elements.preview.innerHTML = this.unwrapPicturesForEditor(html)
         }
         this.updateDerivedMetadata()
     }

@@ -289,6 +289,7 @@ class AdminPosts {
         const postUrl = `/${this.getPostPath(post)}`
         if (slugEl) {
             slugEl.textContent = postUrl
+            slugEl.title = postUrl
         }
 
         const timestamp = this.getPostTimestamp(post)
