@@ -548,7 +548,17 @@
             "platforms_title": "Conoce estas plataformas",
             "link_github": "GitHub Pages",
             "link_workers": "Cloudflare Workers",
-            "donate_title": "Tu donación importa"
+            "donate_title": "Tu donación importa",
+            "content": {
+                "intro1": "Mantener el blog al día requiere tiempo y dedicación. Aunque las plataformas y herramientas que usamos son gratuitas, tienen limitaciones: cada una restringe cuántas visitas puede recibir un sitio al mes, así como la cantidad de datos que sus servidores pueden transferir durante esas visitas.",
+                "intro2": "Aquí en el blog nos encanta la idea de explorar nuevas funcionalidades, implementar nuevos recursos y, quién sabe, ampliar nuestra gama de servicios, además de construir una comunidad vibrante y dinámica.",
+                "intro3": "Para hacer realidad estas ideas necesitamos invertir recursos en un dominio propio, servidores VPS que soporten más tráfico, espacio de almacenamiento e infraestructura que permita construir una gama más amplia de aplicaciones.",
+                "intro4": "Rechazamos la idea de recaudar fondos con publicidad, muros de pago, rastreo de pago o venta de datos... defendemos y <strong>creemos que tú eres el único dueño de tus datos</strong>, tal como se describe en nuestro <a href=\"./you-in-control-of-your-data.html\" title=\"White Paper\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">\"White Paper\"</a>, así que tu ayuda puede marcar toda la diferencia, animándonos y ayudándonos a hacer más y hacerlo mejor 🚀",
+                "contribution1": "Puedes contribuir a este blog de muchas formas: compartiéndolo en tus redes, mejorando el código, colaborando editorialmente, interactuando con nuestra comunidad y mucho más.",
+                "contribution2": "También puedes dar \"<b>esa ayuda extra</b>\" eligiendo una de las opciones de donación de abajo 🎊",
+                "pix_caption": "PagBank Pix",
+                "trademarks": "Los logotipos y marcas aquí utilizados son propiedad de sus respectivos titulares de derechos. Utilizarlos aquí no implica ningún tipo de vínculo ni respaldo por parte de estas marcas."
+            }
         },
         "dpo": {
             "heading": "Delegado de Protección de Datos (DPO)",

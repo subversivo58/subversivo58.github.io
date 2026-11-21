@@ -446,7 +446,17 @@
             "platforms_title": "Lerne diese Plattformen kennen",
             "link_github": "GitHub Pages",
             "link_workers": "Cloudflare Workers",
-            "donate_title": "Deine Spende ist wichtig"
+            "donate_title": "Deine Spende ist wichtig",
+            "content": {
+                "intro1": "Den Blog auf dem neuesten Stand zu halten, kostet Zeit und Engagement. Die Plattformen und Werkzeuge, die wir nutzen, sind zwar kostenlos, haben aber Einschränkungen: Jede begrenzt, wie viele Besuche eine Website pro Monat erhalten kann, sowie die Datenmenge, die während dieser Besuche von ihren Servern übertragen werden kann.",
+                "intro2": "Hier im Blog lieben wir die Idee, neue Funktionen zu erkunden, neue Ressourcen umzusetzen und vielleicht unser Serviceangebot zu erweitern sowie eine lebendige, dynamische Community aufzubauen.",
+                "intro3": "Um diese Ideen umzusetzen, müssen wir in eine eigene Domain, VPS-Server mit höherer Traffickapazität, Speicherplatz und eine Infrastruktur investieren, die es erlaubt, eine größere Bandbreite an Anwendungen zu entwickeln.",
+                "intro4": "Wir lehnen die Idee ab, Geld durch Werbung, Paywalls, bezahltes Tracking oder den Verkauf von Daten zu sammeln ... wir stehen dafür ein und <strong>glauben, dass du der alleinige Eigentümer deiner Daten bist</strong>, wie in unserem <a href=\"./you-in-control-of-your-data.html\" title=\"White Paper\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">\"White Paper\"</a> beschrieben. Deine kleine Unterstützung kann daher den entscheidenden Unterschied machen und uns motivieren, mehr und besser zu werden 🚀",
+                "contribution1": "Du kannst diesen Blog auf unzählige Arten unterstützen: indem du ihn in deinen Netzwerken teilst, den Code verbesserst, redaktionell mitarbeitest, dich mit unserer Community austauschst und vieles mehr.",
+                "contribution2": "Erwäge auch, <b>\"noch einen kleinen Extra-Beitrag\"</b> zu leisten, indem du eine der unten stehenden Spendenoptionen wählst 🎊",
+                "pix_caption": "PagBank Pix",
+                "trademarks": "Die hier verwendeten Logos und Marken sind Eigentum ihrer jeweiligen Rechteinhaber. Ihre Verwendung hier impliziert keine Zugehörigkeit zu diesen Marken und keine Billigung durch sie."
+            }
         },
         "dpo": {
             "heading": "Datenschutzbeauftragter (DPO)",

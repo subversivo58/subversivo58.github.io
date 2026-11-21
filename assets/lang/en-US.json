@@ -446,7 +446,17 @@
             "platforms_title": "Meet these platforms",
             "link_github": "GitHub Pages",
             "link_workers": "Cloudflare Workers",
-            "donate_title": "Your donation matters"
+            "donate_title": "Your donation matters",
+            "content": {
+                "intro1": "Keeping the blog up to date takes time and dedication. Although the platforms and tools we use are free, they have limits: each one caps how many visits a site can receive per month, as well as the amount of data that can be transferred from their servers during those visits.",
+                "intro2": "Here on the blog we love the idea of exploring new features, implementing new resources and, who knows, expanding our range of services as well as building a vibrant and dynamic community.",
+                "intro3": "To make these ideas happen, we need to invest in a custom domain, VPS servers that can handle more traffic, storage space and infrastructure that lets us build a wider range of applications.",
+                "intro4": "We reject the idea of raising funds through ads, paywalls, paid tracking or selling data... we believe that <strong>you are the sole owner of your data</strong>, as described in our <a href=\"./you-in-control-of-your-data.html\" title=\"White Paper\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">\"White Paper\"</a>, so your help can make all the difference, encouraging us and helping us do more and do it better 🚀",
+                "contribution1": "You can contribute to this blog in countless ways: sharing it on your networks, improving the code, editorial collaboration, interacting with our community and much more.",
+                "contribution2": "Also consider giving \"<b>that extra help</b>\" by choosing one of the donation options below 🎊",
+                "pix_caption": "PagBank Pix",
+                "trademarks": "The logos and trademarks used here are the property of their respective rights holders. Using them here does not imply any affiliation with or endorsement by these brands."
+            }
         },
         "dpo": {
             "heading": "Data Protection Officer (DPO)",

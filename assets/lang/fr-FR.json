@@ -446,7 +446,17 @@
             "platforms_title": "Découvrez ces plateformes",
             "link_github": "GitHub Pages",
             "link_workers": "Cloudflare Workers",
-            "donate_title": "Votre don compte"
+            "donate_title": "Votre don compte",
+            "content": {
+                "intro1": "Tenir le blog à jour demande du temps et de l'investissement. Bien que les plateformes et outils que nous utilisons soient gratuits, ils ont des limites : chacun restreint le nombre de visites qu'un site peut recevoir par mois, ainsi que la quantité de données pouvant transiter depuis leurs serveurs pendant ces visites.",
+                "intro2": "Ici, sur le blog, nous aimons l'idée d'explorer de nouvelles fonctionnalités, de mettre en place de nouvelles ressources et, qui sait, d'élargir notre gamme de services tout en bâtissant une communauté dynamique et vivante.",
+                "intro3": "Pour concrétiser ces idées, il faut investir dans un nom de domaine propre, des serveurs VPS capables de supporter davantage de trafic, de l'espace de stockage et une infrastructure permettant de développer un plus large éventail d'applications.",
+                "intro4": "Nous rejetons l'idée de financer le projet par la publicité, les paywalls, le suivi payant ou la revente de données... nous défendons et <strong>croyons que vous êtes le seul propriétaire de vos données</strong>, comme décrit dans notre <a href=\"./you-in-control-of-your-data.html\" title=\"White Paper\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">\"White Paper\"</a>. Votre petit coup de pouce peut donc faire toute la différence, en nous encourageant et en nous aidant à faire plus et mieux 🚀",
+                "contribution1": "Vous pouvez contribuer à ce blog de multiples façons : en le partageant sur vos réseaux, en améliorant le code, par une collaboration éditoriale, en échangeant avec notre communauté et bien plus encore.",
+                "contribution2": "Pensez aussi à donner « <b>un coup de pouce supplémentaire</b> » en choisissant l'une des options de don ci-dessous 🎊",
+                "pix_caption": "PagBank Pix",
+                "trademarks": "Les logos et marques utilisés ici sont la propriété de leurs détenteurs respectifs. Leur utilisation ici n'implique aucun lien ni aucune approbation de la part de ces marques."
+            }
         },
         "dpo": {
             "heading": "Délégué à la protection des données (DPO)",

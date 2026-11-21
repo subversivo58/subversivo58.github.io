@@ -41,165 +41,339 @@
 </head>
 <body id="body">
     <!-- CONTENT CONTAINER -->
-    <section id="index-central-block" class="container-fluid px-0 pt-5 fill-height">
-        <div class="page-banner policy-page parallax text-white px-3 px-md-5 py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
-                        <div class="card rounded-0 h-100 text-dark">
-                            <div class="card-body d-flex flex-column">
-                                <h2 class="i18n h5 font-weight-bold" data-i18n-html="pages.policy.cards.introduction.title">Introdução</h2>
-                                <p class="i18n small flex-grow-1" data-i18n-html="pages.policy.cards.introduction.description">Este Site foi criado utilizando tecnologias da Web, acreditamos na descentralização e na segurança cryptografica. Acreditamos que você é o único detentor de seus dados.</p>
-                                <a href="/you-in-control-of-your-data.html" class="i18n small ext-link-icon" data-i18n-html="pages.policy.cards.introduction.link">Veja mais em nosso "White Paper"</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
-                        <div class="card rounded-0 h-100 text-dark">
-                            <div class="card-body d-flex flex-column">
-                                <h2 class="i18n h5 font-weight-bold" data-i18n-html="pages.policy.cards.privacy.title">Privacidade</h2>
-                                <p class="i18n small flex-grow-1" data-i18n-html="pages.policy.cards.privacy.description">A politica de privacidade descreve porque este Site solicita dados, como estes são processados além de informar como o usuário pode editar, baixar ou excluir seus dados.</p>
-                                <a href="#policy-privacy" class="i18n small anchor-link" data-anchor-mg="80" data-i18n-html="pages.policy.cards.privacy.link">Leia nossa Politica de Privacidade</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3 mb-3 mb-md-0">
-                        <div class="card rounded-0 h-100 text-dark">
-                            <div class="card-body d-flex flex-column">
-                                <h2 class="i18n h5 font-weight-bold" data-i18n-html="pages.policy.cards.terms.title">Termos</h2>
-                                <p class="i18n small flex-grow-1" data-i18n-html="pages.policy.cards.terms.description">Os termos descrevem como operacionalizamos este Site, o que nossos usuários podem esperar deste Site e o que esperamos de nossos usuários nesse processo.</p>
-                                <a href="#policy-terms" class="i18n small anchor-link" data-anchor-mg="80" data-i18n-html="pages.policy.cards.terms.link">Leia nossos Termos de Uso</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="card rounded-0 h-100 text-dark">
-                            <div class="card-body d-flex flex-column">
-                                <h2 class="i18n h5 font-weight-bold" data-i18n-html="pages.policy.cards.general.title">Politica</h2>
-                                <p class="i18n small flex-grow-1" data-i18n-html="pages.policy.cards.general.description">A "Politica" é o documento geral que rege o relacionamente entre o Site e o Usuário, estabelece as garantias e limitações para o contrato de uso do Site e suas ferramentas.</p>
-                                <a href="#policy-general" class="i18n small anchor-link" data-anchor-mg="80" data-i18n-html="pages.policy.cards.general.link">Leia nossa Politica Geral</a>
-                            </div>
-                        </div>
-                    </div>
+    <section id="index-central-block" class="container-fluid px-0 py-5">
+        <div class="row px-0 mx-1 mx-sm-2 mx-md-4 py-3">
+            <div class="col-12 px-1 col-sm-6 col-md-3 mx-auto mt-2">
+                <div class="p-2 align-self-baseline flex-fill">
+                    <h2 class="h3 i18n" data-i18n-html="pages.policy.cards.introduction.title"></h2>
+                    <p class="i18n" data-i18n-html="pages.policy.cards.introduction.description"></p>
+                    <a href="./you-in-control-of-your-data.html" class="display-block ext-link-icon"><small class="i18n" data-i18n-html="pages.policy.cards.introduction.link"></small></a>
+                </div>
+            </div>
+            <div class="col-12 px-1 col-sm-6 col-md-3 mx-auto mt-2">
+                <div class="p-2 align-self-baseline flex-fill">
+                    <h2 class="h3 i18n" data-i18n-html="pages.policy.cards.privacy.title"></h2>
+                    <p class="i18n" data-i18n-html="pages.policy.cards.privacy.description"></p>
+                    <a href="#privacy-policy-header" data-anchor-mg="60" class="display-block anchor-link"><small class="i18n" data-i18n-html="pages.policy.cards.privacy.link"></small></a>
+                </div>
+            </div>
+            <div class="col-12 px-1 col-sm-6 col-md-3 mx-auto mt-2">
+                <div class="p-2 align-self-baseline flex-fill">
+                    <h2 class="h3 i18n" data-i18n-html="pages.policy.cards.terms.title"></h2>
+                    <p class="i18n" data-i18n-html="pages.policy.cards.terms.description"></p>
+                    <a href="#terms-policy-header" data-anchor-mg="60" class="display-block anchor-link"><small class="i18n" data-i18n-html="pages.policy.cards.terms.link"></small></a>
+                </div>
+            </div>
+            <div class="col-12 px-1 col-sm-6 col-md-3 mx-auto mt-2">
+                <div class="p-2 align-self-baseline flex-fill">
+                    <h2 class="h3 i18n" data-i18n-html="pages.policy.cards.general.title"></h2>
+                    <p class="i18n" data-i18n-html="pages.policy.cards.general.description"></p>
+                    <a href="#general-policy-header" data-anchor-mg="60" class="display-block anchor-link"><small class="i18n" data-i18n-html="pages.policy.cards.general.link"></small></a>
                 </div>
             </div>
         </div>
 
-        <div class="container py-5">
-            <article class="markdown-body post-content">
-                <blockquote class="mb-4">
-                    <p class="i18n" data-i18n-html="pages.policy.overview.quote1"></p>
-                    <p class="i18n" data-i18n-html="pages.policy.overview.quote2"></p>
-                    <p class="i18n" data-i18n-html="pages.policy.overview.quote3"></p>
-                    <cite><a href="/you-in-control-of-your-data.html" class="i18n" data-i18n-html="pages.policy.overview.whitepaper_link">Um trecho de nosso "White Paper"</a></cite>
+        <div class="row px-0 mx-0 mx-sm-2 mx-md-4 py-3">
+            <div class="col-12 col-sm-10 mx-auto py-3 py-md-5"><div class="section-dividermask"></div></div>
+            <div class="col-12 col-md-10 px-3 mx-auto">
+                <blockquote>
+                    <p class="contrast i18n" data-i18n-html="pages.policy.overview.quote1"></p>
+                    <p class="contrast i18n" data-i18n-html="pages.policy.overview.quote2"></p>
+                    <p class="contrast i18n" data-i18n-html="pages.policy.overview.quote3"></p>
+                    <cite><a href="./you-in-control-of-your-data.html" class="display-block ext-link-icon i18n" data-i18n-html="pages.policy.overview.whitepaper_link"></a></cite>
                 </blockquote>
+                <p class="contrast mt-5 i18n" data-i18n-html="pages.policy.overview.contact"></p>
+            </div>
+            <div class="col-12 col-sm-10 mx-auto py-3 py-md-5"><div class="section-dividermask"></div></div>
+            <div class="col-12 col-md-10 px-3 mx-auto">
+                <p class="contrast i18n" data-i18n-html="pages.policy.overview.markdown1"></p>
+                <p class="contrast i18n" data-i18n-html="pages.policy.overview.markdown2"></p>
+            </div>
+            <div class="col-12 col-sm-10 mx-auto py-3 py-md-5"><div class="section-dividermask"></div></div>
 
-                <p class="i18n" data-i18n-html="pages.policy.overview.contact"></p>
-                <p class="i18n" data-i18n-html="pages.policy.overview.markdown1"></p>
-                <p class="i18n" data-i18n-html="pages.policy.overview.markdown2"></p>
+            <!-- PRIVACY POLICY -->
+            <div class="col-12 col-md-10 px-3 mx-auto">
+                <h2 id="privacy-policy-header" class="h3">Política de Privacidade</h2>
+            </div>
+            <div class="col-12 col-md-10 px-3 mx-auto">                <div class="row mt-3">
 
-                <hr>
+                    <div class="col-3 px-0 d-none d-sm-inline-block">
+                        <picture>
+                            <img src="/assets/media/image/1x1.gif"
+                                 data-src="/assets/media/image/svg/your-have-chooice.svg" data-lazy-target
+                                 class="img-fluid w-100 i18n"
+                                 data-i18n-alt="pages.policy.privacy.image_alt"
+                                 data-i18n-title="pages.policy.privacy.image_title">
+                        </picture>
+                    </div>
 
-                <section id="policy-privacy" class="pt-3">
-                    <h2 class="i18n h3 font-weight-bold mb-3" data-i18n-html="pages.policy.privacy.heading">Privacidade</h2>
-                    <div id="policy-container-privacy">
-                        <h3 class="h6 font-weight-bold mt-4">▪️ Introdução</h3>
+                    <div class="col-12 col-sm-9">
+                        <p class="contrast i18n" data-i18n-html="pages.policy.privacy.paragraph1"></p>
+                        <p class="contrast i18n" data-i18n-html="pages.policy.privacy.paragraph2"></p>
+                        <p class="contrast i18n" data-i18n-html="pages.policy.privacy.paragraph3"></p>
+                    </div>
+
+                </div>
+            </div>
+            <div id="policy-container-privacy" class="col-12 col-md-10 px-3 mx-auto markdown-body">
+                <h3 class="h6 font-weight-bold text-decoration-underline mt-4">▪️ Introdução</h3>
+                <div class="row mt-3">
+                    <div class="col-12 col-sm-9">
                         <p>Esta Política de Privacidade é baseada na coleta, processamento, uso, guarda (armazenamento) e práticas de segurança de dados oriundos da interação do usuário com o Site, seus sistemas e serviços.</p>
                         <p>Para obter uma visão detalhada das filosofias que orientam nossa Política de Privacidade, dicas de segurança e informações técnicas por favor consulte nosso <a href="/you-in-control-of-your-data.html" title="White Paper" target="_blank" rel="nofollow noopener" class="ext-link-icon">White Paper</a>.</p>
-
-                        <h3 class="h6 font-weight-bold mt-4">▪️ Definições</h3>
-                        <ul>
-                            <li><strong>essenciais</strong>: registros de logs ou softwares de análise dos servidores coletados quando o usuário se conecta ao Site ou utiliza seus sistemas e serviços (dados de conexão).</li>
-                            <li><strong>análise</strong>: dados oriundos da interação do Usuário com o Site, seus sistemas e serviços (tempo de atividade, páginas visitadas, interações).</li>
-                            <li><strong>pessoais</strong>: dados do Usuário que permitem identificá-lo direta ou indiretamente.</li>
-                            <li><strong>anônimos / anonimizados</strong>: dados que não permitem identificar o Usuário direta ou indiretamente.</li>
-                            <li><strong>públicos</strong>: dados do usuário compartilhados publicamente.</li>
-                        </ul>
-
-                        <h3 class="h6 font-weight-bold mt-4">▪️ Base Legal do Tratamento</h3>
-                        <ul>
-                            <li><strong>Dados de conexão</strong>: cumprimento de obrigação legal (Marco Civil da Internet, Art. 15).</li>
-                            <li><strong>Dados de análise e de erro</strong>: legítimo interesse do controlador, observados os direitos do titular.</li>
-                            <li><strong>Feedback, mensagens e dados públicos</strong>: consentimento do titular, revogável a qualquer momento mediante solicitação ao DPO.</li>
-                        </ul>
-                        <p>Este Site <strong>não coleta dados pessoais sensíveis</strong> (Art. 5º, II, LGPD).</p>
-
-                        <h3 class="h6 font-weight-bold mt-4">▪️ Direitos do Titular (LGPD, Art. 18)</h3>
-                        <p>O titular pode exercer seus direitos mediante solicitação ao DPO através da <a href="/dpo.html" title="DPO">página dedicada do DPO</a> ou do e-mail <code>dpo.subversivo58@gmail.com</code>, com resposta em até <strong>30 dias</strong>.</p>
-
-                        <h3 class="h6 font-weight-bold mt-4">▪️ Provedores de serviço</h3>
-                        <p>Utilizamos os serviços de hospedagem de páginas estáticas <a href="https://pages.github.com/" target="_blank" rel="nofollow noopener" class="ext-link-icon">GitHub Pages</a>. Consulte também a <a href="https://docs.github.com/pt/github/site-policy/github-privacy-statement#github-pages" target="_blank" rel="nofollow noopener" class="ext-link-icon">Declaração de privacidade do GitHub</a>.</p>
-
-                        <h3 class="h6 font-weight-bold mt-4">▪️ Consentimento</h3>
-                        <p class="i18n" data-i18n-html="pages.policy.privacy.paragraph1"></p>
-                        <p class="i18n" data-i18n-html="pages.policy.privacy.paragraph2"></p>
-                        <p class="i18n" data-i18n-html="pages.policy.privacy.paragraph3"></p>
                     </div>
-                </section>
+                </div>
 
-                <hr>
+                <h3 class="h6 font-weight-bold text-decoration-underline mt-4">▪️ Definições</h3>
+                <p>Classificamos os tipos de dados que podem ser coletados da seguinte maneira:</p>
+                <ul>
+                    <li><strong>essenciais</strong>: registros de logs ou softwares de análise dos servidores coletados quando o usuário se conecta ao Site ou utiliza seus sistemas e serviços (dados de conexão) fundamentais para conexão, segurança, prestação de serviços e retenção legal do histórico de acesso</li>
+                    <li><strong>análise</strong>: dados oriundos da interação do Usuário com o Site, seus sistemas e serviços (tempo de atividade, páginas visitadas, interações "cliques", ...)</li>
+                    <li><strong>pessoais</strong>: dados do Usuário que permitem identificá-lo direta ou indiretamente em meio à base de usuários do Site, na internet ou no mundo físico (nome, endereço, telefone, data de nascimento, identificadores sociais, ...)</li>
+                    <li><strong>sensíveis</strong>: dados pessoais do Usuário que revelam suas características particulares e podem ensejar ato discriminatório na internet ou no mundo físico (origem racial ou étnica, convicções religiosas, políticas, filosóficas, informações genéticas, biométricas, saúde, ...)</li>
+                    <li><strong>anônimos</strong>: dados oriundos da interação do Usuário com o Site, seus sistemas e serviços que <strong>não permitem identificar o Usuário direta ou indiretamente em meio à base de usuários do Site, na internet ou no mundo físico</strong></li>
+                    <li><strong>anonimizados</strong>: dados que, após tratamento técnico (remoção ou cifragem de identificadores), <strong>não permitem identificar o Usuário direta ou indiretamente em meio à base de usuários do Site, na internet ou no mundo físico</strong></li>
+                    <li><strong>públicos</strong>: dados do usuário compartilhados com outros usuários ou na internet (fotos e nome de usuário, localização, biografia, links externos e outros itens de perfil "<strong>público</strong>", publicações, marcações e comentários realizados no Site, seus sistemas ou serviços)</li>
+                </ul>
+                <p><strong>Nota</strong>: As categorias acima combinam duas dimensões distintas: <strong>finalidade</strong> (essencial, análise, pessoal, sensível, público) e <strong>grau de identificação</strong> (pessoal, anonimizado, anônimo). Um mesmo dado pode ter mais de uma classificação.</p>
 
-                <section id="policy-terms" class="pt-3">
-                    <h2 class="i18n h3 font-weight-bold mb-3" data-i18n-html="pages.policy.terms.heading">Termos de Uso</h2>
-                    <div id="policy-container-terms">
+                <h3 class="h6 font-weight-bold text-decoration-underline mt-4">▪️ Base Legal do Tratamento</h3>
+                <p>O tratamento de dados pessoais neste Site observa as seguintes bases legais (LGPD, Art. 7º):</p>
+                <ul>
+                    <li><strong>Dados de conexão</strong>: cumprimento de obrigação legal (Marco Civil da Internet, Art. 15).</li>
+                    <li><strong>Dados de análise e de erro</strong>: legítimo interesse do controlador, para melhoria e segurança do serviço, observados os direitos do titular.</li>
+                    <li><strong>Feedback, mensagens e dados públicos</strong>: consentimento do titular, revogável a qualquer momento mediante solicitação ao DPO.</li>
+                    <li><strong>Mensagens vinculadas a funcionalidade contratada</strong>: execução de contrato.</li>
+                </ul>
+                <p>Este Site <strong>não coleta dados pessoais sensíveis</strong> (Art. 5º, II, LGPD).</p>
+
+                <h3 class="h6 font-weight-bold text-decoration-underline mt-4">▪️ Direitos do Titular (LGPD, Art. 18)</h3>
+                <p>O titular pode exercer seus direitos mediante solicitação ao DPO através da <a href="./dpo.html" title="DPO">página dedicada do DPO</a> ou do e-mail <code>dpo.subversivo58@gmail.com</code>, requerendo:</p>
+                <ul>
+                    <li>confirmação da existência de tratamento;</li>
+                    <li>acesso aos dados;</li>
+                    <li>correção de dados incompletos, inexatos ou desatualizados;</li>
+                    <li>anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade;</li>
+                    <li>portabilidade, conforme regulamentação da ANPD;</li>
+                    <li>eliminação dos dados tratados com consentimento, ressalvadas as hipóteses do Art. 16 da LGPD;</li>
+                    <li>informação sobre compartilhamento: os dados de conexão são compartilhados com GitHub Pages, conforme seção "Provedores de Serviço";</li>
+                    <li>informação sobre a possibilidade de não consentir e consequências: a negativa ao consentimento para dados de análise e feedback não impede o acesso ao Site, mas desativa as funcionalidades correspondentes;</li>
+                    <li>revogação do consentimento, a qualquer momento, mediante solicitação ao DPO.</li>
+                </ul>
+                <p>As solicitações serão respondidas em até <strong>30 dias</strong>, nos termos da regulamentação aplicável a agentes de tratamento de pequeno porte.</p>
+
+                <h3 class="h6 font-weight-bold text-decoration-underline mt-4">▪️ Prazo de Retenção</h3>
+                <p>Os dados são armazenados pelos prazos necessários às finalidades informadas:</p>
+                <ul>
+                    <li>dados de conexão: <strong>6 meses</strong> (Marco Civil da Internet, Art. 15);</li>
+                    <li>dados de análise: <strong>6 meses</strong>, sendo anonimizados após;</li>
+                    <li>dados de erro: <strong>3 meses</strong>;</li>
+                    <li>feedback: <strong>12 meses</strong> ou até anonimização;</li>
+                    <li>dados pessoais: enquanto a conta existir e por <strong>6 meses</strong> após solicitação de exclusão, para exercício regular de direitos;</li>
+                    <li>dados públicos: enquanto o usuário mantiver publicados.</li>
+                </ul>
+                <p>Os prazos acima valem para os dados armazenados diretamente pelo Site. Provedor de serviço (GitHub Pages) possui políticas próprias de retenção, sobre as quais não temos controle.</p>
+
+                <h3 class="h6 font-weight-bold text-decoration-underline mt-4">▪️ Provedores de serviço</h3>
+                <h3 class="h6 font-weight-bold text-decoration-underline mt-4">▪️ Termos e Políticas de Terceiros</h3>
+                <p>Utilizamos os serviços de hospedagem de páginas estáticas <a href="https://pages.github.com/" target="_blank" rel="nofollow noopener" class="ext-link-icon">GitHub Pages</a>.</p>
+                <p>Estas plataformas podem (e provavelmente o fazem) coletar dados de conexão tais como: endereço <strong>IP</strong>, <strong>data e hora</strong> de conexão bem como <strong>informações de seu navegador</strong> para uso e aprimoramento de suas próprias ferramentas. Não temos controle sobre como a coleta e uso destes dados ocorre; ao utilizar nosso Site o Usuário está "<strong>intrinsecamente concordando</strong>" não somente com nossos Termos e Políticas mas também com os Termos e Políticas destas plataformas que podem ou não estar em Português.</p>
+                <p>Opcionalmente usuários que consentirem com o uso, manuseio, armazenamento e processamento de dados poderão utilizar <a href="https://authchainjs.github.io/" target="_blank" rel="nofollow noopener" class="ext-link-icon">AuthChainJS</a> para autenticação descentralizada, e <a href="https://pluggeding.github.io/" target="_blank" rel="nofollow noopener" class="ext-link-icon">Pluggeding</a> para o sistema de plugins e apps.</p>
+                <p>Para mais informações consulte:</p>
+                <ul>
+                    <li><a href="https://docs.github.com/pt/github/site-policy/github-privacy-statement#github-pages" title="Declaração de privacidade do GitHub" target="_blank" rel="nofollow noopener" class="ext-link-icon">Declaração de privacidade do GitHub</a></li>
+                    <li><a href="https://authchainjs.github.io/legal.html" title="Declaração de privacidade de AuthChainJS" target="_blank" rel="nofollow noopener" class="ext-link-icon">Declaração de privacidade de AuthChainJS</a></li>
+                    <li><a href="https://pluggeding.github.io/privacy.html" title="Declaração de privacidade de Pluggeding" target="_blank" rel="nofollow noopener" class="ext-link-icon">Declaração de privacidade de Pluggeding</a></li>
+                </ul>
+                <p>Em um futuro próximo esperamos implementar nossos próprios serviços para trazer mais qualidade ao Site e enriquecer a experiência de nossos usuários. Na medida que implementarmos novas funcionalidades atualizaremos nossas Políticas e Termos de Uso.</p>
+
+                <h3 class="h6 font-weight-bold text-decoration-underline mt-4">▪️ Consentimento</h3>
+                <p>Com exceção de dados "essenciais" (dados de conexão), todos os demais processos, sistemas e serviços deste Site ou de terceiros que possam coletar, processar e (ou) armazenar dados do usuário passam pela expressa aprovação (consentimento) do Usuário.</p>
+
+                <h3 class="h6 font-weight-bold text-decoration-underline mt-4">▪️ Menores de idade (crianças e adolescentes)</h3>
+                <p>Infelizmente este Site <strong>não possui uma Política de Privacidade para crianças e adolescentes</strong> uma vez que seu uso e acesso está condicionado apenas para "usuários legalmente <strong>capazes</strong> e <strong>responsáveis</strong> pelos seus atos perante suas legislações locais e (ou) aplicáveis" como descrito na seção <a href="#policy-section-2" data-anchor-mg="60" class="anchor-link">Elegibilidade</a> em nossa Política Geral.</p>
+                <p>A tabela a seguir descreve quais tipos, descrição, motivo e dados que podem ser coletados e (ou) processados quando o usuário utiliza este Site, seus sistemas e serviços:</p>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead><tr><th scope="col">Finalidade</th><th scope="col">Grau de identificação</th><th scope="col">Descrição</th><th scope="col">Motivo</th><th scope="col">Dados</th></tr></thead>
+                        <tbody>
+                            <tr><td>Essencial</td><td>Pessoal</td><td>Dados de conexão</td><td>Registro de atividades, análise de fluxo, aperfeiçoamento do sistema e cumprimento legal de retenção dos dados de acesso</td><td>Endereço IP, data e hora e informações de navegador</td></tr>
+                            <tr><td>Análise</td><td>Anonimizado</td><td>Dados de análise</td><td>Entender como a base de usuários do Site usa seus sistemas e serviços, aperfeiçoar o suporte e prestação de serviços</td><td>Tipo de navegação (desktop/mobile), APIs suportadas pelo navegador, idioma usado, preferências de interface, páginas visitadas e tempo de uso</td></tr>
+                            <tr><td>Análise</td><td>Anônimo</td><td>Dados de erros</td><td>Registrar e corrigir falhas na execução do Site, seus sistemas e serviços</td><td>Relatório de erros e depuração automatizados/relatório de erros fornecidos pelo Usuário</td></tr>
+                            <tr><td>Análise</td><td>Anonimizado</td><td>Feedback</td><td>Melhorar a interface do Site, seus sistemas e serviços, melhorar a experiência do Usuário</td><td>Avaliação (rating-system) e comentários sobre o Site</td></tr>
+                            <tr><td>Pessoal</td><td>Pessoal</td><td>Mensagens/comentários</td><td>Sistema de mensagens e comentários de publicações</td><td>Identificador WebPush para sistema de mensagens e comentários de publicações</td></tr>
+                            <tr><td>Público</td><td>Pessoal</td><td>Publicações/comentários/marcações</td><td>Interação social</td><td>Identificador WebPush para sistema de mensagens e comentários de publicações</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="h6 font-weight-bold mt-4">▪️ 1- Dados: coleta e guarda</h3>
+                <p>1.1- Utilizamos os serviços de hospedagem de páginas estáticas <a href="https://pages.github.com/" target="_blank" rel="nofollow noopener" class="ext-link-icon">GitHub Pages</a> esta plataforma pode (e provavelmente o faz) coletar dados de conexão tais como: endereço <strong>IP</strong>, <strong>data e hora</strong> de conexão bem como <strong>informações de seu navegador</strong> para uso e aprimoramento de suas próprias ferramentas. Não temos controle sobre como a coleta e uso destes dados ocorre; ao utilizar nosso Site o Usuário está "<strong>intrinsecamente concordando</strong>" não somente com nossos Termos e Políticas mas também com os Termos e Políticas destas plataformas que podem ou não estar em Português.</p>
+                <p>Para mais informações consulte: <a href="https://docs.github.com/pt/github/site-policy/github-privacy-statement#github-pages" title="Declaração de privacidade do GitHub" target="_blank" rel="nofollow noopener" class="ext-link-icon">Declaração de privacidade do GitHub</a></p>
+                <p>Em um futuro próximo esperamos implementar nossos próprios serviços para trazer mais qualidade ao Site e enriquecer a experiência de nossos usuários. Na medida que implementarmos novas funcionalidades atualizaremos nossas Políticas e Termos de Uso.</p>
+                <p>1.2- Este Site usa cookies e outras tecnologias para armazenar preferências do Usuário em cache no seu dispositivo.</p>
+                <p>[...]</p>
+                <p>1.3- Os seguintes websites (sistemas e serviços operados por este Site) podem coletar dados do Usuário ou armazenar <strong>cookies</strong> no dispositivo do Usuário:</p>
+                <ul><li><strong><a href="https://package.pluggeding.workers.dev/">package.pluggeding.workers.dev</a></strong>: CloudFlare Workers - Browser Proxy para pacotes NPM (Pluggeding System)</li></ul>
+                <p>1.4- A listagem a seguir descreve:</p>
+                <ul>
+                    <li><strong>Por que coletamos dados</strong>: coletamos dados para entender como nossos Usuários interagem com nosso Site e as funcionalidades dispostas no Site e para poder aprimorar nossos sistemas e serviços.</li>
+                    <li><strong>Como coletamos dados</strong>: coletamos dados através da conexão do Usuário quando este visualiza uma página do Site ou utiliza nossos sistemas e serviços bem como através de funcionalidades de depuração de erros, análise ou mesmo o "feedback" fornecido voluntariamente pelos nossos Usuários.</li>
+                    <li><strong>Como classificamos os dados coletados</strong>: a classificação está descrita na seção Definições e na tabela acima.</li>
+                    <li><strong>Como processamos os dados coletados</strong>: [...]</li>
+                    <li><strong>Por quanto tempo armazenamos estes dados</strong>: conforme seção "Prazo de Retenção".</li>
+                    <li><strong>Como o Usuário pode solicitar estes dados</strong>: o Usuário pode solicitar seus dados pessoais armazenados localmente (no cache de seu navegador) ou seus dados pessoais que estejam armazenados nos sistemas e serviços operados por este Site através da guia de configurações do Usuário.</li>
+                    <li><strong>Como o Usuário pode editar ou modificar estes dados</strong>: o Usuário pode editar e (ou) modificar seus dados pessoais diretamente na guia de configurações do Usuário.</li>
+                    <li><strong>Como o Usuário pode excluir estes dados</strong>: o Usuário pode excluir todos os seus dados armazenados localmente (no cache de seu navegador) ou seus dados pessoais que estejam armazenados nos sistemas e serviços operados por este Site diretamente na guia de configurações do Usuário.</li>
+                </ul>
+                <p>A forma como utilizamos cookies e outros dados de armazenamento pode mudar no futuro. Atualizaremos nossas Políticas e Termos na medida que estas mudanças ocorrerem.</p>
+
+                <h3 class="h6 font-weight-bold mt-4">▪️ 2- Dados: segurança</h3>
+                <p>2.1- Este Site utiliza tecnologias da Web seguindo as últimas e modernas APIs JavaScript (ES6 Syntax), HTML5 e CSS3; a segurança e persistência dos dados que o Usuário armazenar em seu dispositivo (navegador) podem ficar comprometidas nos casos da utilização de um navegador antigo ou mal configurado.</p>
+                <p>2.2- A segurança dos dados é diretamente comprometida pela falta de atualização de sistemas, programas e navegadores do dispositivo do Usuário. <strong>Plugins de navegador também podem comprometer a privacidade e segurança dos dados</strong>.</p>
+                <p>Na medida do possível, nos comprometemos a seguir boas práticas de codificação que levem em conta as vulnerabilidades do ecossistema JavaScript do navegador quando e se suportado pelo dispositivo e navegador do Usuário.</p>
+                <p>Considere fazer a leitura de nosso <a href="/you-in-control-of-your-data.html" title="White Paper" target="_blank" rel="nofollow noopener" class="ext-link-icon">White Paper</a> para mais dicas de segurança.</p>
+            </div>
+
+            <div class="col-12 col-sm-10 mx-auto py-3 py-md-5"><div class="section-dividermask"></div></div>
+
+            <!-- TERMS OF USE -->
+            <div class="col-12 col-md-10 px-3 mx-auto"><h2 id="terms-policy-header" class="h3">Termos de Uso</h2></div>
+            <div id="policy-container-terms" class="col-12 col-md-10 px-3 mx-auto markdown-body">
+                <div class="row mt-3">
+                    <div class="col-12 col-sm-9">
                         <h3 class="h6 font-weight-bold mt-4">▪️ 1- Respeito ao licenciamento:</h3>
                         <p>1.1- O Usuário pode acessar e explorar nosso conteúdo respeitando as licenças do Site:</p>
                         <ul>
-                            <li>para postagens <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" class="ext-link-icon">Creative Commons BY-SA 4.0</a></li>
-                            <li>para trechos de código em postagens respeite a licença anexada (caso exista)</li>
-                            <li>para o código fonte do Site <a href="https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE" target="_blank" rel="noopener noreferrer" class="ext-link-icon">MIT</a></li>
-                            <li>e as demais licenças dos Softwares de terceiros que integram o Site. Veja a página de <a href="/copyright.html">licenças</a>.</li>
+                            <li>para postagens <a href="https://creativecommons.org/licenses/by-sa/4.0/" title="Creative Commons BY-SA 4.0" class="ext-link-icon">Creative Commons BY-SA 4.0</a></li>
+                            <li>para "trechos de código" (<a href="https://en.wikipedia.org/wiki/Snippet" title="Wikipédia (Inglês)" class="ext-link-icon">snippets</a>) em postagens respeite a licença anexada (caso exista)</li>
+                            <li>para o código fonte do Site <a href="https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE" title="The MIT License" class="ext-link-icon">MIT</a></li>
+                            <li>e as demais licenças dos Softwares de terceiros que integram o Site. Veja a página de <a href="./copyright.html" title="licenças" class="ext-link-icon">licenças</a></li>
                         </ul>
-
                         <h3 class="h6 font-weight-bold mt-4">▪️ 2- Conduta:</h3>
-                        <p>2.1- Esperamos que o Usuário se comprometa a não praticar nenhum ato ilícito ao utilizar o Site, seus sistemas e ferramentas, respeitando os administradores e demais usuários.</p>
-
+                        <p>2.1- Esperamos que o Usuário se comprometa a não praticar nenhum ato ilícito ao utilizar o Site, seus sistemas e ferramentas, que respeite os administradores e os demais usuários e não atente contra o bom funcionamento do Site ou sua segurança e a segurança dos demais usuários sob nenhuma forma agora ou no futuro.</p>
                         <h3 class="h6 font-weight-bold mt-4">▪️ 3- Aplicação e Vigência:</h3>
-                        <p>3.1- Estes Termos são válidos e aplicáveis ao Usuário que se enquadre nos critérios de elegibilidade descritos em nossa Política Geral.</p>
+                        <p>3.1- Estes Termos são válidos e aplicáveis ao Usuário que se enquadre nos critérios de "elegibilidade" ao uso deste Site como descrito na seção <a href="#policy-section-2" data-anchor-mg="60" class="anchor-link">Elegibilidade</a> e pelo período de tempo descrito na seção <a href="#policy-section-3" data-anchor-mg="60" class="anchor-link">Vigência</a> em nossa Política Geral.</p>
                     </div>
-                </section>
+                    <div class="col-3 px-0 d-none d-sm-inline-block">
+                        <picture>
+                            <img src="/assets/media/image/1x1.gif"
+                                 data-src="/assets/media/image/svg/terms.svg"
+                                 data-lazy-target
+                                 class="img-fluid w-100 i18n"
+                                 data-i18n-alt="pages.policy.terms.image_alt"
+                                 data-i18n-title="pages.policy.terms.image_title">
+                        </picture>
+                    </div>
+                </div>
+            </div>            <div class="col-12 col-sm-10 mx-auto py-3 py-md-5"><div class="section-dividermask"></div></div>
 
-                <hr>
-
-                <section id="policy-general" class="pt-3">
-                    <h2 class="i18n h3 font-weight-bold mb-3" data-i18n-html="pages.policy.general.heading">Politica Geral</h2>
-                    <div id="policy-container-general">
+            <!-- GENERAL POLICY -->
+            <div class="col-12 col-md-10 px-3 mx-auto"><h2 id="general-policy-header" class="h3">Política Geral</h2></div>
+                       <div class="col-12 col-md-10 px-3 mx-auto">
+                <div class="row mt-3">
+                    <div class="col-5 mx-auto px-0 d-none d-sm-inline-block">
+                        <picture>
+                            <img src="/assets/media/image/1x1.gif"
+                                 data-src="/assets/media/image/svg/agreement.svg" data-lazy-target
+                                 class="img-fluid w-100 i18n"
+                                 data-i18n-alt="pages.policy.general.image_alt"
+                                 data-i18n-title="pages.policy.general.image_title">
+                        </picture>
+                    </div>
+                    <!-- POLICY CONTAINER -->
+                 
+                </div>
+                       </div>
+            <div id="policy-container-general" class="col-12 col-md-10 px-3 mx-auto markdown-body">
+                <div class="row mt-3">
+                    
+                    <div class="col-12 col-sm-9">
                         <h3 class="h6 font-weight-bold mt-4">▪️ Introdução</h3>
-                        <p>Optamos por uma Política minimalista, definindo a concessão de direito à cobertura deste contrato, as garantias, limitações e a Base Legal para eventuais disputas.</p>
+                        <p>Sem surpresas aqui, optamos por uma Política minimalista. Definimos aqui a concessão de direito a cobertura deste contrato, as garantias, limitações e a <strong>Base Legal</strong> para eventuais disputas.</p>
+                        <p>No escopo desta documentação nos referimos ao "<strong>Site</strong>" quando representamos este website e seus proprietários, administradores ou colaboradores e nos referimos a "<strong>Usuário</strong>" como aquele que acessa o Site mas não tem nenhum vínculo administrativo com o Site.</p>
+                        <p>Confira nossa seção <a href="#policy-section-7" title="glossário" class="anchor-link" data-anchor-mg="60"><strong>Glossário</strong></a> para outros termos utilizados neste documento.</p>
 
                         <h3 id="policy-section-1" class="h6 font-weight-bold mt-4">▪️ 1- Reserva de Direitos:</h3>
                         <p>1.1- O Site se reserva ao direito de modificar as Políticas e Termos nelas contidas ou mesmo suspender as atividades do Site com ou sem aviso prévio.</p>
-                        <p>1.2- O Site se reserva ao direito de não ser responsabilizado por violações ao sigilo e privacidade dos dados por motivos que não estejam diretamente ligados à coleta, manuseio e guarda realizados pelo Site.</p>
+                        <p>1.2- O Site se reserva ao direito de não ser responsabilizado por:</p>
+                        <ul>
+                            <li>incapacidade de execução de quaisquer funcionalidades do Site, seus sistemas ou serviços causada por incapacidade técnica e (ou) operacional do dispositivo do Usuário assim como por falhas decorrentes da falta de atualização de sistema, programas ou softwares de navegação (navegador) ou softwares de segurança no dispositivo do Usuário.</li>
+                            <li>atos de "auto ingerência" causada pelo Usuário intencionalmente ou não que possam expor seus próprios dados de maneira pública sejam eles sensíveis ou não.</li>
+                            <li>violações ao sigilo e privacidade dos <strong>dados</strong> do Usuário no uso do Site, seus sistemas ou serviços causadas por softwares ou programas instalados no dispositivo do Usuário como mas não se limitando a:
+                                <ul>
+                                    <li>Programas de monitoramento de atividades no dispositivo (InternetBank, Antivirus, Keyloggers, ...)</li>
+                                    <li>Plugins para navegador que possam ter controle e acesso as páginas do Site ou ao armazenamento do dispositivo</li>
+                                    <li>Programas de terceiros não vinculados ao Site que sejam usados para acessar o Site, seus sistemas e serviços (apps mobile/desktop)</li>
+                                    <li>Acesso de terceiros com ou sem a permissão do Usuário ao seu dispositivo (amigos, familiares ou nos casos de perda e roubo) que possam expor os seus dados.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>1.3- O Site se reserva ao direito de não ser responsabilizado por violações ao sigilo e privacidade dos <strong>dados</strong> do Usuário por quaisquer motivos que não estejam diretamente ligados a <strong>coleta</strong>, <strong>manuseio</strong> e <strong>guarda</strong> realizadas pelo Site, seus sistemas e serviços.</p>
 
                         <h3 id="policy-section-2" class="h6 font-weight-bold mt-4">▪️ 2- Elegibilidade:</h3>
-                        <p>2.1- Podem utilizar o Site usuários legalmente capazes e responsáveis perante sua legislação local aplicável que consintam com estes Termos e Políticas.</p>
+                        <p>2.1- Quaisquer usuários que se enquadrem nas regras a seguir podem ser considerados "elegíveis" a utilizar o Site, seus sistemas e serviços sob os Termos e Políticas deste Site.</p>
+                        <ul>
+                            <li>ser legalmente "capaz" e "responsável" pelos seus atos perante sua legislação local e (ou) aplicável ao ingressar no Site</li>
+                            <li>poder celebrar este contrato em língua <strong>Portuguesa</strong> ou em suas <strong>transcrições</strong> sem prejuízo ou impossibilidade oriunda de sua legislação local</li>
+                            <li>consentir com os <strong>Termos</strong> descritos neste contrato, com as <strong>Políticas do Site</strong> ou seus anexos e documentos complementares</li>
+                        </ul>
+                        <p>2.2- Os usuários que não atendam os itens listados acima serão considerados "<strong>inelegíveis</strong>" ao uso do Site.</p>
+                        <p>2.3- O <strong>Site</strong> se reserva ao direito de não celebrar este contrato no caso de "<strong>inelegibilidade</strong>" do Usuário.</p>
 
                         <h3 id="policy-section-3" class="h6 font-weight-bold mt-4">▪️ 3- Vigência:</h3>
-                        <p>3.1- O período de vigência se estende enquanto o usuário utilizar ou acessar o Site, seus sistemas e serviços.</p>
+                        <p>3.1- O período de vigência se estende por tempo indeterminado enquanto o usuário utilizar|visualizar|acessar o Site, seus sistemas e serviços.</p>
+                        <p>3.2- Esta vigência se extingue sob as seguintes circunstâncias:</p>
+                        <ul>
+                            <li><strong>livre desassociação</strong>: o Usuário por livre e espontânea vontade decide encerrar suas atividades no Site excluindo seus dados</li>
+                            <li><strong>rompimento deste contrato</strong>: constatado o não cumprimento dos <strong>Termos de Uso</strong>, inconformidades com as <strong>Políticas do Site</strong> ou "<strong>inelegibilidade</strong>" do Usuário o Site pode suspender o acesso ou excluir os dados do Usuário mantidos pelo Site, seus sistemas e serviços encerrando assim a "<strong>vigência</strong>" deste contrato</li>
+                            <li><strong>aplicação da lei</strong>: em cumprimento a determinações judiciais ou observância da lei aplicável</li>
+                        </ul>
 
                         <h3 id="policy-section-4" class="h6 font-weight-bold mt-4">▪️ 4- Garantias e Limitações:</h3>
-                        <p>4.1- O Site não oferece nenhuma garantia quanto ao acesso ou disponibilidade do seu conteúdo ou funcionalidades.</p>
+                        <p>4.1- O Site não oferece nenhuma garantia quanto ao acesso ou disponibilidade do seu conteúdo ou suas funcionalidades. <strong>O Usuário é "limitado pela capacidade do seu dispositivo em poder renderizar ou executar" o conteúdo e funcionalidades do Site</strong>.</p>
 
                         <h3 id="policy-section-5" class="h6 font-weight-bold mt-4">▪️ 5- Representante:</h3>
-                        <p>5.1- Este Site nomeou Lauro de Moraes como seu Data Protection Officer (DPO). O contato pode ser feito pela <a href="/dpo.html">página dedicada do DPO</a> ou pelo e-mail <a href="mailto:dpo.subversivo58@gmail.com">dpo.subversivo58@gmail.com</a>, com prazo de resposta de até <strong>30 dias</strong>.</p>
+                        <p>5.1- Este Site nomeou Lauro de Moraes como seu Data Protection Officer (<a href="https://en.wikipedia.org/wiki/Data_Protection_Officer" title="DPO Wikipedia English" target="_blank" rel="nofollow noopener" class="ext-link-icon">DPO</a>).</p>
+                        <p>5.2- O Usuário pode entrar em contato com o DPO através da <a href="./dpo.html" title="DPO">página dedicada do DPO</a>, na guia de configurações do Usuário ou no seguinte endereço de e-mail <a href="mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Politicas%20do%20Site" title="DPO email contact" target="_blank" rel="nofollow noopener" class="ext-link-icon">dpo.subversivo58@gmail.com</a>.</p>
+                        <p>5.3- As solicitações serão respondidas em até <strong>30 dias</strong>, nos termos da regulamentação aplicável a agentes de tratamento de pequeno porte.</p>
 
                         <h3 id="policy-section-6" class="h6 font-weight-bold mt-4">▪️ 6- Lei Aplicável:</h3>
-                        <p>6.1- Esta política está sujeita à Lei da República Federativa do Brasil e o Foro da Comarca de Porto Alegre é competente para dirimir qualquer controvérsia com relação à mesma.</p>
-                    </div>
-                </section>
+                        <p>6.1 - Esta política está sujeita à Lei da República Federativa do Brasil e o Foro da Comarca de Porto Alegre é competente para dirimir qualquer controvérsia com relação à mesma.</p>
 
-                <hr>
-
-                <section id="policy-cookie-agree" class="pt-3">
-                    <h2 class="i18n h3 font-weight-bold mb-3" data-i18n-html="pages.policy.cookies.heading">Aceitar cookies</h2>
-                    <p class="i18n" data-i18n-html="pages.policy.cookies.paragraph1"></p>
-                    <p class="i18n" data-i18n-html="pages.policy.cookies.paragraph2"></p>
-                    <p class="i18n" data-i18n-html="pages.policy.cookies.paragraph3"></p>
-                    <div class="mt-4">
-                        <button type="button" id="yes-cookies-accept" class="i18n btn btn-outline-info rounded-0 cp" data-i18n-html="pages.policy.cookies.button">🍪 segure para ativar cookies</button>
+                        <h3 id="policy-section-7" class="h6 font-weight-bold mt-4">▪️ Glossário:</h3>
+                        <p>Utilizamos alguns termos (palavras) em nossa documentação aos quais nossos usuários "<strong>podem não estar familiarizados</strong>". Para "<strong>um melhor entendimento</strong>", utilizamos como "<strong>fontes de referência explicativa</strong>" as definições apresentadas pela enciclopédia digital <a href="https://pt.wikipedia.org" title="Wikipédia" target="_blank" rel="nofollow noopener" class="ext-link-icon">Wikipédia</a>.</p>
+                        <ul>
+                            <li><a href="https://pt.wikipedia.org/wiki/S%C3%ADtio_eletr%C3%B4nico" title="Wikipédia Sítio Eletrônico" class="ext-link-icon">website</a></li>
+                            <li><a href="https://pt.wikipedia.org/wiki/Cookie_(inform%C3%A1tica)" title="Wikipédia Cookie (informática)" class="ext-link-icon">cookies</a></li>
+                            <li><a href="https://pt.wikipedia.org/wiki/Dados" title="Wikipédia Dados" class="ext-link-icon">dados</a></li>
+                            <li><a href="https://pt.wikipedia.org/wiki/JavaScript" title="Wikipédia JavaScript" class="ext-link-icon">JavaScript</a></li>
+                            <li><a href="https://pt.wikipedia.org/wiki/HTML" title="Wikipédia HTML" class="ext-link-icon">HTML</a></li>
+                            <li><a href="https://pt.wikipedia.org/wiki/Cascading_Style_Sheets" title="Wikipédia Cascading Style Sheets" class="ext-link-icon">CSS</a></li>
+                            <li><a href="https://pt.wikipedia.org/wiki/Server-side" title="Wikipédia Server-side" class="ext-link-icon">Server-side</a></li>
+                        </ul>
+                        <p class="text-center">Porto Alegre RS - 10 de Maio de 2020</p>
                     </div>
-                </section>
-            </article>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-10 mx-auto py-3 py-md-5"><div class="section-dividermask"></div></div>
+
+        </div>
+
+        <div class="row px-0 mx-0 mx-sm-2 mx-md-4 py-3">
+            <div class="col-12 col-sm-10 mx-auto py-3 py-md-5"><div class="section-dividermask"></div></div>
+            <div class="col-12 col-md-10 px-3 mx-auto mt-2">
+                <h3 id="policy-cookie-agree" class="h4 i18n" data-i18n-html="pages.policy.cookies.heading"></h3>
+            </div>
+            <div class="col-12 col-md-10 px-3 mx-auto">
+                <p class="i18n" data-i18n-html="pages.policy.cookies.paragraph1"></p>
+                <p class="i18n" data-i18n-html="pages.policy.cookies.paragraph2"></p>
+                <p class="i18n" data-i18n-html="pages.policy.cookies.paragraph3"></p>
+                <div class="col-12 mt-5 text-center">
+                    <button id="yes-cookies-accept" type="button" class="btn btn-md btn-light border-def pulse pulse-sky mx-auto rounded-0 i18n" data-i18n-html="pages.policy.cookies.button"></button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -218,124 +392,38 @@
                 <h2 id="footer-fh-title" class="col-12 h3 ct"></h2>
                 <p id="footer-fh-content" class="mt-2 col-md-10 mx-auto ct"></p>
             </div>
-            <div class="mt-3 row">
-                <div id="footer-fh-img" data-lazy-target class="col-12 col-md-10 col-lg-8 mx-auto"></div>
-            </div>
+            <div class="mt-3 row"><div id="footer-fh-img" data-lazy-target class="col-12 col-md-10 col-lg-8 mx-auto"></div></div>
         </section>
         <section id="footbody" data-lazy-target class="container-fluid">
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
-                    <div class="row">
-                        <picture class="col">
-                            <img alt="Brand" src="/assets/media/image/1x1.gif"
-                                 data-src="/assets/media/image/logos/site-logo@500x100.webp"
-                                 data-lazy-target width="300" height="50"
-                                 class="img-fluid w-100 cp">
-                        </picture>
-                    </div>
-                    <div class="mt-2 row">
-                        <p class="col white ct">©️ 2010 - 2026 Subversivo58 ®️</p>
-                    </div>
-                    <div class="mt-3 row">
-                        <p data-i18n-html="footer.content.desc1" class="i18n col-12 ct"></p>
-                        <div class="col alert alert-info rounded-0 mx-3 p-2 ct">
-                            <small data-i18n-html="footer.content.desc2" class="i18n mb-0"></small>
-                        </div>
-                    </div>
+                    <div class="row"><picture class="col"><img alt="Brand" src="/assets/media/image/1x1.gif" data-src="/assets/media/image/logos/site-logo@500x100.webp" data-lazy-target width="300" height="50" class="img-fluid w-100 cp"></picture></div>
+                    <div class="mt-2 row"><p class="col white ct">©️ 2010 - 2026 Subversivo58 ®️</p></div>
+                    <div class="mt-3 row"><p data-i18n-html="footer.content.desc1" class="i18n col-12 ct"></p><div class="col alert alert-info rounded-0 mx-3 p-2 ct"><small data-i18n-html="footer.content.desc2" class="i18n mb-0"></small></div></div>
                 </div>
                 <div class="col-12 my-5 d-sm-none dropdown-divider"></div>
                 <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
                     <span id="general-contact" data-i18n-html="footer.content.contactnf" class="i18n white"></span>
-                    <div class="mt-3 col px-0">
-                        <small class="col-1 ct pl-0">🏢</small>
-                        <small class="col pl-0"><a href="https://www.google.com/search?q=@subversivo58" target="_blank" rel="noopener">Subversivo58</a></small>
-                    </div>
-                    <div class="col mt-3 px-0">
-                        <small class="col-1 ct pl-0">🗺️</small>
-                        <small class="col pl-0"><a href="geo:Porto Alegre, RS - Brasil">Porto Alegre, RS - Brasil</a></small>
-                    </div>
-                    <div class="col mt-3 px-0">
-                        <small class="col-1 ct pl-0">📧</small>
-                        <small class="col pl-0"><a href="mailto:subversivo58@gmail.com?subject=Contact" rel="nofollow">subversivo58@gmail.com</a></small>
-                    </div>
-                    <div class="col mt-3 px-0">
-                        <small class="col-1 ct pl-0">📱</small>
-                        <small class="col pl-0"><a href="tel:+5551984419162">+55 (51) 98441-9162</a></small>
-                    </div>
-                    <div class="col mt-3 px-0">
-                        <small class="col-1 ct pl-0">🧭</small>
-                        <small class="col pl-0"><a href="geo:-30.0397,-51.2382">-30.0397,-51.2382</a></small>
-                    </div>
-                    <div class="mt-3 row ct">
-                        <figure class="col mb-0">
-                            <a href="https://www.openstreetmap.org/#map=12/-30.0397/-51.2382" target="_blank" rel="noopener">
-                                <img alt="geo map" src="/assets/media/image/1x1.gif"
-                                     data-src="/assets/media/image/poa-osm-print.webp"
-                                     data-lazy-target width="285" height="165"
-                                     class="img-fluid w-100 cp">
-                            </a>
-                            <figcaption class="bg-white">
-                                ©️ <a class="tdu contrast" href="//www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors
-                            </figcaption>
-                        </figure>
-                    </div>
+                    <div class="mt-3 col px-0"><small class="col-1 ct pl-0">🏢</small><small class="col pl-0"><a href="https://www.google.com/search?q=@subversivo58" target="_blank" rel="noopener">Subversivo58</a></small></div>
+                    <div class="col mt-3 px-0"><small class="col-1 ct pl-0">🗺️</small><small class="col pl-0"><a href="geo:Porto Alegre, RS - Brasil">Porto Alegre, RS - Brasil</a></small></div>
+                    <div class="col mt-3 px-0"><small class="col-1 ct pl-0">📧</small><small class="col pl-0"><a href="mailto:subversivo58@gmail.com?subject=Contact" rel="nofollow">subversivo58@gmail.com</a></small></div>
+                    <div class="col mt-3 px-0"><small class="col-1 ct pl-0">📱</small><small class="col pl-0"><a href="tel:+5551984419162">+55 (51) 98441-9162</a></small></div>
+                    <div class="col mt-3 px-0"><small class="col-1 ct pl-0">🧭</small><small class="col pl-0"><a href="geo:-30.0397,-51.2382">-30.0397,-51.2382</a></small></div>
+                    <div class="mt-3 row ct"><figure class="col mb-0"><a href="https://www.openstreetmap.org/#map=12/-30.0397/-51.2382" target="_blank" rel="noopener"><img alt="geo map" src="/assets/media/image/1x1.gif" data-src="/assets/media/image/poa-osm-print.webp" data-lazy-target width="285" height="165" class="img-fluid w-100 cp"></a><figcaption class="bg-white">©️ <a class="tdu contrast" href="//www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</figcaption></figure></div>
                 </div>
                 <div class="col-12 my-5 d-md-none dropdown-divider"></div>
-                <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
-                    <span data-i18n-html="footer.content.blognew" class="i18n white"></span>
-                    <div id="dinamic-footer-news" class="col px-0"></div>
-                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 widget-column"><span data-i18n-html="footer.content.blognew" class="i18n white"></span><div id="dinamic-footer-news" class="col px-0"></div></div>
                 <div class="col-12 my-5 d-sm-none d-md-block d-lg-none dropdown-divider"></div>
                 <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
                     <span data-i18n-html="footer.content.uselink" class="i18n white"></span>
-                    <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="/about.html">
-                            <small class="col-1 px-0">❔</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.about"></small>
-                        </a>
-                    </div>
-                    <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="/copyright.html">
-                            <small class="col-1 px-0">©️</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="combo.copyr"></small>
-                        </a>
-                    </div>
-                    <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="/docs/">
-                            <small class="col-1 px-0">📖</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.docs"></small>
-                        </a>
-                    </div>
-                    <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="/policy.html">
-                            <small class="col-1 px-0">📃</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.policies"></small>
-                        </a>
-                    </div>
-                    <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="/dpo.html">
-                            <small class="col-1 px-0">🛡️</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.dpo"></small>
-                        </a>
-                    </div>
-                    <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="::" data-fix-modal="#modal-feedback">
-                            <small class="col-1 px-0">📣</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.feedback"></small>
-                        </a>
-                    </div>
-                    <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="https://github.com/subversivo58/subversivo58.github.io" target="_blank" rel="noopener">
-                            <small class="col-1 px-0">🍴</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.source"></small>
-                        </a>
-                    </div>
-                    <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="::" data-fix-modal="#modal-bugs-report">
-                            <small class="col-1 px-0">🐛</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.bugs"></small>
-                        </a>
-                    </div>
+                    <div class="col mt-3 footer-column-bb px-0"><a class="row mx-0 cp" href="/about.html"><small class="col-1 px-0">❔</small><small class="i18n col px-0 ml-2" data-i18n-html="footer.about"></small></a></div>
+                    <div class="col mt-3 footer-column-bb px-0"><a class="row mx-0 cp" href="/copyright.html"><small class="col-1 px-0">©️</small><small class="i18n col px-0 ml-2" data-i18n-html="combo.copyr"></small></a></div>
+                    <div class="col mt-3 footer-column-bb px-0"><a class="row mx-0 cp" href="/docs/"><small class="col-1 px-0">📖</small><small class="i18n col px-0 ml-2" data-i18n-html="footer.content.docs"></small></a></div>
+                    <div class="col mt-3 footer-column-bb px-0"><a class="row mx-0 cp disabled" href="javascript:void(0)" aria-disabled="true" tabindex="-1"><small class="col-1 px-0">📃</small><small class="i18n col px-0 ml-2" data-i18n-html="footer.content.policies"></small></a></div>
+                    <div class="col mt-3 footer-column-bb px-0"><a class="row mx-0 cp" href="/dpo.html"><small class="col-1 px-0">🛡️</small><small class="i18n col px-0 ml-2" data-i18n-html="footer.content.dpo"></small></a></div>
+                    <div class="col mt-3 footer-column-bb px-0"><a class="row mx-0 cp" href="::" data-fix-modal="#modal-feedback"><small class="col-1 px-0">📣</small><small class="i18n col px-0 ml-2" data-i18n-html="footer.content.feedback"></small></a></div>
+                    <div class="col mt-3 footer-column-bb px-0"><a class="row mx-0 cp" href="https://github.com/subversivo58/subversivo58.github.io" target="_blank" rel="noopener"><small class="col-1 px-0">🍴</small><small class="i18n col px-0 ml-2" data-i18n-html="footer.content.source"></small></a></div>
+                    <div class="col mt-3 footer-column-bb px-0"><a class="row mx-0 cp" href="::" data-fix-modal="#modal-bugs-report"><small class="col-1 px-0">🐛</small><small class="i18n col px-0 ml-2" data-i18n-html="footer.content.bugs"></small></a></div>
                 </div>
             </div>
         </section>

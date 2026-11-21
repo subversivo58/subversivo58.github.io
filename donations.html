@@ -39,91 +39,246 @@
         <meta http-equiv="refresh" content="0;url=/nojs.html">
     </noscript>
 </head>
+
 <body id="body">
-    <!-- CONTENT CONTAINER -->
-    <section id="index-central-block" class="container-fluid px-0 pt-5 fill-height">
-        <div class="page-banner donations-page parallax text-white px-3 px-md-5 py-5">
-            <div class="container">
-                <h1 class="i18n fontClamp font-weight-bold tsa2 mb-3" data-i18n-html="pages.donations.heading">Pensando em fazer algo legal?</h1>
-                <p class="i18n small mb-0 bg-white text-dark d-inline-block px-2 py-1" data-i18n-html="pages.donations.photo">Foto de <a href="https://unsplash.com/@clarktibbs" target="_blank" rel="noopener" class="ext-link-icon">Clark Tibbs</a> em <a href="https://unsplash.com/" target="_blank" rel="noopener" class="ext-link-icon">Unsplash</a></p>
-            </div>
-        </div>
-
-        <div class="container py-5">
-            <div class="card rounded-0 border mb-4">
-                <div class="card-body">
-                    <h2 class="i18n h4 font-weight-bold mb-2" data-i18n-html="pages.donations.thanks_title">Agradecimentos</h2>
-                    <p class="i18n mb-3" data-i18n-html="pages.donations.thanks_text">Com muito orgulho utilizamos as <a href="https://pages.github.com/" target="_blank" rel="nofollow noopener" class="ext-link-icon">Páginas do Github</a> e os serviços de <a href="https://workers.cloudflare.com/" target="_blank" rel="nofollow noopener" class="ext-link-icon">Cloudflare Workers</a>, estas plataformas e suas ferramentas são realmente incriveis que nos permitem fazer coisas legais como este blogue e nossas ferramentas.</p>
-                    <h3 class="i18n h6 font-weight-bold mb-2" data-i18n-html="pages.donations.platforms_title">Conheça estas plataformas</h3>
-                    <div class="d-flex flex-wrap gap-2">
-                        <a href="https://pages.github.com/" target="_blank" rel="nofollow noopener" class="i18n btn btn-sm btn-outline-info rounded-0 mr-2 mb-2 ext-link-icon" data-i18n-html="pages.donations.link_github">GitHub Pages</a>
-                        <a href="https://workers.cloudflare.com/" target="_blank" rel="nofollow noopener" class="i18n btn btn-sm btn-outline-info rounded-0 mb-2 ext-link-icon" data-i18n-html="pages.donations.link_workers">Cloudflare Workers</a>
-                    </div>
+    <!-- -->
+    <section class="container-fluid px-0 mt-5">
+        <!--vertical align on parent using my-auto, horizontal align on self mx-auto-->
+        <header
+            data-parallax-speed="9"
+            class="row mx-0 page-banner donations-page parallax"
+        >
+            <div class="col-12 jumbotron rounded-0 bg-none">
+                <div class="col-12 px-0">
+                    <h1
+                        class="text-center font-weight-bold font-italic tsa2-gray fontClamp text-light i18n"
+                        data-i18n-html="pages.donations.heading"
+                    ></h1>
                 </div>
             </div>
+            <div class="col-12 unplash-credits-position">
+                <small
+                    class="badge badge-light fr i18n"
+                    data-i18n-html="pages.donations.photo"
+                ></small>
+            </div>
+        </header>
 
-            <article class="markdown-body post-content">
-                <h2 class="i18n h3 font-weight-bold mb-4" data-i18n-html="pages.donations.donate_title">Sua doação é importante</h2>
-                <p>Manter o blogue em dia requer tempo e dedicação, embora as plataformas e ferramentas que utilizamos sejam gratuitas, elas possuem limitação. Cada uma delas limita quantos acessos um site pode ter por mês assim como, a quantidade de dados que podem trafegar de seu servidores durante estes acessos.</p>
-                <p>Aqui neste blogue gostamos da idéia de explorar novas funcionalidades, implementar novos recursos e quem sabe, aumentar a gama de serviços bem como construir uma comunidade vibrante e dinâmica.</p>
-                <p>Para alcançar estas idéias é necessário investir recursos na busca de um dominio próprio, servidores VPS que suportem mais trafego, espaço em armazenamento e que permitam a construção de uma gama maior de aplicações.</p>
-                <p>Abominamos a idéia de angariar fundos com propagandas, paywalls, rastreio pago ou venda de dados ...defendemos e <strong>acreditamos que você é o único detentor de seus dados</strong> como descrito em nosso <a href="/you-in-control-of-your-data.html" title="White Paper" target="_blank" rel="nofollow noopener" class="ext-link-icon">"White Paper"</a> por isso, sua ajudinha pode fazer toda a diferença, nos incentivando e ajudando a fazer mais e fazer melhor 🚀</p>
+        <main
+            id="about-page-main"
+            class="col-12 col-md-11 mx-auto bg-white my-4"
+        >
+            <div class="col-12 col-md-10 px-3 mx-auto">
+                <div class="row mt-5 pt-3">
+                    <div class="col-12 px-0 contrast">
+                        <h3
+                            class="contrast mt-3 mb-4 i18n"
+                            data-i18n-html="pages.donations.thanks_title"
+                        ></h3>
+                        <p
+                            class="i18n"
+                            data-i18n-html="pages.donations.thanks_text"
+                        ></p>
+                    </div>
 
-                <div class="row px-0 mx-0 mx-sm-2 mx-md-4 py-3">
-                    <div class="col-12 py-3 py-sm-0 px-2 text-center mx-auto">
-                        <div class="col-12 alert alert-success rounded-0 px-2 mt-3">
-                            <p>Você pode contribuir com este blogue de inúmeras formas, compartilhando-o em suas redes, melhorando o código, com colaboração editorial, interagindo com nossa comunidade e muito mais.</p>
-                            <p class="mb-0">Também considere dar "<b>aquele help a mais</b>" escolhendo uma das opções de doação abaixo 🎊</p>
+                    <div class="col-12 px-0 contrast mt-3 text-center">
+                        <h3
+                            class="i18n"
+                            data-i18n-html="pages.donations.platforms_title"
+                        ></h3>
+                    </div>
+
+                    <div class="row mt-5 pb-5">
+                        <div class="col-6 m-0 px-5">
+                            <div class="row">
+                                <picture class="col-12 px-0 m-2">
+                                    <img
+                                        class="img-fluid w-100"
+                                        alt="GitHub logo"
+                                        src="./assets/media/image/logos/github-logo.png"
+                                    />
+                                </picture>
+
+                                <a
+                                    href="https://pages.github.com/"
+                                    target="_blank"
+                                    rel="nofollow noopener"
+                                    class="ext-link-icon ml-2"
+                                >
+                                    <small
+                                        class="i18n"
+                                        data-i18n-html="pages.donations.link_github"
+                                    ></small>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-6 m-0 px-5">
+                            <div class="row">
+                                <picture class="col-12 px-0 m-2">
+                                    <img
+                                        class="img-fluid w-100"
+                                        alt="Cloudflare Workers logo"
+                                        src="./assets/media/image/logos/cloudflare-workers-logo.jpg"
+                                    />
+                                </picture>
+
+                                <a
+                                    href="https://workers.cloudflare.com/built-with"
+                                    target="_blank"
+                                    rel="nofollow noopener"
+                                    class="ext-link-icon ml-2"
+                                >
+                                    <small
+                                        class="i18n"
+                                        data-i18n-html="pages.donations.link_workers"
+                                    ></small>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <hr>
-
-                <div class="row px-0 mx-0 mx-sm-2 mx-md-4 py-3 align-items-center text-center">
-                    <div class="col-12 col-md-4 py-3 px-2 mx-auto">
-                        <a href="https://www.paypal.com/donate?hosted_button_id=KDYUNCBP4F3WE" target="_blank" rel="nofollow noopener" class="ext-link-icon d-inline-block">
-                            <picture>
-                                <img alt="PayPal" src="/assets/media/image/1x1.gif" data-src="/assets/media/image/donations/paypal-cards-logo.jpg" data-lazy-target class="img-fluid">
-                            </picture>
-                        </a>
-                    </div>
-                    <div class="col-12 col-md-4 py-3 px-2 mx-auto">
-                        <a href="https://ko-fi.com/subversivo58" target="_blank" rel="nofollow noopener" class="ext-link-icon d-inline-block">
-                            <picture>
-                                <img alt="Ko-fi" src="/assets/media/image/1x1.gif" data-src="/assets/media/image/donations/ko-fi-logo.png" data-lazy-target class="img-fluid">
-                            </picture>
-                        </a>
-                    </div>
-                    <div class="col-12 col-md-4 py-3 px-2 mx-auto">
-                        <figure class="mb-0">
-                            <picture>
-                                <img alt="PIX QR Code" src="/assets/media/image/1x1.gif" data-src="/assets/media/image/donations/pagbank-qrcode.png" data-lazy-target class="img-fluid">
-                            </picture>
-                            <figcaption class="p-2 text-center">PagBank Pix</figcaption>
-                        </figure>
+                    <div class="col-12 m-0 mt-5 contrast">
+                        <h3
+                            class="i18n"
+                            data-i18n-html="pages.donations.donate_title"
+                        ></h3>
                     </div>
                 </div>
 
-                <hr>
+                <div class="row mt-3">
+                    <!-- PRIVACY CONTAINER -->
 
-                <div class="row px-0 mx-0 mx-sm-2 mx-md-4 py-3">
-                    <div class="col-12 col-md-10 py-3 py-sm-0 px-2 text-center mx-auto">
-                        <div class="col-12 alert alert-danger rounded-0 px-2 mt-3">
-                            <small>Os logotipos e logomarcas aqui utilizados são propriedades de seus respectivos detentores de direito. Utilizá-los aqui não garante nenhum tipo de vinculo ou endoso por parte destas marcas.</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
+<div
+    id="copyright-container"
+    class="col-12 markdown-body"
+>
+    <p
+        class="i18n"
+        data-i18n-html="pages.donations.content.intro1"
+    ></p>
+
+    <p
+        class="i18n"
+        data-i18n-html="pages.donations.content.intro2"
+    ></p>
+
+    <p
+        class="i18n"
+        data-i18n-html="pages.donations.content.intro3"
+    ></p>
+
+    <p
+        class="i18n"
+        data-i18n-html="pages.donations.content.intro4"
+    ></p>
+
+    <div class="row px-0 mx-0 mx-sm-2 mx-md-4 py-3">
+        <div class="col-12 py-3 py-sm-0 px-2 text-center mx-auto">
+            <div class="col-12 alert alert-success rounded-0 px-2 mt-3">
+                <p
+                    class="i18n"
+                    data-i18n-html="pages.donations.content.contribution1"
+                ></p>
+
+                <p
+                    class="i18n"
+                    data-i18n-html="pages.donations.content.contribution2"
+                ></p>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <section class="row container-fluid px-0 mx-0">
-        <span class="bg-green-special col progress-slim-0 m-0 lh-75"></span>
-        <span class="bg-blue col progress-slim"></span>
-        <span class="bg-red col progress-slim"></span>
-        <span class="bg-aqua col progress-slim"></span>
-        <span class="bg-yellowgreen col progress-slim"></span>
+    <hr />
+
+    <div class="row px-0 mx-0 mx-sm-2 mx-md-4 py-3">
+        <div class="col-10 col-md-4 py-3 py-sm-0 px-2 mx-auto">
+            <a
+                href="https://www.paypal.com/donate?hosted_button_id=KDYUNCBP4F3WE"
+                target="about:blank_"
+                rel="nofollow noopener"
+                class="ext-link-icon"
+            >
+                <picture>
+                    <img
+                        alt="PayPal"
+                        src="./assets/media/image/donations/paypal-cards-logo.jpg"
+                    />
+                </picture>
+            </a>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row px-0 mx-0 mx-sm-2 mx-md-4 py-3">
+        <div class="col-10 col-md-4 py-3 py-sm-0 px-2 mx-auto">
+            <a
+                href="https://ko-fi.com/subversivo58"
+                target="about:blank_"
+                rel="nofollow noopener"
+                class="ext-link-icon"
+            >
+                <picture>
+                    <img
+                        alt="Ko-fi"
+                        src="./assets/media/image/donations/ko-fi-logo.png"
+                    />
+                </picture>
+            </a>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row px-0 mx-0 mx-sm-2 mx-md-4 py-3">
+        <div class="col-10 col-md-4 py-3 py-sm-0 px-2 mx-auto">
+            <figure>
+                <picture>
+                    <img
+                        alt="PIX QR Code"
+                        src="./assets/media/image/donations/pagbank-qrcode.png"
+                    />
+                </picture>
+                <figcaption
+                    class="p-2 text-center i18n"
+                    data-i18n-html="pages.donations.content.pix_caption"
+                ></figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row px-0 mx-0 mx-sm-2 mx-md-4 py-3">
+        <div class="col-12 col-md-10 py-3 py-sm-0 px-2 text-center mx-auto">
+            <div class="col-12 alert alert-danger rounded-0 px-2 mt-3">
+                <small
+                    class="i18n"
+                    data-i18n-html="pages.donations.content.trademarks"
+                ></small>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-10 mx-auto py-3 py-md-5">
+                <div class="section-dividermask"></div>
+            </div>
+        </main>
+
+        <section class="row container-fluid px-0 mx-0">
+            <span
+                class="bg-green-special col progress-slim-0 m-0 lh-75"
+            ></span>
+            <span class="bg-blue col progress-slim"></span>
+            <span class="bg-red col progress-slim"></span>
+            <span class="bg-aqua col progress-slim"></span>
+            <span class="bg-yellowgreen col progress-slim"></span>
+        </section>
     </section>
 
     <!-- FOOTER -->
@@ -131,131 +286,276 @@
         <section id="foothead" class="container-fluid d-none">
             <div class="row">
                 <h2 id="footer-fh-title" class="col-12 h3 ct"></h2>
-                <p id="footer-fh-content" class="mt-2 col-md-10 mx-auto ct"></p>
+                <p
+                    id="footer-fh-content"
+                    class="mt-2 col-md-10 mx-auto ct"
+                ></p>
             </div>
             <div class="mt-3 row">
-                <div id="footer-fh-img" data-lazy-target class="col-12 col-md-10 col-lg-8 mx-auto"></div>
+                <div
+                    id="footer-fh-img"
+                    data-lazy-target
+                    class="col-12 col-md-10 col-lg-8 mx-auto"
+                ></div>
             </div>
         </section>
+
+        <!-- FOOTBODY -->
         <section id="footbody" data-lazy-target class="container-fluid">
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
                     <div class="row">
                         <picture class="col">
-                            <img alt="Brand" src="/assets/media/image/1x1.gif"
-                                 data-src="/assets/media/image/logos/site-logo@500x100.webp"
-                                 data-lazy-target width="300" height="50"
-                                 class="img-fluid w-100 cp">
+                            <img
+                                alt="Brand"
+                                src="./assets/media/image/1x1.gif"
+                                data-src="./assets/media/image/logos/site-logo@500x100.webp"
+                                data-lazy-target
+                                width="300"
+                                height="50"
+                                class="img-fluid w-100 cp"
+                            />
                         </picture>
                     </div>
+
                     <div class="mt-2 row">
-                        <p class="col white ct">©️ 2010 - 2026 Subversivo58 ®️</p>
+                        <p class="col white ct">
+                            ©️ 2010 - 2026 Subversivo58 ®️
+                        </p>
                     </div>
+
                     <div class="mt-3 row">
-                        <p data-i18n-html="footer.content.desc1" class="i18n col-12 ct"></p>
-                        <div class="col alert alert-info rounded-0 mx-3 p-2 ct">
-                            <small data-i18n-html="footer.content.desc2" class="i18n mb-0"></small>
+                        <p
+                            data-i18n-html="footer.content.desc1"
+                            class="i18n col-12 ct"
+                        ></p>
+                        <div
+                            class="col alert alert-info rounded-0 mx-3 p-2 ct"
+                        >
+                            <small
+                                data-i18n-html="footer.content.desc2"
+                                class="i18n mb-0"
+                            ></small>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-12 my-5 d-sm-none dropdown-divider"></div>
+
                 <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
-                    <span id="general-contact" data-i18n-html="footer.content.contactnf" class="i18n white"></span>
+                    <span
+                        id="general-contact"
+                        data-i18n-html="footer.content.contactnf"
+                        class="i18n white"
+                    ></span>
+
                     <div class="mt-3 col px-0">
                         <small class="col-1 ct pl-0">🏢</small>
-                        <small class="col pl-0"><a href="https://www.google.com/search?q=@subversivo58" target="_blank" rel="noopener">Subversivo58</a></small>
+                        <small class="col pl-0">
+                            <a
+                                href="https://www.google.com/search?q=@subversivo58"
+                                target="_blank"
+                                rel="noopener"
+                            >Subversivo58</a>
+                        </small>
                     </div>
+
                     <div class="col mt-3 px-0">
                         <small class="col-1 ct pl-0">🗺️</small>
-                        <small class="col pl-0"><a href="geo:Porto Alegre, RS - Brasil">Porto Alegre, RS - Brasil</a></small>
+                        <small class="col pl-0">
+                            <a href="geo:Porto Alegre, RS - Brasil">
+                                Porto Alegre, RS - Brasil
+                            </a>
+                        </small>
                     </div>
+
                     <div class="col mt-3 px-0">
                         <small class="col-1 ct pl-0">📧</small>
-                        <small class="col pl-0"><a href="mailto:subversivo58@gmail.com?subject=Contact" rel="nofollow">subversivo58@gmail.com</a></small>
+                        <small class="col pl-0">
+                            <a
+                                href="mailto:subversivo58@gmail.com?subject=Contact"
+                                rel="nofollow"
+                            >subversivo58@gmail.com</a>
+                        </small>
                     </div>
+
+                    <div class="col mt-3 px-0">
+                        <small class="col-1 ct pl-0">🌎</small>
+                        <small class="col pl-0">
+                            <a href="https://subversivo58.github.io/">
+                                https://subversivo58.github.io/
+                            </a>
+                        </small>
+                    </div>
+
                     <div class="col mt-3 px-0">
                         <small class="col-1 ct pl-0">📱</small>
-                        <small class="col pl-0"><a href="tel:+5551984419162">+55 (51) 98441-9162</a></small>
+                        <small class="col pl-0">
+                            <a href="tel:+5551984419162">
+                                +55 (51) 98441-9162
+                            </a>
+                        </small>
                     </div>
+
                     <div class="col mt-3 px-0">
                         <small class="col-1 ct pl-0">🧭</small>
-                        <small class="col pl-0"><a href="geo:-30.0397,-51.2382">-30.0397,-51.2382</a></small>
+                        <small class="col pl-0">
+                            <a href="geo:-30.0397,-51.2382">
+                                -30.0397,-51.2382
+                            </a>
+                        </small>
                     </div>
+
                     <div class="mt-3 row ct">
                         <figure class="col mb-0">
-                            <a href="https://www.openstreetmap.org/#map=12/-30.0397/-51.2382" target="_blank" rel="noopener">
-                                <img alt="geo map" src="/assets/media/image/1x1.gif"
-                                     data-src="/assets/media/image/poa-osm-print.webp"
-                                     data-lazy-target width="285" height="165"
-                                     class="img-fluid w-100 cp">
+                            <a
+                                href="https://www.openstreetmap.org/#map=12/-30.0397/-51.2382"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                <img
+                                    alt="geo map"
+                                    src="./assets/media/image/1x1.gif"
+                                    data-src="assets/media/image/poa-osm-print.webp"
+                                    data-lazy-target
+                                    width="285"
+                                    height="165"
+                                    class="img-fluid w-100 cp"
+                                />
                             </a>
                             <figcaption class="bg-white">
-                                ©️ <a class="tdu contrast" href="//www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors
+                                ©️
+                                <a
+                                    class="tdu contrast"
+                                    href="//www.openstreetmap.org/copyright"
+                                    target="_blank"
+                                    rel="noopener"
+                                >OpenStreetMap</a>
+                                contributors
                             </figcaption>
                         </figure>
                     </div>
                 </div>
+
                 <div class="col-12 my-5 d-md-none dropdown-divider"></div>
+
                 <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
-                    <span data-i18n-html="footer.content.blognew" class="i18n white"></span>
+                    <span
+                        data-i18n-html="footer.content.blognew"
+                        class="i18n white"
+                    ></span>
                     <div id="dinamic-footer-news" class="col px-0"></div>
                 </div>
-                <div class="col-12 my-5 d-sm-none d-md-block d-lg-none dropdown-divider"></div>
+
+                <div
+                    class="col-12 my-5 d-sm-none d-md-block d-lg-none dropdown-divider"
+                ></div>
+
                 <div class="col-sm-6 col-md-4 col-lg-3 widget-column">
-                    <span data-i18n-html="footer.content.uselink" class="i18n white"></span>
+                    <span
+                        data-i18n-html="footer.content.uselink"
+                        class="i18n white"
+                    ></span>
+
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="/about.html">
+                        <a class="row mx-0 cp" href="./about.html">
                             <small class="col-1 px-0">❔</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.about"></small>
+                            <small
+                                class="i18n col px-0 ml-2"
+                                data-i18n-html="footer.about"
+                            ></small>
                         </a>
                     </div>
+
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="/copyright.html">
+                        <a class="row mx-0 cp" href="copyright.html">
                             <small class="col-1 px-0">©️</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="combo.copyr"></small>
+                            <small
+                                class="i18n col px-0 ml-2"
+                                data-i18n-html="combo.copyr"
+                            ></small>
                         </a>
                     </div>
+
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="/docs/">
+                        <a class="row mx-0 cp" href="docs/">
                             <small class="col-1 px-0">📖</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.docs"></small>
+                            <small
+                                class="i18n col px-0 ml-2"
+                                data-i18n-html="footer.content.docs"
+                            ></small>
                         </a>
                     </div>
+
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="/policy.html">
+                        <a class="row mx-0 cp" href="policy.html">
                             <small class="col-1 px-0">📃</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.policies"></small>
+                            <small
+                                class="i18n col px-0 ml-2"
+                                data-i18n-html="footer.content.policies"
+                            ></small>
                         </a>
                     </div>
+
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="/dpo.html">
+                        <a class="row mx-0 cp" href="./dpo.html">
                             <small class="col-1 px-0">🛡️</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.dpo"></small>
+                            <small
+                                class="i18n col px-0 ml-2"
+                                data-i18n-html="footer.content.dpo"
+                            ></small>
                         </a>
                     </div>
+
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="::" data-fix-modal="#modal-feedback">
+                        <a
+                            class="row mx-0 cp"
+                            href="::"
+                            data-fix-modal="#modal-feedback"
+                        >
                             <small class="col-1 px-0">📣</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.feedback"></small>
+                            <small
+                                class="i18n col px-0 ml-2"
+                                data-i18n-html="footer.content.feedback"
+                            ></small>
                         </a>
                     </div>
+
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="https://github.com/subversivo58/subversivo58.github.io" target="_blank" rel="noopener">
+                        <a
+                            class="row mx-0 cp"
+                            href="https://github.com/subversivo58/subversivo58.github.io"
+                            target="_blank"
+                            rel="noopener"
+                        >
                             <small class="col-1 px-0">🍴</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.source"></small>
+                            <small
+                                class="i18n col px-0 ml-2"
+                                data-i18n-html="footer.content.source"
+                            ></small>
                         </a>
                     </div>
+
                     <div class="col mt-3 footer-column-bb px-0">
-                        <a class="row mx-0 cp" href="::" data-fix-modal="#modal-bugs-report">
+                        <a
+                            class="row mx-0 cp"
+                            href="::"
+                            data-fix-modal="#modal-bugs-report"
+                        >
                             <small class="col-1 px-0">🐛</small>
-                            <small class="i18n col px-0 ml-2" data-i18n-html="footer.content.bugs"></small>
+                            <small
+                                class="i18n col px-0 ml-2"
+                                data-i18n-html="footer.content.bugs"
+                            ></small>
                         </a>
                     </div>
                 </div>
             </div>
         </section>
     </footer>
+
     <!-- JAVASCRIPT RESOURCES -->
-    <script type="module" src="/assets/js/setup.mjs"></script>
+    <script type="module" src="./assets/js/setup.mjs"></script>
 </body>
+
 </html>
