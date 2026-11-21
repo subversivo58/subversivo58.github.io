@@ -232,7 +232,9 @@
             "lang": "Idiomas",
             "marks": "Marcador",
             "admin": "Administração",
-            "share": "Compartilhar"
+            "share": "Compartilhar",
+            "theme_light": "Tema claro",
+            "theme_dark": "Tema escuro"
         },
         "version": "Versão",
         "notes_form": {

@@ -232,7 +232,9 @@
             "lang": "言語",
             "marks": "マーカー",
             "admin": "管理",
-            "share": "共有"
+            "share": "共有",
+            "theme_light": "ライトテーマ",
+            "theme_dark": "ダークテーマ"
         },
         "version": "バージョン",
         "notes_form": {

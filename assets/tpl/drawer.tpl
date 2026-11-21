@@ -1,4 +1,3 @@
-
 <!-- DRAWER -->
 <div data-drawer="drawer-menu" class="drawer-menu drawer-container drawer-md fx md-z-index invisible">
     <div class="arrow-up pa"></div>
@@ -86,6 +85,18 @@
             <div data-toggle="modal" data-target="#modal-source-version-info" class="p-2 col-4 ct cp">
                 <span class="d-block p-1">📦</span>
                 <span class="d-block i18n" data-i18n-html="drawer.version"></span>
+            </div>
+
+            <!-- THEME -->
+            <div id="drawer-theme" class="p-2 col-4 ct cp">
+                <button type="button" id="drawer-theme-dark" class="w-100 p-0 border-0 bg-transparent text-reset cp">
+                    <span class="d-block p-1">⚫</span>
+                    <span data-i18n-html="drawer.words.theme_dark" class="i18n d-block"></span>
+                </button>
+                <button type="button" id="drawer-theme-light" class="w-100 p-0 border-0 bg-transparent text-reset cp d-none">
+                    <span class="d-block p-1">⚪</span>
+                    <span data-i18n-html="drawer.words.theme_light" class="i18n d-block"></span>
+                </button>
             </div>
 
             <!-- ADMINISTRATION -->
