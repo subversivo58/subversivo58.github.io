@@ -1518,10 +1518,7 @@ const SetupDOMReady = async evt => {
                                 const api = GitHubAPIInstance;
                                 api.setRepo(REPOSITORY_OWNER, REPOSITORY_NAME);
                                 await api.setBranch(REPOSITORY_BRANCH);
-                                return api.pushFiles(
-                                    `Publicação: ${post.title || post.slug}`,
-                                    post.files
-                                );
+                                return api.pushFiles(`Post: ${post.operation || "create"} "${post.title || post.slug}"`, post.files);
                             };
 
                             let response;

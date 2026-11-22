@@ -93,11 +93,14 @@ class AdminPosts {
 
         const createPost = manager.createPost.bind(manager)
 
-        manager.createPost = data => {
-            if (editor.editingPost) {
-                return this.prepareUpdatePost(editor.editingPost, data)
-            }
-            return createPost(data)
+        manager.createPost = async data => {
+           if (editor.editingPost) {
+               const post = await this.prepareUpdatePost(editor.editingPost, data)
+               return { ...post, operation: 'update' }
+           }
+
+           const post = await createPost(data)
+           return { ...post, operation: 'create' }
         }
 
         const resetEditor = editor.resetEditor.bind(editor)
@@ -595,6 +598,7 @@ class AdminPosts {
         }
 
         return {
+            operation: 'delete',
             slug: current.slug,
             title: current.title,
             files: [...files.values()],

@@ -107,7 +107,7 @@ class Footoodles {
         const entry = { id, title, content, image: path }
         settings.articles.footoodles.unshift(entry)
 
-        await this.commit(`Footoodle: ${title}`, settings, [
+        await this.commit(`Footoodle: create "${title}"`, settings, [
             { path, content: processed }
         ])
 
@@ -139,7 +139,7 @@ class Footoodles {
         }
 
         list[index] = { ...current, title, content, image: path }
-        await this.commit(`Footoodle: ${title}`, settings, files)
+        await this.commit(`Footoodle: update "${title}"`, settings, files)
 
         if (processedImage) {
             this.setCardPreviewFile(id, processedImage)
@@ -161,7 +161,7 @@ class Footoodles {
             ? []
             : [{ path: target.image, delete: true }]
 
-        await this.commit(`Remove footoodle: ${target.title}`, settings, files)
+        await this.commit(`Footoodle: delete "${target.title}"`, settings, files)
 
         this.clearCardPreview(id)
     }
