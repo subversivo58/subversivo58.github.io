@@ -572,7 +572,6 @@
             "summary_restore": "Restaurar automático",
             "summary_help": "O resumo é preenchido automaticamente. Você pode modificá-lo livremente.",
             "content_label": "Conteúdo",
-            "content_placeholder": "Escreva o conteúdo da postagem...",
             "toolbar_label": "Ferramentas de formatação",
             "bold": "Negrito",
             "italic": "Itálico",
@@ -660,8 +659,7 @@
             "save_draft": "Salvar rascunho",
             "drafts_placeholder": "Selecionar rascunho...",
             "open_draft": "Abrir",
-            "delete_draft": "Excluir",
-            "reading_stats": "{words} palavras · {minutes} min de leitura"
+            "delete_draft": "Excluir"
         },
         "posts_list": {
             "untitled": "Postagem sem título",
