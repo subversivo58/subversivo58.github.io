@@ -1,0 +1,808 @@
+{
+    "404": {
+        "general": "Eyvah... Bulunamadı!",
+        "title": "Sayfa bulunamadı",
+        "message": "Açmaya çalıştığınız adres mevcut değil veya taşınmış. Doğru yazıp yazmadığınızı kontrol edin ya da ana sayfaya dönün.",
+        "button": "Ana sayfaya dön"
+    },
+    "source": {
+        "name": "Subversivo58 Blog",
+        "version": "0.1.0",
+        "author": "Subversivo58",
+        "home": "https://github.com/subversivo58/",
+        "colab": [],
+        "build": "Alpha",
+        "bugs": [
+            {
+                "type": "git",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
+            }
+        ],
+        "license": [
+            {
+                "type": "MIT",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
+            }
+        ]
+    },
+    "words": {
+        "an": "1 önce",
+        "agree": "kabul et",
+        "clear": "temizle",
+        "signin": "giriş yap",
+        "logout": "çıkış yap",
+        "signup": "kayıt ol",
+        "close": "kapat",
+        "drawer": "çekmece",
+        "free": "ücretsiz",
+        "search": "ara",
+        "recover": "kurtar",
+        "restore": "geri yükle",
+        "white": "beyaz",
+        "decade": "on yıl",
+        "year": "yıl",
+        "month": "ay",
+        "week": "hafta",
+        "day": "gün",
+        "hour": "saat",
+        "minute": "dakika",
+        "license": "lisans",
+        "more": "daha fazla",
+        "second": "saniye",
+        "now": "şimdi",
+        "rememberme": "beni hatırla",
+        "source": "kaynak",
+        "mail": "e-posta",
+        "page": "sayfa",
+        "pwd": "şifre",
+        "token": "belirteç",
+        "media": "medya",
+        "settings": "ayarlar",
+        "version": "sürüm",
+        "ooops": "eyvah..."
+    },
+    "combo": {
+        "btn_top": "Başa dön",
+        "more_info": "daha fazla bilgi al.",
+        "click_here": "Buraya tıklayın!",
+        "clear_exit": "Temizle ve çık",
+        "not_show_again": "bir daha gösterme",
+        "powered": "Sağlayıcı:",
+        "copyr": "Telif Hakkı",
+        "knowmore": "Daha fazla bilgi",
+        "seelicenses": "Lisansları gör"
+    },
+    "navbar": {
+        "wiki": "WIKI",
+        "blog": "blog",
+        "dpo": "DPO",
+        "colab": "iş birliği yap",
+        "about": "hakkında",
+        "lab": "laboratuvar",
+        "contact": "iletişim",
+        "policies": "politikalar",
+        "donations": "bağışlar",
+        "signin": "Giriş Yap",
+        "docs": "belgeler",
+        "home": "Ana Sayfa"
+    },
+    "footer": {
+        "content": {
+            "contactnf": "İLETİŞİM",
+            "blognew": "YENİLİKLER",
+            "uselink": "FAYDALI BAĞLANTILAR",
+            "docs": "Belgeler",
+            "policies": "Genel Politikalar",
+            "faq": "Destek ve SSS",
+            "forum": "Forum ve Topluluk",
+            "devtool": "DEV Araçları",
+            "api": "Hizmet API'si",
+            "bugs": "Hata Bildir",
+            "desc1": "Bu site 2010 yılında başlatılan projelerden oluşan bir koleksiyonu bir araya getirir ve çok çeşitli konuları paylaşmak için kişisel bir blog olarak hizmet etmeyi amaçlar. Siteyi keşfetmekten ve içeriğini paylaşmaktan çekinmeyin.",
+            "desc2": "Bu site sürekli geliştirilmektedir, hataları bildirmekten veya iyileştirme önermekten çekinmeyin.",
+            "start": "Şimdi başla",
+            "source": "Kaynak Kodu",
+            "feedback": "Geri Bildirim",
+            "dpo": "Veri Koruma Görevlisi (DPO)"
+        },
+        "author": "yazar",
+        "about": "hakkında",
+        "licit": "yasal",
+        "cookie": "çerezler",
+        "privacci": "gizlilik",
+        "footoodle": {
+            "title": "Collabore'a Kaydolun",
+            "description": "<p>Collabore geliştiricilere ve meraklılara kapılarını açıyor. Statik sayfa hizmetinizi dinamik hale getirin.</p><p>Basit ama güçlü bir arayüz aracılığıyla yeni gönderileri değiştirebilir, inceleyebilir ve oluşturabilir, sayfalarınıza eklentiler ve uygulamalar ekleyebilir veya kendi uzantılarınızı entegre edebilirsiniz.</p><p>Tüm bunlar genişletilmek üzere tasarlanmış açık kaynak koduyla mümkün. Collabore kullanıcılarının yalnızca birkaç tıklamayla sayfanıza kaydolmasını ve en iyisi, sayfanızdaki eklenti ve uygulamalarda otomatik olarak kimlik doğrulaması yapmasını sağlayan entegre kimlik doğrulama sistemini kullanın.</p><p class='mt-5 ct'>Bu iş birlikçi sistemin parçası olun, <a href='/signup' class='white tdu'>şimdi kaydolun!</a></p>"
+        }
+    },
+    "drawer": {
+        "clear_data": {
+            "title": "Site verilerini temizle",
+            "question_info": "Bundan emin misiniz?",
+            "positive": "Temizlemek için basılı tutun",
+            "negative": "Hayır, iptal et",
+            "footer_info": "Önbelleği ve çerezleri temizleyin. <a href='#' class='tdu blue'>Belgelere</a> bakın."
+        },
+        "bug_report": {
+            "title": "Hata bildir 🐛",
+            "question_info": "Bir hata mı buldunuz? Bildirin!",
+            "placeholder": "Hatayı burada açıklayın...",
+            "send": "Gönder",
+            "follow": "Desteğe git",
+            "footer_info": "Hata bildirimi. Bu konudaki <a href='#' class='tdu blue'>belgelere</a> bakın.",
+            "sent": "Teşekkürler! Hata kaydedildi.",
+            "failed": "Hata kaydedilemedi. Lütfen tekrar deneyin."
+        },
+        "feedback": {
+            "title": "Yorumunuzu gönderin",
+            "rating": "Değerlendirme:",
+            "question_info": "Collabore hakkındaki görüşünüzü gönderin!",
+            "placeholder": "Eleştiri, övgü veya öneri gönderin",
+            "footer_info": "Yorum gönderme. Bu konudaki <a href='#' class='tdu blue'>belgelere</a> bakın.",
+            "notific": {
+                "error": {
+                    "title": "Geri Bildirim Hatası!",
+                    "message": "Üzgünüz, yorumunuz işlenirken bir hata oluştu."
+                },
+                "success": {
+                    "title": "Geri bildirim gönderildi!",
+                    "message": "Teşekkürler, yorumunuz başarıyla gönderildi!"
+                }
+            }
+        },
+        "geolocation": {
+            "title": "Coğrafi Konum İste",
+            "btn1": "Evet, iste",
+            "btn2": "Hayır, iptal et",
+            "footer_info": "Coğrafi konum? <a href='#' class='tdu blue'>Belgelere</a> bakın."
+        },
+        "notification": {
+            "title": "Bildirim İzni İste",
+            "btn1": "Evet, iste",
+            "btn2": "Hayır, iptal et",
+            "footer_info": "Bildirimler? <a href='#' class='tdu blue'>Belgelere</a> bakın."
+        },
+        "getmedia_audio": {
+            "title": "Mikrofon İste",
+            "btn1": "Evet, iste",
+            "btn2": "Hayır, iptal et",
+            "footer_info": "Ses Medyası? <a href='#' class='tdu blue'>Belgelere</a> bakın."
+        },
+        "getmedia_video": {
+            "title": "Web Kamerası İste",
+            "btn1": "Evet, iste",
+            "btn2": "Hayır, iptal et",
+            "footer_info": "Video Medyası? <a href='#' class='tdu blue'>Belgelere</a> bakın.",
+            "perm_title": "Kamera izni",
+            "perm_1": "Site kamerayı yalnızca ona ihtiyaç duyan bir özelliği başlattığınızda kullanır.",
+            "perm_2": "İzni tarayıcınızın ayarlarından iptal edebilirsiniz.",
+            "perm_3": "İptal ederseniz herhangi bir izin verilmez."
+        },
+        "words": {
+            "clear": "Temizleme",
+            "geo": "Konum",
+            "cam": "Video",
+            "mic": "Ses",
+            "color": "Renk",
+            "note": "Notlar",
+            "bug": "Hatalar",
+            "lab": "Laboratuvar",
+            "not": "Uyarılar",
+            "feedback": "Geri Bildirim",
+            "lang": "Diller",
+            "marks": "Yer İmleri",
+            "admin": "Yönetim",
+            "share": "Paylaş",
+            "theme_light": "Açık tema",
+            "theme_dark": "Koyu tema"
+        },
+        "version": "Sürüm",
+        "notes_form": {
+            "sent": "Not kaydedildi.",
+            "failed": "Not kaydedilemedi. Lütfen tekrar deneyin."
+        }
+    },
+    "copyright": {
+        "contributors": "Bu proje yalnızca diğer birçok açık kaynak projesinin kullanımı ve <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>katkıda bulunanlar topluluğu</a> sayesinde mümkün oldu... temel alınan tüm lisanslara saygı göstererek oluşturmakta, kullanmakta, değiştirmekte ve dağıtmakta özgürsünüz!",
+        "caption": "Kaynakların ve ilgili lisanslarının listesi",
+        "backendsources": "Sunucuda (NodeJS) çalışan ve dinamik olarak yüklenen diğer birçok kaynak bu proje için temeldir, örneğin:",
+        "package": "ve <a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>daha fazlası...</a>",
+        "tps": "Üçüncü taraf yazılım",
+        "thissource": "Bu sitenin yazılımı",
+        "alllicenses": "Tüm lisanslar"
+    },
+    "nocookie": {
+        "title": "Desteklenmiyor",
+        "p1": "Üzgünüz, \"çerezsiz\" gezinmeyi desteklemiyoruz.",
+        "p2": "Bu site çerezler ve diğer depolama teknolojilerini kullansa da, \"<strong>açık izniniz olmadan tarayıcınızda hiçbir veri saklamıyoruz</strong>\"!",
+        "p3": "\"Çerezsiz\" gezinmeyi desteklememek için iyi nedenlerimiz olduğuna inanıyoruz. Daha fazla bilgi için <a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a> belgemize göz atın. Ne yazık ki çerezler etkinleştirilmiş olarak gezinmeniz gerekecektir."
+    },
+    "modals": {
+        "language": {
+            "title": "Dil Seçin",
+            "avaliable": "Mevcut diller",
+            "pt_BR": "Portekizce",
+            "en_US": "İngilizce",
+            "es_ES": "İspanyolca",
+            "fr_FR": "Fransızca",
+            "de_DE": "Almanca",
+            "ja_JP": "Japonca",
+            "hi_IN": "Hintçe",
+            "zh_CN": "Çince (Basitleştirilmiş)",
+            "ru_RU": "Rusça",
+            "bn_BD": "Bengalce",
+            "id_ID": "Endonezce",
+            "tr_TR": "Türkçe",
+            "sw_KE": "Svahili",
+            "fil_PH": "Filipince",
+            "ko_KR": "Korece",
+            "th_TH": "Tayca",
+            "it_IT": "İtalyanca",
+            "te_IN": "Telugu",
+            "mr_IN": "Marathi",
+            "footer": "Kendi dilinizde seçenek yok mu? Bir çeviri oluşturun!"
+        },
+        "version": {
+            "title": "🚧 Yapım Aşamasında 🚧",
+            "text1": "Bu proje yalnızca diğer birçok açık kaynak projesinin kullanımı ve ",
+            "text2": "katkıda bulunanlar topluluğu sayesinde mümkün oldu",
+            "text3": "Temel alınan tüm lisanslara saygı göstererek oluşturmakta, kullanmakta, değiştirmekte ve dağıtmakta özgürsünüz!"
+        },
+        "tabs": {
+            "camera": "Kamera iste",
+            "permissions": "İzinler"
+        },
+        "share": {
+            "title": "Bu blogu paylaş",
+            "broken_link": "Bozuk bir bağlantı bildir?"
+        },
+        "notes": {
+            "title": "Hızlı notlar",
+            "note_title": "Başlık:",
+            "category": "Kategori:",
+            "tags": "Etiketler:",
+            "note": "Not:",
+            "save": "Kaydet",
+            "ph_title": "Başlık",
+            "ph_category": "Kategori",
+            "ph_tags": "Etiketler",
+            "ph_note": "Notunuz buraya..."
+        },
+        "offline": {
+            "title": "Çevrimdışı kullanım için kaydet",
+            "yes": "Evet, kaydet!",
+            "no": "Hayır, iptal et",
+            "about": "Çevrimdışı özellikler hakkında?"
+        },
+        "auth": {
+            "title": "Giriş yap ve yetkilendir",
+            "source": "Kaynak kodu: <a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">GitHub'da görüntüle</a>"
+        },
+        "bugs": {
+            "select_type": "Tür seçin:",
+            "custom": "Özel hata",
+            "css": "CSS Hatası",
+            "js": "JavaScript Hatası",
+            "language": "Dil Hatası",
+            "plugins": "Eklenti Hatası",
+            "server": "Sunucu Hatası",
+            "description": "Açıklama gönder",
+            "ph_description": "Açıklama buraya..."
+        },
+        "permissions": {
+            "title_microphone": "Mikrofon izni",
+            "title_geolocation": "Konum izni",
+            "item_1": "Site bu özelliği yalnızca ona ihtiyaç duyan bir işlevi başlattığınızda kullanır.",
+            "item_2": "İzni tarayıcınızın ayarlarından iptal edebilirsiniz.",
+            "item_3": "İptal ederseniz herhangi bir izin verilmez."
+        }
+    },
+    "notify": {
+        "storage": {
+            "title": "Subversivo58 - Depolama",
+            "body": "Bu site cihazınızda bilgi depolayan \"çerezler\" ve diğer teknolojileri kullanır, bunu kabul ediyor musunuz?",
+            "actions": [
+                {
+                    "action": "cookie-agree",
+                    "title": "nedir bu?",
+                    "icon": "🍪"
+                },
+                {
+                    "action": "cookie-policy",
+                    "title": "politikaları gör",
+                    "icon": "🛡️"
+                },
+                {
+                    "action": "terms-policy",
+                    "title": "koşulları gör",
+                    "icon": "📜"
+                }
+            ]
+        },
+        "permission_granted": {
+            "title": "Bildirimler etkinleştirildi",
+            "body": "Bildirim gönderilmesine izin verdiğiniz için teşekkürler!"
+        }
+    },
+    "pages": {
+        "about": {
+            "heading": "Teknolojiler, trendler ve siber kültür",
+            "item1": "✓ Web API'leri, JavaScript ve HTML5 özellikleri.",
+            "item2": "✓ Fonksiyonel programlama, desenler, çatılar.",
+            "item3": "✓ WebCrypto, laboratuvar ve code-flask'lar.",
+            "item4": "✓ Görüşler, yaşam tarzı, Geek kültürü ve çok daha fazlası.",
+            "photo": "<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a> üzerinde <a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a> fotoğrafı",
+            "title": "Hakkında",
+            "p1": "Merhaba, ben Lauro Moraes namı diğer <a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a> ve bu site benim dijital laboratuvarım ve kişisel blogum.",
+            "p2": "Burada teknoloji trendleri, siber kültür ve PWA'lar, Tek Sayfa Uygulamalar (SPA) ve modern JavaScript, HTML5 ve CSS3 API'lerinin kullanımı gibi web odaklı programlama hakkında içerikler yayınlıyorum",
+            "p3": "Fonksiyonel programlama, tasarım desenleri ve web'in merkeziyetsizliği gibi konulara tutkuluyum ... blokzincir ve web'de kriptografi buradaki sürekli temalardır.",
+            "p4": "Ayrıca deneylerimi yayınladığım, kodlarımı ve küçük fonksiyonel parçacıklarımı paylaştığım ve çeşitli konular, biraz Geek kültürü ve bu yaşam tarzı hakkındaki görüşlerimi ifade ettiğim yer de burasıdır.",
+            "p5": "Blog içeriğini keşfetmekten ve topluluğumuza katılmaktan çekinmeyin."
+        },
+        "you_in_control": {
+            "heading": "Verilerinizin kontrolü sizde",
+            "item1": "✓ Gizlilik sizin hakkınızdır, size sunulan bir ürün değil.",
+            "item2": "✓ Tüm dijital güvenliğin temeli olarak kriptografi.",
+            "item3": "✓ Gizliliğe saygı, seçimlerinize saygı duymakla başlar.",
+            "item4": "✓ Verilerinizi neyi, ne zaman ve kiminle paylaşacağınıza siz karar verirsiniz.",
+            "photo": "<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a> üzerinde <a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a> fotoğrafı"
+        },
+        "donations": {
+            "heading": "Harika bir şey yapmayı mı düşünüyorsunuz?",
+            "photo": "<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a> üzerinde <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> fotoğrafı",
+            "thanks_title": "Teşekkürler",
+            "thanks_text": "Gururla <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Github Pages</a> ve <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a> hizmetlerini kullanıyoruz; bu platformlar ve araçları, bu blog ve araçlarımız gibi harika şeyler yapmamızı sağlayan gerçekten inanılmaz platformlardır.",
+            "platforms_title": "Bu platformları tanıyın",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
+            "donate_title": "Bağışınız önemlidir",
+            "content": {
+                "intro1": "Blogu güncel tutmak zaman ve özveri gerektirir; kullandığımız platformlar ve araçlar ücretsiz olsa da sınırlamalara sahiptir. Her biri bir sitenin aylık sahip olabileceği erişim sayısını ve bu erişimler sırasında sunucularından aktarılabilecek veri miktarını sınırlar.",
+                "intro2": "Bu blogda yeni özellikleri keşfetme, yeni kaynaklar uygulama ve belki de hizmet yelpazesini artırmanın yanı sıra canlı ve dinamik bir topluluk oluşturma fikrini seviyoruz.",
+                "intro3": "Bu fikirlere ulaşmak için kendi alan adımıza, daha fazla trafiği kaldırabilecek VPS sunucularına, depolama alanına ve daha geniş bir uygulama yelpazesinin oluşturulmasına olanak tanıyan kaynaklara yatırım yapmak gerekmektedir.",
+                "intro4": "Reklamlar, ödeme duvarları (paywall), ücretli izleme veya veri satışıyla fon toplama fikrinden nefret ediyoruz ... <a href=\"./you-in-control-of-your-data.html\" title=\"White Paper\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">\"White Paper\"</a> belgemizde açıklandığı gibi <strong>verilerinizin tek sahibinin siz olduğunuzu savunuyor ve buna inanıyoruz</strong>; bu nedenle küçük yardımınız büyük bir fark yaratabilir, bizi daha fazlasını ve daha iyisini yapmaya teşvik edip yardımcı olabilir 🚀",
+                "contribution1": "Bu bloga sayısız şekilde katkıda bulunabilirsiniz; ağlarınızda paylaşarak, kodu iyileştirerek, editoryal iş birliğiyle, topluluğumuzla etkileşime geçerek ve çok daha fazlasıyla.",
+                "contribution2": "Ayrıca aşağıdaki bağış seçeneklerinden birini seçerek \"<b>o ekstra yardımı</b>\" yapmayı da düşünebilirsiniz 🎊",
+                "pix_caption": "PagBank Pix",
+                "trademarks": "Burada kullanılan logolar ve ticari markalar ilgili hak sahiplerinin mülkiyetindedir. Bunların burada kullanılması, bu markalarla herhangi bir bağ veya onay olduğu anlamına gelmez."
+            }
+        },
+        "dpo": {
+            "heading": "Veri Koruma Görevlisi (DPO)",
+            "intro1": "Genel Veri Koruma Yasası (LGPD - 13.709/2018 sayılı Kanun) uyarınca, Veri Koruma Görevlimizin (Data Protection Officer) iletişim bilgilerini paylaşıyoruz.",
+            "intro2": "DPO; Site, veri sahipleri (siz) ve Ulusal Veri Koruma Kurumu (ANPD) arasındaki iletişime aracılık etmekten sorumlu kişidir.",
+            "contact_title": "İletişim Bilgileri",
+            "officer": "<strong>Görevli:</strong> Lauro de Moraes",
+            "email": "E-posta:",
+            "deadline": "<strong>Yanıt Süresi:</strong> Küçük ölçekli veri işleyicilere uygulanan yönetmelik uyarınca en fazla 30 gün.",
+            "send_email": "DPO'ya e-posta gönder",
+            "rights_title": "Haklarınızı nasıl kullanabilirsiniz",
+            "rights1": "LGPD'nin 18. Maddesinde öngörülen haklarınızdan herhangi birini (işleme onayı, erişim, düzeltme, anonimleştirme, silme vb.) kullanmak için yukarıdaki adrese bir e-posta göndermeniz yeterlidir.",
+            "rights2": "Hizmeti hızlandırmak için e-postanın konusuna veya gövdesine şunları eklemenizi öneririz:",
+            "list1": "Tam adınız;",
+            "list2": "Kullanmak istediğiniz hak (örn: veri silme, erişim vb.);",
+            "list3": "Sistemlerimizde verilerinizi bulmamıza yardımcı olabilecek ayrıntılar.",
+            "policies": "Verilerinizi nasıl işlediğimiz hakkında daha fazla ayrıntı için <a href=\"/policy.html#policy-general\">Genel Politikamıza</a> ve <a href=\"/policy.html#policy-privacy\">Gizlilik Politikamıza</a> bakın."
+        },
+        "home": {
+            "intro": {
+                "eyebrow": "SUBVERSIVO58 HAKKINDA",
+                "title": "Bir blogdan çok daha fazlası.",
+                "description": "Meraka, teknolojiye ve fikirleri özgürce keşfetmeye adanmış bir alan.",
+                "details": "Burada bilgi ve yaratıcılık, alışılagelmişin ötesine geçen içeriklerde, deneyimlerde ve projelerde buluşuyor.",
+                "signature": "MERAK · BİLGİ · YARATICILIK"
+            },
+            "exploration": {
+                "eyebrow": "KEŞFEDİN",
+                "title": "Farklı fikirleri keşfedin.",
+                "description": "Öğrenmek, denemek ve yeni olasılıklar keşfetmek için farklı yollar.",
+                "programming": {
+                    "title": "Programlama",
+                    "description": "Dijital dünya için kod, geliştirme ve yaratıcı çözümler."
+                },
+                "technology": {
+                    "title": "Teknoloji",
+                    "description": "Günlük yaşamımızı dönüştüren araçlar, kaynaklar ve yenilikler."
+                },
+                "experiments": {
+                    "title": "Deneyler",
+                    "description": "Geliştirilmekte olan fikirler, testler ve sıra dışı keşifler."
+                },
+                "knowledge": {
+                    "title": "Bilgi",
+                    "description": "Ufukları genişletmek için öğrenme, düşünceler ve bilgiler."
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / LABORATUVAR",
+                "title": "Yeni olasılıkları keşfetmek için bir alan.",
+                "description": "Merakı keşiflere dönüştürmek için geliştirilen deneyler, projeler ve araçlar.",
+                "link": "Laboratuvarı keşfet"
+            }
+        },
+        "policy": {
+            "badges": {
+                "reading_title": "Bu belgenin tahmini okuma süresi",
+                "version": "Sürüm: {version}",
+                "version_title": "Belge sürümü",
+                "print": "Yazdır&nbsp;🖨️",
+                "print_title": "Yazdır"
+            },
+            "cards": {
+                "introduction": {
+                    "title": "Giriş",
+                    "description": "Bu Site Web teknolojileri kullanılarak oluşturulmuştur; merkeziyetsizliğe ve kriptografik güvenliğe inanıyoruz. Verilerinizin tek sahibinin siz olduğuna inanıyoruz.",
+                    "link": "\"White Paper\" belgemizde daha fazlasını görün"
+                },
+                "privacy": {
+                    "title": "Gizlilik",
+                    "description": "Gizlilik politikası, bu Sitenin neden veri istediğini, bunların nasıl işlendiğini ve kullanıcının verilerini nasıl düzenleyebileceğini, indirebileceğini veya silebileceğini açıklar.",
+                    "link": "Gizlilik Politikamızı okuyun"
+                },
+                "terms": {
+                    "title": "Koşullar",
+                    "description": "Koşullar, bu Siteyi nasıl işlettiğimizi, kullanıcılarımızın bu Siteden neler bekleyebileceğini ve bu süreçte kullanıcılarımızdan neler beklediğimizi açıklar.",
+                    "link": "Kullanım Koşullarımızı okuyun"
+                },
+                "general": {
+                    "title": "Politika",
+                    "description": "\"Politika\", Site ile Kullanıcı arasındaki ilişkiyi yöneten genel belgedir; Site ve araçlarının kullanım sözleşmesi için güvenceleri ve sınırlamaları belirler.",
+                    "link": "Genel Politikamızı okuyun"
+                }
+            },
+            "overview": {
+                "quote1": "Politikalar Site ile kullanıcıların ilişki kurma biçimidir; bu ilişki sırasında şeffaflık ve kalite sağlayarak güvenlik ve güven getirirler ve ayrıca dünyanın çeşitli ülkelerindeki birçok veri koruma ve gizlilik yasasında düzenleme konusudurlar.",
+                "quote2": "\"<strong>Anlaşılmaz hukuk dili</strong>\" kalıbından kaçınmak için politikalarımızı olabildiğince basitleştirmeye çalıştık. Ne çok fazla—çünkü fazla olması kaliteyi garanti etmez—ne de çok az—çünkü az olması içeriği garanti etmez.",
+                "quote3": "Bu güven ilişkisinin hem kullanıcılarımız hem de kendimiz için bir öğrenme süreci olmasını umuyoruz.",
+                "whitepaper_link": "\"White Paper\" belgemizden bir kesit",
+                "contact": "Sitenin veya araçlarının kullanımından kaynaklanan her türlü soru iletişim formlarımız veya <strong>geri bildirim</strong> araçlarımız üzerinden bildirilebilir (geri bildirime bayılırız). Sorunların çözümü için şu e-posta adresinden DPO'muzla iletişime geçme davetimizi yineliyoruz: <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Políticas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
+                "markdown1": "Bu sitenin politikaları hafifçe değiştirilmiş <strong>Markdown</strong> işaretleme dilinde yazılmıştır; bunları düz metin olarak görüntüleyebilir veya bu <a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">depo bağlantısı</a> aracılığıyla <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a> üzerinden indirebilirsiniz",
+                "markdown2": "Orada bu Politikaların mevcut ve önceki tüm sürümlerini ve bu Sitenin kaynak kodunu bulabilirsiniz; ayrıca Genel Politikamızın üst kısmında bulunan yazdırma simgesine <span class=\"badge badge-light border-def contrast\">Yazdır&nbsp;🖨️</span> tıklayarak bunları yazdırabilirsiniz."
+            },
+            "privacy": {
+                "heading": "Gizlilik",
+                "image_alt": "Seçenekleriniz var",
+                "image_title": "Seçenekleriniz var",
+                "paragraph1": "Gizlilik ilkesinin seçme özgürlüğü olduğuna inanıyoruz. Kullanıcı, yalnızca tek bir tıklamayla veya belirli bir aracı kullanmak uğruna büyük miktarda veri vermesini zorunlu kılan koşullarla verilerinden vazgeçmek zorunda kalmamalıdır.",
+                "paragraph2": "Seçme özgürlüğü, veri talebi için aşamalı ancak müdahaleci olmayan bir modeldir ve yalnızca gerektiğinde onay almak uyulması gereken bir standart olmalıdır.",
+                "paragraph3": "Gizliliğe saygı, Kullanıcının \"neyi\" ve \"ne zaman\" paylaşmak istediği konusundaki seçimine saygı duymakla başlar."
+            },
+            "terms": {
+                "heading": "Kullanım Koşulları",
+                "image_alt": "Kullanım Koşulları Görseli",
+                "image_title": "Koşullarımız"
+            },
+            "general": {
+                "heading": "Genel Politika",
+                "image_alt": "Sözleşme görseli",
+                "image_title": "Sözleşme"
+            },
+            "cookies": {
+                "heading": "Çerezleri kabul et",
+                "paragraph1": "Kendinize şunu soruyorsanız: <strong>gerçekten çerezleri ve veri depolamayı kabul etmem gerekiyor mu</strong>? Kısa cevap: <strong>hayır, gerekmiyor</strong>! Sitenin çeşitli araçlarını ve özelliklerini yine de gezebilir ve kullanabilirsiniz ancak en iyi deneyimi elde edemeyebilirsiniz 🙁",
+                "paragraph2": "Örneğin: bir dil seçtiğinizde, favori bir rengi kaydettiğinizde veya bir ayar belirlediğinizde, siteye her girdiğinizde veya gezindiğinizde bu seçimi yeniden yapmanız gerekir ... seçimlerinizi \"kalıcı kılmanın\" tek yolu onları yerel olarak depolamaktır.",
+                "paragraph3": "<a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">Verilerinizin tek sahibinin siz olduğunuz</a> felsefemizi izleyerek, seçenekleriniz olduğuna inanıyoruz. Aşağıdaki düğmeye \"<strong>tıklayıp basılı tutarak</strong>\" çerez kullanımını kabul etmeyi seçerseniz, istediğiniz zaman buradan veya Kullanıcı sekmesinden onları <strong>devre dışı bırakmayı</strong> da seçebilir, ayrıca önceden depolanmış her şeyi tek seferde silebilirsiniz 😎",
+                "button": "🍪 çerezleri etkinleştirmek için basılı tutun",
+                "disable": "😮 çerezleri devre dışı bırakmak için tıklayın!"
+            }
+        }
+    },
+    "settings_slide": {
+        "title": "Site ayarları",
+        "media_api": "Medya API'si",
+        "auto_audio": "ilk izinden sonra sesi otomatik olarak çağır",
+        "auto_video": "ilk izinden sonra videoyu otomatik olarak çağır",
+        "geo_api": "Coğrafi konum API'si",
+        "geo_share": "coğrafi izleme analizlerini paylaş",
+        "audio_effects": "Ses efektleri",
+        "audio_effects_on": "ses efektlerini etkinleştir",
+        "audio_notify_on": "sesli bildirimleri etkinleştir",
+        "connection": "Bağlantı (durum)",
+        "notify_off": "bildirimi devre dışı bırak",
+        "analytics": "Analitik",
+        "analytics_toggle": "etkinleştir veya devre dışı bırak"
+    },
+    "palette": {
+        "title": "Renk paleti",
+        "schema": "Şema"
+    },
+    "admin_dashboard": {
+        "posts": "Gönderiler",
+        "close_menu": "Menüyü kapat",
+        "loading_posts": "Gönderiler yükleniyor...",
+        "title": "Yönetim Paneli",
+        "description": "Blog gönderilerinizi yönetin.",
+        "menu": "Menü",
+        "new_post": "Yeni Gönderi",
+        "settings": {
+            "tab": "GitHub Config",
+            "title": "GitHub Config",
+            "save": "Kaydet",
+            "clear_credentials": "GitHub kimlik bilgilerini temizle",
+            "clear": "Temizle"
+        },
+        "close_editor": "Düzenleyiciyi kapat",
+        "footoodles": {
+            "tab": "Footoodles",
+            "title": "Footoodles Yönetimi",
+            "empty": "Kayıtlı Footoodle yok.",
+            "loading": "Footoodles yükleniyor...",
+            "load_error": "Footoodles yüklenemedi.",
+            "new": "Yeni Footoodle",
+            "edit": "Düzenle",
+            "delete": "Sil",
+            "save": "Footoodle'ı Kaydet",
+            "cancel": "İptal",
+            "image": "Görsel",
+            "image_select": "Görsel seç",
+            "image_required": "Bir görsel seçin.",
+            "image_invalid": "İzin verilmeyen görsel formatı. JPEG, PNG veya WebP kullanın.",
+            "title_label": "Başlık",
+            "title_placeholder": "Footoodle başlığını girin",
+            "title_required": "Başlığı girin.",
+            "content_label": "İçerik",
+            "content_placeholder": "Footoodle'ınızı yazın...",
+            "content_required": "İçeriği girin.",
+            "content_limit": "İçerik en fazla 280 karakter olmalıdır.",
+            "character_count": "{count}/280 karakter",
+            "saving": "Footoodle kaydediliyor...",
+            "saved": "Footoodle başarıyla kaydedildi!",
+            "save_error": "Footoodle kaydedilemedi.",
+            "updating": "Footoodle güncelleniyor...",
+            "updated": "Footoodle başarıyla güncellendi!",
+            "update_error": "Footoodle güncellenemedi.",
+            "delete_confirm": "Bu Footoodle'ı gerçekten silmek istiyor musunuz?",
+            "deleting": "Footoodle siliniyor...",
+            "deleted": "Footoodle başarıyla silindi!",
+            "delete_error": "Footoodle silinemedi.",
+            "delete_cancel": "Silme işlemi iptal edildi.",
+            "editor_new": "Yeni Footoodle oluşturuluyor.",
+            "editor_edit": "Footoodle düzenleniyor.",
+            "discard_changes": "Bu Footoodle'daki değişiklikler atılsın mı?",
+            "operation_error": "Footoodle işlenirken bir hata oluştu.",
+            "github_error": "GitHub üzerindeki işlem tamamlanamadı.",
+            "subtitle": "Alt bilgide görsellerle hızlı notlar oluşturun ve yönetin."
+        },
+        "editor": {
+            "status_ready": "Düzenlemeye hazır.",
+            "title_label": "Başlık",
+            "title_placeholder": "Gönderi başlığı",
+            "summary_label": "Özet",
+            "summary_placeholder": "Gönderi özeti",
+            "summary_restore": "Otomatiği geri yükle",
+            "summary_help": "Özet otomatik olarak doldurulur. İstediğiniz gibi değiştirebilirsiniz.",
+            "content_label": "İçerik",
+            "toolbar_label": "Biçimlendirme araçları",
+            "bold": "Kalın",
+            "italic": "İtalik",
+            "strike": "Üstü çizili",
+            "unordered_list": "Madde işaretli liste",
+            "unordered_list_label": "• Liste",
+            "ordered_list": "Numaralı liste",
+            "ordered_list_label": "1. Liste",
+            "quote": "Alıntı",
+            "link": "Bağlantı ekle",
+            "link_label": "Bağlantı",
+            "code": "Kod ekle",
+            "font_size": "Yazı tipi",
+            "font_size_title": "Yazı tipi boyutu",
+            "image": "Görsel",
+            "image_title": "Görsel ekle",
+            "microphone": "Mikrofon",
+            "microphone_title": "Sesi metne dök",
+            "preview_toggle": "Görüntüle",
+            "preview_heading": "Önizleme",
+            "preview_close": "Kapat",
+            "tags_label": "Etiketler",
+            "tags_placeholder": "Etiketleri virgülle ayırarak girin",
+            "draft_select_label": "Taslak seç",
+            "draft_select_default": "Taslak seç",
+            "draft_open": "Taslağı aç",
+            "draft_save": "Taslağı kaydet",
+            "generate": "Gönderi oluştur",
+            "slug_label": "URL Kısa Adı (Slug)",
+            "slug_placeholder": "makalem",
+            "slug_unlock_title": "Slug düzenlemesini kilitle veya kilidini aç",
+            "summary_restore_title": "Otomatik özeti geri yükle",
+            "undo_title": "Geri al (Ctrl+Z)",
+            "redo_title": "Yinele (Ctrl+Y)",
+            "block_format_title": "Blok stili",
+            "block_paragraph": "Paragraf",
+            "heading1": "Başlık 1",
+            "heading2": "Başlık 2",
+            "heading3": "Başlık 3",
+            "heading4": "Başlık 4",
+            "heading5": "Başlık 5",
+            "heading6": "Başlık 6",
+            "code_block": "Kod bloğu",
+            "bold_title": "Kalın (Ctrl+B)",
+            "italic_title": "İtalik (Ctrl+I)",
+            "underline_title": "Altı çizili (Ctrl+U)",
+            "strike_title": "Üstü çizili",
+            "inline_code_title": "Satır içi kod",
+            "clear_format_title": "Biçimlendirmeyi temizle",
+            "fore_color_title": "Metin rengi",
+            "back_color_title": "Vurgu rengi",
+            "unordered_list_title": "Madde işaretli liste",
+            "ordered_list_title": "Numaralı liste",
+            "align_left_title": "Sola hizala",
+            "align_center_title": "Ortala",
+            "align_right_title": "Sağa hizala",
+            "align_justify_title": "İki yana yasla",
+            "link_title": "Bağlantı ekle veya düzenle (Ctrl+K)",
+            "quote_title": "Alıntı bloğu",
+            "code_title": "Kod bloğu ekle",
+            "hr_title": "Yatay çizgi",
+            "table_title": "Tablo ekle",
+            "source_btn": "HTML",
+            "source_title": "HTML kaynak kodunu aç/kapat",
+            "preview": "Önizleme",
+            "link_url_placeholder": "https://ornek.com veya /posts/...",
+            "link_text_placeholder": "Bağlantı metni (isteğe bağlı)",
+            "link_new_tab": "Yeni sekme",
+            "apply": "Uygula",
+            "unlink": "Bağlantıyı kaldır",
+            "cancel": "İptal",
+            "table_rows": "Satırlar",
+            "table_cols": "Sütunlar",
+            "table_insert": "Tablo ekle",
+            "img_width": "Genişlik",
+            "img_align": "Hizalama",
+            "img_align_left": "Sol",
+            "img_align_center": "Orta",
+            "img_align_right": "Sağ",
+            "img_align_full": "Tam genişlik",
+            "img_remove": "Görseli kaldır",
+            "img_alt_placeholder": "Alternatif metin (alt)",
+            "img_caption_placeholder": "Görsel alt yazısı (isteğe bağlı)",
+            "drafts_section": "Taslaklar",
+            "save_draft": "Taslağı kaydet",
+            "drafts_placeholder": "Taslak seç...",
+            "open_draft": "Aç",
+            "delete_draft": "Sil"
+        },
+        "posts_list": {
+            "untitled": "Başlıksız gönderi",
+            "edit": "Düzenle",
+            "delete": "Sil"
+        },
+        "edit_post": "Gönderiyi Düzenle",
+        "update_post": "Gönderiyi güncelle",
+        "delete_modal": {
+            "title": "Gönderiyi sil",
+            "question": "Bu gönderiyi gerçekten silmek istiyor musunuz?",
+            "cancel": "İptal",
+            "confirm": "Evet, sil",
+            "deleting": "Siliniyor...",
+            "deleting_status": "Gönderi GitHub'da siliniyor...",
+            "success": "Gönderi başarıyla silindi!",
+            "error": "Gönderi silinemedi.",
+            "close": "Kapat"
+        },
+        "msg": {
+            "speech_error": "Ses tanıma hatası: {0}.",
+            "speech_unavailable": "Bu tarayıcıda ses tanıma kullanılamıyor.",
+            "speech_start_error": "Tanıma başlatılamadı: {0}",
+            "pending_changes": "Bekleyen değişiklikler.",
+            "images_db_unavailable": "Veritabanı kullanılamıyor: görseller kaydedilemedi.",
+            "images_optimized": "Görseller optimize edildi: {0} → {1}.",
+            "images_added": "Görseller eklendi. Boyut küçülmesi olmadı.",
+            "image_save_error": "Görsel veritabanına kaydedilemedi.",
+            "markdown_load_error": "Markdown işleyici yüklenemedi.",
+            "drafts_db_unavailable": "Veritabanı kullanılamıyor: taslaklar kaydedilmeyecek.",
+            "autosave_ok": "Değişiklikler otomatik olarak kaydedildi.",
+            "autosave_error": "Otomatik olarak kaydedilemedi.",
+            "nothing_to_save": "Kaydetmeden önce bir başlık veya içerik girin.",
+            "db_unavailable": "Veritabanı kullanılamıyor.",
+            "draft_updated": "Taslak güncellendi.",
+            "draft_saved": "Taslak başarıyla kaydedildi.",
+            "draft_save_error": "Taslak kaydedilirken hata oluştu.",
+            "changes_recovered": "Önceki değişiklikler kurtarıldı.",
+            "draft_select": "Açmak için bir taslak seçin.",
+            "draft_not_found": "Taslak bulunamadı.",
+            "draft_opened": "Taslak başarıyla açıldı.",
+            "draft_open_error": "Taslak açılırken hata oluştu.",
+            "editor_ready_new": "Düzenleyici yeni bir gönderi için hazır.",
+            "need_title": "Gönderinin başlığını girin.",
+            "need_content": "Gönderinin içeriğini girin.",
+            "preparing": "Gönderi hazırlanıyor...",
+            "published": "Gönderi başarıyla yayınlandı.",
+            "prepared": "Gönderi hazırlandı. İçerik düzenleyicide korundu.",
+            "publish_stage_error": "\"{0}\" aşamasında başarısız oldu: {1}. İçerik korundu.",
+            "publishing": "Yayınlanıyor...",
+            "stage_init": "Yayınlama başlatılıyor",
+            "stage_library": "Markdown kütüphanesi yükleniyor",
+            "stage_preview": "Önizleme güncelleniyor",
+            "stage_read": "Düzenleyici verileri okunuyor",
+            "stage_autosave": "Otomatik kaydetme",
+            "stage_images": "Görseller hazırlanıyor",
+            "stage_files": "Gönderi dosyaları oluşturuluyor",
+            "stage_publish": "GitHub'da yayınlama",
+            "stage_confirm": "Yayınlama onayı",
+            "discard_changes": "Düzenlenen gönderideki değişiklikler atılsın mı?",
+            "post_updated": "Gönderi başarıyla güncellendi.",
+            "post_loaded": "Gönderi düzenleme için yüklendi.",
+            "post_load_error": "Gönderi düzenleme için yüklenemedi.",
+            "delete_prepare_error": "Silme işlemi hazırlanamadı: {0}",
+            "delete_error": "Gönderi silinemedi: {0}",
+            "draft_untitled": "Başlıksız taslak",
+            "post_missing": "Gönderi artık kayıtta mevcut değil. Güncelleme iptal edildi.",
+            "post_missing_delete": "Gönderi artık kayıtta mevcut değil.",
+            "github_not_confirmed": "GitHub silme işlemini onaylamadı.",
+            "markdown_fetch_error": "Markdown yüklenemedi.",
+            "need_slug": "Gönderi URL'si için geçerli bir slug girin.",
+            "draft_deleted": "Taslak silindi.",
+            "content_placeholder": "Gönderinin içeriğini yazın...",
+            "reading_stats": "{words} kelime · {minutes} dk okuma"
+        },
+        "nav": {
+            "session": "GitHub Oturumu"
+        },
+        "posts_view": {
+            "subtitle": "Yayınlanan HTML gönderilerinizi yönetin, düzenleyin veya kaldırın.",
+            "search_placeholder": "Başlık, slug veya etikete göre filtrele...",
+            "empty": "Gönderi bulunamadı.",
+            "back": "← Gönderilere dön",
+            "view": "Sayfayı aç"
+        },
+        "session": {
+            "title": "GitHub Oturumu",
+            "subtitle": "OAuth kimlik doğrulamasını ve erişim belirtecinin geçerliliğini yönetin.",
+            "scope_label": "Kapsamlar:",
+            "obtained_label": "Kimlik doğrulama tarihi:",
+            "expires_label": "Sona erme tarihi:",
+            "refresh_btn": "Oturumu yeniden doğrula",
+            "diagnostics_title": "OAuth Tanılaması",
+            "reload_diagnostics": "Yenile",
+            "clear_confirm": "Bu tarayıcıda kayıtlı GitHub kimlik bilgilerini kaldırmak istiyor musunuz?",
+            "status_active": "Etkin",
+            "status_expiring": "Yakında süresi doluyor",
+            "status_expired": "Süresi dolmuş",
+            "status_no_expiry": "Süresi tanımlanmamış belirteç",
+            "refreshing": "GitHub ile oturum yeniden doğrulanıyor...",
+            "refreshed": "Oturum başarıyla yeniden doğrulandı.",
+            "refresh_failed": "Belirteç otomatik olarak yeniden doğrulanamadı.",
+            "reauth_needed": "GitHub oturumunuzun süresi doldu. Devam etmek için yeniden kimlik doğrulaması yapın.",
+            "diagnostics_empty": "Kullanılabilir tanılama yok.",
+            "diagnostics_error": "Tanılama yüklenirken hata oluştu."
+        }
+    },
+    "github_auth": {
+        "title": "GitHub Kimlik Doğrulaması",
+        "description": "Yönetim paneline erişmek için GitHub hesabınızla kimlik doğrulaması yapın.",
+        "start": "GitHub ile kimlik doğrula",
+        "confirm": "Onayla ve devam et",
+        "copy_diagnostics": "Tanılamayı kopyala",
+        "identity": {
+            "id_label": "ID:",
+            "profile_label": "Profil:",
+            "email_label": "Herkese açık e-posta:",
+            "confirmation": "Yönetim panelinde bu kimliği kullanmak isteyip istemediğinizi onaylayın."
+        },
+        "messages": {
+            "empty": "GitHub ile kimlik doğrulamayı başlatın.",
+            "verifying": "Kimlik doğrulama kontrol ediliyor...",
+            "failed": "GitHub kimlik doğrulaması başarısız oldu. Lütfen tekrar deneyin.",
+            "authenticated": "{0} olarak kimlik doğrulandı.",
+            "saving": "Kimlik kaydediliyor...",
+            "save_failed": "Kimlik kaydedilemedi. Lütfen tekrar deneyin."
+        }
+    },
+    "blog": {
+        "empty": "Henüz hiçbir şey yayınlanmadı.",
+        "not_found": "Gönderi bulunamadı.",
+        "load_error": "Bu gönderi yüklenemedi.",
+        "showing": "{total} gönderiden {shown} tanesi gösteriliyor",
+        "load_more": "Daha fazla yükle",
+        "read_time": "{minutes} dk okuma",
+        "updated": "Son güncelleme: {date}",
+        "more_posts": "Daha fazla gönderi",
+        "license": "Bu içerik <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a> altında lisanslanmıştır",
+        "search_placeholder": "Gönderi ara...",
+        "all_tags": "Tümü",
+        "no_results": "Seçilen filtrelere uyan gönderi yok.",
+        "read_article": "Makaleyi oku",
+        "back_to_blog": "Bloga dön",
+        "copy_code": "Kodu kopyala"
+    }
+}

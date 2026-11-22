@@ -1,0 +1,808 @@
+{
+    "404": {
+        "general": "Ups... Tidak ditemukan!",
+        "title": "Halaman tidak ditemukan",
+        "message": "Alamat yang Anda coba buka tidak ada atau telah dipindahkan. Periksa apakah Anda mengetiknya dengan benar atau kembali ke beranda.",
+        "button": "Kembali ke beranda"
+    },
+    "source": {
+        "name": "Subversivo58 Blog",
+        "version": "0.1.0",
+        "author": "Subversivo58",
+        "home": "https://github.com/subversivo58/",
+        "colab": [],
+        "build": "Alpha",
+        "bugs": [
+            {
+                "type": "git",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
+            }
+        ],
+        "license": [
+            {
+                "type": "MIT",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
+            }
+        ]
+    },
+    "words": {
+        "an": "1 lalu",
+        "agree": "setuju",
+        "clear": "bersihkan",
+        "signin": "masuk",
+        "logout": "keluar",
+        "signup": "daftar",
+        "close": "tutup",
+        "drawer": "laci",
+        "free": "gratis",
+        "search": "cari",
+        "recover": "pulihkan",
+        "restore": "kembalikan",
+        "white": "putih",
+        "decade": "dekade",
+        "year": "tahun",
+        "month": "bulan",
+        "week": "minggu",
+        "day": "hari",
+        "hour": "jam",
+        "minute": "menit",
+        "license": "lisensi",
+        "more": "lainnya",
+        "second": "detik",
+        "now": "sekarang",
+        "rememberme": "ingat saya",
+        "source": "sumber",
+        "mail": "email",
+        "page": "halaman",
+        "pwd": "kata sandi",
+        "token": "token",
+        "media": "media",
+        "settings": "pengaturan",
+        "version": "versi",
+        "ooops": "ups..."
+    },
+    "combo": {
+        "btn_top": "Kembali ke atas",
+        "more_info": "dapatkan informasi lebih lanjut.",
+        "click_here": "Klik di sini!",
+        "clear_exit": "Bersihkan dan keluar",
+        "not_show_again": "jangan tampilkan lagi",
+        "powered": "Didukung oleh",
+        "copyr": "Hak Cipta",
+        "knowmore": "Pelajari lebih lanjut",
+        "seelicenses": "Lihat lisensi"
+    },
+    "navbar": {
+        "wiki": "WIKI",
+        "blog": "blog",
+        "dpo": "DPO",
+        "colab": "berkolaborasi",
+        "about": "tentang",
+        "lab": "laboratorium",
+        "contact": "kontak",
+        "policies": "kebijakan",
+        "donations": "donasi",
+        "signin": "Masuk",
+        "docs": "dokumentasi",
+        "home": "Beranda"
+    },
+    "footer": {
+        "content": {
+            "contactnf": "KONTAK",
+            "blognew": "BERITA",
+            "uselink": "TAUTAN BERGUNA",
+            "docs": "Dokumentasi",
+            "policies": "Kebijakan Umum",
+            "faq": "Dukungan dan FAQ",
+            "forum": "Forum dan Komunitas",
+            "devtool": "Alat DEV",
+            "api": "API Layanan",
+            "bugs": "Laporkan Bug",
+            "desc1": "Situs ini menghimpun koleksi proyek yang dimulai sejak 2010 dan bertujuan menjadi blog pribadi untuk berbagi berbagai topik. Jangan ragu untuk menjelajahi situs ini dan membagikan kontennya.",
+            "desc2": "Situs ini terus dalam pengembangan, silakan sampaikan kesalahan atau sarankan perbaikan.",
+            "start": "Mulai sekarang",
+            "source": "Kode Sumber",
+            "feedback": "Umpan Balik",
+            "dpo": "Petugas Perlindungan Data (DPO)"
+        },
+        "author": "penulis",
+        "about": "tentang",
+        "licit": "hukum",
+        "cookie": "cookies",
+        "privacci": "privasi",
+        "footoodle": {
+            "title": "Daftar di Collabore",
+            "description": "<p>Collabore membuka pintu bagi para pengembang dan antusias. Ubah layanan halaman statis Anda menjadi dinamis.</p><p>Melalui antarmuka yang sederhana namun tangguh, Anda dapat mengubah, meninjau, dan membuat postingan baru, menambahkan plugin dan aplikasi ke halaman Anda, atau menyematkan ekstensi Anda sendiri.</p><p>Semua ini melalui kode sumber terbuka yang dirancang untuk diperluas. Gunakan sistem autentikasi terpadu agar pengguna Collabore dapat mendaftar di halaman Anda hanya dengan beberapa klik, dan yang terbaik, terautentikasi secara otomatis di plugin dan aplikasi halaman Anda.</p><p class='mt-5 ct'>Jadilah bagian dari sistem kolaboratif ini, <a href='/signup' class='white tdu'>daftar sekarang!</a></p>"
+        }
+    },
+    "drawer": {
+        "clear_data": {
+            "title": "Hapus data situs",
+            "question_info": "Apakah Anda yakin?",
+            "positive": "Tahan untuk menghapus",
+            "negative": "Tidak, batalkan",
+            "footer_info": "Hapus cache dan cookie. Lihat <a href='#' class='tdu blue'>dokumentasi</a>."
+        },
+        "bug_report": {
+            "title": "Laporkan bug 🐛",
+            "question_info": "Menemukan bug? Laporkan!",
+            "placeholder": "Jelaskan kesalahannya di sini...",
+            "send": "Kirim",
+            "follow": "Ke dukungan",
+            "footer_info": "Melaporkan bug. Lihat <a href='#' class='tdu blue'>dokumentasi</a> tentang ini.",
+            "sent": "Terima kasih! Bug telah dicatat.",
+            "failed": "Tidak dapat mencatat bug. Silakan coba lagi."
+        },
+        "feedback": {
+            "title": "Kirim komentar Anda",
+            "rating": "Penilaian:",
+            "question_info": "Kirim pendapat Anda tentang Collabore!",
+            "placeholder": "Kirim kritik, pujian, atau saran",
+            "footer_info": "Mengirim komentar. Lihat <a href='#' class='tdu blue'>dokumentasi</a> tentang ini.",
+            "notific": {
+                "error": {
+                    "title": "Umpan balik gagal!",
+                    "message": "Maaf, terjadi kesalahan saat memproses komentar Anda."
+                },
+                "success": {
+                    "title": "Umpan balik terkirim!",
+                    "message": "Terima kasih, komentar Anda berhasil dikirim!"
+                }
+            }
+        },
+        "geolocation": {
+            "title": "Minta Geolokasi",
+            "btn1": "Ya, minta",
+            "btn2": "Tidak, batalkan",
+            "footer_info": "Geolokasi? Lihat <a href='#' class='tdu blue'>dokumentasi</a>."
+        },
+        "notification": {
+            "title": "Minta Notifikasi",
+            "btn1": "Ya, minta",
+            "btn2": "Tidak, batalkan",
+            "footer_info": "Notifikasi? Lihat <a href='#' class='tdu blue'>dokumentasi</a>."
+        },
+        "getmedia_audio": {
+            "title": "Minta Mikrofon",
+            "btn1": "Ya, minta",
+            "btn2": "Tidak, batalkan",
+            "footer_info": "Media Audio? Lihat <a href='#' class='tdu blue'>dokumentasi</a>."
+        },
+        "getmedia_video": {
+            "title": "Minta Webcam",
+            "btn1": "Ya, minta",
+            "btn2": "Tidak, batalkan",
+            "footer_info": "Media Video? Lihat <a href='#' class='tdu blue'>dokumentasi</a>.",
+            "perm_title": "Izin kamera",
+            "perm_1": "Situs hanya menggunakan kamera saat Anda memulai fitur yang membutuhkannya.",
+            "perm_2": "Anda dapat mencabut izin di pengaturan browser Anda.",
+            "perm_3": "Jika Anda membatalkan, tidak ada izin yang diberikan."
+        },
+        "words": {
+            "clear": "Pembersihan",
+            "geo": "Geo",
+            "cam": "Video",
+            "mic": "Audio",
+            "color": "Warna",
+            "note": "Catatan",
+            "bug": "Bug",
+            "lab": "Laboratorium",
+            "not": "Peringatan",
+            "feedback": "Umpan balik",
+            "lang": "Bahasa",
+            "marks": "Penanda",
+            "admin": "Administrasi",
+            "share": "Bagikan",
+            "theme_light": "Tema terang",
+            "theme_dark": "Tema gelap"
+        },
+        "version": "Versi",
+        "notes_form": {
+            "sent": "Catatan disimpan.",
+            "failed": "Tidak dapat menyimpan catatan. Silakan coba lagi."
+        }
+    },
+    "copyright": {
+        "contributors": "Proyek ini hanya dimungkinkan berkat penggunaan banyak proyek sumber terbuka lainnya dan <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>komunitas kontributor</a>... Anda bebas membuat, menggunakan, memodifikasi, dan mendistribusikan dengan menghormati semua lisensi yang mendasarinya!",
+        "caption": "Daftar sumber dan lisensinya masing-masing",
+        "backendsources": "Banyak sumber lain yang berjalan di server (NodeJS) dan dimuat secara dinamis sangat penting bagi proyek ini, seperti:",
+        "package": "dan <a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>lainnya...</a>",
+        "tps": "Perangkat lunak pihak ketiga",
+        "thissource": "Perangkat lunak situs ini",
+        "alllicenses": "Semua lisensi"
+    },
+    "nocookie": {
+        "title": "Tidak didukung",
+        "p1": "Maaf, kami tidak mendukung penjelajahan \"tanpa cookie\".",
+        "p2": "Meskipun situs ini menggunakan cookie dan teknologi penyimpanan lainnya, \"<strong>kami tidak menyimpan data apa pun di browser Anda tanpa izin tegas Anda</strong>\"!",
+        "p3": "Kami yakin memiliki alasan yang kuat untuk tidak mendukung penjelajahan \"tanpa cookie\". Lihat <a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a> kami untuk informasi lebih lanjut. Sayangnya, Anda perlu menjelajah dengan cookie diaktifkan."
+    },
+    "modals": {
+        "language": {
+            "title": "Pilih Bahasa",
+            "avaliable": "Bahasa yang tersedia",
+            "pt_BR": "Portugis",
+            "en_US": "Inggris",
+            "es_ES": "Spanyol",
+            "fr_FR": "Prancis",
+            "de_DE": "Jerman",
+            "ja_JP": "Jepang",
+            "hi_IN": "Hindi",
+            "zh_CN": "Tionghoa (Sederhana)",
+            "ru_RU": "Rusia",
+            "bn_BD": "Bengali",
+            "id_ID": "Indonesia",
+            "tr_TR": "Turki",
+            "sw_KE": "Swahili",
+            "fil_PH": "Filipino",
+            "ko_KR": "Korea",
+            "th_TH": "Thai",
+            "it_IT": "Italia",
+            "te_IN": "Telugu",
+            "mr_IN": "Marathi",
+            "footer": "Tidak ada pilihan dalam bahasa Anda? Buatlah terjemahan!"
+        },
+        "version": {
+            "title": "🚧 Sedang Dibangun 🚧",
+            "text1": "Proyek ini hanya dimungkinkan berkat penggunaan banyak proyek sumber terbuka lainnya dan ",
+            "text2": "komunitas kontributor",
+            "text3": "Anda bebas membuat, menggunakan, memodifikasi, dan mendistribusikan dengan menghormati semua lisensi yang mendasarinya!"
+        },
+        "tabs": {
+            "camera": "Minta kamera",
+            "permissions": "Izin"
+        },
+        "share": {
+            "title": "Bagikan blog ini",
+            "broken_link": "Laporkan tautan rusak?"
+        },
+        "notes": {
+            "title": "Catatan cepat",
+            "note_title": "Judul:",
+            "category": "Kategori:",
+            "tags": "Tag:",
+            "note": "Catatan:",
+            "save": "Simpan",
+            "ph_title": "Judul",
+            "ph_category": "Kategori",
+            "ph_tags": "Tag",
+            "ph_note": "Catatan Anda di sini..."
+        },
+        "offline": {
+            "title": "Simpan untuk penggunaan offline",
+            "yes": "Ya, simpan!",
+            "no": "Tidak, batalkan",
+            "about": "Tentang fitur offline?"
+        },
+        "auth": {
+            "title": "Masuk dan otorisasi",
+            "source": "Kode sumber: <a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">lihat di GitHub</a>"
+        },
+        "bugs": {
+            "select_type": "Pilih jenis:",
+            "custom": "Kesalahan kustom",
+            "css": "Kesalahan CSS",
+            "js": "Kesalahan JavaScript",
+            "language": "Kesalahan Bahasa",
+            "plugins": "Kesalahan Plugin",
+            "server": "Kesalahan Server",
+            "description": "Kirim deskripsi",
+            "ph_description": "Deskripsi di sini..."
+        },
+        "permissions": {
+            "title_microphone": "Izin mikrofon",
+            "title_geolocation": "Izin lokasi",
+            "item_1": "Situs hanya menggunakan fitur ini saat Anda memulai fungsi yang membutuhkannya.",
+            "item_2": "Anda dapat mencabut izin di pengaturan browser Anda.",
+            "item_3": "Jika Anda membatalkan, tidak ada izin yang diberikan."
+        }
+    },
+    "notify": {
+        "storage": {
+            "title": "Subversivo58 - Penyimpanan",
+            "body": "Situs ini menggunakan \"cookie\" dan teknologi lain yang menyimpan informasi di perangkat Anda, apakah Anda setuju?",
+            "actions": [
+                {
+                    "action": "cookie-agree",
+                    "title": "apa ini?",
+                    "icon": "🍪"
+                },
+                {
+                    "action": "cookie-policy",
+                    "title": "lihat kebijakan",
+                    "icon": "🛡️"
+                },
+                {
+                    "action": "terms-policy",
+                    "title": "lihat ketentuan",
+                    "icon": "📜"
+                }
+            ]
+        },
+        "permission_granted": {
+            "title": "Notifikasi diaktifkan",
+            "body": "Terima kasih telah mengizinkan pengiriman notifikasi!"
+        }
+    },
+    "pages": {
+        "about": {
+            "heading": "Teknologi, tren, dan budaya siber",
+            "item1": "✓ Web APIs, JavaScript, dan fitur HTML5.",
+            "item2": "✓ Pemrograman fungsional, pola, framework.",
+            "item3": "✓ WebCrypto, laboratorium, dan code-flask.",
+            "item4": "✓ Opini, gaya hidup, budaya Geek, dan banyak lagi.",
+            "photo": "Foto oleh <a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a> di <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "title": "Tentang",
+            "p1": "Halo, saya Lauro Moraes \"alias\" <a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a> dan situs ini adalah laboratorium digital serta blog pribadi saya.",
+            "p2": "Di sini saya menerbitkan konten tentang tren teknologi, budaya siber, dan pemrograman berorientasi web seperti PWA, Single Page Apps, serta penggunaan API JavaScript, HTML5, dan CSS3 modern",
+            "p3": "Saya sangat menyukai pemrograman fungsional, perancangan pola, dan topik seperti desentralisasi web ... blockchain dan kriptografi di web adalah tema yang selalu hadir di sini.",
+            "p4": "Di sinilah juga saya menerbitkan eksperimen saya dan membagikan kode serta potongan fungsional kecil, selain mengungkapkan pendapat saya tentang berbagai topik, sedikit budaya Geek, dan gaya hidup ini.",
+            "p5": "Jangan ragu untuk menjelajahi konten blog dan berpartisipasi dalam komunitas kami."
+        },
+        "you_in_control": {
+            "heading": "Anda memegang kendali atas data Anda",
+            "item1": "✓ Privasi adalah hak Anda, bukan produk yang ditawarkan kepada Anda.",
+            "item2": "✓ Kriptografi sebagai dasar seluruh keamanan digital.",
+            "item3": "✓ Menghormati privasi dimulai dengan menghormati pilihan Anda.",
+            "item4": "✓ Anda memutuskan apa, kapan, dan dengan siapa membagikan data Anda.",
+            "photo": "Foto oleh <a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a> di <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>"
+        },
+        "donations": {
+            "heading": "Berpikir untuk melakukan sesuatu yang keren?",
+            "photo": "Foto oleh <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> di <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "thanks_title": "Ucapan Terima Kasih",
+            "thanks_text": "Dengan penuh kebanggaan kami menggunakan <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Github Pages</a> dan layanan <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>, platform dan alat-alat ini benar-benar luar biasa sehingga memungkinkan kami membuat hal-hal keren seperti blog ini dan alat-alat kami.",
+            "platforms_title": "Kenali platform-platform ini",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
+            "donate_title": "Donasi Anda sangat berarti",
+            "content": {
+                "intro1": "Menjaga blog tetap mutakhir membutuhkan waktu dan dedikasi; meskipun platform dan alat yang kami gunakan gratis, semuanya memiliki keterbatasan. Masing-masing membatasi jumlah kunjungan suatu situs per bulan serta jumlah data yang dapat mengalir dari server mereka selama kunjungan tersebut.",
+                "intro2": "Di blog ini kami menyukai gagasan untuk mengeksplorasi fitur baru, mengimplementasikan sumber daya baru, dan mungkin memperluas ragam layanan serta membangun komunitas yang hidup dan dinamis.",
+                "intro3": "Untuk mewujudkan gagasan ini diperlukan investasi sumber daya guna mendapatkan domain sendiri, server VPS yang mendukung lalu lintas lebih besar, ruang penyimpanan, dan yang memungkinkan pembuatan lebih banyak aplikasi.",
+                "intro4": "Kami membenci gagasan menggalang dana dengan iklan, paywall, pelacakan berbayar, atau penjualan data ... kami membela dan <strong>percaya bahwa Anda adalah satu-satunya pemilik data Anda</strong> seperti yang dijelaskan dalam <a href=\"./you-in-control-of-your-data.html\" title=\"White Paper\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">\"White Paper\"</a> kami, karena itu bantuan kecil Anda dapat membuat perbedaan besar, mendorong dan membantu kami berbuat lebih banyak dan lebih baik 🚀",
+                "contribution1": "Anda dapat berkontribusi pada blog ini dengan berbagai cara: membagikannya di jejaring sosial Anda, memperbaiki kode, kolaborasi editorial, berinteraksi dengan komunitas kami, dan banyak lagi.",
+                "contribution2": "Pertimbangkan juga untuk memberikan \"<b>bantuan ekstra</b>\" dengan memilih salah satu opsi donasi di bawah ini 🎊",
+                "pix_caption": "PagBank Pix",
+                "trademarks": "Logo dan merek dagang yang digunakan di sini adalah milik masing-masing pemegang haknya. Penggunaannya di sini tidak menjamin adanya hubungan atau dukungan apa pun dari merek-merek tersebut."
+            }
+        },
+        "dpo": {
+            "heading": "Petugas Perlindungan Data (DPO)",
+            "intro1": "Sesuai dengan Undang-Undang Perlindungan Data Umum (LGPD - UU No. 13.709/2018), kami menginformasikan kontak Petugas Perlindungan Data (Data Protection Officer) kami.",
+            "intro2": "DPO adalah orang yang bertanggung jawab menengahi komunikasi antara Situs, subjek data (Anda), dan Otoritas Perlindungan Data Nasional (ANPD).",
+            "contact_title": "Informasi Kontak",
+            "officer": "<strong>Petugas:</strong> Lauro de Moraes",
+            "email": "Email:",
+            "deadline": "<strong>Batas Waktu Respons:</strong> Hingga 30 hari, sesuai peraturan yang berlaku bagi pengolah data skala kecil.",
+            "send_email": "Kirim email ke DPO",
+            "rights_title": "Cara menggunakan hak Anda",
+            "rights1": "Untuk menggunakan salah satu hak Anda yang diatur dalam Pasal 18 LGPD (seperti konfirmasi pemrosesan, akses, perbaikan, anonimisasi, penghapusan, dan lainnya), cukup kirimkan email ke alamat di atas.",
+            "rights2": "Untuk mempercepat layanan, kami menyarankan Anda mencantumkan di subjek atau isi email:",
+            "list1": "Nama lengkap Anda;",
+            "list2": "Hak yang ingin Anda gunakan (misalnya: penghapusan data, akses, dll.);",
+            "list3": "Detail yang dapat membantu kami menemukan data Anda di sistem kami.",
+            "policies": "Untuk detail lebih lanjut tentang cara kami memproses data Anda, silakan lihat <a href=\"/policy.html#policy-general\">Kebijakan Umum</a> dan <a href=\"/policy.html#policy-privacy\">Kebijakan Privasi</a> kami."
+        },
+        "home": {
+            "intro": {
+                "eyebrow": "TENTANG SUBVERSIVO58",
+                "title": "Jauh lebih dari sekadar blog.",
+                "description": "Ruang yang didedikasikan untuk rasa ingin tahu, teknologi, dan kebebasan mengeksplorasi ide.",
+                "details": "Di sini, pengetahuan dan kreativitas bertemu dalam konten, pengalaman, dan proyek yang melampaui hal konvensional.",
+                "signature": "RASA INGIN TAHU · PENGETAHUAN · KREATIVITAS"
+            },
+            "exploration": {
+                "eyebrow": "TEMUKAN",
+                "title": "Jelajahi berbagai ide.",
+                "description": "Berbagai jalan untuk belajar, bereksperimen, dan menemukan kemungkinan baru.",
+                "programming": {
+                    "title": "Pemrograman",
+                    "description": "Kode, pengembangan, dan solusi kreatif untuk dunia digital."
+                },
+                "technology": {
+                    "title": "Teknologi",
+                    "description": "Alat, sumber daya, dan berita yang mengubah keseharian kita."
+                },
+                "experiments": {
+                    "title": "Eksperimen",
+                    "description": "Ide yang sedang dibangun, uji coba, dan penemuan di luar kebiasaan."
+                },
+                "knowledge": {
+                    "title": "Pengetahuan",
+                    "description": "Pembelajaran, refleksi, dan informasi untuk memperluas wawasan."
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / LABORATORIUM",
+                "title": "Ruang untuk mengeksplorasi kemungkinan baru.",
+                "description": "Eksperimen, proyek, dan alat yang dikembangkan untuk mengubah rasa ingin tahu menjadi penemuan.",
+                "link": "Jelajahi laboratorium"
+            }
+        },
+        "policy": {
+            "badges": {
+                "reading_title": "Perkiraan waktu membaca dokumen ini",
+                "version": "Versi: {version}",
+                "version_title": "Versi dokumen",
+                "print": "Cetak&nbsp;🖨️",
+                "print_title": "Cetak"
+            },
+            "cards": {
+                "introduction": {
+                    "title": "Pendahuluan",
+                    "description": "Situs ini dibuat menggunakan teknologi Web; kami percaya pada desentralisasi dan keamanan kriptografi. Kami percaya Anda adalah satu-satunya pemilik data Anda.",
+                    "link": "Lihat selengkapnya di \"White Paper\" kami"
+                },
+                "privacy": {
+                    "title": "Privasi",
+                    "description": "Kebijakan privasi menjelaskan mengapa Situs ini meminta data, bagaimana data diproses, serta menginformasikan cara pengguna dapat mengedit, mengunduh, atau menghapus datanya.",
+                    "link": "Baca Kebijakan Privasi kami"
+                },
+                "terms": {
+                    "title": "Ketentuan",
+                    "description": "Ketentuan menjelaskan cara kami mengoperasikan Situs ini, apa yang dapat diharapkan pengguna dari Situs ini, dan apa yang kami harapkan dari pengguna kami dalam proses tersebut.",
+                    "link": "Baca Ketentuan Penggunaan kami"
+                },
+                "general": {
+                    "title": "Kebijakan",
+                    "description": "\"Kebijakan\" adalah dokumen umum yang mengatur hubungan antara Situs dan Pengguna, serta menetapkan jaminan dan batasan untuk perjanjian penggunaan Situs beserta alatnya.",
+                    "link": "Baca Kebijakan Umum kami"
+                }
+            },
+            "overview": {
+                "quote1": "Kebijakan adalah cara Situs dan pengguna berinteraksi; kebijakan menghadirkan keamanan dan kepercayaan dengan menjamin transparansi dan kualitas selama hubungan ini, serta menjadi objek regulasi dalam banyak undang-undang perlindungan data dan privasi di berbagai negara di dunia.",
+                "quote2": "Kami berusaha menyederhanakan kebijakan kami semaksimal mungkin untuk menghindari pola \"<strong>bahasa hukum yang berbelit-belit</strong>\". Tidak terlalu banyak karena banyak tidak menjamin kualitas, dan tidak terlalu sedikit karena sedikit tidak menjamin isi.",
+                "quote3": "Kami berharap hubungan saling percaya ini menjadi proses pembelajaran baik bagi pengguna kami maupun bagi kami sendiri.",
+                "whitepaper_link": "Kutipan dari \"White Paper\" kami",
+                "contact": "Pertanyaan apa pun yang timbul dari penggunaan Situs atau alatnya dapat dilaporkan melalui formulir kontak atau alat <strong>umpan balik</strong> kami (kami suka umpan balik). Kami kembali mengundang Anda untuk menyelesaikan masalah melalui DPO kami di alamat email berikut <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Políticas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
+                "markdown1": "Kebijakan situs ini ditulis dalam bahasa markup <strong>Markdown</strong> yang sedikit dimodifikasi; Anda dapat melihatnya dalam teks biasa atau mengunduhnya di <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a> melalui <a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">tautan ke repositori kami</a> ini",
+                "markdown2": "Di sana Anda akan menemukan versi ini dan versi sebelumnya dari Kebijakan ini serta kode sumber Situs ini; Anda juga dapat mencetaknya dengan mengklik ikon cetak <span class=\"badge badge-light border-def contrast\">Cetak&nbsp;🖨️</span> yang ada di bagian atas Kebijakan Umum kami."
+            },
+            "privacy": {
+                "heading": "Privasi",
+                "image_alt": "Anda punya pilihan",
+                "image_title": "Anda punya pilihan",
+                "paragraph1": "Kami percaya bahwa prinsip privasi adalah kebebasan memilih. Pengguna seharusnya tidak harus menyerahkan datanya hanya dengan satu klik atau dengan ketentuan yang memaksanya menyerahkan sejumlah besar data demi menggunakan alat tertentu.",
+                "paragraph2": "Kebebasan memilih adalah model yang progresif namun tidak memaksa untuk permintaan data, dan persetujuan hanya saat diperlukan seharusnya menjadi standar yang diikuti.",
+                "paragraph3": "Menghormati privasi dimulai dengan menghormati pilihan Pengguna tentang \"apa\" dan \"kapan\" ia ingin berbagi."
+            },
+            "terms": {
+                "heading": "Ketentuan Penggunaan",
+                "image_alt": "Gambar Ketentuan Penggunaan",
+                "image_title": "Ketentuan Kami"
+            },
+            "general": {
+                "heading": "Kebijakan Umum",
+                "image_alt": "Gambar kontrak",
+                "image_title": "Kontrak"
+            },
+            "cookies": {
+                "heading": "Terima cookie",
+                "paragraph1": "Jika Anda bertanya-tanya apakah: <strong>benar-benar harus menerima cookie dan penyimpanan data</strong>? Jawaban singkatnya adalah: <strong>tidak, Anda tidak harus</strong>! Anda tetap dapat menjelajah dan menggunakan berbagai alat serta fitur Situs, namun mungkin tidak mendapatkan pengalaman terbaik 🙁",
+                "paragraph2": "Misalnya: ketika Anda memilih bahasa, menyimpan warna favorit, atau menetapkan pengaturan, Anda harus mengulangi pilihan ini setiap kali mengakses atau menjelajahi situs ... satu-satunya cara untuk \"mempertahankan\" pilihan Anda adalah dengan menyimpannya secara lokal.",
+                "paragraph3": "Mengikuti filosofi kami bahwa <a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">Anda adalah satu-satunya pemilik data Anda</a>, kami percaya Anda punya pilihan. Jika memilih menerima penggunaan cookie dengan \"<strong>mengklik dan menahan</strong>\" tombol di bawah, Anda juga dapat memilih untuk <strong>menonaktifkannya</strong> kapan pun Anda mau di sini atau di tab Pengguna, serta menghapus semua yang sudah tersimpan sekaligus 😎",
+                "button": "🍪 tahan untuk mengaktifkan cookie",
+                "disable": "😮 klik untuk menonaktifkan cookie!"
+            }
+        }
+    },
+    "settings_slide": {
+        "title": "Pengaturan situs",
+        "media_api": "API media",
+        "auto_audio": "panggil audio secara otomatis setelah izin pertama",
+        "auto_video": "panggil video secara otomatis setelah izin pertama",
+        "geo_api": "API geolokasi",
+        "geo_share": "bagikan analitik pelacakan geografis",
+        "audio_effects": "Efek audio",
+        "audio_effects_on": "aktifkan efek audio",
+        "audio_notify_on": "aktifkan notifikasi audio",
+        "connection": "Koneksi (status)",
+        "notify_off": "nonaktifkan notifikasi",
+        "analytics": "Analitik",
+        "analytics_toggle": "aktifkan atau nonaktifkan"
+    },
+    "palette": {
+        "title": "Palet warna",
+        "schema": "Skema"
+    },
+    "admin_dashboard": {
+        "posts": "Postingan",
+        "close_menu": "Tutup menu",
+        "loading_posts": "Memuat postingan...",
+        "title": "Panel Administrasi",
+        "description": "Kelola postingan blog Anda.",
+        "menu": "Menu",
+        "new_post": "Postingan Baru",
+        "settings": {
+            "tab": "GitHub Config",
+            "title": "GitHub Config",
+            "save": "Simpan",
+            "clear_credentials": "Hapus kredensial GitHub",
+            "clear": "Bersihkan"
+        },
+        "close_editor": "Tutup editor",
+        "footoodles": {
+            "tab": "Footoodles",
+            "title": "Kelola Footoodles",
+            "empty": "Belum ada Footoodle yang terdaftar.",
+            "loading": "Memuat Footoodles...",
+            "load_error": "Tidak dapat memuat Footoodles.",
+            "new": "Footoodle Baru",
+            "edit": "Edit",
+            "delete": "Hapus",
+            "save": "Simpan Footoodle",
+            "cancel": "Batal",
+            "image": "Gambar",
+            "image_select": "Pilih gambar",
+            "image_required": "Pilih sebuah gambar.",
+            "image_invalid": "Format gambar tidak diizinkan. Gunakan JPEG, PNG, atau WebP.",
+            "title_label": "Judul",
+            "title_placeholder": "Masukkan judul Footoodle",
+            "title_required": "Masukkan judul.",
+            "content_label": "Konten",
+            "content_placeholder": "Tulis Footoodle Anda...",
+            "content_required": "Masukkan konten.",
+            "content_limit": "Konten maksimal 280 karakter.",
+            "character_count": "{count}/280 karakter",
+            "saving": "Menyimpan Footoodle...",
+            "saved": "Footoodle berhasil disimpan!",
+            "save_error": "Tidak dapat menyimpan Footoodle.",
+            "updating": "Memperbarui Footoodle...",
+            "updated": "Footoodle berhasil diperbarui!",
+            "update_error": "Tidak dapat memperbarui Footoodle.",
+            "delete_confirm": "Apakah Anda yakin ingin menghapus Footoodle ini?",
+            "deleting": "Menghapus Footoodle...",
+            "deleted": "Footoodle berhasil dihapus!",
+            "delete_error": "Tidak dapat menghapus Footoodle.",
+            "delete_cancel": "Penghapusan dibatalkan.",
+            "editor_new": "Membuat Footoodle baru.",
+            "editor_edit": "Mengedit Footoodle.",
+            "discard_changes": "Buang perubahan pada Footoodle ini?",
+            "operation_error": "Terjadi kesalahan saat memproses Footoodle.",
+            "github_error": "Tidak dapat menyelesaikan operasi di GitHub.",
+            "subtitle": "Buat dan kelola catatan cepat dengan gambar di footer."
+        },
+        "editor": {
+            "status_ready": "Siap untuk mengedit.",
+            "title_label": "Judul",
+            "title_placeholder": "Judul postingan",
+            "summary_label": "Ringkasan",
+            "summary_placeholder": "Ringkasan postingan",
+            "summary_restore": "Pulihkan otomatis",
+            "summary_help": "Ringkasan diisi secara otomatis. Anda bebas mengubahnya.",
+            "content_label": "Konten",
+            "toolbar_label": "Alat pemformatan",
+            "bold": "Tebal",
+            "italic": "Miring",
+            "strike": "Coret",
+            "unordered_list": "Daftar berpoin",
+            "unordered_list_label": "• Daftar",
+            "ordered_list": "Daftar bernomor",
+            "ordered_list_label": "1. Daftar",
+            "quote": "Kutipan",
+            "link": "Sisipkan tautan",
+            "link_label": "Tautan",
+            "code": "Sisipkan kode",
+            "font_size": "Font",
+            "font_size_title": "Ukuran font",
+            "image": "Gambar",
+            "image_title": "Tambahkan gambar",
+            "microphone": "Mikrofon",
+            "microphone_title": "Transkripsikan suara",
+            "preview_toggle": "Pratinjau",
+            "preview_heading": "Pratinjau",
+            "preview_close": "Tutup",
+            "tags_label": "Tag",
+            "tags_placeholder": "Masukkan tag dipisahkan koma",
+            "draft_select_label": "Pilih draf",
+            "draft_select_default": "Pilih draf",
+            "draft_open": "Buka draf",
+            "draft_save": "Simpan draf",
+            "generate": "Buat postingan",
+            "slug_label": "Slug URL",
+            "slug_placeholder": "artikel-saya",
+            "slug_unlock_title": "Buka kunci atau kunci pengeditan slug",
+            "summary_restore_title": "Pulihkan ringkasan otomatis",
+            "undo_title": "Urungkan (Ctrl+Z)",
+            "redo_title": "Ulangi (Ctrl+Y)",
+            "block_format_title": "Gaya blok",
+            "block_paragraph": "Paragraf",
+            "heading1": "Judul 1",
+            "heading2": "Judul 2",
+            "heading3": "Judul 3",
+            "heading4": "Judul 4",
+            "heading5": "Judul 5",
+            "heading6": "Judul 6",
+            "code_block": "Blok kode",
+            "bold_title": "Tebal (Ctrl+B)",
+            "italic_title": "Miring (Ctrl+I)",
+            "underline_title": "Garis bawah (Ctrl+U)",
+            "strike_title": "Coret",
+            "inline_code_title": "Kode sebaris",
+            "clear_format_title": "Hapus format",
+            "fore_color_title": "Warna teks",
+            "back_color_title": "Warna sorotan",
+            "unordered_list_title": "Daftar berpoin",
+            "ordered_list_title": "Daftar bernomor",
+            "align_left_title": "Rata kiri",
+            "align_center_title": "Rata tengah",
+            "align_right_title": "Rata kanan",
+            "align_justify_title": "Rata kanan-kiri",
+            "link_title": "Sisipkan atau edit tautan (Ctrl+K)",
+            "quote_title": "Blok kutipan",
+            "code_title": "Sisipkan blok kode",
+            "hr_title": "Garis horizontal",
+            "table_title": "Sisipkan tabel",
+            "source_btn": "HTML",
+            "source_title": "Alihkan kode sumber HTML",
+            "preview": "Pratinjau",
+            "link_url_placeholder": "https://contoh.com atau /posts/...",
+            "link_text_placeholder": "Teks tautan (opsional)",
+            "link_new_tab": "Tab baru",
+            "apply": "Terapkan",
+            "unlink": "Hapus tautan",
+            "cancel": "Batal",
+            "table_rows": "Baris",
+            "table_cols": "Kolom",
+            "table_insert": "Sisipkan tabel",
+            "img_width": "Lebar",
+            "img_align": "Perataan",
+            "img_align_left": "Kiri",
+            "img_align_center": "Tengah",
+            "img_align_right": "Kanan",
+            "img_align_full": "Lebar penuh",
+            "img_remove": "Hapus gambar",
+            "img_alt_placeholder": "Teks alternatif (alt)",
+            "img_caption_placeholder": "Keterangan gambar (opsional)",
+            "drafts_section": "Draf",
+            "save_draft": "Simpan draf",
+            "drafts_placeholder": "Pilih draf...",
+            "open_draft": "Buka",
+            "delete_draft": "Hapus"
+        },
+        "posts_list": {
+            "untitled": "Postingan tanpa judul",
+            "edit": "Edit",
+            "delete": "Hapus"
+        },
+        "edit_post": "Edit Postingan",
+        "update_post": "Perbarui postingan",
+        "delete_modal": {
+            "title": "Hapus postingan",
+            "question": "Apakah Anda yakin ingin menghapus postingan ini?",
+            "cancel": "Batal",
+            "confirm": "Ya, hapus",
+            "deleting": "Menghapus...",
+            "deleting_status": "Menghapus postingan di GitHub...",
+            "success": "Postingan berhasil dihapus!",
+            "error": "Tidak dapat menghapus postingan.",
+            "close": "Tutup"
+        },
+        "msg": {
+            "speech_error": "Kesalahan pengenalan suara: {0}.",
+            "speech_unavailable": "Pengenalan suara tidak tersedia di browser ini.",
+            "speech_start_error": "Tidak dapat memulai pengenalan suara: {0}",
+            "pending_changes": "Perubahan tertunda.",
+            "images_db_unavailable": "Basis data tidak tersedia: tidak dapat menyimpan gambar.",
+            "images_optimized": "Gambar dioptimalkan: {0} → {1}.",
+            "images_added": "Gambar ditambahkan. Tidak ada pengurangan ukuran.",
+            "image_save_error": "Tidak dapat menyimpan gambar ke basis data.",
+            "markdown_load_error": "Tidak dapat memuat perender Markdown.",
+            "drafts_db_unavailable": "Basis data tidak tersedia: draf tidak akan disimpan.",
+            "autosave_ok": "Perubahan disimpan secara otomatis.",
+            "autosave_error": "Tidak dapat menyimpan secara otomatis.",
+            "nothing_to_save": "Masukkan judul atau konten sebelum menyimpan.",
+            "db_unavailable": "Basis data tidak tersedia.",
+            "draft_updated": "Draf diperbarui.",
+            "draft_saved": "Draf berhasil disimpan.",
+            "draft_save_error": "Kesalahan saat menyimpan draf.",
+            "changes_recovered": "Perubahan sebelumnya dipulihkan.",
+            "draft_select": "Pilih draf untuk dibuka.",
+            "draft_not_found": "Draf tidak ditemukan.",
+            "draft_opened": "Draf berhasil dibuka.",
+            "draft_open_error": "Kesalahan saat membuka draf.",
+            "editor_ready_new": "Editor siap untuk postingan baru.",
+            "need_title": "Masukkan judul postingan.",
+            "need_content": "Masukkan konten postingan.",
+            "preparing": "Menyiapkan postingan...",
+            "published": "Postingan berhasil diterbitkan.",
+            "prepared": "Postingan disiapkan. Konten dipertahankan di editor.",
+            "publish_stage_error": "Gagal pada tahap \"{0}\": {1}. Konten dipertahankan.",
+            "publishing": "Menerbitkan...",
+            "stage_init": "Inisialisasi penerbitan",
+            "stage_library": "Memuat pustaka Markdown",
+            "stage_preview": "Memperbarui pratinjau",
+            "stage_read": "Membaca data editor",
+            "stage_autosave": "Penyimpanan otomatis",
+            "stage_images": "Menyiapkan gambar",
+            "stage_files": "Membuat file postingan",
+            "stage_publish": "Menerbitkan ke GitHub",
+            "stage_confirm": "Konfirmasi penerbitan",
+            "discard_changes": "Buang perubahan pada postingan yang sedang diedit?",
+            "post_updated": "Postingan berhasil diperbarui.",
+            "post_loaded": "Postingan dimuat untuk diedit.",
+            "post_load_error": "Tidak dapat memuat postingan untuk diedit.",
+            "delete_prepare_error": "Tidak dapat menyiapkan penghapusan: {0}",
+            "delete_error": "Gagal menghapus postingan: {0}",
+            "draft_untitled": "Draf tanpa judul",
+            "post_missing": "Postingan tidak lagi ada dalam catatan. Pembaruan dibatalkan.",
+            "post_missing_delete": "Postingan tidak lagi ada dalam catatan.",
+            "github_not_confirmed": "GitHub tidak mengonfirmasi penghapusan.",
+            "markdown_fetch_error": "Tidak dapat memuat Markdown.",
+            "need_slug": "Masukkan slug yang valid untuk URL postingan.",
+            "draft_deleted": "Draf dihapus.",
+            "content_placeholder": "Tulis konten postingan...",
+            "reading_stats": "{words} kata · {minutes} mnt baca"
+        },
+        "nav": {
+            "session": "Sesi GitHub"
+        },
+        "posts_view": {
+            "subtitle": "Kelola, edit, atau hapus postingan HTML Anda yang telah diterbitkan.",
+            "search_placeholder": "Filter menurut judul, slug, atau tag...",
+            "empty": "Tidak ada postingan ditemukan.",
+            "back": "← Kembali ke postingan",
+            "view": "Buka halaman"
+        },
+        "session": {
+            "title": "Sesi GitHub",
+            "subtitle": "Kelola autentikasi OAuth dan masa berlaku token akses.",
+            "scope_label": "Cakupan:",
+            "obtained_label": "Diautentikasi pada:",
+            "expires_label": "Kedaluwarsa pada:",
+            "refresh_btn": "Validasi ulang sesi",
+            "diagnostics_title": "Diagnostik OAuth",
+            "reload_diagnostics": "Perbarui",
+            "clear_confirm": "Apakah Anda ingin menghapus kredensial GitHub yang tersimpan di browser ini?",
+            "status_active": "Aktif",
+            "status_expiring": "Segera kedaluwarsa",
+            "status_expired": "Kedaluwarsa",
+            "status_no_expiry": "Token tanpa masa kedaluwarsa",
+            "refreshing": "Memvalidasi ulang sesi dengan GitHub...",
+            "refreshed": "Sesi berhasil divalidasi ulang.",
+            "refresh_failed": "Tidak dapat memvalidasi ulang token secara otomatis.",
+            "reauth_needed": "Sesi GitHub Anda telah kedaluwarsa. Autentikasi ulang untuk melanjutkan.",
+            "diagnostics_empty": "Tidak ada diagnostik tersedia.",
+            "diagnostics_error": "Kesalahan saat memuat diagnostik."
+        }
+    },
+    "github_auth": {
+        "title": "Autentikasi GitHub",
+        "description": "Autentikasi dengan akun GitHub Anda untuk mengakses panel administrasi.",
+        "start": "Autentikasi dengan GitHub",
+        "confirm": "Konfirmasi dan lanjutkan",
+        "copy_diagnostics": "Salin diagnostik",
+        "identity": {
+            "id_label": "ID:",
+            "profile_label": "Profil:",
+            "email_label": "Email publik:",
+            "confirmation": "Konfirmasikan apakah Anda ingin menggunakan identitas ini di panel administrasi."
+        },
+        "messages": {
+            "empty": "Mulai autentikasi dengan GitHub.",
+            "verifying": "Memverifikasi autentikasi...",
+            "failed": "Autentikasi dengan GitHub gagal. Silakan coba lagi.",
+            "authenticated": "Diautentikasi sebagai {0}.",
+            "saving": "Menyimpan identitas...",
+            "save_failed": "Tidak dapat menyimpan identitas. Silakan coba lagi."
+        }
+    },
+    "blog": {
+        "empty": "Belum ada yang diterbitkan.",
+        "not_found": "Postingan tidak ditemukan.",
+        "load_error": "Tidak dapat memuat postingan ini.",
+        "showing": "Menampilkan {shown} dari {total}",
+        "load_more": "Muat lainnya",
+        "read_time": "{minutes} mnt baca",
+        "updated": "Pembaruan terakhir: {date}",
+        "more_posts": "Postingan lainnya",
+        "license": "Konten ini dilisensikan di bawah <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>",
+        "search_placeholder": "Cari postingan...",
+        "all_tags": "Semua",
+        "no_results": "Tidak ada postingan yang cocok dengan filter yang dipilih.",
+        "read_article": "Baca artikel",
+        "back_to_blog": "Kembali ke blog",
+        "copy_code": "Salin kode"
+    }
+}

@@ -1,18 +1,9 @@
 {
     "404": {
-        "general": "おっと... 見つかりません！",
+        "general": "おっと… 見つかりません！",
         "title": "ページが見つかりません",
-        "message": "アクセスしようとしたアドレスは存在しないか、移動されています。入力内容を確認するか、ホームページに戻ってください。",
+        "message": "開こうとしたアドレスは存在しないか、移動されました。入力内容が正しいか確認するか、ホームページに戻ってください。",
         "button": "ホームページに戻る"
-    },
-    "anonimous": {
-        "title": "匿名モードで閲覧していますか？",
-        "body": {
-            "first": "どうやらプライベートブラウジングモード（匿名）で閲覧しているようです。",
-            "second": "この閲覧モードでは、保存されたすべてのCookieとキャッシュデータは、ブラウジングを終了すると破棄されます。",
-            "third": "このサイトはオフラインでも動作するように設計されていますが、一部の機能、プラグイン、アプリが正常に動作しない、または利用できない場合があります。"
-        },
-        "button": "わかりました。続行します"
     },
     "source": {
         "name": "Subversivo58 Blog",
@@ -35,20 +26,20 @@
         ]
     },
     "words": {
-        "an": "1件前",
+        "an": "1前",
         "agree": "同意する",
-        "clear": "消去",
+        "clear": "クリア",
         "signin": "ログイン",
         "logout": "ログアウト",
-        "signup": "登録",
+        "signup": "新規登録",
         "close": "閉じる",
         "drawer": "ドロワー",
         "free": "無料",
         "search": "検索",
-        "recover": "復元",
-        "restore": "元に戻す",
+        "recover": "回復",
+        "restore": "復元",
         "white": "白",
-        "decade": "10年",
+        "decade": "十年",
         "year": "年",
         "month": "月",
         "week": "週",
@@ -56,10 +47,10 @@
         "hour": "時間",
         "minute": "分",
         "license": "ライセンス",
-        "more": "もっと見る",
+        "more": "もっと",
         "second": "秒",
         "now": "今",
-        "rememberme": "ログイン状態を保持する",
+        "rememberme": "ログイン状態を保持",
         "source": "ソース",
         "mail": "メール",
         "page": "ページ",
@@ -68,33 +59,25 @@
         "media": "メディア",
         "settings": "設定",
         "version": "バージョン",
-        "ooops": "おっと..."
+        "ooops": "おっと…"
     },
     "combo": {
         "btn_top": "トップへ戻る",
-        "more_info": "詳細を見る。",
-        "click_here": "こちらをクリック！",
-        "clear_exit": "消去して終了",
+        "more_info": "詳細情報を取得する。",
+        "click_here": "ここをクリック！",
+        "clear_exit": "クリアして終了",
         "not_show_again": "今後表示しない",
         "powered": "提供",
         "copyr": "著作権",
-        "knowmore": "詳しく見る",
+        "knowmore": "もっと詳しく",
         "seelicenses": "ライセンスを見る"
-    },
-    "langs": {
-        "enUS": "英語（アメリカ合衆国）- [デフォルト]",
-        "ptBR": "ポルトガル語（ブラジル）",
-        "esES": "スペイン語（スペイン）",
-        "frFR": "フランス語（フランス）",
-        "deDE": "ドイツ語（ドイツ）",
-        "jaJP": "日本語"
     },
     "navbar": {
         "wiki": "WIKI",
         "blog": "ブログ",
         "dpo": "DPO",
-        "colab": "コラボレーション",
-        "about": "サイトについて",
+        "colab": "協力する",
+        "about": "概要",
         "lab": "ラボ",
         "contact": "お問い合わせ",
         "policies": "ポリシー",
@@ -106,7 +89,7 @@
     "footer": {
         "content": {
             "contactnf": "お問い合わせ",
-            "blognew": "最新情報",
+            "blognew": "新着情報",
             "uselink": "便利なリンク",
             "docs": "ドキュメント",
             "policies": "一般ポリシー",
@@ -115,122 +98,99 @@
             "devtool": "開発者ツール",
             "api": "サービスAPI",
             "bugs": "バグを報告",
-            "desc1": "このサイトは2010年に始まったプロジェクトを集めたもので、さまざまなテーマを共有する個人ブログとして運営されています。ぜひサイトを探索し、コンテンツを共有してください。",
-            "desc2": "このサイトは継続的に開発されています。エラーの報告や改善の提案を歓迎します。",
+            "desc1": "このサイトは2010年に始まったプロジェクトのコレクションをまとめたもので、さまざまなテーマを共有する個人ブログとして機能することを目的としています。サイトを探索し、コンテンツを自由に共有してください。",
+            "desc2": "このサイトは継続的に開発中です。エラーの指摘や改善の提案をお気軽にお寄せください。",
             "start": "今すぐ始める",
             "source": "ソースコード",
             "feedback": "フィードバック",
-            "dpo": "データ保護責任者（DPO）"
+            "dpo": "データ保護責任者 (DPO)"
         },
-        "author": "作成者",
-        "about": "サイトについて",
+        "author": "著者",
+        "about": "概要",
         "licit": "法的情報",
-        "cookie": "Cookie",
+        "cookie": "クッキー",
         "privacci": "プライバシー",
         "footoodle": {
-            "title": "Collaboreに参加する",
-            "description": "<p>Collaboreは開発者や愛好家に門戸を開いています。静的ページのサービスを動的なものへと変えましょう。</p><p>シンプルでありながら強力なインターフェースを通じて、投稿の編集、レビュー、新規作成、ページへのプラグインやアプリの追加、独自の拡張機能の組み込みができます。</p><p>これらすべてを、拡張性を考慮して設計されたオープンソースコードで実現できます。統合認証システムを利用すれば、Collaboreのユーザーは数回のクリックであなたのページに登録でき、ページ上のプラグインやアプリにも自動的に認証されます。</p><p class='mt-5 ct'>この協働システムに参加しましょう。<a href='/signup' class='white tdu'>今すぐ登録！</a></p>"
-        }
-    },
-    "api": {
-        "geo": {
-            "request": "位置情報を要求する",
-            "description": "<div class='row'><p>位置情報を利用すると、より正確で関連性の高いコンテンツを検索できます。</p><p>友人、ページ、商品、グループ、チャンネル、投稿、タグなど、近くにあるものを探す最も簡単な方法です。</p></div><div data-mg='top:15' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-map-marker ct' onclick='$.Geo.request()'> 許可を要求する</span></div></div>",
-            "link_docs": "詳しくは、<a href='https://docs.himliy.com/gelocation#permissions' target='blank_' rel='nofollow' class='blue tdu'>ドキュメント</a>の権限に関するガイドをご覧ください。"
-        },
-        "not": {
-            "request": "通知を要求する",
-            "description": "<div class='row'><p>通知を利用すると：</p><p><b>ログインユーザー：</b>メッセージ、システム、チャット、チャンネル、登録済みフィード（ドキュメント：<a href='http://docs.himliy.com/notification#subscribles' target='blank_' rel='nofollow' class='blue tdu'>購読</a>を参照）に関する通知を受け取れます。他のWebページを閲覧している間や、ブラウザーが<b>最小化</b>されている場合でも通知されます。</p><p><b>未ログインユーザー：</b>システム通知や検索通知を受け取れます（ドキュメント：<a href='https://docs.himliy.com/notification#unsigned-subscrible' target='blank_' rel='nofollow' class='blue tdu'>未登録の購読</a>を参照）。</p></div><div data-mg='top:5' class='css row'><div class='col-4 off-4'><span class='css row btn sky fa fa-bell-o ct' onclick='$.Notific.request()'> 許可を要求する</span></div></div>",
-            "link_docs": "詳しくは、<a href='https://docs.himliy.com/notification#permissions' target='blank_' rel='nofollow' class='blue tdu'>ドキュメント</a>の権限に関するガイドをご覧ください。",
-            "message": {
-                "head": "ありがとうございます",
-                "body": "Collaboreの通知を有効にしました :)"
-            }
-        }
-    },
-    "cookies": {
-        "agree": {
-            "description_1": "このサイトでは、情報を保存するためにCookieやその他の技術を使用しています。このサイトを引き続き利用することで、これらの使用および関連する「ポリシー」に同意したものとみなされます。",
-            "description_2": "詳しい情報については、当サイトの<a href='/policy.html#cookie-agree' target='blank_' rel='nofollow' class='tdu sky'>クッキーポリシー</a>をご覧ください。",
-            "close_banner_info": "閉じるには、下のボタンをクリックしてください。"
+            "title": "Collaboreに登録",
+            "description": "<p>Collaboreは開発者や愛好家への扉を開きます。静的ページサービスを動的なものに変えましょう。</p><p>シンプルでありながら強力なインターフェースを通じて、新しい投稿の変更、レビュー、作成、ページへのプラグインやアプリの追加、独自の拡張機能の組み込みが可能になります。</p><p>これらすべてが拡張を想定して設計されたオープンソースコードによって実現されています。統合認証システムを活用することで、Collaboreユーザーは数回のクリックであなたのページに登録でき、さらにページのプラグインやアプリにも自動的に認証されます。</p><p class='mt-5 ct'>この共同システムの一員になりましょう。<a href='/signup' class='white tdu'>今すぐ登録！</a></p>"
         }
     },
     "drawer": {
         "clear_data": {
-            "title": "サイトデータを消去",
+            "title": "サイトデータをクリア",
             "question_info": "本当によろしいですか？",
-            "positive": "長押しで消去",
+            "positive": "長押ししてクリア",
             "negative": "いいえ、キャンセル",
-            "footer_info": "キャッシュとCookieを消去します。<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
+            "footer_info": "キャッシュとクッキーをクリアします。<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
         },
         "bug_report": {
             "title": "バグを報告 🐛",
-            "question_info": "エラーを見つけましたか？報告してください！",
-            "placeholder": "ここにエラーの内容を記入...",
+            "question_info": "バグを見つけましたか？報告してください！",
+            "placeholder": "ここにエラーの詳細を記入してください...",
             "send": "送信",
             "follow": "サポートへ移動",
-            "footer_info": "バグの報告については、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。",
-            "sent": "ありがとうございます。バグを記録しました。",
+            "footer_info": "バグ報告について。詳細は<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。",
+            "sent": "ありがとうございます！バグが記録されました。",
             "failed": "バグを記録できませんでした。もう一度お試しください。"
         },
         "feedback": {
             "title": "コメントを送信",
             "rating": "評価：",
-            "question_info": "Collaboreについてのご意見をお聞かせください！",
-            "placeholder": "批評、感想、提案を入力してください",
-            "footer_info": "コメントの送信については、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。",
+            "question_info": "Collaboreへのご意見をお送りください！",
+            "placeholder": "批判、称賛、または提案をお送りください",
+            "footer_info": "コメント送信について。詳細は<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。",
             "notific": {
                 "error": {
-                    "title": "フィードバックの送信に失敗しました！",
-                    "message": "申し訳ありません。コメントの処理中にエラーが発生しました。"
+                    "title": "フィードバック失敗！",
+                    "message": "申し訳ありませんが、コメントの処理中にエラーが発生しました。"
                 },
                 "success": {
                     "title": "フィードバックを送信しました！",
-                    "message": "ありがとうございます。コメントは正常に送信されました！"
+                    "message": "ありがとうございます！コメントは正常に送信されました！"
                 }
             }
         },
         "geolocation": {
-            "title": "位置情報を要求",
-            "btn1": "はい、要求する",
+            "title": "位置情報をリクエスト",
+            "btn1": "はい、リクエストする",
             "btn2": "いいえ、キャンセル",
-            "footer_info": "位置情報については、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
+            "footer_info": "位置情報について？<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
         },
         "notification": {
-            "title": "通知を要求",
-            "btn1": "はい、要求する",
+            "title": "通知をリクエスト",
+            "btn1": "はい、リクエストする",
             "btn2": "いいえ、キャンセル",
-            "footer_info": "通知については、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
+            "footer_info": "通知について？<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
         },
         "getmedia_audio": {
-            "title": "マイクを要求",
-            "btn1": "はい、要求する",
+            "title": "マイクをリクエスト",
+            "btn1": "はい、リクエストする",
             "btn2": "いいえ、キャンセル",
-            "footer_info": "音声メディアについては、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
+            "footer_info": "音声メディアについて？<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。"
         },
         "getmedia_video": {
-            "title": "Webカメラを要求",
-            "btn1": "はい、要求する",
+            "title": "Webカメラをリクエスト",
+            "btn1": "はい、リクエストする",
             "btn2": "いいえ、キャンセル",
-            "footer_info": "ビデオメディアについては、<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。",
+            "footer_info": "映像メディアについて？<a href='#' class='tdu blue'>ドキュメント</a>をご覧ください。",
             "perm_title": "カメラの許可",
-            "perm_1": "サイトは、カメラを必要とする機能を開始したときにのみカメラを使用します。",
-            "perm_2": "許可はブラウザーの設定からいつでも取り消せます。",
-            "perm_3": "キャンセルすると、許可は与えられません。"
+            "perm_1": "このサイトは、カメラを必要とする機能を開始したときにのみカメラを使用します。",
+            "perm_2": "ブラウザの設定からいつでも許可を取り消すことができます。",
+            "perm_3": "キャンセルした場合、許可は付与されません。"
         },
         "words": {
-            "clear": "消去",
+            "clear": "クリーンアップ",
             "geo": "位置情報",
             "cam": "ビデオ",
-            "mic": "音声",
-            "color": "色",
+            "mic": "オーディオ",
+            "color": "カラー",
             "note": "メモ",
             "bug": "バグ",
             "lab": "ラボ",
-            "not": "通知",
+            "not": "アラート",
             "feedback": "フィードバック",
             "lang": "言語",
-            "marks": "マーカー",
+            "marks": "ブックマーク",
             "admin": "管理",
             "share": "共有",
             "theme_light": "ライトテーマ",
@@ -243,85 +203,19 @@
         }
     },
     "copyright": {
-        "contributors": "このプロジェクトは、多くのオープンソースプロジェクトと<a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>貢献者コミュニティ</a>のおかげで実現しました。すべての関連ライセンスを遵守する限り、自由に作成、使用、変更、配布できます！",
-        "caption": "ソースと各ライセンスの一覧",
-        "backendsources": "サーバー（NodeJS）上で実行され、動的に読み込まれる多くのソースも、このプロジェクトに不可欠です。例えば：",
-        "package": "および<a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>その他...</a>",
-        "tps": "サードパーティソフトウェア",
+        "contributors": "このプロジェクトは、他の多くのオープンソースプロジェクトと<a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>コントリビューターコミュニティ</a>のおかげで実現しました… 基礎となるすべてのライセンスを尊重する限り、自由に作成、使用、変更、配布できます！",
+        "caption": "ソースおよび各ライセンスの一覧",
+        "backendsources": "サーバー（NodeJS）上で実行され動的に読み込まれる他の多くのソースも、このプロジェクトの基盤となっています：",
+        "package": "および <a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>その他…</a>",
+        "tps": "サードパーティ製ソフトウェア",
         "thissource": "このサイトのソフトウェア",
         "alllicenses": "すべてのライセンス"
     },
     "nocookie": {
-        "title": "サポート対象外",
-        "p1": "申し訳ありませんが、「Cookieなし」でのブラウジングには対応していません。",
-        "p2": "このサイトではCookieやその他の保存技術を使用していますが、<strong>明示的な許可なくブラウザーにデータを保存することはありません</strong>！",
-        "p3": "「Cookieなし」のブラウジングに対応しないのには、正当な理由があると考えています。詳しくは、<a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">ホワイトペーパー</a>をご覧ください。残念ながら、Cookieを有効にして閲覧する必要があります。"
-    },
-    "twofactory": {
-        "security_slide": {
-            "enabled": "2FAを無効にする",
-            "disabled": "2FAを有効にする"
-        }
-    },
-    "webpush": {
-        "subscribe": {
-            "": ""
-        }
-    },
-    "date": {
-        "days": {
-            "long": [
-                "日曜日",
-                "月曜日",
-                "火曜日",
-                "水曜日",
-                "木曜日",
-                "金曜日",
-                "土曜日"
-            ],
-            "short": [
-                "日",
-                "月",
-                "火",
-                "水",
-                "木",
-                "金",
-                "土"
-            ]
-        },
-        "months": {
-            "long": [
-                "1月",
-                "2月",
-                "3月",
-                "4月",
-                "5月",
-                "6月",
-                "7月",
-                "8月",
-                "9月",
-                "10月",
-                "11月",
-                "12月"
-            ],
-            "short": [
-                "1月",
-                "2月",
-                "3月",
-                "4月",
-                "5月",
-                "6月",
-                "7月",
-                "8月",
-                "9月",
-                "10月",
-                "11月",
-                "12月"
-            ]
-        },
-        "formatter": {
-            "error": "日付が定義されていません"
-        }
+        "title": "非対応",
+        "p1": "申し訳ありませんが、「クッキーなし」の閲覧には対応しておりません。",
+        "p2": "このサイトはクッキーやその他のストレージ技術を使用していますが、「<strong>お客様の明示的な許可なしにブラウザにデータを保存することはありません</strong>」！",
+        "p3": "「クッキーなし」の閲覧に対応していないのには正当な理由があると考えています。詳細については<a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">「ホワイトペーパー」</a>をご覧ください。恐れ入りますが、クッキーを有効にして閲覧してください。"
     },
     "modals": {
         "language": {
@@ -333,16 +227,29 @@
             "fr_FR": "フランス語",
             "de_DE": "ドイツ語",
             "ja_JP": "日本語",
-            "footer": "お使いの言語がありませんか？翻訳を作成してください！"
+            "hi_IN": "ヒンディー語",
+            "zh_CN": "中国語（簡体字）",
+            "ru_RU": "ロシア語",
+            "bn_BD": "ベンガル語",
+            "id_ID": "インドネシア語",
+            "tr_TR": "トルコ語",
+            "sw_KE": "スワヒリ語",
+            "fil_PH": "フィリピン語",
+            "ko_KR": "韓国語",
+            "th_TH": "タイ語",
+            "it_IT": "イタリア語",
+            "te_IN": "テルグ語",
+            "mr_IN": "マラーティー語",
+            "footer": "お使いの言語がありませんか？翻訳を作成しましょう！"
         },
         "version": {
             "title": "🚧 工事中 🚧",
-            "text1": "このプロジェクトは、多くのオープンソースプロジェクトと",
-            "text2": "貢献者コミュニティ",
-            "text3": "のおかげで実現しました。すべての関連ライセンスを遵守する限り、自由に作成、使用、変更、配布できます！"
+            "text1": "このプロジェクトは、他の多くのオープンソースプロジェクトと",
+            "text2": "コントリビューターコミュニティのおかげで実現しました",
+            "text3": "基礎となるすべてのライセンスを尊重する限り、自由に作成、使用、変更、配布できます！"
         },
         "tabs": {
-            "camera": "カメラを要求",
+            "camera": "カメラをリクエスト",
             "permissions": "権限"
         },
         "share": {
@@ -362,10 +269,10 @@
             "ph_note": "ここにメモを入力..."
         },
         "offline": {
-            "title": "オフライン用に保存",
-            "yes": "はい、保存する！",
+            "title": "オフライン使用のために保存",
+            "yes": "はい、保存します！",
             "no": "いいえ、キャンセル",
-            "about": "オフライン機能について"
+            "about": "オフライン機能について？"
         },
         "auth": {
             "title": "ログインして認証",
@@ -379,21 +286,21 @@
             "language": "言語エラー",
             "plugins": "プラグインエラー",
             "server": "サーバーエラー",
-            "description": "説明を入力してください",
+            "description": "説明を送信",
             "ph_description": "ここに説明を入力..."
         },
         "permissions": {
             "title_microphone": "マイクの許可",
             "title_geolocation": "位置情報の許可",
-            "item_1": "サイトは、この機能を必要とする操作を開始したときにのみ使用します。",
-            "item_2": "許可はブラウザーの設定からいつでも取り消せます。",
-            "item_3": "キャンセルすると、許可は与えられません。"
+            "item_1": "このサイトは、その機能を必要とする操作を開始したときにのみこの機能を使用します。",
+            "item_2": "ブラウザの設定からいつでも許可を取り消すことができます。",
+            "item_3": "キャンセルした場合、許可は付与されません。"
         }
     },
     "notify": {
         "storage": {
             "title": "Subversivo58 - ストレージ",
-            "body": "このサイトでは、デバイスに情報を保存するためにCookieなどの技術を使用しています。同意しますか？",
+            "body": "このサイトでは「クッキー」およびデバイスに情報を保存するその他の技術を使用しています。これに同意しますか？",
             "actions": [
                 {
                     "action": "cookie-agree",
@@ -407,7 +314,7 @@
                 },
                 {
                     "action": "terms-policy",
-                    "title": "利用規約を見る",
+                    "title": "規約を見る",
                     "icon": "📜"
                 }
             ]
@@ -421,85 +328,85 @@
         "about": {
             "heading": "テクノロジー、トレンド、サイバーカルチャー",
             "item1": "✓ Web API、JavaScript、HTML5の機能。",
-            "item2": "✓ 関数型プログラミング、デザインパターン、フレームワーク。",
-            "item3": "✓ WebCrypto、ラボ、コード実験。",
-            "item4": "✓ 意見、ライフスタイル、Geek文化など。",
-            "photo": "<a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a>による写真（<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>）",
-            "title": "サイトについて",
-            "p1": "こんにちは。私はLauro Moraes、通称<a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a>です。このサイトは私のデジタルラボであり、個人ブログです。",
-            "p2": "ここでは、技術トレンド、サイバーカルチャー、PWAやSingle Page AppsなどのWebプログラミング、最新のJavaScript API、HTML5、CSS3について発信しています。",
-            "p3": "関数型プログラミングやデザインパターン、Webの分散化などに情熱を注いでいます。ブロックチェーンやWeb暗号技術も、ここで頻繁に取り上げるテーマです。",
-            "p4": "また、ここでは実験を公開し、コードや小さな機能サンプルを共有するとともに、さまざまなテーマやGeek文化、ライフスタイルについての意見も発信しています。",
-            "p5": "ぜひブログのコンテンツを探索し、コミュニティに参加してください。"
+            "item2": "✓ 関数型プログラミング、パターン、フレームワーク。",
+            "item3": "✓ WebCrypto、ラボ、コードフラスク。",
+            "item4": "✓ 意見、ライフスタイル、ギーク文化など。",
+            "photo": "写真：<a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a>（<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>）",
+            "title": "概要",
+            "p1": "こんにちは、私はLauro Moraes、別名<a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a>です。このサイトは私のデジタルラボであり個人ブログです。",
+            "p2": "ここでは、テクノロジートレンド、サイバーカルチャー、およびPWA、シングルページアプリ、最新のJavaScript、HTML5、CSS3 APIの活用などWeb向けプログラミングに関するコンテンツを公開しています。",
+            "p3": "関数型プログラミング、デザインパターン、Webの分散化などのテーマに情熱を注いでいます… ブロックチェーンとWeb暗号技術もここでよく扱うテーマです。",
+            "p4": "また、自分の実験を公開したり、コードや小さな関数型スニペットを共有したり、さまざまなテーマやギーク文化、このライフスタイルについての意見を表現する場でもあります。",
+            "p5": "ブログのコンテンツを自由に探索し、コミュニティに参加してください。"
         },
         "you_in_control": {
-            "heading": "あなた自身がデータを管理する",
+            "heading": "自分のデータを自分でコントロールする",
             "item1": "✓ プライバシーは提供される商品ではなく、あなたの権利です。",
-            "item2": "✓ 暗号化はデジタルセキュリティの基盤です。",
+            "item2": "✓ あらゆるデジタルセキュリティの基盤としての暗号技術。",
             "item3": "✓ プライバシーの尊重は、あなたの選択を尊重することから始まります。",
-            "item4": "✓ 何を、いつ、誰と共有するかは、あなたが決めます。",
-            "photo": "<a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a>による写真（<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>）"
+            "item4": "✓ データを何を、いつ、誰と共有するかはあなたが決めます。",
+            "photo": "写真：<a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a>（<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>）"
         },
         "donations": {
-            "heading": "何か素敵なことをしてみませんか？",
-            "photo": "<a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a>による写真（<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>）",
+            "heading": "何か素敵なことをしようとお考えですか？",
+            "photo": "写真：<a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a>（<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>）",
             "thanks_title": "謝辞",
-            "thanks_text": "私たちは<a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a>と、<a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>のサービスを誇りを持って利用しています。これらのプラットフォームとツールは本当に素晴らしく、このブログや私たちのツールのようなものを作ることを可能にしてくれます。",
+            "thanks_text": "私たちは<a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a>および<a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>のサービスを誇りを持って利用しています。これらのプラットフォームとツールは本当に素晴らしく、このブログやツールのような素敵なものを作ることを可能にしてくれます。",
             "platforms_title": "これらのプラットフォームを知る",
             "link_github": "GitHub Pages",
             "link_workers": "Cloudflare Workers",
-            "donate_title": "あなたの寄付は大切です",
+            "donate_title": "あなたのご寄付が重要です",
             "content": {
-                "intro1": "ブログを最新の状態に保つには、時間と労力が必要です。私たちが利用しているプラットフォームやツールは無料ですが、制限があります。それぞれ、サイトが月に受けられるアクセス数や、アクセス時にサーバーから転送できるデータ量に上限があります。",
-                "intro2": "このブログでは、新しい機能を試したり、新しいリソースを導入したり、そしてサービスの幅を広げたりして、活気に満ちたダイナミックなコミュニティを築くことに魅力を感じています。",
-                "intro3": "こうしたアイデアを実現するには、独自ドメインの取得、より多くのトラフィックに対応できるVPSサーバー、ストレージ容量、そしてより幅広いアプリケーションを構築できる基盤への投資が必要です。",
-                "intro4": "私たちは、広告、ペイウォール、有料トラッキング、データ販売によって資金を集めることには反対です……私たちは<strong>あなたが自分のデータの唯一の所有者である</strong>と考えており、それは<a href=\"./you-in-control-of-your-data.html\" title=\"White Paper\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">\"White Paper\"</a>に記載されているとおりです。そのため、あなたの少しの応援が大きな違いを生み、私たちがより多くのことをより良く行うための励みと助けになります 🚀",
-                "contribution1": "このブログには、SNSでの共有、コードの改善、編集面での協力、コミュニティとの交流など、さまざまな形で貢献いただけます。",
-                "contribution2": "下記の寄付オプションから一つお選びいただき、<b>「ちょっとした後押し」</b>をいただくこともご検討ください 🎊",
+                "intro1": "ブログを最新に保つには時間と献身が必要です。私たちが利用しているプラットフォームやツールは無料ですが、制限があります。それぞれが月間のサイトアクセス数や、アクセス中にサーバーから転送できるデータ量を制限しています。",
+                "intro2": "このブログでは、新しい機能を探求し、新しいリソースを実装し、できればサービスの範囲を広げるとともに、活気に満ちたダイナミックなコミュニティを築きたいと考えています。",
+                "intro3": "これらのアイデアを実現するには、独自ドメイン、より多くのトラフィックに耐えられるVPSサーバー、ストレージ容量、そしてより幅広いアプリケーションを構築できる環境への投資が必要です。",
+                "intro4": "私たちは広告、ペイウォール、有料トラッキング、データ販売で資金を集めることを嫌悪しています… <a href=\"./you-in-control-of-your-data.html\" title=\"ホワイトペーパー\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">「ホワイトペーパー」</a>に記載されている通り、<strong>あなたこそが自分のデータの唯一の所有者である</strong>と信じ、擁護しています。そのため、あなたのちょっとした支援が大きな違いを生み、より多くのことをより良く行うための励みと助けになります 🚀",
+                "contribution1": "このブログにはさまざまな方法で貢献できます。SNSでの共有、コードの改善、編集協力、コミュニティとの交流など、多くの方法があります。",
+                "contribution2": "また、以下の寄付オプションのいずれかを選んで「<b>もうひと押しの応援</b>」をすることもご検討ください 🎊",
                 "pix_caption": "PagBank Pix",
-                "trademarks": "ここで使用しているロゴおよび商標は、それぞれの権利者の所有物です。ここでそれらを使用しても、これらのブランドとの提携や推奨を意味するものではありません。"
+                "trademarks": "ここで使用されているロゴおよび商標は、それぞれの権利所有者の財産です。ここでの使用は、これらのブランドとのいかなる提携や推奨も意味するものではありません。"
             }
         },
         "dpo": {
-            "heading": "データ保護責任者（DPO）",
-            "intro1": "ブラジル一般データ保護法（LGPD - 法律第13.709/2018号）に従い、データ保護責任者（Data Protection Officer）の連絡先をお知らせします。",
-            "intro2": "DPOは、サイト、データ主体（あなた）、および国家データ保護機関（ANPD）との連絡を仲介する責任者です。",
+            "heading": "データ保護責任者 (DPO)",
+            "intro1": "一般データ保護法（LGPD - 法律第13.709/2018号）に従い、当サイトのデータ保護責任者（Data Protection Officer）の連絡先をお知らせします。",
+            "intro2": "DPOは、当サイト、データ主体（お客様）、および国家データ保護庁（ANPD）間のコミュニケーションを仲介する責任者です。",
             "contact_title": "連絡先情報",
             "officer": "<strong>責任者：</strong> Lauro de Moraes",
-            "email": "メールアドレス：",
-            "deadline": "<strong>回答期限：</strong> 小規模なデータ処理事業者に適用される規則に従い、最大30日。",
+            "email": "メール：",
+            "deadline": "<strong>回答期限：</strong> 小規模データ処理事業者向けの規制に従い、最大30日間。",
             "send_email": "DPOにメールを送信",
-            "rights_title": "あなたの権利を行使する方法",
-            "rights1": "LGPD第18条に定められた権利（データ処理の確認、アクセス、訂正、匿名化、削除など）を行使するには、上記のメールアドレスにご連絡ください。",
-            "rights2": "対応を円滑に進めるため、メールの件名または本文に以下を記載することをお勧めします。",
-            "list1": "氏名",
-            "list2": "行使したい権利（例：データの削除、アクセスなど）",
-            "list3": "システム内でお客様のデータを特定するために役立つ情報",
-            "policies": "データの取り扱いについて詳しくは、<a href=\"/policy.html#policy-general\">一般ポリシー</a>および<a href=\"/policy.html#policy-privacy\">プライバシーポリシー</a>をご覧ください。"
+            "rights_title": "権利の行使方法",
+            "rights1": "LGPD第18条に定められた権利（処理の確認、アクセス、訂正、匿名化、削除など）のいずれかを行使するには、上記のアドレス宛にメールをお送りください。",
+            "rights2": "迅速な対応のため、メールの件名または本文に以下をご記載いただくことをお勧めします：",
+            "list1": "氏名（フルネーム）；",
+            "list2": "行使を希望する権利（例：データの削除、アクセスなど）；",
+            "list3": "当サイトのシステム内でお客様のデータを特定するのに役立つ詳細情報。",
+            "policies": "データの取り扱いに関する詳細は、<a href=\"/policy.html#policy-general\">一般ポリシー</a>および<a href=\"/policy.html#policy-privacy\">プライバシーポリシー</a>をご参照ください。"
         },
         "home": {
             "intro": {
                 "eyebrow": "SUBVERSIVO58について",
-                "title": "ブログをはるかに超えた場所。",
-                "description": "好奇心、テクノロジー、そしてアイデアを探求する自由のための場所です。",
-                "details": "ここでは、知識と創造性が、従来の枠を超えたコンテンツ、体験、プロジェクトの中で出会います。",
-                "signature": "好奇心・知識・創造性"
+                "title": "単なるブログを超えて。",
+                "description": "好奇心、テクノロジー、そしてアイデアを自由に探求するための空間。",
+                "details": "ここでは、知識と創造性が従来の枠を超えたコンテンツ、体験、プロジェクトの中で出会います。",
+                "signature": "好奇心 · 知識 · 創造性"
             },
             "exploration": {
                 "eyebrow": "発見する",
                 "title": "さまざまなアイデアを探求しよう。",
-                "description": "学び、試し、新しい可能性を発見するためのさまざまな道。",
+                "description": "学び、実験し、新たな可能性を発見するための多様な道。",
                 "programming": {
                     "title": "プログラミング",
-                    "description": "デジタル世界のためのコード、開発、そして創造的なソリューション。"
+                    "description": "デジタル世界のためのコード、開発、創造的なソリューション。"
                 },
                 "technology": {
                     "title": "テクノロジー",
-                    "description": "私たちの日常を変えるツール、リソース、最新情報。"
+                    "description": "私たちの日常を変革するツール、リソース、最新情報。"
                 },
                 "experiments": {
                     "title": "実験",
-                    "description": "制作途中のアイデア、テスト、そして型にはまらない発見。"
+                    "description": "構築中のアイデア、テスト、常識にとらわれない発見。"
                 },
                 "knowledge": {
                     "title": "知識",
@@ -508,133 +415,163 @@
             },
             "lab": {
                 "eyebrow": "SUBVERSIVO58 / ラボ",
-                "title": "新しい可能性を探求するための場所。",
+                "title": "新たな可能性を探求する空間。",
                 "description": "好奇心を発見へと変えるために開発された実験、プロジェクト、ツール。",
-                "link": "ラボを探索する"
+                "link": "ラボを探検する"
             }
         },
         "policy": {
             "badges": {
-                "reading_title": "この文書の推定読了時間",
+                "reading_title": "このドキュメントの推定読了時間",
                 "version": "バージョン: {version}",
-                "version_title": "文書のバージョン",
+                "version_title": "ドキュメントのバージョン",
                 "print": "印刷&nbsp;🖨️",
                 "print_title": "印刷"
             },
             "cards": {
                 "introduction": {
                     "title": "はじめに",
-                    "description": "このサイトはWeb技術を使って作られており、分散化と暗号による安全性を信じています。あなたのデータを所有できるのはあなただけだと私たちは考えています。",
+                    "description": "このサイトはWeb技術を用いて構築されており、私たちは分散化と暗号セキュリティを信じています。あなたこそが自分のデータの唯一の所有者であると信じています。",
                     "link": "「ホワイトペーパー」で詳しく見る"
                 },
                 "privacy": {
                     "title": "プライバシー",
-                    "description": "プライバシーポリシーでは、このサイトがなぜデータを求めるのか、どのように処理されるのかを説明し、ユーザーが自分のデータを編集、ダウンロード、削除する方法についてもお知らせします。",
+                    "description": "プライバシーポリシーでは、このサイトがデータを要求する理由、処理方法、およびユーザーが自分のデータを編集・ダウンロード・削除する方法を説明しています。",
                     "link": "プライバシーポリシーを読む"
                 },
                 "terms": {
-                    "title": "規約",
-                    "description": "規約では、このサイトをどのように運営しているか、ユーザーがこのサイトに期待できること、そしてこのプロセスにおいて私たちがユーザーに期待することを説明します。",
+                    "title": "利用規約",
+                    "description": "利用規約では、このサイトの運営方法、ユーザーがサイトに期待できること、そしてその過程でユーザーに期待することを説明しています。",
                     "link": "利用規約を読む"
                 },
                 "general": {
                     "title": "ポリシー",
-                    "description": "「ポリシー」は、サイトとユーザーの関係を定める総合的な文書であり、サイトおよびそのツールの利用契約に関する保証と制限を定めています。",
-                    "link": "総合ポリシーを読む"
+                    "description": "「ポリシー」はサイトとユーザーの関係を規定する一般文書であり、サイトおよびそのツールの利用契約に関する保証と制限を定めています。",
+                    "link": "一般ポリシーを読む"
                 }
             },
             "overview": {
-                "quote1": "ポリシーは、サイトとユーザーが関係を築くための方法です。この関係の中で透明性と品質を保証することで、安全と信頼をもたらします。また、世界各国の多くのデータ保護・プライバシー法でも規制の対象となっています。",
-                "quote2": "私たちは、「<strong>略語だらけの難解な文書</strong>」にならないよう、ポリシーをできる限りシンプルにするよう努めています。多すぎれば品質は保証されず、少なすぎれば内容は保証されないからです。",
-                "quote3": "この信頼関係が、ユーザーにとっても私たち自身にとっても学びのプロセスとなることを願っています。",
+                "quote1": "ポリシーはサイトとユーザーが関わるための枠組みであり、透明性と品質を保証して安全性と信頼をもたらします。また、世界中の多くの国でデータ保護およびプライバシー法の規制対象となっています。",
+                "quote2": "「<strong>難解な専門用語の羅列</strong>」という定番を避けるため、ポリシーを可能な限り簡素化しました。多すぎても品質は保証されず、少なすぎても内容が保証されないからです。",
+                "quote3": "この信頼関係が、ユーザーと私たち自身の双方にとって学びのプロセスとなることを願っています。",
                 "whitepaper_link": "「ホワイトペーパー」からの抜粋",
-                "contact": "サイトまたはそのツールの利用に関するご質問は、お問い合わせフォームまたは<strong>フィードバック</strong>ツールからお寄せください（フィードバックは大歓迎です）。問題の解決には、次のメールアドレスの当サイトのDPO（データ保護責任者）もご利用いただけます：<a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Politicas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>。",
-                "markdown1": "このサイトのポリシーは、わずかに改変した<strong>Markdown</strong>マークアップ言語で書かれています。プレーンテキストで閲覧することも、<a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a>から、この<a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">リポジトリへのリンク</a>を通じてダウンロードすることもできます。",
-                "markdown2": "そこには、このポリシーと過去のすべてのバージョン、そしてこのサイトのソースコードがあります。総合ポリシーの上部にある印刷アイコン<span class=\"badge badge-light border-def contrast\">印刷&nbsp;🖨️</span>をクリックして印刷することもできます。"
+                "contact": "サイトやツールの使用に関するご質問は、お問い合わせフォームまたは<strong>フィードバック</strong>ツール（フィードバック大歓迎です）からご報告いただけます。また、問題解決のためにDPO（データ保護責任者）宛メール <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Políticas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a> までお気軽にご連絡ください。",
+                "markdown1": "このサイトのポリシーはわずかにカスタマイズされた<strong>Markdown</strong>マークアップ言語で記述されており、<a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a>の<a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">リポジトリへのリンク</a>からプレーンテキストで閲覧したりダウンロードしたりできます。",
+                "markdown2": "そこでは現在および過去のバージョンのポリシーや当サイトのソースコードをご覧いただけます。また、一般ポリシーの上部にある印刷アイコン <span class=\"badge badge-light border-def contrast\">印刷&nbsp;🖨️</span> をクリックして印刷することもできます。"
             },
             "privacy": {
                 "heading": "プライバシー",
                 "image_alt": "あなたには選択肢があります",
                 "image_title": "あなたには選択肢があります",
-                "paragraph1": "私たちは、プライバシーの原則とは選択の自由だと考えています。ユーザーは、ワンクリックで、あるいは特定のツールを使うために大量のデータの提供を強いるような規約によって、自分のデータを手放すべきではありません。",
-                "paragraph2": "選択の自由、そして必要なときにのみデータの提供と同意を求める、段階的で妨げにならない仕組みは、従うべき標準であるべきです。",
-                "paragraph3": "プライバシーの尊重は、ユーザーが「何を」「いつ」共有したいかという選択を尊重することから始まります。"
+                "paragraph1": "私たちは、プライバシーの原則は選択の自由であると信じています。ユーザーは、特定のツールを使用するためにワンクリックでデータを手放したり、大量のデータの提供を強制する規約に縛られたりすべきではありません。",
+                "paragraph2": "選択の自由とは、データ要求に対する段階的かつ押し付けがましくないモデルであり、必要なときにのみ同意を求めることは守られるべき標準であるべきです。",
+                "paragraph3": "プライバシーの尊重は、「何を」「いつ」共有したいかというユーザーの選択を尊重することから始まります。"
             },
             "terms": {
                 "heading": "利用規約",
-                "image_alt": "サイトの規約の画像",
-                "image_title": "私たちの規約"
+                "image_alt": "利用規約の画像",
+                "image_title": "利用規約"
             },
             "general": {
-                "heading": "総合ポリシー",
-                "image_alt": "サイトの契約の画像",
+                "heading": "一般ポリシー",
+                "image_alt": "契約の画像",
                 "image_title": "契約"
             },
             "cookies": {
-                "heading": "Cookieを受け入れる",
-                "paragraph1": "もし<strong>本当にCookieとデータ保存を受け入れる必要があるのか</strong>と思われたら、簡単に言えば、<strong>いいえ、必要ありません</strong>！サイトの多くのツールや機能は引き続きご利用いただけますが、最良の体験は得られないかもしれません 🙁",
-                "paragraph2": "たとえば、言語を選んだり、お気に入りの色を保存したり、設定を変更したりしても、サイトにアクセスまたは移動するたびにその選択をやり直す必要があります ... 選択を「保持」する唯一の方法は、ローカルに保存することです。",
-                "paragraph3": "<a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">あなたのデータを所有できるのはあなただけ</a>という私たちの理念に基づき、あなたには選択肢があると考えています。下のボタンを<strong>クリックして押す</strong>ことでCookieの使用を受け入れた場合でも、ここまたはユーザータブからいつでも<strong>無効にする</strong>ことができ、すでに保存されているものをすべて一度に削除することもできます 😎",
-                "button": "🍪 長押しでCookieを有効にする",
-                "disable": "😮 クリックしてCookieを無効にする！"
+                "heading": "クッキーを受け入れる",
+                "paragraph1": "「<strong>本当にクッキーとデータ保存を受け入れる必要があるのか？</strong>」と疑問に思うなら、短い答えは「<strong>いいえ、必要ありません</strong>！」です。それでもサイトの多くのツールや機能を閲覧・使用できますが、最適な体験は得られないかもしれません 🙁",
+                "paragraph2": "たとえば、言語を選択したり、お気に入りの色を保存したり、設定を行ったりしても、サイトにアクセスしたり移動したりするたびに選び直す必要があります… 選択を「永続化」する唯一の方法はローカルに保存することです。",
+                "paragraph3": "<a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">あなたこそが自分のデータの唯一の所有者である</a>という私たちの理念に基づき、あなたには選択肢があると信じています。下のボタンを「<strong>クリックして長押し</strong>」してクッキーの使用を受け入れることを選択した場合でも、ここまたはユーザーガイドからいつでも<strong>無効化</strong>したり、すでに保存されたものを一度にすべて削除したりできます 😎",
+                "button": "🍪 長押ししてクッキーを有効にする",
+                "disable": "😮 クリックしてクッキーを無効にする！"
             }
         }
     },
     "settings_slide": {
         "title": "サイト設定",
         "media_api": "メディアAPI",
-        "auto_audio": "初回の許可後に音声を自動的に起動する",
-        "auto_video": "初回の許可後にビデオを自動的に起動する",
+        "auto_audio": "初回許可後に音声を自動的に呼び出す",
+        "auto_video": "初回許可後に映像を自動的に呼び出す",
         "geo_api": "位置情報API",
-        "geo_share": "位置情報追跡の分析データを共有する",
-        "audio_effects": "オーディオエフェクト",
-        "audio_effects_on": "オーディオエフェクトを有効にする",
+        "geo_share": "位置追跡分析を共有する",
+        "audio_effects": "オーディオ効果",
+        "audio_effects_on": "オーディオ効果を有効にする",
         "audio_notify_on": "音声通知を有効にする",
-        "connection": "接続（状態）",
+        "connection": "接続（ステータス）",
         "notify_off": "通知を無効にする",
-        "analytics": "分析",
-        "analytics_toggle": "有効または無効にする"
+        "analytics": "アナリティクス",
+        "analytics_toggle": "有効化または無効化"
     },
     "palette": {
         "title": "カラーパレット",
-        "schema": "配色"
-    },
-    "blog": {
-        "empty": "まだ投稿はありません。",
-        "not_found": "投稿が見つかりません。",
-        "load_error": "この投稿を読み込めませんでした。",
-        "showing": "{total}件中{shown}件を表示",
-        "load_more": "さらに読み込む",
-        "read_time": "読了時間：約{minutes}分",
-        "updated": "最終更新: {date}",
-        "more_posts": "その他の投稿",
-        "license": "このコンテンツは<a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.ja\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>の下でライセンスされています",
-        "search_placeholder": "投稿を検索...",
-        "all_tags": "すべて",
-        "no_results": "選択したフィルターに一致する投稿はありません。",
-        "read_article": "記事を読む",
-        "back_to_blog": "ブログへ戻る",
-        "copy_code": "コードをコピー"
+        "schema": "スキーム"
     },
     "admin_dashboard": {
         "posts": "投稿",
         "close_menu": "メニューを閉じる",
         "loading_posts": "投稿を読み込み中...",
-        "title": "管理ダッシュボード",
+        "title": "管理パネル",
         "description": "ブログの投稿を管理します。",
         "menu": "メニュー",
-        "new_post": "新しい投稿",
+        "new_post": "新規投稿",
+        "settings": {
+            "tab": "GitHub Config",
+            "title": "GitHub Config",
+            "save": "保存",
+            "clear_credentials": "GitHubの認証情報をクリア",
+            "clear": "クリア"
+        },
         "close_editor": "エディターを閉じる",
+        "footoodles": {
+            "tab": "Footoodles",
+            "title": "Footoodlesの管理",
+            "empty": "登録されたFootoodleはありません。",
+            "loading": "Footoodlesを読み込み中...",
+            "load_error": "Footoodlesを読み込めませんでした。",
+            "new": "新しいFootoodle",
+            "edit": "編集",
+            "delete": "削除",
+            "save": "Footoodleを保存",
+            "cancel": "キャンセル",
+            "image": "画像",
+            "image_select": "画像を選択",
+            "image_required": "画像を選択してください。",
+            "image_invalid": "許可されていない画像形式です。JPEG、PNG、またはWebPを使用してください。",
+            "title_label": "タイトル",
+            "title_placeholder": "Footoodleのタイトルを入力",
+            "title_required": "タイトルを入力してください。",
+            "content_label": "内容",
+            "content_placeholder": "Footoodleを書く...",
+            "content_required": "内容を入力してください。",
+            "content_limit": "内容は最大280文字以内にしてください。",
+            "character_count": "{count}/280文字",
+            "saving": "Footoodleを保存中...",
+            "saved": "Footoodleを保存しました！",
+            "save_error": "Footoodleを保存できませんでした。",
+            "updating": "Footoodleを更新中...",
+            "updated": "Footoodleを更新しました！",
+            "update_error": "Footoodleを更新できませんでした。",
+            "delete_confirm": "本当にこのFootoodleを削除しますか？",
+            "deleting": "Footoodleを削除中...",
+            "deleted": "Footoodleを削除しました！",
+            "delete_error": "Footoodleを削除できませんでした。",
+            "delete_cancel": "削除をキャンセルしました。",
+            "editor_new": "新しいFootoodleを作成中。",
+            "editor_edit": "Footoodleを編集中。",
+            "discard_changes": "このFootoodleの変更を破棄しますか？",
+            "operation_error": "Footoodleの処理中にエラーが発生しました。",
+            "github_error": "GitHubでの操作を完了できませんでした。",
+            "subtitle": "フッターに画像付きのクイックメモを作成・管理します。"
+        },
         "editor": {
             "status_ready": "編集の準備ができました。",
             "title_label": "タイトル",
-            "title_placeholder": "投稿のタイトル",
-            "summary_label": "要約",
-            "summary_placeholder": "投稿の要約",
-            "summary_restore": "自動生成に戻す",
-            "summary_help": "要約は自動的に入力されます。自由に編集できます。",
+            "title_placeholder": "投稿タイトル",
+            "summary_label": "概要",
+            "summary_placeholder": "投稿の概要",
+            "summary_restore": "自動復元",
+            "summary_help": "概要は自動的に入力されます。自由に変更できます。",
             "content_label": "本文",
-            "content_placeholder": "投稿の本文を入力してください...",
             "toolbar_label": "書式ツール",
             "bold": "太字",
             "italic": "斜体",
@@ -657,16 +594,16 @@
             "preview_heading": "プレビュー",
             "preview_close": "閉じる",
             "tags_label": "タグ",
-            "tags_placeholder": "タグをカンマで区切って入力",
+            "tags_placeholder": "タグをカンマ区切りで入力",
             "draft_select_label": "下書きを選択",
             "draft_select_default": "下書きを選択",
             "draft_open": "下書きを開く",
             "draft_save": "下書きを保存",
             "generate": "投稿を生成",
-            "slug_label": "URL スラッグ",
+            "slug_label": "URLスラッグ",
             "slug_placeholder": "my-article",
-            "slug_unlock_title": "スラッグ編集のロック／ロック解除",
-            "summary_restore_title": "自動要約を復元",
+            "slug_unlock_title": "スラッグ編集のロックを解除またはロック",
+            "summary_restore_title": "自動概要を復元",
             "undo_title": "元に戻す (Ctrl+Z)",
             "redo_title": "やり直す (Ctrl+Y)",
             "block_format_title": "ブロックスタイル",
@@ -693,87 +630,36 @@
             "align_right_title": "右揃え",
             "align_justify_title": "両端揃え",
             "link_title": "リンクを挿入または編集 (Ctrl+K)",
-            "quote_title": "引用",
+            "quote_title": "引用ブロック",
             "code_title": "コードブロックを挿入",
             "hr_title": "水平線",
             "table_title": "表を挿入",
             "source_btn": "HTML",
-            "source_title": "HTMLソース表示を切り替え",
+            "source_title": "HTMLソースコードを切り替え",
             "preview": "プレビュー",
             "link_url_placeholder": "https://example.com または /posts/...",
             "link_text_placeholder": "リンクテキスト（任意）",
-            "link_new_tab": "新しいタブで開く",
+            "link_new_tab": "新しいタブ",
             "apply": "適用",
             "unlink": "リンクを解除",
             "cancel": "キャンセル",
-            "table_rows": "行数",
-            "table_cols": "列数",
+            "table_rows": "行",
+            "table_cols": "列",
             "table_insert": "表を挿入",
             "img_width": "幅",
             "img_align": "配置",
-            "img_align_left": "左寄せ",
+            "img_align_left": "左",
             "img_align_center": "中央",
-            "img_align_right": "右寄せ",
+            "img_align_right": "右",
             "img_align_full": "全幅",
             "img_remove": "画像を削除",
             "img_alt_placeholder": "代替テキスト (alt)",
-            "img_caption_placeholder": "画像キャプション（任意）",
+            "img_caption_placeholder": "画像のキャプション（任意）",
             "drafts_section": "下書き",
             "save_draft": "下書きを保存",
             "drafts_placeholder": "下書きを選択...",
             "open_draft": "開く",
-            "delete_draft": "削除",
-            "reading_stats": "{words}語 · 読了時間：約{minutes}分",
-            "msg": {
-                "speech_error": "音声認識エラー: {0}",
-                "speech_unavailable": "このブラウザーでは音声認識を利用できません。",
-                "speech_start_error": "音声認識を開始できませんでした: {0}",
-                "pending_changes": "未保存の変更があります。",
-                "images_db_unavailable": "データベースを利用できないため、画像を保存できませんでした。",
-                "images_optimized": "画像を最適化しました: {0} → {1}",
-                "images_added": "画像を追加しました。サイズは縮小されませんでした。",
-                "image_save_error": "画像をデータベースに保存できませんでした。",
-                "drafts_db_unavailable": "データベースを利用できないため、下書きは保存されません。",
-                "autosave_ok": "変更を自動保存しました。",
-                "autosave_error": "自動保存できませんでした。",
-                "nothing_to_save": "保存する前にタイトルか本文を入力してください。",
-                "db_unavailable": "データベースを利用できません。",
-                "draft_updated": "下書きを更新しました。",
-                "draft_saved": "下書きを保存しました。",
-                "draft_save_error": "下書きの保存中にエラーが発生しました。",
-                "changes_recovered": "前回の変更を復元しました。",
-                "draft_select": "開く下書きを選択してください。",
-                "draft_not_found": "下書きが見つかりません。",
-                "draft_opened": "下書きを開きました。",
-                "draft_open_error": "下書きを開く際にエラーが発生しました。",
-                "editor_ready_new": "新しい投稿の準備ができました。",
-                "need_title": "投稿のタイトルを入力してください。",
-                "need_content": "投稿の本文を入力してください。",
-                "preparing": "投稿を準備しています...",
-                "published": "投稿を公開しました。",
-                "prepared": "投稿を準備しました。内容はエディターに保持されています。",
-                "publish_stage_error": "「{0}」でエラーが発生しました: {1}。内容は保持されています。",
-                "publishing": "公開中...",
-                "stage_init": "公開の初期化",
-                "stage_preview": "プレビューの更新",
-                "stage_read": "エディターのデータの読み取り",
-                "stage_autosave": "自動保存",
-                "stage_images": "画像の準備",
-                "stage_files": "投稿ファイルの作成",
-                "stage_publish": "GitHubへの公開",
-                "stage_confirm": "公開の確認",
-                "discard_changes": "編集中の投稿の変更を破棄しますか？",
-                "post_updated": "投稿を更新しました。",
-                "post_loaded": "編集用に投稿を読み込みました。",
-                "post_load_error": "編集用に投稿を読み込めませんでした。",
-                "delete_prepare_error": "削除の準備ができませんでした: {0}",
-                "delete_error": "投稿の削除に失敗しました: {0}",
-                "draft_untitled": "無題の下書き",
-                "need_slug": "投稿の有効なURLスラッグを入力してください。",
-                "draft_deleted": "下書きを削除しました。",
-                "content_placeholder": "投稿の本文を入力してください...",
-                "reading_stats": "{words}語 · 読了時間：約{minutes}分"
-            }
+            "delete_draft": "削除"
         },
         "posts_list": {
             "untitled": "無題の投稿",
@@ -784,50 +670,50 @@
         "update_post": "投稿を更新",
         "delete_modal": {
             "title": "投稿を削除",
-            "question": "この投稿を本当に削除しますか？",
+            "question": "本当にこの投稿を削除しますか？",
             "cancel": "キャンセル",
             "confirm": "はい、削除します",
             "deleting": "削除中...",
-            "deleting_status": "GitHubで投稿を削除中...",
+            "deleting_status": "GitHub上の投稿を削除中...",
             "success": "投稿を削除しました！",
             "error": "投稿を削除できませんでした。",
             "close": "閉じる"
         },
         "msg": {
-            "speech_error": "音声認識エラー: {0}",
-            "speech_unavailable": "このブラウザーでは音声認識を利用できません。",
+            "speech_error": "音声認識エラー: {0}。",
+            "speech_unavailable": "このブラウザでは音声認識が利用できません。",
             "speech_start_error": "音声認識を開始できませんでした: {0}",
-            "pending_changes": "未保存の変更があります。",
-            "images_db_unavailable": "データベースを利用できないため、画像を保存できませんでした。",
-            "images_optimized": "画像を最適化しました: {0} → {1}",
+            "pending_changes": "保留中の変更があります。",
+            "images_db_unavailable": "データベースが利用できません：画像を保存できませんでした。",
+            "images_optimized": "画像を最適化しました: {0} → {1}。",
             "images_added": "画像を追加しました。サイズは縮小されませんでした。",
             "image_save_error": "画像をデータベースに保存できませんでした。",
             "markdown_load_error": "Markdownレンダラーを読み込めませんでした。",
-            "drafts_db_unavailable": "データベースを利用できないため、下書きは保存されません。",
+            "drafts_db_unavailable": "データベースが利用できません：下書きは保存されません。",
             "autosave_ok": "変更を自動保存しました。",
             "autosave_error": "自動保存できませんでした。",
-            "nothing_to_save": "保存する前にタイトルか本文を入力してください。",
-            "db_unavailable": "データベースを利用できません。",
+            "nothing_to_save": "保存する前にタイトルまたは本文を入力してください。",
+            "db_unavailable": "データベースが利用できません。",
             "draft_updated": "下書きを更新しました。",
             "draft_saved": "下書きを保存しました。",
             "draft_save_error": "下書きの保存中にエラーが発生しました。",
-            "changes_recovered": "前回の変更を復元しました。",
+            "changes_recovered": "以前の変更を復元しました。",
             "draft_select": "開く下書きを選択してください。",
             "draft_not_found": "下書きが見つかりません。",
             "draft_opened": "下書きを開きました。",
             "draft_open_error": "下書きを開く際にエラーが発生しました。",
-            "editor_ready_new": "新しい投稿の準備ができました。",
+            "editor_ready_new": "新しい投稿の作成準備ができました。",
             "need_title": "投稿のタイトルを入力してください。",
             "need_content": "投稿の本文を入力してください。",
-            "preparing": "投稿を準備しています...",
+            "preparing": "投稿を準備中...",
             "published": "投稿を公開しました。",
             "prepared": "投稿を準備しました。内容はエディターに保持されています。",
-            "publish_stage_error": "「{0}」でエラーが発生しました: {1}。内容は保持されています。",
+            "publish_stage_error": "ステージ「{0}」で失敗しました: {1}。内容は保持されています。",
             "publishing": "公開中...",
             "stage_init": "公開の初期化",
             "stage_library": "Markdownライブラリの読み込み",
             "stage_preview": "プレビューの更新",
-            "stage_read": "エディターのデータの読み取り",
+            "stage_read": "エディターデータの読み込み",
             "stage_autosave": "自動保存",
             "stage_images": "画像の準備",
             "stage_files": "投稿ファイルの作成",
@@ -840,117 +726,83 @@
             "delete_prepare_error": "削除の準備ができませんでした: {0}",
             "delete_error": "投稿の削除に失敗しました: {0}",
             "draft_untitled": "無題の下書き",
-            "post_missing": "投稿が登録簿に存在しません。更新を取り消しました。",
-            "post_missing_delete": "投稿が登録簿に存在しません。",
-            "github_not_confirmed": "GitHubで削除が確認されませんでした。",
+            "post_missing": "その投稿は登録にもう存在しません。更新を中止しました。",
+            "post_missing_delete": "その投稿は登録にもう存在しません。",
+            "github_not_confirmed": "GitHubが削除を確認しませんでした。",
             "markdown_fetch_error": "Markdownを読み込めませんでした。",
-            "need_slug": "投稿の有効なURLスラッグを入力してください。",
+            "need_slug": "投稿URL用の有効なスラッグを入力してください。",
             "draft_deleted": "下書きを削除しました。",
             "content_placeholder": "投稿の本文を入力してください...",
-            "reading_stats": "{words}語 · 読了時間：約{minutes}分"
-        },
-        "footoodles": {
-            "tab": "Footoodles",
-            "title": "Footoodles を管理",
-            "empty": "登録された Footoodle はありません。",
-            "loading": "Footoodles を読み込み中...",
-            "load_error": "Footoodles を読み込めませんでした。",
-            "new": "新しい Footoodle",
-            "edit": "編集",
-            "delete": "削除",
-            "save": "Footoodle を保存",
-            "cancel": "キャンセル",
-            "image": "画像",
-            "image_select": "画像を選択",
-            "image_required": "画像を選択してください。",
-            "image_invalid": "許可されていない画像形式です。JPEG、PNG、WebP を使用してください。",
-            "title_label": "タイトル",
-            "title_placeholder": "Footoodle のタイトルを入力",
-            "title_required": "タイトルを入力してください。",
-            "content_label": "本文",
-            "content_placeholder": "Footoodle を入力してください...",
-            "content_required": "本文を入力してください。",
-            "content_limit": "本文は280文字以内にしてください。",
-            "character_count": "{count}/280 文字",
-            "saving": "Footoodle を保存中...",
-            "saved": "Footoodle を保存しました！",
-            "save_error": "Footoodle を保存できませんでした。",
-            "updating": "Footoodle を更新中...",
-            "updated": "Footoodle を更新しました！",
-            "update_error": "Footoodle を更新できませんでした。",
-            "delete_confirm": "この Footoodle を本当に削除しますか？",
-            "deleting": "Footoodle を削除中...",
-            "deleted": "Footoodle を削除しました！",
-            "delete_error": "Footoodle を削除できませんでした。",
-            "delete_cancel": "削除をキャンセルしました。",
-            "editor_new": "新しい Footoodle を作成中。",
-            "editor_edit": "Footoodle を編集中。",
-            "discard_changes": "この Footoodle の変更を破棄しますか？",
-            "operation_error": "Footoodle の処理中にエラーが発生しました。",
-            "github_error": "GitHub での操作を完了できませんでした。",
-            "subtitle": "フッター用の画像付きクイックノートを作成・管理します。"
-        },
-        "settings": {
-            "tab": "GitHub設定",
-            "title": "GitHub設定",
-            "save": "保存",
-            "clear_credentials": "GitHubの認証情報を消去",
-            "clear": "消去"
+            "reading_stats": "{words}語 · 読了時間約{minutes}分"
         },
         "nav": {
-            "session": "GitHub セッション"
+            "session": "GitHubセッション"
         },
         "posts_view": {
-            "subtitle": "公開済みのHTML投稿を管理・編集・削除します。",
-            "search_placeholder": "タイトル、スラッグ、タグで絞り込む...",
+            "subtitle": "公開済みのHTML投稿を管理、編集、または削除します。",
+            "search_placeholder": "タイトル、スラッグ、またはタグで絞り込み...",
             "empty": "投稿が見つかりません。",
-            "back": "← 投稿一覧に戻る",
+            "back": "← 投稿一覧へ戻る",
             "view": "ページを開く"
         },
         "session": {
-            "title": "GitHub セッション",
+            "title": "GitHubセッション",
             "subtitle": "OAuth認証とアクセストークンの有効期限を管理します。",
             "scope_label": "スコープ：",
             "obtained_label": "認証日時：",
             "expires_label": "有効期限：",
             "refresh_btn": "セッションを再検証",
-            "diagnostics_title": "OAuth 診断",
+            "diagnostics_title": "OAuth診断",
             "reload_diagnostics": "更新",
-            "clear_confirm": "このブラウザに保存されたGitHub認証情報を削除しますか？",
+            "clear_confirm": "このブラウザに保存されたGitHubの認証情報を削除しますか？",
             "status_active": "有効",
-            "status_expiring": "間もなく期限切れ",
+            "status_expiring": "まもなく期限切れ",
             "status_expired": "期限切れ",
             "status_no_expiry": "有効期限なしのトークン",
-            "refreshing": "GitHubでセッションを再検証しています...",
+            "refreshing": "GitHubでセッションを再検証中...",
             "refreshed": "セッションを再検証しました。",
-            "refresh_failed": "トークンを自動的に更新できませんでした。",
+            "refresh_failed": "トークンを自動的に再検証できませんでした。",
             "reauth_needed": "GitHubセッションの有効期限が切れました。続行するには再認証してください。",
-            "diagnostics_empty": "診断情報はありません。",
-            "diagnostics_error": "診断情報の読み込みに失敗しました。"
+            "diagnostics_empty": "利用可能な診断情報はありません。",
+            "diagnostics_error": "診断情報の読み込みエラー。"
         }
     },
     "github_auth": {
         "title": "GitHub認証",
-        "description": "管理ダッシュボードにアクセスするには、GitHub APIキーを入力してください。",
-        "label": "GitHub APIキー",
-        "placeholder": "APIキーを貼り付けてください",
-        "verify": "確認",
-        "messages": {
-            "empty": "APIキーを入力してください。",
-            "verifying": "認証を確認しています...",
-            "failed": "認証に失敗しました。APIキーを確認してください。",
-            "authenticated": "{0} として認証されました。",
-            "saving": "ID情報を保存中...",
-            "save_failed": "ID情報を保存できませんでした。もう一度お試しください。"
-        },
+        "description": "管理パネルにアクセスするにはGitHubアカウントで認証してください。",
         "start": "GitHubで認証",
         "confirm": "確認して続行",
         "copy_diagnostics": "診断情報をコピー",
         "identity": {
-            "id_label": "ID:",
-            "profile_label": "プロフィール:",
-            "email_label": "公開メール:",
-            "confirmation": "この識別情報を管理パネルで使用するか確認してください。"
+            "id_label": "ID：",
+            "profile_label": "プロフィール：",
+            "email_label": "公開メール：",
+            "confirmation": "管理パネルでこのIDを使用するか確認してください。"
+        },
+        "messages": {
+            "empty": "GitHubでの認証を開始してください。",
+            "verifying": "認証を確認中...",
+            "failed": "GitHubでの認証に失敗しました。もう一度お試しください。",
+            "authenticated": "{0} として認証されました。",
+            "saving": "IDを保存中...",
+            "save_failed": "IDを保存できませんでした。もう一度お試しください。"
         }
+    },
+    "blog": {
+        "empty": "まだ公開されている記事はありません。",
+        "not_found": "投稿が見つかりません。",
+        "load_error": "この投稿を読み込めませんでした。",
+        "showing": "{total}件中{shown}件を表示",
+        "load_more": "もっと読み込む",
+        "read_time": "読了時間 {minutes}分",
+        "updated": "最終更新: {date}",
+        "more_posts": "その他の投稿",
+        "license": "このコンテンツは <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a> の下でライセンスされています",
+        "search_placeholder": "投稿を検索...",
+        "all_tags": "すべて",
+        "no_results": "選択したフィルターに一致する投稿はありません。",
+        "read_article": "記事を読む",
+        "back_to_blog": "ブログに戻る",
+        "copy_code": "コードをコピー"
     }
 }

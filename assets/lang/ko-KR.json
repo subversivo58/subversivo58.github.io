@@ -1,0 +1,808 @@
+{
+    "404": {
+        "general": "앗... 찾을 수 없습니다!",
+        "title": "페이지를 찾을 수 없습니다",
+        "message": "열려고 한 주소가 존재하지 않거나 이동되었습니다. 올바르게 입력했는지 확인하거나 홈페이지로 돌아가세요.",
+        "button": "홈페이지로 돌아가기"
+    },
+    "source": {
+        "name": "Subversivo58 Blog",
+        "version": "0.1.0",
+        "author": "Subversivo58",
+        "home": "https://github.com/subversivo58/",
+        "colab": [],
+        "build": "Alpha",
+        "bugs": [
+            {
+                "type": "git",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
+            }
+        ],
+        "license": [
+            {
+                "type": "MIT",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
+            }
+        ]
+    },
+    "words": {
+        "an": "1 전",
+        "agree": "동의",
+        "clear": "지우기",
+        "signin": "로그인",
+        "logout": "로그아웃",
+        "signup": "가입하기",
+        "close": "닫기",
+        "drawer": "서랍",
+        "free": "무료로",
+        "search": "검색",
+        "recover": "복구",
+        "restore": "복원",
+        "white": "흰색",
+        "decade": "10년",
+        "year": "년",
+        "month": "개월",
+        "week": "주",
+        "day": "일",
+        "hour": "시간",
+        "minute": "분",
+        "license": "라이선스",
+        "more": "더보기",
+        "second": "초",
+        "now": "지금",
+        "rememberme": "로그인 상태 유지",
+        "source": "소스",
+        "mail": "이메일",
+        "page": "페이지",
+        "pwd": "비밀번호",
+        "token": "토큰",
+        "media": "미디어",
+        "settings": "설정",
+        "version": "버전",
+        "ooops": "앗..."
+    },
+    "combo": {
+        "btn_top": "맨 위로",
+        "more_info": "자세한 정보 보기.",
+        "click_here": "여기를 클릭하세요!",
+        "clear_exit": "지우고 나가기",
+        "not_show_again": "다시 보지 않기",
+        "powered": "제공:",
+        "copyr": "저작권",
+        "knowmore": "자세히 알아보기",
+        "seelicenses": "라이선스 보기"
+    },
+    "navbar": {
+        "wiki": "WIKI",
+        "blog": "블로그",
+        "dpo": "DPO",
+        "colab": "협업",
+        "about": "소개",
+        "lab": "실험실",
+        "contact": "문의",
+        "policies": "정책",
+        "donations": "후원",
+        "signin": "로그인",
+        "docs": "문서",
+        "home": "홈"
+    },
+    "footer": {
+        "content": {
+            "contactnf": "문의",
+            "blognew": "새 소식",
+            "uselink": "유용한 링크",
+            "docs": "문서",
+            "policies": "일반 정책",
+            "faq": "지원 및 FAQ",
+            "forum": "포럼 및 커뮤니티",
+            "devtool": "개발자 도구",
+            "api": "서비스 API",
+            "bugs": "오류 신고",
+            "desc1": "이 사이트는 2010년에 시작된 다양한 프로젝트 모음이며, 여러 주제를 공유하는 개인 블로그 역할을 합니다. 자유롭게 사이트를 탐색하고 콘텐츠를 공유해 보세요.",
+            "desc2": "이 사이트는 지속적으로 개발 중이므로 언제든 오류를 제보하거나 개선 사항을 제안해 주세요.",
+            "start": "지금 시작하기",
+            "source": "소스 코드",
+            "feedback": "피드백",
+            "dpo": "개인정보 보호책임자(DPO)"
+        },
+        "author": "작성자",
+        "about": "소개",
+        "licit": "법적 고지",
+        "cookie": "쿠키",
+        "privacci": "개인정보 처리방침",
+        "footoodle": {
+            "title": "Collabore에 가입하세요",
+            "description": "<p>Collabore는 개발자와 애호가들에게 새로운 문을 열어줍니다. 정적 페이지 서비스를 동적인 서비스로 전환하세요.</p><p>간단하지만 강력한 인터페이스를 통해 새 게시물을 수정, 검토 및 작성하고, 페이지에 플러그인과 앱을 추가하거나 직접 만든 확장 기능을 통합할 수 있습니다.</p><p>이 모든 것이 확장을 위해 설계된 오픈 소스 코드를 통해 제공됩니다. 통합 인증 시스템을 활용하여 Collabore 사용자가 몇 번의 클릭만으로 페이지에 가입하고, 페이지의 플러그인과 앱에 자동으로 인증되도록 하세요.</p><p class='mt-5 ct'>이 협업 시스템의 일원이 되세요. <a href='/signup' class='white tdu'>지금 등록하세요!</a></p>"
+        }
+    },
+    "drawer": {
+        "clear_data": {
+            "title": "사이트 데이터 지우기",
+            "question_info": "정말로 진행하시겠습니까?",
+            "positive": "길게 눌러 지우기",
+            "negative": "아니요, 취소",
+            "footer_info": "캐시 및 쿠키를 지웁니다. <a href='#' class='tdu blue'>문서</a>를 확인하세요."
+        },
+        "bug_report": {
+            "title": "오류 신고 🐛",
+            "question_info": "오류를 발견하셨나요? 제보해 주세요!",
+            "placeholder": "여기에 오류를 설명하세요...",
+            "send": "보내기",
+            "follow": "지원 페이지로 이동",
+            "footer_info": "오류 신고에 관한 <a href='#' class='tdu blue'>문서</a>를 확인하세요.",
+            "sent": "감사합니다! 버그가 등록되었습니다.",
+            "failed": "버그를 등록할 수 없습니다. 다시 시도해 주세요."
+        },
+        "feedback": {
+            "title": "의견 보내기",
+            "rating": "평가:",
+            "question_info": "Collabore에 대한 의견을 보내주세요!",
+            "placeholder": "비판, 칭찬 또는 제안을 보내주세요",
+            "footer_info": "의견 보내기에 관한 <a href='#' class='tdu blue'>문서</a>를 확인하세요.",
+            "notific": {
+                "error": {
+                    "title": "피드백 전송 실패!",
+                    "message": "죄송합니다. 의견을 처리하는 중 오류가 발생했습니다."
+                },
+                "success": {
+                    "title": "피드백 전송 완료!",
+                    "message": "감사합니다. 의견이 성공적으로 전송되었습니다!"
+                }
+            }
+        },
+        "geolocation": {
+            "title": "위치 정보 요청",
+            "btn1": "예, 요청합니다",
+            "btn2": "아니요, 취소",
+            "footer_info": "위치 정보에 대해 궁금하신가요? <a href='#' class='tdu blue'>문서</a>를 확인하세요."
+        },
+        "notification": {
+            "title": "알림 요청",
+            "btn1": "예, 요청합니다",
+            "btn2": "아니요, 취소",
+            "footer_info": "알림에 관한 <a href='#' class='tdu blue'>문서</a>를 확인하세요."
+        },
+        "getmedia_audio": {
+            "title": "마이크 요청",
+            "btn1": "예, 요청합니다",
+            "btn2": "아니요, 취소",
+            "footer_info": "오디오 미디어에 관한 <a href='#' class='tdu blue'>문서</a>를 확인하세요."
+        },
+        "getmedia_video": {
+            "title": "웹캠 요청",
+            "btn1": "예, 요청합니다",
+            "btn2": "아니요, 취소",
+            "footer_info": "비디오 미디어에 관한 <a href='#' class='tdu blue'>문서</a>를 확인하세요.",
+            "perm_title": "카메라 권한",
+            "perm_1": "사이트는 카메라가 필요한 기능을 시작할 때만 카메라를 사용합니다.",
+            "perm_2": "브라우저 설정에서 언제든 권한을 철회할 수 있습니다.",
+            "perm_3": "취소하면 권한이 부여되지 않습니다."
+        },
+        "words": {
+            "clear": "정리",
+            "geo": "위치",
+            "cam": "비디오",
+            "mic": "오디오",
+            "color": "색상",
+            "note": "메모",
+            "bug": "버그",
+            "lab": "실험실",
+            "not": "알림",
+            "feedback": "피드백",
+            "lang": "언어",
+            "marks": "북마크",
+            "admin": "관리",
+            "share": "공유",
+            "theme_light": "라이트 테마",
+            "theme_dark": "다크 테마"
+        },
+        "version": "버전",
+        "notes_form": {
+            "sent": "메모가 저장되었습니다.",
+            "failed": "메모를 저장할 수 없습니다. 다시 시도해 주세요."
+        }
+    },
+    "copyright": {
+        "contributors": "이 프로젝트는 수많은 오픈 소스 프로젝트와 <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>기여자 커뮤니티</a> 덕분에 가능했습니다... 기본 라이선스를 준수하는 한 자유롭게 생성, 사용, 수정 및 배포할 수 있습니다!",
+        "caption": "소스 및 해당 라이선스 목록",
+        "backendsources": "서버(NodeJS)에서 실행되며 동적으로 로드되는 수많은 다른 소스도 이 프로젝트의 핵심입니다:",
+        "package": "및 <a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>더 보기...</a>",
+        "tps": "타사 소프트웨어",
+        "thissource": "이 사이트의 소프트웨어",
+        "alllicenses": "모든 라이선스"
+    },
+    "nocookie": {
+        "title": "지원되지 않음",
+        "p1": "죄송합니다. \"쿠키 없는\" 브라우징은 지원하지 않습니다.",
+        "p2": "이 사이트는 쿠키 및 기타 저장 기술을 사용하지만, \"<strong>명시적인 허가 없이는 브라우저에 어떠한 데이터도 저장하지 않습니다</strong>\"!",
+        "p3": "\"쿠키 없는\" 브라우징을 지원하지 않는 데에는 타당한 이유가 있습니다. 자세한 내용은 <a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"백서\"</a>를 확인해 주세요. 안타깝지만 쿠키를 활성화한 상태로 탐색하셔야 합니다."
+    },
+    "modals": {
+        "language": {
+            "title": "언어 선택",
+            "avaliable": "사용 가능한 언어",
+            "pt_BR": "포르투갈어",
+            "en_US": "영어",
+            "es_ES": "스페인어",
+            "fr_FR": "프랑스어",
+            "de_DE": "독일어",
+            "ja_JP": "일본어",
+            "hi_IN": "힌디어",
+            "zh_CN": "중국어(간체)",
+            "ru_RU": "러시아어",
+            "bn_BD": "벵골어",
+            "id_ID": "인도네시아어",
+            "tr_TR": "터키어",
+            "sw_KE": "스와힐리어",
+            "fil_PH": "필리핀어",
+            "ko_KR": "한국어",
+            "th_TH": "태국어",
+            "it_IT": "이탈리아어",
+            "te_IN": "텔루구어",
+            "mr_IN": "마라티어",
+            "footer": "원하는 언어가 없나요? 번역을 만들어 보세요!"
+        },
+        "version": {
+            "title": "🚧 제작 중 🚧",
+            "text1": "이 프로젝트는 수많은 오픈 소스 프로젝트와 ",
+            "text2": "기여자 커뮤니티",
+            "text3": "덕분에 가능했습니다. 기본 라이선스를 준수하는 한 자유롭게 생성, 사용, 수정 및 배포할 수 있습니다!"
+        },
+        "tabs": {
+            "camera": "카메라 요청",
+            "permissions": "권한"
+        },
+        "share": {
+            "title": "이 블로그 공유하기",
+            "broken_link": "깨진 링크를 신고하시겠습니까?"
+        },
+        "notes": {
+            "title": "빠른 메모",
+            "note_title": "제목:",
+            "category": "카테고리:",
+            "tags": "태그:",
+            "note": "메모:",
+            "save": "저장",
+            "ph_title": "제목",
+            "ph_category": "카테고리",
+            "ph_tags": "태그",
+            "ph_note": "여기에 메모를 입력하세요..."
+        },
+        "offline": {
+            "title": "오프라인 사용을 위해 저장",
+            "yes": "예, 저장합니다!",
+            "no": "아니요, 취소",
+            "about": "오프라인 기능에 대하여"
+        },
+        "auth": {
+            "title": "로그인 및 승인",
+            "source": "소스 코드: <a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">GitHub에서 보기</a>"
+        },
+        "bugs": {
+            "select_type": "유형 선택:",
+            "custom": "사용자 지정 오류",
+            "css": "CSS 오류",
+            "js": "JavaScript 오류",
+            "language": "언어 오류",
+            "plugins": "플러그인 오류",
+            "server": "서버 오류",
+            "description": "설명을 보내주세요",
+            "ph_description": "여기에 설명을 입력하세요..."
+        },
+        "permissions": {
+            "title_microphone": "마이크 권한",
+            "title_geolocation": "위치 권한",
+            "item_1": "사이트는 해당 기능이 필요한 작업을 시작할 때만 이 리소스를 사용합니다.",
+            "item_2": "브라우저 설정에서 언제든 권한을 철회할 수 있습니다.",
+            "item_3": "취소하면 권한이 부여되지 않습니다."
+        }
+    },
+    "notify": {
+        "storage": {
+            "title": "Subversivo58 - 저장소",
+            "body": "이 사이트는 기기에 정보를 저장하는 \"쿠키\" 및 기타 기술을 사용합니다. 이에 동의하십니까?",
+            "actions": [
+                {
+                    "action": "cookie-agree",
+                    "title": "이게 무엇인가요?",
+                    "icon": "🍪"
+                },
+                {
+                    "action": "cookie-policy",
+                    "title": "정책 보기",
+                    "icon": "🛡️"
+                },
+                {
+                    "action": "terms-policy",
+                    "title": "약관 보기",
+                    "icon": "📜"
+                }
+            ]
+        },
+        "permission_granted": {
+            "title": "알림 활성화됨",
+            "body": "알림 전송을 허용해 주셔서 감사합니다!"
+        }
+    },
+    "pages": {
+        "about": {
+            "heading": "기술, 트렌드 및 사이버 문화",
+            "item1": "✓ Web API, JavaScript 및 HTML5 기능.",
+            "item2": "✓ 함수형 프로그래밍, 패턴, 프레임워크.",
+            "item3": "✓ WebCrypto, 실험실 및 code-flask.",
+            "item4": "✓ 의견, 라이프스타일, 긱 문화 등 다양한 주제.",
+            "photo": "사진: <a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a> (<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>)",
+            "title": "소개",
+            "p1": "안녕하세요, 저는 Lauro Moraes (일명 <a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a>)입니다. 이 사이트는 저의 디지털 실험실이자 개인 블로그입니다.",
+            "p2": "이곳에서는 PWA, Single Page Apps, 최신 JavaScript API, HTML5, CSS3 활용 등 웹 중심의 기술 트렌드, 사이버 문화, 프로그래밍 콘텐츠를 게시합니다.",
+            "p3": "저는 함수형 프로그래밍, 디자인 패턴, 그리고 웹 탈중앙화에 깊은 열정을 가지고 있으며... 블록체인과 웹 암호화는 이곳에서 자주 다루는 주제입니다.",
+            "p4": "또한 이곳에서 저의 실험을 공유하고 코드와 작은 기능적 스니펫을 나누며, 다양한 주제에 대한 의견과 긱 문화 및 이러한 라이프스타일에 관한 생각도 표현합니다.",
+            "p5": "자유롭게 블로그 콘텐츠를 둘러보시고 커뮤니티에 참여해 보세요."
+        },
+        "you_in_control": {
+            "heading": "내 데이터의 주도권은 나에게",
+            "item1": "✓ 프라이버시는 상품이 아니라 당신의 권리입니다.",
+            "item2": "✓ 모든 디지털 보안의 기반이 되는 암호화.",
+            "item3": "✓ 프라이버시 존중은 당신의 선택을 존중하는 것에서 시작됩니다.",
+            "item4": "✓ 무엇을, 언제, 누구와 공유할지는 당신이 결정합니다.",
+            "photo": "사진: <a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a> (<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>)"
+        },
+        "donations": {
+            "heading": "멋진 일에 동참하고 싶으신가요?",
+            "photo": "사진: <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> (<a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>)",
+            "thanks_title": "감사의 말씀",
+            "thanks_text": "저희는 자랑스럽게 <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">GitHub Pages</a>와 <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a> 서비스를 사용하고 있습니다. 이 플랫폼과 도구들은 정말 놀라우며, 이 블로그와 다양한 도구를 만들 수 있게 해줍니다.",
+            "platforms_title": "이 플랫폼들을 알아보세요",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
+            "donate_title": "여러분의 후원이 큰 힘이 됩니다",
+            "content": {
+                "intro1": "블로그를 최신 상태로 유지하는 데는 시간과 노력이 필요합니다. 사용하는 플랫폼과 도구가 무료이긴 하지만 한계가 존재합니다. 각 플랫폼은 월간 사이트 접속 수와 접속 중 서버에서 전송할 수 있는 데이터 양을 제한합니다.",
+                "intro2": "이 블로그에서는 새로운 기능을 탐색하고 구현하며, 서비스 범위를 넓히고 활기차고 역동적인 커뮤니티를 구축하고자 합니다.",
+                "intro3": "이러한 목표를 달성하려면 자체 도메인 확보, 더 많은 트래픽을 감당할 수 있는 VPS 서버, 저장 공간, 그리고 더 다양한 애플리케이션을 구축할 수 있는 인프라에 자원을 투자해야 합니다.",
+                "intro4": "저희는 광고, 유료 벽(페이월), 유료 추적 또는 데이터 판매로 자금을 모으는 것을 혐오합니다... <a href=\"./you-in-control-of-your-data.html\" title=\"백서\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">\"백서\"</a>에 명시된 대로 <strong>당신만이 자신의 데이터의 유일한 소유자</strong>라고 믿고 옹호합니다. 그렇기에 여러분의 작은 도움이 더 많은 것을 더 잘 해낼 수 있도록 격려하고 돕는 큰 차이를 만듭니다 🚀",
+                "contribution1": "소셜 네트워크에 공유하거나, 코드를 개선하고, 편집에 협력하거나, 커뮤니티와 소통하는 등 다양한 방법으로 이 블로그에 기여할 수 있습니다.",
+                "contribution2": "또한 아래의 후원 옵션 중 하나를 선택해 \"<b>조금 더 큰 도움</b>\"을 주시는 것도 고려해 보세요 🎊",
+                "pix_caption": "PagBank Pix",
+                "trademarks": "여기에 사용된 로고 및 상표는 각 권리 보유자의 자산입니다. 이곳에서의 사용이 해당 브랜드와의 제휴나 보증을 의미하지는 않습니다."
+            }
+        },
+        "dpo": {
+            "heading": "개인정보 보호책임자 (DPO)",
+            "intro1": "개인정보 보호 일반법(LGPD - 법률 제13.709/2018호)에 따라 개인정보 보호책임자(Data Protection Officer)의 연락처를 안내해 드립니다.",
+            "intro2": "DPO는 본 사이트, 정보 주체(귀하) 및 국가개인정보보호당국(ANPD) 간의 소통을 중개하는 책임을 맡고 있습니다.",
+            "contact_title": "연락처 정보",
+            "officer": "<strong>책임자:</strong> Lauro de Moraes",
+            "email": "이메일:",
+            "deadline": "<strong>응답 기한:</strong> 소규모 개인정보 처리자에 적용되는 규정에 따라 최대 30일 이내.",
+            "send_email": "DPO에게 이메일 보내기",
+            "rights_title": "권리 행사 방법",
+            "rights1": "LGPD 제18조에 규정된 권리(처리 여부 확인, 열람, 정정, 익명화, 삭제 등)를 행사하려면 위 이메일 주소로 연락해 주시면 됩니다.",
+            "rights2": "신속한 처리를 위해 이메일 제목이나 본문에 다음 내용을 포함해 주시기 바랍니다:",
+            "list1": "성명;",
+            "list2": "행사하고자 하는 권리(예: 데이터 삭제, 열람 등);",
+            "list3": "당사 시스템에서 귀하의 데이터를 찾는 데 도움이 될 세부 정보.",
+            "policies": "당사가 데이터를 처리하는 방법에 대한 자세한 내용은 <a href=\"/policy.html#policy-general\">일반 정책</a> 및 <a href=\"/policy.html#policy-privacy\">개인정보 처리방침</a>을 참조하세요."
+        },
+        "home": {
+            "intro": {
+                "eyebrow": "SUBVERSIVO58 소개",
+                "title": "단순한 블로그 그 이상.",
+                "description": "호기심, 기술, 그리고 아이디어를 탐구하는 자유를 위한 공간입니다.",
+                "details": "이곳에서는 지식과 창의성이 만나 기존의 틀을 넘어서는 콘텐츠, 경험, 프로젝트를 만들어냅니다.",
+                "signature": "호기심 · 지식 · 창의성"
+            },
+            "exploration": {
+                "eyebrow": "발견하기",
+                "title": "다양한 아이디어를 탐험하세요.",
+                "description": "배우고, 실험하고, 새로운 가능성을 발견하는 다양한 방법들.",
+                "programming": {
+                    "title": "프로그래밍",
+                    "description": "디지털 세상을 위한 코드, 개발 및 창의적인 솔루션."
+                },
+                "technology": {
+                    "title": "기술",
+                    "description": "우리의 일상을 변화시키는 도구, 기능 및 최신 소식."
+                },
+                "experiments": {
+                    "title": "실험",
+                    "description": "구상 중인 아이디어, 테스트, 그리고 틀을 깬 발견들."
+                },
+                "knowledge": {
+                    "title": "지식",
+                    "description": "시야를 넓혀주는 배움, 성찰 및 정보."
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / 실험실",
+                "title": "새로운 가능성을 탐구하는 공간.",
+                "description": "호기심을 발견으로 바꾸기 위해 개발된 실험, 프로젝트 및 도구들.",
+                "link": "실험실 둘러보기"
+            }
+        },
+        "policy": {
+            "badges": {
+                "reading_title": "이 문서의 예상 읽기 시간",
+                "version": "버전: {version}",
+                "version_title": "문서 버전",
+                "print": "인쇄&nbsp;🖨️",
+                "print_title": "인쇄"
+            },
+            "cards": {
+                "introduction": {
+                    "title": "소개",
+                    "description": "이 사이트는 웹 기술로 구축되었으며, 저희는 탈중앙화와 암호화 보안을 믿습니다. 당신만이 자신의 데이터의 유일한 소유자라고 믿습니다.",
+                    "link": "\"백서\"에서 더 보기"
+                },
+                "privacy": {
+                    "title": "개인정보 보호",
+                    "description": "개인정보 처리방침은 본 사이트가 데이터를 요청하는 이유, 처리 방식, 그리고 사용자가 데이터를 편집, 다운로드 또는 삭제할 수 있는 방법을 설명합니다.",
+                    "link": "개인정보 처리방침 읽기"
+                },
+                "terms": {
+                    "title": "이용약관",
+                    "description": "이용약관은 본 사이트를 운영하는 방식, 사용자가 기대할 수 있는 사항, 그리고 그 과정에서 사용자에게 기대하는 사항을 설명합니다.",
+                    "link": "이용약관 읽기"
+                },
+                "general": {
+                    "title": "정책",
+                    "description": "\"정책\"은 사이트와 사용자 간의 관계를 규율하는 일반 문서로, 사이트 및 도구 사용 계약에 대한 보장과 제한 사항을 규정합니다.",
+                    "link": "일반 정책 읽기"
+                }
+            },
+            "overview": {
+                "quote1": "정책은 사이트와 사용자가 관계를 맺는 방식이며, 이 관계에서 투명성과 품질을 보장하여 안전과 신뢰를 제공합니다. 또한 전 세계 여러 국가의 개인정보 보호법에서도 규율하는 대상입니다.",
+                "quote2": "저희는 흔한 \"<strong>알아보기 힘든 깨알 같은 약관</strong>\" 형태를 피하기 위해 정책을 최대한 단순화하려고 노력했습니다. 너무 길면 품질을 보장하지 못하고, 너무 짧으면 내용을 충분히 담지 못하기 때문입니다.",
+                "quote3": "이러한 신뢰 관계가 사용자와 저희 모두에게 배움의 과정이 되기를 바랍니다.",
+                "whitepaper_link": "\"백서\" 발췌문",
+                "contact": "사이트 또는 도구 사용으로 인해 발생하는 모든 문의 사항은 문의 양식이나 <strong>피드백</strong> 도구(피드백을 환영합니다)를 통해 알려주실 수 있습니다. 또한 다음 이메일 주소를 통해 DPO에게 문제를 문의하실 수도 있습니다: <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Políticas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
+                "markdown1": "본 사이트의 정책은 약간 수정된 <strong>Markdown</strong> 마크업 언어로 작성되었으며, <a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">저장소 링크</a>를 통해 <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a>에서 일반 텍스트로 보거나 다운로드할 수 있습니다.",
+                "markdown2": "그곳에서 현재 버전과 이전 버전의 정책은 물론 이 사이트의 소스 코드도 확인하실 수 있으며, 일반 정책 상단에 있는 인쇄 아이콘 <span class=\"badge badge-light border-def contrast\">인쇄&nbsp;🖨️</span>을 클릭하여 인쇄할 수도 있습니다."
+            },
+            "privacy": {
+                "heading": "개인정보 보호",
+                "image_alt": "당신에게는 선택권이 있습니다",
+                "image_title": "당신에게는 선택권이 있습니다",
+                "paragraph1": "저희는 프라이버시의 원칙이 선택의 자유라고 믿습니다. 사용자는 단 한 번의 클릭이나 특정 도구 사용을 위해 방대한 데이터를 넘기도록 강요하는 약관으로 인해 자신의 데이터를 포기해서는 안 됩니다.",
+                "paragraph2": "선택의 자유는 데이터 요청에 대한 점진적이면서도 방해되지 않는 모델이며, 필요할 때만 동의를 구하는 것이 표준이 되어야 합니다.",
+                "paragraph3": "프라이버시 존중은 사용자가 \"무엇을\", \"언제\" 공유할지 선택할 권리를 존중하는 것에서 시작됩니다."
+            },
+            "terms": {
+                "heading": "이용약관",
+                "image_alt": "이용약관 이미지",
+                "image_title": "이용약관"
+            },
+            "general": {
+                "heading": "일반 정책",
+                "image_alt": "계약 이미지",
+                "image_title": "계약"
+            },
+            "cookies": {
+                "heading": "쿠키 허용",
+                "paragraph1": "<strong>정말로 쿠키와 데이터 저장을 수락해야 하는지</strong> 궁금하실 수 있습니다. 짧은 답변은: <strong>아니요, 그럴 필요 없습니다</strong>! 여전히 사이트를 탐색하고 다양한 도구와 기능을 사용할 수 있지만, 최상의 경험을 얻지 못할 수는 있습니다 🙁",
+                "paragraph2": "예를 들어 언어를 선택하거나 좋아하는 색상을 저장하거나 설정을 지정할 때, 사이트에 접속하거나 이동할 때마다 다시 선택해야 합니다... 선택 사항을 \"유지\"하는 유일한 방법은 로컬에 저장하는 것입니다.",
+                "paragraph3": "<a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">당신만이 자신의 데이터의 유일한 소유자</a>라는 철학에 따라, 저희는 당신에게 선택권이 있다고 믿습니다. 아래 버튼을 \"<strong>클릭하고 길게 눌러</strong>\" 쿠키 사용을 수락하더라도, 여기나 사용자 탭에서 언제든 <strong>비활성화</strong>할 수 있으며 저장된 모든 내용을 한 번에 삭제할 수도 있습니다 😎",
+                "button": "🍪 길게 눌러 쿠키 활성화",
+                "disable": "😮 클릭하여 쿠키 비활성화!"
+            }
+        }
+    },
+    "settings_slide": {
+        "title": "사이트 설정",
+        "media_api": "미디어 API",
+        "auto_audio": "첫 권한 허용 후 오디오 자동 호출",
+        "auto_video": "첫 권한 허용 후 비디오 자동 호출",
+        "geo_api": "위치 정보 API",
+        "geo_share": "위치 추적 분석 공유",
+        "audio_effects": "오디오 효과",
+        "audio_effects_on": "오디오 효과 활성화",
+        "audio_notify_on": "오디오 알림 활성화",
+        "connection": "연결 (상태)",
+        "notify_off": "알림 비활성화",
+        "analytics": "분석",
+        "analytics_toggle": "활성화 또는 비활성화"
+    },
+    "palette": {
+        "title": "색상 팔레트",
+        "schema": "구성표"
+    },
+    "admin_dashboard": {
+        "posts": "게시물",
+        "close_menu": "메뉴 닫기",
+        "loading_posts": "게시물 불러오는 중...",
+        "title": "관리자 대시보드",
+        "description": "블로그 게시물을 관리하세요.",
+        "menu": "메뉴",
+        "new_post": "새 게시물",
+        "settings": {
+            "tab": "GitHub 설정",
+            "title": "GitHub 설정",
+            "save": "저장",
+            "clear_credentials": "GitHub 자격 증명 지우기",
+            "clear": "지우기"
+        },
+        "close_editor": "편집기 닫기",
+        "footoodles": {
+            "tab": "Footoodles",
+            "title": "Footoodles 관리",
+            "empty": "등록된 Footoodle이 없습니다.",
+            "loading": "Footoodles 불러오는 중...",
+            "load_error": "Footoodles를 불러올 수 없습니다.",
+            "new": "새 Footoodle",
+            "edit": "편집",
+            "delete": "삭제",
+            "save": "Footoodle 저장",
+            "cancel": "취소",
+            "image": "이미지",
+            "image_select": "이미지 선택",
+            "image_required": "이미지를 선택하세요.",
+            "image_invalid": "허용되지 않는 이미지 형식입니다. JPEG, PNG 또는 WebP를 사용하세요.",
+            "title_label": "제목",
+            "title_placeholder": "Footoodle 제목을 입력하세요",
+            "title_required": "제목을 입력하세요.",
+            "content_label": "내용",
+            "content_placeholder": "Footoodle을 작성하세요...",
+            "content_required": "내용을 입력하세요.",
+            "content_limit": "내용은 최대 280자까지 입력할 수 있습니다.",
+            "character_count": "{count}/280자",
+            "saving": "Footoodle 저장 중...",
+            "saved": "Footoodle이 성공적으로 저장되었습니다!",
+            "save_error": "Footoodle을 저장할 수 없습니다.",
+            "updating": "Footoodle 업데이트 중...",
+            "updated": "Footoodle이 성공적으로 업데이트되었습니다!",
+            "update_error": "Footoodle을 업데이트할 수 없습니다.",
+            "delete_confirm": "이 Footoodle을 정말로 삭제하시겠습니까?",
+            "deleting": "Footoodle 삭제 중...",
+            "deleted": "Footoodle이 성공적으로 삭제되었습니다!",
+            "delete_error": "Footoodle을 삭제할 수 없습니다.",
+            "delete_cancel": "삭제가 취소되었습니다.",
+            "editor_new": "새 Footoodle을 작성 중입니다.",
+            "editor_edit": "Footoodle을 편집 중입니다.",
+            "discard_changes": "이 Footoodle의 변경 사항을 버리시겠습니까?",
+            "operation_error": "Footoodle을 처리하는 중 오류가 발생했습니다.",
+            "github_error": "GitHub에서 작업을 완료할 수 없습니다.",
+            "subtitle": "바닥글에 이미지가 포함된 빠른 메모를 만들고 관리하세요."
+        },
+        "editor": {
+            "status_ready": "편집 준비 완료.",
+            "title_label": "제목",
+            "title_placeholder": "게시물 제목",
+            "summary_label": "요약",
+            "summary_placeholder": "게시물 요약",
+            "summary_restore": "자동 복원",
+            "summary_help": "요약은 자동으로 채워집니다. 자유롭게 수정할 수 있습니다.",
+            "content_label": "내용",
+            "toolbar_label": "서식 도구",
+            "bold": "굵게",
+            "italic": "기울임꼴",
+            "strike": "취소선",
+            "unordered_list": "글머리 기호 목록",
+            "unordered_list_label": "• 목록",
+            "ordered_list": "번호 매기기 목록",
+            "ordered_list_label": "1. 목록",
+            "quote": "인용",
+            "link": "링크 삽입",
+            "link_label": "링크",
+            "code": "코드 삽입",
+            "font_size": "글꼴",
+            "font_size_title": "글꼴 크기",
+            "image": "이미지",
+            "image_title": "이미지 추가",
+            "microphone": "마이크",
+            "microphone_title": "음성 받아쓰기",
+            "preview_toggle": "미리보기",
+            "preview_heading": "미리보기",
+            "preview_close": "닫기",
+            "tags_label": "태그",
+            "tags_placeholder": "쉼표로 구분하여 태그를 입력하세요",
+            "draft_select_label": "임시 저장 글 선택",
+            "draft_select_default": "임시 저장 글 선택",
+            "draft_open": "임시 저장 글 열기",
+            "draft_save": "임시 저장",
+            "generate": "게시물 생성",
+            "slug_label": "URL 슬러그",
+            "slug_placeholder": "my-article",
+            "slug_unlock_title": "슬러그 편집 잠금 해제 또는 잠금",
+            "summary_restore_title": "자동 요약 복원",
+            "undo_title": "실행 취소 (Ctrl+Z)",
+            "redo_title": "다시 실행 (Ctrl+Y)",
+            "block_format_title": "블록 스타일",
+            "block_paragraph": "단락",
+            "heading1": "제목 1",
+            "heading2": "제목 2",
+            "heading3": "제목 3",
+            "heading4": "제목 4",
+            "heading5": "제목 5",
+            "heading6": "제목 6",
+            "code_block": "코드 블록",
+            "bold_title": "굵게 (Ctrl+B)",
+            "italic_title": "기울임꼴 (Ctrl+I)",
+            "underline_title": "밑줄 (Ctrl+U)",
+            "strike_title": "취소선",
+            "inline_code_title": "인라인 코드",
+            "clear_format_title": "서식 지우기",
+            "fore_color_title": "텍스트 색상",
+            "back_color_title": "강조 색상",
+            "unordered_list_title": "글머리 기호 목록",
+            "ordered_list_title": "번호 매기기 목록",
+            "align_left_title": "왼쪽 정렬",
+            "align_center_title": "가운데 정렬",
+            "align_right_title": "오른쪽 정렬",
+            "align_justify_title": "양쪽 맞춤",
+            "link_title": "링크 삽입 또는 편집 (Ctrl+K)",
+            "quote_title": "인용 블록",
+            "code_title": "코드 블록 삽입",
+            "hr_title": "구분선",
+            "table_title": "표 삽입",
+            "source_btn": "HTML",
+            "source_title": "HTML 소스 코드 전환",
+            "preview": "미리보기",
+            "link_url_placeholder": "https://example.com 또는 /posts/...",
+            "link_text_placeholder": "링크 텍스트 (선택 사항)",
+            "link_new_tab": "새 탭",
+            "apply": "적용",
+            "unlink": "링크 제거",
+            "cancel": "취소",
+            "table_rows": "행",
+            "table_cols": "열",
+            "table_insert": "표 삽입",
+            "img_width": "너비",
+            "img_align": "정렬",
+            "img_align_left": "왼쪽",
+            "img_align_center": "가운데",
+            "img_align_right": "오른쪽",
+            "img_align_full": "전체 너비",
+            "img_remove": "이미지 제거",
+            "img_alt_placeholder": "대체 텍스트 (alt)",
+            "img_caption_placeholder": "이미지 설명 (선택 사항)",
+            "drafts_section": "임시 저장",
+            "save_draft": "임시 저장",
+            "drafts_placeholder": "임시 저장 글 선택...",
+            "open_draft": "열기",
+            "delete_draft": "삭제"
+        },
+        "posts_list": {
+            "untitled": "제목 없는 게시물",
+            "edit": "편집",
+            "delete": "삭제"
+        },
+        "edit_post": "게시물 편집",
+        "update_post": "게시물 업데이트",
+        "delete_modal": {
+            "title": "게시물 삭제",
+            "question": "이 게시물을 정말로 삭제하시겠습니까?",
+            "cancel": "취소",
+            "confirm": "예, 삭제합니다",
+            "deleting": "삭제 중...",
+            "deleting_status": "GitHub에서 게시물 삭제 중...",
+            "success": "게시물이 성공적으로 삭제되었습니다!",
+            "error": "게시물을 삭제할 수 없습니다.",
+            "close": "닫기"
+        },
+        "msg": {
+            "speech_error": "음성 인식 오류: {0}.",
+            "speech_unavailable": "이 브라우저에서는 음성 인식을 사용할 수 없습니다.",
+            "speech_start_error": "음성 인식을 시작할 수 없습니다: {0}",
+            "pending_changes": "보류 중인 변경 사항이 있습니다.",
+            "images_db_unavailable": "데이터베이스를 사용할 수 없음: 이미지를 저장할 수 없습니다.",
+            "images_optimized": "이미지 최적화 완료: {0} → {1}.",
+            "images_added": "이미지가 추가되었습니다. 크기 감소는 없었습니다.",
+            "image_save_error": "데이터베이스에 이미지를 저장할 수 없습니다.",
+            "markdown_load_error": "Markdown 렌더러를 불러올 수 없습니다.",
+            "drafts_db_unavailable": "데이터베이스를 사용할 수 없음: 임시 저장 글이 저장되지 않습니다.",
+            "autosave_ok": "변경 사항이 자동 저장되었습니다.",
+            "autosave_error": "자동 저장할 수 없습니다.",
+            "nothing_to_save": "저장하기 전에 제목이나 내용을 입력하세요.",
+            "db_unavailable": "데이터베이스를 사용할 수 없습니다.",
+            "draft_updated": "임시 저장 글이 업데이트되었습니다.",
+            "draft_saved": "임시 저장 글이 성공적으로 저장되었습니다.",
+            "draft_save_error": "임시 저장 글을 저장하는 중 오류가 발생했습니다.",
+            "changes_recovered": "이전 변경 사항을 복구했습니다.",
+            "draft_select": "열려는 임시 저장 글을 선택하세요.",
+            "draft_not_found": "임시 저장 글을 찾을 수 없습니다.",
+            "draft_opened": "임시 저장 글을 성공적으로 열었습니다.",
+            "draft_open_error": "임시 저장 글을 여는 중 오류가 발생했습니다.",
+            "editor_ready_new": "새 게시물을 작성할 준비가 되었습니다.",
+            "need_title": "게시물 제목을 입력하세요.",
+            "need_content": "게시물 내용을 입력하세요.",
+            "preparing": "게시물 준비 중...",
+            "published": "게시물이 성공적으로 발행되었습니다.",
+            "prepared": "게시물이 준비되었습니다. 편집기에 내용이 보존되었습니다.",
+            "publish_stage_error": "\"{0}\" 단계에서 실패했습니다: {1}. 내용이 보존되었습니다.",
+            "publishing": "발행 중...",
+            "stage_init": "발행 초기화",
+            "stage_library": "Markdown 라이브러리 로드",
+            "stage_preview": "미리보기 업데이트",
+            "stage_read": "편집기 데이터 읽기",
+            "stage_autosave": "자동 저장",
+            "stage_images": "이미지 준비",
+            "stage_files": "게시물 파일 생성",
+            "stage_publish": "GitHub에 발행",
+            "stage_confirm": "발행 확인",
+            "discard_changes": "편집 중인 게시물의 변경 사항을 버리시겠습니까?",
+            "post_updated": "게시물이 성공적으로 업데이트되었습니다.",
+            "post_loaded": "편집을 위해 게시물을 불러왔습니다.",
+            "post_load_error": "편집할 게시물을 불러올 수 없습니다.",
+            "delete_prepare_error": "삭제를 준비할 수 없습니다: {0}",
+            "delete_error": "게시물 삭제 실패: {0}",
+            "draft_untitled": "제목 없는 임시 저장 글",
+            "post_missing": "목록에 더 이상 게시물이 존재하지 않습니다. 업데이트가 취소되었습니다.",
+            "post_missing_delete": "목록에 더 이상 게시물이 존재하지 않습니다.",
+            "github_not_confirmed": "GitHub에서 삭제를 확인하지 못했습니다.",
+            "markdown_fetch_error": "Markdown을 불러올 수 없습니다.",
+            "need_slug": "게시물 URL에 유효한 슬러그를 입력하세요.",
+            "draft_deleted": "임시 저장 글이 삭제되었습니다.",
+            "content_placeholder": "게시물 내용을 작성하세요...",
+            "reading_stats": "{words}단어 · 읽기 약 {minutes}분"
+        },
+        "nav": {
+            "session": "GitHub 세션"
+        },
+        "posts_view": {
+            "subtitle": "게시된 HTML 게시물을 관리, 편집 또는 삭제하세요.",
+            "search_placeholder": "제목, 슬러그 또는 태그로 필터링...",
+            "empty": "게시물을 찾을 수 없습니다.",
+            "back": "← 게시물로 돌아가기",
+            "view": "페이지 열기"
+        },
+        "session": {
+            "title": "GitHub 세션",
+            "subtitle": "OAuth 인증 및 액세스 토큰 유효성을 관리하세요.",
+            "scope_label": "범위(Scopes):",
+            "obtained_label": "인증 일시:",
+            "expires_label": "만료 일시:",
+            "refresh_btn": "세션 다시 확인",
+            "diagnostics_title": "OAuth 진단",
+            "reload_diagnostics": "새로고침",
+            "clear_confirm": "이 브라우저에 저장된 GitHub 자격 증명을 제거하시겠습니까?",
+            "status_active": "활성",
+            "status_expiring": "곧 만료됨",
+            "status_expired": "만료됨",
+            "status_no_expiry": "만료 기한이 설정되지 않은 토큰",
+            "refreshing": "GitHub에서 세션을 다시 확인하는 중...",
+            "refreshed": "세션이 성공적으로 다시 확인되었습니다.",
+            "refresh_failed": "토큰을 자동으로 다시 확인할 수 없습니다.",
+            "reauth_needed": "GitHub 세션이 만료되었습니다. 계속하려면 다시 인증하세요.",
+            "diagnostics_empty": "사용 가능한 진단 정보가 없습니다.",
+            "diagnostics_error": "진단 정보를 불러오는 중 오류가 발생했습니다."
+        }
+    },
+    "github_auth": {
+        "title": "GitHub 인증",
+        "description": "관리자 대시보드에 액세스하려면 GitHub 계정으로 인증하세요.",
+        "start": "GitHub로 인증하기",
+        "confirm": "확인 및 계속",
+        "copy_diagnostics": "진단 정보 복사",
+        "identity": {
+            "id_label": "ID:",
+            "profile_label": "프로필:",
+            "email_label": "공개 이메일:",
+            "confirmation": "관리자 대시보드에서 이 신원을 사용할지 확인하세요."
+        },
+        "messages": {
+            "empty": "GitHub 인증을 시작하세요.",
+            "verifying": "인증 확인 중...",
+            "failed": "GitHub 인증에 실패했습니다. 다시 시도해 주세요.",
+            "authenticated": "{0}(으)로 인증되었습니다.",
+            "saving": "신원 정보 저장 중...",
+            "save_failed": "신원 정보를 저장할 수 없습니다. 다시 시도해 주세요."
+        }
+    },
+    "blog": {
+        "empty": "아직 게시된 글이 없습니다.",
+        "not_found": "게시물을 찾을 수 없습니다.",
+        "load_error": "이 게시물을 불러올 수 없습니다.",
+        "showing": "전체 {total}개 중 {shown}개 표시 중",
+        "load_more": "더 불러오기",
+        "read_time": "읽기 약 {minutes}분",
+        "updated": "마지막 업데이트: {date}",
+        "more_posts": "더 많은 게시물",
+        "license": "이 콘텐츠는 <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a> 라이선스에 따라 제공됩니다",
+        "search_placeholder": "게시물 검색...",
+        "all_tags": "전체",
+        "no_results": "선택한 필터와 일치하는 게시물이 없습니다.",
+        "read_article": "글 읽기",
+        "back_to_blog": "블로그로 돌아가기",
+        "copy_code": "코드 복사"
+    }
+}

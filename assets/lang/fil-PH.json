@@ -1,0 +1,808 @@
+{
+    "404": {
+        "general": "Naku... Hindi nahanap!",
+        "title": "Hindi nahanap ang pahina",
+        "message": "Ang address na sinubukan mong buksan ay wala o nailipat na. Suriin kung tama ang pagkaka-type mo o bumalik sa home page.",
+        "button": "Bumalik sa home page"
+    },
+    "source": {
+        "name": "Subversivo58 Blog",
+        "version": "0.1.0",
+        "author": "Subversivo58",
+        "home": "https://github.com/subversivo58/",
+        "colab": [],
+        "build": "Alpha",
+        "bugs": [
+            {
+                "type": "git",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
+            }
+        ],
+        "license": [
+            {
+                "type": "MIT",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
+            }
+        ]
+    },
+    "words": {
+        "an": "1 ang nakalipas",
+        "agree": "sumang-ayon",
+        "clear": "linisin",
+        "signin": "mag-sign in",
+        "logout": "mag-log out",
+        "signup": "mag-sign up",
+        "close": "isara",
+        "drawer": "drawer",
+        "free": "libre",
+        "search": "maghanap",
+        "recover": "bawiin",
+        "restore": "ibalik",
+        "white": "puti",
+        "decade": "dekada",
+        "year": "taon",
+        "month": "buwan",
+        "week": "linggo",
+        "day": "araw",
+        "hour": "oras",
+        "minute": "minuto",
+        "license": "lisensya",
+        "more": "higit pa",
+        "second": "segundo",
+        "now": "ngayon",
+        "rememberme": "tandaan ako",
+        "source": "pinagmulan",
+        "mail": "email",
+        "page": "pahina",
+        "pwd": "password",
+        "token": "token",
+        "media": "media",
+        "settings": "mga setting",
+        "version": "bersyon",
+        "ooops": "naku..."
+    },
+    "combo": {
+        "btn_top": "Bumalik sa itaas",
+        "more_info": "kumuha ng karagdagang impormasyon.",
+        "click_here": "Mag-click dito!",
+        "clear_exit": "Linisin at lumabas",
+        "not_show_again": "huwag nang ipakita muli",
+        "powered": "Pinapagana ng",
+        "copyr": "Karapatang-ari",
+        "knowmore": "Alamin pa",
+        "seelicenses": "Tingnan ang mga lisensya"
+    },
+    "navbar": {
+        "wiki": "WIKI",
+        "blog": "blog",
+        "dpo": "DPO",
+        "colab": "makipagtulungan",
+        "about": "tungkol sa",
+        "lab": "laboratoryo",
+        "contact": "makipag-ugnayan",
+        "policies": "mga patakaran",
+        "donations": "mga donasyon",
+        "signin": "Mag-sign In",
+        "docs": "dokumentasyon",
+        "home": "Home"
+    },
+    "footer": {
+        "content": {
+            "contactnf": "MAKIPAG-UGNAYAN",
+            "blognew": "MGA BALITA",
+            "uselink": "MGA KAPAKI-PAKINABANG NA LINK",
+            "docs": "Dokumentasyon",
+            "policies": "Mga Pangkalahatang Patakaran",
+            "faq": "Suporta at FAQ",
+            "forum": "Forum at Komunidad",
+            "devtool": "Mga DEV Tool",
+            "api": "API ng mga Serbisyo",
+            "bugs": "Mag-ulat ng mga Error",
+            "desc1": "Pinagsasama-sama ng site na ito ang isang koleksyon ng mga proyektong sinimulan noong 2010 at nilalayong magsilbi bilang personal na blog upang magbahagi ng iba't ibang paksa. Huwag mag-atubiling tuklasin ang site at ibahagi ang nilalaman nito.",
+            "desc2": "Ang site na ito ay patuloy na pinauunlad, huwag mag-atubiling magturo ng mga error o magmungkahi ng mga pagpapabuti.",
+            "start": "Magsimula ngayon",
+            "source": "Source Code",
+            "feedback": "Feedback",
+            "dpo": "Data Protection Officer (DPO)"
+        },
+        "author": "may-akda",
+        "about": "tungkol sa",
+        "licit": "legal",
+        "cookie": "cookies",
+        "privacci": "privacy",
+        "footoodle": {
+            "title": "Mag-sign up sa Collabore",
+            "description": "<p>Binubuksan ng Collabore ang mga pinto para sa mga developer at mahilig. Gawing dinamiko ang iyong serbisyo ng mga static na pahina.</p><p>Sa pamamagitan ng isang simple ngunit makapangyarihang interface, maaari mong baguhin, suriin, at lumikha ng mga bagong post, magdagdag ng mga plugin at app sa iyong mga pahina o isama ang iyong sariling mga extension.</p><p>Lahat ng ito sa pamamagitan ng open-source code na idinisenyo upang lumawak. Gamitin ang pinagsamang sistema ng pagpapatotoo upang ang mga gumagamit ng Collabore ay makapagrehistro sa iyong pahina sa ilang pag-click lamang at ang pinakamaganda, awtomatikong mapatotoo sa mga plugin at app ng iyong pahina.</p><p class='mt-5 ct'>Maging bahagi ng sistemang ito ng pakikipagtulungan, <a href='/signup' class='white tdu'>magrehistro na ngayon!</a></p>"
+        }
+    },
+    "drawer": {
+        "clear_data": {
+            "title": "Linisin ang data ng site",
+            "question_info": "Sigurado ka ba rito?",
+            "positive": "Pindutin nang matagal upang linisin",
+            "negative": "Hindi, kanselahin",
+            "footer_info": "Linisin ang cache at cookies. Tingnan ang <a href='#' class='tdu blue'>dokumentasyon</a>."
+        },
+        "bug_report": {
+            "title": "Mag-ulat ng mga error 🐛",
+            "question_info": "Nakahanap ng error? Iulat ito!",
+            "placeholder": "Ilarawan ang error dito...",
+            "send": "Ipadala",
+            "follow": "Pumunta sa suporta",
+            "footer_info": "Pag-uulat ng mga error. Tingnan ang <a href='#' class='tdu blue'>dokumentasyon</a> tungkol dito.",
+            "sent": "Salamat! Naitala na ang bug.",
+            "failed": "Hindi naitala ang bug. Pakisubukan muli."
+        },
+        "feedback": {
+            "title": "Ipadala ang iyong komento",
+            "rating": "Rating:",
+            "question_info": "Ipadala ang iyong opinyon tungkol sa Collabore!",
+            "placeholder": "Magpadala ng puna, papuri o mungkahi",
+            "footer_info": "Nagpapadala ng mga komento. Tingnan ang <a href='#' class='tdu blue'>dokumentasyon</a> tungkol dito.",
+            "notific": {
+                "error": {
+                    "title": "Nabigo ang Feedback!",
+                    "message": "Paumanhin, nagkaroon ng error sa pagproseso ng iyong komento."
+                },
+                "success": {
+                    "title": "Naipadala ang feedback!",
+                    "message": "Salamat, matagumpay na naipadala ang iyong komento!"
+                }
+            }
+        },
+        "geolocation": {
+            "title": "Humiling ng Geolocation",
+            "btn1": "Oo, humiling",
+            "btn2": "Hindi, kanselahin",
+            "footer_info": "Geolocation? Tingnan ang <a href='#' class='tdu blue'>dokumentasyon</a>."
+        },
+        "notification": {
+            "title": "Humiling ng mga Abiso",
+            "btn1": "Oo, humiling",
+            "btn2": "Hindi, kanselahin",
+            "footer_info": "Mga Abiso? Tingnan ang <a href='#' class='tdu blue'>dokumentasyon</a>."
+        },
+        "getmedia_audio": {
+            "title": "Humiling ng Mikropono",
+            "btn1": "Oo, humiling",
+            "btn2": "Hindi, kanselahin",
+            "footer_info": "Audio Media? Tingnan ang <a href='#' class='tdu blue'>dokumentasyon</a>."
+        },
+        "getmedia_video": {
+            "title": "Humiling ng Webcam",
+            "btn1": "Oo, humiling",
+            "btn2": "Hindi, kanselahin",
+            "footer_info": "Video Media? Tingnan ang <a href='#' class='tdu blue'>dokumentasyon</a>.",
+            "perm_title": "Pahintulot sa camera",
+            "perm_1": "Ginagamit lamang ng site ang camera kapag sinimulan mo ang isang feature na nangangailangan nito.",
+            "perm_2": "Maaari mong bawiin ang pahintulot sa mga setting ng iyong browser.",
+            "perm_3": "Kung kakanselahin mo, walang ibinibigay na pahintulot."
+        },
+        "words": {
+            "clear": "Paglilinis",
+            "geo": "Geo",
+            "cam": "Video",
+            "mic": "Audio",
+            "color": "Kulay",
+            "note": "Mga Tala",
+            "bug": "Mga Bug",
+            "lab": "Laboratoryo",
+            "not": "Mga Alerto",
+            "feedback": "Feedback",
+            "lang": "Mga Wika",
+            "marks": "Bookmark",
+            "admin": "Pamamahala",
+            "share": "Ibahagi",
+            "theme_light": "Maliwanag na tema",
+            "theme_dark": "Madilim na tema"
+        },
+        "version": "Bersyon",
+        "notes_form": {
+            "sent": "Nai-save ang tala.",
+            "failed": "Hindi nai-save ang tala. Pakisubukan muli."
+        }
+    },
+    "copyright": {
+        "contributors": "Ang proyektong ito ay naging posible lamang dahil sa paggamit ng maraming iba pang open-source na proyekto at ng <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>komunidad ng mga tagapag-ambag</a>... malaya kang lumikha, gumamit, magbago at mamahagi habang iginagalang ang lahat ng pinagbabatayang lisensya!",
+        "caption": "Listahan ng mga pinagmulan at kani-kanilang mga lisensya",
+        "backendsources": "Maraming iba pang pinagmulan na tumatakbo sa server (NodeJS) at dinamikong nilo-load ang mahalaga para sa proyektong ito, tulad ng:",
+        "package": "at <a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>higit pa...</a>",
+        "tps": "Software ng ikatlong partido",
+        "thissource": "Software ng site na ito",
+        "alllicenses": "Lahat ng lisensya"
+    },
+    "nocookie": {
+        "title": "Hindi suportado",
+        "p1": "Paumanhin, hindi kami sumusuporta sa pag-browse nang \"walang cookies\".",
+        "p2": "Bagama't gumagamit ang site na ito ng cookies at iba pang teknolohiya sa pag-iimbak, \"<strong>hindi kami nag-iimbak ng anumang data sa iyong browser nang wala ang iyong malinaw na pahintulot</strong>\"!",
+        "p3": "Naniniwala kaming may mabubuti kaming dahilan upang hindi suportahan ang pag-browse nang \"walang cookies\". Tingnan ang aming <a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a> para sa karagdagang impormasyon. Sa kasamaang palad, kakailanganin mong mag-browse nang naka-enable ang cookies."
+    },
+    "modals": {
+        "language": {
+            "title": "Pumili ng Wika",
+            "avaliable": "Mga available na wika",
+            "pt_BR": "Portuges",
+            "en_US": "Ingles",
+            "es_ES": "Espanyol",
+            "fr_FR": "Pranses",
+            "de_DE": "Aleman",
+            "ja_JP": "Hapon",
+            "hi_IN": "Hindi",
+            "zh_CN": "Tsino (Pinasimple)",
+            "ru_RU": "Ruso",
+            "bn_BD": "Bengali",
+            "id_ID": "Indones",
+            "tr_TR": "Turko",
+            "sw_KE": "Swahili",
+            "fil_PH": "Filipino",
+            "ko_KR": "Koreano",
+            "th_TH": "Thai",
+            "it_IT": "Italyano",
+            "te_IN": "Telugu",
+            "mr_IN": "Marathi",
+            "footer": "Walang opsyon sa iyong wika? Gumawa ng pagsasalin!"
+        },
+        "version": {
+            "title": "🚧 Ginagawa Pa 🚧",
+            "text1": "Ang proyektong ito ay naging posible lamang dahil sa paggamit ng maraming iba pang open-source na proyekto at ng ",
+            "text2": "komunidad ng mga tagapag-ambag",
+            "text3": "Malaya kang lumikha, gumamit, magbago at mamahagi habang iginagalang ang lahat ng pinagbabatayang lisensya!"
+        },
+        "tabs": {
+            "camera": "Humiling ng camera",
+            "permissions": "Mga Pahintulot"
+        },
+        "share": {
+            "title": "Ibahagi ang blog na ito",
+            "broken_link": "Mag-ulat ng sirang link?"
+        },
+        "notes": {
+            "title": "Mabibilis na tala",
+            "note_title": "Pamagat:",
+            "category": "Kategorya:",
+            "tags": "Mga Tag:",
+            "note": "Tala:",
+            "save": "I-save",
+            "ph_title": "Pamagat",
+            "ph_category": "Kategorya",
+            "ph_tags": "Mga Tag",
+            "ph_note": "Ang iyong tala rito..."
+        },
+        "offline": {
+            "title": "I-save para sa offline na paggamit",
+            "yes": "Oo, i-save!",
+            "no": "Hindi, kanselahin",
+            "about": "Tungkol sa mga offline na feature?"
+        },
+        "auth": {
+            "title": "Mag-sign in at pahintulutan",
+            "source": "Source code: <a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">tingnan sa GitHub</a>"
+        },
+        "bugs": {
+            "select_type": "Piliin ang uri:",
+            "custom": "Custom na error",
+            "css": "Error sa CSS",
+            "js": "Error sa JavaScript",
+            "language": "Error sa Wika",
+            "plugins": "Error sa mga Plugin",
+            "server": "Error ng Server",
+            "description": "Magpadala ng paglalarawan",
+            "ph_description": "Paglalarawan dito..."
+        },
+        "permissions": {
+            "title_microphone": "Pahintulot sa mikropono",
+            "title_geolocation": "Pahintulot sa lokasyon",
+            "item_1": "Ginagamit lamang ng site ang feature na ito kapag sinimulan mo ang isang function na nangangailangan nito.",
+            "item_2": "Maaari mong bawiin ang pahintulot sa mga setting ng iyong browser.",
+            "item_3": "Kung kakanselahin mo, walang ibinibigay na pahintulot."
+        }
+    },
+    "notify": {
+        "storage": {
+            "title": "Subversivo58 - Imbakan",
+            "body": "Gumagamit ang site na ito ng \"cookies\" at iba pang teknolohiyang nag-iimbak ng impormasyon sa iyong device, sumasang-ayon ka ba rito?",
+            "actions": [
+                {
+                    "action": "cookie-agree",
+                    "title": "ano ito?",
+                    "icon": "🍪"
+                },
+                {
+                    "action": "cookie-policy",
+                    "title": "tingnan ang mga patakaran",
+                    "icon": "🛡️"
+                },
+                {
+                    "action": "terms-policy",
+                    "title": "tingnan ang mga tuntunin",
+                    "icon": "📜"
+                }
+            ]
+        },
+        "permission_granted": {
+            "title": "Naka-enable ang mga abiso",
+            "body": "Salamat sa pagpapahintulot sa pagpapadala ng mga abiso!"
+        }
+    },
+    "pages": {
+        "about": {
+            "heading": "Mga teknolohiya, uso at cyberculture",
+            "item1": "✓ Web APIs, JavaScript at mga feature ng HTML5.",
+            "item2": "✓ Functional programming, mga pattern, mga framework.",
+            "item3": "✓ WebCrypto, laboratoryo at mga code-flask.",
+            "item4": "✓ Mga opinyon, pamumuhay, kulturang Geek at marami pang iba.",
+            "photo": "Larawan ni <a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a> sa <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "title": "Tungkol sa",
+            "p1": "Kumusta, ako si Lauro Moraes \"aka\" <a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a> at ang site na ito ang aking digital na laboratoryo at personal na blog.",
+            "p2": "Dito ay naglalathala ako ng nilalaman tungkol sa mga uso sa teknolohiya, cyberculture at programming na nakatuon sa web tulad ng mga PWA, Single Page Apps at paggamit ng makabagong API ng JavaScript, HTML5 at CSS3",
+            "p3": "Mahilig ako sa functional programming, pattern design at mga paksang tulad ng desentralisasyon ng web ... ang blockchain at kriptograpiya sa web ay palaging mga paksa rito.",
+            "p4": "Dito rin ako naglalathala ng aking mga eksperimento at nagbabahagi ng aking mga code at maliliit na functional snippet bukod pa sa pagpapahayag ng aking mga opinyon tungkol sa iba't ibang paksa, kaunting kulturang Geek at ganitong pamumuhay.",
+            "p5": "Huwag mag-atubiling tuklasin ang nilalaman ng blog at sumali sa aming komunidad."
+        },
+        "you_in_control": {
+            "heading": "Ikaw ang may kontrol sa iyong data",
+            "item1": "✓ Ang privacy ay karapatan mo, hindi isang produktong iniaalok sa iyo.",
+            "item2": "✓ Kriptograpiya bilang batayan ng lahat ng digital na seguridad.",
+            "item3": "✓ Ang paggalang sa privacy ay nagsisimula sa paggalang sa iyong mga pagpili.",
+            "item4": "✓ Ikaw ang magpapasya kung ano, kailan at kanino ibabahagi ang iyong data.",
+            "photo": "Larawan ni <a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a> sa <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>"
+        },
+        "donations": {
+            "heading": "Nag-iisip na gumawa ng astig na bagay?",
+            "photo": "Larawan ni <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> sa <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "thanks_title": "Pasasalamat",
+            "thanks_text": "Buong pagmamalaki naming ginagamit ang <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Github Pages</a> at ang mga serbisyo ng <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>, ang mga platform na ito at ang kanilang mga tool ay talagang kahanga-hanga na nagbibigay-daan sa aming gumawa ng mga astig na bagay tulad ng blog na ito at ng aming mga tool.",
+            "platforms_title": "Kilalanin ang mga platform na ito",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
+            "donate_title": "Mahalaga ang iyong donasyon",
+            "content": {
+                "intro1": "Ang pagpapanatiling napapanahon ng blog ay nangangailangan ng oras at dedikasyon; bagama't libre ang mga platform at tool na ginagamit namin, mayroon silang mga limitasyon. Nililimitahan ng bawat isa sa kanila kung ilang pagbisita ang maaaring makuha ng isang site bawat buwan gayundin ang dami ng data na maaaring dumaan mula sa kanilang mga server sa mga pagbisitang ito.",
+                "intro2": "Dito sa blog na ito, gusto namin ang ideyang tumuklas ng mga bagong feature, magpatupad ng mga bagong mapagkukunan at marahil ay palawakin ang hanay ng mga serbisyo gayundin ang pagbuo ng isang masigla at dinamikong komunidad.",
+                "intro3": "Upang makamit ang mga ideyang ito, kinakailangang mamuhunan ng mga mapagkukunan sa paghahanap ng sariling domain, mga VPS server na kayang suportahan ang mas maraming trapiko, espasyo sa imbakan at nagbibigay-daan sa pagbuo ng mas malawak na hanay ng mga aplikasyon.",
+                "intro4": "Kinasusuklaman namin ang ideya ng pangangalap ng pondo gamit ang mga ad, paywall, bayad na pagsubaybay o pagbebenta ng data ... ipinagtatanggol at <strong>naniniwala kaming ikaw lamang ang nagmamay-ari ng iyong data</strong> gaya ng inilarawan sa aming <a href=\"./you-in-control-of-your-data.html\" title=\"White Paper\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">\"White Paper\"</a> kaya ang iyong kaunting tulong ay makakagawa ng malaking pagbabago, na naghihikayat at tumutulong sa aming gumawa ng higit pa at mas mahusay 🚀",
+                "contribution1": "Maaari kang mag-ambag sa blog na ito sa napakaraming paraan: pagbabahagi nito sa iyong mga network, pagpapabuti ng code, pakikipagtulungan sa editoryal, pakikipag-ugnayan sa aming komunidad at marami pang iba.",
+                "contribution2": "Isaalang-alang din ang pagbibigay ng \"<b>dagdag na tulong na iyon</b>\" sa pamamagitan ng pagpili sa isa sa mga opsyon sa donasyon sa ibaba 🎊",
+                "pix_caption": "PagBank Pix",
+                "trademarks": "Ang mga logo at trademark na ginamit dito ay pag-aari ng kani-kanilang mga may-ari ng karapatan. Ang paggamit ng mga ito rito ay hindi nagagarantiya ng anumang uri ng ugnayan o pag-endorso mula sa mga tatak na ito."
+            }
+        },
+        "dpo": {
+            "heading": "Data Protection Officer (DPO)",
+            "intro1": "Alinsunod sa General Data Protection Law (LGPD - Batas Blg. 13.709/2018), ipinapaalam namin ang contact ng aming Data Protection Officer.",
+            "intro2": "Ang DPO ang taong responsable sa pamamagitan ng komunikasyon sa pagitan ng Site, ng mga may-ari ng data (ikaw) at ng National Data Protection Authority (ANPD).",
+            "contact_title": "Impormasyon sa Pakikipag-ugnayan",
+            "officer": "<strong>Opisyal:</strong> Lauro de Moraes",
+            "email": "E-mail:",
+            "deadline": "<strong>Takdang Oras ng Tugon:</strong> Hanggang 30 araw, alinsunod sa regulasyong naaangkop sa maliliit na ahente sa pagproseso.",
+            "send_email": "Magpadala ng e-mail sa DPO",
+            "rights_title": "Paano gamitin ang iyong mga karapatan",
+            "rights1": "Upang gamitin ang alinman sa iyong mga karapatang nakasaad sa Art. 18 ng LGPD (tulad ng kumpirmasyon ng pagproseso, pag-access, pagwawasto, anonymization, pagtanggal, bukod sa iba pa), magpadala lamang ng e-mail sa address sa itaas.",
+            "rights2": "Upang mapabilis ang serbisyo, iminumungkahi naming isama sa paksa o katawan ng e-mail:",
+            "list1": "Ang iyong buong pangalan;",
+            "list2": "Ang karapatang nais mong gamitin (hal: pagtanggal ng data, pag-access, atbp.);",
+            "list3": "Mga detalye na makakatulong sa aming mahanap ang iyong data sa aming mga sistema.",
+            "policies": "Para sa higit pang mga detalye tungkol sa kung paano namin pinoproseso ang iyong data, sumangguni sa aming <a href=\"/policy.html#policy-general\">Pangkalahatang Patakaran</a> at sa aming <a href=\"/policy.html#policy-privacy\">Patakaran sa Privacy</a>."
+        },
+        "home": {
+            "intro": {
+                "eyebrow": "TUNGKOL SA SUBVERSIVO58",
+                "title": "Higit pa sa isang blog.",
+                "description": "Isang espasyong nakatuon sa pagkamausisa, teknolohiya at kalayaang tumuklas ng mga ideya.",
+                "details": "Dito, ang kaalaman at pagkamalikhain ay nagtatagpo sa mga nilalaman, karanasan at proyektong lampas sa nakasanayan.",
+                "signature": "PAGKAMAUSISA · KAALAMAN · PAGKAMALIKHAIN"
+            },
+            "exploration": {
+                "eyebrow": "TUKLASIN",
+                "title": "Maggalugad ng iba't ibang ideya.",
+                "description": "Iba't ibang landas upang matuto, mag-eksperimento at makatuklas ng mga bagong posibilidad.",
+                "programming": {
+                    "title": "Programming",
+                    "description": "Code, pagbuo at mga malikhaing solusyon para sa digital na mundo."
+                },
+                "technology": {
+                    "title": "Teknolojia",
+                    "description": "Mga tool, mapagkukunan at bagong bagay na nagpapabago sa ating pang-araw-araw."
+                },
+                "experiments": {
+                    "title": "Mga Eksperimento",
+                    "description": "Mga ideyang binubuo, pagsubok at mga tuklas na wala sa nakasanayan."
+                },
+                "knowledge": {
+                    "title": "Kaalaman",
+                    "description": "Pagkatuto, mga pagninilay at impormasyon upang palawakin ang abot-tanaw."
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / LABORATORYO",
+                "title": "Isang espasyo upang tuklasin ang mga bagong posibilidad.",
+                "description": "Mga eksperimento, proyekto at tool na binuo upang gawing mga tuklas ang pagkamausisa.",
+                "link": "Tuklasin ang laboratoryo"
+            }
+        },
+        "policy": {
+            "badges": {
+                "reading_title": "Tinatayang oras ng pagbabasa ng dokumentong ito",
+                "version": "Bersyon: {version}",
+                "version_title": "Bersyon ng dokumento",
+                "print": "I-print&nbsp;🖨️",
+                "print_title": "I-print"
+            },
+            "cards": {
+                "introduction": {
+                    "title": "Panimula",
+                    "description": "Ang Site na ito ay ginawa gamit ang mga teknolohiya sa Web, naniniwala kami sa desentralisasyon at kriptograpikong seguridad. Naniniwala kaming ikaw lamang ang nagmamay-ari ng iyong data.",
+                    "link": "Tingnan pa sa aming \"White Paper\""
+                },
+                "privacy": {
+                    "title": "Privacy",
+                    "description": "Inilalarawan ng patakaran sa privacy kung bakit humihiling ng data ang Site na ito, paano ito pinoproseso bukod pa sa pagpapaalam kung paano maaaring i-edit, i-download o tanggalin ng user ang kanyang data.",
+                    "link": "Basahin ang aming Patakaran sa Privacy"
+                },
+                "terms": {
+                    "title": "Mga Tuntunin",
+                    "description": "Inilalarawan ng mga tuntunin kung paano namin pinapatakbo ang Site na ito, ano ang maaaring asahan ng aming mga user mula sa Site na ito at ano ang inaasahan namin mula sa aming mga user sa prosesong ito.",
+                    "link": "Basahin ang aming Mga Tuntunin ng Paggamit"
+                },
+                "general": {
+                    "title": "Patakaran",
+                    "description": "Ang \"Patakaran\" ay ang pangkalahatang dokumento na namamahala sa ugnayan ng Site at ng User, na nagtatakda ng mga garantiya at limitasyon para sa kontrata sa paggamit ng Site at mga tool nito.",
+                    "link": "Basahin ang aming Pangkalahatang Patakaran"
+                }
+            },
+            "overview": {
+                "quote1": "Ang mga patakaran ay ang paraan kung paano nag-uugnayan ang Site at mga user, nagdadala ang mga ito ng seguridad at tiwala na tinitiyak ang pagiging malinaw at kalidad sa ugnayang ito, at paksa rin ng regulasyon sa maraming batas sa proteksyon ng data at privacy sa iba't ibang bansa sa mundo.",
+                "quote2": "Sinikap naming pasimplehin hangga't maaari ang aming mga patakaran upang makaiwas sa karaniwang \"<strong>magulong legal na pananalita</strong>\". Hindi masyadong marami dahil hindi ginagarantiyahan ng dami ang kalidad, ni masyadong kaunti dahil hindi ginagarantiyahan ng kakulangan ang nilalaman.",
+                "quote3": "Umaasa kaming ang ugnayang ito ng tiwala ay maging isang proseso ng pagkatuto para sa aming mga user at para sa aming sarili.",
+                "whitepaper_link": "Isang sipi mula sa aming \"White Paper\"",
+                "contact": "Anumang mga katanungang dulot ng paggamit ng Site o ng mga tool nito ay maaaring iulat sa aming mga form ng pakikipag-ugnayan o mga tool sa <strong>feedback</strong> (gustong-gusto namin ng feedback). Pinatitibay namin ang paanyaya para sa paglutas ng problema sa pamamagitan ng aming DPO sa sumusunod na e-mail address <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Políticas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
+                "markdown1": "Ang mga patakaran ng site na ito ay isinulat sa wikang pangmarkang <strong>Markdown</strong> na bahagyang binago, maaari mong tingnan ang mga ito sa plain text o i-download pa sa <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a> sa pamamagitan ng <a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">link na ito sa aming repository</a>",
+                "markdown2": "Doon mo makikita ang bersyong ito at anumang nakaraang bersyon ng mga Patakarang ito gayundin ang source code ng Site na ito, maaari mo ring i-print ang mga ito sa pamamagitan ng pag-click sa icon ng pag-print <span class=\"badge badge-light border-def contrast\">I-print&nbsp;🖨️</span> na nasa itaas ng aming Pangkalahatang Patakaran."
+            },
+            "privacy": {
+                "heading": "Privacy",
+                "image_alt": "May mga pagpipilian ka",
+                "image_title": "May mga pagpipilian ka",
+                "paragraph1": "Naniniwala kaming ang prinsipyo ng privacy ay ang kalayaan sa pagpili. Hindi dapat kailangang isuko ng User ang kanyang data sa isang pag-click lamang o sa mga tuntuning pumipilit sa kanyang magbigay ng malaking halaga ng kanyang data kapalit ng paggamit ng isang partikular na tool.",
+                "paragraph2": "Ang kalayaan sa pagpili ay isang progresibo ngunit hindi nakakagambalang modelo para sa paghiling ng data at ang pahintulot lamang kapag kinakailangan ay dapat na maging pamantayang susundin.",
+                "paragraph3": "Ang paggalang sa privacy ay nagsisimula sa paggalang sa pagpili ng User kung \"ano\" at \"kailan\" niya gustong ibahagi."
+            },
+            "terms": {
+                "heading": "Mga Tuntunin ng Paggamit",
+                "image_alt": "Larawan ng Mga Tuntunin ng Paggamit",
+                "image_title": "Aming Mga Tuntunin"
+            },
+            "general": {
+                "heading": "Pangkalahatang Patakaran",
+                "image_alt": "Larawan ng kontrata",
+                "image_title": "Kontrata"
+            },
+            "cookies": {
+                "heading": "Tanggapin ang cookies",
+                "paragraph1": "Kung nagtatanong ka kung: <strong>talaga bang kailangan mong tanggapin ang cookies at pag-iimbak ng data</strong>? Ang maikling sagot ay: <strong>hindi, hindi mo kailangan</strong>! Makakapag-browse ka pa rin at makakagamit ng iba't ibang tool at feature ng Site gayunpaman, maaaring hindi mo makuha ang pinakamahusay na karanasan 🙁",
+                "paragraph2": "Halimbawa: kapag pumili ka ng wika, nag-save ng paboritong kulay o nagtakda ng setting, kakailanganin mong ulitin ang pagpiling ito sa tuwing papasok o magba-browse ka sa site ... ang tanging paraan upang \"panatilihin\" ang iyong mga pagpili ay ang pag-imbak sa mga ito nang lokal.",
+                "paragraph3": "Alinsunod sa aming pilosopiya na <a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">ikaw lamang ang nagmamay-ari ng iyong data</a>, naniniwala kaming may mga pagpipilian ka. Kung pipiliin mong tanggapin ang paggamit ng cookies sa pamamagitan ng \"<strong>pag-click at pagpindot nang matagal</strong>\" sa button sa ibaba, maaari mo ring piliing <strong>i-disable ang mga ito</strong> kahit kailan mo gusto rito o sa tab ng User, at maaari mo ring alisin ang lahat ng naimbak na nang sabay-sabay 😎",
+                "button": "🍪 pindutin nang matagal upang i-enable ang cookies",
+                "disable": "😮 mag-click upang i-disable ang cookies!"
+            }
+        }
+    },
+    "settings_slide": {
+        "title": "Mga setting ng site",
+        "media_api": "Media API",
+        "auto_audio": "awtomatikong tawagin ang audio pagkatapos ng unang pahintulot",
+        "auto_video": "awtomatikong tawagin ang video pagkatapos ng unang pahintulot",
+        "geo_api": "Geolocation API",
+        "geo_share": "ibahagi ang analytics ng pagsubaybay sa heograpiya",
+        "audio_effects": "Mga audio effect",
+        "audio_effects_on": "i-enable ang mga audio effect",
+        "audio_notify_on": "i-enable ang mga audio notification",
+        "connection": "Koneksyon (status)",
+        "notify_off": "i-disable ang abiso",
+        "analytics": "Analytics",
+        "analytics_toggle": "i-enable o i-disable"
+    },
+    "palette": {
+        "title": "Palette ng kulay",
+        "schema": "Schema"
+    },
+    "admin_dashboard": {
+        "posts": "Mga Post",
+        "close_menu": "Isara ang menu",
+        "loading_posts": "Nilo-load ang mga post...",
+        "title": "Admin Panel",
+        "description": "Pamahalaan ang mga post ng iyong blog.",
+        "menu": "Menu",
+        "new_post": "Bagong Post",
+        "settings": {
+            "tab": "GitHub Config",
+            "title": "GitHub Config",
+            "save": "I-save",
+            "clear_credentials": "Linisin ang mga kredensyal ng GitHub",
+            "clear": "Linisin"
+        },
+        "close_editor": "Isara ang editor",
+        "footoodles": {
+            "tab": "Footoodles",
+            "title": "Pamahalaan ang Footoodles",
+            "empty": "Walang nakarehistrong Footoodle.",
+            "loading": "Nilo-load ang Footoodles...",
+            "load_error": "Hindi na-load ang mga Footoodle.",
+            "new": "Bagong Footoodle",
+            "edit": "I-edit",
+            "delete": "Tanggalin",
+            "save": "I-save ang Footoodle",
+            "cancel": "Kanselahin",
+            "image": "Larawan",
+            "image_select": "Pumili ng larawan",
+            "image_required": "Pumili ng larawan.",
+            "image_invalid": "Hindi pinapayagan ang format ng larawan. Gumamit ng JPEG, PNG o WebP.",
+            "title_label": "Pamagat",
+            "title_placeholder": "Ilagay ang pamagat ng Footoodle",
+            "title_required": "Ilagay ang pamagat.",
+            "content_label": "Nilalaman",
+            "content_placeholder": "Isulat ang iyong Footoodle...",
+            "content_required": "Ilagay ang nilalaman.",
+            "content_limit": "Ang nilalaman ay dapat may hanggang 280 character lamang.",
+            "character_count": "{count}/280 character",
+            "saving": "Sine-save ang Footoodle...",
+            "saved": "Matagumpay na nai-save ang Footoodle!",
+            "save_error": "Hindi nai-save ang Footoodle.",
+            "updating": "Ina-update ang Footoodle...",
+            "updated": "Matagumpay na na-update ang Footoodle!",
+            "update_error": "Hindi na-update ang Footoodle.",
+            "delete_confirm": "Talaga bang gusto mong tanggalin ang Footoodle na ito?",
+            "deleting": "Tinatanggal ang Footoodle...",
+            "deleted": "Matagumpay na natanggal ang Footoodle!",
+            "delete_error": "Hindi natanggal ang Footoodle.",
+            "delete_cancel": "Kinansela ang pagtanggal.",
+            "editor_new": "Gumagawa ng bagong Footoodle.",
+            "editor_edit": "Ine-edit ang Footoodle.",
+            "discard_changes": "Itapon ang mga pagbabago sa Footoodle na ito?",
+            "operation_error": "Nagkaroon ng error sa pagproseso ng Footoodle.",
+            "github_error": "Hindi nakumpleto ang operasyon sa GitHub.",
+            "subtitle": "Lumikha at mamahala ng mga mabilisang tala na may mga larawan sa footer."
+        },
+        "editor": {
+            "status_ready": "Handa nang mag-edit.",
+            "title_label": "Pamagat",
+            "title_placeholder": "Pamagat ng post",
+            "summary_label": "Buod",
+            "summary_placeholder": "Buod ng post",
+            "summary_restore": "Ibalik ang awtomatiko",
+            "summary_help": "Awtomatikong pinupunan ang buod. Maaari mo itong malayang baguhin.",
+            "content_label": "Nilalaman",
+            "toolbar_label": "Mga tool sa pag-format",
+            "bold": "Makapal",
+            "italic": "Nakakahilig",
+            "strike": "May guhit sa gitna",
+            "unordered_list": "Listahang may tuldok",
+            "unordered_list_label": "• Listahan",
+            "ordered_list": "Listahang may numero",
+            "ordered_list_label": "1. Listahan",
+            "quote": "Sipi",
+            "link": "Maglagay ng link",
+            "link_label": "Link",
+            "code": "Maglagay ng code",
+            "font_size": "Font",
+            "font_size_title": "Laki ng font",
+            "image": "Larawan",
+            "image_title": "Magdagdag ng larawan",
+            "microphone": "Mikropono",
+            "microphone_title": "I-transcribe ang boses",
+            "preview_toggle": "Tingnan",
+            "preview_heading": "Preview",
+            "preview_close": "Isara",
+            "tags_label": "Mga Tag",
+            "tags_placeholder": "Ilagay ang mga tag na pinaghihiwalay ng kuwit",
+            "draft_select_label": "Pumili ng draft",
+            "draft_select_default": "Pumili ng draft",
+            "draft_open": "Buksan ang draft",
+            "draft_save": "I-save ang draft",
+            "generate": "Bumuo ng post",
+            "slug_label": "Slug ng URL",
+            "slug_placeholder": "aking-artikulo",
+            "slug_unlock_title": "I-unlock o i-lock ang pag-edit ng slug",
+            "summary_restore_title": "Ibalik ang awtomatikong buod",
+            "undo_title": "I-undo (Ctrl+Z)",
+            "redo_title": "I-redo (Ctrl+Y)",
+            "block_format_title": "Estilo ng bloke",
+            "block_paragraph": "Talata",
+            "heading1": "Pamagat 1",
+            "heading2": "Pamagat 2",
+            "heading3": "Pamagat 3",
+            "heading4": "Pamagat 4",
+            "heading5": "Pamagat 5",
+            "heading6": "Pamagat 6",
+            "code_block": "Bloke ng code",
+            "bold_title": "Makapal (Ctrl+B)",
+            "italic_title": "Nakakahilig (Ctrl+I)",
+            "underline_title": "May salungguhit (Ctrl+U)",
+            "strike_title": "May guhit sa gitna",
+            "inline_code_title": "Inline na code",
+            "clear_format_title": "Linisin ang pag-format",
+            "fore_color_title": "Kulay ng teksto",
+            "back_color_title": "Kulay ng highlight",
+            "unordered_list_title": "Listahang may tuldok",
+            "ordered_list_title": "Listahang may numero",
+            "align_left_title": "Ihanay sa kaliwa",
+            "align_center_title": "Igitna",
+            "align_right_title": "Ihanay sa kanan",
+            "align_justify_title": "Pantayin (Justify)",
+            "link_title": "Maglagay o mag-edit ng link (Ctrl+K)",
+            "quote_title": "Bloke ng sipi",
+            "code_title": "Maglagay ng bloke ng code",
+            "hr_title": "Pahalang na linya",
+            "table_title": "Maglagay ng talahanayan",
+            "source_btn": "HTML",
+            "source_title": "I-toggle ang HTML source code",
+            "preview": "I-preview",
+            "link_url_placeholder": "https://halimbawa.com o /posts/...",
+            "link_text_placeholder": "Teksto ng link (opsyonal)",
+            "link_new_tab": "Bagong tab",
+            "apply": "Ilapat",
+            "unlink": "Alisin ang link",
+            "cancel": "Kanselahin",
+            "table_rows": "Mga Hanay",
+            "table_cols": "Mga Kolum",
+            "table_insert": "Maglagay ng talahanayan",
+            "img_width": "Lapad",
+            "img_align": "Pagkakahanay",
+            "img_align_left": "Kaliwa",
+            "img_align_center": "Gitna",
+            "img_align_right": "Kanan",
+            "img_align_full": "Buong lapad",
+            "img_remove": "Alisin ang larawan",
+            "img_alt_placeholder": "Alternatibong teksto (alt)",
+            "img_caption_placeholder": "Caption ng larawan (opsyonal)",
+            "drafts_section": "Mga Draft",
+            "save_draft": "I-save ang draft",
+            "drafts_placeholder": "Pumili ng draft...",
+            "open_draft": "Buksan",
+            "delete_draft": "Tanggalin"
+        },
+        "posts_list": {
+            "untitled": "Post na walang pamagat",
+            "edit": "I-edit",
+            "delete": "Tanggalin"
+        },
+        "edit_post": "I-edit ang Post",
+        "update_post": "I-update ang post",
+        "delete_modal": {
+            "title": "Burahin ang post",
+            "question": "Talaga bang gusto mong tanggalin ang post na ito?",
+            "cancel": "Kanselahin",
+            "confirm": "Oo, tanggalin",
+            "deleting": "Tinatanggal...",
+            "deleting_status": "Tinatanggal ang post sa GitHub...",
+            "success": "Matagumpay na natanggal ang post!",
+            "error": "Hindi natanggal ang post.",
+            "close": "Isara"
+        },
+        "msg": {
+            "speech_error": "Error sa pagkilala ng boses: {0}.",
+            "speech_unavailable": "Hindi available ang pagkilala ng boses sa browser na ito.",
+            "speech_start_error": "Hindi masimulan ang pagkilala: {0}",
+            "pending_changes": "Mga nakabinbing pagbabago.",
+            "images_db_unavailable": "Hindi available ang database: hindi nai-save ang mga larawan.",
+            "images_optimized": "Na-optimize ang mga larawan: {0} → {1}.",
+            "images_added": "Naidagdag ang mga larawan. Walang pagbabawas ng laki.",
+            "image_save_error": "Hindi nai-save ang larawan sa database.",
+            "markdown_load_error": "Hindi na-load ang Markdown renderer.",
+            "drafts_db_unavailable": "Hindi available ang database: hindi mase-save ang mga draft.",
+            "autosave_ok": "Awtomatikong nai-save ang mga pagbabago.",
+            "autosave_error": "Hindi awtomatikong nai-save.",
+            "nothing_to_save": "Maglagay ng pamagat o nilalaman bago mag-save.",
+            "db_unavailable": "Hindi available ang database.",
+            "draft_updated": "Na-update ang draft.",
+            "draft_saved": "Matagumpay na nai-save ang draft.",
+            "draft_save_error": "Error sa pag-save ng draft.",
+            "changes_recovered": "Nabawi ang mga nakaraang pagbabago.",
+            "draft_select": "Pumili ng draft na bubuksan.",
+            "draft_not_found": "Hindi nahanap ang draft.",
+            "draft_opened": "Matagumpay na nabuksan ang draft.",
+            "draft_open_error": "Error sa pagbukas ng draft.",
+            "editor_ready_new": "Handa na ang editor para sa bagong post.",
+            "need_title": "Ilagay ang pamagat ng post.",
+            "need_content": "Ilagay ang nilalaman ng post.",
+            "preparing": "Inihahanda ang post...",
+            "published": "Matagumpay na nai-publish ang post.",
+            "prepared": "Naihanda na ang post. Napanatili ang nilalaman sa editor.",
+            "publish_stage_error": "Nabigo sa hakbang na \"{0}\": {1}. Napanatili ang nilalaman.",
+            "publishing": "Inilalathala...",
+            "stage_init": "Pagsisimula ng paglalathala",
+            "stage_library": "Paglo-load ng Markdown library",
+            "stage_preview": "Pag-update ng preview",
+            "stage_read": "Pagbabasa ng data ng editor",
+            "stage_autosave": "Awtomatikong pag-save",
+            "stage_images": "Paghahanda ng mga larawan",
+            "stage_files": "Paglikha ng mga file ng post",
+            "stage_publish": "Paglalathala sa GitHub",
+            "stage_confirm": "Pagkumpirma ng paglalathala",
+            "discard_changes": "Itapon ang mga pagbabago sa post na ine-edit?",
+            "post_updated": "Matagumpay na na-update ang post.",
+            "post_loaded": "Na-load ang post para i-edit.",
+            "post_load_error": "Hindi na-load ang post para i-edit.",
+            "delete_prepare_error": "Hindi maihanda ang pagtanggal: {0}",
+            "delete_error": "Nabigong tanggalin ang post: {0}",
+            "draft_untitled": "Draft na walang pamagat",
+            "post_missing": "Wala na ang post sa talaan. Kinansela ang pag-update.",
+            "post_missing_delete": "Wala na ang post sa talaan.",
+            "github_not_confirmed": "Hindi kinumpirma ng GitHub ang pagtanggal.",
+            "markdown_fetch_error": "Hindi na-load ang Markdown.",
+            "need_slug": "Maglagay ng wastong slug para sa URL ng post.",
+            "draft_deleted": "Tinanggal ang draft.",
+            "content_placeholder": "Isulat ang nilalaman ng post...",
+            "reading_stats": "{words} salita · {minutes} min na pagbabasa"
+        },
+        "nav": {
+            "session": "Sesyon ng GitHub"
+        },
+        "posts_view": {
+            "subtitle": "Pamahalaan, i-edit o alisin ang iyong mga nai-publish na HTML post.",
+            "search_placeholder": "I-filter ayon sa pamagat, slug o tag...",
+            "empty": "Walang nahanap na post.",
+            "back": "← Bumalik sa mga post",
+            "view": "Buksan ang pahina"
+        },
+        "session": {
+            "title": "Sesyon ng GitHub",
+            "subtitle": "Pamahalaan ang OAuth authentication at bisa ng access token.",
+            "scope_label": "Mga Saklaw:",
+            "obtained_label": "Napatotohanan noong:",
+            "expires_label": "Mag-e-expire sa:",
+            "refresh_btn": "Muling patunayan ang sesyon",
+            "diagnostics_title": "Mga Diagnostics ng OAuth",
+            "reload_diagnostics": "I-update",
+            "clear_confirm": "Gusto mo bang alisin ang mga kredensyal ng GitHub na naka-save sa browser na ito?",
+            "status_active": "Aktibo",
+            "status_expiring": "Malapit nang mag-expire",
+            "status_expired": "Nag-expire na",
+            "status_no_expiry": "Token na walang nakatakdang pag-expire",
+            "refreshing": "Muling pinapatunayan ang sesyon sa GitHub...",
+            "refreshed": "Matagumpay na muling napatunayan ang sesyon.",
+            "refresh_failed": "Hindi awtomatikong muling napatunayan ang token.",
+            "reauth_needed": "Nag-expire na ang iyong sesyon sa GitHub. Magpatotoo muli upang magpatuloy.",
+            "diagnostics_empty": "Walang available na diagnostics.",
+            "diagnostics_error": "Error sa pag-load ng diagnostics."
+        }
+    },
+    "github_auth": {
+        "title": "Pagpapatotoo ng GitHub",
+        "description": "Magpatotoo gamit ang iyong GitHub account upang ma-access ang admin panel.",
+        "start": "Magpatotoo gamit ang GitHub",
+        "confirm": "Kumpirmahin at magpatuloy",
+        "copy_diagnostics": "Kopyahin ang diagnostics",
+        "identity": {
+            "id_label": "ID:",
+            "profile_label": "Profile:",
+            "email_label": "Pampublikong e-mail:",
+            "confirmation": "Kumpirmahin kung gusto mong gamitin ang pagkakakilanlang ito sa admin panel."
+        },
+        "messages": {
+            "empty": "Simulan ang pagpapatotoo gamit ang GitHub.",
+            "verifying": "Sinusuri ang pagpapatotoo...",
+            "failed": "Nabigo ang pagpapatotoo sa GitHub. Pakisubukan muli.",
+            "authenticated": "Napatotohanan bilang {0}.",
+            "saving": "Sine-save ang pagkakakilanlan...",
+            "save_failed": "Hindi nai-save ang pagkakakilanlan. Pakisubukan muli."
+        }
+    },
+    "blog": {
+        "empty": "Wala pang nai-publish.",
+        "not_found": "Hindi nahanap ang post.",
+        "load_error": "Hindi na-load ang post na ito.",
+        "showing": "Ipinapakita ang {shown} sa {total}",
+        "load_more": "Mag-load pa",
+        "read_time": "{minutes} min na pagbabasa",
+        "updated": "Huling pag-update: {date}",
+        "more_posts": "Higit pang mga post",
+        "license": "Ang nilalamang ito ay lisensyado sa ilalim ng <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>",
+        "search_placeholder": "Maghanap ng mga post...",
+        "all_tags": "Lahat",
+        "no_results": "Walang post na tumutugma sa mga napiling filter.",
+        "read_article": "Basahin ang artikulo",
+        "back_to_blog": "Bumalik sa blog",
+        "copy_code": "Kopyahin ang code"
+    }
+}

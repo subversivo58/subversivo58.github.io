@@ -1,0 +1,808 @@
+{
+    "404": {
+        "general": "Lo! Haijapatikana!",
+        "title": "Ukurasa haujapatikana",
+        "message": "Anwani uliyojaribu kufungua haipo au imehamishwa. Angalia kama umeandika kwa usahihi au rudi kwenye ukurasa wa nyumbani.",
+        "button": "Rudi kwenye ukurasa wa nyumbani"
+    },
+    "source": {
+        "name": "Subversivo58 Blog",
+        "version": "0.1.0",
+        "author": "Subversivo58",
+        "home": "https://github.com/subversivo58/",
+        "colab": [],
+        "build": "Alpha",
+        "bugs": [
+            {
+                "type": "git",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
+            }
+        ],
+        "license": [
+            {
+                "type": "MIT",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
+            }
+        ]
+    },
+    "words": {
+        "an": "1 iliyopita",
+        "agree": "kubali",
+        "clear": "futa",
+        "signin": "ingia",
+        "logout": "toka",
+        "signup": "jisajili",
+        "close": "funga",
+        "drawer": "droo",
+        "free": "bure",
+        "search": "tafuta",
+        "recover": "rejesha",
+        "restore": "rudisha",
+        "white": "nyeupe",
+        "decade": "muongo",
+        "year": "mwaka",
+        "month": "mwezi",
+        "week": "wiki",
+        "day": "siku",
+        "hour": "saa",
+        "minute": "dakika",
+        "license": "leseni",
+        "more": "zaidi",
+        "second": "sekunde",
+        "now": "sasa",
+        "rememberme": "nikumbuke",
+        "source": "chanzo",
+        "mail": "barua pepe",
+        "page": "ukurasa",
+        "pwd": "nenosiri",
+        "token": "tokeni",
+        "media": "midia",
+        "settings": "mipangilio",
+        "version": "toleo",
+        "ooops": "lo..."
+    },
+    "combo": {
+        "btn_top": "Rudi juu",
+        "more_info": "pata maelezo zaidi.",
+        "click_here": "Bofya hapa!",
+        "clear_exit": "Futa na utoke",
+        "not_show_again": "usionyeshe tena",
+        "powered": "Inasambazwa na",
+        "copyr": "Hakimiliki",
+        "knowmore": "Jifunze zaidi",
+        "seelicenses": "Angalia leseni"
+    },
+    "navbar": {
+        "wiki": "WIKI",
+        "blog": "blogu",
+        "dpo": "DPO",
+        "colab": "shirikiana",
+        "about": "kuhusu",
+        "lab": "maabara",
+        "contact": "mawasiliano",
+        "policies": "sera",
+        "donations": "michango",
+        "signin": "Ingia",
+        "docs": "nyaraka",
+        "home": "Nyumbani"
+    },
+    "footer": {
+        "content": {
+            "contactnf": "MAWASILIANO",
+            "blognew": "HABARI",
+            "uselink": "VIUNGO MUHIMU",
+            "docs": "Nyaraka",
+            "policies": "Sera za Jumla",
+            "faq": "Msaada na Maswali ya Mara kwa Mara",
+            "forum": "Jukwaa na Jamii",
+            "devtool": "Zana za DEV",
+            "api": "API ya Huduma",
+            "bugs": "Ripoti Hitilafu",
+            "desc1": "Tovuti hii inakusanya mkusanyiko wa miradi iliyoanzishwa mwaka 2010 na inalenga kutumika kama blogu binafsi ya kushiriki mada mbalimbali. Jisikie huru kuchunguza tovuti na kushiriki maudhui yake.",
+            "desc2": "Tovuti hii iko katika uendelezaji wa mara kwa mara, jisikie huru kuonyesha makosa au kupendekeza maboresho.",
+            "start": "Anza sasa",
+            "source": "Msimbo Chanzo",
+            "feedback": "Maoni",
+            "dpo": "Afisa wa Ulinzi wa Data (DPO)"
+        },
+        "author": "mwandishi",
+        "about": "kuhusu",
+        "licit": "kisheria",
+        "cookie": "vidakuzi",
+        "privacci": "faragha",
+        "footoodle": {
+            "title": "Jisajili kwenye Collabore",
+            "description": "<p>Collabore inafungua milango kwa wasanidi programu na wapenzi. Badilisha huduma yako ya kurasa tuli kuwa kurasa zinazobadilika.</p><p>Kupitia kiolesura rahisi lakini chenye nguvu unaweza kurekebisha, kukagua na kuunda machapisho mapya, kuongeza programu-jalizi na programu kwenye kurasa zako au kuingiza viendelezi vyako mwenyewe.</p><p>Yote haya kupitia msimbo huria ulioundwa kupanuka. Tumia mfumo jumuishi wa uthibitishaji unaowezesha watumiaji wa Collabore kujisajili kwenye ukurasa wako kwa mibofyo michache tu na bora zaidi, wakithibitishwa kiotomatiki kwenye programu-jalizi na programu za ukurasa wako.</p><p class='mt-5 ct'>Kuwa sehemu ya mfumo huu wa ushirikiano, <a href='/signup' class='white tdu'>jisajili sasa!</a></p>"
+        }
+    },
+    "drawer": {
+        "clear_data": {
+            "title": "Futa data ya tovuti",
+            "question_info": "Una uhakika na hili?",
+            "positive": "Shikilia ili kufuta",
+            "negative": "Hapana, ghairi",
+            "footer_info": "Futa akiba na vidakuzi. Tazama <a href='#' class='tdu blue'>nyaraka</a>."
+        },
+        "bug_report": {
+            "title": "Ripoti hitilafu 🐛",
+            "question_info": "Umepata hitilafu? Iripoti!",
+            "placeholder": "Eleza hitilafu hapa...",
+            "send": "Tuma",
+            "follow": "Nenda kwenye msaada",
+            "footer_info": "Kuripoti hitilafu. Tazama <a href='#' class='tdu blue'>nyaraka</a> kuhusu hili.",
+            "sent": "Asante! Hitilafu imesajiliwa.",
+            "failed": "Haikuwezekana kusajili hitilafu. Jaribu tena."
+        },
+        "feedback": {
+            "title": "Tuma maoni yako",
+            "rating": "Ukadiriaji:",
+            "question_info": "Tuma maoni yako kuhusu Collabore!",
+            "placeholder": "Tuma ukosoaji, sifa au mapendekezo",
+            "footer_info": "Kutuma maoni. Tazama <a href='#' class='tdu blue'>nyaraka</a> kuhusu hili.",
+            "notific": {
+                "error": {
+                    "title": "Maoni yameshindwa!",
+                    "message": "Samahani, kulikuwa na hitilafu wakati wa kuchakata maoni yako."
+                },
+                "success": {
+                    "title": "Maoni yametumwa!",
+                    "message": "Asante, maoni yako yametumwa kwa mafanikio!"
+                }
+            }
+        },
+        "geolocation": {
+            "title": "Omba Mahali Kijiografia",
+            "btn1": "Ndiyo, omba",
+            "btn2": "Hapana, ghairi",
+            "footer_info": "Mahali Kijiografia? Tazama <a href='#' class='tdu blue'>nyaraka</a>."
+        },
+        "notification": {
+            "title": "Omba Arifa",
+            "btn1": "Ndiyo, omba",
+            "btn2": "Hapana, ghairi",
+            "footer_info": "Arifa? Tazama <a href='#' class='tdu blue'>nyaraka</a>."
+        },
+        "getmedia_audio": {
+            "title": "Omba Maikrofoni",
+            "btn1": "Ndiyo, omba",
+            "btn2": "Hapana, ghairi",
+            "footer_info": "Midia ya Sauti? Tazama <a href='#' class='tdu blue'>nyaraka</a>."
+        },
+        "getmedia_video": {
+            "title": "Omba Kamera ya Wavuti",
+            "btn1": "Ndiyo, omba",
+            "btn2": "Hapana, ghairi",
+            "footer_info": "Midia ya Video? Tazama <a href='#' class='tdu blue'>nyaraka</a>.",
+            "perm_title": "Ruhusa ya kamera",
+            "perm_1": "Tovuti hutumia kamera tu unapoanzisha kipengele kinachoihitaji.",
+            "perm_2": "Unaweza kubatilisha ruhusa katika mipangilio ya kivinjari chako.",
+            "perm_3": "Ukighairi, hakuna ruhusa itakayotolewa."
+        },
+        "words": {
+            "clear": "Usafishaji",
+            "geo": "Mahali",
+            "cam": "Video",
+            "mic": "Sauti",
+            "color": "Rangi",
+            "note": "Maelezo",
+            "bug": "Hitilafu",
+            "lab": "Maabara",
+            "not": "Tahadhari",
+            "feedback": "Maoni",
+            "lang": "Lugha",
+            "marks": "Alamisho",
+            "admin": "Utawala",
+            "share": "Shiriki",
+            "theme_light": "Mandhari angavu",
+            "theme_dark": "Mandhari meusi"
+        },
+        "version": "Toleo",
+        "notes_form": {
+            "sent": "Dokezo limehifadhiwa.",
+            "failed": "Haikuwezekana kuhifadhi dokezo. Jaribu tena."
+        }
+    },
+    "copyright": {
+        "contributors": "Mradi huu uliwezekana tu kutokana na matumizi ya miradi mingine mingi ya msimbo huria na <a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>jamii ya wachangiaji</a>... uko huru kuunda, kutumia, kurekebisha na kusambaza ukiheshimu leseni zote za msingi!",
+        "caption": "Orodha ya vyanzo na leseni zake husika",
+        "backendsources": "Vyanzo vingine vingi vinavyoendeshwa kwenye seva (NodeJS) na kupakiwa kwa njia inayobadilika ni muhimu kwa mradi huu, kama vile:",
+        "package": "na <a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>zaidi...</a>",
+        "tps": "Programu za wahusika wengine",
+        "thissource": "Programu ya tovuti hii",
+        "alllicenses": "Leseni zote"
+    },
+    "nocookie": {
+        "title": "Haiungwi mkono",
+        "p1": "Samahani, hatuungi mkono kuvinjari \"bila vidakuzi\".",
+        "p2": "Ingawa tovuti hii inatumia vidakuzi na teknolojia nyingine za uhifadhi, \"<strong>hatuhifadhi data yoyote kwenye kivinjari chako bila ruhusa yako ya wazi</strong>\"!",
+        "p3": "Tunaamini tuna sababu nzuri za kutounga mkono kuvinjari \"bila vidakuzi\". Angalia <a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">\"White Paper\"</a> yetu kwa maelezo zaidi. Kwa bahati mbaya, utahitaji kuvinjari ukiwa umewasha vidakuzi."
+    },
+    "modals": {
+        "language": {
+            "title": "Chagua Lugha",
+            "avaliable": "Lugha zinazopatikana",
+            "pt_BR": "Kireno",
+            "en_US": "Kiingereza",
+            "es_ES": "Kihispania",
+            "fr_FR": "Kifaransa",
+            "de_DE": "Kijerumani",
+            "ja_JP": "Kijapani",
+            "hi_IN": "Kihindi",
+            "zh_CN": "Kichina (Kilichorahisishwa)",
+            "ru_RU": "Kirusi",
+            "bn_BD": "Kibengali",
+            "id_ID": "Kiindonesia",
+            "tr_TR": "Kituruki",
+            "sw_KE": "Kiswahili",
+            "fil_PH": "Kifilipino",
+            "ko_KR": "Kikorea",
+            "th_TH": "Kithai",
+            "it_IT": "Kiitaliano",
+            "te_IN": "Kitelugu",
+            "mr_IN": "Kimarathi",
+            "footer": "Hakuna chaguo katika lugha yako? Unda tafsiri!"
+        },
+        "version": {
+            "title": "🚧 Inajengwa 🚧",
+            "text1": "Mradi huu uliwezekana tu kutokana na matumizi ya miradi mingine mingi ya msimbo huria na ",
+            "text2": "jamii ya wachangiaji",
+            "text3": "Uko huru kuunda, kutumia, kurekebisha na kusambaza ukiheshimu leseni zote za msingi!"
+        },
+        "tabs": {
+            "camera": "Omba kamera",
+            "permissions": "Ruhusa"
+        },
+        "share": {
+            "title": "Shiriki blogu hii",
+            "broken_link": "Ripoti kiungo kilichovunjika?"
+        },
+        "notes": {
+            "title": "Maelezo ya haraka",
+            "note_title": "Kichwa:",
+            "category": "Kategoria:",
+            "tags": "Lebo:",
+            "note": "Dokezo:",
+            "save": "Hifadhi",
+            "ph_title": "Kichwa",
+            "ph_category": "Kategoria",
+            "ph_tags": "Lebo",
+            "ph_note": "Dokezo lako hapa..."
+        },
+        "offline": {
+            "title": "Hifadhi kwa matumizi ya nje ya mtandao",
+            "yes": "Ndiyo, hifadhi!",
+            "no": "Hapana, ghairi",
+            "about": "Kuhusu vipengele vya nje ya mtandao?"
+        },
+        "auth": {
+            "title": "Ingia na uidhinishe",
+            "source": "Msimbo chanzo: <a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">tazama kwenye GitHub</a>"
+        },
+        "bugs": {
+            "select_type": "Chagua aina:",
+            "custom": "Hitilafu maalum",
+            "css": "Hitilafu ya CSS",
+            "js": "Hitilafu ya JavaScript",
+            "language": "Hitilafu ya Lugha",
+            "plugins": "Hitilafu katika Programu-jalizi",
+            "server": "Hitilafu ya Seva",
+            "description": "Tuma maelezo",
+            "ph_description": "Maelezo hapa..."
+        },
+        "permissions": {
+            "title_microphone": "Ruhusa ya maikrofoni",
+            "title_geolocation": "Ruhusa ya mahali",
+            "item_1": "Tovuti hutumia kipengele hiki tu unapoanzisha kazi inayokihitaji.",
+            "item_2": "Unaweza kubatilisha ruhusa katika mipangilio ya kivinjari chako.",
+            "item_3": "Ukighairi, hakuna ruhusa itakayotolewa."
+        }
+    },
+    "notify": {
+        "storage": {
+            "title": "Subversivo58 - Uhifadhi",
+            "body": "Tovuti hii inatumia \"vidakuzi\" na teknolojia nyingine zinazohifadhi taarifa kwenye kifaa chako, unakubaliana na hili?",
+            "actions": [
+                {
+                    "action": "cookie-agree",
+                    "title": "ni nini?",
+                    "icon": "🍪"
+                },
+                {
+                    "action": "cookie-policy",
+                    "title": "angalia sera",
+                    "icon": "🛡️"
+                },
+                {
+                    "action": "terms-policy",
+                    "title": "angalia masharti",
+                    "icon": "📜"
+                }
+            ]
+        },
+        "permission_granted": {
+            "title": "Arifa zimewashwa",
+            "body": "Asante kwa kuruhusu utumaji wa arifa!"
+        }
+    },
+    "pages": {
+        "about": {
+            "heading": "Teknolojia, mitindo na utamaduni wa mtandao",
+            "item1": "✓ Web APIs, JavaScript na vipengele vya HTML5.",
+            "item2": "✓ Upangaji programu wa kifunksheni, ruwaza, mifumo ya kazi.",
+            "item3": "✓ WebCrypto, maabara na code-flasks.",
+            "item4": "✓ Maoni, mtindo wa maisha, utamaduni wa Geek na mengine mengi.",
+            "photo": "Picha na <a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a> kwenye <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "title": "Kuhusu",
+            "p1": "Habari, mimi ni Lauro Moraes \"aka\" <a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a> na tovuti hii ni maabara yangu ya kidijitali na blogu binafsi.",
+            "p2": "Hapa ninachapisha maudhui kuhusu mitindo ya kiteknolojia, utamaduni wa mtandao na upangaji programu unaolenga wavuti kama PWA's, Single Page Apps na matumizi ya API za kisasa za JavaScript, HTML5 na CSS3",
+            "p3": "Ninapenda sana upangaji programu wa kifunksheni, usanifu wa ruwaza na mada kama ugatuaji wa wavuti ... blockchain na usimbaji fiche kwenye wavuti ni mada za mara kwa mara hapa.",
+            "p4": "Pia ni hapa ambapo ninachapisha majaribio yangu na kushiriki misimbo yangu na vipande vidogo vya kifunksheni pamoja na kutoa maoni yangu kuhusu mada mbalimbali, utamaduni kidogo wa Geek na mtindo huu wa maisha.",
+            "p5": "Jisikie huru kuchunguza maudhui ya blogu na kushiriki katika jamii yetu."
+        },
+        "you_in_control": {
+            "heading": "Wewe ndiye unadhibiti data yako",
+            "item1": "✓ Faragha ni haki yako, si bidhaa unayopewa.",
+            "item2": "✓ Usimbaji fiche kama msingi wa usalama wote wa kidijitali.",
+            "item3": "✓ Kuheshimu faragha huanza kwa kuheshimu chaguo zako.",
+            "item4": "✓ Unaamua nini, lini na nani wa kushiriki naye data yako.",
+            "photo": "Picha na <a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a> kwenye <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>"
+        },
+        "donations": {
+            "heading": "Unafikiria kufanya jambo zuri?",
+            "photo": "Picha na <a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a> kwenye <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "thanks_title": "Shukrani",
+            "thanks_text": "Kwa fahari kubwa tunatumia <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Github Pages</a> na huduma za <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a>, majukwaa haya na zana zake ni za kushangaza kweli ambazo hutuwezesha kufanya mambo mazuri kama blogu hii na zana zetu.",
+            "platforms_title": "Fahamu majukwaa haya",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
+            "donate_title": "Mchango wako ni muhimu",
+            "content": {
+                "intro1": "Kudumisha blogu ikiwa ya kisasa kunahitaji muda na kujitolea; ingawa majukwaa na zana tunazotumia ni za bure, zina mipaka. Kila moja yao inaweka kikomo cha idadi ya matembezi ambayo tovuti inaweza kuwa nayo kwa mwezi pamoja na kiasi cha data kinachoweza kupita kutoka kwa seva zao wakati wa matembezi haya.",
+                "intro2": "Hapa kwenye blogu hii tunapenda wazo la kuchunguza vipengele vipya, kutekeleza rasilimali mpya na labda kuongeza aina mbalimbali za huduma pamoja na kujenga jamii yenye uchangamfu na inayobadilika.",
+                "intro3": "Ili kufikia mawazo haya ni muhimu kuwekeza rasilimali katika kutafuta kikoa chetu wenyewe, seva za VPS zinazoweza kuhimili trafiki zaidi, nafasi ya kuhifadhi na zinazoruhusu ujenzi wa programu nyingi zaidi.",
+                "intro4": "Tunachukia wazo la kukusanya fedha kwa matangazo, kuta za malipo, ufuatiliaji wa kulipia au uuzaji wa data ... tunatetea na <strong>tunaamini kuwa wewe ndiye mmiliki pekee wa data yako</strong> kama ilivyoelezwa katika <a href=\"./you-in-control-of-your-data.html\" title=\"White Paper\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">\"White Paper\"</a> yetu, kwa hivyo msaada wako mdogo unaweza kuleta tofauti kubwa, ukitutia moyo na kutusaidia kufanya zaidi na bora 🚀",
+                "contribution1": "Unaweza kuchangia blogu hii kwa njia nyingi: kuishiriki kwenye mitandao yako, kuboresha msimbo, kwa ushirikiano wa uhariri, kuwasiliana na jamii yetu na mengine mengi.",
+                "contribution2": "Pia fikiria kutoa \"<b>msaada huo wa ziada</b>\" kwa kuchagua mojawapo ya chaguo za mchango hapa chini 🎊",
+                "pix_caption": "PagBank Pix",
+                "trademarks": "Nembo na alama za biashara zinazotumika hapa ni mali ya wamiliki wake husika wa haki. Kuzitumia hapa hakuhakikishi aina yoyote ya uhusiano au uidhinishaji kutoka kwa chapa hizi."
+            }
+        },
+        "dpo": {
+            "heading": "Afisa wa Ulinzi wa Data (DPO)",
+            "intro1": "Kwa kuzingatia Sheria ya Jumla ya Ulinzi wa Data (LGPD - Sheria Na. 13.709/2018), tunatoa mawasiliano ya Afisa wetu wa Ulinzi wa Data (Data Protection Officer).",
+            "intro2": "DPO ni mtu anayehusika na kusimamia mawasiliano kati ya Tovuti, wahusika wa data (wewe) na Mamlaka ya Kitaifa ya Ulinzi wa Data (ANPD).",
+            "contact_title": "Taarifa za Mawasiliano",
+            "officer": "<strong>Afisa:</strong> Lauro de Moraes",
+            "email": "Barua pepe:",
+            "deadline": "<strong>Muda wa Majibu:</strong> Hadi siku 30, kulingana na kanuni zinazotumika kwa wachakataji wa data wadogo.",
+            "send_email": "Tuma barua pepe kwa DPO",
+            "rights_title": "Jinsi ya kutumia haki zako",
+            "rights1": "Ili kutumia haki yako yoyote iliyotolewa katika Kifungu cha 18 cha LGPD (kama vile uthibitisho wa uchakataji, ufikiaji, marekebisho, kuficha utambulisho, ufutaji, miongoni mwa mengine), tuma tu barua pepe kwa anwani iliyo hapo juu.",
+            "rights2": "Ili kuharakisha huduma, tunapendekeza ujumuishe katika mada au mwili wa barua pepe:",
+            "list1": "Jina lako kamili;",
+            "list2": "Haki unayotaka kutumia (mfano: ufutaji wa data, ufikiaji, n.k.);",
+            "list3": "Maelezo yanayoweza kutusaidia kupata data yako katika mifumo yetu.",
+            "policies": "Kwa maelezo zaidi kuhusu jinsi tunavyochakata data yako, rejelea <a href=\"/policy.html#policy-general\">Sera yetu ya Jumla</a> na <a href=\"/policy.html#policy-privacy\">Sera yetu ya Faragha</a>."
+        },
+        "home": {
+            "intro": {
+                "eyebrow": "KUHUSU SUBVERSIVO58",
+                "title": "Zaidi ya blogu tu.",
+                "description": "Nafasi iliyojitolea kwa udadisi, teknolojia na uhuru wa kuchunguza mawazo.",
+                "details": "Hapa, maarifa na ubunifu hukutana katika maudhui, uzoefu na miradi inayovuka mipaka ya kawaida.",
+                "signature": "UDADISI · MAARIFA · UBUNIFU"
+            },
+            "exploration": {
+                "eyebrow": "GUNDUA",
+                "title": "Chunguza mawazo tofauti.",
+                "description": "Njia tofauti za kujifunza, kufanya majaribio na kugundua uwezekano mpya.",
+                "programming": {
+                    "title": "Upangaji Programu",
+                    "description": "Msimbo, uendelezaji na suluhisho za kiubunifu kwa ulimwengu wa kidijitali."
+                },
+                "technology": {
+                    "title": "Teknolojia",
+                    "description": "Zana, rasilimali na habari zinazobadilisha maisha yetu ya kila siku."
+                },
+                "experiments": {
+                    "title": "Majaribio",
+                    "description": "Mawazo yanayojengwa, majaribio na ugunduzi usio wa kawaida."
+                },
+                "knowledge": {
+                    "title": "Maarifa",
+                    "description": "Kujifunza, tafakari na taarifa za kupanua upeo."
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / MAABARA",
+                "title": "Nafasi ya kuchunguza uwezekano mpya.",
+                "description": "Majaribio, miradi na zana zilizoundwa kubadilisha udadisi kuwa ugunduzi.",
+                "link": "Chunguza maabara"
+            }
+        },
+        "policy": {
+            "badges": {
+                "reading_title": "Muda uliokadiriwa wa kusoma hati hii",
+                "version": "Toleo: {version}",
+                "version_title": "Toleo la hati",
+                "print": "Chapisha&nbsp;🖨️",
+                "print_title": "Chapisha"
+            },
+            "cards": {
+                "introduction": {
+                    "title": "Utangulizi",
+                    "description": "Tovuti hii iliundwa kwa kutumia teknolojia za Wavuti, tunaamini katika ugatuaji na usalama wa usimbaji fiche. Tunaamini kuwa wewe ndiye mmiliki pekee wa data yako.",
+                    "link": "Tazama zaidi katika \"White Paper\" yetu"
+                },
+                "privacy": {
+                    "title": "Faragha",
+                    "description": "Sera ya faragha inaeleza kwa nini Tovuti hii inaomba data, jinsi inavyochakatwa pamoja na kufahamisha jinsi mtumiaji anavyoweza kuhariri, kupakua au kufuta data yake.",
+                    "link": "Soma Sera yetu ya Faragha"
+                },
+                "terms": {
+                    "title": "Masharti",
+                    "description": "Masharti yanaeleza jinsi tunavyoendesha Tovuti hii, kile watumiaji wetu wanaweza kutarajia kutoka kwa Tovuti hii na kile tunachotarajia kutoka kwa watumiaji wetu katika mchakato huu.",
+                    "link": "Soma Masharti yetu ya Matumizi"
+                },
+                "general": {
+                    "title": "Sera",
+                    "description": "\"Sera\" ni hati ya jumla inayosimamia uhusiano kati ya Tovuti na Mtumiaji, inaweka dhamana na mipaka kwa mkataba wa matumizi ya Tovuti na zana zake.",
+                    "link": "Soma Sera yetu ya Jumla"
+                }
+            },
+            "overview": {
+                "quote1": "Sera ni njia ambayo Tovuti na watumiaji hushirikiana, zinaleta usalama na uaminifu kwa kuhakikisha uwazi na ubora wakati wa uhusiano huu, na pia ni mada ya udhibiti katika sheria nyingi za ulinzi wa data na faragha katika nchi mbalimbali duniani.",
+                "quote2": "Tulijaribu kurahisisha sera zetu kadiri iwezekanavyo ili kuepuka mtindo wa \"<strong>lugha ngumu ya kisheria</strong>\". Si nyingi mno kwa sababu wingi hauhakikishi ubora, wala si chache mno kwa sababu uchache hauhakikishi maudhui.",
+                "quote3": "Tunatumai kuwa uhusiano huu wa kuaminiana utakuwa mchakato wa kujifunza kwa watumiaji wetu na kwetu sisi wenyewe.",
+                "whitepaper_link": "Sehemu ya \"White Paper\" yetu",
+                "contact": "Maswali yoyote yanayotokana na matumizi ya Tovuti au zana zake yanaweza kuripotiwa katika fomu zetu za mawasiliano au zana za <strong>maoni</strong> (tunapenda maoni). Tunasisitiza mwaliko wa kutatua matatizo kupitia DPO wetu katika anwani ifuatayo ya barua pepe <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Políticas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a>.",
+                "markdown1": "Sera za tovuti hii ziliandikwa katika lugha ya uwekaji alama ya <strong>Markdown</strong> iliyorekebishwa kidogo, unaweza kuziona katika maandishi wazi au hata kuzipakua kwenye <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a> kupitia <a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">kiungo hiki cha hazina yetu</a>",
+                "markdown2": "Huko utapata toleo hili na matoleo mengine yoyote ya awali ya Sera hizi pamoja na msimbo chanzo wa Tovuti hii, unaweza pia kuzichapisha kwa kubofya ikoni ya kuchapisha <span class=\"badge badge-light border-def contrast\">Chapisha&nbsp;🖨️</span> iliyopo juu ya Sera yetu ya Jumla."
+            },
+            "privacy": {
+                "heading": "Faragha",
+                "image_alt": "Una chaguo",
+                "image_title": "Una chaguo",
+                "paragraph1": "Tunaamini kuwa kanuni ya faragha ni uhuru wa kuchagua. Mtumiaji hapaswi kuachia data yake kwa kubofya mara moja tu au kwa masharti yanayomlazimisha kutoa kiasi kikubwa cha data yake ili kutumia zana fulani.",
+                "paragraph2": "Uhuru wa kuchagua ni mfano wa kimaendeleo lakini usioingilia kwa ombi la data na ridhaa tu inapohitajika, unapaswa kuwa kiwango cha kufuatwa.",
+                "paragraph3": "Kuheshimu faragha huanza kwa kuheshimu chaguo la Mtumiaji kuhusu \"nini\" na \"lini\" anataka kushiriki."
+            },
+            "terms": {
+                "heading": "Masharti ya Matumizi",
+                "image_alt": "Picha ya Masharti ya Matumizi",
+                "image_title": "Masharti Yetu"
+            },
+            "general": {
+                "heading": "Sera ya Jumla",
+                "image_alt": "Picha ya mkataba",
+                "image_title": "Mkataba"
+            },
+            "cookies": {
+                "heading": "Kubali vidakuzi",
+                "paragraph1": "Ikiwa unajiuliza kama: <strong>kweli unahitaji kukubali vidakuzi na uhifadhi wa data</strong>? Jibu fupi ni: <strong>hapana, huhitaji</strong>! Bado utaweza kuvinjari na kutumia zana na vipengele mbalimbali vya Tovuti hata hivyo, huenda usipate uzoefu bora zaidi 🙁",
+                "paragraph2": "Kwa mfano: unapochagua lugha, kuhifadhi rangi unayoipenda au kuweka mpangilio, itabidi ufanye chaguo hili tena kila unapoingia au kuvinjari tovuti ... njia pekee ya \"kudumisha\" chaguo zako ni kuzihifadhi kwenye kifaa chako.",
+                "paragraph3": "Kwa kufuata falsafa yetu kwamba <a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">wewe ndiye mmiliki pekee wa data yako</a>, tunaamini kuwa una chaguo. Ukichagua kukubali matumizi ya vidakuzi kwa \"<strong>kubofya na kushikilia</strong>\" kitufe kilicho hapa chini, unaweza pia kuchagua <strong>kuvizima</strong> wakati wowote unapotaka kupitia hapa au kwenye kichupo cha Mtumiaji, na pia unaweza kuondoa kila kitu ambacho tayari kimehifadhiwa kwa mara moja 😎",
+                "button": "🍪 shikilia ili kuwasha vidakuzi",
+                "disable": "😮 bofya ili kuzima vidakuzi!"
+            }
+        }
+    },
+    "settings_slide": {
+        "title": "Mipangilio ya tovuti",
+        "media_api": "API ya midia",
+        "auto_audio": "ita sauti kiotomatiki baada ya ruhusa ya kwanza",
+        "auto_video": "ita video kiotomatiki baada ya ruhusa ya kwanza",
+        "geo_api": "API ya mahali kijiografia",
+        "geo_share": "shiriki takwimu za ufuatiliaji wa kijiografia",
+        "audio_effects": "Athari za sauti",
+        "audio_effects_on": "washa athari za sauti",
+        "audio_notify_on": "washa arifa za sauti",
+        "connection": "Muunganisho (hali)",
+        "notify_off": "zima arifa",
+        "analytics": "Takwimu",
+        "analytics_toggle": "washa au zima"
+    },
+    "palette": {
+        "title": "Paleti ya rangi",
+        "schema": "Mpango"
+    },
+    "admin_dashboard": {
+        "posts": "Machapisho",
+        "close_menu": "Funga menyu",
+        "loading_posts": "Inapakia machapisho...",
+        "title": "Paneli ya Utawala",
+        "description": "Dhibiti machapisho ya blogu yako.",
+        "menu": "Menyu",
+        "new_post": "Chapisho Jipya",
+        "settings": {
+            "tab": "GitHub Config",
+            "title": "GitHub Config",
+            "save": "Hifadhi",
+            "clear_credentials": "Futa vitambulisho vya GitHub",
+            "clear": "Futa"
+        },
+        "close_editor": "Funga kihariri",
+        "footoodles": {
+            "tab": "Footoodles",
+            "title": "Dhibiti Footoodles",
+            "empty": "Hakuna Footoodle iliyosajiliwa.",
+            "loading": "Inapakia Footoodles...",
+            "load_error": "Haikuwezekana kupakia Footoodles.",
+            "new": "Footoodle Mpya",
+            "edit": "Hariri",
+            "delete": "Futa",
+            "save": "Hifadhi Footoodle",
+            "cancel": "Ghairi",
+            "image": "Picha",
+            "image_select": "Chagua picha",
+            "image_required": "Chagua picha.",
+            "image_invalid": "Umbizo la picha haliruhusiwi. Tumia JPEG, PNG au WebP.",
+            "title_label": "Kichwa",
+            "title_placeholder": "Ingiza kichwa cha Footoodle",
+            "title_required": "Ingiza kichwa.",
+            "content_label": "Maudhui",
+            "content_placeholder": "Andika Footoodle yako...",
+            "content_required": "Ingiza maudhui.",
+            "content_limit": "Maudhui yanapaswa kuwa na herufi zisizozidi 280.",
+            "character_count": "Herufi {count}/280",
+            "saving": "Inahifadhi Footoodle...",
+            "saved": "Footoodle imehifadhiwa kwa mafanikio!",
+            "save_error": "Haikuwezekana kuhifadhi Footoodle.",
+            "updating": "Inasasisha Footoodle...",
+            "updated": "Footoodle imesasishwa kwa mafanikio!",
+            "update_error": "Haikuwezekana kusasisha Footoodle.",
+            "delete_confirm": "Je, unataka kweli kufuta Footoodle hii?",
+            "deleting": "Inafuta Footoodle...",
+            "deleted": "Footoodle imefutwa kwa mafanikio!",
+            "delete_error": "Haikuwezekana kufuta Footoodle.",
+            "delete_cancel": "Ufutaji umeghairiwa.",
+            "editor_new": "Inaunda Footoodle mpya.",
+            "editor_edit": "Inahariri Footoodle.",
+            "discard_changes": "Tupa mabadiliko ya Footoodle hii?",
+            "operation_error": "Hitilafu imetokea wakati wa kuchakata Footoodle.",
+            "github_error": "Haikuwezekana kukamilisha operesheni kwenye GitHub.",
+            "subtitle": "Unda na udhibiti maelezo ya haraka yenye picha chini ya ukurasa."
+        },
+        "editor": {
+            "status_ready": "Tayari kuhariri.",
+            "title_label": "Kichwa",
+            "title_placeholder": "Kichwa cha chapisho",
+            "summary_label": "Muhtasari",
+            "summary_placeholder": "Muhtasari wa chapisho",
+            "summary_restore": "Rejesha kiotomatiki",
+            "summary_help": "Muhtasari hujazwa kiotomatiki. Unaweza kuubadilisha kwa uhuru.",
+            "content_label": "Maudhui",
+            "toolbar_label": "Zana za uumbizaji",
+            "bold": "Herufi nzito",
+            "italic": "Italiki",
+            "strike": "Mkato wa mstari",
+            "unordered_list": "Orodha yenye alama",
+            "unordered_list_label": "• Orodha",
+            "ordered_list": "Orodha yenye nambari",
+            "ordered_list_label": "1. Orodha",
+            "quote": "Nukuu",
+            "link": "Chomeka kiungo",
+            "link_label": "Kiungo",
+            "code": "Chomeka msimbo",
+            "font_size": "Fonti",
+            "font_size_title": "Ukubwa wa fonti",
+            "image": "Picha",
+            "image_title": "Ongeza picha",
+            "microphone": "Maikrofoni",
+            "microphone_title": "Nukuu sauti",
+            "preview_toggle": "Hakiki",
+            "preview_heading": "Hakikisho",
+            "preview_close": "Funga",
+            "tags_label": "Lebo",
+            "tags_placeholder": "Ingiza lebo zikitenganishwa na koma",
+            "draft_select_label": "Chagua rasimu",
+            "draft_select_default": "Chagua rasimu",
+            "draft_open": "Fungua rasimu",
+            "draft_save": "Hifadhi rasimu",
+            "generate": "Tengeneza chapisho",
+            "slug_label": "Slug ya URL",
+            "slug_placeholder": "makala-yangu",
+            "slug_unlock_title": "Fungua au funga uhariri wa slug",
+            "summary_restore_title": "Rejesha muhtasari otomatiki",
+            "undo_title": "Tendua (Ctrl+Z)",
+            "redo_title": "Rudia (Ctrl+Y)",
+            "block_format_title": "Mtindo wa bloku",
+            "block_paragraph": "Aya",
+            "heading1": "Kichwa 1",
+            "heading2": "Kichwa 2",
+            "heading3": "Kichwa 3",
+            "heading4": "Kichwa 4",
+            "heading5": "Kichwa 5",
+            "heading6": "Kichwa 6",
+            "code_block": "Bloku ya msimbo",
+            "bold_title": "Herufi nzito (Ctrl+B)",
+            "italic_title": "Italiki (Ctrl+I)",
+            "underline_title": "Pigia mstari (Ctrl+U)",
+            "strike_title": "Mkato wa mstari",
+            "inline_code_title": "Msimbo wa ndani ya mstari",
+            "clear_format_title": "Futa uumbizaji",
+            "fore_color_title": "Rangi ya maandishi",
+            "back_color_title": "Rangi ya mwangaza",
+            "unordered_list_title": "Orodha yenye alama",
+            "ordered_list_title": "Orodha yenye nambari",
+            "align_left_title": "Pangilia kushoto",
+            "align_center_title": "Weka katikati",
+            "align_right_title": "Pangilia kulia",
+            "align_justify_title": "Sawazisha pande zote",
+            "link_title": "Chomeka au hariri kiungo (Ctrl+K)",
+            "quote_title": "Bloku ya nukuu",
+            "code_title": "Chomeka bloku ya msimbo",
+            "hr_title": "Mstari mlalo",
+            "table_title": "Chomeka jedwali",
+            "source_btn": "HTML",
+            "source_title": "Badilisha msimbo chanzo wa HTML",
+            "preview": "Hakiki",
+            "link_url_placeholder": "https://mfano.com au /posts/...",
+            "link_text_placeholder": "Maandishi ya kiungo (si lazima)",
+            "link_new_tab": "Kichupo kipya",
+            "apply": "Tumia",
+            "unlink": "Ondoa kiungo",
+            "cancel": "Ghairi",
+            "table_rows": "Safu mlalo",
+            "table_cols": "Safu wima",
+            "table_insert": "Chomeka jedwali",
+            "img_width": "Upana",
+            "img_align": "Mpangilio",
+            "img_align_left": "Kushoto",
+            "img_align_center": "Katikati",
+            "img_align_right": "Kulia",
+            "img_align_full": "Upana kamili",
+            "img_remove": "Ondoa picha",
+            "img_alt_placeholder": "Maandishi mbadala (alt)",
+            "img_caption_placeholder": "Maelezo ya picha (si lazima)",
+            "drafts_section": "Rasimu",
+            "save_draft": "Hifadhi rasimu",
+            "drafts_placeholder": "Chagua rasimu...",
+            "open_draft": "Fungua",
+            "delete_draft": "Futa"
+        },
+        "posts_list": {
+            "untitled": "Chapisho lisilo na kichwa",
+            "edit": "Hariri",
+            "delete": "Futa"
+        },
+        "edit_post": "Hariri Chapisho",
+        "update_post": "Sasisha chapisho",
+        "delete_modal": {
+            "title": "Futa chapisho",
+            "question": "Je, unataka kweli kufuta chapisho hili?",
+            "cancel": "Ghairi",
+            "confirm": "Ndiyo, futa",
+            "deleting": "Inafuta...",
+            "deleting_status": "Inafuta chapisho kwenye GitHub...",
+            "success": "Chapisho limefutwa kwa mafanikio!",
+            "error": "Haikuwezekana kufuta chapisho.",
+            "close": "Funga"
+        },
+        "msg": {
+            "speech_error": "Hitilafu ya utambuzi wa sauti: {0}.",
+            "speech_unavailable": "Utambuzi wa sauti haupatikani katika kivinjari hiki.",
+            "speech_start_error": "Haikuwezekana kuanza utambuzi: {0}",
+            "pending_changes": "Mabadiliko yanayosubiri.",
+            "images_db_unavailable": "Hifadhidata haipatikani: haikuwezekana kuhifadhi picha.",
+            "images_optimized": "Picha zimeboreshwa: {0} → {1}.",
+            "images_added": "Picha zimeongezwa. Hakukuwa na upunguzaji wa ukubwa.",
+            "image_save_error": "Haikuwezekana kuhifadhi picha kwenye hifadhidata.",
+            "markdown_load_error": "Haikuwezekana kupakia kionyeshi cha Markdown.",
+            "drafts_db_unavailable": "Hifadhidata haipatikani: rasimu hazitahifadhiwa.",
+            "autosave_ok": "Mabadiliko yamehifadhiwa kiotomatiki.",
+            "autosave_error": "Haikuwezekana kuhifadhi kiotomatiki.",
+            "nothing_to_save": "Andika kichwa au maudhui kabla ya kuhifadhi.",
+            "db_unavailable": "Hifadhidata haipatikani.",
+            "draft_updated": "Rasimu imesasishwa.",
+            "draft_saved": "Rasimu imehifadhiwa kwa mafanikio.",
+            "draft_save_error": "Hitilafu wakati wa kuhifadhi rasimu.",
+            "changes_recovered": "Mabadiliko ya awali yamerejeshwa.",
+            "draft_select": "Chagua rasimu ili kuifungua.",
+            "draft_not_found": "Rasimu haijapatikana.",
+            "draft_opened": "Rasimu imefunguliwa kwa mafanikio.",
+            "draft_open_error": "Hitilafu wakati wa kufungua rasimu.",
+            "editor_ready_new": "Kihariri kiko tayari kwa chapisho jipya.",
+            "need_title": "Ingiza kichwa cha chapisho.",
+            "need_content": "Ingiza maudhui ya chapisho.",
+            "preparing": "Inaandaa chapisho...",
+            "published": "Chapisho limechapishwa kwa mafanikio.",
+            "prepared": "Chapisho limeandaliwa. Maudhui yamehifadhiwa kwenye kihariri.",
+            "publish_stage_error": "Imeshindwa katika hatua ya \"{0}\": {1}. Maudhui yamehifadhiwa.",
+            "publishing": "Inachapisha...",
+            "stage_init": "Kuanzisha uchapishaji",
+            "stage_library": "Kupakia maktaba ya Markdown",
+            "stage_preview": "Kusasisha hakikisho",
+            "stage_read": "Kusoma data ya kihariri",
+            "stage_autosave": "Kuhifadhi kiotomatiki",
+            "stage_images": "Kuandaa picha",
+            "stage_files": "Kuunda faili za chapisho",
+            "stage_publish": "Kuchapisha kwenye GitHub",
+            "stage_confirm": "Kuthibitisha uchapishaji",
+            "discard_changes": "Tupa mabadiliko ya chapisho linalohaririwa?",
+            "post_updated": "Chapisho limesasishwa kwa mafanikio.",
+            "post_loaded": "Chapisho limepakiwa kwa ajili ya kuhariri.",
+            "post_load_error": "Haikuwezekana kupakia chapisho kwa ajili ya kuhariri.",
+            "delete_prepare_error": "Haikuwezekana kuandaa ufutaji: {0}",
+            "delete_error": "Imeshindwa kufuta chapisho: {0}",
+            "draft_untitled": "Rasimu isiyo na kichwa",
+            "post_missing": "Chapisho halipo tena kwenye orodha. Usasishaji umeghairiwa.",
+            "post_missing_delete": "Chapisho halipo tena kwenye orodha.",
+            "github_not_confirmed": "GitHub haikuthibitisha ufutaji.",
+            "markdown_fetch_error": "Haikuwezekana kupakia Markdown.",
+            "need_slug": "Ingiza slug halali kwa URL ya chapisho.",
+            "draft_deleted": "Rasimu imefutwa.",
+            "content_placeholder": "Andika maudhui ya chapisho...",
+            "reading_stats": "Maneno {words} · dakika {minutes} za kusoma"
+        },
+        "nav": {
+            "session": "Kipindi cha GitHub"
+        },
+        "posts_view": {
+            "subtitle": "Dhibiti, hariri au ondoa machapisho yako ya HTML yaliyochapishwa.",
+            "search_placeholder": "Chuja kwa kichwa, slug au lebo...",
+            "empty": "Hakuna chapisho lililopatikana.",
+            "back": "← Rudi kwenye machapisho",
+            "view": "Fungua ukurasa"
+        },
+        "session": {
+            "title": "Kipindi cha GitHub",
+            "subtitle": "Dhibiti uthibitishaji wa OAuth na uhalali wa tokeni ya ufikiaji.",
+            "scope_label": "Mawanda:",
+            "obtained_label": "Imethibitishwa tarehe:",
+            "expires_label": "Inaisha muda:",
+            "refresh_btn": "Thibitisha tena kipindi",
+            "diagnostics_title": "Uchunguzi wa OAuth",
+            "reload_diagnostics": "Sasisha",
+            "clear_confirm": "Je, unataka kuondoa vitambulisho vya GitHub vilivyohifadhiwa kwenye kivinjari hiki?",
+            "status_active": "Hai",
+            "status_expiring": "Inaisha muda hivi karibuni",
+            "status_expired": "Imeisha muda",
+            "status_no_expiry": "Tokeni isiyo na muda wa mwisho",
+            "refreshing": "Inathibitisha tena kipindi na GitHub...",
+            "refreshed": "Kipindi kimethibitishwa tena kwa mafanikio.",
+            "refresh_failed": "Haikuwezekana kuthibitisha tena tokeni kiotomatiki.",
+            "reauth_needed": "Kipindi chako cha GitHub kimeisha muda. Thibitisha tena ili kuendelea.",
+            "diagnostics_empty": "Hakuna uchunguzi unaopatikana.",
+            "diagnostics_error": "Hitilafu wakati wa kupakia uchunguzi."
+        }
+    },
+    "github_auth": {
+        "title": "Uthibitishaji wa GitHub",
+        "description": "Thibitisha ukitumia akaunti yako ya GitHub ili kufikia paneli ya utawala.",
+        "start": "Thibitisha na GitHub",
+        "confirm": "Thibitisha na uendelee",
+        "copy_diagnostics": "Nakili uchunguzi",
+        "identity": {
+            "id_label": "ID:",
+            "profile_label": "Wasifu:",
+            "email_label": "Barua pepe ya umma:",
+            "confirmation": "Thibitisha ikiwa unataka kutumia utambulisho huu katika paneli ya utawala."
+        },
+        "messages": {
+            "empty": "Anzisha uthibitishaji na GitHub.",
+            "verifying": "Inathibitisha uthibitishaji...",
+            "failed": "Uthibitishaji na GitHub umeshindwa. Jaribu tena.",
+            "authenticated": "Imethibitishwa kama {0}.",
+            "saving": "Inahifadhi utambulisho...",
+            "save_failed": "Haikuwezekana kuhifadhi utambulisho. Jaribu tena."
+        }
+    },
+    "blog": {
+        "empty": "Hakuna kilichochapishwa bado.",
+        "not_found": "Chapisho halijapatikana.",
+        "load_error": "Haikuwezekana kupakia chapisho hili.",
+        "showing": "Inaonyesha {shown} kati ya {total}",
+        "load_more": "Pakia zaidi",
+        "read_time": "dakika {minutes} za kusoma",
+        "updated": "Sasisho la mwisho: {date}",
+        "more_posts": "Machapisho zaidi",
+        "license": "Maudhui haya yamepewa leseni chini ya <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a>",
+        "search_placeholder": "Tafuta machapisho...",
+        "all_tags": "Zote",
+        "no_results": "Hakuna chapisho linalolingana na vichujio vilivyochaguliwa.",
+        "read_article": "Soma makala",
+        "back_to_blog": "Rudi kwenye blogu",
+        "copy_code": "Nakili msimbo"
+    }
+}

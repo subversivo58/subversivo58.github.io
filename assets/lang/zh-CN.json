@@ -1,0 +1,808 @@
+{
+    "404": {
+        "general": "哎呀… 未找到！",
+        "title": "页面未找到",
+        "message": "您尝试打开的地址不存在或已被移动。请检查输入是否正确，或返回首页。",
+        "button": "返回首页"
+    },
+    "source": {
+        "name": "Subversivo58 Blog",
+        "version": "0.1.0",
+        "author": "Subversivo58",
+        "home": "https://github.com/subversivo58/",
+        "colab": [],
+        "build": "Alpha",
+        "bugs": [
+            {
+                "type": "git",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/issues"
+            }
+        ],
+        "license": [
+            {
+                "type": "MIT",
+                "url": "https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE"
+            }
+        ]
+    },
+    "words": {
+        "an": "1前",
+        "agree": "同意",
+        "clear": "清除",
+        "signin": "登录",
+        "logout": "退出",
+        "signup": "注册",
+        "close": "关闭",
+        "drawer": "抽屉栏",
+        "free": "免费",
+        "search": "搜索",
+        "recover": "恢复",
+        "restore": "还原",
+        "white": "白色",
+        "decade": "十年",
+        "year": "年",
+        "month": "月",
+        "week": "周",
+        "day": "天",
+        "hour": "小时",
+        "minute": "分钟",
+        "license": "许可证",
+        "more": "更多",
+        "second": "秒",
+        "now": "现在",
+        "rememberme": "记住我",
+        "source": "来源",
+        "mail": "邮箱",
+        "page": "页面",
+        "pwd": "密码",
+        "token": "令牌",
+        "media": "媒体",
+        "settings": "设置",
+        "version": "版本",
+        "ooops": "哎呀…"
+    },
+    "combo": {
+        "btn_top": "返回顶部",
+        "more_info": "获取更多信息。",
+        "click_here": "点击这里！",
+        "clear_exit": "清除并退出",
+        "not_show_again": "不再显示",
+        "powered": "技术支持",
+        "copyr": "版权所有",
+        "knowmore": "了解更多",
+        "seelicenses": "查看许可证"
+    },
+    "navbar": {
+        "wiki": "WIKI",
+        "blog": "博客",
+        "dpo": "DPO",
+        "colab": "协作",
+        "about": "关于",
+        "lab": "实验室",
+        "contact": "联系",
+        "policies": "政策",
+        "donations": "捐赠",
+        "signin": "登录",
+        "docs": "文档",
+        "home": "首页"
+    },
+    "footer": {
+        "content": {
+            "contactnf": "联系方式",
+            "blognew": "最新动态",
+            "uselink": "实用链接",
+            "docs": "文档",
+            "policies": "通用政策",
+            "faq": "支持与常见问题",
+            "forum": "论坛与社区",
+            "devtool": "开发者工具",
+            "api": "服务 API",
+            "bugs": "报告错误",
+            "desc1": "本网站汇集了始于 2010 年的一系列项目，旨在作为个人博客分享各种主题的内容。欢迎随时探索本站并分享内容。",
+            "desc2": "本网站仍在持续开发中，欢迎指出错误或提出改进建议。",
+            "start": "立即开始",
+            "source": "源代码",
+            "feedback": "反馈",
+            "dpo": "数据保护官 (DPO)"
+        },
+        "author": "作者",
+        "about": "关于",
+        "licit": "法律声明",
+        "cookie": "Cookie",
+        "privacci": "隐私",
+        "footoodle": {
+            "title": "注册 Collabore",
+            "description": "<p>Collabore 为开发者和爱好者敞开大门。将您的静态页面服务转变为动态页面。</p><p>通过简单而强大的界面，您可以修改、审核和创建新文章，向您的页面添加插件和应用，或者集成您自己的扩展。</p><p>这一切都基于专为扩展而设计的开源代码实现。利用集成的身份验证系统，让 Collabore 用户只需点击几下即可在您的页面上注册，更棒的是，他们将自动在您页面的插件和应用中完成认证。</p><p class='mt-5 ct'>加入这个协作系统，<a href='/signup' class='white tdu'>立即注册！</a></p>"
+        }
+    },
+    "drawer": {
+        "clear_data": {
+            "title": "清除网站数据",
+            "question_info": "您确定吗？",
+            "positive": "长按以清除",
+            "negative": "不，取消",
+            "footer_info": "清除缓存和 Cookie。请查看<a href='#' class='tdu blue'>文档</a>。"
+        },
+        "bug_report": {
+            "title": "报告错误 🐛",
+            "question_info": "发现错误了吗？请报告！",
+            "placeholder": "在此描述错误...",
+            "send": "发送",
+            "follow": "前往支持",
+            "footer_info": "报告错误。请查看相关<a href='#' class='tdu blue'>文档</a>。",
+            "sent": "谢谢！该错误已记录。",
+            "failed": "无法记录该错误。请重试。"
+        },
+        "feedback": {
+            "title": "发送您的评论",
+            "rating": "评分：",
+            "question_info": "发送您对 Collabore 的意见！",
+            "placeholder": "发送批评、赞美或建议",
+            "footer_info": "发送评论。请查看相关<a href='#' class='tdu blue'>文档</a>。",
+            "notific": {
+                "error": {
+                    "title": "反馈失败！",
+                    "message": "抱歉，处理您的评论时发生错误。"
+                },
+                "success": {
+                    "title": "反馈已发送！",
+                    "message": "谢谢，您的评论已成功发送！"
+                }
+            }
+        },
+        "geolocation": {
+            "title": "请求地理位置",
+            "btn1": "是，请求",
+            "btn2": "不，取消",
+            "footer_info": "地理位置？请查看<a href='#' class='tdu blue'>文档</a>。"
+        },
+        "notification": {
+            "title": "请求通知权限",
+            "btn1": "是，请求",
+            "btn2": "不，取消",
+            "footer_info": "通知？请查看<a href='#' class='tdu blue'>文档</a>。"
+        },
+        "getmedia_audio": {
+            "title": "请求麦克风权限",
+            "btn1": "是，请求",
+            "btn2": "不，取消",
+            "footer_info": "音频媒体？请查看<a href='#' class='tdu blue'>文档</a>。"
+        },
+        "getmedia_video": {
+            "title": "请求摄像头权限",
+            "btn1": "是，请求",
+            "btn2": "不，取消",
+            "footer_info": "视频媒体？请查看<a href='#' class='tdu blue'>文档</a>。",
+            "perm_title": "相机权限",
+            "perm_1": "本网站仅在您启动需要相机的功能时才会使用它。",
+            "perm_2": "您可以随时在浏览器设置中撤销权限。",
+            "perm_3": "如果取消，将不会授予任何权限。"
+        },
+        "words": {
+            "clear": "清理",
+            "geo": "位置",
+            "cam": "视频",
+            "mic": "音频",
+            "color": "颜色",
+            "note": "笔记",
+            "bug": "错误",
+            "lab": "实验室",
+            "not": "提醒",
+            "feedback": "反馈",
+            "lang": "语言",
+            "marks": "书签",
+            "admin": "管理",
+            "share": "分享",
+            "theme_light": "浅色主题",
+            "theme_dark": "深色主题"
+        },
+        "version": "版本",
+        "notes_form": {
+            "sent": "笔记已保存。",
+            "failed": "无法保存笔记。请重试。"
+        }
+    },
+    "copyright": {
+        "contributors": "本项目的实现得益于众多其他开源项目以及<a href='https://github.com/Collabore/node-app/blob/master/CONTRIBUTORS.md' class='blue'>贡献者社区</a>的支持… 在遵守所有基础许可证的前提下，您可以自由地创建、使用、修改和分发！",
+        "caption": "源码及其各自许可证列表",
+        "backendsources": "许多在服务器（NodeJS）上运行并动态加载的其他源码对本项目同样至关重要，例如：",
+        "package": "以及<a href='https://github.com/Collabore/node-app/blob/master/package.json' class='blue'>更多…</a>",
+        "tps": "第三方软件",
+        "thissource": "本网站软件",
+        "alllicenses": "所有许可证"
+    },
+    "nocookie": {
+        "title": "不支持",
+        "p1": "抱歉，我们不支持“无 Cookie”浏览。",
+        "p2": "虽然本网站使用 Cookie 和其他存储技术，但“<strong>未经您的明确许可，我们不会在您的浏览器中存储任何数据</strong>”！",
+        "p3": "我们认为我们有充分的理由不支持“无 Cookie”浏览。请查看我们的<a href=\"/you-in-control-of-your-data.html\" class=\"ext-link-icon\">《白皮书》</a>以获取更多信息。很遗憾，您需要启用 Cookie 才能浏览。"
+    },
+    "modals": {
+        "language": {
+            "title": "选择语言",
+            "avaliable": "可用语言",
+            "pt_BR": "葡萄牙语",
+            "en_US": "英语",
+            "es_ES": "西班牙语",
+            "fr_FR": "法语",
+            "de_DE": "德语",
+            "ja_JP": "日语",
+            "hi_IN": "印地语",
+            "zh_CN": "中文（简体）",
+            "ru_RU": "俄语",
+            "bn_BD": "孟加拉语",
+            "id_ID": "印度尼西亚语",
+            "tr_TR": "土耳其语",
+            "sw_KE": "斯瓦希里语",
+            "fil_PH": "菲律宾语",
+            "ko_KR": "韩语",
+            "th_TH": "泰语",
+            "it_IT": "意大利语",
+            "te_IN": "泰卢固语",
+            "mr_IN": "马拉地语",
+            "footer": "没有您的语言选项？创建一个翻译吧！"
+        },
+        "version": {
+            "title": "🚧 建设中 🚧",
+            "text1": "本项目的实现得益于众多其他开源项目以及",
+            "text2": "贡献者社区的支持",
+            "text3": "在遵守所有基础许可证的前提下，您可以自由地创建、使用、修改和分发！"
+        },
+        "tabs": {
+            "camera": "请求相机",
+            "permissions": "权限"
+        },
+        "share": {
+            "title": "分享此博客",
+            "broken_link": "报告失效链接？"
+        },
+        "notes": {
+            "title": "快速笔记",
+            "note_title": "标题：",
+            "category": "分类：",
+            "tags": "标签：",
+            "note": "笔记：",
+            "save": "保存",
+            "ph_title": "标题",
+            "ph_category": "分类",
+            "ph_tags": "标签",
+            "ph_note": "在此输入您的笔记..."
+        },
+        "offline": {
+            "title": "保存以供离线使用",
+            "yes": "是，保存！",
+            "no": "不，取消",
+            "about": "关于离线功能？"
+        },
+        "auth": {
+            "title": "登录并授权",
+            "source": "源代码：<a href=\"https://github.com/subversivo58/subversivo58.github.io\" target=\"about:blank\" rel=\"noopener\" class=\"tdu ext-link-icon\">在 GitHub 上查看</a>"
+        },
+        "bugs": {
+            "select_type": "选择类型：",
+            "custom": "自定义错误",
+            "css": "CSS 错误",
+            "js": "JavaScript 错误",
+            "language": "语言错误",
+            "plugins": "插件错误",
+            "server": "服务器错误",
+            "description": "发送描述",
+            "ph_description": "在此输入描述..."
+        },
+        "permissions": {
+            "title_microphone": "麦克风权限",
+            "title_geolocation": "位置权限",
+            "item_1": "本网站仅在您启动需要该权限的功能时才会使用它。",
+            "item_2": "您可以随时在浏览器设置中撤销权限。",
+            "item_3": "如果取消，将不会授予任何权限。"
+        }
+    },
+    "notify": {
+        "storage": {
+            "title": "Subversivo58 - 存储",
+            "body": "本网站使用“Cookie”及其他在您设备上存储信息的技术，您同意吗？",
+            "actions": [
+                {
+                    "action": "cookie-agree",
+                    "title": "这是什么？",
+                    "icon": "🍪"
+                },
+                {
+                    "action": "cookie-policy",
+                    "title": "查看政策",
+                    "icon": "🛡️"
+                },
+                {
+                    "action": "terms-policy",
+                    "title": "查看条款",
+                    "icon": "📜"
+                }
+            ]
+        },
+        "permission_granted": {
+            "title": "通知已开启",
+            "body": "感谢您允许发送通知！"
+        }
+    },
+    "pages": {
+        "about": {
+            "heading": "技术、趋势与网络文化",
+            "item1": "✓ Web APIs、JavaScript 与 HTML5 特性。",
+            "item2": "✓ 函数式编程、设计模式、框架。",
+            "item3": "✓ WebCrypto、实验室与代码实验瓶。",
+            "item4": "✓ 观点、生活方式、极客文化及更多。",
+            "photo": "摄影：<a href=\"https://unsplash.com/@glenncarstenspeters\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Glenn Carstens-Peters</a>，发布于 <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "title": "关于",
+            "p1": "你好，我是 Lauro Moraes，网名 <a href=\"https://www.google.com/search?q=subversivo58\" class=\"ext-link-icon\" target=\"_blank\" rel=\"noopener\">Subversivo58</a>，本网站是我的数字实验室和个人博客。",
+            "p2": "在这里，我发布关于技术趋势、网络文化以及面向 Web 的编程内容，例如 PWA、单页应用以及现代 JavaScript、HTML5 和 CSS3 API 的应用。",
+            "p3": "我热衷于函数式编程、模式设计以及 Web 去中心化等话题… 区块链与 Web 加密技术是这里经常讨论的主题。",
+            "p4": "这里也是我发布实验成果、分享代码和小型函数式片段的地方，同时我还会分享对各种话题的看法、一些极客文化以及这种生活方式。",
+            "p5": "欢迎自由浏览博客内容并加入我们的社区。"
+        },
+        "you_in_control": {
+            "heading": "由您掌控自己的数据",
+            "item1": "✓ 隐私是您的权利，而不是供人售卖的商品。",
+            "item2": "✓ 加密技术是一切数字安全的基础。",
+            "item3": "✓ 尊重隐私始于尊重您的选择。",
+            "item4": "✓ 由您决定分享什么数据、何时分享以及与谁分享。",
+            "photo": "摄影：<a href=\"https://unsplash.com/@ev\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">ev</a>，发布于 <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>"
+        },
+        "donations": {
+            "heading": "想做点酷事吗？",
+            "photo": "摄影：<a href=\"https://unsplash.com/@clarktibbs\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Clark Tibbs</a>，发布于 <a href=\"https://unsplash.com/\" target=\"_blank\" rel=\"noopener\" class=\"ext-link-icon\">Unsplash</a>",
+            "thanks_title": "致谢",
+            "thanks_text": "我们非常自豪地使用 <a href=\"https://pages.github.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Github Pages</a> 和 <a href=\"https://workers.cloudflare.com/\" target=\"_blank\" rel=\"nofollow noopener\" class=\"ext-link-icon\">Cloudflare Workers</a> 服务，这些平台及其工具非常出色，使我们能够构建像本博客和我们的工具这样酷的项目。",
+            "platforms_title": "了解这些平台",
+            "link_github": "GitHub Pages",
+            "link_workers": "Cloudflare Workers",
+            "donate_title": "您的捐赠至关重要",
+            "content": {
+                "intro1": "保持博客更新需要时间和精力。虽然我们使用的平台和工具是免费的，但它们都有一定限制。每个平台都限制了网站每月的访问量，以及访问期间可从其服务器传输的数据量。",
+                "intro2": "在这个博客中，我们喜欢探索新功能、实现新特性，甚至扩大服务范围并建立一个充满活力和动态的社区。",
+                "intro3": "为了实现这些想法，我们需要投入资源来购买独立域名、能够承受更大流量的 VPS 服务器、存储空间，并支持构建更广泛的应用。",
+                "intro4": "我们厌恶通过广告、付费墙、付费追踪或出售数据来筹集资金… 正如我们的<a href=\"./you-in-control-of-your-data.html\" title=\"白皮书\" target=\"about:blank_\" rel=\"nofollow noopener\" class=\"ext-link-icon\">《白皮书》</a>所述，我们捍卫并<strong>相信您是自己数据的唯一所有者</strong>，因此您的一点帮助就能带来巨大改变，激励并帮助我们做得更多、更好 🚀",
+                "contribution1": "您可以通过多种方式为本博客做出贡献：在您的社交网络上分享、改进代码、参与编辑协作、与我们的社区互动等等。",
+                "contribution2": "也可以考虑选择下方的捐赠方式之一，给予我们“<b>额外的一份支持</b>” 🎊",
+                "pix_caption": "PagBank Pix",
+                "trademarks": "此处使用的徽标和商标均归其各自的权利所有者所有。在此使用它们并不代表与这些品牌有任何关联或获得其认可。"
+            }
+        },
+        "dpo": {
+            "heading": "数据保护官 (DPO)",
+            "intro1": "根据《通用数据保护法》（LGPD - 第 13.709/2018 号法律），我们特此公布我们的数据保护官（Data Protection Officer）的联系方式。",
+            "intro2": "DPO 是负责在网站、数据主体（您）与国家数据保护局（ANPD）之间协调沟通的负责人。",
+            "contact_title": "联系信息",
+            "officer": "<strong>负责人：</strong> Lauro de Moraes",
+            "email": "电子邮箱：",
+            "deadline": "<strong>回复期限：</strong> 根据适用于小型数据处理机构的规定，最长 30 天。",
+            "send_email": "给 DPO 发送电子邮件",
+            "rights_title": "如何行使您的权利",
+            "rights1": "如需行使 LGPD 第 18 条规定的任何权利（如处理确认、访问、更正、匿名化、删除等），只需发送电子邮件至上述地址即可。",
+            "rights2": "为加快处理速度，建议您在邮件主题或正文中包含以下信息：",
+            "list1": "您的全名；",
+            "list2": "您希望行使的权利（例如：删除数据、访问数据等）；",
+            "list3": "有助于我们在系统中定位您数据的详细信息。",
+            "policies": "有关我们如何处理您的数据的更多详情，请参阅我们的<a href=\"/policy.html#policy-general\">通用政策</a>和<a href=\"/policy.html#policy-privacy\">隐私政策</a>。"
+        },
+        "home": {
+            "intro": {
+                "eyebrow": "关于 SUBVERSIVO58",
+                "title": "远不止是一个博客。",
+                "description": "一个致力于好奇心、技术以及自由探索想法的空间。",
+                "details": "在这里，知识与创造力在超越常规的内容、体验与项目中相遇。",
+                "signature": "好奇心 · 知识 · 创造力"
+            },
+            "exploration": {
+                "eyebrow": "探索发现",
+                "title": "探索不同的想法。",
+                "description": "学习、实验和发现新可能性的不同路径。",
+                "programming": {
+                    "title": "编程",
+                    "description": "面向数字世界的代码、开发与创意解决方案。"
+                },
+                "technology": {
+                    "title": "技术",
+                    "description": "改变我们日常生活的工具、资源与前沿动态。"
+                },
+                "experiments": {
+                    "title": "实验",
+                    "description": "正在构建中的想法、测试以及突破常规的发现。"
+                },
+                "knowledge": {
+                    "title": "知识",
+                    "description": "用于拓宽视野的学习、思考与资讯。"
+                }
+            },
+            "lab": {
+                "eyebrow": "SUBVERSIVO58 / 实验室",
+                "title": "探索新可能性的空间。",
+                "description": "旨在将好奇心转化为发现的实验、项目和工具。",
+                "link": "探索实验室"
+            }
+        },
+        "policy": {
+            "badges": {
+                "reading_title": "本文档预计阅读时间",
+                "version": "版本：{version}",
+                "version_title": "文档版本",
+                "print": "打印&nbsp;🖨️",
+                "print_title": "打印"
+            },
+            "cards": {
+                "introduction": {
+                    "title": "简介",
+                    "description": "本网站采用 Web 技术构建，我们信奉去中心化与加密安全。我们相信您是自己数据的唯一所有者。",
+                    "link": "在我们的《白皮书》中查看更多"
+                },
+                "privacy": {
+                    "title": "隐私",
+                    "description": "隐私政策说明了本网站为何请求数据、如何处理这些数据，以及用户如何编辑、下载或删除自己的数据。",
+                    "link": "阅读我们的隐私政策"
+                },
+                "terms": {
+                    "title": "条款",
+                    "description": "条款说明了我们如何运营本网站、用户对本网站可以有何期待，以及在此过程中我们对用户的期望。",
+                    "link": "阅读我们的使用条款"
+                },
+                "general": {
+                    "title": "政策",
+                    "description": "“政策”是规范网站与用户之间关系的通用文件，确立了网站及其工具使用协议的保障与限制。",
+                    "link": "阅读我们的通用政策"
+                }
+            },
+            "overview": {
+                "quote1": "政策是网站与用户建立关系的方式，它们在这一关系中保障透明度与质量，带来安全与信任，同时也是世界许多国家数据保护和隐私法律所监管的对象。",
+                "quote2": "我们尽力简化政策，以摆脱“<strong>晦涩冗长的条文堆砌</strong>”的套路。既不繁琐冗长——因为多并不代表高质量；也不过于简略——因为少无法保证内容完整。",
+                "quote3": "我们希望这种信任关系对我们的用户和我们自己来说都是一个学习的过程。",
+                "whitepaper_link": "《白皮书》节选",
+                "contact": "因使用本网站或其工具而产生的任何疑问，均可通过我们的联系表单或<strong>反馈</strong>工具进行报告（我们非常喜欢收到反馈）。我们也欢迎您通过电子邮件 <a href=\"mailto:dpo.subversivo58@gmail.com?subject=DPO%20-%20Contato%20Sobre%20Políticas%20do%20Site\" target=\"_blank\" rel=\"noopener noreferrer\">dpo.subversivo58@gmail.com</a> 联系我们的 DPO 来解决问题。",
+                "markdown1": "本网站的政策采用略作修改的 <strong>Markdown</strong> 标记语言编写，您可以通过此<a href=\"https://github.com/subversivo58/subversivo58.github.io/blob/master/docs/policies/\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">仓库链接</a>在 <a href=\"https://github.com\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ext-link-icon\">GitHub</a> 上以纯文本形式查看或下载。",
+                "markdown2": "在那里您可以找到这些政策的当前及所有历史版本以及本网站的源代码，您也可以点击通用政策顶部的打印图标 <span class=\"badge badge-light border-def contrast\">打印&nbsp;🖨️</span> 来打印它们。"
+            },
+            "privacy": {
+                "heading": "隐私",
+                "image_alt": "您拥有选择权",
+                "image_title": "您拥有选择权",
+                "paragraph1": "我们认为隐私的原则在于选择的自由。用户不应该仅仅通过一次点击就放弃自己的数据，也不应该受制于强迫其让渡大量数据才能使用某项工具的条款。",
+                "paragraph2": "选择的自由是一种渐进但非侵入式的数据请求模式，仅在必要时征求同意应当成为值得遵循的标准。",
+                "paragraph3": "尊重隐私始于尊重用户对“分享什么”以及“何时分享”的选择。"
+            },
+            "terms": {
+                "heading": "使用条款",
+                "image_alt": "使用条款图片",
+                "image_title": "我们的条款"
+            },
+            "general": {
+                "heading": "通用政策",
+                "image_alt": "协议图片",
+                "image_title": "协议"
+            },
+            "cookies": {
+                "heading": "接受 Cookie",
+                "paragraph1": "如果您想问：<strong>真的必须接受 Cookie 和数据存储吗</strong>？简短的回答是：<strong>不，您不需要</strong>！您仍然可以浏览并使用网站的许多工具和功能，但可能无法获得最佳体验 🙁",
+                "paragraph2": "例如：当您选择一种语言、保存喜爱的颜色或设置偏好时，每次访问或浏览网站时都必须重新进行选择… “持久化”您选择的唯一方式就是将其存储在本地。",
+                "paragraph3": "秉承<a href=\"/you-in-control-of-your-data.html\" class=\"display-block ext-link-icon\">您是自己数据的唯一所有者</a>这一理念，我们相信您拥有选择权。如果您选择通过“<strong>点击并按住</strong>”下方按钮来接受使用 Cookie，您也可以随时在此处或用户指南中选择<strong>禁用它们</strong>，还可以一次性清除所有已存储的内容 😎",
+                "button": "🍪 按住以启用 Cookie",
+                "disable": "😮 点击以禁用 Cookie！"
+            }
+        }
+    },
+    "settings_slide": {
+        "title": "网站设置",
+        "media_api": "媒体 API",
+        "auto_audio": "首次授权后自动调用音频",
+        "auto_video": "首次授权后自动调用视频",
+        "geo_api": "地理位置 API",
+        "geo_share": "分享地理追踪分析",
+        "audio_effects": "音效",
+        "audio_effects_on": "启用音效",
+        "audio_notify_on": "启用音频通知",
+        "connection": "连接（状态）",
+        "notify_off": "禁用通知",
+        "analytics": "统计分析",
+        "analytics_toggle": "启用或禁用"
+    },
+    "palette": {
+        "title": "调色板",
+        "schema": "配色方案"
+    },
+    "admin_dashboard": {
+        "posts": "文章",
+        "close_menu": "关闭菜单",
+        "loading_posts": "正在加载文章...",
+        "title": "管理面板",
+        "description": "管理您的博客文章。",
+        "menu": "菜单",
+        "new_post": "新建文章",
+        "settings": {
+            "tab": "GitHub Config",
+            "title": "GitHub Config",
+            "save": "保存",
+            "clear_credentials": "清除 GitHub 凭据",
+            "clear": "清除"
+        },
+        "close_editor": "关闭编辑器",
+        "footoodles": {
+            "tab": "Footoodles",
+            "title": "管理 Footoodles",
+            "empty": "尚未注册任何 Footoodle。",
+            "loading": "正在加载 Footoodles...",
+            "load_error": "无法加载 Footoodles。",
+            "new": "新建 Footoodle",
+            "edit": "编辑",
+            "delete": "删除",
+            "save": "保存 Footoodle",
+            "cancel": "取消",
+            "image": "图片",
+            "image_select": "选择图片",
+            "image_required": "请选择一张图片。",
+            "image_invalid": "不支持的图片格式。请使用 JPEG、PNG 或 WebP。",
+            "title_label": "标题",
+            "title_placeholder": "输入 Footoodle 标题",
+            "title_required": "请输入标题。",
+            "content_label": "内容",
+            "content_placeholder": "编写您的 Footoodle...",
+            "content_required": "请输入内容。",
+            "content_limit": "内容最多不得超过 280 个字符。",
+            "character_count": "{count}/280 字符",
+            "saving": "正在保存 Footoodle...",
+            "saved": "Footoodle 保存成功！",
+            "save_error": "无法保存 Footoodle。",
+            "updating": "正在更新 Footoodle...",
+            "updated": "Footoodle 更新成功！",
+            "update_error": "无法更新 Footoodle。",
+            "delete_confirm": "确定要删除此 Footoodle 吗？",
+            "deleting": "正在删除 Footoodle...",
+            "deleted": "Footoodle 删除成功！",
+            "delete_error": "无法删除 Footoodle。",
+            "delete_cancel": "已取消删除。",
+            "editor_new": "正在创建新的 Footoodle。",
+            "editor_edit": "正在编辑 Footoodle。",
+            "discard_changes": "放弃对此 Footoodle 的更改吗？",
+            "operation_error": "处理 Footoodle 时发生错误。",
+            "github_error": "无法在 GitHub 上完成操作。",
+            "subtitle": "在页脚创建和管理带图片的快速笔记。"
+        },
+        "editor": {
+            "status_ready": "准备编辑。",
+            "title_label": "标题",
+            "title_placeholder": "文章标题",
+            "summary_label": "摘要",
+            "summary_placeholder": "文章摘要",
+            "summary_restore": "恢复自动生成",
+            "summary_help": "摘要会自动填充。您可以自由修改。",
+            "content_label": "正文",
+            "toolbar_label": "格式工具",
+            "bold": "粗体",
+            "italic": "斜体",
+            "strike": "删除线",
+            "unordered_list": "项目符号列表",
+            "unordered_list_label": "• 列表",
+            "ordered_list": "编号列表",
+            "ordered_list_label": "1. 列表",
+            "quote": "引用",
+            "link": "插入链接",
+            "link_label": "链接",
+            "code": "插入代码",
+            "font_size": "字体",
+            "font_size_title": "字体大小",
+            "image": "图片",
+            "image_title": "添加图片",
+            "microphone": "麦克风",
+            "microphone_title": "语音转录",
+            "preview_toggle": "预览",
+            "preview_heading": "预览",
+            "preview_close": "关闭",
+            "tags_label": "标签",
+            "tags_placeholder": "输入标签，用逗号分隔",
+            "draft_select_label": "选择草稿",
+            "draft_select_default": "选择草稿",
+            "draft_open": "打开草稿",
+            "draft_save": "保存草稿",
+            "generate": "生成文章",
+            "slug_label": "URL 别名 (Slug)",
+            "slug_placeholder": "my-article",
+            "slug_unlock_title": "解锁或锁定别名编辑",
+            "summary_restore_title": "恢复自动摘要",
+            "undo_title": "撤销 (Ctrl+Z)",
+            "redo_title": "重做 (Ctrl+Y)",
+            "block_format_title": "块级样式",
+            "block_paragraph": "正文段落",
+            "heading1": "标题 1",
+            "heading2": "标题 2",
+            "heading3": "标题 3",
+            "heading4": "标题 4",
+            "heading5": "标题 5",
+            "heading6": "标题 6",
+            "code_block": "代码块",
+            "bold_title": "粗体 (Ctrl+B)",
+            "italic_title": "斜体 (Ctrl+I)",
+            "underline_title": "下划线 (Ctrl+U)",
+            "strike_title": "删除线",
+            "inline_code_title": "行内代码",
+            "clear_format_title": "清除格式",
+            "fore_color_title": "文字颜色",
+            "back_color_title": "高亮颜色",
+            "unordered_list_title": "项目符号列表",
+            "ordered_list_title": "编号列表",
+            "align_left_title": "左对齐",
+            "align_center_title": "居中对齐",
+            "align_right_title": "右对齐",
+            "align_justify_title": "两端对齐",
+            "link_title": "插入或编辑链接 (Ctrl+K)",
+            "quote_title": "引用块",
+            "code_title": "插入代码块",
+            "hr_title": "水平分隔线",
+            "table_title": "插入表格",
+            "source_btn": "HTML",
+            "source_title": "切换 HTML 源代码",
+            "preview": "预览",
+            "link_url_placeholder": "https://example.com 或 /posts/...",
+            "link_text_placeholder": "链接文本（可选）",
+            "link_new_tab": "新标签页",
+            "apply": "应用",
+            "unlink": "移除链接",
+            "cancel": "取消",
+            "table_rows": "行数",
+            "table_cols": "列数",
+            "table_insert": "插入表格",
+            "img_width": "宽度",
+            "img_align": "对齐方式",
+            "img_align_left": "左对齐",
+            "img_align_center": "居中",
+            "img_align_right": "右对齐",
+            "img_align_full": "全宽",
+            "img_remove": "移除图片",
+            "img_alt_placeholder": "替代文本 (alt)",
+            "img_caption_placeholder": "图片说明（可选）",
+            "drafts_section": "草稿",
+            "save_draft": "保存草稿",
+            "drafts_placeholder": "选择草稿...",
+            "open_draft": "打开",
+            "delete_draft": "删除"
+        },
+        "posts_list": {
+            "untitled": "无标题文章",
+            "edit": "编辑",
+            "delete": "删除"
+        },
+        "edit_post": "编辑文章",
+        "update_post": "更新文章",
+        "delete_modal": {
+            "title": "删除文章",
+            "question": "确定要删除这篇文章吗？",
+            "cancel": "取消",
+            "confirm": "是，删除",
+            "deleting": "正在删除...",
+            "deleting_status": "正在 GitHub 上删除文章...",
+            "success": "文章删除成功！",
+            "error": "无法删除文章。",
+            "close": "关闭"
+        },
+        "msg": {
+            "speech_error": "语音识别错误：{0}。",
+            "speech_unavailable": "此浏览器不支持语音识别。",
+            "speech_start_error": "无法启动语音识别：{0}",
+            "pending_changes": "有待保存的更改。",
+            "images_db_unavailable": "数据库不可用：无法保存图片。",
+            "images_optimized": "图片已优化：{0} → {1}。",
+            "images_added": "图片已添加。大小未缩减。",
+            "image_save_error": "无法将图片保存到数据库。",
+            "markdown_load_error": "无法加载 Markdown 渲染器。",
+            "drafts_db_unavailable": "数据库不可用：草稿将不会被保存。",
+            "autosave_ok": "更改已自动保存。",
+            "autosave_error": "无法自动保存。",
+            "nothing_to_save": "保存前请输入标题或正文。",
+            "db_unavailable": "数据库不可用。",
+            "draft_updated": "草稿已更新。",
+            "draft_saved": "草稿保存成功。",
+            "draft_save_error": "保存草稿时出错。",
+            "changes_recovered": "已恢复先前的更改。",
+            "draft_select": "请选择要打开的草稿。",
+            "draft_not_found": "未找到草稿。",
+            "draft_opened": "草稿已成功打开。",
+            "draft_open_error": "打开草稿时出错。",
+            "editor_ready_new": "编辑器已准备好撰写新文章。",
+            "need_title": "请输入文章标题。",
+            "need_content": "请输入文章内容。",
+            "preparing": "正在准备文章...",
+            "published": "文章发布成功。",
+            "prepared": "文章已准备好。内容已保留在编辑器中。",
+            "publish_stage_error": "阶段“{0}”失败：{1}。内容已保留。",
+            "publishing": "正在发布...",
+            "stage_init": "初始化发布",
+            "stage_library": "加载 Markdown 库",
+            "stage_preview": "更新预览",
+            "stage_read": "读取编辑器数据",
+            "stage_autosave": "自动保存",
+            "stage_images": "准备图片",
+            "stage_files": "创建文章文件",
+            "stage_publish": "发布到 GitHub",
+            "stage_confirm": "确认发布",
+            "discard_changes": "放弃正在编辑的文章更改吗？",
+            "post_updated": "文章更新成功。",
+            "post_loaded": "已加载文章以供编辑。",
+            "post_load_error": "无法加载文章以供编辑。",
+            "delete_prepare_error": "无法准备删除：{0}",
+            "delete_error": "删除文章失败：{0}",
+            "draft_untitled": "无标题草稿",
+            "post_missing": "文章在记录中已不存在。已取消更新。",
+            "post_missing_delete": "文章在记录中已不存在。",
+            "github_not_confirmed": "GitHub 未确认删除操作。",
+            "markdown_fetch_error": "无法加载 Markdown。",
+            "need_slug": "请为文章 URL 输入有效的别名 (slug)。",
+            "draft_deleted": "草稿已删除。",
+            "content_placeholder": "撰写文章内容...",
+            "reading_stats": "{words} 字 · 预计阅读 {minutes} 分钟"
+        },
+        "nav": {
+            "session": "GitHub 会话"
+        },
+        "posts_view": {
+            "subtitle": "管理、编辑或删除您已发布的 HTML 文章。",
+            "search_placeholder": "按标题、别名或标签筛选...",
+            "empty": "未找到文章。",
+            "back": "← 返回文章列表",
+            "view": "打开页面"
+        },
+        "session": {
+            "title": "GitHub 会话",
+            "subtitle": "管理 OAuth 身份验证和访问令牌的有效期。",
+            "scope_label": "权限范围：",
+            "obtained_label": "认证时间：",
+            "expires_label": "过期时间：",
+            "refresh_btn": "重新验证会话",
+            "diagnostics_title": "OAuth 诊断",
+            "reload_diagnostics": "刷新",
+            "clear_confirm": "确定要移除保存在此浏览器中的 GitHub 凭据吗？",
+            "status_active": "有效",
+            "status_expiring": "即将过期",
+            "status_expired": "已过期",
+            "status_no_expiry": "无明确过期时间的令牌",
+            "refreshing": "正在通过 GitHub 重新验证会话...",
+            "refreshed": "会话重新验证成功。",
+            "refresh_failed": "无法自动重新验证令牌。",
+            "reauth_needed": "您的 GitHub 会话已过期。请重新认证以继续。",
+            "diagnostics_empty": "无可用诊断信息。",
+            "diagnostics_error": "加载诊断信息时出错。"
+        }
+    },
+    "github_auth": {
+        "title": "GitHub 身份验证",
+        "description": "使用您的 GitHub 帐户进行身份验证以访问管理面板。",
+        "start": "使用 GitHub 认证",
+        "confirm": "确认并继续",
+        "copy_diagnostics": "复制诊断信息",
+        "identity": {
+            "id_label": "ID：",
+            "profile_label": "个人资料：",
+            "email_label": "公开邮箱：",
+            "confirmation": "请确认是否要在管理面板中使用此身份。"
+        },
+        "messages": {
+            "empty": "开始使用 GitHub 进行身份验证。",
+            "verifying": "正在验证身份...",
+            "failed": "GitHub 身份验证失败。请重试。",
+            "authenticated": "已认证为 {0}。",
+            "saving": "正在保存身份信息...",
+            "save_failed": "无法保存身份信息。请重试。"
+        }
+    },
+    "blog": {
+        "empty": "暂无已发布的内容。",
+        "not_found": "未找到文章。",
+        "load_error": "无法加载此文章。",
+        "showing": "显示 {shown} / 共 {total}",
+        "load_more": "加载更多",
+        "read_time": "阅读需 {minutes} 分钟",
+        "updated": "最后更新：{date}",
+        "more_posts": "更多文章",
+        "license": "本内容采用 <a href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br\" class=\"alert-link\" target=\"_blank\" rel=\"license noopener noreferrer\">Creative Commons BY-SA 4.0</a> 许可协议进行许可",
+        "search_placeholder": "搜索文章...",
+        "all_tags": "全部",
+        "no_results": "没有符合所选筛选条件的文章。",
+        "read_article": "阅读文章",
+        "back_to_blog": "返回博客",
+        "copy_code": "复制代码"
+    }
+}
