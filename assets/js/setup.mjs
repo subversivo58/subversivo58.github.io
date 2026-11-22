@@ -118,6 +118,68 @@ if (!navigator.cookieEnabled && PathName(true) !== "nocookie") {
 
 const LocalStorage = AWStorage();
 
+const THEME_STORAGE_KEY = "theme";
+
+const normalizeTheme = value => (value === "dark" ? "dark" : "light");
+
+const getSavedTheme = () => {
+    try {
+        return normalizeTheme(LocalStorage.get(THEME_STORAGE_KEY));
+    } catch (error) {
+        return "light";
+    }
+};
+
+const syncDrawerThemeButtons = theme => {
+    const normalized = normalizeTheme(theme);
+    const darkBtn = dc.getElementById("drawer-theme-dark");
+    const lightBtn = dc.getElementById("drawer-theme-light");
+
+    if (darkBtn) {
+        darkBtn.classList.toggle("d-none", normalized === "dark");
+        darkBtn.setAttribute("aria-pressed", String(normalized === "dark"));
+    }
+
+    if (lightBtn) {
+        lightBtn.classList.toggle("d-none", normalized === "light");
+        lightBtn.setAttribute("aria-pressed", String(normalized === "light"));
+    }
+};
+
+const applyTheme = (theme, { persist = false } = {}) => {
+    const normalized = normalizeTheme(theme);
+
+    dc.documentElement.dataset.theme = normalized;
+    dc.documentElement.classList.toggle("theme-dark", normalized === "dark");
+    dc.documentElement.style.colorScheme = normalized;
+
+    const themeColorMeta = dc.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+        if (!themeColorMeta.dataset.lightColor) {
+            themeColorMeta.dataset.lightColor =
+                themeColorMeta.getAttribute("content") || "#1ebfff";
+        }
+        themeColorMeta.setAttribute(
+            "content",
+            normalized === "dark" ? "#1a2027" : themeColorMeta.dataset.lightColor
+        );
+    }
+
+    syncDrawerThemeButtons(normalized);
+
+    if (persist) {
+        try {
+            LocalStorage.set(THEME_STORAGE_KEY, normalized);
+        } catch (error) {
+            console.error("[THEME]: could not save theme preference", error);
+        }
+    }
+
+    return normalized;
+};
+
+applyTheme(getSavedTheme());
+
 import PolicyHandler from "./modules/models/PolicyHandler.mjs";
 
 import Templates from "./modules/models/Templates.mjs";
@@ -553,6 +615,19 @@ const SetupDOMReady = async evt => {
         } catch (error) {
             console.error("[SETUP]: could not save the language cookie", error);
         }
+    });
+
+    // Alternância de tema claro/escuro pelo botão do Drawer
+    dc.addEventListener("click", evt => {
+        const trigger = evt.target.closest("#drawer-theme-dark, #drawer-theme-light");
+        if (!trigger) return;
+
+        const nextTheme = trigger.id === "drawer-theme-dark" ? "dark" : "light";
+        applyTheme(nextTheme, { persist: true });
+    });
+
+    _.DOM.waitEl(dc, "#drawer-theme", () => {
+        syncDrawerThemeButtons(dc.documentElement.dataset.theme);
     });
 
     // router
