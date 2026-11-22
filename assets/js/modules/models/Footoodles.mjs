@@ -1,3 +1,4 @@
+
 /**
  * @license The MIT License (MIT)
  * @copyright Copyright (c) 2026 Lauro Moraes - [https://github.com/subversivo58]
@@ -27,6 +28,7 @@ class Footoodles {
 
         this.editingId = null
         this.previewObjectUrl = null
+        this.cardPreviewUrls = new Map()
     }
 
     tr(key) {
@@ -109,6 +111,8 @@ class Footoodles {
             { path, content: processed }
         ])
 
+        this.setCardPreviewFile(id, processed)
+
         return entry
     }
 
@@ -122,11 +126,12 @@ class Footoodles {
         const current = list[index]
         const files = []
         let path = current.image
+        let processedImage = null
 
         if (image) {
-            const processed = await this.images.process(image)
-            path = this.imagePath(id, processed)
-            files.push({ path, content: processed })
+            processedImage = await this.images.process(image)
+            path = this.imagePath(id, processedImage)
+            files.push({ path, content: processedImage })
 
             if (current.image !== path && !this.isImageShared(list, current.image, id)) {
                 files.push({ path: current.image, delete: true })
@@ -135,6 +140,11 @@ class Footoodles {
 
         list[index] = { ...current, title, content, image: path }
         await this.commit(`Footoodle: ${title}`, settings, files)
+
+        if (processedImage) {
+            this.setCardPreviewFile(id, processedImage)
+        }
+
         return list[index]
     }
 
@@ -152,6 +162,8 @@ class Footoodles {
             : [{ path: target.image, delete: true }]
 
         await this.commit(`Remove footoodle: ${target.title}`, settings, files)
+
+        this.clearCardPreview(id)
     }
 
     isImageShared(list, path, ignoreId) {
@@ -228,6 +240,26 @@ class Footoodles {
         if (!path || !this.el?.imagePreview) return
         this.el.imagePreview.src = `/${String(path).replace(/^\/+/, '')}`
         this.el.imagePreview.hidden = false
+    }
+
+    setCardPreviewFile(id, file) {
+        this.clearCardPreview(id)
+
+        if (!file) return
+
+        const url = URL.createObjectURL(file)
+        this.cardPreviewUrls.set(id, url)
+
+        return url
+    }
+
+    clearCardPreview(id) {
+        const url = this.cardPreviewUrls.get(id)
+
+        if (url) {
+            URL.revokeObjectURL(url)
+            this.cardPreviewUrls.delete(id)
+        }
     }
 
     openEditor(item) {
@@ -364,7 +396,10 @@ class Footoodles {
         const thumbWrap = document.createElement('div')
         thumbWrap.className = 'admin-footoodle-thumb bg-light'
         const img = document.createElement('img')
-        img.src = `/${String(item.image || '').replace(/^\/+/, '')}`
+
+        img.src = this.cardPreviewUrls.get(item.id)
+            || `/${String(item.image || '').replace(/^\/+/, '')}`
+
         img.alt = item.title || ''
         img.className = 'w-100 h-100'
         img.style.objectFit = 'cover'
