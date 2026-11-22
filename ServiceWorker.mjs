@@ -556,6 +556,7 @@ async function startGitHubOAuth(request) {
 
         authorizationURL.searchParams.set("client_id", GITHUB_CLIENT_ID);
         authorizationURL.searchParams.set("redirect_uri", GITHUB_REDIRECT_URI);
+        authorizationURL.searchParams.set("scope", "public_repo");
         authorizationURL.searchParams.set("state", state);
         authorizationURL.searchParams.set("code_challenge", challenge);
         authorizationURL.searchParams.set("code_challenge_method", "S256");
