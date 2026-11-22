@@ -98,6 +98,12 @@
         ],
         "footoodles": [
             {
+                "id": "WbJwKG1aG",
+                "title": "O futuro da programação moderna: agentes de I.A.",
+                "content": "Este doodle descreve o futuro da programação moderna. Agentes de I.A. em toda a cadeia de processos...desde a criação, depuração e análise de estatísticas tudo terá (em algum momento) um agente de I.A. operando \"por trás das cortinas\".",
+                "image": "assets/footoodles/images/WbJwKG1aG.webp"
+            },
+            {
                 "id": "2PvjPzlqW",
                 "title": "Arquitetura de Software e Código Limpo",
                 "content": "O doodle ilustra a arquitetura de sistemas web modernos: destacando editores de código com destaque de sintaxe, estruturação lógica de componentes e a interface de usuário final focada em UX.",
