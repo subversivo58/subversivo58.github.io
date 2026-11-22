@@ -81,14 +81,6 @@
         "knowmore": "Saiba mais",
         "seelicenses": "Veja as licenças"
     },
-    "langs": {
-        "enUS": "Inglês (Estados Unidos) - [padrão]",
-        "ptBR": "Português (Brasil)",
-        "esES": "Espanhol (Espanha)",
-        "frFR": "Francês (França)",
-        "deDE": "Alemão (Alemanha)",
-        "jaJP": "Japonês"
-    },
     "navbar": {
         "wiki": "WIKI",
         "blog": "blog",
@@ -279,15 +271,7 @@
                 "Sexta-feira",
                 "Sábado"
             ],
-            "short": [
-                "Dom",
-                "Seg",
-                "Ter",
-                "Qua",
-                "Qui",
-                "Sex",
-                "Sáb"
-            ]
+            "short": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
         },
         "months": {
             "long": [
@@ -333,6 +317,19 @@
             "fr_FR": "Francês",
             "de_DE": "Alemão",
             "ja_JP": "Japonês",
+            "hi_IN": "Hindi",
+            "zh_CN": "Chinês (Simplificado)",
+            "ru_RU": "Russo",
+            "bn_BD": "Bengali",
+            "id_ID": "Indonésio",
+            "tr_TR": "Turco",
+            "sw_KE": "Suaíli",
+            "fil_PH": "Filipino",
+            "ko_KR": "Coreano",
+            "th_TH": "Tailandês",
+            "it_IT": "Italiano",
+            "te_IN": "Telugu",
+            "mr_IN": "Marathi",
             "footer": "Não tem opção em seu idioma? Crie uma tradução!"
         },
         "version": {

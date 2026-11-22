@@ -38,6 +38,45 @@
                     <div id="ja-JP" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
                         <div data-i18n-html="modals.language.ja_JP" class="i18n-append">🇯🇵</div>
                     </div>
+<div id="hi-IN" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.hi_IN" class="i18n-append">🇮🇳</div>
+</div>
+<div id="zh-CN" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.zh_CN" class="i18n-append">🇨🇳</div>
+</div>
+<div id="ru-RU" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.ru_RU" class="i18n-append">🇷🇺</div>
+</div>
+<div id="bn-BD" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.bn_BD" class="i18n-append">🇧🇩</div>
+</div>
+<div id="id-ID" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.id_ID" class="i18n-append">🇮🇩</div>
+</div>
+<div id="tr-TR" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.tr_TR" class="i18n-append">🇹🇷</div>
+</div>
+<div id="sw-KE" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.sw_KE" class="i18n-append">🇰🇪</div>
+</div>
+<div id="fil-PH" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.fil_PH" class="i18n-append">🇵🇭</div>
+</div>
+<div id="ko-KR" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.ko_KR" class="i18n-append">🇰🇷</div>
+</div>
+<div id="th-TH" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.th_TH" class="i18n-append">🇹🇭</div>
+</div>
+<div id="it-IT" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.it_IT" class="i18n-append">🇮🇹</div>
+</div>
+<div id="te-IN" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.te_IN" class="i18n-append">🇮🇳</div>
+</div>
+<div id="mr-IN" class="col-6 col-sm-4 col-lg-3 change-language px-2 mt-3 bnh cp fl f32">
+    <div data-i18n-html="modals.language.mr_IN" class="i18n-append">🇮🇳</div>
+</div>
                 </div>
 
 
