@@ -2999,3 +2999,6 @@ html[data-theme="dark"] .wysiwyg-editor .wysiwyg-select {
     border-color: #364152;
 }
 
+html[data-theme="dark"] .markdown-body table {
+    color: #dbe3ec;
+}
