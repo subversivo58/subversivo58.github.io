@@ -1442,7 +1442,7 @@ footer #footbody > div > .widget-column a:hover {
 #modal-notification-content {
     background-image: url(../media/image/notifications-banner.webp);
 }
-#modal-feedback-content {
+html[data-theme="light"] #modal-feedback-content {
     background-image: url(../media/image/feedback-rocket.webp);
     background-size: 100% 55vw !important;
 }
