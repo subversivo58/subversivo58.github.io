@@ -2548,7 +2548,7 @@ TEMA ESCURO (DARK THEME)
 
 html[data-theme="dark"],
 html[data-theme="dark"] body {
-    background-color: #12161b;
+    background-color: #181e25;
     color: #dbe3ec;
 }
 
@@ -2596,10 +2596,6 @@ html[data-theme="dark"] blockquote cite a {
 
 html[data-theme="dark"] .contrast {
     color: #d8e0e8 !important;
-}
-
-html[data-theme="dark"] .text-dark {
-    color: #e2e8f0 !important;
 }
 
 html[data-theme="dark"] .text-muted {
