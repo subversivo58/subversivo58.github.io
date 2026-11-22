@@ -32,7 +32,7 @@
     <div class="admin-layout d-flex w-100">
 
         <!-- SIDEBAR UNIFICADA (DRAWER NO MOBILE, FIXA NO DESKTOP) -->
-        <aside id="admin-sidebar" class="admin-sidebar bg-white border-right d-flex flex-column" aria-label="Admin Navigation">
+        <aside id="admin-sidebar" class="admin-sidebar border-right d-flex flex-column" aria-label="Admin Navigation">
 
             <div class="admin-sidebar-head d-flex align-items-center justify-content-between px-3 py-3 border-bottom">
                 <div class="min-w-0">
@@ -93,7 +93,7 @@
             </nav>
 
             <!-- CARD DE IDENTIDADE GITHUB NA SIDEBAR -->
-            <div class="admin-sidebar-user p-3 border-top bg-light">
+            <div class="admin-sidebar-user p-3 border-top">
                 <div class="d-flex align-items-center mb-2">
                     <picture class="mr-2 flex-shrink-0">
                         <img
