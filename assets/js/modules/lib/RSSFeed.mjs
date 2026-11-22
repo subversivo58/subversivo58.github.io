@@ -52,6 +52,30 @@ export default class RSSFeed {
     }
 
     /**
+     * Resolve um endereço público pertencente ao próprio site.
+     */
+    static buildURL(path, siteOrigin) {
+        if (typeof path !== 'string' || !path.trim()) {
+            return null
+        }
+
+        try {
+            const url = new URL(
+                path.trim().replace(/^\/+/, ''),
+                `${siteOrigin.replace(/\/+$/, '')}/`
+            )
+
+            if (url.origin !== siteOrigin) {
+                return null
+            }
+
+            return url.href
+        } catch {
+            return null
+        }
+    }
+
+    /**
      * Resolve o endereço público de uma postagem.
      */
     static buildPostURL(post, siteOrigin) {
@@ -59,21 +83,30 @@ export default class RSSFeed {
             ? post.path.trim()
             : (post.slug ? `posts/${post.slug}.html` : '')
 
-        if (!path) return null
+        return this.buildURL(path, siteOrigin)
+    }
 
-        try {
-            const url = new URL(
-                path.replace(/^\/+/, ''),
-                `${siteOrigin.replace(/\/+$/, '')}/`
-            )
+    /**
+     * Identifica o tipo MIME da imagem pela extensão.
+     */
+    static getImageType(imageURL) {
+        const extension = imageURL
+            .split(/[?#]/)[0]
+            .split('.')
+            .pop()
+            .toLowerCase()
 
-            // O feed só pode apontar para postagens deste site.
-            if (url.origin !== siteOrigin) return null
-
-            return url.href
-        } catch {
-            return null
+        const types = {
+            avif: 'image/avif',
+            gif: 'image/gif',
+            jpeg: 'image/jpeg',
+            jpg: 'image/jpeg',
+            png: 'image/png',
+            svg: 'image/svg+xml',
+            webp: 'image/webp'
         }
+
+        return types[extension] || 'image/*'
     }
 
     /**
@@ -118,6 +151,11 @@ export default class RSSFeed {
 
                 const summary = String(post.summary || '').trim()
 
+                const cover = this.buildURL(
+                    post.cover,
+                    siteOrigin
+                )
+
                 const tags = Array.isArray(post.tags)
                     ? [...new Set(
                         post.tags
@@ -132,6 +170,7 @@ export default class RSSFeed {
                     publishedAt,
                     updatedAt,
                     summary,
+                    cover,
                     tags
                 }
             })
@@ -148,9 +187,36 @@ export default class RSSFeed {
                 `        <guid isPermaLink="true">${this.escapeXML(item.link)}</guid>`
             ]
 
-            if (item.summary) {
+            if (item.cover) {
+                const imageURL = this.escapeXML(item.cover)
+                const imageType = this.escapeXML(
+                    this.getImageType(item.cover)
+                )
+
+                // Media RSS: imagem principal e miniatura da postagem.
                 fields.push(
-                    `        <description>${this.escapeXML(item.summary)}</description>`
+                    `        <media:content url="${imageURL}" type="${imageType}" medium="image" />`,
+                    `        <media:thumbnail url="${imageURL}" />`
+                )
+            }
+
+            if (item.summary || item.cover) {
+                const descriptionParts = []
+
+                if (item.cover) {
+                    descriptionParts.push(
+                        `<img src="${this.escapeXML(item.cover)}" alt="${this.escapeXML(item.title)}" />`
+                    )
+                }
+
+                if (item.summary) {
+                    descriptionParts.push(
+                        `<p>${this.escapeXML(item.summary)}</p>`
+                    )
+                }
+
+                fields.push(
+                    `        <description>${this.escapeXML(descriptionParts.join('\n'))}</description>`
                 )
             }
 
@@ -184,7 +250,7 @@ export default class RSSFeed {
 
         return [
             '<?xml version="1.0" encoding="UTF-8"?>',
-            '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+            '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">',
             '  <channel>',
             `    <title>${this.escapeXML(channelTitle)}</title>`,
             `    <link>${this.escapeXML(channelLink)}</link>`,
