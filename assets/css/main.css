@@ -1461,9 +1461,14 @@ footer #footbody > div > .widget-column a:hover {
     background-image: url(../media/image/clean-banner-min.webp);
     background-size: 100% 75% !important;
 }
-
+/* BUGS REPORT - TEMA CLARO */
 #modal-bugs-report-content {
-    background-image: url(../media/image/bugs-report-banner.webp);
+    background-image: url(../media/image/bugs-report-black.webp);
+}
+
+/* BUGS REPORT - TEMA ESCURO */
+html[data-theme="dark"] #modal-bugs-report-content {
+    background-image: url(../media/image/bugs-report-white.webp);
 }
 #modal-geolocation-content,
 #modal-getmedia-audio-content,
