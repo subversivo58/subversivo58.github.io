@@ -10,7 +10,7 @@
 import Hashids from '../vendor/Hashids/hashids-es6.mjs'
 import { highlightCodeBlocks } from '../lib/Highlight.mjs'
 
-const SITE_ORIGIN = 'https://subversivo58.github.io'
+const SITE_ORIGIN = `${globalThis.location.protocol}//${globalThis.location.host}`
 const DEFAULT_OG_IMAGE = 'assets/media/image/graph.webp'
 
 const esc = text => String(text ?? '').replace(

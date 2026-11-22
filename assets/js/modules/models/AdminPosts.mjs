@@ -6,6 +6,8 @@
  * @description Gerenciamento de postagens HTML (/posts/<slug>.html) no painel administrativo.
  */
 
+import RSSFeed from '../lib/RSSFeed.mjs'
+
 class AdminPosts {
     constructor(editor) {
         this.editor = editor
@@ -20,8 +22,47 @@ class AdminPosts {
 
         this.settingsPath = this.postManager.settingsPath
         this.sitemapPath = this.postManager.sitemapPath
+        this.feedPath = 'feed.xml'
 
         this.installEditorIntegration()
+    }
+
+    attachRSSFeed(files) {
+        if (!Array.isArray(files)) {
+            throw new Error('rss_files_missing')
+        }
+
+        const settingsFile = files.find(file => (
+            file.path === this.settingsPath &&
+            !file.delete &&
+            typeof file.content === 'string'
+        ))
+
+        if (!settingsFile) {
+            throw new Error('rss_settings_missing')
+        }
+
+        const settings = JSON.parse(settingsFile.content)
+        const posts = settings?.articles?.storage
+
+        if (!Array.isArray(posts)) {
+            throw new Error('rss_posts_invalid')
+        }
+
+        const feedContent = RSSFeed.generate(posts)
+        const feedFile = {
+            path: this.feedPath,
+            content: feedContent
+        }
+        const existingIndex = files.findIndex(file => file.path === this.feedPath)
+
+        if (existingIndex >= 0) {
+            files[existingIndex] = feedFile
+        } else {
+            files.push(feedFile)
+        }
+
+        return files
     }
 
     mount() {
@@ -94,13 +135,15 @@ class AdminPosts {
         const createPost = manager.createPost.bind(manager)
 
         manager.createPost = async data => {
-           if (editor.editingPost) {
-               const post = await this.prepareUpdatePost(editor.editingPost, data)
-               return { ...post, operation: 'update' }
-           }
+            if (editor.editingPost) {
+                const post = await this.prepareUpdatePost(editor.editingPost, data)
+                this.attachRSSFeed(post.files)
+                return { ...post, operation: 'update' }
+            }
 
-           const post = await createPost(data)
-           return { ...post, operation: 'create' }
+            const post = await createPost(data)
+            this.attachRSSFeed(post.files)
+            return { ...post, operation: 'create' }
         }
 
         const resetEditor = editor.resetEditor.bind(editor)
@@ -597,11 +640,14 @@ class AdminPosts {
             })
         }
 
+        const fileList = [...files.values()]
+        this.attachRSSFeed(fileList)
+
         return {
             operation: 'delete',
             slug: current.slug,
             title: current.title,
-            files: [...files.values()],
+            files: fileList,
             updatedSettings,
             updatedSitemap
         }
