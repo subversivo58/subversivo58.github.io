@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Blog Subversivo58</title>
+    <link>https://subversivo58.github.io/blog.html</link>
+    <description>Publicações do Blog Subversivo58.</description>
+    <language>pt-BR</language>
+    <lastBuildDate>Sun, 22 Nov 2026 17:35:01 GMT</lastBuildDate>
+    <atom:link href="https://subversivo58.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+        <title>WebRTC no Front-End Moderno</title>
+        <link>https://subversivo58.github.io/posts/webrtc-no-front-end-moderno.html</link>
+        <guid isPermaLink="true">https://subversivo58.github.io/posts/webrtc-no-front-end-moderno.html</guid>
+        <media:content url="https://subversivo58.github.io/assets/posts/images/7785505f19139808966fee756e43be6cec41db97788d6fcc6f7cd0fd17c3502e.webp" type="image/webp" medium="image" />
+        <media:thumbnail url="https://subversivo58.github.io/assets/posts/images/7785505f19139808966fee756e43be6cec41db97788d6fcc6f7cd0fd17c3502e.webp" />
+        <description>&lt;img src=&quot;https://subversivo58.github.io/assets/posts/images/7785505f19139808966fee756e43be6cec41db97788d6fcc6f7cd0fd17c3502e.webp&quot; alt=&quot;WebRTC no Front-End Moderno&quot; /&gt;
+&lt;p&gt;Houve um tempo em que fazer uma chamada de vídeo ou transmitir áudio pelo navegador exigia a instalação de...&lt;/p&gt;</description>
+        <pubDate>Mon, 16 Nov 2026 16:26:20 GMT</pubDate>
+        <atom:updated>2026-11-22T17:35:00.918Z</atom:updated>
+        <category>webrtc</category>
+        <category>p2p</category>
+        <category>descentralização</category>
+    </item>
+    <item>
+        <title>Descentralização na Web e no Front-End</title>
+        <link>https://subversivo58.github.io/posts/descentralizacao-na-web-e-no-front-end.html</link>
+        <guid isPermaLink="true">https://subversivo58.github.io/posts/descentralizacao-na-web-e-no-front-end.html</guid>
+        <media:content url="https://subversivo58.github.io/assets/posts/images/5e2b2a672acf175f4b6c7bd0a4432e6e8f33d7445ce09f60ca7ba1a03ff4bb17.webp" type="image/webp" medium="image" />
+        <media:thumbnail url="https://subversivo58.github.io/assets/posts/images/5e2b2a672acf175f4b6c7bd0a4432e6e8f33d7445ce09f60ca7ba1a03ff4bb17.webp" />
+        <description>&lt;img src=&quot;https://subversivo58.github.io/assets/posts/images/5e2b2a672acf175f4b6c7bd0a4432e6e8f33d7445ce09f60ca7ba1a03ff4bb17.webp&quot; alt=&quot;Descentralização na Web e no Front-End&quot; /&gt;
+&lt;p&gt;A arquitetura da internet como conhecemos está passando por uma transformação profunda e estrutural. Historicamente, a web tem sido construída sobre...&lt;/p&gt;</description>
+        <pubDate>Mon, 16 Nov 2026 14:17:22 GMT</pubDate>
+        <atom:updated>2026-11-16T14:34:05.326Z</atom:updated>
+        <category>web3</category>
+        <category>p2p</category>
+        <category>crypto</category>
+        <category>ledger</category>
+    </item>
+    <item>
+        <title>Subversivo58: ideias, tecnologia e experimentação</title>
+        <link>https://subversivo58.github.io/posts/subversivo58-ideias-tecnologia-e-experimentacao.html</link>
+        <guid isPermaLink="true">https://subversivo58.github.io/posts/subversivo58-ideias-tecnologia-e-experimentacao.html</guid>
+        <media:content url="https://subversivo58.github.io/assets/posts/images/f942b77456165eda25fc066111c9eced1c983d5558c1eb0bada85dfc405f0bbf.webp" type="image/webp" medium="image" />
+        <media:thumbnail url="https://subversivo58.github.io/assets/posts/images/f942b77456165eda25fc066111c9eced1c983d5558c1eb0bada85dfc405f0bbf.webp" />
+        <description>&lt;img src=&quot;https://subversivo58.github.io/assets/posts/images/f942b77456165eda25fc066111c9eced1c983d5558c1eb0bada85dfc405f0bbf.webp&quot; alt=&quot;Subversivo58: ideias, tecnologia e experimentação&quot; /&gt;
+&lt;p&gt;Subversivo58 — Um espaço nerd dedicado à troca de ideias, experimentações e tecnologia...&lt;/p&gt;</description>
+        <pubDate>Mon, 16 Nov 2026 12:38:40 GMT</pubDate>
+        <atom:updated>2026-11-16T12:38:40.060Z</atom:updated>
+        <category>tech</category>
+        <category>news</category>
+        <category>group</category>
+        <category>community</category>
+    </item>
+    <item>
+        <title>Blockchain Além das Criptomoedas</title>
+        <link>https://subversivo58.github.io/posts/blockchain-alem-das-criptomoedas.html</link>
+        <guid isPermaLink="true">https://subversivo58.github.io/posts/blockchain-alem-das-criptomoedas.html</guid>
+        <media:content url="https://subversivo58.github.io/assets/posts/images/9a1e0dbd20531c57a892aaac8a2a676428b317604825eb24fea57b29544a9cf4.webp" type="image/webp" medium="image" />
+        <media:thumbnail url="https://subversivo58.github.io/assets/posts/images/9a1e0dbd20531c57a892aaac8a2a676428b317604825eb24fea57b29544a9cf4.webp" />
+        <description>&lt;img src=&quot;https://subversivo58.github.io/assets/posts/images/9a1e0dbd20531c57a892aaac8a2a676428b317604825eb24fea57b29544a9cf4.webp&quot; alt=&quot;Blockchain Além das Criptomoedas&quot; /&gt;
+&lt;p&gt;Quando o assunto é blockchain, a associação imediata costuma ser com Bitcoin e outras criptomoedas.&lt;/p&gt;</description>
+        <pubDate>Sun, 15 Nov 2026 12:56:05 GMT</pubDate>
+        <atom:updated>2026-11-15T12:56:05.702Z</atom:updated>
+        <category>blockchain</category>
+        <category>javascript</category>
+        <category>node</category>
+        <category>ledger</category>
+        <category>p2p</category>
+    </item>
+    <item>
+        <title>Assim surge: A teoria do caos</title>
+        <link>https://subversivo58.github.io/posts/assim-surge-a-teoria-do-caos.html</link>
+        <guid isPermaLink="true">https://subversivo58.github.io/posts/assim-surge-a-teoria-do-caos.html</guid>
+        <media:content url="https://subversivo58.github.io/assets/posts/images/6aca0b4283da10a24ef5e55e426103a3b04d3473d24f9e61619de5f65d73db23.webp" type="image/webp" medium="image" />
+        <media:thumbnail url="https://subversivo58.github.io/assets/posts/images/6aca0b4283da10a24ef5e55e426103a3b04d3473d24f9e61619de5f65d73db23.webp" />
+        <description>&lt;img src=&quot;https://subversivo58.github.io/assets/posts/images/6aca0b4283da10a24ef5e55e426103a3b04d3473d24f9e61619de5f65d73db23.webp&quot; alt=&quot;Assim surge: A teoria do caos&quot; /&gt;
+&lt;p&gt;Muito mais que um blog Tem gente que coleciona disco, tem gente que coleciona meme, tem gente que coleciona projeto inacabado no GitHub. Eu me encaixo tranquilo&lt;/p&gt;</description>
+        <pubDate>Sun, 15 Nov 2026 11:02:30 GMT</pubDate>
+        <atom:updated>2026-11-15T11:31:33.216Z</atom:updated>
+        <category>subversivo58</category>
+        <category>tech</category>
+        <category>cult</category>
+    </item>
+  </channel>
+</rss>

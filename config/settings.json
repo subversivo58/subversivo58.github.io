@@ -4,7 +4,14 @@
             "canonical": "0.1.0 [development stage]",
             "tag": "0.1.0"
         },
-        "language": ["pt-BR", "en-US", "es-ES", "fr-FR", "de-DE", "ja-JP"],
+        "language": [
+            "pt-BR",
+            "en-US",
+            "es-ES",
+            "fr-FR",
+            "de-DE",
+            "ja-JP"
+        ],
         "policies": {
             "version": "1.0.0",
             "last_update": "24/09/1985",
@@ -30,9 +37,13 @@
                 "images": [
                     "assets/posts/images/7785505f19139808966fee756e43be6cec41db97788d6fcc6f7cd0fd17c3502e.webp"
                 ],
-                "tags": ["webrtc", "p2p", "descentralização"],
+                "tags": [
+                    "webrtc",
+                    "p2p",
+                    "descentralização"
+                ],
                 "timestamp": 1794846380796,
-                "lastModified": 1794846380796,
+                "lastModified": 1795368900918,
                 "readingTime": 6
             },
             {
@@ -45,7 +56,12 @@
                 "images": [
                     "assets/posts/images/5e2b2a672acf175f4b6c7bd0a4432e6e8f33d7445ce09f60ca7ba1a03ff4bb17.webp"
                 ],
-                "tags": ["web3", "p2p", "crypto", "ledger"],
+                "tags": [
+                    "web3",
+                    "p2p",
+                    "crypto",
+                    "ledger"
+                ],
                 "timestamp": 1794838642626,
                 "lastModified": 1794839645326,
                 "readingTime": 4
@@ -60,7 +76,12 @@
                 "images": [
                     "assets/posts/images/f942b77456165eda25fc066111c9eced1c983d5558c1eb0bada85dfc405f0bbf.webp"
                 ],
-                "tags": ["tech", "news", "group", "community"],
+                "tags": [
+                    "tech",
+                    "news",
+                    "group",
+                    "community"
+                ],
                 "timestamp": 1794832720060,
                 "lastModified": 1794832720060,
                 "readingTime": 4
@@ -75,7 +96,13 @@
                 "images": [
                     "assets/posts/images/9a1e0dbd20531c57a892aaac8a2a676428b317604825eb24fea57b29544a9cf4.webp"
                 ],
-                "tags": ["blockchain", "javascript", "node", "ledger", "p2p"],
+                "tags": [
+                    "blockchain",
+                    "javascript",
+                    "node",
+                    "ledger",
+                    "p2p"
+                ],
                 "timestamp": 1794747365702,
                 "lastModified": 1794747365702,
                 "readingTime": 5
@@ -90,7 +117,11 @@
                 "images": [
                     "assets/posts/images/6aca0b4283da10a24ef5e55e426103a3b04d3473d24f9e61619de5f65d73db23.webp"
                 ],
-                "tags": ["subversivo58", "tech", "cult"],
+                "tags": [
+                    "subversivo58",
+                    "tech",
+                    "cult"
+                ],
                 "timestamp": 1794740550474,
                 "lastModified": 1794742293216,
                 "readingTime": 3
@@ -225,11 +256,17 @@
             ]
         },
         {
-            "source": ["/policies", "/copyright", "/guard"],
+            "source": [
+                "/policies",
+                "/copyright",
+                "/guard"
+            ],
             "files": []
         },
         {
-            "source": ["/admin"],
+            "source": [
+                "/admin"
+            ],
             "files": [
                 {
                     "file": "/assets/tpl/admin-dashboard.tpl",
@@ -309,7 +346,7 @@
         "url": ""
     },
     "cookies_warning": true,
-    "last_modified": 1794846380796,
+    "last_modified": 1795368900918,
     "submissions": {
         "routes": {
             "/bugs": {
