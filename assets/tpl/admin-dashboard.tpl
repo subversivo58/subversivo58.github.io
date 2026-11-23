@@ -1,3 +1,4 @@
+
 <!-- ADMIN DASHBOARD -->
 <section id="admin-dashboard" class="admin-dashboard-shell w-100">
 
@@ -31,7 +32,7 @@
 
     <div class="admin-layout d-flex w-100">
 
-        <!-- SIDEBAR UNIFICADA (DRAWER NO MOBILE, FIXA NO DESKTOP) -->
+        <!-- SIDEBAR UNIFICADA -->
         <aside id="admin-sidebar" class="admin-sidebar border-right d-flex flex-column" aria-label="Admin Navigation">
 
             <div class="admin-sidebar-head d-flex align-items-center justify-content-between px-3 py-3 border-bottom">
@@ -47,6 +48,7 @@
             </div>
 
             <nav class="admin-sidebar-nav p-2 flex-grow-1" role="tablist">
+
                 <button
                     type="button"
                     data-admin-nav="posts"
@@ -90,6 +92,25 @@
                     <span class="i18n admin-nav-label" data-i18n-html="admin_dashboard.nav.session"></span>
                     <span id="admin-session-nav-dot" class="admin-status-dot ml-auto" aria-hidden="true"></span>
                 </button>
+
+                <!-- DEVTOOLS -->
+                <button
+                    type="button"
+                    data-admin-nav="devtools"
+                    class="admin-nav-btn cp"
+                    role="tab"
+                    aria-selected="false">
+                    <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M12 8V4"></path>
+                        <path d="M8 4h8"></path>
+                        <rect x="4" y="8" width="16" height="12" rx="2"></rect>
+                        <path d="M9 13h.01"></path>
+                        <path d="M15 13h.01"></path>
+                        <path d="M9 17h6"></path>
+                    </svg>
+                    <span class="i18n admin-nav-label" data-i18n-html="admin_dashboard.devtools.title">DevTools</span>
+                </button>
+
             </nav>
 
             <!-- CARD DE IDENTIDADE GITHUB NA SIDEBAR -->
@@ -183,7 +204,6 @@
                         data-i18n-html="admin_dashboard.footoodles.new"></button>
                 </div>
 
-                <!-- PAINEL ISOLADO DO EDITOR DE FOOTOODLES -->
                 <div id="admin-footoodles-editor-panel" class="mb-4" hidden></div>
 
                 <div id="admin-footoodles-empty" class="p-4 text-center border bg-white text-muted small" hidden>
@@ -278,6 +298,75 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- VIEW 5: DEVTOOLS -->
+            <section id="admin-view-devtools" class="admin-view" hidden>
+
+                <div class="mb-3 pb-3 border-bottom">
+                    <h2 class="i18n h4 mb-1" data-i18n-html="admin_dashboard.devtools.title">DevTools</h2>
+                    <p class="i18n text-muted small mb-0" data-i18n-html="admin_dashboard.devtools.subtitle"></p>
+                </div>
+
+                <div class="row">
+
+                    <!-- INDEXEDDB -->
+                    <div class="col-12 mb-4">
+                        <div class="card rounded-0 border">
+                            <div class="card-header bg-white py-2">
+                                <h3 class="i18n h6 mb-0" data-i18n-html="admin_dashboard.devtools.indexeddb.title">IndexedDB</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="admin-devtools-indexeddb" class="small">
+                                    <p class="i18n text-muted mb-0" data-i18n-html="admin_dashboard.devtools.loading"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LOCAL STORAGE -->
+                    <div class="col-12 col-lg-6 mb-4">
+                        <div class="card rounded-0 h-100 border">
+                            <div class="card-header bg-white py-2">
+                                <h3 class="i18n h6 mb-0" data-i18n-html="admin_dashboard.devtools.local_storage.title">Local Storage</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="admin-devtools-local-storage" class="small">
+                                    <p class="i18n text-muted mb-0" data-i18n-html="admin_dashboard.devtools.loading"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CACHE STORAGE -->
+                    <div class="col-12 col-lg-6 mb-4">
+                        <div class="card rounded-0 h-100 border">
+                            <div class="card-header bg-white py-2">
+                                <h3 class="i18n h6 mb-0" data-i18n-html="admin_dashboard.devtools.cache_storage.title">Cache Storage</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="admin-devtools-cache-storage" class="small">
+                                    <p class="i18n text-muted mb-0" data-i18n-html="admin_dashboard.devtools.loading"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COOKIES -->
+                    <div class="col-12 mb-4">
+                        <div class="card rounded-0 border">
+                            <div class="card-header bg-white py-2">
+                                <h3 class="i18n h6 mb-0" data-i18n-html="admin_dashboard.devtools.cookies.title">Cookies</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="admin-devtools-cookies" class="small">
+                                    <p class="i18n text-muted mb-0" data-i18n-html="admin_dashboard.devtools.loading"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
