@@ -45,7 +45,6 @@
         }
     },
     "articles": {
-    "articles": {
         "storage": [
             {
                 "slug": "webrtc-no-front-end-moderno",
