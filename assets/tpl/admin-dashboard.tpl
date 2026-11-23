@@ -93,6 +93,22 @@
                     <span id="admin-session-nav-dot" class="admin-status-dot ml-auto" aria-hidden="true"></span>
                 </button>
 
+                <!-- CREDENCIAIS -->
+                <button
+                    type="button"
+                    data-admin-nav="credentials"
+                    class="admin-nav-btn cp"
+                    role="tab"
+                    aria-selected="false">
+                    <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="8" cy="15" r="5"></circle>
+                        <path d="m10.5 11.5 9-9"></path>
+                        <path d="M16 5l3 3"></path>
+                        <path d="M13 8l3 3"></path>
+                    </svg>
+                    <span class="admin-nav-label">Credenciais</span>
+                </button>
+
                 <!-- DEVTOOLS -->
                 <button
                     type="button"
@@ -301,7 +317,59 @@
                 </div>
             </section>
 
-            <!-- VIEW 5: DEVTOOLS -->
+            <!-- VIEW 5: CREDENCIAIS -->
+            <section id="admin-view-credentials" class="admin-view" hidden>
+
+                <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-3 pb-3 border-bottom">
+                    <div class="mb-2 mb-md-0">
+                        <h2 class="h4 mb-1">Credenciais</h2>
+                        <p class="text-muted small mb-0">
+                            Consulte e mantenha as credenciais disponíveis neste painel.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="admin-credentials-new"
+                        class="btn btn-info btn-sm rounded-0 px-3"
+                        disabled
+                        aria-disabled="true"
+                        title="Disponível após a integração do gerenciamento de credenciais">
+                        Nova credencial
+                    </button>
+                </div>
+
+                <!-- RESUMO -->
+                <div class="mb-3">
+                    <span class="small text-muted">
+                        Credenciais cadastradas:
+                        <strong id="admin-credentials-count">0</strong>
+                    </span>
+                </div>
+
+                <!-- LISTAGEM -->
+                <div id="admin-credentials-list" class="row"></div>
+
+                <!-- ESTADO VAZIO -->
+                <div
+                    id="admin-credentials-empty"
+                    class="p-4 text-center border bg-white text-muted small">
+                    <div class="mb-2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <circle cx="8" cy="15" r="5"></circle>
+                            <path d="m10.5 11.5 9-9"></path>
+                            <path d="M16 5l3 3"></path>
+                            <path d="M13 8l3 3"></path>
+                        </svg>
+                    </div>
+                    <p class="mb-0">
+                        Nenhuma credencial cadastrada.
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- VIEW 6: DEVTOOLS -->
             <section id="admin-view-devtools" class="admin-view" hidden>
 
                 <div class="mb-3 pb-3 border-bottom">
