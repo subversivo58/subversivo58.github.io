@@ -38,6 +38,13 @@
         "repository_owner": "subversivo58",
         "repository_name": "subversivo58.github.io"
     },
+    "jwt": {
+        "issuer": "Blog Subversivo58",
+        "proxy": {
+            "endpoint": "https://webpush-proxy.dib.workers.dev"
+        }
+    },
+    "articles": {
     "articles": {
         "storage": [
             {
