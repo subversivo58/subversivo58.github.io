@@ -1685,6 +1685,7 @@ const SetupDOMReady = async evt => {
                     editor: dc.getElementById("admin-view-editor"),
                     footoodles: dc.getElementById("admin-view-footoodles"),
                     session: dc.getElementById("admin-view-session"),
+                    credentials: dc.getElementById("admin-view-credentials"),
                     devtools: dc.getElementById("admin-view-devtools")
                 };
 
