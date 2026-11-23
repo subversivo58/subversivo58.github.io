@@ -161,7 +161,9 @@ const applyTheme = (theme, { persist = false } = {}) => {
         }
         themeColorMeta.setAttribute(
             "content",
-            normalized === "dark" ? "#1a2027" : themeColorMeta.dataset.lightColor
+            normalized === "dark"
+                ? "#1a2027"
+                : themeColorMeta.dataset.lightColor
         );
     }
 
@@ -452,45 +454,56 @@ const SetupDOMReady = async evt => {
     const router = PathName(true);
 
     // Destaca blocos de código imediatamente sem depender de i18n, templates ou API do GitHub.
-    const postCodeEnhancementsPromise = router === "post"
-        ? (async () => {
-            const box = dc.getElementById("index-central-block");
-            if (!box) return;
-            try {
-                const [{ highlightCodeBlocks }, { default: CodeCopy }] = await Promise.all([
-                    import("./modules/lib/Highlight.mjs"),
-                    import("./modules/lib/CodeCopy.mjs")
-                ]);
-                highlightCodeBlocks(box, { autoDetect: true, normalizeBarePre: true });
-                const codeCopy = CodeCopy("#index-central-block", "#code-copy-wrapper-template");
-                codeCopy();
-            } catch (error) {
-                console.error("[POST]: Failed to highlight code blocks.", error);
-            }
+    const postCodeEnhancementsPromise =
+        router === "post"
+            ? (async () => {
+                  const box = dc.getElementById("index-central-block");
+                  if (!box) return;
+                  try {
+                      const [{ highlightCodeBlocks }, { default: CodeCopy }] =
+                          await Promise.all([
+                              import("./modules/lib/Highlight.mjs"),
+                              import("./modules/lib/CodeCopy.mjs")
+                          ]);
+                      highlightCodeBlocks(box, {
+                          autoDetect: true,
+                          normalizeBarePre: true
+                      });
+                      const codeCopy = CodeCopy(
+                          "#index-central-block",
+                          "#code-copy-wrapper-template"
+                      );
+                      codeCopy();
+                  } catch (error) {
+                      console.error(
+                          "[POST]: Failed to highlight code blocks.",
+                          error
+                      );
+                  }
 
-            box.addEventListener("click", async event => {
-                const button = event.target.closest("[data-code-copy]");
-                if (!button || !box.contains(button)) return;
+                  box.addEventListener("click", async event => {
+                      const button = event.target.closest("[data-code-copy]");
+                      if (!button || !box.contains(button)) return;
 
-                const wrapper = button.closest(".code-container");
-                const code = wrapper?.querySelector("pre code");
-                if (!code) return;
+                      const wrapper = button.closest(".code-container");
+                      const code = wrapper?.querySelector("pre code");
+                      if (!code) return;
 
-                try {
-                    await navigator.clipboard.writeText(code.textContent);
-                    const originalContent = button.textContent;
-                    button.textContent = "✓";
-                    button.classList.add("is-copied");
-                    setTimeout(() => {
-                        button.textContent = originalContent;
-                        button.classList.remove("is-copied");
-                    }, 1200);
-                } catch (error) {
-                    console.error("[POST]: Failed to copy code.", error);
-                }
-            });
-        })()
-        : Promise.resolve();
+                      try {
+                          await navigator.clipboard.writeText(code.textContent);
+                          const originalContent = button.textContent;
+                          button.textContent = "✓";
+                          button.classList.add("is-copied");
+                          setTimeout(() => {
+                              button.textContent = originalContent;
+                              button.classList.remove("is-copied");
+                          }, 1200);
+                      } catch (error) {
+                          console.error("[POST]: Failed to copy code.", error);
+                      }
+                  });
+              })()
+            : Promise.resolve();
 
     PolicyHandler.supported = settings.source.language;
     dc.documentElement.lang = PolicyHandler.language;
@@ -619,7 +632,9 @@ const SetupDOMReady = async evt => {
 
     // Alternância de tema claro/escuro pelo botão do Drawer
     dc.addEventListener("click", evt => {
-        const trigger = evt.target.closest("#drawer-theme-dark, #drawer-theme-light");
+        const trigger = evt.target.closest(
+            "#drawer-theme-dark, #drawer-theme-light"
+        );
         if (!trigger) return;
 
         const nextTheme = trigger.id === "drawer-theme-dark" ? "dark" : "light";
@@ -658,8 +673,7 @@ const SetupDOMReady = async evt => {
                     });
 
                     adminAuth = Boolean(
-                        storedAuth?.user &&
-                        storedAuth?.tokens?.access_token
+                        storedAuth?.user && storedAuth?.tokens?.access_token
                     );
                 } catch (error) {
                     console.error(
@@ -701,7 +715,9 @@ const SetupDOMReady = async evt => {
 
             const readAuthorCache = key => {
                 try {
-                    const raw = sessionStorage.getItem(AUTHOR_CACHE_PREFIX + key);
+                    const raw = sessionStorage.getItem(
+                        AUTHOR_CACHE_PREFIX + key
+                    );
                     return raw ? JSON.parse(raw) : null;
                 } catch {
                     return null;
@@ -710,7 +726,10 @@ const SetupDOMReady = async evt => {
 
             const writeAuthorCache = (key, author) => {
                 try {
-                    sessionStorage.setItem(AUTHOR_CACHE_PREFIX + key, JSON.stringify(author));
+                    sessionStorage.setItem(
+                        AUTHOR_CACHE_PREFIX + key,
+                        JSON.stringify(author)
+                    );
                 } catch {
                     // Armazenamento indisponível: segue sem cache.
                 }
@@ -777,21 +796,27 @@ const SetupDOMReady = async evt => {
 
                 if (box) {
                     box.querySelectorAll("time[datetime]").forEach(el => {
-                        const formatted = formatDateLocale(el.getAttribute("datetime"));
+                        const formatted = formatDateLocale(
+                            el.getAttribute("datetime")
+                        );
                         if (formatted) el.textContent = formatted;
                     });
 
-                    box.querySelectorAll("[data-post-reading-time]").forEach(el => {
-                        const mins = Number(el.dataset.postReadingTime);
-                        if (Number.isFinite(mins) && mins > 0) {
-                            el.textContent = i18n
-                                .getWord("blog.read_time")
-                                .replace("{minutes}", Math.ceil(mins));
+                    box.querySelectorAll("[data-post-reading-time]").forEach(
+                        el => {
+                            const mins = Number(el.dataset.postReadingTime);
+                            if (Number.isFinite(mins) && mins > 0) {
+                                el.textContent = i18n
+                                    .getWord("blog.read_time")
+                                    .replace("{minutes}", Math.ceil(mins));
+                            }
                         }
-                    });
+                    );
 
                     box.querySelectorAll("[data-post-updated]").forEach(el => {
-                        const formatted = formatDateLocale(el.dataset.postUpdated);
+                        const formatted = formatDateLocale(
+                            el.dataset.postUpdated
+                        );
                         if (formatted) {
                             el.textContent = i18n
                                 .getWord("blog.updated")
@@ -820,9 +845,14 @@ const SetupDOMReady = async evt => {
                             </span>`;
                     };
 
-                    const authorBox = document.getElementById("post-author-container");
-                    const metaAuthor = document.querySelector('meta[name="post-author"]')?.content;
-                    const authorId = authorBox?.dataset.authorId || metaAuthor || "";
+                    const authorBox = document.getElementById(
+                        "post-author-container"
+                    );
+                    const metaAuthor = document.querySelector(
+                        'meta[name="post-author"]'
+                    )?.content;
+                    const authorId =
+                        authorBox?.dataset.authorId || metaAuthor || "";
 
                     if (authorBox && authorId) {
                         const author = await fetchAuthor(authorId);
@@ -854,13 +884,17 @@ const SetupDOMReady = async evt => {
                 const posts = [...settings.articles.storage].sort(
                     (a, b) => getPostTimestamp(b) - getPostTimestamp(a)
                 );
-                const maxList = Number(settings.articles["blog-max-list"]) || 10;
+                const maxList =
+                    Number(settings.articles["blog-max-list"]) || 10;
 
-                const allTags = [...new Set(
-                    posts.flatMap(p => Array.isArray(p.tags) ? p.tags : [])
-                        .map(t => String(t).trim().toLowerCase())
-                        .filter(Boolean)
-                )].sort();
+                const allTags = [
+                    ...new Set(
+                        posts
+                            .flatMap(p => (Array.isArray(p.tags) ? p.tags : []))
+                            .map(t => String(t).trim().toLowerCase())
+                            .filter(Boolean)
+                    )
+                ].sort();
 
                 let activeTag = "";
                 let searchQuery = "";
@@ -875,13 +909,24 @@ const SetupDOMReady = async evt => {
                             </div>
                         </div>`;
                 } else {
-                    const getFiltered = () => posts.filter(post => {
-                        const tags = Array.isArray(post.tags) ? post.tags.map(t => String(t).toLowerCase()) : [];
-                        if (activeTag && !tags.includes(activeTag)) return false;
-                        if (!searchQuery) return true;
-                        const haystack = [post.title, post.summary, post.slug, ...tags].join(" ").toLowerCase();
-                        return haystack.includes(searchQuery);
-                    });
+                    const getFiltered = () =>
+                        posts.filter(post => {
+                            const tags = Array.isArray(post.tags)
+                                ? post.tags.map(t => String(t).toLowerCase())
+                                : [];
+                            if (activeTag && !tags.includes(activeTag))
+                                return false;
+                            if (!searchQuery) return true;
+                            const haystack = [
+                                post.title,
+                                post.summary,
+                                post.slug,
+                                ...tags
+                            ]
+                                .join(" ")
+                                .toLowerCase();
+                            return haystack.includes(searchQuery);
+                        });
 
                     const normalizeMs = value => {
                         const num = Number(value);
@@ -891,23 +936,39 @@ const SetupDOMReady = async evt => {
 
                     const cardHTML = post => {
                         const postPath = `/${String(post.path || `posts/${post.slug}.html`).replace(/^\/+/, "")}`;
-                        const rawCover = post.cover || (Array.isArray(post.images) ? post.images[0] : "");
+                        const rawCover =
+                            post.cover ||
+                            (Array.isArray(post.images) ? post.images[0] : "");
                         const coverUrl = rawCover
                             ? `/${String(rawCover).replace(/^\/+/, "")}`
                             : "/assets/media/image/graph.webp";
                         const publishedMs = getPostTimestamp(post);
                         const modifiedMs = normalizeMs(post.lastModified);
-                        const publishedIso = publishedMs ? new Date(publishedMs).toISOString() : "";
-                        const modifiedIso = modifiedMs ? new Date(modifiedMs).toISOString() : "";
+                        const publishedIso = publishedMs
+                            ? new Date(publishedMs).toISOString()
+                            : "";
+                        const modifiedIso = modifiedMs
+                            ? new Date(modifiedMs).toISOString()
+                            : "";
                         const dateText = formatDateLocale(publishedMs);
-                        const updatedFormatted = modifiedMs && publishedMs && modifiedMs !== publishedMs
-                            ? formatDateLocale(modifiedMs)
-                            : "";
+                        const updatedFormatted =
+                            modifiedMs &&
+                            publishedMs &&
+                            modifiedMs !== publishedMs
+                                ? formatDateLocale(modifiedMs)
+                                : "";
                         const updatedText = updatedFormatted
-                            ? i18n.getWord("blog.updated").replace("{date}", updatedFormatted)
+                            ? i18n
+                                  .getWord("blog.updated")
+                                  .replace("{date}", updatedFormatted)
                             : "";
-                        const mins = Number(post.readingTime) > 0 ? Math.ceil(Number(post.readingTime)) : 1;
-                        const readText = i18n.getWord("blog.read_time").replace("{minutes}", mins);
+                        const mins =
+                            Number(post.readingTime) > 0
+                                ? Math.ceil(Number(post.readingTime))
+                                : 1;
+                        const readText = i18n
+                            .getWord("blog.read_time")
+                            .replace("{minutes}", mins);
                         const tags = Array.isArray(post.tags) ? post.tags : [];
                         const authorId = post.author ? String(post.author) : "";
 
@@ -937,10 +998,14 @@ const SetupDOMReady = async evt => {
                                             <a href="${escHTML(postPath)}" class="text-dark">${escHTML(post.title)}</a>
                                         </h2>
                                         <p class="small text-muted mb-3 flex-grow-1">${escHTML(post.summary || "")}</p>
-                                        ${tags.length ? `
+                                        ${
+                                            tags.length
+                                                ? `
                                             <div class="d-flex flex-wrap mb-3">
                                                 ${tags.map(tag => `<span class="badge badge-light border mr-1 mb-1 font-weight-normal">${escHTML(tag)}</span>`).join("")}
-                                            </div>` : ""}
+                                            </div>`
+                                                : ""
+                                        }
                                         <div class="mt-auto pt-2 border-top">
                                             <a href="${escHTML(postPath)}" class="i18n btn btn-sm btn-outline-info rounded-0 cp" data-i18n-html="blog.read_article">${escHTML(i18n.getWord("blog.read_article"))}</a>
                                         </div>
@@ -965,18 +1030,26 @@ const SetupDOMReady = async evt => {
                                 </div>
                             </header>
 
-                            ${allTags.length ? `
+                            ${
+                                allTags.length
+                                    ? `
                                 <div id="blog-tag-filters" class="d-flex flex-wrap align-items-center mb-4">
                                     <button type="button"
                                             data-blog-tag=""
                                             class="i18n btn btn-sm btn-outline-secondary rounded-0 mr-2 mb-2 blog-tag-filter active cp"
                                             data-i18n-html="blog.all_tags">${escHTML(i18n.getWord("blog.all_tags"))}</button>
-                                    ${allTags.map(tag => `
+                                    ${allTags
+                                        .map(
+                                            tag => `
                                         <button type="button"
                                                 data-blog-tag="${escHTML(tag)}"
                                                 class="btn btn-sm btn-outline-secondary rounded-0 mr-2 mb-2 blog-tag-filter cp">${escHTML(tag)}</button>
-                                    `).join("")}
-                                </div>` : ""}
+                                    `
+                                        )
+                                        .join("")}
+                                </div>`
+                                    : ""
+                            }
 
                             <div id="blog-empty-filter" class="p-4 text-center border bg-light text-muted mb-4" hidden>
                                 <span class="i18n" data-i18n-html="blog.no_results">${escHTML(i18n.getWord("blog.no_results"))}</span>
@@ -993,15 +1066,26 @@ const SetupDOMReady = async evt => {
                         </div>`;
 
                     const listEl = document.getElementById("blog-list");
-                    const emptyEl = document.getElementById("blog-empty-filter");
+                    const emptyEl =
+                        document.getElementById("blog-empty-filter");
                     const countEl = document.getElementById("blog-count");
                     const moreEl = document.getElementById("blog-more");
-                    const searchInput = document.getElementById("blog-search-input");
-                    const tagsWrap = document.getElementById("blog-tag-filters");
+                    const searchInput =
+                        document.getElementById("blog-search-input");
+                    const tagsWrap =
+                        document.getElementById("blog-tag-filters");
 
                     const hydrateCardAuthors = () => {
-                        const slots = [...listEl.querySelectorAll("[data-blog-author]")];
-                        const uniqueIds = [...new Set(slots.map(el => el.dataset.blogAuthor).filter(Boolean))];
+                        const slots = [
+                            ...listEl.querySelectorAll("[data-blog-author]")
+                        ];
+                        const uniqueIds = [
+                            ...new Set(
+                                slots
+                                    .map(el => el.dataset.blogAuthor)
+                                    .filter(Boolean)
+                            )
+                        ];
 
                         uniqueIds.forEach(async id => {
                             const author = await fetchAuthor(id);
@@ -1026,11 +1110,13 @@ const SetupDOMReady = async evt => {
                                        class="ext-link-icon blog-author-link">${escHTML(displayName)}</a>
                                 </span>`;
 
-                            listEl.querySelectorAll("[data-blog-author]").forEach(slot => {
-                                if (slot.dataset.blogAuthor !== id) return;
-                                slot.innerHTML = badgeHTML;
-                                slot.classList.remove("d-none");
-                            });
+                            listEl
+                                .querySelectorAll("[data-blog-author]")
+                                .forEach(slot => {
+                                    if (slot.dataset.blogAuthor !== id) return;
+                                    slot.innerHTML = badgeHTML;
+                                    slot.classList.remove("d-none");
+                                });
 
                             lazyLoad.observe(listEl);
                         });
@@ -1041,7 +1127,10 @@ const SetupDOMReady = async evt => {
                         const shown = Math.min(visible, filtered.length);
 
                         if (emptyEl) emptyEl.hidden = filtered.length > 0;
-                        listEl.innerHTML = filtered.slice(0, shown).map(cardHTML).join("");
+                        listEl.innerHTML = filtered
+                            .slice(0, shown)
+                            .map(cardHTML)
+                            .join("");
 
                         if (countEl) {
                             countEl.textContent = i18n
@@ -1061,7 +1150,9 @@ const SetupDOMReady = async evt => {
 
                     if (searchInput) {
                         searchInput.addEventListener("input", () => {
-                            searchQuery = searchInput.value.trim().toLowerCase();
+                            searchQuery = searchInput.value
+                                .trim()
+                                .toLowerCase();
                             visible = maxList;
                             renderCatalog();
                         });
@@ -1072,9 +1163,11 @@ const SetupDOMReady = async evt => {
                             const btn = evt.target.closest("[data-blog-tag]");
                             if (!btn) return;
                             activeTag = btn.dataset.blogTag || "";
-                            tagsWrap.querySelectorAll("[data-blog-tag]").forEach(el => {
-                                el.classList.toggle("active", el === btn);
-                            });
+                            tagsWrap
+                                .querySelectorAll("[data-blog-tag]")
+                                .forEach(el => {
+                                    el.classList.toggle("active", el === btn);
+                                });
                             visible = maxList;
                             renderCatalog();
                         });
@@ -1092,11 +1185,21 @@ const SetupDOMReady = async evt => {
             }
 
             if (router === "admin") {
-                const [{ default: WysiwygEditor }, { default: GitHubAPI }] =
-                    await Promise.all([
-                        import("./modules/models/WysiwygEditor.mjs"),
-                        import("./modules/lib/GitHubAPI.mjs")
-                    ]);
+                const [
+                    { default: WysiwygEditor },
+                    { default: GitHubAPI },
+                    { default: DeveloperTools }
+                ] = await Promise.all([
+                    import("./modules/models/WysiwygEditor.mjs"),
+                    import("./modules/lib/GitHubAPI.mjs"),
+                    import("./modules/lib/DeveloperTools.mjs")
+                ]);
+
+                const DevTools = new DeveloperTools({
+                    database: DBMethods,
+                    databaseName: settings.database.name,
+                    databaseVersion: settings.database.version
+                });
 
                 const REPOSITORY_OWNER = settings.github_auth.repository_owner;
                 const REPOSITORY_NAME = settings.github_auth.repository_name;
@@ -1126,10 +1229,16 @@ const SetupDOMReady = async evt => {
                 const modal = dc.getElementById("modal-github-auth");
                 const statusElement = dc.getElementById("github-auth-status");
                 const introElement = dc.getElementById("github-auth-intro");
-                const identityElement = dc.getElementById("github-auth-identity");
+                const identityElement = dc.getElementById(
+                    "github-auth-identity"
+                );
                 const errorElement = dc.getElementById("github-auth-error");
-                const diagnosticsElement = dc.getElementById("github-auth-diagnostics");
-                const copyDiagnosticsButton = dc.getElementById("github-auth-copy-diagnostics");
+                const diagnosticsElement = dc.getElementById(
+                    "github-auth-diagnostics"
+                );
+                const copyDiagnosticsButton = dc.getElementById(
+                    "github-auth-copy-diagnostics"
+                );
 
                 if (
                     !modal ||
@@ -1150,8 +1259,10 @@ const SetupDOMReady = async evt => {
                 let refreshInFlight = null;
 
                 const showAuthError = error => {
-                    const message = error instanceof Error ? error.message : String(error);
-                    statusElement.textContent = authMessage("github_auth_failed");
+                    const message =
+                        error instanceof Error ? error.message : String(error);
+                    statusElement.textContent =
+                        authMessage("github_auth_failed");
                     diagnosticsElement.textContent = message;
                     errorElement.hidden = false;
                     console.error("[ADMIN AUTH]:", error);
@@ -1163,7 +1274,10 @@ const SetupDOMReady = async evt => {
                     try {
                         await navigator.clipboard.writeText(diagnostics);
                     } catch (error) {
-                        console.error("[ADMIN AUTH]: Não foi possível copiar o diagnóstico.", error);
+                        console.error(
+                            "[ADMIN AUTH]: Não foi possível copiar o diagnóstico.",
+                            error
+                        );
                     }
                 });
 
@@ -1171,7 +1285,8 @@ const SetupDOMReady = async evt => {
                     if (!user || typeof user !== "object") return;
                     currentGitHubUser = user;
 
-                    const profileURL = user.profile_url || user.html_url || user.url || "";
+                    const profileURL =
+                        user.profile_url || user.html_url || user.url || "";
 
                     const sideAvatar = dc.getElementById("admin-github-avatar");
                     const sideName = dc.getElementById("admin-github-name");
@@ -1182,14 +1297,22 @@ const SetupDOMReady = async evt => {
                         sideAvatar.alt = user.name || user.login || "GitHub";
                         if (user.avatar_url) lazyLoad.observe([sideAvatar]);
                     }
-                    if (sideName) sideName.textContent = user.name || user.login || "";
-                    if (sideLogin) sideLogin.textContent = user.login ? `@${user.login}` : "";
+                    if (sideName)
+                        sideName.textContent = user.name || user.login || "";
+                    if (sideLogin)
+                        sideLogin.textContent = user.login
+                            ? `@${user.login}`
+                            : "";
 
-                    const sessAvatar = dc.getElementById("admin-session-avatar");
+                    const sessAvatar = dc.getElementById(
+                        "admin-session-avatar"
+                    );
                     const sessName = dc.getElementById("admin-session-name");
                     const sessLogin = dc.getElementById("admin-session-login");
                     const sessId = dc.getElementById("admin-session-id");
-                    const sessProfile = dc.getElementById("admin-session-profile");
+                    const sessProfile = dc.getElementById(
+                        "admin-session-profile"
+                    );
                     const sessEmail = dc.getElementById("admin-session-email");
 
                     if (sessAvatar) {
@@ -1197,8 +1320,12 @@ const SetupDOMReady = async evt => {
                         sessAvatar.alt = user.name || user.login || "GitHub";
                         if (user.avatar_url) lazyLoad.observe([sessAvatar]);
                     }
-                    if (sessName) sessName.textContent = user.name || user.login || "";
-                    if (sessLogin) sessLogin.textContent = user.login ? `@${user.login}` : "";
+                    if (sessName)
+                        sessName.textContent = user.name || user.login || "";
+                    if (sessLogin)
+                        sessLogin.textContent = user.login
+                            ? `@${user.login}`
+                            : "";
                     if (sessId) sessId.textContent = String(user.id ?? "");
                     if (sessProfile) {
                         sessProfile.textContent = profileURL;
@@ -1210,30 +1337,47 @@ const SetupDOMReady = async evt => {
                 const renderSessionDetails = storedAuth => {
                     const tokens = storedAuth?.tokens || {};
                     const scopeEl = dc.getElementById("admin-session-scope");
-                    const obtainedEl = dc.getElementById("admin-session-obtained");
-                    const expiresEl = dc.getElementById("admin-session-expires");
-                    const statusBadge = dc.getElementById("admin-session-status-badge");
+                    const obtainedEl = dc.getElementById(
+                        "admin-session-obtained"
+                    );
+                    const expiresEl = dc.getElementById(
+                        "admin-session-expires"
+                    );
+                    const statusBadge = dc.getElementById(
+                        "admin-session-status-badge"
+                    );
                     const navDot = dc.getElementById("admin-session-nav-dot");
 
-                    if (scopeEl) scopeEl.textContent = tokens.scope || "default";
+                    if (scopeEl)
+                        scopeEl.textContent = tokens.scope || "default";
 
                     const obtainedAt = Number(tokens.obtained_at);
                     const expiresIn = Number(tokens.expires_in);
 
                     if (obtainedEl) {
-                        obtainedEl.textContent = Number.isFinite(obtainedAt) && obtainedAt > 0
-                            ? new Date(obtainedAt).toLocaleString(PolicyHandler.language)
-                            : "—";
+                        obtainedEl.textContent =
+                            Number.isFinite(obtainedAt) && obtainedAt > 0
+                                ? new Date(obtainedAt).toLocaleString(
+                                      PolicyHandler.language
+                                  )
+                                : "—";
                     }
 
                     let dotClass = "is-ok";
                     let badgeClass = "badge-success";
                     let statusKey = "status_active";
 
-                    if (Number.isFinite(expiresIn) && expiresIn > 0 && Number.isFinite(obtainedAt) && obtainedAt > 0) {
+                    if (
+                        Number.isFinite(expiresIn) &&
+                        expiresIn > 0 &&
+                        Number.isFinite(obtainedAt) &&
+                        obtainedAt > 0
+                    ) {
                         const expiresAt = obtainedAt + expiresIn * 1000;
                         if (expiresEl) {
-                            expiresEl.textContent = new Date(expiresAt).toLocaleString(PolicyHandler.language);
+                            expiresEl.textContent = new Date(
+                                expiresAt
+                            ).toLocaleString(PolicyHandler.language);
                         }
                         const remaining = expiresAt - Date.now();
                         if (remaining <= 0) {
@@ -1246,7 +1390,9 @@ const SetupDOMReady = async evt => {
                             statusKey = "status_expiring";
                         }
                     } else {
-                        if (expiresEl) expiresEl.textContent = dashMessage("status_no_expiry") || "—";
+                        if (expiresEl)
+                            expiresEl.textContent =
+                                dashMessage("status_no_expiry") || "—";
                     }
 
                     if (statusBadge) {
@@ -1259,26 +1405,38 @@ const SetupDOMReady = async evt => {
                 };
 
                 const loadSessionDiagnostics = async () => {
-                    const diagPre = dc.getElementById("admin-session-diagnostics");
+                    const diagPre = dc.getElementById(
+                        "admin-session-diagnostics"
+                    );
                     if (!diagPre) return;
 
                     try {
-                        const response = await fetch("/admin-auth/diagnostics", {
-                            cache: "no-store",
-                            credentials: "same-origin"
-                        });
-                        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                        const response = await fetch(
+                            "/admin-auth/diagnostics",
+                            {
+                                cache: "no-store",
+                                credentials: "same-origin"
+                            }
+                        );
+                        if (!response.ok)
+                            throw new Error(`HTTP ${response.status}`);
                         const payload = await response.json();
-                        const entries = Array.isArray(payload?.entries) ? payload.entries : [];
+                        const entries = Array.isArray(payload?.entries)
+                            ? payload.entries
+                            : [];
 
                         if (!entries.length) {
-                            diagPre.textContent = dashMessage("diagnostics_empty");
+                            diagPre.textContent =
+                                dashMessage("diagnostics_empty");
                             return;
                         }
 
                         diagPre.textContent = entries
                             .slice(-40)
-                            .map(entry => `[${entry.time}] ${entry.stage} (${entry.status}): ${entry.details}`)
+                            .map(
+                                entry =>
+                                    `[${entry.time}] ${entry.stage} (${entry.status}): ${entry.details}`
+                            )
                             .join("\n");
                     } catch {
                         diagPre.textContent = dashMessage("diagnostics_error");
@@ -1310,8 +1468,12 @@ const SetupDOMReady = async evt => {
                     }
 
                     if (!response.ok || !payload?.ok) {
-                        const err = new Error(payload?.message || `HTTP ${response.status}`);
-                        err.reauthRequired = Boolean(payload?.reauth_required || response.status === 401);
+                        const err = new Error(
+                            payload?.message || `HTTP ${response.status}`
+                        );
+                        err.reauthRequired = Boolean(
+                            payload?.reauth_required || response.status === 401
+                        );
                         throw err;
                     }
 
@@ -1320,19 +1482,28 @@ const SetupDOMReady = async evt => {
                         tbk: "user-github"
                     });
 
-                    if (!updatedAuth?.user || !updatedAuth?.tokens?.access_token) {
-                        const err = new Error("Credenciais renovadas não encontradas no IndexedDB.");
+                    if (
+                        !updatedAuth?.user ||
+                        !updatedAuth?.tokens?.access_token
+                    ) {
+                        const err = new Error(
+                            "Credenciais renovadas não encontradas no IndexedDB."
+                        );
                         err.reauthRequired = true;
                         throw err;
                     }
 
-                    GitHubAPIInstance = new GitHubAPI({ token: updatedAuth.tokens.access_token });
+                    GitHubAPIInstance = new GitHubAPI({
+                        token: updatedAuth.tokens.access_token
+                    });
                     renderAdminGitHubIdentity(updatedAuth.user);
                     renderSessionDetails(updatedAuth);
                     return true;
                 };
 
-                const ensureValidGitHubSession = async (forceRefresh = false) => {
+                const ensureValidGitHubSession = async (
+                    forceRefresh = false
+                ) => {
                     if (!DBMethods) return false;
 
                     const run = async () => {
@@ -1357,21 +1528,31 @@ const SetupDOMReady = async evt => {
                             expiresIn > 0 &&
                             Number.isFinite(obtainedAt) &&
                             obtainedAt > 0 &&
-                            Date.now() >= obtainedAt + expiresIn * 1000 - TOKEN_REFRESH_MARGIN_MS;
+                            Date.now() >=
+                                obtainedAt +
+                                    expiresIn * 1000 -
+                                    TOKEN_REFRESH_MARGIN_MS;
 
                         if (forceRefresh || isExpiring) {
                             if (!tokens.refresh_token) {
                                 if (forceRefresh) {
-                                    openReauthModal(dashMessage("reauth_needed"));
+                                    openReauthModal(
+                                        dashMessage("reauth_needed")
+                                    );
                                     return false;
                                 }
                             } else {
                                 try {
                                     return await performTokenRefresh();
                                 } catch (error) {
-                                    console.error("[ADMIN AUTH REFRESH]:", error);
+                                    console.error(
+                                        "[ADMIN AUTH REFRESH]:",
+                                        error
+                                    );
                                     if (error.reauthRequired) {
-                                        openReauthModal(dashMessage("reauth_needed"));
+                                        openReauthModal(
+                                            dashMessage("reauth_needed")
+                                        );
                                     }
                                     return false;
                                 }
@@ -1386,16 +1567,23 @@ const SetupDOMReady = async evt => {
                                 renderAdminGitHubIdentity(user);
                                 renderSessionDetails(storedAuth);
                             } catch (error) {
-                                if (error?.response?.status === 401 && tokens.refresh_token) {
+                                if (
+                                    error?.response?.status === 401 &&
+                                    tokens.refresh_token
+                                ) {
                                     try {
                                         return await performTokenRefresh();
                                     } catch (refreshErr) {
-                                        openReauthModal(dashMessage("reauth_needed"));
+                                        openReauthModal(
+                                            dashMessage("reauth_needed")
+                                        );
                                         return false;
                                     }
                                 }
                                 if (error?.response?.status === 401) {
-                                    openReauthModal(dashMessage("reauth_needed"));
+                                    openReauthModal(
+                                        dashMessage("reauth_needed")
+                                    );
                                     return false;
                                 }
                                 throw error;
@@ -1445,7 +1633,9 @@ const SetupDOMReady = async evt => {
                     }
                 };
 
-                statusElement.textContent = authMessage("github_auth_verifying");
+                statusElement.textContent = authMessage(
+                    "github_auth_verifying"
+                );
 
                 try {
                     await loadAdminGitHubAuth();
@@ -1459,13 +1649,19 @@ const SetupDOMReady = async evt => {
                 const sidebar = dc.getElementById("admin-sidebar");
                 const sidebarToggle = dc.getElementById("admin-sidebar-toggle");
                 const sidebarClose = dc.getElementById("admin-sidebar-close");
-                const sidebarBackdrop = dc.getElementById("admin-sidebar-backdrop");
+                const sidebarBackdrop = dc.getElementById(
+                    "admin-sidebar-backdrop"
+                );
 
                 const setSidebarOpen = open => {
                     if (!sidebar) return;
                     sidebar.classList.toggle("is-open", open);
                     if (sidebarBackdrop) sidebarBackdrop.hidden = !open;
-                    if (sidebarToggle) sidebarToggle.setAttribute("aria-expanded", String(open));
+                    if (sidebarToggle)
+                        sidebarToggle.setAttribute(
+                            "aria-expanded",
+                            String(open)
+                        );
                 };
 
                 if (sidebarToggle) {
@@ -1474,21 +1670,30 @@ const SetupDOMReady = async evt => {
                     });
                 }
                 if (sidebarClose) {
-                    sidebarClose.addEventListener("click", () => setSidebarOpen(false));
+                    sidebarClose.addEventListener("click", () =>
+                        setSidebarOpen(false)
+                    );
                 }
                 if (sidebarBackdrop) {
-                    sidebarBackdrop.addEventListener("click", () => setSidebarOpen(false));
+                    sidebarBackdrop.addEventListener("click", () =>
+                        setSidebarOpen(false)
+                    );
                 }
 
                 const views = {
                     posts: dc.getElementById("admin-view-posts"),
                     editor: dc.getElementById("admin-view-editor"),
                     footoodles: dc.getElementById("admin-view-footoodles"),
-                    session: dc.getElementById("admin-view-session")
+                    session: dc.getElementById("admin-view-session"),
+                    devtools: dc.getElementById("admin-view-devtools")
                 };
 
                 const showAdminView = viewName => {
                     const target = views[viewName] ? viewName : "posts";
+
+                    if (target === "devtools") {
+                        loadDevTools();
+                    }
                     Object.entries(views).forEach(([key, section]) => {
                         if (section) section.hidden = key !== target;
                     });
@@ -1504,11 +1709,452 @@ const SetupDOMReady = async evt => {
 
                     if (target === "session") {
                         DBMethods?.read({ tbn: "config", tbk: "user-github" })
-                            .then(stored => stored && renderSessionDetails(stored))
+                            .then(
+                                stored => stored && renderSessionDetails(stored)
+                            )
                             .catch(() => {});
                         loadSessionDiagnostics();
                     }
                 };
+                const devToolsRoot = views.devtools;
+
+                const devToolsText = (key, fallback) => {
+                    const value = i18n.getWord(
+                        `admin_dashboard.devtools.${key}`
+                    );
+                    return value && value !== `admin_dashboard.devtools.${key}`
+                        ? value
+                        : fallback;
+                };
+
+                const devToolsButton = (action, label, attributes = "") => `
+    <button
+        type="button"
+        class="btn btn-sm btn-outline-danger rounded-0 mt-2"
+        data-devtools-action="${action}"
+        ${attributes}>
+        ${escHTML(label)}
+    </button>
+`;
+
+                const devToolsError = error => `
+    <p class="text-danger mb-0">
+        ${escHTML(error?.message || String(error))}
+    </p>
+`;
+
+                const devToolsServiceWorkers = document.createElement("div");
+                devToolsServiceWorkers.className = "col-12 mb-4";
+                devToolsServiceWorkers.innerHTML = `
+    <div class="card rounded-0 border">
+        <div class="card-header bg-white py-2">
+            <h3 class="h6 mb-0">Service Workers</h3>
+        </div>
+        <div class="card-body">
+            <div id="admin-devtools-service-workers" class="small"></div>
+        </div>
+    </div>
+`;
+
+                devToolsRoot
+                    .querySelector(".row")
+                    ?.prepend(devToolsServiceWorkers);
+
+                const renderServiceWorkers = result => {
+                    const root = dc.getElementById(
+                        "admin-devtools-service-workers"
+                    );
+
+                    if (!root) return;
+
+                    if (!result.registrations.length) {
+                        root.textContent = "Nenhum Service Worker registrado.";
+                        return;
+                    }
+
+                    root.innerHTML = result.registrations
+                        .map(
+                            registration => `
+        <article class="border-bottom pb-3 mb-3">
+            <p class="font-weight-bold mb-1">
+                ${escHTML(registration.scope)}
+            </p>
+
+            ${["active", "waiting", "installing"]
+                .map(state => {
+                    const worker = registration[state];
+
+                    return worker
+                        ? `
+                    <div class="mb-1">
+                        <strong>${state}:</strong>
+                        ${escHTML(worker.state)}
+                        <div class="text-muted text-break">
+                            ${escHTML(worker.scriptURL)}
+                        </div>
+                    </div>
+                `
+                        : "";
+                })
+                .join("")}
+
+            ${devToolsButton(
+                "unregister-sw",
+                "Desregistrar",
+                `data-scope="${escHTML(registration.scope)}"`
+            )}
+        </article>
+    `
+                        )
+                        .join("");
+                };
+
+                const renderIndexedDB = result => {
+                    const root = dc.getElementById("admin-devtools-indexeddb");
+
+                    if (!root) return;
+
+                    if (!result.databases.length) {
+                        root.textContent = "Nenhum banco IndexedDB encontrado.";
+                        return;
+                    }
+
+                    root.innerHTML = result.databases
+                        .map(
+                            database => `
+        <article class="border-bottom pb-3 mb-3">
+            <p class="font-weight-bold mb-1">
+                ${escHTML(database.name)}
+            </p>
+
+            <p class="text-muted mb-1">
+                Versão: ${escHTML(database.version ?? "—")}
+            </p>
+
+            ${
+                database.isApplicationDatabase
+                    ? `
+                <p class="text-success mb-1">
+                    Banco da aplicação
+                </p>
+
+                <strong>Object Stores:</strong>
+
+                <ul class="mb-0">
+                    ${(database.objectStores || [])
+                        .map(
+                            store => `
+                        <li>${escHTML(store)}</li>
+                    `
+                        )
+                        .join("")}
+                </ul>
+            `
+                    : `
+                ${devToolsButton(
+                    "delete-db",
+                    "Excluir banco",
+                    `data-name="${escHTML(database.name)}"`
+                )}
+            `
+            }
+        </article>
+    `
+                        )
+                        .join("");
+                };
+
+                const renderCaches = result => {
+                    const root = dc.getElementById(
+                        "admin-devtools-cache-storage"
+                    );
+
+                    if (!root) return;
+
+                    if (!result.caches.length) {
+                        root.textContent = "Nenhum cache encontrado.";
+                        return;
+                    }
+
+                    root.innerHTML = result.caches
+                        .map(
+                            cache => `
+        <article class="border-bottom pb-3 mb-3">
+            <p class="font-weight-bold mb-1">
+                ${escHTML(cache.name)}
+            </p>
+
+            <p class="text-muted mb-2">
+                Entradas: ${cache.count}
+            </p>
+
+            <ul class="mb-2 pl-3">
+                ${cache.entries
+                    .map(
+                        url => `
+                    <li class="text-break">${escHTML(url)}</li>
+                `
+                    )
+                    .join("")}
+            </ul>
+
+            ${devToolsButton(
+                "delete-cache",
+                "Excluir cache",
+                `data-name="${escHTML(cache.name)}"`
+            )}
+        </article>
+    `
+                        )
+                        .join("");
+                };
+
+                const renderWebStorage = result => {
+                    const root = dc.getElementById(
+                        "admin-devtools-local-storage"
+                    );
+
+                    if (!root) return;
+
+                    const renderArea = (name, storage) => `
+        <section class="mb-4">
+            <h4 class="h6">${name}</h4>
+
+            <p class="text-muted mb-2">
+                Registros: ${storage.count}
+            </p>
+
+            ${
+                storage.entries.length
+                    ? `
+                ${storage.entries
+                    .map(
+                        entry => `
+                    <div class="border-bottom py-2">
+                        <strong class="text-break">
+                            ${escHTML(entry.key)}
+                        </strong>
+
+                        <pre class="small bg-light border p-2 mt-1 mb-0 text-break">${escHTML(entry.value)}</pre>
+                    </div>
+                `
+                    )
+                    .join("")}
+            `
+                    : `
+                <p class="text-muted">Nenhum registro.</p>
+            `
+            }
+
+            ${devToolsButton(
+                "clear-storage",
+                `Limpar ${name}`,
+                `data-type="${name}"`
+            )}
+        </section>
+    `;
+
+                    root.innerHTML =
+                        renderArea("Local Storage", result.localStorage) +
+                        renderArea("Session Storage", result.sessionStorage);
+                };
+
+                const renderCookies = result => {
+                    const root = dc.getElementById("admin-devtools-cookies");
+
+                    if (!root) return;
+
+                    if (!result.cookies.length) {
+                        root.textContent =
+                            "Nenhum cookie acessível encontrado.";
+                        return;
+                    }
+
+                    root.innerHTML = result.cookies
+                        .map(
+                            cookie => `
+        <article class="border-bottom pb-3 mb-3">
+            <strong>${escHTML(cookie.name)}</strong>
+
+            <pre class="small bg-light border p-2 mt-1 text-break">${escHTML(cookie.value)}</pre>
+
+            <p class="text-muted mb-1">
+                Domínio: ${escHTML(cookie.domain || "—")}
+            </p>
+
+            <p class="text-muted mb-1">
+                Caminho: ${escHTML(cookie.path || "—")}
+            </p>
+
+            <p class="text-muted mb-1">
+                SameSite: ${escHTML(cookie.sameSite || "—")}
+            </p>
+
+            ${devToolsButton(
+                "delete-cookie",
+                "Excluir cookie",
+                `data-name="${escHTML(cookie.name)}"
+                 data-domain="${escHTML(cookie.domain || "")}"
+                 data-path="${escHTML(cookie.path || "/")}"`
+            )}
+        </article>
+    `
+                        )
+                        .join("");
+                };
+
+                let devToolsLoading = false;
+
+                const loadDevTools = async () => {
+                    if (devToolsLoading || !devToolsRoot) return;
+
+                    devToolsLoading = true;
+
+                    try {
+                        const result = await DevTools.refresh();
+
+                        const renderers = {
+                            serviceWorkers: renderServiceWorkers,
+                            indexedDB: renderIndexedDB,
+                            caches: renderCaches,
+                            webStorage: renderWebStorage,
+                            cookies: renderCookies
+                        };
+
+                        Object.entries(renderers).forEach(([name, render]) => {
+                            const error = result.errors[name];
+
+                            if (error) {
+                                const target = {
+                                    serviceWorkers:
+                                        "admin-devtools-service-workers",
+                                    indexedDB: "admin-devtools-indexeddb",
+                                    caches: "admin-devtools-cache-storage",
+                                    webStorage: "admin-devtools-local-storage",
+                                    cookies: "admin-devtools-cookies"
+                                }[name];
+
+                                const element = dc.getElementById(target);
+
+                                if (element) {
+                                    element.innerHTML = devToolsError(
+                                        error.message
+                                    );
+                                }
+
+                                return;
+                            }
+
+                            if (result.data[name]) {
+                                render(result.data[name]);
+                            }
+                        });
+                    } catch (error) {
+                        console.error("[DEVTOOLS]:", error);
+                    } finally {
+                        devToolsLoading = false;
+                    }
+                };
+
+                devToolsRoot.addEventListener("click", async event => {
+                    const button = event.target.closest(
+                        "[data-devtools-action]"
+                    );
+
+                    if (!button) return;
+
+                    const action = button.dataset.devtoolsAction;
+
+                    try {
+                        button.disabled = true;
+
+                        switch (action) {
+                            case "unregister-sw": {
+                                const scope = button.dataset.scope;
+
+                                if (
+                                    !confirm(
+                                        `Desregistrar este Service Worker?\n${scope}`
+                                    )
+                                ) {
+                                    return;
+                                }
+
+                                await DevTools.unregisterServiceWorker(scope);
+                                break;
+                            }
+
+                            case "delete-db": {
+                                const name = button.dataset.name;
+
+                                if (
+                                    !confirm(
+                                        `Excluir o banco IndexedDB "${name}"?`
+                                    )
+                                ) {
+                                    return;
+                                }
+
+                                await DevTools.deleteIndexedDB(name);
+                                break;
+                            }
+
+                            case "delete-cache": {
+                                const name = button.dataset.name;
+
+                                if (!confirm(`Excluir o cache "${name}"?`)) {
+                                    return;
+                                }
+
+                                await DevTools.deleteCache(name);
+                                break;
+                            }
+
+                            case "clear-storage": {
+                                const type = button.dataset.type;
+
+                                if (
+                                    !confirm(
+                                        `Limpar todo o conteúdo de ${type}?`
+                                    )
+                                ) {
+                                    return;
+                                }
+
+                                DevTools.clearStorage(type);
+                                break;
+                            }
+
+                            case "delete-cookie": {
+                                const name = button.dataset.name;
+                                const domain = button.dataset.domain;
+                                const path = button.dataset.path;
+
+                                if (!confirm(`Excluir o cookie "${name}"?`)) {
+                                    return;
+                                }
+
+                                await DevTools.deleteCookie({
+                                    name,
+                                    ...(domain ? { domain } : {}),
+                                    ...(path ? { path } : {})
+                                });
+
+                                break;
+                            }
+
+                            default:
+                                return;
+                        }
+
+                        await loadDevTools();
+                    } catch (error) {
+                        console.error("[DEVTOOLS]: Operation failed.", error);
+                        alert(error?.message || String(error));
+                    } finally {
+                        button.disabled = false;
+                    }
+                });
 
                 window.__adminShowView = showAdminView;
 
@@ -1518,22 +2164,30 @@ const SetupDOMReady = async evt => {
                     });
                 });
 
-                const mobileNewPost = dc.getElementById("admin-mobile-new-post");
+                const mobileNewPost = dc.getElementById(
+                    "admin-mobile-new-post"
+                );
                 if (mobileNewPost) {
                     mobileNewPost.addEventListener("click", () => {
                         dc.getElementById("admin-new-post")?.click();
                     });
                 }
 
-                const sessionRefreshBtn = dc.getElementById("admin-session-refresh");
-                const sessionRefreshStatus = dc.getElementById("admin-session-refresh-status");
+                const sessionRefreshBtn = dc.getElementById(
+                    "admin-session-refresh"
+                );
+                const sessionRefreshStatus = dc.getElementById(
+                    "admin-session-refresh-status"
+                );
                 if (sessionRefreshBtn) {
                     sessionRefreshBtn.addEventListener("click", async () => {
                         sessionRefreshBtn.disabled = true;
                         if (sessionRefreshStatus) {
                             sessionRefreshStatus.hidden = false;
-                            sessionRefreshStatus.className = "small mt-2 mb-0 text-muted";
-                            sessionRefreshStatus.textContent = dashMessage("refreshing");
+                            sessionRefreshStatus.className =
+                                "small mt-2 mb-0 text-muted";
+                            sessionRefreshStatus.textContent =
+                                dashMessage("refreshing");
                         }
 
                         const ok = await ensureValidGitHubSession(true);
@@ -1550,9 +2204,14 @@ const SetupDOMReady = async evt => {
                     });
                 }
 
-                const diagRefreshBtn = dc.getElementById("admin-session-diagnostics-refresh");
+                const diagRefreshBtn = dc.getElementById(
+                    "admin-session-diagnostics-refresh"
+                );
                 if (diagRefreshBtn) {
-                    diagRefreshBtn.addEventListener("click", loadSessionDiagnostics);
+                    diagRefreshBtn.addEventListener(
+                        "click",
+                        loadSessionDiagnostics
+                    );
                 }
 
                 SlideMenus();
@@ -1565,17 +2224,29 @@ const SetupDOMReady = async evt => {
                     db: DBMethods,
                     permissions: BrowserPermissions,
                     translate: () => i18n.transcript(),
-                    getAuthorId: () => (currentGitHubUser?.id ? String(currentGitHubUser.id) : ""),
+                    getAuthorId: () =>
+                        currentGitHubUser?.id
+                            ? String(currentGitHubUser.id)
+                            : "",
 
                     onCreate: async post => {
                         try {
-                            const sessionOk = await ensureValidGitHubSession(false);
+                            const sessionOk =
+                                await ensureValidGitHubSession(false);
                             if (!sessionOk || !GitHubAPIInstance) {
-                                throw new Error("Autenticação do GitHub indisponível.");
+                                throw new Error(
+                                    "Autenticação do GitHub indisponível."
+                                );
                             }
 
-                            if (!post || !Array.isArray(post.files) || !post.files.length) {
-                                throw new Error("A postagem não contém arquivos para publicação.");
+                            if (
+                                !post ||
+                                !Array.isArray(post.files) ||
+                                !post.files.length
+                            ) {
+                                throw new Error(
+                                    "A postagem não contém arquivos para publicação."
+                                );
                             }
 
                             for (const file of post.files) {
@@ -1585,7 +2256,9 @@ const SetupDOMReady = async evt => {
                                     !file.path.trim() ||
                                     !("content" in file)
                                 ) {
-                                    throw new Error("A lista de arquivos contém um item inválido.");
+                                    throw new Error(
+                                        "A lista de arquivos contém um item inválido."
+                                    );
                                 }
                             }
 
@@ -1593,7 +2266,10 @@ const SetupDOMReady = async evt => {
                                 const api = GitHubAPIInstance;
                                 api.setRepo(REPOSITORY_OWNER, REPOSITORY_NAME);
                                 await api.setBranch(REPOSITORY_BRANCH);
-                                return api.pushFiles(`Post: ${post.operation || "create"} "${post.title || post.slug}"`, post.files);
+                                return api.pushFiles(
+                                    `Post: ${post.operation || "create"} "${post.title || post.slug}"`,
+                                    post.files
+                                );
                             };
 
                             let response;
@@ -1601,9 +2277,13 @@ const SetupDOMReady = async evt => {
                                 response = await executeCommit();
                             } catch (commitError) {
                                 if (commitError?.response?.status === 401) {
-                                    const renewed = await ensureValidGitHubSession(true);
+                                    const renewed =
+                                        await ensureValidGitHubSession(true);
                                     if (!renewed) {
-                                        throw new Error(dashMessage("reauth_needed") || "Sessão expirada.");
+                                        throw new Error(
+                                            dashMessage("reauth_needed") ||
+                                                "Sessão expirada."
+                                        );
                                     }
                                     response = await executeCommit();
                                 } else {
@@ -1613,7 +2293,10 @@ const SetupDOMReady = async evt => {
 
                             return { published: true, post, response };
                         } catch (error) {
-                            console.error("[ADMIN]: Falha ao publicar postagem.", error);
+                            console.error(
+                                "[ADMIN]: Falha ao publicar postagem.",
+                                error
+                            );
                             throw error;
                         }
                     }
@@ -1622,7 +2305,8 @@ const SetupDOMReady = async evt => {
                 wysiwygEditor.mount();
 
                 // Footoodles admin em painel isolado
-                const { default: Footoodles } = await import("./modules/models/Footoodles.mjs");
+                const { default: Footoodles } =
+                    await import("./modules/models/Footoodles.mjs");
 
                 const footoodles = new Footoodles({
                     getApi: () => GitHubAPIInstance,
@@ -1684,13 +2368,23 @@ const SetupDOMReady = async evt => {
         case "policy": {
             await TemplatesReady.import;
             (() => {
-                let GeneralPolicyBox = _.DOM.getById("policy-container-general");
-                let DataStoragePolicyBox = _.DOM.getById("policy-container-storage");
+                let GeneralPolicyBox = _.DOM.getById(
+                    "policy-container-general"
+                );
+                let DataStoragePolicyBox = _.DOM.getById(
+                    "policy-container-storage"
+                );
                 let TermsPolicyBox = _.DOM.getById("policy-container-terms");
-                let PrivacyPolicyBox = _.DOM.getById("policy-container-privacy");
+                let PrivacyPolicyBox = _.DOM.getById(
+                    "policy-container-privacy"
+                );
 
                 const PrinterJS = (_html, _injectHeader = "") => {
-                    let popup = window.open("about:blank", "PRINT", "rel=noopener");
+                    let popup = window.open(
+                        "about:blank",
+                        "PRINT",
+                        "rel=noopener"
+                    );
                     if (popup) {
                         popup.opener = null;
                         popup.location = location.origin;
@@ -1734,12 +2428,18 @@ const SetupDOMReady = async evt => {
                         `<h2>${i18n.getWord("pages.policy.terms.heading")}</h2>`,
                         `<h2>${i18n.getWord("pages.policy.general.heading")}</h2>`
                     ];
-                    const boxes = [PrivacyPolicyBox, TermsPolicyBox, GeneralPolicyBox];
+                    const boxes = [
+                        PrivacyPolicyBox,
+                        TermsPolicyBox,
+                        GeneralPolicyBox
+                    ];
                     const AllPolicyContentHTML = boxes
                         .map((elm, idx) => PolicyHeaders[idx] + elm.innerHTML)
                         .join("");
 
-                    if (!GeneralPolicyBox.querySelector(".printable-launcher")) {
+                    if (
+                        !GeneralPolicyBox.querySelector(".printable-launcher")
+                    ) {
                         const generalText = GeneralPolicyBox.textContent || "";
                         GeneralPolicyBox.insertAdjacentHTML(
                             "afterbegin",
@@ -1752,7 +2452,9 @@ const SetupDOMReady = async evt => {
                         );
                     }
 
-                    const printBtn = GeneralPolicyBox.querySelector(".printable-launcher");
+                    const printBtn = GeneralPolicyBox.querySelector(
+                        ".printable-launcher"
+                    );
                     if (printBtn) {
                         printBtn.addEventListener(
                             "click",
@@ -1776,20 +2478,27 @@ const SetupDOMReady = async evt => {
                         let target = null;
                         switch (targetHash) {
                             case "policy-privacy":
-                                target = _.DOM.getById("policy-container-privacy");
+                                target = _.DOM.getById(
+                                    "policy-container-privacy"
+                                );
                                 break;
                             case "policy-terms":
-                                target = _.DOM.getById("policy-container-terms");
+                                target = _.DOM.getById(
+                                    "policy-container-terms"
+                                );
                                 break;
                             case "policy-general":
-                                target = _.DOM.getById("policy-container-general");
+                                target = _.DOM.getById(
+                                    "policy-container-general"
+                                );
                                 break;
                             case "cookie-agree":
                                 target = _.DOM.getById("policy-cookie-agree");
                                 break;
                         }
                         if (target) {
-                            let vertical = target.getBoundingClientRect().y - 120;
+                            let vertical =
+                                target.getBoundingClientRect().y - 120;
                             wd.scrollTo({
                                 top: vertical,
                                 left: 0,
@@ -2200,7 +2909,8 @@ const injectFootoodle = () => {
 
     if (title) title.textContent = item.title;
     if (content) content.textContent = item.content;
-    if (image) image.style.backgroundImage = `url("/${String(item.image || "").replace(/^\/+/, "")}")`;
+    if (image)
+        image.style.backgroundImage = `url("/${String(item.image || "").replace(/^\/+/, "")}")`;
 
     // Shows the section only when there is something to show.
     document.getElementById("foothead")?.classList.remove("d-none");
@@ -2227,14 +2937,16 @@ dc.addEventListener("click", async event => {
 // Limpa as credenciais OAuth do GitHub pelos botões da sidebar e da visão de sessão.
 const handleGitHubCredentialsClear = async event => {
     const button = event.target.closest(
-        "#admin-github-credentials-clear, " +
-        "#admin-session-credentials-clear"
+        "#admin-github-credentials-clear, " + "#admin-session-credentials-clear"
     );
 
     if (!button) return;
 
     const confirmText =
-        dc.querySelector('#admin-dashboard-messages [data-msg="clear_confirm"]')
+        dc
+            .querySelector(
+                '#admin-dashboard-messages [data-msg="clear_confirm"]'
+            )
             ?.textContent?.trim() || "Clear GitHub credentials?";
 
     if (!wd.confirm(confirmText)) return;
