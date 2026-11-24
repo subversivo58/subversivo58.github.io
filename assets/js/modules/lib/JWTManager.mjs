@@ -1,4 +1,3 @@
-
 /**
  * JWT Manager - Gerenciamento de pares de chaves e credenciais JWT
  * @license The MIT License (MIT) - https://github.com/subversivo58/subversivo58.github.io/blob/main/LICENSE
@@ -9,10 +8,7 @@
 import { JWToken } from "./JWToken.mjs";
 
 export default class JWTManager {
-    constructor({
-        config,
-        database
-    } = {}) {
+    constructor({ config, database } = {}) {
         if (!config || typeof config !== "object") {
             throw new TypeError("Configuração JWT não informada.");
         }
@@ -22,7 +18,9 @@ export default class JWTManager {
         }
 
         if (!config.storage || typeof config.storage !== "object") {
-            throw new TypeError("Configuração de armazenamento JWT não informada.");
+            throw new TypeError(
+                "Configuração de armazenamento JWT não informada."
+            );
         }
 
         if (
@@ -31,7 +29,9 @@ export default class JWTManager {
             !config.storage.key ||
             typeof config.storage.key !== "string"
         ) {
-            throw new TypeError("Object store ou chave de armazenamento inválidos.");
+            throw new TypeError(
+                "Object store ou chave de armazenamento inválidos."
+            );
         }
 
         if (
@@ -91,7 +91,21 @@ export default class JWTManager {
             return;
         }
 
-        if (!Array.isArray(stored)) {
+        let credentials = stored;
+
+        if (
+            !Array.isArray(credentials) &&
+            credentials &&
+            typeof credentials === "object"
+        ) {
+            if (Object.keys(credentials).length === 0) {
+                credentials = [];
+            } else if (credentials.kid && credentials.keyPair) {
+                credentials = [credentials];
+            }
+        }
+
+        if (!Array.isArray(credentials)) {
             throw new TypeError(
                 "O registro de credenciais não contém um array válido."
             );
@@ -99,7 +113,7 @@ export default class JWTManager {
 
         const loaded = [];
 
-        for (const credential of stored) {
+        for (const credential of credentials) {
             if (
                 !credential ||
                 typeof credential !== "object" ||
@@ -153,9 +167,8 @@ export default class JWTManager {
         bytes[6] = (bytes[6] & 0x0f) | 0x40;
         bytes[8] = (bytes[8] & 0x3f) | 0x80;
 
-        const hex = Array.from(
-            bytes,
-            byte => byte.toString(16).padStart(2, "0")
+        const hex = Array.from(bytes, byte =>
+            byte.toString(16).padStart(2, "0")
         ).join("");
 
         return [
@@ -176,7 +189,7 @@ export default class JWTManager {
             {
                 tbn: this.store,
                 tbk: this.storageKey,
-                tbv: credentials
+                tbv: [credentials]
             }
         ]);
     }
@@ -254,19 +267,13 @@ export default class JWTManager {
                 }
             };
 
-            const updatedCredentials = [
-                ...this.credentials,
-                credential
-            ];
+            const updatedCredentials = [...this.credentials, credential];
 
             await this._saveCredentials(updatedCredentials);
 
             this.credentials = updatedCredentials;
 
-            return this.getCredentials().find(
-                item => item.kid === kid
-            );
-
+            return this.getCredentials().find(item => item.kid === kid);
         } catch (error) {
             this.jwt.keys.delete(kid);
             throw error;
@@ -293,9 +300,7 @@ export default class JWTManager {
         );
 
         if (!credentialExists) {
-            throw new Error(
-                `Credencial "${kid}" não encontrada.`
-            );
+            throw new Error(`Credencial "${kid}" não encontrada.`);
         }
 
         const updatedCredentials = this.credentials.filter(
