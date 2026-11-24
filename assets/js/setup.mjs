@@ -2309,10 +2309,6 @@ const SetupDOMReady = async evt => {
                     }
                 }
 
-                const credentialsList = dc.getElementById(
-                    "admin-credentials-list"
-                );
-
                 if (credentialsList) {
                     credentialsList.addEventListener("click", async event => {
                         const button =
