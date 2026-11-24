@@ -42,6 +42,10 @@
         "issuer": "Blog Subversivo58",
         "proxy": {
             "endpoint": "https://webpush-proxy.dib.workers.dev"
+        },
+        "storage": {
+            "store": "config",
+            "key": "credenciais"
         }
     },
     "articles": {
