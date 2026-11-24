@@ -1728,7 +1728,25 @@ const SetupDOMReady = async evt => {
                 const credentialsEmpty = dc.getElementById(
                     "admin-credentials-empty"
                 );
+                const base64UrlToBase64 = value => {
+                    const base64 = value.replace(/-/g, "+").replace(/_/g, "/");
 
+                    return base64.padEnd(Math.ceil(base64.length / 4) * 4, "=");
+                };
+
+                const formatPEM = (value, type) => {
+                    const base64 = base64UrlToBase64(value);
+                    const lines = base64.match(/.{1,64}/g) || [];
+
+                    const label =
+                        type === "public" ? "PUBLIC KEY" : "PRIVATE KEY";
+
+                    return [
+                        `-----BEGIN ${label}-----`,
+                        ...lines,
+                        `-----END ${label}-----`
+                    ].join("\n");
+                };
                 const renderCredentials = () => {
                     if (
                         !jwtManager ||
@@ -1781,12 +1799,40 @@ const SetupDOMReady = async evt => {
                                 ${escHTML(createdAt)}
                             </p>
 
-                            <button
-                                type="button"
-                                class="btn btn-outline-danger btn-sm rounded-0"
-                                data-jwt-delete="${escHTML(credential.kid)}">
-                                Excluir
-                            </button>
+                            <div class="d-flex flex-wrap gap-2">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-primary btn-sm rounded-0"
+                                    data-jwt-copy="public"
+                                    data-jwt-kid="${escHTML(credential.kid)}">
+                                    Copiar chave pública
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-primary btn-sm rounded-0"
+                                    data-jwt-copy="private"
+                                    data-jwt-kid="${escHTML(credential.kid)}">
+                                    Copiar chave privada
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-secondary btn-sm rounded-0"
+                                    data-jwt-copy="key"
+                                    data-jwt-kid="${escHTML(credential.kid)}">
+                                    Copiar key (K_)
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-danger btn-sm rounded-0"
+                                    data-jwt-delete="${escHTML(credential.kid)}">
+                                    Excluir
+                                </button>
+
+                            </div>
 
                         </div>
                     </article>
@@ -2308,16 +2354,85 @@ const SetupDOMReady = async evt => {
                         );
                     }
                 }
-
                 if (credentialsList) {
                     credentialsList.addEventListener("click", async event => {
-                        const button =
-                            event.target.closest("[data-jwt-delete]");
+                        const button = event.target.closest(
+                            "[data-jwt-copy], [data-jwt-delete]"
+                        );
 
                         if (!button || !jwtManager) return;
 
-                        const kid = button.dataset.jwtDelete;
+                        const kid =
+                            button.dataset.jwtKid || button.dataset.jwtDelete;
 
+                        // Copiar identificadores e chaves
+                        if (button.dataset.jwtCopy) {
+                            const type = button.dataset.jwtCopy;
+
+                            const credential = jwtManager
+                                .getCredentials()
+                                .find(item => item.kid === kid);
+
+                            if (!credential) {
+                                wd.alert("Credencial não encontrada.");
+                                return;
+                            }
+
+                            let value;
+
+                            try {
+                                switch (type) {
+                                    case "public":
+                                        value = formatPEM(
+                                            credential.keyPair.publicKey.value,
+                                            "public"
+                                        );
+                                        break;
+
+                                    case "private":
+                                        value = formatPEM(
+                                            credential.keyPair.privateKey.value,
+                                            "private"
+                                        );
+                                        break;
+
+                                    case "key":
+                                        value = `K_${kid}`;
+                                        break;
+
+                                    default:
+                                        throw new Error(
+                                            "Tipo de cópia inválido."
+                                        );
+                                }
+
+                                await navigator.clipboard.writeText(value);
+
+                                const originalText = button.textContent;
+
+                                button.textContent = "Copiado!";
+                                button.disabled = true;
+
+                                setTimeout(() => {
+                                    button.textContent = originalText;
+                                    button.disabled = false;
+                                }, 1200);
+                            } catch (error) {
+                                console.error(
+                                    "[JWT]: Não foi possível copiar o conteúdo.",
+                                    error
+                                );
+
+                                wd.alert(
+                                    error?.message ||
+                                        "Não foi possível copiar para a área de transferência."
+                                );
+                            }
+
+                            return;
+                        }
+
+                        // Excluir credencial
                         if (
                             !wd.confirm(`Deseja excluir a credencial "${kid}"?`)
                         ) {
