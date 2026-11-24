@@ -272,4 +272,41 @@ export default class JWTManager {
             throw error;
         }
     }
+
+    // --------------------------------------------------
+    // Exclusão de credenciais
+    // --------------------------------------------------
+
+    async deleteCredential(kid) {
+        if (!this.initialized) {
+            throw new Error(
+                "JWTManager precisa ser inicializado antes de excluir credenciais."
+            );
+        }
+
+        if (!kid || typeof kid !== "string") {
+            throw new TypeError("Identificador da credencial inválido.");
+        }
+
+        const credentialExists = this.credentials.some(
+            credential => credential.kid === kid
+        );
+
+        if (!credentialExists) {
+            throw new Error(
+                `Credencial "${kid}" não encontrada.`
+            );
+        }
+
+        const updatedCredentials = this.credentials.filter(
+            credential => credential.kid !== kid
+        );
+
+        await this._saveCredentials(updatedCredentials);
+
+        this.credentials = updatedCredentials;
+        this.jwt.keys.delete(kid);
+
+        return true;
+    }
 }
