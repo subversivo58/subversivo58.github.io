@@ -332,8 +332,6 @@
                         type="button"
                         id="admin-credentials-new"
                         class="btn btn-info btn-sm rounded-0 px-3"
-                        disabled
-                        aria-disabled="true"
                         title="Disponível após a integração do gerenciamento de credenciais">
                         Nova credencial
                     </button>

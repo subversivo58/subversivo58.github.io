@@ -1188,12 +1188,36 @@ const SetupDOMReady = async evt => {
                 const [
                     { default: WysiwygEditor },
                     { default: GitHubAPI },
-                    { default: DeveloperTools }
+                    { default: DeveloperTools },
+                    { default: JWTManager }
                 ] = await Promise.all([
                     import("./modules/models/WysiwygEditor.mjs"),
                     import("./modules/lib/GitHubAPI.mjs"),
-                    import("./modules/lib/DeveloperTools.mjs")
+                    import("./modules/lib/DeveloperTools.mjs"),
+                    import("./modules/lib/JWTManager.mjs")
                 ]);
+
+                let jwtManager = null;
+
+                try {
+                    if (!DBMethods) {
+                        throw new Error("Conexão com IndexedDB indisponível.");
+                    }
+
+                    jwtManager = new JWTManager({
+                        config: settings.jwt,
+                        database: DBMethods
+                    });
+
+                    await jwtManager.initialize();
+                } catch (error) {
+                    jwtManager = null;
+
+                    console.error(
+                        "[JWT]: Não foi possível inicializar o gerenciamento de credenciais.",
+                        error
+                    );
+                }
 
                 const DevTools = new DeveloperTools({
                     database: DBMethods,
@@ -1689,6 +1713,91 @@ const SetupDOMReady = async evt => {
                     devtools: dc.getElementById("admin-view-devtools")
                 };
 
+                // --------------------------------------------------
+                // Renderização das credenciais JWT
+                // --------------------------------------------------
+
+                const credentialsList = dc.getElementById(
+                    "admin-credentials-list"
+                );
+
+                const credentialsCount = dc.getElementById(
+                    "admin-credentials-count"
+                );
+
+                const credentialsEmpty = dc.getElementById(
+                    "admin-credentials-empty"
+                );
+
+                const renderCredentials = () => {
+                    if (
+                        !jwtManager ||
+                        !credentialsList ||
+                        !credentialsCount ||
+                        !credentialsEmpty
+                    ) {
+                        return;
+                    }
+
+                    const credentials = jwtManager.getCredentials();
+
+                    credentialsCount.textContent = String(credentials.length);
+
+                    credentialsEmpty.hidden = credentials.length > 0;
+
+                    credentialsList.innerHTML = credentials
+                        .map(credential => {
+                            const metadata = credential.metadata || {};
+
+                            const createdAt = metadata.createdAt
+                                ? new Date(metadata.createdAt).toLocaleString()
+                                : "—";
+
+                            return `
+                <div class="col-12 col-lg-6 mb-3">
+                    <article class="card rounded-0 border h-100">
+                        <div class="card-body">
+
+                            <p class="small text-muted mb-1">
+                                Identificador
+                            </p>
+
+                            <p class="text-break">
+                                <code>${escHTML(credential.kid)}</code>
+                            </p>
+
+                            <p class="small mb-1">
+                                <strong>Emissor:</strong>
+                                ${escHTML(metadata.issuer || "—")}
+                            </p>
+
+                            <p class="small mb-1">
+                                <strong>Algoritmo:</strong>
+                                ${escHTML(metadata.algorithm || "—")}
+                            </p>
+
+                            <p class="small mb-3">
+                                <strong>Criação:</strong>
+                                ${escHTML(createdAt)}
+                            </p>
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-danger btn-sm rounded-0"
+                                data-jwt-delete="${escHTML(credential.kid)}">
+                                Excluir
+                            </button>
+
+                        </div>
+                    </article>
+                </div>
+            `;
+                        })
+                        .join("");
+                };
+
+                renderCredentials();
+
                 const showAdminView = viewName => {
                     const target = views[viewName] ? viewName : "posts";
 
@@ -2164,6 +2273,78 @@ const SetupDOMReady = async evt => {
                         showAdminView(btn.dataset.adminNav);
                     });
                 });
+
+                // --------------------------------------------------
+                // Gerenciamento de credenciais JWT
+                // --------------------------------------------------
+
+                const credentialsNewButton = dc.getElementById(
+                    "admin-credentials-new"
+                );
+
+                if (credentialsNewButton) {
+                    credentialsNewButton.disabled = !jwtManager;
+
+                    if (jwtManager) {
+                        credentialsNewButton.addEventListener(
+                            "click",
+                            async () => {
+                                credentialsNewButton.disabled = true;
+
+                                try {
+                                    await jwtManager.createCredential();
+                                    renderCredentials();
+                                } catch (error) {
+                                    console.error(
+                                        "[JWT]: Não foi possível criar a credencial.",
+                                        error
+                                    );
+
+                                    wd.alert(error?.message || String(error));
+                                } finally {
+                                    credentialsNewButton.disabled = false;
+                                }
+                            }
+                        );
+                    }
+                }
+
+                const credentialsList = dc.getElementById(
+                    "admin-credentials-list"
+                );
+
+                if (credentialsList) {
+                    credentialsList.addEventListener("click", async event => {
+                        const button =
+                            event.target.closest("[data-jwt-delete]");
+
+                        if (!button || !jwtManager) return;
+
+                        const kid = button.dataset.jwtDelete;
+
+                        if (
+                            !wd.confirm(`Deseja excluir a credencial "${kid}"?`)
+                        ) {
+                            return;
+                        }
+
+                        button.disabled = true;
+
+                        try {
+                            await jwtManager.deleteCredential(kid);
+                            renderCredentials();
+                        } catch (error) {
+                            console.error(
+                                "[JWT]: Não foi possível excluir a credencial.",
+                                error
+                            );
+
+                            wd.alert(error?.message || String(error));
+                        } finally {
+                            button.disabled = false;
+                        }
+                    });
+                }
 
                 const mobileNewPost = dc.getElementById(
                     "admin-mobile-new-post"
