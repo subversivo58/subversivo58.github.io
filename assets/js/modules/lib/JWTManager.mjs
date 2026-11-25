@@ -1,4 +1,3 @@
-
 /**
  * JWT Manager - Gerenciamento de pares de chaves e credenciais JWT
  * @license The MIT License (MIT) - https://github.com/subversivo58/subversivo58.github.io/blob/main/LICENSE
@@ -86,6 +85,31 @@ export default class JWTManager {
         return Array.from(bytes, byte =>
             byte.toString(16).padStart(2, "0")
         ).join("");
+    }
+
+    // --------------------------------------------------
+    // VALIDAÇÃO DE METADADOS
+    // --------------------------------------------------
+
+    _normalizeMetadata({ name, description } = {}) {
+        name = typeof name === "string"
+            ? name.trim()
+            : "";
+
+        description = typeof description === "string"
+            ? description.trim()
+            : "";
+
+        if (!name || !description) {
+            throw new TypeError(
+                "Nome e descrição são obrigatórios."
+            );
+        }
+
+        return {
+            name,
+            description
+        };
     }
 
     // --------------------------------------------------
@@ -214,7 +238,10 @@ export default class JWTManager {
                 tokens: Array.isArray(credential.tokens)
                     ? credential.tokens
                     : [],
-                metadata: credential.metadata || {}
+                metadata: credential.metadata &&
+                    typeof credential.metadata === "object"
+                    ? credential.metadata
+                    : {}
             });
         }
 
@@ -242,12 +269,17 @@ export default class JWTManager {
     getCredentials() {
         return this.credentials.map(credential => ({
             ...credential,
+
             keyPair: {
                 ...credential.keyPair,
                 publicKey: { ...credential.keyPair.publicKey },
                 privateKey: { ...credential.keyPair.privateKey }
             },
-            tokens: [...credential.tokens],
+
+            tokens: credential.tokens.map(token => ({
+                ...token
+            })),
+
             metadata: { ...credential.metadata }
         }));
     }
@@ -256,12 +288,20 @@ export default class JWTManager {
     // CRIAÇÃO DE CREDENCIAL
     // --------------------------------------------------
 
-    async createCredential() {
+    async createCredential({
+        name,
+        description
+    } = {}) {
         if (!this.initialized) {
             throw new Error(
                 "JWTManager precisa ser inicializado antes de criar credenciais."
             );
         }
+
+        const metadata = this._normalizeMetadata({
+            name,
+            description
+        });
 
         const kid = this._generateKeyId();
         const externalKid = this._normalizeKid(kid);
@@ -317,6 +357,7 @@ export default class JWTManager {
                 tokens: [],
 
                 metadata: {
+                    ...metadata,
                     issuer: this.config.issuer,
                     algorithm: "EdDSA",
                     createdAt: new Date().toISOString()
@@ -375,13 +416,20 @@ export default class JWTManager {
     async createToken({
         kid,
         aud,
-        expiresIn = "8h"
+        expiresIn = "8h",
+        name,
+        description
     } = {}) {
         if (!this.initialized) {
             throw new Error(
                 "JWTManager precisa ser inicializado antes de criar tokens."
             );
         }
+
+        const metadata = this._normalizeMetadata({
+            name,
+            description
+        });
 
         if (
             typeof aud !== "string" ||
@@ -495,6 +543,10 @@ export default class JWTManager {
             token: data.token,
             kid: externalKid,
             jti: decoded.payload.jti,
+
+            name: metadata.name,
+            description: metadata.description,
+
             aud,
             expiresIn,
             issuedAt: decoded.payload.iat,
@@ -520,7 +572,7 @@ export default class JWTManager {
 
         this.credentials = updatedCredentials;
 
-        return tokenRecord;
+        return { ...tokenRecord };
     }
 
     // --------------------------------------------------
@@ -633,7 +685,202 @@ export default class JWTManager {
 
         this.credentials = updatedCredentials;
 
-        return updatedRecord;
+        return { ...updatedRecord };
+    }
+
+    // --------------------------------------------------
+    // EDIÇÃO DE METADADOS DA CREDENCIAL
+    // --------------------------------------------------
+
+    async updateCredentialMetadata({
+        kid,
+        name,
+        description
+    } = {}) {
+        if (!this.initialized) {
+            throw new Error(
+                "JWTManager precisa ser inicializado."
+            );
+        }
+
+        const externalKid = this._normalizeKid(kid);
+        const storedKid = this._getStoredKid(externalKid);
+
+        const metadata = this._normalizeMetadata({
+            name,
+            description
+        });
+
+        const credential = this.credentials.find(
+            item => item.kid === storedKid
+        );
+
+        if (!credential) {
+            throw new Error(
+                `Credencial "${externalKid}" não encontrada.`
+            );
+        }
+
+        const updatedCredential = {
+            ...credential,
+            metadata: {
+                ...credential.metadata,
+                ...metadata
+            }
+        };
+
+        const updatedCredentials = this.credentials.map(item =>
+            item.kid === storedKid
+                ? updatedCredential
+                : item
+        );
+
+        await this._saveCredentials(updatedCredentials);
+
+        this.credentials = updatedCredentials;
+
+        return this.getCredentials().find(
+            item => item.kid === storedKid
+        );
+    }
+
+    // --------------------------------------------------
+    // EDIÇÃO DE METADADOS DO JWT
+    // --------------------------------------------------
+
+    async updateTokenMetadata({
+        kid,
+        jti,
+        name,
+        description
+    } = {}) {
+        if (!this.initialized) {
+            throw new Error(
+                "JWTManager precisa ser inicializado."
+            );
+        }
+
+        const externalKid = this._normalizeKid(kid);
+        const storedKid = this._getStoredKid(externalKid);
+
+        const metadata = this._normalizeMetadata({
+            name,
+            description
+        });
+
+        if (
+            typeof jti !== "string" ||
+            !jti
+        ) {
+            throw new TypeError("JTI inválido.");
+        }
+
+        const credential = this.credentials.find(
+            item => item.kid === storedKid
+        );
+
+        if (!credential) {
+            throw new Error(
+                `Credencial "${externalKid}" não encontrada.`
+            );
+        }
+
+        const tokenIndex = credential.tokens.findIndex(
+            item => item.jti === jti
+        );
+
+        if (tokenIndex === -1) {
+            throw new Error(
+                `JWT com JTI "${jti}" não encontrado.`
+            );
+        }
+
+        const updatedTokens = [...credential.tokens];
+
+        updatedTokens[tokenIndex] = {
+            ...updatedTokens[tokenIndex],
+            ...metadata
+        };
+
+        const updatedCredential = {
+            ...credential,
+            tokens: updatedTokens
+        };
+
+        const updatedCredentials = this.credentials.map(item =>
+            item.kid === storedKid
+                ? updatedCredential
+                : item
+        );
+
+        await this._saveCredentials(updatedCredentials);
+
+        this.credentials = updatedCredentials;
+
+        return {
+            ...updatedTokens[tokenIndex]
+        };
+    }
+
+    // --------------------------------------------------
+    // EXCLUSÃO INDIVIDUAL DE JWT
+    // --------------------------------------------------
+
+    async deleteToken({ kid, jti } = {}) {
+        if (!this.initialized) {
+            throw new Error(
+                "JWTManager precisa ser inicializado antes de excluir tokens."
+            );
+        }
+
+        const externalKid = this._normalizeKid(kid);
+        const storedKid = this._getStoredKid(externalKid);
+
+        if (
+            typeof jti !== "string" ||
+            !jti
+        ) {
+            throw new TypeError("JTI inválido.");
+        }
+
+        const credential = this.credentials.find(
+            item => item.kid === storedKid
+        );
+
+        if (!credential) {
+            throw new Error(
+                `Credencial "${externalKid}" não encontrada.`
+            );
+        }
+
+        const tokenExists = credential.tokens.some(
+            item => item.jti === jti
+        );
+
+        if (!tokenExists) {
+            throw new Error(
+                `JWT com JTI "${jti}" não encontrado.`
+            );
+        }
+
+        const updatedCredential = {
+            ...credential,
+            tokens: credential.tokens.filter(
+                item => item.jti !== jti
+            )
+        };
+
+        const updatedCredentials = this.credentials.map(item =>
+            item.kid === storedKid
+                ? updatedCredential
+                : item
+        );
+
+        await this._saveCredentials(updatedCredentials);
+
+        this.credentials = updatedCredentials;
+
+        return true;
     }
 
     // --------------------------------------------------

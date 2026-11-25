@@ -1,4 +1,3 @@
-
 <!-- ADMIN DASHBOARD -->
 <section id="admin-dashboard" class="admin-dashboard-shell w-100">
 
@@ -324,15 +323,14 @@
                     <div class="mb-2 mb-md-0">
                         <h2 class="h4 mb-1">Credenciais</h2>
                         <p class="text-muted small mb-0">
-                            Consulte e mantenha as credenciais disponíveis neste painel.
+                            Gerencie suas chaves e os JWTs associados.
                         </p>
                     </div>
 
                     <button
                         type="button"
                         id="admin-credentials-new"
-                        class="btn btn-info btn-sm rounded-0 px-3"
-                        title="Disponível após a integração do gerenciamento de credenciais">
+                        class="btn btn-info btn-sm rounded-0 px-3">
                         Nova credencial
                     </button>
                 </div>
@@ -343,6 +341,15 @@
                         Credenciais cadastradas:
                         <strong id="admin-credentials-count">0</strong>
                     </span>
+                </div>
+
+                <!-- FEEDBACK DAS OPERAÇÕES -->
+                <div
+                    id="admin-credentials-feedback"
+                    class="alert rounded-0 small mb-3"
+                    role="status"
+                    aria-live="polite"
+                    hidden>
                 </div>
 
                 <!-- LISTAGEM -->
@@ -437,6 +444,418 @@
             </section>
 
         </main>
+    </div>
+
+    <!-- ==================================================
+         MODAL: CRIAR CREDENCIAL
+    =================================================== -->
+    <div
+        class="modal fade"
+        id="admin-modal-credential-create"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="admin-modal-credential-create-title"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+
+                <form id="admin-form-credential-create">
+
+                    <div class="modal-header">
+                        <h5
+                            id="admin-modal-credential-create-title"
+                            class="modal-title">
+                            Nova credencial
+                        </h5>
+
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <p class="text-muted small">
+                            Informe um nome e uma descrição para identificar esta chave.
+                            O identificador KID será gerado automaticamente.
+                        </p>
+
+                        <div class="form-group">
+                            <label for="admin-credential-name">
+                                Nome
+                            </label>
+
+                            <input
+                                type="text"
+                                id="admin-credential-name"
+                                name="name"
+                                class="form-control rounded-0"
+                                maxlength="100"
+                                autocomplete="off"
+                                required>
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <label for="admin-credential-description">
+                                Descrição
+                            </label>
+
+                            <textarea
+                                id="admin-credential-description"
+                                name="description"
+                                class="form-control rounded-0"
+                                rows="3"
+                                maxlength="500"
+                                required></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary btn-sm rounded-0"
+                            data-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="admin-credential-create-submit"
+                            class="btn btn-info btn-sm rounded-0">
+                            Criar credencial
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================================================
+         MODAL: CRIAR JWT
+    =================================================== -->
+    <div
+        class="modal fade"
+        id="admin-modal-token-create"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="admin-modal-token-create-title"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+
+                <form id="admin-form-token-create">
+
+                    <div class="modal-header">
+                        <h5
+                            id="admin-modal-token-create-title"
+                            class="modal-title">
+                            Gerar JWT
+                        </h5>
+
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <input
+                            type="hidden"
+                            id="admin-token-kid"
+                            name="kid">
+
+                        <div class="form-group">
+                            <label for="admin-token-name">
+                                Nome
+                            </label>
+
+                            <input
+                                type="text"
+                                id="admin-token-name"
+                                name="name"
+                                class="form-control rounded-0"
+                                maxlength="100"
+                                autocomplete="off"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="admin-token-description">
+                                Descrição
+                            </label>
+
+                            <textarea
+                                id="admin-token-description"
+                                name="description"
+                                class="form-control rounded-0"
+                                rows="3"
+                                maxlength="500"
+                                required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="admin-token-audience">
+                                Serviço (Audience)
+                            </label>
+
+                            <select
+                                id="admin-token-audience"
+                                name="aud"
+                                class="form-control rounded-0"
+                                required>
+                                <option value="" selected disabled>
+                                    Selecione um serviço
+                                </option>
+                            </select>
+
+                            <small class="form-text text-muted">
+                                Selecione um dos serviços configurados no sistema.
+                            </small>
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <label for="admin-token-expires">
+                                Validade
+                            </label>
+
+                            <select
+                                id="admin-token-expires"
+                                name="expiresIn"
+                                class="form-control rounded-0"
+                                required>
+
+                                <option value="8h" selected>
+                                    8 horas (padrão)
+                                </option>
+
+                                <option value="6m">
+                                    6 meses
+                                </option>
+
+                                <option value="1y">
+                                    1 ano
+                                </option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary btn-sm rounded-0"
+                            data-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="admin-token-create-submit"
+                            class="btn btn-info btn-sm rounded-0">
+                            Gerar JWT
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================================================
+         MODAL: EDITAR METADADOS
+         Utilizado para credenciais e JWTs antigos.
+    =================================================== -->
+    <div
+        class="modal fade"
+        id="admin-modal-metadata"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="admin-modal-metadata-title"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+
+                <form id="admin-form-metadata">
+
+                    <div class="modal-header">
+                        <h5
+                            id="admin-modal-metadata-title"
+                            class="modal-title">
+                            Editar identificação
+                        </h5>
+
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <input
+                            type="hidden"
+                            id="admin-metadata-type"
+                            name="type">
+
+                        <input
+                            type="hidden"
+                            id="admin-metadata-kid"
+                            name="kid">
+
+                        <input
+                            type="hidden"
+                            id="admin-metadata-jti"
+                            name="jti">
+
+                        <div class="form-group">
+                            <label for="admin-metadata-name">
+                                Nome
+                            </label>
+
+                            <input
+                                type="text"
+                                id="admin-metadata-name"
+                                name="name"
+                                class="form-control rounded-0"
+                                maxlength="100"
+                                autocomplete="off"
+                                required>
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <label for="admin-metadata-description">
+                                Descrição
+                            </label>
+
+                            <textarea
+                                id="admin-metadata-description"
+                                name="description"
+                                class="form-control rounded-0"
+                                rows="3"
+                                maxlength="500"
+                                required></textarea>
+                        </div>
+
+                        <small class="form-text text-muted mt-3">
+                            Esta operação altera somente a identificação local.
+                            Não modifica a chave criptográfica nem o conteúdo do JWT.
+                        </small>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary btn-sm rounded-0"
+                            data-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="admin-metadata-submit"
+                            class="btn btn-info btn-sm rounded-0">
+                            Salvar alterações
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================================================
+         MODAL: CONFIRMAR EXCLUSÃO
+         Usado para excluir JWT ou credencial completa.
+    =================================================== -->
+    <div
+        class="modal fade"
+        id="admin-modal-confirm"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="admin-modal-confirm-title"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+
+                <div class="modal-header">
+                    <h5
+                        id="admin-modal-confirm-title"
+                        class="modal-title">
+                        Confirmar exclusão
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <input
+                        type="hidden"
+                        id="admin-confirm-type"
+                        name="type">
+
+                    <input
+                        type="hidden"
+                        id="admin-confirm-kid"
+                        name="kid">
+
+                    <input
+                        type="hidden"
+                        id="admin-confirm-jti"
+                        name="jti">
+
+                    <p
+                        id="admin-modal-confirm-message"
+                        class="mb-0">
+                        Deseja realmente excluir este registro?
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-outline-secondary btn-sm rounded-0"
+                        data-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="button"
+                        id="admin-confirm-submit"
+                        class="btn btn-danger btn-sm rounded-0">
+                        Excluir
+                    </button>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <!-- MENSAGENS INTERNAS TRADUZÍVEIS -->
