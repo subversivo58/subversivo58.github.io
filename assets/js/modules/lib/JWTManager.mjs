@@ -1,3 +1,4 @@
+
 /**
  * JWT Manager - Gerenciamento de pares de chaves e credenciais JWT
  * @license The MIT License (MIT) - https://github.com/subversivo58/subversivo58.github.io/blob/main/LICENSE
@@ -53,6 +54,14 @@ export default class JWTManager {
         this.credentials = [];
         this.initialized = false;
         this._initializing = null;
+
+        // RENOVAÇÃO AUTOMÁTICA
+        this._autoRefreshInterval = null;
+        this._autoRefreshRunning = false;
+        this._autoRefreshOAuthBlocked = false;
+        this._autoRefreshBlockedAccessToken = null;
+        this._refreshInFlight = new Map();
+        this.autoRefreshIntervalMs = 5 * 60 * 1000;
     }
 
     // --------------------------------------------------
@@ -156,6 +165,13 @@ export default class JWTManager {
         try {
             await this._initializing;
             this.initialized = true;
+
+            // Verificação imediata antes de iniciar o monitoramento.
+            await this._runAutoRefreshCheck();
+
+            // O temporizador permanece ativo enquanto esta instância existir.
+            this._startAutoRefresh();
+
             return this;
         } finally {
             this._initializing = null;
@@ -246,6 +262,229 @@ export default class JWTManager {
         }
 
         this.credentials = loaded;
+    }
+
+    // --------------------------------------------------
+    // RENOVAÇÃO AUTOMÁTICA
+    // --------------------------------------------------
+
+    _getAutoRefreshMarginMs(expiresIn) {
+        switch (expiresIn) {
+            case "8h":
+                return 60 * 60 * 1000;
+
+            case "6m":
+            case "1y":
+                return 24 * 60 * 60 * 1000;
+
+            default:
+                // Não renova automaticamente registros sem duração reconhecida.
+                return null;
+        }
+    }
+
+    _isTokenInsideRefreshWindow(token, now = Date.now()) {
+        if (
+            !token ||
+            !token.token ||
+            typeof token.jti !== "string" ||
+            !token.jti ||
+            typeof token.expiresAt !== "number" ||
+            !Number.isFinite(token.expiresAt)
+        ) {
+            return false;
+        }
+
+        const margin = this._getAutoRefreshMarginMs(token.expiresIn);
+
+        if (margin === null) {
+            return false;
+        }
+
+        const expiresAtMs = token.expiresAt * 1000;
+
+        return expiresAtMs - now <= margin;
+    }
+
+    _startAutoRefresh() {
+        if (this._autoRefreshInterval !== null) {
+            return;
+        }
+
+        this._autoRefreshInterval = setInterval(() => {
+            this._runAutoRefreshCheck().catch(error => {
+                console.error(
+                    "[JWTManager] Falha na verificação automática:",
+                    error
+                );
+            });
+        }, this.autoRefreshIntervalMs);
+    }
+
+    async _runAutoRefreshCheck() {
+        if (!this.initialized || this._autoRefreshRunning) {
+            return false;
+        }
+
+        this._autoRefreshRunning = true;
+
+        try {
+            // Atualiza a cópia em memória para não trabalhar com registros
+            // antigos caso outra aba já tenha renovado ou excluído um token.
+            await this._loadCredentials();
+
+            // Após uma falha OAuth, aguarda a troca/renovação da sessão.
+            // Enquanto o token OAuth armazenado continuar igual, não insiste.
+            if (this._autoRefreshOAuthBlocked) {
+                let currentAccessToken;
+
+                try {
+                    currentAccessToken = await this._getGitHubAccessToken();
+                } catch {
+                    return false;
+                }
+
+                if (
+                    currentAccessToken ===
+                    this._autoRefreshBlockedAccessToken
+                ) {
+                    return false;
+                }
+
+                this._autoRefreshOAuthBlocked = false;
+                this._autoRefreshBlockedAccessToken = null;
+            }
+
+            for (const credential of [...this.credentials]) {
+                for (const token of [...credential.tokens]) {
+                    if (!this._isTokenInsideRefreshWindow(token)) {
+                        continue;
+                    }
+
+                    const externalKid = this._normalizeKid(credential.kid);
+                    const lockName = [
+                        "jwt-auto-refresh",
+                        externalKid,
+                        token.jti
+                    ].join(":");
+
+                    const renewToken = async () => {
+                        // Recarrega os dados depois de obter o bloqueio.
+                        // Outra aba pode ter renovado ou excluído este JWT.
+                        await this._loadCredentials();
+
+                        const latestCredential = this.credentials.find(
+                            item => item.kid === credential.kid
+                        );
+
+                        if (!latestCredential) {
+                            return;
+                        }
+
+                        const latestToken = latestCredential.tokens.find(
+                            item => item.jti === token.jti
+                        );
+
+                        if (
+                            !latestToken ||
+                            !this._isTokenInsideRefreshWindow(latestToken)
+                        ) {
+                            return;
+                        }
+
+                        try {
+                            await this.refresh({
+                                kid: externalKid,
+                                jti: latestToken.jti
+                            });
+                        } catch (error) {
+                            if (
+                                error?.code === "OAUTH_EXPIRED" ||
+                                error?.name === "OAUTH_EXPIRED"
+                            ) {
+                                this._autoRefreshOAuthBlocked = true;
+
+                                try {
+                                    this._autoRefreshBlockedAccessToken =
+                                        await this._getGitHubAccessToken();
+                                } catch {
+                                    this._autoRefreshBlockedAccessToken = null;
+                                }
+
+                                console.warn(
+                                    "[JWTManager] Renovação automática pausada: " +
+                                    "é necessário revalidar a sessão OAuth do GitHub."
+                                );
+
+                                return "OAUTH_EXPIRED";
+                            }
+
+                            // Falhas de rede ou do Worker não removem nem
+                            // modificam o JWT. A próxima verificação tentará
+                            // novamente se ele continuar na janela.
+                            console.warn(
+                                "[JWTManager] Não foi possível renovar o JWT:",
+                                error
+                            );
+
+                            return "RETRY";
+                        }
+
+                        return "RENEWED";
+                    };
+
+                    let result;
+
+                    try {
+                        // Web Locks evita que abas diferentes renovem o
+                        // mesmo JWT simultaneamente quando a API está disponível.
+                        if (
+                            typeof navigator !== "undefined" &&
+                            navigator.locks &&
+                            typeof navigator.locks.request === "function"
+                        ) {
+                            await navigator.locks.request(
+                                lockName,
+                                { ifAvailable: true },
+                                async lock => {
+                                    if (lock) {
+                                        result = await renewToken();
+                                    }
+                                }
+                            );
+                        } else {
+                            // O bloqueio interno de refresh continua protegendo
+                            // chamadas simultâneas nesta instância do Manager.
+                            result = await renewToken();
+                        }
+                    } catch (error) {
+                        console.warn(
+                            "[JWTManager] Falha ao controlar a renovação:",
+                            error
+                        );
+                    }
+
+                    if (
+                        result === "OAUTH_EXPIRED" ||
+                        this._autoRefreshOAuthBlocked
+                    ) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        } catch (error) {
+            // Uma falha geral de leitura/verificação não apaga credenciais.
+            console.error(
+                "[JWTManager] Não foi possível verificar os JWTs:",
+                error
+            );
+
+            return false;
+        } finally {
+            this._autoRefreshRunning = false;
+        }
     }
 
     // --------------------------------------------------
@@ -580,6 +819,45 @@ export default class JWTManager {
     // --------------------------------------------------
 
     async refresh({ kid, jti } = {}) {
+        if (!this.initialized) {
+            throw new Error(
+                "JWTManager precisa ser inicializado antes de renovar tokens."
+            );
+        }
+
+        const externalKid = this._normalizeKid(kid);
+        const storedKid = this._getStoredKid(externalKid);
+
+        if (
+            typeof jti !== "string" ||
+            !jti
+        ) {
+            throw new TypeError("JTI inválido.");
+        }
+
+        const refreshKey = `${storedKid}:${jti}`;
+
+        if (this._refreshInFlight.has(refreshKey)) {
+            return this._refreshInFlight.get(refreshKey);
+        }
+
+        const operation = this._refreshToken({
+            kid: externalKid,
+            jti
+        });
+
+        this._refreshInFlight.set(refreshKey, operation);
+
+        try {
+            return await operation;
+        } finally {
+            if (this._refreshInFlight.get(refreshKey) === operation) {
+                this._refreshInFlight.delete(refreshKey);
+            }
+        }
+    }
+
+    async _refreshToken({ kid, jti } = {}) {
         if (!this.initialized) {
             throw new Error(
                 "JWTManager precisa ser inicializado antes de renovar tokens."
