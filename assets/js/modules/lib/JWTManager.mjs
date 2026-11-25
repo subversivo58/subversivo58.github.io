@@ -1,3 +1,4 @@
+
 /**
  * JWT Manager - Gerenciamento de pares de chaves e credenciais JWT
  * @license The MIT License (MIT) - https://github.com/subversivo58/subversivo58.github.io/blob/main/LICENSE
@@ -15,6 +16,14 @@ export default class JWTManager {
 
         if (!config.issuer || typeof config.issuer !== "string") {
             throw new TypeError("Issuer JWT inválido.");
+        }
+
+        if (!config.sub || typeof config.sub !== "string") {
+            throw new TypeError("Subject JWT inválido.");
+        }
+
+        if (!config.proxy?.endpoint || typeof config.proxy.endpoint !== "string") {
+            throw new TypeError("Endpoint do JWT Proxy inválido.");
         }
 
         if (!config.storage || typeof config.storage !== "object") {
@@ -56,6 +65,30 @@ export default class JWTManager {
 
         this.initialized = false;
         this._initializing = null;
+    }
+
+    // --------------------------------------------------
+    // Identificação da chave
+    // --------------------------------------------------
+
+    _normalizeKid(kid) {
+        if (typeof kid !== "string" || !kid.trim()) {
+            throw new TypeError("Identificador da credencial inválido.");
+        }
+
+        const normalized = kid.startsWith("K_")
+            ? kid
+            : `K_${kid}`;
+
+        if (!/^K_[a-f0-9]{32}$/i.test(normalized)) {
+            throw new Error("Formato de KID inválido.");
+        }
+
+        return normalized;
+    }
+
+    _getStoredKid(kid) {
+        return kid.startsWith("K_") ? kid.slice(2) : kid;
     }
 
     // --------------------------------------------------
@@ -137,15 +170,17 @@ export default class JWTManager {
                 );
             }
 
+            const externalKid = this._normalizeKid(credential.kid);
+
             await this.jwt.importKey({
-                keyId: credential.kid,
+                keyId: externalKid,
                 type: "public",
                 keyData: publicKey.value,
                 format: publicKey.format
             });
 
             await this.jwt.importKey({
-                keyId: credential.kid,
+                keyId: externalKid,
                 type: "private",
                 keyData: privateKey.value,
                 format: privateKey.format
@@ -160,14 +195,13 @@ export default class JWTManager {
     // --------------------------------------------------
     // Identificação
     // --------------------------------------------------
+
     _generateKeyId() {
         const bytes = crypto.getRandomValues(new Uint8Array(16));
 
-        const hex = Array.from(bytes, byte =>
+        return Array.from(bytes, byte =>
             byte.toString(16).padStart(2, "0")
         ).join("");
-
-        return hex;
     }
 
     // --------------------------------------------------
@@ -213,6 +247,7 @@ export default class JWTManager {
         }
 
         const kid = this._generateKeyId();
+        const externalKid = this._normalizeKid(kid);
 
         if (this.credentials.some(item => item.kid === kid)) {
             throw new Error(`O identificador "${kid}" já existe.`);
@@ -232,6 +267,15 @@ export default class JWTManager {
             const privateKey = await this.jwt.exportKey({
                 key: pair.privateKey,
                 format: "pkcs8"
+            });
+
+            // Registra a chave pública também pelo KID externo,
+            // exatamente como será recebido no header do JWT.
+            await this.jwt.importKey({
+                keyId: externalKid,
+                type: "public",
+                keyData: publicKey,
+                format: "spki"
             });
 
             const credential = {
@@ -266,8 +310,170 @@ export default class JWTManager {
             return this.getCredentials().find(item => item.kid === kid);
         } catch (error) {
             this.jwt.keys.delete(kid);
+            this.jwt.keys.delete(externalKid);
             throw error;
         }
+    }
+
+    // --------------------------------------------------
+    // Criação de JWT no Cloudflare Worker
+    // --------------------------------------------------
+
+    async createToken({
+        kid,
+        aud,
+        expiresIn = "8h"
+    } = {}) {
+        if (!this.initialized) {
+            throw new Error(
+                "JWTManager precisa ser inicializado antes de criar tokens."
+            );
+        }
+
+        if (!aud || typeof aud !== "string" || !aud.trim()) {
+            throw new TypeError("Audience do JWT inválida.");
+        }
+
+        if (!["8h", "6m", "1y"].includes(expiresIn)) {
+            throw new TypeError("Duração do JWT inválida.");
+        }
+
+        const externalKid = this._normalizeKid(kid);
+        const storedKid = this._getStoredKid(externalKid);
+
+        const credential = this.credentials.find(
+            item => item.kid === storedKid
+        );
+
+        if (!credential) {
+            throw new Error(
+                `Credencial "${externalKid}" não encontrada.`
+            );
+        }
+
+        // Recupera a sessão OAuth do GitHub armazenada pelo painel.
+        const githubAuth = await this.database.read({
+            tbn: "config",
+            tbk: "user-github"
+        });
+
+        const accessToken = githubAuth?.tokens?.access_token;
+
+        if (!accessToken || typeof accessToken !== "string") {
+            throw JWToken.createError(
+                "OAUTH_EXPIRED",
+                "Sessão OAuth do GitHub não encontrada. Autentique-se novamente."
+            );
+        }
+
+        let response;
+
+        try {
+            response = await fetch(
+                `${this.config.proxy.endpoint.replace(/\/+$/, "")}/jwt/create`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-GitHub-Access-Token": accessToken
+                    },
+                    body: JSON.stringify({
+                        kid: externalKid,
+                        aud,
+                        expiresIn
+                    }),
+                    cache: "no-store"
+                }
+            );
+        } catch {
+            throw JWToken.createError(
+                "NETWORK_ERROR",
+                "Falha de comunicação com o Cloudflare Worker."
+            );
+        }
+
+        let data;
+
+        try {
+            data = await response.json();
+        } catch {
+            data = {};
+        }
+
+        if (!response.ok) {
+            const code = data.code || data.error;
+
+            if (code === "OAUTH_EXPIRED") {
+                throw JWToken.createError(
+                    "OAUTH_EXPIRED",
+                    "A sessão OAuth do GitHub expirou ou é inválida."
+                );
+            }
+
+            throw JWToken.createError(
+                "SERVER_ERROR",
+                data.error || "O Worker não conseguiu gerar o JWT."
+            );
+        }
+
+        if (typeof data.token !== "string" || !data.token) {
+            throw JWToken.createError(
+                "SERVER_ERROR",
+                "A resposta do Worker não contém um JWT válido."
+            );
+        }
+
+        // Verifica assinatura e claims antes de armazenar o token.
+        try {
+            await this.jwt.verify({
+                token: data.token,
+                issuer: this.config.issuer,
+                audience: aud
+            });
+
+            const decoded = this.jwt.decode(data.token);
+
+            if (
+                decoded.header.kid !== externalKid ||
+                decoded.payload.sub !== this.config.sub
+            ) {
+                throw new Error(
+                    "O KID ou o Subject do JWT não corresponde à configuração."
+                );
+            }
+        } catch (error) {
+            throw JWToken.createError(
+                "INVALID_TOKEN",
+                `O JWT recebido não passou na validação: ${error.message}`
+            );
+        }
+
+        const decoded = this.jwt.decode(data.token);
+
+        const tokenRecord = {
+            token: data.token,
+            kid: externalKid,
+            aud,
+            expiresIn,
+            issuedAt: decoded.payload.iat,
+            expiresAt: decoded.payload.exp,
+            createdAt: new Date().toISOString()
+        };
+
+        const updatedCredential = {
+            ...credential,
+            tokens: [...credential.tokens, tokenRecord]
+        };
+
+        const updatedCredentials = this.credentials.map(item =>
+            item.kid === storedKid ? updatedCredential : item
+        );
+
+        await this._saveCredentials(updatedCredentials);
+
+        this.credentials = updatedCredentials;
+
+        return tokenRecord;
     }
 
     // --------------------------------------------------
@@ -285,8 +491,10 @@ export default class JWTManager {
             throw new TypeError("Identificador da credencial inválido.");
         }
 
+        const storedKid = this._getStoredKid(kid);
+
         const credentialExists = this.credentials.some(
-            credential => credential.kid === kid
+            credential => credential.kid === storedKid
         );
 
         if (!credentialExists) {
@@ -294,13 +502,15 @@ export default class JWTManager {
         }
 
         const updatedCredentials = this.credentials.filter(
-            credential => credential.kid !== kid
+            credential => credential.kid !== storedKid
         );
 
         await this._saveCredentials(updatedCredentials);
 
         this.credentials = updatedCredentials;
-        this.jwt.keys.delete(kid);
+
+        this.jwt.keys.delete(storedKid);
+        this.jwt.keys.delete(this._normalizeKid(storedKid));
 
         return true;
     }
