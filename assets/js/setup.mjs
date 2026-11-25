@@ -1799,11 +1799,11 @@ const SetupDOMReady = async evt => {
                                 ${escHTML(createdAt)}
                             </p>
 
-                            <div class="d-flex flex-wrap gap-2">
+                            <div class="d-flex flex-wrap">
 
                                 <button
                                     type="button"
-                                    class="btn btn-outline-primary btn-sm rounded-0"
+                                    class="btn btn-outline-primary btn-sm rounded-0 mr-2 mb-2"
                                     data-jwt-copy="public"
                                     data-jwt-kid="${escHTML(credential.kid)}">
                                     Copiar chave pública
@@ -1811,7 +1811,7 @@ const SetupDOMReady = async evt => {
 
                                 <button
                                     type="button"
-                                    class="btn btn-outline-primary btn-sm rounded-0"
+                                    class="btn btn-outline-primary btn-sm rounded-0 mr-2 mb-2"
                                     data-jwt-copy="private"
                                     data-jwt-kid="${escHTML(credential.kid)}">
                                     Copiar chave privada
@@ -1819,7 +1819,7 @@ const SetupDOMReady = async evt => {
 
                                 <button
                                     type="button"
-                                    class="btn btn-outline-secondary btn-sm rounded-0"
+                                    class="btn btn-outline-secondary btn-sm rounded-0 mr-2 mb-2"
                                     data-jwt-copy="key"
                                     data-jwt-kid="${escHTML(credential.kid)}">
                                     Copiar key (K_)
@@ -1827,7 +1827,7 @@ const SetupDOMReady = async evt => {
 
                                 <button
                                     type="button"
-                                    class="btn btn-outline-danger btn-sm rounded-0"
+                                    class="btn btn-outline-danger btn-sm rounded-0 mr-2 mb-2"
                                     data-jwt-delete="${escHTML(credential.kid)}">
                                     Excluir
                                 </button>
