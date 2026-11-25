@@ -2537,8 +2537,7 @@ const SetupDOMReady = async evt => {
 
                 const fillTokenAudiences = () => {
                     if (!tokenAudienceSelect) return;
-
-                    const services = settings.jwt?.services || {};
+                    const services = settings.jwt?.services || [];
 
                     tokenAudienceSelect.innerHTML = "";
 
@@ -2550,14 +2549,14 @@ const SetupDOMReady = async evt => {
 
                     tokenAudienceSelect.appendChild(placeholder);
 
-                    Object.entries(services).forEach(([name, value]) => {
+                    services.forEach(value => {
                         if (typeof value !== "string" || !value.trim()) {
                             return;
                         }
 
                         const option = dc.createElement("option");
                         option.value = value;
-                        option.textContent = `${name} — ${value}`;
+                        option.textContent = value;
 
                         tokenAudienceSelect.appendChild(option);
                     });
@@ -2811,9 +2810,7 @@ const SetupDOMReady = async evt => {
                             "admin-token-expires"
                         ).value;
 
-                        const services = Object.values(
-                            settings.jwt?.services || {}
-                        );
+                        const services = settings.jwt?.services || [];
 
                         if (!name || !description || !aud) {
                             showCredentialsFeedback(

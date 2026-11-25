@@ -49,9 +49,9 @@
             "store": "config",
             "key": "credenciais"
         },
-        "services": {
-            "analytics": "blog-analytics"
-        }
+        "services": [
+          "blog-records"
+        ]
     },
     "articles": {
         "storage": [
