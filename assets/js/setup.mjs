@@ -1189,12 +1189,14 @@ const SetupDOMReady = async evt => {
                     { default: WysiwygEditor },
                     { default: GitHubAPI },
                     { default: DeveloperTools },
-                    { default: JWTManager }
+                    { default: JWTManager },
+                    { default: RecordsManager }
                 ] = await Promise.all([
                     import("./modules/models/WysiwygEditor.mjs"),
                     import("./modules/lib/GitHubAPI.mjs"),
                     import("./modules/lib/DeveloperTools.mjs"),
-                    import("./modules/lib/JWTManager.mjs")
+                    import("./modules/lib/JWTManager.mjs"),
+                    import("./modules/lib/RecordsManager.mjs")
                 ]);
 
                 let jwtManager = null;
@@ -1224,7 +1226,13 @@ const SetupDOMReady = async evt => {
                     databaseName: settings.database.name,
                     databaseVersion: settings.database.version
                 });
+                const recordsManager = new RecordsManager({
+                    endpoint: settings.records?.endpoint,
+                    jwtManager,
+                    root: dc.getElementById("admin-view-records")
+                });
 
+                recordsManager.initialize();
                 const REPOSITORY_OWNER = settings.github_auth.repository_owner;
                 const REPOSITORY_NAME = settings.github_auth.repository_name;
                 const REPOSITORY_BRANCH = "main";
@@ -1710,6 +1718,7 @@ const SetupDOMReady = async evt => {
                     footoodles: dc.getElementById("admin-view-footoodles"),
                     session: dc.getElementById("admin-view-session"),
                     credentials: dc.getElementById("admin-view-credentials"),
+                    records: dc.getElementById("admin-view-records"),
                     devtools: dc.getElementById("admin-view-devtools")
                 };
 
@@ -1993,6 +2002,10 @@ const SetupDOMReady = async evt => {
 
                     if (target === "devtools") {
                         loadDevTools();
+                    }
+
+                    if (target === "records") {
+                        recordsManager.loadAll();
                     }
                     Object.entries(views).forEach(([key, section]) => {
                         if (section) section.hidden = key !== target;

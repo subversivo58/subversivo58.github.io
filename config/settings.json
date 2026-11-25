@@ -40,6 +40,9 @@
     },
 
     "jwt": {
+        "records": {
+            "endpoint": "https://blog-records.dib.workers.dev"
+        },
         "issuer": "Blog Subversivo58",
         "sub": "https://subversivo58.github.io",
         "proxy": {

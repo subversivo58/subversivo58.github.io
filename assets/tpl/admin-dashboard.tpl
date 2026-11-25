@@ -107,7 +107,112 @@
                     </svg>
                     <span class="admin-nav-label">Credenciais</span>
                 </button>
+<!-- REGISTROS -->
+<button
+    type="button"
+    data-admin-nav="records"
+    class="admin-nav-btn cp"
+    role="tab"
+    aria-selected="false">
 
+    <svg class="admin-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+        <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"></path>
+        <path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"></path>
+    </svg>
+
+    <span class="admin-nav-label">Registros</span>
+</button>
+
+<!-- VIEW: REGISTROS -->
+<section id="admin-view-records" class="admin-view" hidden>
+
+    <div class="mb-3 pb-3 border-bottom">
+
+        <h2 class="h4 mb-1">
+            Registros
+        </h2>
+
+        <p class="text-muted small mb-0">
+            Consulte os registros armazenados no serviço.
+        </p>
+
+    </div>
+
+    <nav class="nav nav-tabs mb-3"
+         role="tablist">
+
+        <button
+            type="button"
+            class="nav-link active"
+            data-records-tab="analytics"
+            role="tab"
+            aria-selected="true">
+            Analíticos
+            <span class="badge badge-secondary ml-1"
+                  data-records-count="analytics">—</span>
+        </button>
+
+        <button
+            type="button"
+            class="nav-link"
+            data-records-tab="feedback"
+            role="tab"
+            aria-selected="false">
+            Feedback
+            <span class="badge badge-secondary ml-1"
+                  data-records-count="feedback">—</span>
+        </button>
+
+        <button
+            type="button"
+            class="nav-link"
+            data-records-tab="errors"
+            role="tab"
+            aria-selected="false">
+            Erros
+            <span class="badge badge-secondary ml-1"
+                  data-records-count="errors">—</span>
+        </button>
+
+    </nav>
+
+    <!-- ANALYTICS -->
+    <div data-records-panel="analytics"
+         role="tabpanel">
+
+        <div data-records-list="analytics"></div>
+
+        <div data-records-pagination="analytics"
+             class="mt-3"></div>
+
+    </div>
+
+    <!-- FEEDBACK -->
+    <div data-records-panel="feedback"
+         role="tabpanel"
+         hidden>
+
+        <div data-records-list="feedback"></div>
+
+        <div data-records-pagination="feedback"
+             class="mt-3"></div>
+
+    </div>
+
+    <!-- ERRORS -->
+    <div data-records-panel="errors"
+         role="tabpanel"
+         hidden>
+
+        <div data-records-list="errors"></div>
+
+        <div data-records-pagination="errors"
+             class="mt-3"></div>
+
+    </div>
+
+</section>
                 <!-- DEVTOOLS -->
                 <button
                     type="button"
