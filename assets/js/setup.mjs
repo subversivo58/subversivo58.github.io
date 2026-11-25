@@ -1747,6 +1747,7 @@ const SetupDOMReady = async evt => {
                         `-----END ${label}-----`
                     ].join("\n");
                 };
+
                 const renderCredentials = () => {
                     if (
                         !jwtManager ||
@@ -1766,10 +1767,64 @@ const SetupDOMReady = async evt => {
                     credentialsList.innerHTML = credentials
                         .map(credential => {
                             const metadata = credential.metadata || {};
+                            const tokens = Array.isArray(credential.tokens)
+                                ? credential.tokens
+                                : [];
 
                             const createdAt = metadata.createdAt
                                 ? new Date(metadata.createdAt).toLocaleString()
                                 : "—";
+
+                            const tokenHTML = tokens.length
+                                ? tokens.map(token => {
+                                    const expiration = token.expiresAt
+                                        ? new Date(
+                                            token.expiresAt * 1000
+                                        ).toLocaleString()
+                                        : "—";
+
+                                    return `
+                                        <div class="border-top mt-3 pt-3">
+                                            <p class="small mb-1">
+                                                <strong>Audience:</strong>
+                                                ${escHTML(token.aud || "—")}
+                                            </p>
+
+                                            <p class="small mb-1">
+                                                <strong>JTI:</strong>
+                                                <code class="text-break">${escHTML(token.jti || "—")}</code>
+                                            </p>
+
+                                            <p class="small mb-2">
+                                                <strong>Expiração:</strong>
+                                                ${escHTML(expiration)}
+                                            </p>
+
+                                            <div class="d-flex flex-wrap">
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-outline-primary btn-sm rounded-0 mr-2 mb-2"
+                                                    data-jwt-token-copy="${escHTML(token.jti)}"
+                                                    data-jwt-kid="${escHTML(credential.kid)}">
+                                                    Copiar JWT
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-outline-secondary btn-sm rounded-0 mr-2 mb-2"
+                                                    data-jwt-token-renew="${escHTML(token.jti)}"
+                                                    data-jwt-kid="${escHTML(credential.kid)}">
+                                                    Renovar JWT
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join("")
+                                : `
+                                    <p class="small text-muted border-top mt-3 pt-3 mb-0">
+                                        Nenhum JWT gerado para esta credencial.
+                                    </p>
+                                `;
 
                             return `
                 <div class="col-12 col-lg-6 mb-3">
@@ -1800,6 +1855,13 @@ const SetupDOMReady = async evt => {
                             </p>
 
                             <div class="d-flex flex-wrap">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-info btn-sm rounded-0 mr-2 mb-2"
+                                    data-jwt-create="${escHTML(credential.kid)}">
+                                    Gerar JWT
+                                </button>
 
                                 <button
                                     type="button"
@@ -1834,6 +1896,14 @@ const SetupDOMReady = async evt => {
 
                             </div>
 
+                            <div class="mt-3">
+                                <p class="small font-weight-bold mb-2">
+                                    JWTs desta credencial (${tokens.length})
+                                </p>
+
+                                ${tokenHTML}
+                            </div>
+
                         </div>
                     </article>
                 </div>
@@ -1841,6 +1911,7 @@ const SetupDOMReady = async evt => {
                         })
                         .join("");
                 };
+
 
                 renderCredentials();
 
@@ -2321,7 +2392,7 @@ const SetupDOMReady = async evt => {
                 });
 
                 // --------------------------------------------------
-                // Gerenciamento de credenciais JWT
+                // Gerenciamento de credenciais e tokens JWT
                 // --------------------------------------------------
 
                 const credentialsNewButton = dc.getElementById(
@@ -2354,30 +2425,199 @@ const SetupDOMReady = async evt => {
                         );
                     }
                 }
+
                 if (credentialsList) {
                     credentialsList.addEventListener("click", async event => {
                         const button = event.target.closest(
-                            "[data-jwt-copy], [data-jwt-delete]"
+                            [
+                                "[data-jwt-copy]",
+                                "[data-jwt-delete]",
+                                "[data-jwt-create]",
+                                "[data-jwt-token-copy]",
+                                "[data-jwt-token-renew]"
+                            ].join(", ")
                         );
 
                         if (!button || !jwtManager) return;
 
                         const kid =
-                            button.dataset.jwtKid || button.dataset.jwtDelete;
+                            button.dataset.jwtKid ||
+                            button.dataset.jwtDelete ||
+                            button.dataset.jwtCreate;
 
-                        // Copiar identificadores e chaves
-                        if (button.dataset.jwtCopy) {
-                            const type = button.dataset.jwtCopy;
+                        const credentials = jwtManager.getCredentials();
 
-                            const credential = jwtManager
-                                .getCredentials()
-                                .find(item => item.kid === kid);
+                        const credential = credentials.find(
+                            item => item.kid === kid
+                        );
 
-                            if (!credential) {
-                                wd.alert("Credencial não encontrada.");
+                        if (!credential) {
+                            wd.alert("Credencial não encontrada.");
+                            return;
+                        }
+
+                        // --------------------------------------------------
+                        // GERAR JWT
+                        // --------------------------------------------------
+
+                        if (button.dataset.jwtCreate) {
+                            const services = settings.jwt?.services || {};
+                            const serviceEntries = Object.entries(services);
+
+                            if (!serviceEntries.length) {
+                                wd.alert(
+                                    "Nenhum serviço JWT está configurado."
+                                );
                                 return;
                             }
 
+                            const serviceList = serviceEntries
+                                .map(([, value]) => value)
+                                .join(", ");
+
+                            const aud = window.prompt(
+                                `Informe a Audience do JWT:\n${serviceList}`,
+                                serviceEntries[0][1]
+                            );
+
+                            if (aud === null) return;
+
+                            if (
+                                !serviceEntries.some(
+                                    ([, value]) => value === aud.trim()
+                                )
+                            ) {
+                                wd.alert(
+                                    "Audience não encontrada nas configurações."
+                                );
+                                return;
+                            }
+
+                            const expiresIn = window.prompt(
+                                "Informe a duração do JWT: 8h, 6m ou 1y.",
+                                "8h"
+                            );
+
+                            if (expiresIn === null) return;
+
+                            if (!["8h", "6m", "1y"].includes(expiresIn)) {
+                                wd.alert("Duração inválida.");
+                                return;
+                            }
+
+                            button.disabled = true;
+
+                            try {
+                                await jwtManager.createToken({
+                                    kid,
+                                    aud: aud.trim(),
+                                    expiresIn
+                                });
+
+                                renderCredentials();
+                            } catch (error) {
+                                console.error(
+                                    "[JWT]: Não foi possível gerar o JWT.",
+                                    error
+                                );
+
+                                wd.alert(error?.message || String(error));
+                            } finally {
+                                button.disabled = false;
+                            }
+
+                            return;
+                        }
+
+                        // --------------------------------------------------
+                        // COPIAR JWT
+                        // --------------------------------------------------
+
+                        if (button.dataset.jwtTokenCopy) {
+                            const jti = button.dataset.jwtTokenCopy;
+
+                            const tokenRecord = credential.tokens.find(
+                                item => item.jti === jti
+                            );
+
+                            if (!tokenRecord?.token) {
+                                wd.alert("JWT não encontrado.");
+                                return;
+                            }
+
+                            try {
+                                await navigator.clipboard.writeText(
+                                    tokenRecord.token
+                                );
+
+                                const originalText = button.textContent;
+
+                                button.textContent = "Copiado!";
+                                button.disabled = true;
+
+                                setTimeout(() => {
+                                    button.textContent = originalText;
+                                    button.disabled = false;
+                                }, 1200);
+                            } catch (error) {
+                                console.error(
+                                    "[JWT]: Não foi possível copiar o JWT.",
+                                    error
+                                );
+
+                                wd.alert(
+                                    error?.message ||
+                                    "Não foi possível copiar o JWT."
+                                );
+                            }
+
+                            return;
+                        }
+
+                        // --------------------------------------------------
+                        // RENOVAR JWT
+                        // --------------------------------------------------
+
+                        if (button.dataset.jwtTokenRenew) {
+                            const jti = button.dataset.jwtTokenRenew;
+
+                            if (
+                                !wd.confirm(
+                                    "Deseja renovar este JWT?"
+                                )
+                            ) {
+                                return;
+                            }
+
+                            button.disabled = true;
+
+                            try {
+                                await jwtManager.refresh({
+                                    kid,
+                                    jti
+                                });
+
+                                renderCredentials();
+                            } catch (error) {
+                                console.error(
+                                    "[JWT]: Não foi possível renovar o JWT.",
+                                    error
+                                );
+
+                                wd.alert(error?.message || String(error));
+                            } finally {
+                                button.disabled = false;
+                            }
+
+                            return;
+                        }
+
+                        // --------------------------------------------------
+                        // COPIAR CHAVES
+                        // --------------------------------------------------
+
+                        if (button.dataset.jwtCopy) {
+                            const type = button.dataset.jwtCopy;
                             let value;
 
                             try {
@@ -2425,37 +2665,45 @@ const SetupDOMReady = async evt => {
 
                                 wd.alert(
                                     error?.message ||
-                                        "Não foi possível copiar para a área de transferência."
+                                    "Não foi possível copiar para a área de transferência."
                                 );
                             }
 
                             return;
                         }
 
-                        // Excluir credencial
-                        if (
-                            !wd.confirm(`Deseja excluir a credencial "${kid}"?`)
-                        ) {
-                            return;
-                        }
+                        // --------------------------------------------------
+                        // EXCLUIR CREDENCIAL
+                        // --------------------------------------------------
 
-                        button.disabled = true;
+                        if (button.dataset.jwtDelete) {
+                            if (
+                                !wd.confirm(
+                                    `Deseja excluir a credencial "${kid}"?`
+                                )
+                            ) {
+                                return;
+                            }
 
-                        try {
-                            await jwtManager.deleteCredential(kid);
-                            renderCredentials();
-                        } catch (error) {
-                            console.error(
-                                "[JWT]: Não foi possível excluir a credencial.",
-                                error
-                            );
+                            button.disabled = true;
 
-                            wd.alert(error?.message || String(error));
-                        } finally {
-                            button.disabled = false;
+                            try {
+                                await jwtManager.deleteCredential(kid);
+                                renderCredentials();
+                            } catch (error) {
+                                console.error(
+                                    "[JWT]: Não foi possível excluir a credencial.",
+                                    error
+                                );
+
+                                wd.alert(error?.message || String(error));
+                            } finally {
+                                button.disabled = false;
+                            }
                         }
                     });
                 }
+
 
                 const mobileNewPost = dc.getElementById(
                     "admin-mobile-new-post"
