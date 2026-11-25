@@ -1767,6 +1767,7 @@ const SetupDOMReady = async evt => {
                     credentialsList.innerHTML = credentials
                         .map(credential => {
                             const metadata = credential.metadata || {};
+
                             const tokens = Array.isArray(credential.tokens)
                                 ? credential.tokens
                                 : [];
@@ -1775,16 +1776,53 @@ const SetupDOMReady = async evt => {
                                 ? new Date(metadata.createdAt).toLocaleString()
                                 : "—";
 
-                            const tokenHTML = tokens.length
-                                ? tokens.map(token => {
-                                    const expiration = token.expiresAt
-                                        ? new Date(
-                                            token.expiresAt * 1000
-                                        ).toLocaleString()
-                                        : "—";
+                            const credentialName =
+                                metadata.name || "Credencial sem nome";
 
-                                    return `
+                            const credentialDescription =
+                                metadata.description ||
+                                "Sem descrição cadastrada.";
+
+                            const tokenHTML = tokens.length
+                                ? tokens
+                                      .map(token => {
+                                          const expiration = token.expiresAt
+                                              ? new Date(
+                                                    token.expiresAt * 1000
+                                                ).toLocaleString()
+                                              : "—";
+
+                                          const tokenName =
+                                              token.name || "JWT sem nome";
+
+                                          const tokenDescription =
+                                              token.description ||
+                                              "Sem descrição cadastrada.";
+
+                                          return `
                                         <div class="border-top mt-3 pt-3">
+
+                                            <div class="d-flex align-items-start justify-content-between">
+                                                <div class="mr-2">
+                                                    <p class="font-weight-bold mb-1">
+                                                        ${escHTML(tokenName)}
+                                                    </p>
+
+                                                    <p class="small text-muted mb-2">
+                                                        ${escHTML(tokenDescription)}
+                                                    </p>
+                                                </div>
+
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-outline-secondary btn-sm rounded-0"
+                                                    data-jwt-metadata="token"
+                                                    data-jwt-kid="${escHTML(credential.kid)}"
+                                                    data-jwt-jti="${escHTML(token.jti || "")}">
+                                                    Editar
+                                                </button>
+                                            </div>
+
                                             <p class="small mb-1">
                                                 <strong>Audience:</strong>
                                                 ${escHTML(token.aud || "—")}
@@ -1801,10 +1839,11 @@ const SetupDOMReady = async evt => {
                                             </p>
 
                                             <div class="d-flex flex-wrap">
+
                                                 <button
                                                     type="button"
                                                     class="btn btn-outline-primary btn-sm rounded-0 mr-2 mb-2"
-                                                    data-jwt-token-copy="${escHTML(token.jti)}"
+                                                    data-jwt-token-copy="${escHTML(token.jti || "")}"
                                                     data-jwt-kid="${escHTML(credential.kid)}">
                                                     Copiar JWT
                                                 </button>
@@ -1812,14 +1851,25 @@ const SetupDOMReady = async evt => {
                                                 <button
                                                     type="button"
                                                     class="btn btn-outline-secondary btn-sm rounded-0 mr-2 mb-2"
-                                                    data-jwt-token-renew="${escHTML(token.jti)}"
+                                                    data-jwt-token-renew="${escHTML(token.jti || "")}"
                                                     data-jwt-kid="${escHTML(credential.kid)}">
                                                     Renovar JWT
                                                 </button>
+
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-outline-danger btn-sm rounded-0 mb-2"
+                                                    data-jwt-token-delete="${escHTML(token.jti || "")}"
+                                                    data-jwt-kid="${escHTML(credential.kid)}">
+                                                    Excluir JWT
+                                                </button>
+
                                             </div>
+
                                         </div>
                                     `;
-                                }).join("")
+                                      })
+                                      .join("")
                                 : `
                                     <p class="small text-muted border-top mt-3 pt-3 mb-0">
                                         Nenhum JWT gerado para esta credencial.
@@ -1830,6 +1880,28 @@ const SetupDOMReady = async evt => {
                 <div class="col-12 col-lg-6 mb-3">
                     <article class="card rounded-0 border h-100">
                         <div class="card-body">
+
+                            <div class="d-flex align-items-start justify-content-between mb-3">
+
+                                <div class="mr-2">
+                                    <h3 class="h5 mb-1">
+                                        ${escHTML(credentialName)}
+                                    </h3>
+
+                                    <p class="small text-muted mb-0">
+                                        ${escHTML(credentialDescription)}
+                                    </p>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-secondary btn-sm rounded-0"
+                                    data-jwt-metadata="credential"
+                                    data-jwt-kid="${escHTML(credential.kid)}">
+                                    Editar
+                                </button>
+
+                            </div>
 
                             <p class="small text-muted mb-1">
                                 Identificador
@@ -1889,19 +1961,21 @@ const SetupDOMReady = async evt => {
 
                                 <button
                                     type="button"
-                                    class="btn btn-outline-danger btn-sm rounded-0 mr-2 mb-2"
+                                    class="btn btn-outline-danger btn-sm rounded-0 mb-2"
                                     data-jwt-delete="${escHTML(credential.kid)}">
-                                    Excluir
+                                    Excluir credencial
                                 </button>
 
                             </div>
 
                             <div class="mt-3">
+
                                 <p class="small font-weight-bold mb-2">
                                     JWTs desta credencial (${tokens.length})
                                 </p>
 
                                 ${tokenHTML}
+
                             </div>
 
                         </div>
@@ -1911,7 +1985,6 @@ const SetupDOMReady = async evt => {
                         })
                         .join("");
                 };
-
 
                 renderCredentials();
 
@@ -2399,32 +2472,569 @@ const SetupDOMReady = async evt => {
                     "admin-credentials-new"
                 );
 
+                const credentialsFeedback = dc.getElementById(
+                    "admin-credentials-feedback"
+                );
+
+                const showCredentialsFeedback = (message, type = "success") => {
+                    if (!credentialsFeedback) return;
+
+                    credentialsFeedback.className = `alert alert-${type} rounded-0 small mb-3`;
+
+                    credentialsFeedback.textContent = message;
+                    credentialsFeedback.hidden = false;
+                };
+
+                const credentialCreateModalElement = dc.getElementById(
+                    "admin-modal-credential-create"
+                );
+
+                const tokenCreateModalElement = dc.getElementById(
+                    "admin-modal-token-create"
+                );
+
+                const metadataModalElement = dc.getElementById(
+                    "admin-modal-metadata"
+                );
+
+                const confirmModalElement = dc.getElementById(
+                    "admin-modal-confirm"
+                );
+
+                const credentialCreateModal = credentialCreateModalElement
+                    ? new BootstrapNative.Modal(credentialCreateModalElement)
+                    : null;
+
+                const tokenCreateModal = tokenCreateModalElement
+                    ? new BootstrapNative.Modal(tokenCreateModalElement)
+                    : null;
+
+                const metadataModal = metadataModalElement
+                    ? new BootstrapNative.Modal(metadataModalElement)
+                    : null;
+
+                const confirmModal = confirmModalElement
+                    ? new BootstrapNative.Modal(confirmModalElement)
+                    : null;
+
+                const credentialCreateForm = dc.getElementById(
+                    "admin-form-credential-create"
+                );
+
+                const tokenCreateForm = dc.getElementById(
+                    "admin-form-token-create"
+                );
+
+                const metadataForm = dc.getElementById("admin-form-metadata");
+
+                const tokenAudienceSelect = dc.getElementById(
+                    "admin-token-audience"
+                );
+
+                const confirmSubmitButton = dc.getElementById(
+                    "admin-confirm-submit"
+                );
+
+                const fillTokenAudiences = () => {
+                    if (!tokenAudienceSelect) return;
+
+                    const services = settings.jwt?.services || {};
+
+                    tokenAudienceSelect.innerHTML = "";
+
+                    const placeholder = dc.createElement("option");
+                    placeholder.value = "";
+                    placeholder.textContent = "Selecione um serviço";
+                    placeholder.disabled = true;
+                    placeholder.selected = true;
+
+                    tokenAudienceSelect.appendChild(placeholder);
+
+                    Object.entries(services).forEach(([name, value]) => {
+                        if (typeof value !== "string" || !value.trim()) {
+                            return;
+                        }
+
+                        const option = dc.createElement("option");
+                        option.value = value;
+                        option.textContent = `${name} — ${value}`;
+
+                        tokenAudienceSelect.appendChild(option);
+                    });
+
+                    tokenAudienceSelect.disabled =
+                        tokenAudienceSelect.options.length <= 1;
+                };
+
+                const openCredentialCreateModal = () => {
+                    if (!credentialCreateModal || !credentialCreateForm) {
+                        showCredentialsFeedback(
+                            "O formulário de criação de credencial não foi encontrado.",
+                            "danger"
+                        );
+                        return;
+                    }
+
+                    credentialCreateForm.reset();
+                    credentialCreateModal.show();
+                };
+
+                const openTokenCreateModal = kid => {
+                    if (!tokenCreateModal || !tokenCreateForm) {
+                        showCredentialsFeedback(
+                            "O formulário de criação de JWT não foi encontrado.",
+                            "danger"
+                        );
+                        return;
+                    }
+
+                    tokenCreateForm.reset();
+
+                    dc.getElementById("admin-token-kid").value = kid;
+
+                    fillTokenAudiences();
+
+                    const expiresSelect = dc.getElementById(
+                        "admin-token-expires"
+                    );
+
+                    if (expiresSelect) {
+                        expiresSelect.value = "8h";
+                    }
+
+                    tokenCreateModal.show();
+                };
+
+                const openMetadataModal = ({
+                    type,
+                    kid,
+                    jti = "",
+                    name = "",
+                    description = ""
+                }) => {
+                    if (!metadataModal || !metadataForm) {
+                        showCredentialsFeedback(
+                            "O formulário de edição não foi encontrado.",
+                            "danger"
+                        );
+                        return;
+                    }
+
+                    metadataForm.reset();
+
+                    dc.getElementById("admin-metadata-type").value = type;
+                    dc.getElementById("admin-metadata-kid").value = kid;
+                    dc.getElementById("admin-metadata-jti").value = jti;
+                    dc.getElementById("admin-metadata-name").value = name;
+                    dc.getElementById("admin-metadata-description").value =
+                        description;
+
+                    const title = dc.getElementById(
+                        "admin-modal-metadata-title"
+                    );
+
+                    if (title) {
+                        title.textContent =
+                            type === "credential"
+                                ? "Editar credencial"
+                                : "Editar identificação do JWT";
+                    }
+
+                    metadataModal.show();
+                };
+
+                let pendingCredentialOperation = null;
+
+                const openConfirmModal = ({ type, kid, jti = "", message }) => {
+                    if (!confirmModal) {
+                        showCredentialsFeedback(
+                            "O modal de confirmação não foi encontrado.",
+                            "danger"
+                        );
+                        return;
+                    }
+
+                    pendingCredentialOperation = {
+                        type,
+                        kid,
+                        jti
+                    };
+
+                    dc.getElementById("admin-confirm-type").value = type;
+                    dc.getElementById("admin-confirm-kid").value = kid;
+                    dc.getElementById("admin-confirm-jti").value = jti;
+
+                    const messageElement = dc.getElementById(
+                        "admin-modal-confirm-message"
+                    );
+
+                    if (messageElement) {
+                        messageElement.textContent = message;
+                    }
+
+                    const title = dc.getElementById(
+                        "admin-modal-confirm-title"
+                    );
+
+                    if (title) {
+                        title.textContent =
+                            type === "renew"
+                                ? "Confirmar renovação"
+                                : "Confirmar exclusão";
+                    }
+
+                    if (confirmSubmitButton) {
+                        confirmSubmitButton.textContent =
+                            type === "renew" ? "Renovar JWT" : "Excluir";
+                        confirmSubmitButton.classList.toggle(
+                            "btn-danger",
+                            type !== "renew"
+                        );
+                        confirmSubmitButton.classList.toggle(
+                            "btn-info",
+                            type === "renew"
+                        );
+                    }
+
+                    confirmModal.show();
+                };
+
+                const getCredentialByKid = kid => {
+                    return jwtManager
+                        ?.getCredentials()
+                        .find(item => item.kid === kid);
+                };
+
                 if (credentialsNewButton) {
                     credentialsNewButton.disabled = !jwtManager;
 
-                    if (jwtManager) {
-                        credentialsNewButton.addEventListener(
-                            "click",
-                            async () => {
-                                credentialsNewButton.disabled = true;
+                    credentialsNewButton.addEventListener("click", () => {
+                        if (!jwtManager) return;
 
-                                try {
-                                    await jwtManager.createCredential();
-                                    renderCredentials();
-                                } catch (error) {
-                                    console.error(
-                                        "[JWT]: Não foi possível criar a credencial.",
-                                        error
-                                    );
+                        openCredentialCreateModal();
+                    });
+                }
 
-                                    wd.alert(error?.message || String(error));
-                                } finally {
-                                    credentialsNewButton.disabled = false;
+                // --------------------------------------------------
+                // CRIAR CREDENCIAL
+                // --------------------------------------------------
+
+                if (credentialCreateForm) {
+                    credentialCreateForm.addEventListener(
+                        "submit",
+                        async event => {
+                            event.preventDefault();
+
+                            if (!jwtManager) return;
+
+                            const submitButton = dc.getElementById(
+                                "admin-credential-create-submit"
+                            );
+
+                            const name = dc
+                                .getElementById("admin-credential-name")
+                                .value.trim();
+
+                            const description = dc
+                                .getElementById("admin-credential-description")
+                                .value.trim();
+
+                            if (!name || !description) {
+                                showCredentialsFeedback(
+                                    "Informe o nome e a descrição da credencial.",
+                                    "danger"
+                                );
+                                return;
+                            }
+
+                            if (submitButton) submitButton.disabled = true;
+
+                            try {
+                                await jwtManager.createCredential({
+                                    name,
+                                    description
+                                });
+
+                                credentialCreateModal?.hide();
+
+                                renderCredentials();
+
+                                showCredentialsFeedback(
+                                    "Credencial criada com sucesso."
+                                );
+                            } catch (error) {
+                                console.error(
+                                    "[JWT]: Não foi possível criar a credencial.",
+                                    error
+                                );
+
+                                showCredentialsFeedback(
+                                    error?.message || String(error),
+                                    "danger"
+                                );
+                            } finally {
+                                if (submitButton) {
+                                    submitButton.disabled = false;
                                 }
                             }
-                        );
-                    }
+                        }
+                    );
                 }
+
+                // --------------------------------------------------
+                // CRIAR JWT
+                // --------------------------------------------------
+
+                if (tokenCreateForm) {
+                    tokenCreateForm.addEventListener("submit", async event => {
+                        event.preventDefault();
+
+                        if (!jwtManager) return;
+
+                        const submitButton = dc.getElementById(
+                            "admin-token-create-submit"
+                        );
+
+                        const kid = dc.getElementById("admin-token-kid").value;
+
+                        const name = dc
+                            .getElementById("admin-token-name")
+                            .value.trim();
+
+                        const description = dc
+                            .getElementById("admin-token-description")
+                            .value.trim();
+
+                        const aud = tokenAudienceSelect?.value || "";
+
+                        const expiresIn = dc.getElementById(
+                            "admin-token-expires"
+                        ).value;
+
+                        const services = Object.values(
+                            settings.jwt?.services || {}
+                        );
+
+                        if (!name || !description || !aud) {
+                            showCredentialsFeedback(
+                                "Preencha todos os campos para gerar o JWT.",
+                                "danger"
+                            );
+                            return;
+                        }
+
+                        if (!services.includes(aud)) {
+                            showCredentialsFeedback(
+                                "O serviço selecionado não está configurado.",
+                                "danger"
+                            );
+                            return;
+                        }
+
+                        if (!["8h", "6m", "1y"].includes(expiresIn)) {
+                            showCredentialsFeedback(
+                                "A validade selecionada é inválida.",
+                                "danger"
+                            );
+                            return;
+                        }
+
+                        if (submitButton) submitButton.disabled = true;
+
+                        try {
+                            await jwtManager.createToken({
+                                kid,
+                                name,
+                                description,
+                                aud,
+                                expiresIn
+                            });
+
+                            tokenCreateModal?.hide();
+
+                            renderCredentials();
+
+                            showCredentialsFeedback("JWT criado com sucesso.");
+                        } catch (error) {
+                            console.error(
+                                "[JWT]: Não foi possível gerar o JWT.",
+                                error
+                            );
+
+                            showCredentialsFeedback(
+                                error?.message || String(error),
+                                "danger"
+                            );
+                        } finally {
+                            if (submitButton) {
+                                submitButton.disabled = false;
+                            }
+                        }
+                    });
+                }
+
+                // --------------------------------------------------
+                // EDITAR METADADOS
+                // --------------------------------------------------
+
+                if (metadataForm) {
+                    metadataForm.addEventListener("submit", async event => {
+                        event.preventDefault();
+
+                        if (!jwtManager) return;
+
+                        const submitButton = dc.getElementById(
+                            "admin-metadata-submit"
+                        );
+
+                        const type = dc.getElementById(
+                            "admin-metadata-type"
+                        ).value;
+
+                        const kid =
+                            dc.getElementById("admin-metadata-kid").value;
+
+                        const jti =
+                            dc.getElementById("admin-metadata-jti").value;
+
+                        const name = dc
+                            .getElementById("admin-metadata-name")
+                            .value.trim();
+
+                        const description = dc
+                            .getElementById("admin-metadata-description")
+                            .value.trim();
+
+                        if (!name || !description) {
+                            showCredentialsFeedback(
+                                "Informe o nome e a descrição.",
+                                "danger"
+                            );
+                            return;
+                        }
+
+                        if (submitButton) submitButton.disabled = true;
+
+                        try {
+                            if (type === "credential") {
+                                await jwtManager.updateCredentialMetadata({
+                                    kid,
+                                    name,
+                                    description
+                                });
+                            } else if (type === "token") {
+                                await jwtManager.updateTokenMetadata({
+                                    kid,
+                                    jti,
+                                    name,
+                                    description
+                                });
+                            } else {
+                                throw new Error("Tipo de metadado inválido.");
+                            }
+
+                            metadataModal?.hide();
+
+                            renderCredentials();
+
+                            showCredentialsFeedback(
+                                "Identificação atualizada com sucesso."
+                            );
+                        } catch (error) {
+                            console.error(
+                                "[JWT]: Não foi possível atualizar os metadados.",
+                                error
+                            );
+
+                            showCredentialsFeedback(
+                                error?.message || String(error),
+                                "danger"
+                            );
+                        } finally {
+                            if (submitButton) {
+                                submitButton.disabled = false;
+                            }
+                        }
+                    });
+                }
+
+                // --------------------------------------------------
+                // CONFIRMAR OPERAÇÃO
+                // --------------------------------------------------
+
+                if (confirmSubmitButton) {
+                    confirmSubmitButton.addEventListener("click", async () => {
+                        if (!jwtManager || !pendingCredentialOperation) {
+                            return;
+                        }
+
+                        const operation = pendingCredentialOperation;
+
+                        confirmSubmitButton.disabled = true;
+
+                        try {
+                            switch (operation.type) {
+                                case "token-delete":
+                                    await jwtManager.deleteToken({
+                                        kid: operation.kid,
+                                        jti: operation.jti
+                                    });
+
+                                    showCredentialsFeedback(
+                                        "JWT excluído com sucesso."
+                                    );
+                                    break;
+
+                                case "credential-delete":
+                                    await jwtManager.deleteCredential(
+                                        operation.kid
+                                    );
+
+                                    showCredentialsFeedback(
+                                        "Credencial e todos os seus JWTs foram excluídos."
+                                    );
+                                    break;
+
+                                case "renew":
+                                    await jwtManager.refresh({
+                                        kid: operation.kid,
+                                        jti: operation.jti
+                                    });
+
+                                    showCredentialsFeedback(
+                                        "JWT renovado com sucesso."
+                                    );
+                                    break;
+
+                                default:
+                                    throw new Error(
+                                        "Operação de credencial desconhecida."
+                                    );
+                            }
+
+                            confirmModal?.hide();
+                            pendingCredentialOperation = null;
+
+                            renderCredentials();
+                        } catch (error) {
+                            console.error(
+                                "[JWT]: Não foi possível concluir a operação.",
+                                error
+                            );
+
+                            showCredentialsFeedback(
+                                error?.message || String(error),
+                                "danger"
+                            );
+                        } finally {
+                            confirmSubmitButton.disabled = false;
+                        }
+                    });
+                }
+
+                // --------------------------------------------------
+                // EVENTOS DA LISTAGEM DE CREDENCIAIS
+                // --------------------------------------------------
 
                 if (credentialsList) {
                     credentialsList.addEventListener("click", async event => {
@@ -2434,7 +3044,9 @@ const SetupDOMReady = async evt => {
                                 "[data-jwt-delete]",
                                 "[data-jwt-create]",
                                 "[data-jwt-token-copy]",
-                                "[data-jwt-token-renew]"
+                                "[data-jwt-token-renew]",
+                                "[data-jwt-token-delete]",
+                                "[data-jwt-metadata]"
                             ].join(", ")
                         );
 
@@ -2445,93 +3057,110 @@ const SetupDOMReady = async evt => {
                             button.dataset.jwtDelete ||
                             button.dataset.jwtCreate;
 
-                        const credentials = jwtManager.getCredentials();
-
-                        const credential = credentials.find(
-                            item => item.kid === kid
-                        );
+                        const credential = getCredentialByKid(kid);
 
                         if (!credential) {
-                            wd.alert("Credencial não encontrada.");
+                            showCredentialsFeedback(
+                                "Credencial não encontrada.",
+                                "danger"
+                            );
                             return;
                         }
 
-                        // --------------------------------------------------
-                        // GERAR JWT
-                        // --------------------------------------------------
+                        // ------------------------------------------
+                        // ABRIR FORMULÁRIO DE CRIAÇÃO DE JWT
+                        // ------------------------------------------
 
                         if (button.dataset.jwtCreate) {
-                            const services = settings.jwt?.services || {};
-                            const serviceEntries = Object.entries(services);
+                            openTokenCreateModal(kid);
+                            return;
+                        }
 
-                            if (!serviceEntries.length) {
-                                wd.alert(
-                                    "Nenhum serviço JWT está configurado."
-                                );
-                                return;
-                            }
+                        // ------------------------------------------
+                        // EDITAR METADADOS
+                        // ------------------------------------------
 
-                            const serviceList = serviceEntries
-                                .map(([, value]) => value)
-                                .join(", ");
+                        if (button.dataset.jwtMetadata) {
+                            const type = button.dataset.jwtMetadata;
 
-                            const aud = window.prompt(
-                                `Informe a Audience do JWT:\n${serviceList}`,
-                                serviceEntries[0][1]
-                            );
-
-                            if (aud === null) return;
-
-                            if (
-                                !serviceEntries.some(
-                                    ([, value]) => value === aud.trim()
-                                )
-                            ) {
-                                wd.alert(
-                                    "Audience não encontrada nas configurações."
-                                );
-                                return;
-                            }
-
-                            const expiresIn = window.prompt(
-                                "Informe a duração do JWT: 8h, 6m ou 1y.",
-                                "8h"
-                            );
-
-                            if (expiresIn === null) return;
-
-                            if (!["8h", "6m", "1y"].includes(expiresIn)) {
-                                wd.alert("Duração inválida.");
-                                return;
-                            }
-
-                            button.disabled = true;
-
-                            try {
-                                await jwtManager.createToken({
+                            if (type === "credential") {
+                                openMetadataModal({
+                                    type,
                                     kid,
-                                    aud: aud.trim(),
-                                    expiresIn
+                                    name: credential.metadata?.name || "",
+                                    description:
+                                        credential.metadata?.description || ""
                                 });
 
-                                renderCredentials();
-                            } catch (error) {
-                                console.error(
-                                    "[JWT]: Não foi possível gerar o JWT.",
-                                    error
+                                return;
+                            }
+
+                            if (type === "token") {
+                                const jti = button.dataset.jwtJti;
+
+                                const tokenRecord = credential.tokens.find(
+                                    item => item.jti === jti
                                 );
 
-                                wd.alert(error?.message || String(error));
-                            } finally {
-                                button.disabled = false;
+                                if (!tokenRecord) {
+                                    showCredentialsFeedback(
+                                        "JWT não encontrado.",
+                                        "danger"
+                                    );
+                                    return;
+                                }
+
+                                openMetadataModal({
+                                    type,
+                                    kid,
+                                    jti,
+                                    name: tokenRecord.name || "",
+                                    description: tokenRecord.description || ""
+                                });
+
+                                return;
                             }
+                        }
+
+                        // ------------------------------------------
+                        // EXCLUIR JWT INDIVIDUAL
+                        // ------------------------------------------
+
+                        if (button.dataset.jwtTokenDelete) {
+                            const jti = button.dataset.jwtTokenDelete;
+
+                            openConfirmModal({
+                                type: "token-delete",
+                                kid,
+                                jti,
+                                message:
+                                    "Deseja realmente excluir somente este JWT? A credencial e os demais tokens serão mantidos."
+                            });
 
                             return;
                         }
 
-                        // --------------------------------------------------
+                        // ------------------------------------------
+                        // RENOVAR JWT
+                        // ------------------------------------------
+
+                        if (button.dataset.jwtTokenRenew) {
+                            const jti = button.dataset.jwtTokenRenew;
+
+                            openConfirmModal({
+                                type: "renew",
+                                kid,
+                                jti,
+                                message:
+                                    "Deseja renovar este JWT? O token será substituído por uma nova emissão."
+                            });
+
+                            return;
+                        }
+
+                        // ------------------------------------------
                         // COPIAR JWT
-                        // --------------------------------------------------
+                        // ------------------------------------------
 
                         if (button.dataset.jwtTokenCopy) {
                             const jti = button.dataset.jwtTokenCopy;
@@ -2541,7 +3170,10 @@ const SetupDOMReady = async evt => {
                             );
 
                             if (!tokenRecord?.token) {
-                                wd.alert("JWT não encontrado.");
+                                showCredentialsFeedback(
+                                    "JWT não encontrado.",
+                                    "danger"
+                                );
                                 return;
                             }
 
@@ -2550,71 +3182,28 @@ const SetupDOMReady = async evt => {
                                     tokenRecord.token
                                 );
 
-                                const originalText = button.textContent;
-
-                                button.textContent = "Copiado!";
-                                button.disabled = true;
-
-                                setTimeout(() => {
-                                    button.textContent = originalText;
-                                    button.disabled = false;
-                                }, 1200);
+                                showCredentialsFeedback(
+                                    "JWT copiado para a área de transferência."
+                                );
                             } catch (error) {
                                 console.error(
                                     "[JWT]: Não foi possível copiar o JWT.",
                                     error
                                 );
 
-                                wd.alert(
+                                showCredentialsFeedback(
                                     error?.message ||
-                                    "Não foi possível copiar o JWT."
+                                        "Não foi possível copiar o JWT.",
+                                    "danger"
                                 );
                             }
 
                             return;
                         }
 
-                        // --------------------------------------------------
-                        // RENOVAR JWT
-                        // --------------------------------------------------
-
-                        if (button.dataset.jwtTokenRenew) {
-                            const jti = button.dataset.jwtTokenRenew;
-
-                            if (
-                                !wd.confirm(
-                                    "Deseja renovar este JWT?"
-                                )
-                            ) {
-                                return;
-                            }
-
-                            button.disabled = true;
-
-                            try {
-                                await jwtManager.refresh({
-                                    kid,
-                                    jti
-                                });
-
-                                renderCredentials();
-                            } catch (error) {
-                                console.error(
-                                    "[JWT]: Não foi possível renovar o JWT.",
-                                    error
-                                );
-
-                                wd.alert(error?.message || String(error));
-                            } finally {
-                                button.disabled = false;
-                            }
-
-                            return;
-                        }
-
-                        // --------------------------------------------------
+                        // ------------------------------------------
                         // COPIAR CHAVES
-                        // --------------------------------------------------
+                        // ------------------------------------------
 
                         if (button.dataset.jwtCopy) {
                             const type = button.dataset.jwtCopy;
@@ -2648,62 +3237,39 @@ const SetupDOMReady = async evt => {
 
                                 await navigator.clipboard.writeText(value);
 
-                                const originalText = button.textContent;
-
-                                button.textContent = "Copiado!";
-                                button.disabled = true;
-
-                                setTimeout(() => {
-                                    button.textContent = originalText;
-                                    button.disabled = false;
-                                }, 1200);
+                                showCredentialsFeedback(
+                                    "Conteúdo copiado para a área de transferência."
+                                );
                             } catch (error) {
                                 console.error(
                                     "[JWT]: Não foi possível copiar o conteúdo.",
                                     error
                                 );
 
-                                wd.alert(
+                                showCredentialsFeedback(
                                     error?.message ||
-                                    "Não foi possível copiar para a área de transferência."
+                                        "Não foi possível copiar para a área de transferência.",
+                                    "danger"
                                 );
                             }
 
                             return;
                         }
 
-                        // --------------------------------------------------
-                        // EXCLUIR CREDENCIAL
-                        // --------------------------------------------------
+                        // ------------------------------------------
+                        // EXCLUIR CREDENCIAL COMPLETA
+                        // ------------------------------------------
 
                         if (button.dataset.jwtDelete) {
-                            if (
-                                !wd.confirm(
-                                    `Deseja excluir a credencial "${kid}"?`
-                                )
-                            ) {
-                                return;
-                            }
-
-                            button.disabled = true;
-
-                            try {
-                                await jwtManager.deleteCredential(kid);
-                                renderCredentials();
-                            } catch (error) {
-                                console.error(
-                                    "[JWT]: Não foi possível excluir a credencial.",
-                                    error
-                                );
-
-                                wd.alert(error?.message || String(error));
-                            } finally {
-                                button.disabled = false;
-                            }
+                            openConfirmModal({
+                                type: "credential-delete",
+                                kid,
+                                message:
+                                    "Deseja excluir esta credencial? O par de chaves e todos os JWTs associados serão removidos do armazenamento local."
+                            });
                         }
                     });
                 }
-
 
                 const mobileNewPost = dc.getElementById(
                     "admin-mobile-new-post"
