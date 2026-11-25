@@ -1227,7 +1227,7 @@ const SetupDOMReady = async evt => {
                     databaseVersion: settings.database.version
                 });
                 const recordsManager = new RecordsManager({
-                    endpoint: settings.records?.endpoint,
+                    endpoint: settings.jwt?.records?.endpoint,
                     jwtManager,
                     root: dc.getElementById("admin-view-records")
                 });
