@@ -143,33 +143,6 @@
 
             </nav>
 
-            <!-- CARD DE IDENTIDADE GITHUB NA SIDEBAR -->
-            <div class="admin-sidebar-user p-3 border-top">
-                <div class="d-flex align-items-center mb-2">
-                    <picture class="mr-2 flex-shrink-0">
-                        <img
-                            id="admin-github-avatar"
-                            src="/assets/media/image/1x1.gif"
-                            data-src=""
-                            data-lazy-target
-                            alt=""
-                            class="rounded-circle border bg-white"
-                            width="40"
-                            height="40">
-                    </picture>
-                    <div class="min-w-0">
-                        <div id="admin-github-name" class="font-weight-bold small text-truncate"></div>
-                        <div id="admin-github-login" class="text-muted small text-truncate"></div>
-                    </div>
-                </div>
-
-                <button
-                    type="button"
-                    id="admin-github-credentials-clear"
-                    class="i18n btn btn-outline-danger btn-sm rounded-0 w-100 cp"
-                    data-i18n-html="admin_dashboard.settings.clear_credentials"></button>
-            </div>
-
         </aside>
 
         <!-- ÁREA PRINCIPAL -->
