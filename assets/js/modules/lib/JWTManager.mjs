@@ -737,7 +737,8 @@ export default class JWTManager {
             await this.jwt.verify({
                 token: data.token,
                 issuer: this.config.issuer,
-                audience: aud
+                audience: aud,
+                clockSkewSeconds: 60
             });
 
             decoded = this.jwt.decode(data.token);
