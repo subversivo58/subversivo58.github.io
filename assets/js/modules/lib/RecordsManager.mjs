@@ -54,7 +54,9 @@ export default class RecordsManager {
                 error: null,
                 message: null,
                 dateFrom: "",
-                dateTo: ""
+                dateTo: "",
+                managerOpen: false,
+                expandedRecords: new Set()
             };
         });
 
@@ -679,24 +681,27 @@ export default class RecordsManager {
         const disabled = state.loading || state.deleting;
 
         return `
-            <div class="card rounded-0 mb-3">
+            <details
+                class="card rounded-0 mb-3"
+                data-records-manager="${table}"
+                ${state.managerOpen ? "open" : ""}>
+
+                <summary
+                    class="card-header bg-light d-flex flex-wrap
+                           justify-content-between align-items-center"
+                    style="cursor:pointer;">
+
+                    <strong>Gerenciar registros</strong>
+
+                    <span class="small text-muted">
+                        ${this.escapeHTML(
+                            this.tables[table].label
+                        )}
+                    </span>
+
+                </summary>
+
                 <div class="card-body">
-
-                    <div class="d-flex flex-wrap
-                                justify-content-between
-                                align-items-center mb-3">
-
-                        <strong>
-                            Gerenciar registros
-                        </strong>
-
-                        <span class="small text-muted">
-                            ${this.escapeHTML(
-                                this.tables[table].label
-                            )}
-                        </span>
-
-                    </div>
 
                     <div class="form-row align-items-end">
 
@@ -774,7 +779,8 @@ export default class RecordsManager {
                     ` : ""}
 
                 </div>
-            </div>
+
+            </details>
         `;
     }
 
@@ -816,26 +822,34 @@ export default class RecordsManager {
             `;
         }
 
+        const recordId = String(record.id);
+        const expanded = this.state[table].expandedRecords.has(recordId);
+
         return `
-            <article class="card rounded-0 border mb-3">
+            <details
+                class="card rounded-0 border mb-2"
+                data-records-record="${table}"
+                data-record-id="${this.escapeHTML(record.id)}"
+                ${expanded ? "open" : ""}>
+
+                <summary
+                    class="card-header bg-light d-flex flex-wrap
+                           justify-content-between align-items-center"
+                    style="cursor:pointer;">
+
+                    <strong>
+                        Registro #${this.escapeHTML(record.id)}
+                    </strong>
+
+                    <small class="text-muted">
+                        ${this.escapeHTML(
+                            this.formatDate(record.created_at)
+                        )}
+                    </small>
+
+                </summary>
 
                 <div class="card-body">
-
-                    <div class="d-flex flex-wrap
-                                justify-content-between
-                                align-items-center mb-3">
-
-                        <strong>
-                            Registro #${this.escapeHTML(record.id)}
-                        </strong>
-
-                        <small class="text-muted">
-                            ${this.escapeHTML(
-                                this.formatDate(record.created_at)
-                            )}
-                        </small>
-
-                    </div>
 
                     ${description}
 
@@ -856,8 +870,38 @@ export default class RecordsManager {
 
                 </div>
 
-            </article>
+            </details>
         `;
+    }
+
+    bindCollapsibleToggles(table, list) {
+        const state = this.state[table];
+
+        const manager = list.querySelector(
+            "[data-records-manager]"
+        );
+
+        if (manager) {
+            manager.addEventListener("toggle", () => {
+                state.managerOpen = manager.open;
+            });
+        }
+
+        list.querySelectorAll(
+            "[data-records-record]"
+        ).forEach(details => {
+            details.addEventListener("toggle", () => {
+                const id = details.dataset.recordId;
+
+                if (!id) return;
+
+                if (details.open) {
+                    state.expandedRecords.add(String(id));
+                } else {
+                    state.expandedRecords.delete(String(id));
+                }
+            });
+        });
     }
 
     render(table) {
@@ -918,6 +962,7 @@ export default class RecordsManager {
 
         if (state.error && !state.results.length) {
             list.innerHTML = content;
+            this.bindCollapsibleToggles(table, list);
             pagination.innerHTML = "";
 
             return;
@@ -948,6 +993,7 @@ export default class RecordsManager {
         }
 
         list.innerHTML = content;
+        this.bindCollapsibleToggles(table, list);
 
         this.renderPagination(table);
     }
