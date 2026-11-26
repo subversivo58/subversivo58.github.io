@@ -708,7 +708,7 @@ export default class JWTManager {
                         "X-GitHub-Access-Token": accessToken
                     },
                     body: JSON.stringify({
-                        kid: externalKid,
+                        kid: storedKid,
                         aud,
                         expiresIn
                     }),
@@ -760,7 +760,7 @@ export default class JWTManager {
             decoded = this.jwt.decode(data.token);
 
             if (
-                decoded.header.kid !== externalKid ||
+                decoded.header.kid !== storedKid ||
                 decoded.payload.sub !== this.config.sub ||
                 decoded.payload.aud !== aud ||
                 typeof decoded.payload.jti !== "string" ||
