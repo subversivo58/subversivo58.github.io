@@ -506,7 +506,7 @@
                                     <p id="feedback-form-status" class="small mt-2 mb-0" role="status" hidden></p>
                                     <input type="hidden" id="feedback-rating" name="rating" form="feedback-form" disabled>
                                     <div class="form-group mt-1 mb-2">
-                                        <textarea type="textarea" id="feedback-textarea" data-i18n-place="drawer.feedback.placeholder" class="i18n form-control resize-none bg-none rounded-0" rows="5" maxlength="400" required name="message"></textarea>
+                                        <textarea type="textarea" id="feedback-textarea" data-i18n-place="drawer.feedback.placeholder" class="i18n form-control resize-none bg-none rounded-0" rows="5" maxlength="500" required name="message"></textarea>
                                     </div>
                                     <div class="form-group mt-2 mt-md-0 mb-0">
                                         <button type="reset" id="feedback-form-clear" data-i18n-html="words.clear" class="i18n btn btn-sm btn-outline-secondary rounded-0 cp"></button>
@@ -564,7 +564,7 @@
                                 <label>
                                     <strong class="col px-0 i18n" data-i18n-html="modals.bugs.description"></strong>
                                 </label>
-                                <textarea type="textarea" id="bugs-report-textarea" class="form-control resize-none rounded-0 i18n" rows="5" maxlength="400" required data-i18n-place="modals.bugs.ph_description" name="message"></textarea>
+                                <textarea type="textarea" id="bugs-report-textarea" class="form-control resize-none rounded-0 i18n" rows="5" maxlength="280" required data-i18n-place="modals.bugs.ph_description" name="message"></textarea>
                             </div>
                             <div class="form-group mt-2 mt-md-3">
                                 <button type="reset" data-i18n-html="words.clear" class="i18n btn btn-sm btn-outline-secondary rounded-0 cp"></button>

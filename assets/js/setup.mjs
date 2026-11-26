@@ -256,6 +256,7 @@ dc.addEventListener("reset", event => {
     }
 });
 
+
 dc.addEventListener("submit", async event => {
     const form = event.target;
     const keys = FORM_STATUS[form.id];
@@ -275,6 +276,72 @@ dc.addEventListener("submit", async event => {
         i18n.transcript();
     };
 
+    // Validação específica dos formulários de feedback e erros.
+    if (
+        form.id === "feedback-form" ||
+        form.id === "bugs-report-form"
+    ) {
+        const messageField = form.elements.namedItem("message");
+        const message = messageField?.value.trim() || "";
+
+        if (form.id === "feedback-form") {
+            const ratingField = form.elements.namedItem("rating");
+            const rating = Number(ratingField?.value);
+
+            if (
+                !Number.isInteger(rating) ||
+                rating < 1 ||
+                rating > 5
+            ) {
+                messageField.setCustomValidity(
+                    "Selecione uma avaliação de 1 a 5 estrelas."
+                );
+                messageField.reportValidity();
+                messageField.setCustomValidity("");
+                return;
+            }
+
+            if (message.length < 1 || message.length > 500) {
+                messageField.setCustomValidity(
+                    "A mensagem deve conter entre 1 e 500 caracteres."
+                );
+                messageField.reportValidity();
+                messageField.setCustomValidity("");
+                return;
+            }
+        }
+
+        if (form.id === "bugs-report-form") {
+            const typeField = form.elements.namedItem("type");
+            const allowedTypes = [
+                "custom",
+                "css",
+                "javascript",
+                "language",
+                "plugin",
+                "server"
+            ];
+
+            if (!allowedTypes.includes(typeField?.value)) {
+                typeField?.setCustomValidity(
+                    "Selecione um tipo de erro válido."
+                );
+                typeField?.reportValidity();
+                typeField?.setCustomValidity("");
+                return;
+            }
+
+            if (message.length < 1 || message.length > 280) {
+                messageField.setCustomValidity(
+                    "A descrição deve conter entre 1 e 280 caracteres."
+                );
+                messageField.reportValidity();
+                messageField.setCustomValidity("");
+                return;
+            }
+        }
+    }
+
     try {
         const response = await fetch(form.action, {
             method: "POST",
@@ -291,6 +358,7 @@ dc.addEventListener("submit", async event => {
         showStatus(keys.fail, "text-danger");
     }
 });
+
 
 // IndexedDB manager
 const ConnectionDB = new AWIndexedDB(
