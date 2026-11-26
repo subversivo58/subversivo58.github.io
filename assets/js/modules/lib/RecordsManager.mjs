@@ -106,9 +106,11 @@ export default class RecordsManager {
             if (!this.tables[table]) return;
 
             if (action === "delete") {
-                const id = button.dataset.recordId;
+                this.deleteRecord(
+                    table,
+                    button.dataset.recordId
+                );
 
-                this.deleteRecord(table, id);
                 return;
             }
 
@@ -233,6 +235,15 @@ export default class RecordsManager {
         token,
         body
     } = {}) {
+        if (
+            typeof token !== "string" ||
+            !token
+        ) {
+            throw new Error(
+                "Token JWT não disponível."
+            );
+        }
+
         const response = await fetch(
             `${this.endpoint}${path}`,
             {
@@ -335,101 +346,41 @@ export default class RecordsManager {
         }
     }
 
-    async fetchAllRecords(table, token) {
-        const firstPage = await this.request(
-            `/v1/admin/${table}?page=1`,
-            {
-                token
-            }
-        );
+    async reloadAfterMutation(table, {
+        message = null,
+        error = null
+    } = {}) {
+        const state = this.state[table];
 
-        if (!Array.isArray(firstPage.results)) {
-            throw new Error(
-                "Formato de resultados inválido."
-            );
+        state.deleting = false;
+
+        await this.load(table, 1);
+
+        if (error) {
+            state.error = error;
+            state.message = null;
+        } else if (message) {
+            state.message = message;
+            state.error = null;
         }
 
-        const records = [
-            ...firstPage.results
-        ];
-
-        const totalPages = Number(
-            firstPage.pagination?.totalPages ?? 1
-        );
-
-        if (
-            !Number.isSafeInteger(totalPages) ||
-            totalPages < 0
-        ) {
-            throw new Error(
-                "Paginação inválida recebida do serviço Records."
-            );
-        }
-
-        for (let page = 2; page <= totalPages; page++) {
-            const data = await this.request(
-                `/v1/admin/${table}?page=${page}`,
-                {
-                    token
-                }
-            );
-
-            if (!Array.isArray(data.results)) {
-                throw new Error(
-                    `Resultados inválidos na página ${page}.`
-                );
-            }
-
-            records.push(...data.results);
-        }
-
-        return records;
-    }
-
-    async deleteByIds(table, records, token) {
-        const result = {
-            deleted: 0,
-            failed: []
-        };
-
-        for (const record of records) {
-            try {
-                await this.request(
-                    `/v1/admin/${table}/${encodeURIComponent(record.id)}`,
-                    {
-                        method: "DELETE",
-                        token
-                    }
-                );
-
-                result.deleted++;
-
-            } catch (error) {
-                result.failed.push({
-                    id: record.id,
-                    error: error.message
-                });
-
-                console.error(
-                    `[RECORDS]: Falha ao excluir ${table} #${record.id}.`,
-                    error
-                );
-            }
-        }
-
-        return result;
+        this.render(table);
     }
 
     async deleteRecord(table, id) {
+        if (!this.tables[table]) return;
+
+        const recordId = Number(id);
+
         if (
-            !this.tables[table] ||
-            !/^\d+$/.test(String(id))
+            !Number.isSafeInteger(recordId) ||
+            recordId < 1
         ) {
             return;
         }
 
         const confirmed = confirm(
-            `Deseja realmente excluir o registro #${id} ` +
+            `Deseja realmente excluir o registro #${recordId} ` +
             `da tabela ${this.tables[table].label}?`
         );
 
@@ -445,6 +396,9 @@ export default class RecordsManager {
 
         this.render(table);
 
+        let message = null;
+        let errorMessage = null;
+
         try {
             const token = this.getAccessToken();
 
@@ -455,49 +409,30 @@ export default class RecordsManager {
             }
 
             await this.request(
-                `/v1/admin/${table}/${encodeURIComponent(id)}`,
+                `/v1/admin/${table}/${recordId}`,
                 {
                     method: "DELETE",
                     token
                 }
             );
 
-            state.message =
-                `Registro #${id} excluído com sucesso.`;
+            message =
+                `Registro #${recordId} excluído com sucesso.`;
 
         } catch (error) {
-            state.error = error.message;
+            errorMessage = error.message;
 
             console.error(
-                `[RECORDS]: Falha ao excluir registro ${id}.`,
+                `[RECORDS]: Falha ao excluir registro ${recordId}.`,
                 error
             );
 
-        } finally {
-            state.deleting = false;
-
-            await this.load(table, 1);
-        }
-    }
-
-    getRecordDate(value) {
-        if (!value) return null;
-
-        const date = new Date(value);
-
-        if (Number.isNaN(date.getTime())) {
-            return null;
         }
 
-        const year = date.getFullYear();
-        const month = String(
-            date.getMonth() + 1
-        ).padStart(2, "0");
-        const day = String(
-            date.getDate()
-        ).padStart(2, "0");
-
-        return `${year}-${month}-${day}`;
+        await this.reloadAfterMutation(table, {
+            message,
+            error: errorMessage
+        });
     }
 
     async deletePeriod(table) {
@@ -514,6 +449,32 @@ export default class RecordsManager {
             state.error =
                 "Informe a data inicial e a data final.";
 
+            state.message = null;
+
+            this.render(table);
+
+            return;
+        }
+
+        const validDate = value => {
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+                return false;
+            }
+
+            const date = new Date(
+                `${value}T00:00:00.000Z`
+            );
+
+            return (
+                !Number.isNaN(date.getTime()) &&
+                date.toISOString().slice(0, 10) === value
+            );
+        };
+
+        if (!validDate(from) || !validDate(to)) {
+            state.error = "Informe um intervalo de datas válido.";
+            state.message = null;
+
             this.render(table);
 
             return;
@@ -523,15 +484,29 @@ export default class RecordsManager {
             state.error =
                 "A data inicial não pode ser posterior à data final.";
 
+            state.message = null;
+
             this.render(table);
 
             return;
         }
 
+        const confirmed = confirm(
+            `Deseja realmente excluir os registros da tabela ` +
+            `${this.tables[table].label} entre ${from} e ${to}?\n\n` +
+            "Essa operação não pode ser desfeita."
+        );
+
+        if (!confirmed) return;
+
+        state.deleting = true;
         state.error = null;
         state.message = null;
 
         this.render(table);
+
+        let message = null;
+        let errorMessage = null;
 
         try {
             const token = this.getAccessToken();
@@ -542,68 +517,47 @@ export default class RecordsManager {
                 );
             }
 
-            const records = await this.fetchAllRecords(
-                table,
-                token
-            );
-
-            const selected = records.filter(record => {
-                const date = this.getRecordDate(
-                    record.created_at
-                );
-
-                return date && date >= from && date <= to;
+            const params = new URLSearchParams({
+                from,
+                to
             });
 
-            if (!selected.length) {
-                state.message =
-                    "Nenhum registro encontrado nesse período.";
-
-                this.render(table);
-
-                return;
-            }
-
-            const confirmed = confirm(
-                `Foram encontrados ${selected.length} registros ` +
-                `em ${table} entre ${from} e ${to}.\n\n` +
-                "Deseja excluir todos esses registros?"
+            const data = await this.request(
+                `/v1/admin/${table}?${params.toString()}`,
+                {
+                    method: "DELETE",
+                    token
+                }
             );
 
-            if (!confirmed) return;
+            const deleted = Number(data.deleted);
 
-            state.deleting = true;
-            this.render(table);
-
-            const result = await this.deleteByIds(
-                table,
-                selected,
-                token
-            );
-
-            if (result.failed.length) {
-                state.error =
-                    `${result.deleted} registro(s) excluído(s). ` +
-                    `${result.failed.length} não puderam ser excluídos.`;
-            } else {
-                state.message =
-                    `${result.deleted} registro(s) excluído(s) ` +
-                    `do período selecionado.`;
+            if (
+                !Number.isSafeInteger(deleted) ||
+                deleted < 0
+            ) {
+                throw new Error(
+                    "Quantidade de registros excluídos inválida."
+                );
             }
+
+            message = deleted === 0
+                ? "Nenhum registro encontrado nesse período."
+                : `${deleted} registro(s) excluído(s) do período selecionado.`;
 
         } catch (error) {
-            state.error = error.message;
+            errorMessage = error.message;
 
             console.error(
                 `[RECORDS]: Falha na exclusão por período de ${table}.`,
                 error
             );
-
-        } finally {
-            state.deleting = false;
-
-            await this.load(table, 1);
         }
+
+        await this.reloadAfterMutation(table, {
+            message,
+            error: errorMessage
+        });
     }
 
     async deleteAll(table) {
@@ -613,10 +567,24 @@ export default class RecordsManager {
 
         if (state.loading || state.deleting) return;
 
+        const confirmed = confirm(
+            `ATENÇÃO!\n\n` +
+            `Você está prestes a excluir TODOS os registros ` +
+            `da tabela ${this.tables[table].label}.\n\n` +
+            "Essa operação não pode ser desfeita.\n\n" +
+            "Deseja continuar?"
+        );
+
+        if (!confirmed) return;
+
+        state.deleting = true;
         state.error = null;
         state.message = null;
 
         this.render(table);
+
+        let message = null;
+        let errorMessage = null;
 
         try {
             const token = this.getAccessToken();
@@ -627,62 +595,42 @@ export default class RecordsManager {
                 );
             }
 
-            const records = await this.fetchAllRecords(
-                table,
-                token
+            const data = await this.request(
+                `/v1/admin/${table}`,
+                {
+                    method: "DELETE",
+                    token
+                }
             );
 
-            if (!records.length) {
-                state.message =
-                    "Não existem registros para excluir.";
+            const deleted = Number(data.deleted);
 
-                this.render(table);
-
-                return;
+            if (
+                !Number.isSafeInteger(deleted) ||
+                deleted < 0
+            ) {
+                throw new Error(
+                    "Quantidade de registros excluídos inválida."
+                );
             }
 
-            const confirmed = confirm(
-                `ATENÇÃO!\n\n` +
-                `Você está prestes a excluir TODOS os ` +
-                `${records.length} registros da tabela ` +
-                `${this.tables[table].label}.\n\n` +
-                "Essa operação não pode ser desfeita.\n\n" +
-                "Deseja continuar?"
-            );
-
-            if (!confirmed) return;
-
-            state.deleting = true;
-            this.render(table);
-
-            const result = await this.deleteByIds(
-                table,
-                records,
-                token
-            );
-
-            if (result.failed.length) {
-                state.error =
-                    `${result.deleted} registro(s) excluído(s). ` +
-                    `${result.failed.length} não puderam ser excluídos.`;
-            } else {
-                state.message =
-                    `Todos os ${result.deleted} registros foram excluídos.`;
-            }
+            message = deleted === 0
+                ? "Não existiam registros para excluir."
+                : `Todos os ${deleted} registros foram excluídos.`;
 
         } catch (error) {
-            state.error = error.message;
+            errorMessage = error.message;
 
             console.error(
                 `[RECORDS]: Falha na limpeza de ${table}.`,
                 error
             );
-
-        } finally {
-            state.deleting = false;
-
-            await this.load(table, 1);
         }
+
+        await this.reloadAfterMutation(table, {
+            message,
+            error: errorMessage
+        });
     }
 
     escapeHTML(value) {
