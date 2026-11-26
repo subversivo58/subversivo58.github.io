@@ -240,10 +240,13 @@ function loadSettings() {
             new URL("/config/settings.json", self.location.origin),
             { cache: "no-store" }
         ).then(response => {
-            if (!response.ok) throw new Error(`settings.json (${response.status})`);
+            if (!response.ok)
+                throw new Error(`settings.json (${response.status})`);
             return response.json();
         });
-        settingsPromise.catch(() => { settingsPromise = null; });
+        settingsPromise.catch(() => {
+            settingsPromise = null;
+        });
     }
     return settingsPromise;
 }
@@ -259,7 +262,9 @@ function getDatabase() {
             );
             return connection.open(database.indexed);
         });
-        databasePromise.catch(() => { databasePromise = null; });
+        databasePromise.catch(() => {
+            databasePromise = null;
+        });
     }
     return databasePromise;
 }
@@ -345,11 +350,15 @@ async function authStorage(action, key, value) {
         };
 
         transaction.onerror = () => {
-            reject(transaction.error || new Error("Falha na transação IndexedDB."));
+            reject(
+                transaction.error || new Error("Falha na transação IndexedDB.")
+            );
         };
 
         transaction.onabort = () => {
-            reject(transaction.error || new Error("Transação IndexedDB cancelada."));
+            reject(
+                transaction.error || new Error("Transação IndexedDB cancelada.")
+            );
         };
     });
 }
@@ -427,7 +436,7 @@ function jsonResponse(body, status = 200) {
         headers: {
             "Content-Type": "application/json; charset=utf-8",
             "Cache-Control": "no-store",
-            "Pragma": "no-cache",
+            Pragma: "no-cache",
             "X-Content-Type-Options": "nosniff"
         }
     });
@@ -437,8 +446,10 @@ function isSameOrigin(request) {
     const url = new URL(request.url);
     const origin = request.headers.get("Origin");
 
-    return url.origin === self.location.origin &&
-        (!origin || origin === self.location.origin);
+    return (
+        url.origin === self.location.origin &&
+        (!origin || origin === self.location.origin)
+    );
 }
 
 // Normaliza a identidade pública recebida diretamente do GitHub.
@@ -500,15 +511,16 @@ async function saveStoredGitHubAuth(user, token) {
     const auth = storedGitHubAuth(user, token);
     const db = await getDatabase();
 
-    await db.create([{
-        tbn: "config",
-        tbk: "user-github",
-        tbv: auth
-    }]);
+    await db.create([
+        {
+            tbn: "config",
+            tbk: "user-github",
+            tbv: auth
+        }
+    ]);
 
     return true;
 }
-
 
 // ===============================================================
 // INÍCIO DO OAUTH — POST /admin-auth/start
@@ -516,20 +528,19 @@ async function saveStoredGitHubAuth(user, token) {
 
 async function startGitHubOAuth(request) {
     if (request.method !== "POST" || !isSameOrigin(request)) {
-        return jsonResponse({
-            ok: false,
-            error: "invalid_request"
-        }, 405);
+        return jsonResponse(
+            {
+                ok: false,
+                error: "invalid_request"
+            },
+            405
+        );
     }
 
     try {
         oauthDiagnostics = [];
 
-        logOAuth(
-            "Início",
-            "OK",
-            "Solicitação de autenticação recebida."
-        );
+        logOAuth("Início", "OK", "Solicitação de autenticação recebida.");
 
         const state = randomOAuthValue(32);
         const verifier = randomOAuthValue(64);
@@ -569,7 +580,6 @@ async function startGitHubOAuth(request) {
         await saveDiagnostics();
 
         return Response.redirect(authorizationURL.toString(), 303);
-
     } catch (error) {
         console.error("[SW] Falha ao iniciar OAuth:", error);
 
@@ -580,11 +590,15 @@ async function startGitHubOAuth(request) {
 
         await saveDiagnostics().catch(() => {});
 
-        return jsonResponse({
-            ok: false,
-            error: "OAUTH_START_FAILED",
-            message: "Não foi possível iniciar a autenticação. Consulte o diagnóstico."
-        }, 500);
+        return jsonResponse(
+            {
+                ok: false,
+                error: "OAUTH_START_FAILED",
+                message:
+                    "Não foi possível iniciar a autenticação. Consulte o diagnóstico."
+            },
+            500
+        );
     }
 }
 
@@ -593,11 +607,7 @@ async function startGitHubOAuth(request) {
 // ===============================================================
 
 async function exchangeGitHubCode(code, verifier) {
-    logOAuth(
-        "Proxy",
-        "ENVIANDO",
-        "Solicitando troca do código OAuth."
-    );
+    logOAuth("Proxy", "ENVIANDO", "Solicitando troca do código OAuth.");
 
     const body = new URLSearchParams({
         client_id: GITHUB_CLIENT_ID,
@@ -609,7 +619,7 @@ async function exchangeGitHubCode(code, verifier) {
     const response = await fetch(GITHUB_TOKEN_URL, {
         method: "POST",
         headers: {
-            "Accept": "application/json",
+            Accept: "application/json",
             "Content-Type": "application/x-www-form-urlencoded"
         },
         body,
@@ -642,17 +652,13 @@ async function exchangeGitHubCode(code, verifier) {
 // ===============================================================
 
 async function getGitHubUser(accessToken) {
-    logOAuth(
-        "GitHub /user",
-        "ENVIANDO",
-        "Consultando identidade da conta."
-    );
+    logOAuth("GitHub /user", "ENVIANDO", "Consultando identidade da conta.");
 
     const response = await fetch(GITHUB_API_USER, {
         method: "GET",
         headers: {
-            "Accept": "application/vnd.github+json",
-            "Authorization": `Bearer ${accessToken}`,
+            Accept: "application/vnd.github+json",
+            Authorization: `Bearer ${accessToken}`,
             "X-GitHub-Api-Version": "2022-11-28"
         },
         cache: "no-store"
@@ -668,11 +674,7 @@ async function getGitHubUser(accessToken) {
         throw new Error("GITHUB_IDENTITY_INVALID");
     }
 
-    logOAuth(
-        "GitHub /user",
-        "OK",
-        "Identidade da conta recebida."
-    );
+    logOAuth("GitHub /user", "OK", "Identidade da conta recebida.");
 
     return user;
 }
@@ -682,12 +684,7 @@ async function getGitHubUser(accessToken) {
 // ===============================================================
 
 async function handleGitHubCallback(url) {
-    logOAuth(
-        "Callback",
-        "INÍCIO",
-        "Retorno do GitHub recebido."
-    );
-
+    logOAuth("Callback", "INÍCIO", "Retorno do GitHub recebido.");
     try {
         const oauthError = url.searchParams.get("error");
 
@@ -720,21 +717,14 @@ async function handleGitHubCallback(url) {
             throw new Error("OAUTH_STATE_MISMATCH");
         }
 
-        logOAuth(
-            "Validação state",
-            "OK",
-            "Correspondência confirmada."
-        );
+        logOAuth("Validação state", "OK", "Correspondência confirmada.");
 
         // O verifier já está em memória. Podemos remover o registro temporário
         // antes de iniciar a troca do código.
         await authStorage("delete", "oauth_pending");
 
         // Troca o código pelos tokens OAuth.
-        const tokens = await exchangeGitHubCode(
-            code,
-            pending.verifier
-        );
+        const tokens = await exchangeGitHubCode(code, pending.verifier);
 
         // Consulta a identidade da conta autenticada.
         const user = await getGitHubUser(tokens.access_token);
@@ -749,11 +739,9 @@ async function handleGitHubCallback(url) {
         );
 
         await saveDiagnostics();
-
     } catch (error) {
-        const code = error instanceof Error
-            ? error.message
-            : "OAUTH_CALLBACK_FAILED";
+        const code =
+            error instanceof Error ? error.message : "OAUTH_CALLBACK_FAILED";
 
         const knownMessages = {
             GITHUB_AUTHORIZATION_DENIED:
@@ -768,11 +756,9 @@ async function handleGitHubCallback(url) {
             OAUTH_REQUEST_EXPIRED:
                 "A solicitação OAuth expirou. Inicie novamente.",
 
-            OAUTH_STATE_MISMATCH:
-                "A validação de segurança do retorno falhou.",
+            OAUTH_STATE_MISMATCH: "A validação de segurança do retorno falhou.",
 
-            TOKEN_RESPONSE_INVALID:
-                "O proxy retornou uma resposta inválida.",
+            TOKEN_RESPONSE_INVALID: "O proxy retornou uma resposta inválida.",
 
             TOKEN_EXCHANGE_FAILED:
                 "Não foi possível trocar o código por um token.",
@@ -803,7 +789,6 @@ async function handleGitHubCallback(url) {
     );
 }
 
-
 // ===============================================================
 // PÁGINA ADMINISTRATIVA
 // ===============================================================
@@ -828,10 +813,13 @@ async function handleAdminPage(request) {
 
 async function logoutGitHub(request) {
     if (request.method !== "POST" || !isSameOrigin(request)) {
-        return jsonResponse({
-            ok: false,
-            error: "invalid_request"
-        }, 405);
+        return jsonResponse(
+            {
+                ok: false,
+                error: "invalid_request"
+            },
+            405
+        );
     }
 
     try {
@@ -845,11 +833,7 @@ async function logoutGitHub(request) {
             tbk: "user-github"
         });
 
-        logOAuth(
-            "Autenticação",
-            "ENCERRADA",
-            "Identidade local removida."
-        );
+        logOAuth("Autenticação", "ENCERRADA", "Identidade local removida.");
 
         await saveDiagnostics();
 
@@ -857,18 +841,17 @@ async function logoutGitHub(request) {
             ok: true,
             status: "unauthenticated"
         });
-
     } catch (error) {
-        console.error(
-            "[SW] Falha ao encerrar autenticação:",
-            error
-        );
+        console.error("[SW] Falha ao encerrar autenticação:", error);
 
-        return jsonResponse({
-            ok: false,
-            error: "AUTH_LOGOUT_FAILED",
-            message: "Não foi possível encerrar a autenticação local."
-        }, 500);
+        return jsonResponse(
+            {
+                ok: false,
+                error: "AUTH_LOGOUT_FAILED",
+                message: "Não foi possível encerrar a autenticação local."
+            },
+            500
+        );
     }
 }
 
@@ -878,10 +861,13 @@ async function logoutGitHub(request) {
 
 async function refreshGitHubToken(request) {
     if (request.method !== "POST" || !isSameOrigin(request)) {
-        return jsonResponse({
-            ok: false,
-            error: "invalid_request"
-        }, 405);
+        return jsonResponse(
+            {
+                ok: false,
+                error: "invalid_request"
+            },
+            405
+        );
     }
 
     try {
@@ -900,12 +886,15 @@ async function refreshGitHubToken(request) {
             );
             await saveDiagnostics().catch(() => {});
 
-            return jsonResponse({
-                ok: false,
-                reauth_required: true,
-                code: "REFRESH_TOKEN_MISSING",
-                message: "É necessário autenticar novamente no GitHub."
-            }, 401);
+            return jsonResponse(
+                {
+                    ok: false,
+                    reauth_required: true,
+                    code: "REFRESH_TOKEN_MISSING",
+                    message: "É necessário autenticar novamente no GitHub."
+                },
+                401
+            );
         }
 
         logOAuth(
@@ -923,7 +912,7 @@ async function refreshGitHubToken(request) {
         const response = await fetch(GITHUB_TOKEN_URL, {
             method: "POST",
             headers: {
-                "Accept": "application/json",
+                Accept: "application/json",
                 "Content-Type": "application/x-www-form-urlencoded"
             },
             body,
@@ -934,22 +923,26 @@ async function refreshGitHubToken(request) {
         try {
             result = await response.json();
         } catch {
-            return jsonResponse({
-                ok: false,
-                reauth_required: false,
-                code: "TOKEN_REFRESH_INVALID",
-                message: "Resposta inválida do proxy durante a renovação."
-            }, 502);
+            return jsonResponse(
+                {
+                    ok: false,
+                    reauth_required: false,
+                    code: "TOKEN_REFRESH_INVALID",
+                    message: "Resposta inválida do proxy durante a renovação."
+                },
+                502
+            );
         }
 
         if (!response.ok || result.error || !result.access_token) {
             const code = result?.error || "TOKEN_REFRESH_FAILED";
-            const permanent = [
-                "bad_refresh_token",
-                "incorrect_client_credentials",
-                "unsupported_grant_type",
-                "invalid_grant"
-            ].includes(code) || response.status === 401;
+            const permanent =
+                [
+                    "bad_refresh_token",
+                    "incorrect_client_credentials",
+                    "unsupported_grant_type",
+                    "invalid_grant"
+                ].includes(code) || response.status === 401;
 
             safeFailure(
                 code,
@@ -957,12 +950,17 @@ async function refreshGitHubToken(request) {
             );
             await saveDiagnostics().catch(() => {});
 
-            return jsonResponse({
-                ok: false,
-                reauth_required: permanent,
-                code,
-                message: result?.error_description || "Não foi possível renovar a sessão do GitHub."
-            }, permanent ? 401 : 502);
+            return jsonResponse(
+                {
+                    ok: false,
+                    reauth_required: permanent,
+                    code,
+                    message:
+                        result?.error_description ||
+                        "Não foi possível renovar a sessão do GitHub."
+                },
+                permanent ? 401 : 502
+            );
         }
 
         const obtainedAt = Date.now();
@@ -971,9 +969,11 @@ async function refreshGitHubToken(request) {
             refresh_token: result.refresh_token || refreshToken,
             expires_in: result.expires_in ?? stored?.tokens?.expires_in,
             refresh_token_expires_in:
-                result.refresh_token_expires_in ?? stored?.tokens?.refresh_token_expires_in,
+                result.refresh_token_expires_in ??
+                stored?.tokens?.refresh_token_expires_in,
             obtained_at: obtainedAt,
-            token_type: result.token_type || stored?.tokens?.token_type || "bearer",
+            token_type:
+                result.token_type || stored?.tokens?.token_type || "bearer",
             scope: result.scope ?? stored?.tokens?.scope ?? ""
         };
 
@@ -982,12 +982,15 @@ async function refreshGitHubToken(request) {
             user = await getGitHubUser(mergedTokens.access_token);
         } catch (userError) {
             if (!isValidGitHubUser(user)) {
-                return jsonResponse({
-                    ok: false,
-                    reauth_required: true,
-                    code: "GITHUB_IDENTITY_FAILED",
-                    message: "Não foi possível confirmar a conta no GitHub."
-                }, 401);
+                return jsonResponse(
+                    {
+                        ok: false,
+                        reauth_required: true,
+                        code: "GITHUB_IDENTITY_FAILED",
+                        message: "Não foi possível confirmar a conta no GitHub."
+                    },
+                    401
+                );
             }
         }
 
@@ -1013,15 +1016,21 @@ async function refreshGitHubToken(request) {
         });
     } catch (error) {
         console.error("[SW] Falha ao renovar token:", error);
-        safeFailure("TOKEN_REFRESH_EXCEPTION", "Erro inesperado ao renovar sessão.");
+        safeFailure(
+            "TOKEN_REFRESH_EXCEPTION",
+            "Erro inesperado ao renovar sessão."
+        );
         await saveDiagnostics().catch(() => {});
 
-        return jsonResponse({
-            ok: false,
-            reauth_required: false,
-            code: "TOKEN_REFRESH_EXCEPTION",
-            message: "Falha inesperada ao renovar a sessão."
-        }, 500);
+        return jsonResponse(
+            {
+                ok: false,
+                reauth_required: false,
+                code: "TOKEN_REFRESH_EXCEPTION",
+                message: "Falha inesperada ao renovar a sessão."
+            },
+            500
+        );
     }
 }
 
@@ -1031,10 +1040,13 @@ async function refreshGitHubToken(request) {
 
 async function getAuthDiagnostics(request) {
     if (request.method !== "GET" || !isSameOrigin(request)) {
-        return jsonResponse({
-            ok: false,
-            error: "invalid_request"
-        }, 405);
+        return jsonResponse(
+            {
+                ok: false,
+                error: "invalid_request"
+            },
+            405
+        );
     }
 
     try {
@@ -1042,18 +1054,17 @@ async function getAuthDiagnostics(request) {
             ok: true,
             entries: await readDiagnostics()
         });
-
     } catch (error) {
-        console.error(
-            "[SW] Falha ao consultar diagnósticos:",
-            error
-        );
+        console.error("[SW] Falha ao consultar diagnósticos:", error);
 
-        return jsonResponse({
-            ok: false,
-            error: "DIAGNOSTICS_UNAVAILABLE",
-            entries: []
-        }, 500);
+        return jsonResponse(
+            {
+                ok: false,
+                error: "DIAGNOSTICS_UNAVAILABLE",
+                entries: []
+            },
+            500
+        );
     }
 }
 
@@ -1068,7 +1079,206 @@ RegisterRoute("/admin-auth/logout", logoutGitHub);
 RegisterRoute("/admin-auth/diagnostics", getAuthDiagnostics);
 
 // ===============================================================
-// ENVIOS DE FORMULÁRIO (POST) EXISTENTES
+// FILA E SINCRONIZAÇÃO DOS REGISTROS
+// ===============================================================
+
+const RECORDS_SYNC_INTERVAL = 60 * 60 * 1000;
+const RECORDS_QUEUE = {
+    feedback: {
+        store: "analytics",
+        key: "feedback",
+        marker: "records-sync-feedback",
+        path: "/v1/feedback"
+    },
+    errors: {
+        store: "analytics",
+        key: "bug",
+        marker: "records-sync-errors",
+        path: "/v1/errors"
+    }
+};
+
+let recordsSyncPromise = null;
+
+function normalizeFeedback(entry) {
+    const rating = Number(entry?.rating);
+    const message =
+        typeof entry?.message === "string" ? entry.message.trim() : "";
+
+    if (
+        !Number.isInteger(rating) ||
+        rating < 1 ||
+        rating > 5 ||
+        message.length < 1 ||
+        message.length > 500
+    ) {
+        return null;
+    }
+
+    return { rating, message };
+}
+
+function normalizeError(entry) {
+    const allowedTypes = [
+        "custom",
+        "css",
+        "javascript",
+        "language",
+        "plugin",
+        "server"
+    ];
+
+    const type = typeof entry?.type === "string" ? entry.type.trim() : "";
+    const message =
+        typeof entry?.message === "string" ? entry.message.trim() : "";
+
+    if (
+        !allowedTypes.includes(type) ||
+        message.length < 1 ||
+        message.length > 280
+    ) {
+        return null;
+    }
+
+    return { type, message };
+}
+
+async function readSubmissionList(db, route) {
+    const value = await db.read({
+        tbn: route.store,
+        tbk: route.key
+    });
+
+    return Array.isArray(value) ? value : [];
+}
+
+async function writeSubmissionList(db, route, list) {
+    await db.create([
+        {
+            tbn: route.store,
+            tbk: route.key,
+            tbv: [list]
+        }
+    ]);
+}
+
+async function syncRecordRoute(settings, routeName) {
+    const route = RECORDS_QUEUE[routeName];
+    const endpoint = settings?.jwt?.records?.endpoint;
+
+    if (!route || typeof endpoint !== "string" || !endpoint.trim()) {
+        return;
+    }
+
+    const db = await getDatabase();
+    let list = await readSubmissionList(db, route);
+
+    // Registros inválidos são descartados sem consumir o intervalo.
+    while (list.length) {
+        const payload =
+            routeName === "feedback"
+                ? normalizeFeedback(list[0])
+                : normalizeError(list[0]);
+
+        if (payload) break;
+
+        list.shift();
+        await writeSubmissionList(db, route, list);
+    }
+
+    if (!list.length) return;
+
+    const lastAttempt = await db.read({
+        tbn: "config",
+        tbk: route.marker
+    });
+
+    const lastAttemptTime = Number(lastAttempt) || 0;
+    const now = Date.now();
+
+    if (now - lastAttemptTime < RECORDS_SYNC_INTERVAL) {
+        return;
+    }
+
+    // O marcador é gravado antes da requisição. Falhas também consomem
+    // o intervalo de uma hora, independentemente da resposta recebida.
+    await db.create([
+        {
+            tbn: "config",
+            tbk: route.marker,
+            tbv: now
+        }
+    ]);
+
+    const payload =
+        routeName === "feedback"
+            ? normalizeFeedback(list[0])
+            : normalizeError(list[0]);
+
+    const baseURL = endpoint.trim().replace(/\/+$/, "");
+    let response;
+
+    try {
+        response = await fetch(baseURL + route.path, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload),
+            cache: "no-store"
+        });
+    } catch (error) {
+        console.error(`[SW] Falha de rede ao sincronizar ${routeName}:`, error);
+        return;
+    }
+
+    // 201 = criado; 409 = duplicado. Nos dois casos, o registro
+    // já está confirmado no backend e pode sair da fila local.
+    if (response.status === 201 || response.status === 409) {
+        list.shift();
+        await writeSubmissionList(db, route, list);
+        return;
+    }
+
+    // 429, 403, erros 4xx e 5xx permanecem na fila. O marcador
+    // já foi atualizado e impede nova tentativa antes de uma hora.
+    console.warn(
+        `[SW] Backend recusou a sincronização de ${routeName}:`,
+        response.status
+    );
+}
+
+async function syncPendingRecords() {
+    if (recordsSyncPromise) return recordsSyncPromise;
+
+    recordsSyncPromise = (async () => {
+        try {
+            const settings = await loadSettings();
+
+            // Os limites são independentes: uma tentativa de feedback
+            // não bloqueia uma tentativa de erro, e vice-versa.
+            await Promise.allSettled([
+                syncRecordRoute(settings, "feedback"),
+                syncRecordRoute(settings, "errors")
+            ]);
+        } catch (error) {
+            console.error(
+                "[SW] Não foi possível sincronizar a fila de registros:",
+                error
+            );
+        }
+    })();
+
+    try {
+        await recordsSyncPromise;
+    } finally {
+        recordsSyncPromise = null;
+    }
+}
+
+// ===============================================================
+// ENVIOS DE FORMULÁRIO (POST)
 // ===============================================================
 
 async function handlePost(request) {
@@ -1085,7 +1295,7 @@ async function handlePost(request) {
     }
 
     const settings = await loadSettings().catch(() => null);
-    const route = settings && settings.submissions.routes[url.pathname];
+    const route = settings?.submissions?.routes?.[url.pathname];
 
     if (!route) {
         return fetch(request);
@@ -1094,28 +1304,32 @@ async function handlePost(request) {
     try {
         const form = await request.formData();
 
-        await appendSubmission(
-            route.store,
-            route.key,
+        await appendSubmission(route.store, route.key, {
+            ...Object.fromEntries(form.entries()),
+            sentAt: new Date().toISOString()
+        });
+
+        // /notes continua apenas com armazenamento local.
+        // Feedback e erros entram na fila de sincronização.
+        if (route.key === "feedback" || route.key === "bug") {
+            await syncPendingRecords();
+        }
+
+        return jsonResponse(
             {
-                ...Object.fromEntries(form.entries()),
-                sentAt: new Date().toISOString()
-            }
+                ok: true
+            },
+            200
         );
-
-        return jsonResponse({
-            ok: true
-        }, 200);
-
     } catch (error) {
-        console.error(
-            "[SW] Falha ao guardar o envio:",
-            error
-        );
+        console.error("[SW] Falha ao guardar o envio:", error);
 
-        return jsonResponse({
-            ok: false
-        }, 500);
+        return jsonResponse(
+            {
+                ok: false
+            },
+            500
+        );
     }
 }
 
@@ -1128,7 +1342,7 @@ self.addEventListener("install", event => {
 });
 
 self.addEventListener("activate", event => {
-    event.waitUntil(self.clients.claim());
+    event.waitUntil(self.clients.claim().then(() => syncPendingRecords()));
 });
 
 self.addEventListener("fetch", event => {
@@ -1148,6 +1362,14 @@ self.addEventListener("fetch", event => {
         return;
     }
 
+    // Cada navegação/requisição GET verifica os marcadores temporais.
+    // O Service Worker não depende de Periodic Background Sync.
+    event.waitUntil(
+        syncPendingRecords().catch(error => {
+            console.error("[SW] Verificação da fila falhou:", error);
+        })
+    );
+
     const response = Router(request);
 
     if (response) {
@@ -1155,8 +1377,4 @@ self.addEventListener("fetch", event => {
     }
 });
 
-export {
-    Router,
-    RegisterRoute,
-    Routes
-};
+export { Router, RegisterRoute, Routes };
