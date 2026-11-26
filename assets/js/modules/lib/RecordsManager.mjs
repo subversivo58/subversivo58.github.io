@@ -50,7 +50,11 @@ export default class RecordsManager {
                 results: [],
                 pagination: null,
                 loading: false,
-                error: null
+                deleting: false,
+                error: null,
+                message: null,
+                dateFrom: "",
+                dateTo: ""
             };
         });
 
@@ -70,25 +74,76 @@ export default class RecordsManager {
 
         this.root.addEventListener("click", event => {
             const button = event.target.closest(
-                "[data-records-page]"
+                "[data-records-page], [data-records-action]"
             );
 
             if (!button || !this.root.contains(button)) {
                 return;
             }
 
-            const table = button.dataset.recordsPage;
-            const page = Number(button.dataset.page);
+            if (button.disabled) return;
+
+            if (button.hasAttribute("data-records-page")) {
+                const table = button.dataset.recordsPage;
+                const page = Number(button.dataset.page);
+
+                if (
+                    !this.tables[table] ||
+                    !Number.isSafeInteger(page) ||
+                    page < 1
+                ) {
+                    return;
+                }
+
+                this.load(table, page);
+
+                return;
+            }
+
+            const table = button.dataset.recordsTable;
+            const action = button.dataset.recordsAction;
+
+            if (!this.tables[table]) return;
+
+            if (action === "delete") {
+                const id = button.dataset.recordId;
+
+                this.deleteRecord(table, id);
+                return;
+            }
+
+            if (action === "delete-period") {
+                this.deletePeriod(table);
+                return;
+            }
+
+            if (action === "delete-all") {
+                this.deleteAll(table);
+            }
+        });
+
+        this.root.addEventListener("change", event => {
+            const input = event.target.closest(
+                "[data-records-date]"
+            );
+
+            if (!input || !this.root.contains(input)) {
+                return;
+            }
+
+            const table = input.dataset.recordsTable;
+            const field = input.dataset.recordsDate;
 
             if (
                 !this.tables[table] ||
-                !Number.isSafeInteger(page) ||
-                page < 1
+                !["from", "to"].includes(field)
             ) {
                 return;
             }
 
-            this.load(table, page);
+            this.state[table][
+                field === "from" ? "dateFrom" : "dateTo"
+            ] = input.value;
         });
 
         this.initialized = true;
@@ -140,10 +195,17 @@ export default class RecordsManager {
             );
         }
 
+        const credentials = this.jwtManager.getCredentials();
+
+        if (!Array.isArray(credentials)) {
+            throw new Error(
+                "Não foi possível consultar as credenciais JWT."
+            );
+        }
+
         const now = Math.floor(Date.now() / 1000);
 
-        const tokens = this.jwtManager
-            .getCredentials()
+        const tokens = credentials
             .flatMap(credential =>
                 (credential.tokens || []).map(token => ({
                     ...token
@@ -156,7 +218,7 @@ export default class RecordsManager {
                 Number(token.expiresAt) > now
             )
             .sort((a, b) =>
-                b.expiresAt - a.expiresAt
+                Number(b.expiresAt) - Number(a.expiresAt)
             );
 
         if (!tokens.length) {
@@ -166,6 +228,48 @@ export default class RecordsManager {
         return tokens[0].token;
     }
 
+    async request(path, {
+        method = "GET",
+        token,
+        body
+    } = {}) {
+        const response = await fetch(
+            `${this.endpoint}${path}`,
+            {
+                method,
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    ...(body ? {
+                        "Content-Type": "application/json"
+                    } : {})
+                },
+                ...(body ? {
+                    body: JSON.stringify(body)
+                } : {}),
+                cache: "no-store"
+            }
+        );
+
+        let data;
+
+        try {
+            data = await response.json();
+        } catch {
+            throw new Error(
+                "Resposta inválida do serviço Records."
+            );
+        }
+
+        if (!response.ok || data.success !== true) {
+            throw new Error(
+                data.error ||
+                `Falha na operação: HTTP ${response.status}.`
+            );
+        }
+
+        return data;
+    }
+
     async load(table, page = 1) {
         if (!this.tables[table]) return;
 
@@ -173,6 +277,7 @@ export default class RecordsManager {
 
         state.loading = true;
         state.error = null;
+        state.message = null;
 
         this.render(table);
 
@@ -191,33 +296,12 @@ export default class RecordsManager {
                 return;
             }
 
-            const response = await fetch(
-                `${this.endpoint}/v1/admin/${table}?page=${page}`,
+            const data = await this.request(
+                `/v1/admin/${table}?page=${page}`,
                 {
-                    method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    },
-                    cache: "no-store"
+                    token
                 }
             );
-
-            let data;
-
-            try {
-                data = await response.json();
-            } catch {
-                throw new Error(
-                    "Resposta inválida do serviço Records."
-                );
-            }
-
-            if (!response.ok || data.success !== true) {
-                throw new Error(
-                    data.error ||
-                    `Falha na consulta: HTTP ${response.status}.`
-                );
-            }
 
             if (!Array.isArray(data.results)) {
                 throw new Error(
@@ -248,6 +332,356 @@ export default class RecordsManager {
         } finally {
             state.loading = false;
             this.render(table);
+        }
+    }
+
+    async fetchAllRecords(table, token) {
+        const firstPage = await this.request(
+            `/v1/admin/${table}?page=1`,
+            {
+                token
+            }
+        );
+
+        if (!Array.isArray(firstPage.results)) {
+            throw new Error(
+                "Formato de resultados inválido."
+            );
+        }
+
+        const records = [
+            ...firstPage.results
+        ];
+
+        const totalPages = Number(
+            firstPage.pagination?.totalPages ?? 1
+        );
+
+        if (
+            !Number.isSafeInteger(totalPages) ||
+            totalPages < 0
+        ) {
+            throw new Error(
+                "Paginação inválida recebida do serviço Records."
+            );
+        }
+
+        for (let page = 2; page <= totalPages; page++) {
+            const data = await this.request(
+                `/v1/admin/${table}?page=${page}`,
+                {
+                    token
+                }
+            );
+
+            if (!Array.isArray(data.results)) {
+                throw new Error(
+                    `Resultados inválidos na página ${page}.`
+                );
+            }
+
+            records.push(...data.results);
+        }
+
+        return records;
+    }
+
+    async deleteByIds(table, records, token) {
+        const result = {
+            deleted: 0,
+            failed: []
+        };
+
+        for (const record of records) {
+            try {
+                await this.request(
+                    `/v1/admin/${table}/${encodeURIComponent(record.id)}`,
+                    {
+                        method: "DELETE",
+                        token
+                    }
+                );
+
+                result.deleted++;
+
+            } catch (error) {
+                result.failed.push({
+                    id: record.id,
+                    error: error.message
+                });
+
+                console.error(
+                    `[RECORDS]: Falha ao excluir ${table} #${record.id}.`,
+                    error
+                );
+            }
+        }
+
+        return result;
+    }
+
+    async deleteRecord(table, id) {
+        if (
+            !this.tables[table] ||
+            !/^\d+$/.test(String(id))
+        ) {
+            return;
+        }
+
+        const confirmed = confirm(
+            `Deseja realmente excluir o registro #${id} ` +
+            `da tabela ${this.tables[table].label}?`
+        );
+
+        if (!confirmed) return;
+
+        const state = this.state[table];
+
+        if (state.deleting || state.loading) return;
+
+        state.deleting = true;
+        state.error = null;
+        state.message = null;
+
+        this.render(table);
+
+        try {
+            const token = this.getAccessToken();
+
+            if (!token) {
+                throw new Error(
+                    "Nenhum JWT válido encontrado para blog-records."
+                );
+            }
+
+            await this.request(
+                `/v1/admin/${table}/${encodeURIComponent(id)}`,
+                {
+                    method: "DELETE",
+                    token
+                }
+            );
+
+            state.message =
+                `Registro #${id} excluído com sucesso.`;
+
+        } catch (error) {
+            state.error = error.message;
+
+            console.error(
+                `[RECORDS]: Falha ao excluir registro ${id}.`,
+                error
+            );
+
+        } finally {
+            state.deleting = false;
+
+            await this.load(table, 1);
+        }
+    }
+
+    getRecordDate(value) {
+        if (!value) return null;
+
+        const date = new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+            return null;
+        }
+
+        const year = date.getFullYear();
+        const month = String(
+            date.getMonth() + 1
+        ).padStart(2, "0");
+        const day = String(
+            date.getDate()
+        ).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    }
+
+    async deletePeriod(table) {
+        if (!this.tables[table]) return;
+
+        const state = this.state[table];
+
+        if (state.loading || state.deleting) return;
+
+        const from = state.dateFrom;
+        const to = state.dateTo;
+
+        if (!from || !to) {
+            state.error =
+                "Informe a data inicial e a data final.";
+
+            this.render(table);
+
+            return;
+        }
+
+        if (from > to) {
+            state.error =
+                "A data inicial não pode ser posterior à data final.";
+
+            this.render(table);
+
+            return;
+        }
+
+        state.error = null;
+        state.message = null;
+
+        this.render(table);
+
+        try {
+            const token = this.getAccessToken();
+
+            if (!token) {
+                throw new Error(
+                    "Nenhum JWT válido encontrado para blog-records."
+                );
+            }
+
+            const records = await this.fetchAllRecords(
+                table,
+                token
+            );
+
+            const selected = records.filter(record => {
+                const date = this.getRecordDate(
+                    record.created_at
+                );
+
+                return date && date >= from && date <= to;
+            });
+
+            if (!selected.length) {
+                state.message =
+                    "Nenhum registro encontrado nesse período.";
+
+                this.render(table);
+
+                return;
+            }
+
+            const confirmed = confirm(
+                `Foram encontrados ${selected.length} registros ` +
+                `em ${table} entre ${from} e ${to}.\n\n` +
+                "Deseja excluir todos esses registros?"
+            );
+
+            if (!confirmed) return;
+
+            state.deleting = true;
+            this.render(table);
+
+            const result = await this.deleteByIds(
+                table,
+                selected,
+                token
+            );
+
+            if (result.failed.length) {
+                state.error =
+                    `${result.deleted} registro(s) excluído(s). ` +
+                    `${result.failed.length} não puderam ser excluídos.`;
+            } else {
+                state.message =
+                    `${result.deleted} registro(s) excluído(s) ` +
+                    `do período selecionado.`;
+            }
+
+        } catch (error) {
+            state.error = error.message;
+
+            console.error(
+                `[RECORDS]: Falha na exclusão por período de ${table}.`,
+                error
+            );
+
+        } finally {
+            state.deleting = false;
+
+            await this.load(table, 1);
+        }
+    }
+
+    async deleteAll(table) {
+        if (!this.tables[table]) return;
+
+        const state = this.state[table];
+
+        if (state.loading || state.deleting) return;
+
+        state.error = null;
+        state.message = null;
+
+        this.render(table);
+
+        try {
+            const token = this.getAccessToken();
+
+            if (!token) {
+                throw new Error(
+                    "Nenhum JWT válido encontrado para blog-records."
+                );
+            }
+
+            const records = await this.fetchAllRecords(
+                table,
+                token
+            );
+
+            if (!records.length) {
+                state.message =
+                    "Não existem registros para excluir.";
+
+                this.render(table);
+
+                return;
+            }
+
+            const confirmed = confirm(
+                `ATENÇÃO!\n\n` +
+                `Você está prestes a excluir TODOS os ` +
+                `${records.length} registros da tabela ` +
+                `${this.tables[table].label}.\n\n` +
+                "Essa operação não pode ser desfeita.\n\n" +
+                "Deseja continuar?"
+            );
+
+            if (!confirmed) return;
+
+            state.deleting = true;
+            this.render(table);
+
+            const result = await this.deleteByIds(
+                table,
+                records,
+                token
+            );
+
+            if (result.failed.length) {
+                state.error =
+                    `${result.deleted} registro(s) excluído(s). ` +
+                    `${result.failed.length} não puderam ser excluídos.`;
+            } else {
+                state.message =
+                    `Todos os ${result.deleted} registros foram excluídos.`;
+            }
+
+        } catch (error) {
+            state.error = error.message;
+
+            console.error(
+                `[RECORDS]: Falha na limpeza de ${table}.`,
+                error
+            );
+
+        } finally {
+            state.deleting = false;
+
+            await this.load(table, 1);
         }
     }
 
@@ -292,6 +726,110 @@ export default class RecordsManager {
         }
     }
 
+    renderToolbar(table) {
+        const state = this.state[table];
+        const disabled = state.loading || state.deleting;
+
+        return `
+            <div class="card rounded-0 mb-3">
+                <div class="card-body">
+
+                    <div class="d-flex flex-wrap
+                                justify-content-between
+                                align-items-center mb-3">
+
+                        <strong>
+                            Gerenciar registros
+                        </strong>
+
+                        <span class="small text-muted">
+                            ${this.escapeHTML(
+                                this.tables[table].label
+                            )}
+                        </span>
+
+                    </div>
+
+                    <div class="form-row align-items-end">
+
+                        <div class="form-group col-12 col-md-4 mb-2">
+
+                            <label
+                                for="records-from-${table}"
+                                class="small font-weight-bold">
+                                Data inicial
+                            </label>
+
+                            <input
+                                type="date"
+                                id="records-from-${table}"
+                                class="form-control form-control-sm rounded-0"
+                                data-records-date="from"
+                                data-records-table="${table}"
+                                value="${this.escapeHTML(state.dateFrom)}"
+                                ${disabled ? "disabled" : ""}>
+
+                        </div>
+
+                        <div class="form-group col-12 col-md-4 mb-2">
+
+                            <label
+                                for="records-to-${table}"
+                                class="small font-weight-bold">
+                                Data final
+                            </label>
+
+                            <input
+                                type="date"
+                                id="records-to-${table}"
+                                class="form-control form-control-sm rounded-0"
+                                data-records-date="to"
+                                data-records-table="${table}"
+                                value="${this.escapeHTML(state.dateTo)}"
+                                ${disabled ? "disabled" : ""}>
+
+                        </div>
+
+                        <div class="form-group col-12 col-md-4 mb-2">
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-danger btn-sm rounded-0 btn-block"
+                                data-records-action="delete-period"
+                                data-records-table="${table}"
+                                ${disabled ? "disabled" : ""}>
+                                Excluir período
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="border-top pt-3 mt-2">
+
+                        <button
+                            type="button"
+                            class="btn btn-danger btn-sm rounded-0"
+                            data-records-action="delete-all"
+                            data-records-table="${table}"
+                            ${disabled ? "disabled" : ""}>
+                            Limpar todos os registros
+                        </button>
+
+                    </div>
+
+                    ${state.deleting ? `
+                        <div class="small text-muted mt-3">
+                            <span class="spinner-border spinner-border-sm mr-2"></span>
+                            Excluindo registros. Aguarde...
+                        </div>
+                    ` : ""}
+
+                </div>
+            </div>
+        `;
+    }
+
     renderRecord(table, record) {
         let description = "";
 
@@ -332,9 +870,11 @@ export default class RecordsManager {
 
         return `
             <article class="card rounded-0 border mb-3">
+
                 <div class="card-body">
 
-                    <div class="d-flex justify-content-between
+                    <div class="d-flex flex-wrap
+                                justify-content-between
                                 align-items-center mb-3">
 
                         <strong>
@@ -351,7 +891,23 @@ export default class RecordsManager {
 
                     ${description}
 
+                    <div class="border-top mt-3 pt-3
+                                d-flex justify-content-end">
+
+                        <button
+                            type="button"
+                            class="btn btn-outline-danger btn-sm rounded-0"
+                            data-records-action="delete"
+                            data-records-table="${table}"
+                            data-record-id="${this.escapeHTML(record.id)}"
+                            ${this.state[table].deleting ? "disabled" : ""}>
+                            Excluir registro
+                        </button>
+
+                    </div>
+
                 </div>
+
             </article>
         `;
     }
@@ -394,20 +950,33 @@ export default class RecordsManager {
             return;
         }
 
+        let content = this.renderToolbar(table);
+
         if (state.error) {
-            list.innerHTML = `
+            content += `
                 <div class="alert alert-danger rounded-0">
                     ${this.escapeHTML(state.error)}
                 </div>
             `;
+        }
 
+        if (state.message) {
+            content += `
+                <div class="alert alert-success rounded-0">
+                    ${this.escapeHTML(state.message)}
+                </div>
+            `;
+        }
+
+        if (state.error && !state.results.length) {
+            list.innerHTML = content;
             pagination.innerHTML = "";
 
             return;
         }
 
         if (!state.results.length) {
-            list.innerHTML = `
+            content += `
                 <div class="border bg-white text-center
                             text-muted p-4">
 
@@ -423,12 +992,14 @@ export default class RecordsManager {
             `;
 
         } else {
-            list.innerHTML = state.results
+            content += state.results
                 .map(record =>
                     this.renderRecord(table, record)
                 )
                 .join("");
         }
+
+        list.innerHTML = content;
 
         this.renderPagination(table);
     }
