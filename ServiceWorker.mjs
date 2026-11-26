@@ -1,4 +1,3 @@
-
 /**
  * @license The MIT License (MIT) - [https://github.com/Pluggeding/pluggeding.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
@@ -1141,13 +1140,7 @@ self.addEventListener("fetch", event => {
     }
 
     if (request.method === "POST") {
-        if (
-            Routes.has(url.pathname) ||
-            request.mode === "navigate"
-        ) {
-            event.respondWith(handlePost(request));
-        }
-
+        event.respondWith(handlePost(request));
         return;
     }
 
