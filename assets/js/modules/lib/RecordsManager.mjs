@@ -160,10 +160,7 @@ export default class RecordsManager {
             );
 
         if (!tokens.length) {
-            throw new Error(
-                "Nenhum JWT válido encontrado para blog-records. " +
-                "Verifique a seção Credenciais."
-            );
+            return null;
         }
 
         return tokens[0].token;
@@ -181,6 +178,18 @@ export default class RecordsManager {
 
         try {
             const token = this.getAccessToken();
+
+            if (!token) {
+                state.error =
+                    "Nenhum JWT válido encontrado para blog-records. " +
+                    "Crie ou renove uma credencial na seção Credenciais " +
+                    "para consultar os registros.";
+
+                state.results = [];
+                state.pagination = null;
+
+                return;
+            }
 
             const response = await fetch(
                 `${this.endpoint}/v1/admin/${table}?page=${page}`,
