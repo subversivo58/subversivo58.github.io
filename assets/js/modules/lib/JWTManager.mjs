@@ -1,4 +1,3 @@
-
 /**
  * JWT Manager - Gerenciamento de pares de chaves e credenciais JWT
  * @license The MIT License (MIT) - https://github.com/subversivo58/subversivo58.github.io/blob/main/LICENSE
@@ -184,7 +183,7 @@ export default class JWTManager {
             tbk: this.storageKey
         });
 
-        if (stored === false) {
+        if (stored === undefined || stored === null || stored === false) {
             this.credentials = [];
             return;
         }
@@ -233,17 +232,17 @@ export default class JWTManager {
                 );
             }
 
-            const externalKid = this._normalizeKid(credential.kid);
+            const storedKid = this._getStoredKid(credential.kid);
 
             await this.jwt.importKey({
-                keyId: externalKid,
+                keyId: storedKid,
                 type: "public",
                 keyData: publicKey.value,
                 format: "spki"
             });
 
             await this.jwt.importKey({
-                keyId: externalKid,
+                keyId: storedKid,
                 type: "private",
                 keyData: privateKey.value,
                 format: "pkcs8"
@@ -543,7 +542,6 @@ export default class JWTManager {
         });
 
         const kid = this._generateKeyId();
-        const externalKid = this._normalizeKid(kid);
 
         if (this.credentials.some(item => item.kid === kid)) {
             throw new Error(`O identificador "${kid}" já existe.`);
@@ -562,20 +560,6 @@ export default class JWTManager {
 
             const privateKey = await this.jwt.exportKey({
                 key: pair.privateKey,
-                format: "pkcs8"
-            });
-
-            await this.jwt.importKey({
-                keyId: externalKid,
-                type: "public",
-                keyData: publicKey,
-                format: "spki"
-            });
-
-            await this.jwt.importKey({
-                keyId: externalKid,
-                type: "private",
-                keyData: privateKey,
                 format: "pkcs8"
             });
 
@@ -618,7 +602,6 @@ export default class JWTManager {
 
         } catch (error) {
             this.jwt.keys.delete(kid);
-            this.jwt.keys.delete(externalKid);
             throw error;
         }
     }
@@ -780,7 +763,7 @@ export default class JWTManager {
 
         const tokenRecord = {
             token: data.token,
-            kid: externalKid,
+            kid: storedKid,
             jti: decoded.payload.jti,
 
             name: metadata.name,
@@ -923,7 +906,7 @@ export default class JWTManager {
         const decoded = this.jwt.decode(newToken);
 
         if (
-            decoded.header.kid !== externalKid ||
+            decoded.header.kid !== storedKid ||
             decoded.payload.sub !== this.config.sub ||
             decoded.payload.aud !== currentRecord.aud ||
             typeof decoded.payload.jti !== "string" ||
@@ -1194,7 +1177,6 @@ export default class JWTManager {
         this.credentials = updated;
 
         this.jwt.keys.delete(storedKid);
-        this.jwt.keys.delete(externalKid);
 
         return true;
     }
