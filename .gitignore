@@ -1,0 +1,20 @@
+# Google AI Studio & servidor de pré-visualização local
+.aistudio/
+metadata.json
+server.js
+server-pages/
+package.json
+package-lock.json
+bun.lock
+node_modules/
+.restore_tmp/
+
+# Variáveis de ambiente e logs
+.env
+.env.local
+.env.*.local
+*.log
+
+# Arquivos temporários de sistema
+.DS_Store
+Thumbs.db

@@ -315,12 +315,34 @@
                         </p>
                     </div>
 
-                    <button
-                        type="button"
-                        id="admin-credentials-new"
-                        class="btn btn-info btn-sm rounded-0 px-3">
-                        Nova credencial
-                    </button>
+                    <div class="d-flex flex-wrap align-items-center">
+                        <input
+                            type="file"
+                            id="admin-credentials-import-file"
+                            accept=".json,application/json"
+                            hidden>
+
+                        <button
+                            type="button"
+                            id="admin-credentials-import"
+                            class="btn btn-outline-secondary btn-sm rounded-0 px-3 mr-2 mb-2 mb-md-0">
+                            Importar
+                        </button>
+
+                        <button
+                            type="button"
+                            id="admin-credentials-export-all"
+                            class="btn btn-outline-primary btn-sm rounded-0 px-3 mr-2 mb-2 mb-md-0">
+                            Exportar tudo
+                        </button>
+
+                        <button
+                            type="button"
+                            id="admin-credentials-new"
+                            class="btn btn-info btn-sm rounded-0 px-3 mb-2 mb-md-0">
+                            Nova credencial
+                        </button>
+                    </div>
                 </div>
 
                 <!-- RESUMO -->

@@ -1933,6 +1933,18 @@ const SetupDOMReady = async evt => {
                 const credentialsEmpty = dc.getElementById(
                     "admin-credentials-empty"
                 );
+
+                const credentialsExportAllButton = dc.getElementById(
+                    "admin-credentials-export-all"
+                );
+
+                const credentialsImportButton = dc.getElementById(
+                    "admin-credentials-import"
+                );
+
+                const credentialsImportFile = dc.getElementById(
+                    "admin-credentials-import-file"
+                );
                 /**
                  * Converts a base64url value to base64 with padding.
                  * @param {string} value
@@ -1983,6 +1995,11 @@ const SetupDOMReady = async evt => {
                     credentialsCount.textContent = String(credentials.length);
 
                     credentialsEmpty.hidden = credentials.length > 0;
+
+                    if (credentialsExportAllButton) {
+                        credentialsExportAllButton.disabled =
+                            !jwtManager || credentials.length === 0;
+                    }
 
                     credentialsList.innerHTML = credentials
                         .map(credential => {
@@ -2177,6 +2194,13 @@ const SetupDOMReady = async evt => {
                                     data-jwt-copy="key"
                                     data-jwt-kid="${escHTML(credential.kid)}">
                                     Copiar key (K_)
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-secondary btn-sm rounded-0 mr-2 mb-2"
+                                    data-jwt-export="${escHTML(credential.kid)}">
+                                    Exportar JSON
                                 </button>
 
                                 <button
@@ -3007,6 +3031,29 @@ const SetupDOMReady = async evt => {
                         .find(item => item.kid === kid);
                 };
 
+                /**
+                 * Triggers a JSON file download in the browser.
+                 * @param {string} filename
+                 * @param {*} data
+                 */
+                const downloadJSONFile = (filename, data) => {
+                    const json = JSON.stringify(data, null, 4);
+                    const blob = new Blob([json], {
+                        type: "application/json;charset=utf-8"
+                    });
+                    const url = URL.createObjectURL(blob);
+                    const link = dc.createElement("a");
+
+                    link.href = url;
+                    link.download = filename;
+                    link.hidden = true;
+                    dc.body.appendChild(link);
+                    link.click();
+                    link.remove();
+
+                    setTimeout(() => URL.revokeObjectURL(url), 1000);
+                };
+
                 if (credentialsNewButton) {
                     credentialsNewButton.disabled = !jwtManager;
 
@@ -3015,6 +3062,105 @@ const SetupDOMReady = async evt => {
 
                         openCredentialCreateModal();
                     });
+                }
+
+                if (credentialsExportAllButton) {
+                    credentialsExportAllButton.disabled =
+                        !jwtManager ||
+                        jwtManager.getCredentials().length === 0;
+
+                    credentialsExportAllButton.addEventListener("click", () => {
+                        if (!jwtManager) return;
+
+                        try {
+                            const payload = jwtManager.exportCredentials();
+
+                            if (!payload.credentials.length) {
+                                showCredentialsFeedback(
+                                    "Nenhuma credencial cadastrada para exportar.",
+                                    "warning"
+                                );
+                                return;
+                            }
+
+                            const dateStamp = new Date()
+                                .toISOString()
+                                .slice(0, 10);
+
+                            downloadJSONFile(
+                                `subversivo58-credenciais-${dateStamp}.json`,
+                                payload
+                            );
+
+                            showCredentialsFeedback(
+                                `Exportação concluída: ${payload.credentials.length} credencial(is) salva(s) em JSON.`
+                            );
+                        } catch (error) {
+                            console.error(
+                                "[JWT]: Não foi possível exportar as credenciais.",
+                                error
+                            );
+
+                            showCredentialsFeedback(
+                                error?.message ||
+                                    "Não foi possível exportar as credenciais.",
+                                "danger"
+                            );
+                        }
+                    });
+                }
+
+                if (credentialsImportButton && credentialsImportFile) {
+                    credentialsImportButton.disabled = !jwtManager;
+
+                    credentialsImportButton.addEventListener("click", () => {
+                        if (!jwtManager) return;
+
+                        credentialsImportFile.value = "";
+                        credentialsImportFile.click();
+                    });
+
+                    credentialsImportFile.addEventListener(
+                        "change",
+                        async () => {
+                            const file = credentialsImportFile.files?.[0];
+                            credentialsImportFile.value = "";
+
+                            if (!file || !jwtManager) return;
+
+                            credentialsImportButton.disabled = true;
+
+                            try {
+                                const content = await file.text();
+                                const summary =
+                                    await jwtManager.importCredentials(content);
+
+                                renderCredentials();
+
+                                const details =
+                                    summary.overwritten > 0
+                                        ? ` (${summary.overwritten} sobrescrita(s))`
+                                        : "";
+
+                                showCredentialsFeedback(
+                                    `Importação concluída: ${summary.imported} credencial(is) importada(s)${details}.`
+                                );
+                            } catch (error) {
+                                console.error(
+                                    "[JWT]: Não foi possível importar as credenciais.",
+                                    error
+                                );
+
+                                showCredentialsFeedback(
+                                    error?.message ||
+                                        "Não foi possível importar o arquivo de credenciais.",
+                                    "danger"
+                                );
+                            } finally {
+                                credentialsImportButton.disabled = false;
+                            }
+                        }
+                    );
                 }
 
 
@@ -3329,6 +3475,7 @@ const SetupDOMReady = async evt => {
                         const button = event.target.closest(
                             [
                                 "[data-jwt-copy]",
+                                "[data-jwt-export]",
                                 "[data-jwt-delete]",
                                 "[data-jwt-create]",
                                 "[data-jwt-token-copy]",
@@ -3342,6 +3489,7 @@ const SetupDOMReady = async evt => {
 
                         const kid =
                             button.dataset.jwtKid ||
+                            button.dataset.jwtExport ||
                             button.dataset.jwtDelete ||
                             button.dataset.jwtCreate;
 
@@ -3531,6 +3679,36 @@ const SetupDOMReady = async evt => {
                                 showCredentialsFeedback(
                                     error?.message ||
                                         "Não foi possível copiar para a área de transferência.",
+                                    "danger"
+                                );
+                            }
+
+                            return;
+                        }
+
+
+                        if (button.dataset.jwtExport) {
+                            try {
+                                const exported =
+                                    jwtManager.exportCredential(kid);
+
+                                downloadJSONFile(
+                                    `subversivo58-credencial-K_${kid}.json`,
+                                    exported
+                                );
+
+                                showCredentialsFeedback(
+                                    "Credencial exportada em JSON."
+                                );
+                            } catch (error) {
+                                console.error(
+                                    "[JWT]: Não foi possível exportar a credencial.",
+                                    error
+                                );
+
+                                showCredentialsFeedback(
+                                    error?.message ||
+                                        "Não foi possível exportar a credencial.",
                                     "danger"
                                 );
                             }

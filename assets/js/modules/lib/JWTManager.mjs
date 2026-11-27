@@ -1238,4 +1238,262 @@ export default class JWTManager {
 
         return true;
     }
+
+
+    /**
+     * Normalizes and validates a credential object for import.
+     * @private
+     * @param {Object} raw - Candidate credential record.
+     * @return {Object} Normalized credential object ready for key import and persistence.
+     * @throws {Error|TypeError} If the credential structure or key pair is invalid.
+     */
+    _normalizeImportedCredential(raw) {
+        if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
+            throw new TypeError("Registro de credencial inválido.");
+        }
+
+        const storedKid = this._getStoredKid(raw.kid);
+        const externalKid = this._normalizeKid(storedKid);
+
+        const publicKey = raw.keyPair?.publicKey;
+        const privateKey = raw.keyPair?.privateKey;
+
+        if (
+            publicKey?.format !== "spki" ||
+            typeof publicKey.value !== "string" ||
+            !publicKey.value.trim() ||
+            privateKey?.format !== "pkcs8" ||
+            typeof privateKey.value !== "string" ||
+            !privateKey.value.trim()
+        ) {
+            throw new Error(
+                `Par de chaves inválido para "${externalKid}".`
+            );
+        }
+
+        const rawMeta =
+            raw.metadata && typeof raw.metadata === "object" && !Array.isArray(raw.metadata)
+                ? raw.metadata
+                : {};
+
+        const metadata = {
+            ...rawMeta,
+            name:
+                typeof rawMeta.name === "string" && rawMeta.name.trim()
+                    ? rawMeta.name.trim()
+                    : `Credencial ${externalKid}`,
+            description:
+                typeof rawMeta.description === "string" && rawMeta.description.trim()
+                    ? rawMeta.description.trim()
+                    : "Credencial importada.",
+            issuer:
+                typeof rawMeta.issuer === "string" && rawMeta.issuer.trim()
+                    ? rawMeta.issuer.trim()
+                    : this.config.issuer,
+            algorithm:
+                typeof rawMeta.algorithm === "string" && rawMeta.algorithm.trim()
+                    ? rawMeta.algorithm.trim()
+                    : "EdDSA",
+            createdAt:
+                typeof rawMeta.createdAt === "string" && rawMeta.createdAt.trim()
+                    ? rawMeta.createdAt.trim()
+                    : new Date().toISOString()
+        };
+
+        const tokens = Array.isArray(raw.tokens)
+            ? raw.tokens
+                  .filter(
+                      token =>
+                          token &&
+                          typeof token === "object" &&
+                          !Array.isArray(token) &&
+                          typeof token.token === "string" &&
+                          token.token.trim()
+                  )
+                  .map(token => ({ ...token }))
+            : [];
+
+        return {
+            kid: storedKid,
+            keyPair: {
+                publicKey: {
+                    format: "spki",
+                    value: publicKey.value.trim()
+                },
+                privateKey: {
+                    format: "pkcs8",
+                    value: privateKey.value.trim()
+                }
+            },
+            tokens,
+            metadata
+        };
+    }
+
+
+    /**
+     * Exports one credential (with key pair, metadata and derived tokens) as a plain object.
+     * @param {string} kid - Credential identifier.
+     * @return {Object} Full credential export object.
+     * @throws {Error} If the manager is not initialized or the credential does not exist.
+     */
+    exportCredential(kid) {
+        if (!this.initialized) {
+            throw new Error(
+                "JWTManager precisa ser inicializado antes de exportar credenciais."
+            );
+        }
+
+        const storedKid = this._getStoredKid(kid);
+        const externalKid = this._normalizeKid(kid);
+
+        const credential = this.getCredentials().find(
+            item => item.kid === storedKid
+        );
+
+        if (!credential) {
+            throw new Error(
+                `Credencial "${externalKid}" não encontrada.`
+            );
+        }
+
+        return credential;
+    }
+
+
+    /**
+     * Exports all stored credentials (key pairs, metadata and derived tokens) as a JSON bundle.
+     * @return {Object} Full credentials export bundle.
+     * @throws {Error} If the manager is not initialized.
+     */
+    exportCredentials() {
+        if (!this.initialized) {
+            throw new Error(
+                "JWTManager precisa ser inicializado antes de exportar credenciais."
+            );
+        }
+
+        return {
+            format: "subversivo58-credentials",
+            version: 1,
+            exportedAt: new Date().toISOString(),
+            credentials: this.getCredentials()
+        };
+    }
+
+
+    /**
+     * Imports one credential or a bundle of credentials, overwriting existing entries with the same KID.
+     * @param {string|Object|Object[]} input - JSON string, export bundle, single credential object or credential array.
+     * @return {Promise<{imported: number, created: number, overwritten: number, total: number}>} Import summary.
+     * @throws {Error|TypeError} If the manager is not initialized, JSON is invalid or any key pair fails validation.
+     */
+    async importCredentials(input) {
+        if (!this.initialized) {
+            throw new Error(
+                "JWTManager precisa ser inicializado antes de importar credenciais."
+            );
+        }
+
+        let parsed = input;
+
+        if (typeof parsed === "string") {
+            try {
+                parsed = JSON.parse(parsed);
+            } catch {
+                throw new TypeError("Arquivo JSON inválido.");
+            }
+        }
+
+        let rawList = null;
+
+        if (Array.isArray(parsed)) {
+            rawList = parsed;
+        } else if (parsed && typeof parsed === "object") {
+            if (Array.isArray(parsed.credentials)) {
+                rawList = parsed.credentials;
+            } else if (typeof parsed.kid === "string") {
+                rawList = [parsed];
+            }
+        }
+
+        if (!Array.isArray(rawList) || rawList.length === 0) {
+            throw new TypeError(
+                "Nenhuma credencial válida encontrada no arquivo."
+            );
+        }
+
+        const deduped = new Map();
+
+        for (const entry of rawList) {
+            const normalized = this._normalizeImportedCredential(entry);
+            deduped.set(normalized.kid, normalized);
+        }
+
+        const candidates = Array.from(deduped.values());
+        const importedKids = new Set(candidates.map(item => item.kid));
+
+        const previousKeys = new Map();
+        for (const kid of importedKids) {
+            if (this.jwt.keys.has(kid)) {
+                previousKeys.set(kid, this.jwt.keys.get(kid));
+            }
+        }
+
+        try {
+            for (const candidate of candidates) {
+                await this.jwt.importKey({
+                    keyId: candidate.kid,
+                    type: "public",
+                    keyData: candidate.keyPair.publicKey.value,
+                    format: "spki"
+                });
+
+                await this.jwt.importKey({
+                    keyId: candidate.kid,
+                    type: "private",
+                    keyData: candidate.keyPair.privateKey.value,
+                    format: "pkcs8"
+                });
+            }
+
+            const existingMap = new Map(
+                this.credentials.map(item => [item.kid, item])
+            );
+
+            let created = 0;
+            let overwritten = 0;
+
+            for (const candidate of candidates) {
+                if (existingMap.has(candidate.kid)) {
+                    overwritten += 1;
+                } else {
+                    created += 1;
+                }
+                existingMap.set(candidate.kid, candidate);
+            }
+
+            const updated = Array.from(existingMap.values());
+
+            await this._saveCredentials(updated);
+
+            this.credentials = updated;
+
+            return {
+                imported: candidates.length,
+                created,
+                overwritten,
+                total: updated.length
+            };
+        } catch (error) {
+            for (const kid of importedKids) {
+                if (previousKeys.has(kid)) {
+                    this.jwt.keys.set(kid, previousKeys.get(kid));
+                } else {
+                    this.jwt.keys.delete(kid);
+                }
+            }
+            throw error;
+        }
+    }
 }
