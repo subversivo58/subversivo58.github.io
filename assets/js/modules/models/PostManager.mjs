@@ -41,6 +41,7 @@ export default class PostManager {
         this.templatePath = String(options.templatePath ?? 'assets/tpl/post-page.tpl').replace(/^\/+/, '')
         this.blogUrl = options.blogUrl ?? `${SITE_ORIGIN}/blog.html`
         this.siteOrigin = options.siteOrigin ?? SITE_ORIGIN
+        this.analytics = options.analytics || null
 
         this.committedSettings = null
         this.committedSitemap = null
@@ -296,20 +297,25 @@ export default class PostManager {
             return structuredClone(this.committedSettings)
         }
 
-        const settingsURL = new URL(`/${this.settingsPath}`, document.baseURI)
-        settingsURL.searchParams.set('_', Date.now().toString())
+        try {
+            const settingsURL = new URL(`/${this.settingsPath}`, document.baseURI)
+            settingsURL.searchParams.set('_', Date.now().toString())
 
-        const response = await fetch(settingsURL, { cache: 'no-store' })
-        if (!response.ok) {
-            throw new Error(`Não foi possível carregar /${this.settingsPath}: ${response.status}`)
+            const response = await fetch(settingsURL, { cache: 'no-store' })
+            if (!response.ok) {
+                throw new Error(`Não foi possível carregar /${this.settingsPath}: ${response.status}`)
+            }
+
+            const settings = await response.json()
+            if (!settings.articles || !Array.isArray(settings.articles.storage)) {
+                throw new Error('A estrutura articles.storage não foi encontrada ou não é um array.')
+            }
+
+            return settings
+        } catch (error) {
+            this.analytics?.trackError?.('post-manager', error)?.catch?.(() => {})
+            throw error
         }
-
-        const settings = await response.json()
-        if (!settings.articles || !Array.isArray(settings.articles.storage)) {
-            throw new Error('A estrutura articles.storage não foi encontrada ou não é um array.')
-        }
-
-        return settings
     }
 
     /**
@@ -399,7 +405,8 @@ export default class PostManager {
             }
 
             return xml
-        } catch {
+        } catch (error) {
+            this.analytics?.trackError?.('post-manager', error)?.catch?.(() => {})
             return null
         }
     }

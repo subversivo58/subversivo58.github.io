@@ -210,6 +210,8 @@ import {
 
 import indexedDBLogs from "./modules/lib/IndexedLogs.mjs";
 
+import Analytics from "./modules/lib/Analytics.mjs";
+
 import { DrawerEvents, SlideMenus } from "./modules/models/UIHandler.mjs";
 
 // logging
@@ -414,11 +416,42 @@ import LifeCycle from "./modules/core/LifeCycle.mjs";
 
 const Activity = new LifeCycle();
 
+PolicyHandler.supported = settings.source.language;
+
 const Policy = Activity.create(
     new PolicyHandler("Subversivo58_Policy", SetupLog)
 );
 
 Policy.resume();
+
+let SiteAnalytics = null;
+
+if (DBMethods) {
+    try {
+        const analyticsEnabled = await Policy.loadAnalyticsConsent(DBMethods);
+
+        SiteAnalytics = new Analytics({
+            database: DBMethods,
+            enable: analyticsEnabled,
+            getLanguage: () => PolicyHandler.language
+        });
+
+        await SiteAnalytics.initialize();
+        Policy.setAnalytics(SiteAnalytics);
+    } catch (error) {
+        console.error("[ANALYTICS]: Initialization failed", error);
+    }
+
+    wd.addEventListener("error", event => {
+        const err = event?.error || event?.message || "Uncaught script error";
+        SiteAnalytics?.trackError("runtime", err).catch(() => {});
+    });
+
+    wd.addEventListener("unhandledrejection", event => {
+        const reason = event?.reason || "Unhandled promise rejection";
+        SiteAnalytics?.trackError("promise", reason).catch(() => {});
+    });
+}
 
 let BaseRootRegExp = new RegExp(BaseRoot),
     redirectAfterSetup =
@@ -512,9 +545,14 @@ _.DOM.waitEl(dc, "#navbar-fixed", list => {
 });
 
 if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/ServiceWorker.mjs", {
-        type: "module"
-    });
+    navigator.serviceWorker
+        .register("/ServiceWorker.mjs", {
+            type: "module"
+        })
+        .catch(error => {
+            console.error("[SW]: Registration failed", error);
+            SiteAnalytics?.trackError("service-worker", error).catch(() => {});
+        });
 }
 
 /**
@@ -603,10 +641,15 @@ const SetupDOMReady = async evt => {
 
     PolicyHandler.supported = settings.source.language;
     dc.documentElement.lang = PolicyHandler.language;
-    await i18n.get(`/assets/lang/${PolicyHandler.language}.json`, {
-        credentials: "include",
-        cache: "reload"
-    });
+    await i18n
+        .get(`/assets/lang/${PolicyHandler.language}.json`, {
+            credentials: "include",
+            cache: "reload"
+        })
+        .catch(error => {
+            SiteAnalytics?.trackError("i18n", error).catch(() => {});
+            throw error;
+        });
 
     const TemplatesReady = new Templates(
         settings.templates,
@@ -624,8 +667,13 @@ const SetupDOMReady = async evt => {
                 }
             ]
         },
-        i18n
+        i18n,
+        SiteAnalytics
     );
+
+    TemplatesReady.import.catch(error => {
+        SiteAnalytics?.trackError("templates", error).catch(() => {});
+    });
 
     // lazy-load instance
     const lazyLoad = new LazyLoad("undefined");
@@ -723,6 +771,7 @@ const SetupDOMReady = async evt => {
             wd.location.reload();
         } catch (error) {
             console.error("[SETUP]: could not save the language cookie", error);
+            SiteAnalytics?.trackError("i18n-cookie", error).catch(() => {});
         }
     });
 
@@ -762,7 +811,7 @@ const SetupDOMReady = async evt => {
             if (DBMethods) {
                 try {
                     const storedAuth = await DBMethods.read({
-                        tbn: "config",
+                        tbn: "github",
                         tbk: "user-github"
                     });
 
@@ -787,7 +836,8 @@ const SetupDOMReady = async evt => {
                     document.getElementById("index-central-block"),
                     {
                         locale: PolicyHandler.language,
-                        translate: key => i18n.getWord(key)
+                        translate: key => i18n.getWord(key),
+                        analytics: SiteAnalytics
                     }
                 );
             }
@@ -1370,6 +1420,9 @@ const SetupDOMReady = async evt => {
                         "[JWT]: Não foi possível inicializar o gerenciamento de credenciais.",
                         error
                     );
+                    SiteAnalytics?.trackError("jwt-manager", error).catch(
+                        () => {}
+                    );
                 }
 
                 const DevTools = new DeveloperTools({
@@ -1380,7 +1433,8 @@ const SetupDOMReady = async evt => {
                 const recordsManager = new RecordsManager({
                     endpoint: settings.jwt?.records?.endpoint,
                     jwtManager,
-                    root: dc.getElementById("admin-view-records")
+                    root: dc.getElementById("admin-view-records"),
+                    analytics: SiteAnalytics
                 });
 
                 recordsManager.initialize();
@@ -1698,7 +1752,7 @@ const SetupDOMReady = async evt => {
                     }
 
                     const updatedAuth = await DBMethods.read({
-                        tbn: "config",
+                        tbn: "github",
                         tbk: "user-github"
                     });
 
@@ -1713,9 +1767,12 @@ const SetupDOMReady = async evt => {
                         throw err;
                     }
 
-                    GitHubAPIInstance = new GitHubAPI({
-                        token: updatedAuth.tokens.access_token
-                    });
+                    GitHubAPIInstance = new GitHubAPI(
+                        {
+                            token: updatedAuth.tokens.access_token
+                        },
+                        SiteAnalytics
+                    );
                     renderAdminGitHubIdentity(updatedAuth.user);
                     renderSessionDetails(updatedAuth);
                     return true;
@@ -1731,7 +1788,7 @@ const SetupDOMReady = async evt => {
                      */
                     const run = async () => {
                         const storedAuth = await DBMethods.read({
-                            tbn: "config",
+                            tbn: "github",
                             tbk: "user-github"
                         });
 
@@ -1783,7 +1840,10 @@ const SetupDOMReady = async evt => {
                         }
 
                         if (!GitHubAPIInstance) {
-                            const api = new GitHubAPI({ token });
+                            const api = new GitHubAPI(
+                                { token },
+                                SiteAnalytics
+                            );
                             try {
                                 await api.GHInstance.getUser().getProfile();
                                 GitHubAPIInstance = api;
@@ -1837,7 +1897,7 @@ const SetupDOMReady = async evt => {
                     }
 
                     const storedAuth = await DBMethods.read({
-                        tbn: "config",
+                        tbn: "github",
                         tbk: "user-github"
                     });
 
@@ -2261,7 +2321,7 @@ const SetupDOMReady = async evt => {
                     setSidebarOpen(false);
 
                     if (target === "session") {
-                        DBMethods?.read({ tbn: "config", tbk: "user-github" })
+                        DBMethods?.read({ tbn: "github", tbk: "user-github" })
                             .then(
                                 stored => stored && renderSessionDetails(stored)
                             )
@@ -2419,7 +2479,7 @@ const SetupDOMReady = async evt => {
 
                 <strong>Object Stores:</strong>
 
-                <ul class="mb-0">
+                <ul class="mb-2">
                     ${(database.objectStores || [])
                         .map(
                             store => `
@@ -2428,6 +2488,12 @@ const SetupDOMReady = async evt => {
                         )
                         .join("")}
                 </ul>
+
+                ${devToolsButton(
+                    "delete-db",
+                    "Excluir banco",
+                    `data-name="${escHTML(database.name)}" data-app-db="true"`
+                )}
             `
                     : `
                 ${devToolsButton(
@@ -2658,7 +2724,197 @@ const SetupDOMReady = async evt => {
                     }
                 };
 
-                devToolsRoot.addEventListener("click", async event => {
+                const devToolsConfirmModalElement = dc.getElementById(
+                    "admin-modal-devtools-confirm"
+                );
+
+                const devToolsConfirmModal = devToolsConfirmModalElement
+                    ? new BootstrapNative.Modal(devToolsConfirmModalElement)
+                    : null;
+
+                const devToolsConfirmTitle = dc.getElementById(
+                    "admin-modal-devtools-confirm-title"
+                );
+
+                const devToolsConfirmMessage = dc.getElementById(
+                    "admin-modal-devtools-confirm-message"
+                );
+
+                const devToolsConfirmTarget = dc.getElementById(
+                    "admin-modal-devtools-confirm-target"
+                );
+
+                const devToolsConfirmWarning = dc.getElementById(
+                    "admin-modal-devtools-confirm-warning"
+                );
+
+                const devToolsConfirmError = dc.getElementById(
+                    "admin-modal-devtools-confirm-error"
+                );
+
+                const devToolsConfirmSubmitButton = dc.getElementById(
+                    "admin-devtools-confirm-submit"
+                );
+
+                const devToolsConfirmCancelButton = dc.getElementById(
+                    "admin-devtools-confirm-cancel"
+                );
+
+                let pendingDevToolsOperation = null;
+
+                /**
+                 * Opens the Bootstrap confirmation modal for a DevTools destructive operation.
+                 * @param {Object} operation
+                 */
+                const openDevToolsConfirmModal = operation => {
+                    if (!devToolsConfirmModal) return;
+
+                    pendingDevToolsOperation = operation;
+
+                    if (devToolsConfirmTitle) {
+                        devToolsConfirmTitle.textContent =
+                            operation.title || "Confirmar exclusão";
+                    }
+
+                    if (devToolsConfirmMessage) {
+                        devToolsConfirmMessage.textContent =
+                            operation.message ||
+                            "Deseja realmente executar esta ação?";
+                    }
+
+                    if (devToolsConfirmTarget) {
+                        const targetText = operation.target || "";
+                        devToolsConfirmTarget.textContent = targetText;
+                        devToolsConfirmTarget.hidden = !targetText;
+                    }
+
+                    if (devToolsConfirmWarning) {
+                        devToolsConfirmWarning.hidden = !operation.isAppDb;
+                    }
+
+                    if (devToolsConfirmError) {
+                        devToolsConfirmError.textContent = "";
+                        devToolsConfirmError.hidden = true;
+                    }
+
+                    if (devToolsConfirmSubmitButton) {
+                        devToolsConfirmSubmitButton.textContent =
+                            operation.submitLabel || "Excluir";
+                        devToolsConfirmSubmitButton.disabled = false;
+                    }
+
+                    if (devToolsConfirmCancelButton) {
+                        devToolsConfirmCancelButton.disabled = false;
+                    }
+
+                    devToolsConfirmModal.show();
+                };
+
+                if (devToolsConfirmModalElement) {
+                    devToolsConfirmModalElement.addEventListener(
+                        "hidden.bs.modal",
+                        () => {
+                            if (
+                                devToolsConfirmSubmitButton &&
+                                !devToolsConfirmSubmitButton.disabled
+                            ) {
+                                pendingDevToolsOperation = null;
+                            }
+                        }
+                    );
+                }
+
+                if (devToolsConfirmSubmitButton) {
+                    devToolsConfirmSubmitButton.addEventListener(
+                        "click",
+                        async () => {
+                            if (!pendingDevToolsOperation) return;
+
+                            const operation = pendingDevToolsOperation;
+
+                            devToolsConfirmSubmitButton.disabled = true;
+                            if (devToolsConfirmCancelButton) {
+                                devToolsConfirmCancelButton.disabled = true;
+                            }
+                            if (devToolsConfirmError) {
+                                devToolsConfirmError.textContent = "";
+                                devToolsConfirmError.hidden = true;
+                            }
+
+                            try {
+                                switch (operation.action) {
+                                    case "unregister-sw":
+                                        await DevTools.unregisterServiceWorker(
+                                            operation.scope
+                                        );
+                                        break;
+
+                                    case "delete-db":
+                                        await DevTools.deleteIndexedDB(
+                                            operation.name
+                                        );
+                                        break;
+
+                                    case "delete-cache":
+                                        await DevTools.deleteCache(
+                                            operation.name
+                                        );
+                                        break;
+
+                                    case "clear-storage":
+                                        DevTools.clearStorage(operation.type);
+                                        break;
+
+                                    case "delete-cookie":
+                                        await DevTools.deleteCookie({
+                                            name: operation.name,
+                                            ...(operation.domain
+                                                ? { domain: operation.domain }
+                                                : {}),
+                                            ...(operation.path
+                                                ? { path: operation.path }
+                                                : {})
+                                        });
+                                        break;
+
+                                    default:
+                                        return;
+                                }
+
+                                pendingDevToolsOperation = null;
+                                devToolsConfirmModal?.hide();
+
+                                if (
+                                    operation.action === "delete-db" &&
+                                    operation.isAppDb
+                                ) {
+                                    wd.location.reload();
+                                    return;
+                                }
+
+                                await loadDevTools();
+                            } catch (error) {
+                                console.error(
+                                    "[DEVTOOLS]: Operation failed.",
+                                    error
+                                );
+
+                                if (devToolsConfirmError) {
+                                    devToolsConfirmError.textContent =
+                                        error?.message || String(error);
+                                    devToolsConfirmError.hidden = false;
+                                }
+                            } finally {
+                                devToolsConfirmSubmitButton.disabled = false;
+                                if (devToolsConfirmCancelButton) {
+                                    devToolsConfirmCancelButton.disabled = false;
+                                }
+                            }
+                        }
+                    );
+                }
+
+                devToolsRoot.addEventListener("click", event => {
                     const button = event.target.closest(
                         "[data-devtools-action]"
                     );
@@ -2667,94 +2923,93 @@ const SetupDOMReady = async evt => {
 
                     const action = button.dataset.devtoolsAction;
 
-                    try {
-                        button.disabled = true;
+                    switch (action) {
+                        case "unregister-sw": {
+                            const scope = button.dataset.scope;
 
-                        switch (action) {
-                            case "unregister-sw": {
-                                const scope = button.dataset.scope;
-
-                                if (
-                                    !confirm(
-                                        `Desregistrar este Service Worker?\n${scope}`
-                                    )
-                                ) {
-                                    return;
-                                }
-
-                                await DevTools.unregisterServiceWorker(scope);
-                                break;
-                            }
-
-                            case "delete-db": {
-                                const name = button.dataset.name;
-
-                                if (
-                                    !confirm(
-                                        `Excluir o banco IndexedDB "${name}"?`
-                                    )
-                                ) {
-                                    return;
-                                }
-
-                                await DevTools.deleteIndexedDB(name);
-                                break;
-                            }
-
-                            case "delete-cache": {
-                                const name = button.dataset.name;
-
-                                if (!confirm(`Excluir o cache "${name}"?`)) {
-                                    return;
-                                }
-
-                                await DevTools.deleteCache(name);
-                                break;
-                            }
-
-                            case "clear-storage": {
-                                const type = button.dataset.type;
-
-                                if (
-                                    !confirm(
-                                        `Limpar todo o conteúdo de ${type}?`
-                                    )
-                                ) {
-                                    return;
-                                }
-
-                                DevTools.clearStorage(type);
-                                break;
-                            }
-
-                            case "delete-cookie": {
-                                const name = button.dataset.name;
-                                const domain = button.dataset.domain;
-                                const path = button.dataset.path;
-
-                                if (!confirm(`Excluir o cookie "${name}"?`)) {
-                                    return;
-                                }
-
-                                await DevTools.deleteCookie({
-                                    name,
-                                    ...(domain ? { domain } : {}),
-                                    ...(path ? { path } : {})
-                                });
-
-                                break;
-                            }
-
-                            default:
-                                return;
+                            openDevToolsConfirmModal({
+                                action,
+                                scope,
+                                title: "Desregistrar Service Worker",
+                                message:
+                                    "Deseja desregistrar este Service Worker?",
+                                target: scope,
+                                submitLabel: "Desregistrar"
+                            });
+                            break;
                         }
 
-                        await loadDevTools();
-                    } catch (error) {
-                        console.error("[DEVTOOLS]: Operation failed.", error);
-                        alert(error?.message || String(error));
-                    } finally {
-                        button.disabled = false;
+                        case "delete-db": {
+                            const name = button.dataset.name;
+                            const isAppDb =
+                                button.dataset.appDb === "true" ||
+                                name === settings.database.name;
+
+                            openDevToolsConfirmModal({
+                                action,
+                                name,
+                                isAppDb,
+                                title: isAppDb
+                                    ? "Excluir banco principal da aplicação"
+                                    : "Excluir banco IndexedDB",
+                                message: isAppDb
+                                    ? "Deseja realmente excluir o banco de dados principal da aplicação?"
+                                    : "Deseja realmente excluir este banco IndexedDB?",
+                                target: name,
+                                submitLabel: "Excluir banco"
+                            });
+                            break;
+                        }
+
+                        case "delete-cache": {
+                            const name = button.dataset.name;
+
+                            openDevToolsConfirmModal({
+                                action,
+                                name,
+                                title: "Excluir cache",
+                                message: "Deseja realmente excluir este cache?",
+                                target: name,
+                                submitLabel: "Excluir cache"
+                            });
+                            break;
+                        }
+
+                        case "clear-storage": {
+                            const type = button.dataset.type;
+
+                            openDevToolsConfirmModal({
+                                action,
+                                type,
+                                title: "Limpar armazenamento",
+                                message: `Deseja realmente limpar todo o conteúdo de ${type}?`,
+                                target: type,
+                                submitLabel: "Limpar"
+                            });
+                            break;
+                        }
+
+                        case "delete-cookie": {
+                            const name = button.dataset.name;
+                            const domain = button.dataset.domain;
+                            const path = button.dataset.path;
+
+                            openDevToolsConfirmModal({
+                                action,
+                                name,
+                                domain,
+                                path,
+                                title: "Excluir cookie",
+                                message:
+                                    "Deseja realmente excluir este cookie?",
+                                target: name,
+                                submitLabel: "Excluir cookie"
+                            });
+                            break;
+                        }
+
+                        default:
+                            return;
                     }
                 });
 
@@ -3787,6 +4042,7 @@ const SetupDOMReady = async evt => {
                     root: editorRoot,
                     db: DBMethods,
                     permissions: BrowserPermissions,
+                    analytics: SiteAnalytics,
                     translate: () => i18n.transcript(),
                     getAuthorId: () =>
                         currentGitHubUser?.id
@@ -3880,6 +4136,7 @@ const SetupDOMReady = async evt => {
                     ensureSession: ensureValidGitHubSession,
                     repo: { owner: REPOSITORY_OWNER, name: REPOSITORY_NAME },
                     branch: REPOSITORY_BRANCH,
+                    analytics: SiteAnalytics,
                     translate: path =>
                         path
                             .split(".")
@@ -4225,7 +4482,8 @@ const SetupDOMReady = async evt => {
     renderFooterNews(
         settings,
         document.getElementById("dinamic-footer-news"),
-        PolicyHandler.language
+        PolicyHandler.language,
+        { analytics: SiteAnalytics }
     );
 
     // @revise - lazy-load global initializator?
@@ -4346,7 +4604,10 @@ const SetupDOMReady = async evt => {
             }
         } catch (error) {
             console.error("[SETUP]: Could not load user preferences", error);
+            SiteAnalytics?.trackError("preferences", error).catch(() => {});
         }
+
+        userPreferences.connNotific2 = Boolean(Policy.analyticsEnabled);
     }
 
     /**
@@ -4401,15 +4662,25 @@ const SetupDOMReady = async evt => {
         const preferencesToSave = { ...userPreferences };
 
         preferenceSaveQueue = preferenceSaveQueue
-            .then(() =>
-                DBMethods.update([
+            .then(async () => {
+                await DBMethods.update([
                     {
                         tbn: "config",
                         tbk: "preferences",
                         tbv: preferencesToSave
                     }
-                ])
-            )
+                ]);
+
+                if (key === "connNotific2") {
+                    await Policy.setAnalyticsConsent(
+                        preferencesToSave.connNotific2,
+                        DBMethods
+                    );
+                    await SiteAnalytics?.setEnabled(
+                        preferencesToSave.connNotific2
+                    );
+                }
+            })
             .catch(error => {
                 console.error(
                     "[SETUP]: Could not save user preferences",
@@ -4559,7 +4830,7 @@ const handleGitHubCredentialsClear = async event => {
         }).catch(() => null);
 
         await DBMethods.delete({
-            tbn: "config",
+            tbn: "github",
             tbk: "user-github"
         });
 

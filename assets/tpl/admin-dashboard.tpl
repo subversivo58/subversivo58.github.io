@@ -958,6 +958,85 @@
         </div>
     </div>
 
+    <!-- ==================================================
+         MODAL: CONFIRMAR AÇÃO DO DEVTOOLS
+         Usado para confirmar exclusões no painel DevTools.
+    =================================================== -->
+    <div
+        class="modal fade"
+        id="admin-modal-devtools-confirm"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="admin-modal-devtools-confirm-title"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content rounded-0">
+
+                <div class="modal-header">
+                    <h5
+                        id="admin-modal-devtools-confirm-title"
+                        class="modal-title">
+                        Confirmar exclusão
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p
+                        id="admin-modal-devtools-confirm-message"
+                        class="mb-2">
+                        Deseja realmente executar esta ação?
+                    </p>
+
+                    <p
+                        id="admin-modal-devtools-confirm-target"
+                        class="small font-weight-bold text-monospace bg-light border p-2 mb-0 text-break"
+                        hidden></p>
+
+                    <div
+                        id="admin-modal-devtools-confirm-warning"
+                        class="alert alert-warning rounded-0 small mt-3 mb-0"
+                        role="alert"
+                        hidden>
+                        Esta ação apagará todos os dados locais da aplicação (sessão do GitHub, credenciais, rascunhos e preferências) e a página será recarregada automaticamente.
+                    </div>
+
+                    <div
+                        id="admin-modal-devtools-confirm-error"
+                        class="alert alert-danger rounded-0 small mt-3 mb-0"
+                        role="alert"
+                        hidden></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        id="admin-devtools-confirm-cancel"
+                        class="btn btn-outline-secondary btn-sm rounded-0"
+                        data-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="button"
+                        id="admin-devtools-confirm-submit"
+                        class="btn btn-danger btn-sm rounded-0">
+                        Excluir
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- MENSAGENS INTERNAS TRADUZÍVEIS -->
     <div id="admin-dashboard-messages" hidden>
         <span class="i18n" data-msg="clear_confirm" data-i18n-html="admin_dashboard.session.clear_confirm"></span>

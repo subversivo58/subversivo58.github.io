@@ -129,43 +129,57 @@ const INTERVAL = 6000
 export function renderFooterNews(
     settings,
     container,
-    locale = navigator.language
+    locale = navigator.language,
+    { analytics = null } = {}
 ) {
     if (!container) return
 
-    const posts = latest(
-        settings,
-        settings.articles['footer-max-list']
-    )
+    try {
+        const posts = latest(
+            settings,
+            settings.articles['footer-max-list']
+        )
 
-    if (!posts.length) {
-        container.replaceChildren()
-        return
-    }
+        if (!posts.length) {
+            container.replaceChildren()
+            return
+        }
 
-    container.innerHTML = posts.map(post => {
-        const timestamp = getTimestamp(post)
-        return `
+        container.innerHTML = posts.map(post => {
+            const timestamp = getTimestamp(post)
+            return `
         <div class="mt-3 col footer-column-bb">
             <a href="${esc(postURL(post))}" class="row">
                 <small>📰 ${esc(post.title)}</small>
             </a>
             <small class="row">${formatDate(timestamp, locale)}</small>
         </div>`
-    }).join('')
+        }).join('')
+    } catch (error) {
+        console.error('[RECENT POSTS]: Failed to render footer news.', error)
+        analytics?.trackError?.('recent-posts', error)?.catch?.(() => {})
+    }
 }
 
 export function renderIndexCarousel(settings, container, {
     image = '/assets/media/image/graph.webp',
     locale = navigator.language,
-    translate = (key, fallback) => fallback
+    translate = (key, fallback) => fallback,
+    analytics = null
 } = {}) {
     if (!container) return
 
-    const posts = latest(
-        settings,
-        settings.articles['index-max-list']
-    )
+    let posts
+    try {
+        posts = latest(
+            settings,
+            settings.articles['index-max-list']
+        )
+    } catch (error) {
+        console.error('[RECENT POSTS]: Failed to load carousel posts.', error)
+        analytics?.trackError?.('recent-posts', error)?.catch?.(() => {})
+        return
+    }
 
     if (!posts.length) return
 

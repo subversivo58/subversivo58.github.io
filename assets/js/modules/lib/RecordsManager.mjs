@@ -9,7 +9,8 @@ export default class RecordsManager {
     constructor({
         endpoint,
         jwtManager,
-        root
+        root,
+        analytics = null
     } = {}) {
         if (
             typeof endpoint !== "string" ||
@@ -29,6 +30,7 @@ export default class RecordsManager {
         this.endpoint = endpoint.replace(/\/+$/, "");
         this.jwtManager = jwtManager;
         this.root = root;
+        this.analytics = analytics || null;
 
         this.activeTab = "analytics";
 
@@ -367,6 +369,7 @@ export default class RecordsManager {
                 `[RECORDS]: Falha ao consultar ${table}.`,
                 error
             );
+            this.analytics?.trackError?.("records", error)?.catch?.(() => {});
 
         } finally {
             state.loading = false;
@@ -460,6 +463,7 @@ export default class RecordsManager {
                 `[RECORDS]: Falha ao excluir registro ${recordId}.`,
                 error
             );
+            this.analytics?.trackError?.("records", error)?.catch?.(() => {});
 
         }
 
@@ -598,6 +602,7 @@ export default class RecordsManager {
                 `[RECORDS]: Falha na exclusão por período de ${table}.`,
                 error
             );
+            this.analytics?.trackError?.("records", error)?.catch?.(() => {});
         }
 
         await this.reloadAfterMutation(table, {
@@ -677,6 +682,7 @@ export default class RecordsManager {
                 `[RECORDS]: Falha na limpeza de ${table}.`,
                 error
             );
+            this.analytics?.trackError?.("records", error)?.catch?.(() => {});
         }
 
         await this.reloadAfterMutation(table, {

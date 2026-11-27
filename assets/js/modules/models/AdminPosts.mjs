@@ -15,6 +15,7 @@ class AdminPosts {
     constructor(editor) {
         this.editor = editor
         this.postManager = editor.postManager
+        this.analytics = editor?.analytics || this.postManager?.analytics || null
 
         this.posts = []
         this.filterQuery = ''
@@ -304,6 +305,7 @@ class AdminPosts {
             return true
         } catch (error) {
             console.error('[ADMIN POSTS]:', error)
+            this.analytics?.trackError?.('admin-posts', error)?.catch?.(() => {})
             return false
         }
     }
@@ -517,6 +519,7 @@ class AdminPosts {
             this.editor.loadPublishedPost(post, contentHtml)
         } catch (error) {
             console.error('[ADMIN POSTS]:', error)
+            this.analytics?.trackError?.('admin-posts', error)?.catch?.(() => {})
             this.editor.setStatus('post_load_error')
         }
     }
@@ -781,6 +784,7 @@ class AdminPosts {
             this.openDeleteModal(post, payload)
         } catch (error) {
             console.error('[ADMIN POSTS]:', error)
+            this.analytics?.trackError?.('admin-posts', error)?.catch?.(() => {})
             this.editor.setStatus('delete_prepare_error', error.message)
         } finally {
             trigger.disabled = false
@@ -886,6 +890,7 @@ class AdminPosts {
                 }, 900)
             } catch (error) {
                 console.error('[ADMIN POSTS]:', error)
+                this.analytics?.trackError?.('admin-posts', error)?.catch?.(() => {})
                 status.className = 'alert alert-danger rounded-0 mt-3 mb-0'
                 this.setKey(status, 'admin_dashboard.delete_modal.error')
                 this.editor.setStatus('delete_error', error.message)

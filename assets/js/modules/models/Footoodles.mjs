@@ -24,14 +24,15 @@ class Footoodles {
      * @param {string} options.settingsPath
      * @param {Function} options.translate - Translation function.
      */
-    constructor({ getApi, ensureSession, repo, branch, settingsPath, translate } = {}) {
+    constructor({ getApi, ensureSession, repo, branch, settingsPath, translate, analytics = null } = {}) {
         this.getApi = getApi
         this.ensureSession = ensureSession
         this.repo = repo
         this.branch = branch
         this.translate = translate
+        this.analytics = analytics || null
 
-        this.posts = new PostManager({ settingsPath })
+        this.posts = new PostManager({ settingsPath, analytics: this.analytics })
         this.images = new ImageProcessor({ auto: true })
 
         this.editingId = null
@@ -133,6 +134,7 @@ class Footoodles {
                     return retry
                 }
             }
+            this.analytics?.trackError?.('footoodles', error)?.catch?.(() => {})
             throw error
         }
     }
@@ -462,6 +464,7 @@ class Footoodles {
             await this.refresh()
         } catch (error) {
             console.error('[FOOTOODLES]:', error)
+            this.analytics?.trackError?.('footoodles', error)?.catch?.(() => {})
             this.setStatus(editing ? 'update_error' : 'save_error', 'text-danger')
         } finally {
             this.el.save.disabled = false
@@ -478,6 +481,7 @@ class Footoodles {
             list = await this.list()
         } catch (error) {
             console.error('[FOOTOODLES]:', error)
+            this.analytics?.trackError?.('footoodles', error)?.catch?.(() => {})
         }
 
         if (this.badgeEl && Array.isArray(list)) {
@@ -600,6 +604,7 @@ class Footoodles {
             await this.refresh()
         } catch (error) {
             console.error('[FOOTOODLES]:', error)
+            this.analytics?.trackError?.('footoodles', error)?.catch?.(() => {})
             this.setStatus('delete_error', 'text-danger')
         }
     }

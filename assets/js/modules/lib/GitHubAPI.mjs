@@ -15,7 +15,7 @@ import GitHub from '../vendor/GitHub.bundle.mjs';
  * @param {Object|string} auth - Credentials accepted by the underlying GitHub library (e.g. a token).
  * @description Exposes setRepo, setBranch and pushFiles as public methods. The repository and branch are set before a push.
  */
-const GitHubAPI = function(auth) {
+const GitHubAPI = function(auth, analytics = null) {
     let repo,
         currentBranch = {},
         gh = new GitHub(auth)
@@ -38,6 +38,11 @@ const GitHubAPI = function(auth) {
         repo = gh.getRepo(userName, repoName)
     }
 
+    const rejectTracked = error => {
+        analytics?.trackError?.('github-api', error)?.catch?.(() => {})
+        return Promise.reject(error)
+    }
+
     /**
      * Sets the current branch to make push to.
      * @public
@@ -47,7 +52,7 @@ const GitHubAPI = function(auth) {
      */
     this.setBranch = (branchName, baseBranch) => {
         if ( !repo ) {
-            return Promise.reject(new Error('Repository is not initialized'))
+            return rejectTracked(new Error('Repository is not initialized'))
         }
 
         return repo.getRef('heads/' + branchName).then(() => true, error => {
@@ -68,6 +73,9 @@ const GitHubAPI = function(auth) {
             return base.then(name => repo.createBranch(name, branchName)).then(() => {
                 currentBranch.name = branchName
             })
+        }).catch(error => {
+            analytics?.trackError?.('github-api', error)?.catch?.(() => {})
+            throw error
         })
     }
 
@@ -82,15 +90,15 @@ const GitHubAPI = function(auth) {
      */
     this.pushFiles = (message, files) => {
         if ( !repo ) {
-            return Promise.reject(new Error('Repository is not initialized'))
+            return rejectTracked(new Error('Repository is not initialized'))
         }
 
         if ( !currentBranch.hasOwnProperty('name') ) {
-            return Promise.reject(new Error('Branch is not set'))
+            return rejectTracked(new Error('Branch is not set'))
         }
 
         if ( !Array.isArray(files) || files.length === 0 ) {
-            return Promise.reject(new Error('"files" must be a non-empty Array'))
+            return rejectTracked(new Error('"files" must be a non-empty Array'))
         }
 
         const branch = currentBranch.name,
@@ -117,6 +125,7 @@ const GitHubAPI = function(auth) {
             return repo.updateHead('heads/' + branch, commit.data.sha)
         }).catch(error => {
             console.error(error)
+            analytics?.trackError?.('github-api', error)?.catch?.(() => {})
             throw error
         })
     }

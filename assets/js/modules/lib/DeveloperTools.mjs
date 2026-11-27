@@ -146,18 +146,12 @@ export default class DeveloperTools {
     }
 
     /**
-     * Delete one selected external IndexedDB database.
+     * Delete one selected IndexedDB database.
      */
     async deleteIndexedDB(name) {
 
         if (typeof name !== 'string' || !name.trim()) {
             throw new TypeError('A valid database name is required.');
-        }
-
-        if (name === this.databaseName) {
-            throw new Error(
-                'The application database cannot be deleted.'
-            );
         }
 
         const databases = await indexedDB.databases();
@@ -171,6 +165,10 @@ export default class DeveloperTools {
                 deleted: false,
                 name
             };
+        }
+
+        if (name === this.databaseName) {
+            this.database?.close?.();
         }
 
         return await new Promise((resolve, reject) => {

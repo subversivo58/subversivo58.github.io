@@ -246,19 +246,41 @@ function loadSettings() {
     return settingsPromise;
 }
 
+let databaseConnection = null;
+
 function getDatabase() {
+    if (
+        databaseConnection &&
+        (!databaseConnection.db || !databaseConnection.opened)
+    ) {
+        databasePromise = null;
+        databaseConnection = null;
+    }
+
     if (!databasePromise) {
-        databasePromise = loadSettings().then(settings => {
+        databasePromise = loadSettings().then(async settings => {
             const database = settings.database;
             const connection = new AWIndexedDB(
                 database.name,
                 database.version,
                 false
             );
-            return connection.open(database.indexed);
+            databaseConnection = connection;
+
+            const db = await connection.open(database.indexed);
+
+            db.onChange(event => {
+                if (event?.type === "deleted") {
+                    databasePromise = null;
+                    databaseConnection = null;
+                }
+            });
+
+            return db;
         });
         databasePromise.catch(() => {
             databasePromise = null;
+            databaseConnection = null;
         });
     }
     return databasePromise;
@@ -280,94 +302,44 @@ async function appendSubmission(store, key, entry) {
 }
 
 
-const AUTH_DB_NAME = "Subversivo58GitHubAuth";
-const AUTH_DB_VERSION = 1;
-const AUTH_STORE_NAME = "auth";
+const OAUTH_STORE_NAME = "github";
 const OAUTH_PENDING_TTL = 10 * 60 * 1000;
 
-let authDatabasePromise = null;
-
-function openAuthDatabase() {
-    if (!authDatabasePromise) {
-        authDatabasePromise = new Promise((resolve, reject) => {
-            const request = indexedDB.open(AUTH_DB_NAME, AUTH_DB_VERSION);
-
-            request.onupgradeneeded = () => {
-                const database = request.result;
-                if (!database.objectStoreNames.contains(AUTH_STORE_NAME)) {
-                    database.createObjectStore(AUTH_STORE_NAME);
-                }
-            };
-
-            request.onsuccess = () => resolve(request.result);
-            request.onerror = () => reject(request.error);
-        });
-
-        authDatabasePromise.catch(() => {
-            authDatabasePromise = null;
-        });
-    }
-
-    return authDatabasePromise;
-}
-
 /**
- * Runs a get, set or delete operation on the OAuth storage database.
+ * Runs a get, set or delete operation on the OAuth object store in the main database.
  * @param {"get"|"set"|"delete"} action - Operation to run.
  * @param {string} key - Record key.
  * @param {*} [value] - Value for the set operation.
  * @return {Promise<*>} The stored value for get, otherwise the operation result.
- * @description This storage is separate from the main database and holds only temporary OAuth data.
  */
 async function authStorage(action, key, value) {
-    const database = await openAuthDatabase();
+    const db = await getDatabase();
 
-    return new Promise((resolve, reject) => {
-        const transaction = database.transaction(AUTH_STORE_NAME, "readwrite");
-        const store = transaction.objectStore(AUTH_STORE_NAME);
+    if (action === "get") {
+        return db.read({
+            tbn: OAUTH_STORE_NAME,
+            tbk: key
+        });
+    }
 
-        let request;
-        let result;
-
-        if (action === "get") {
-            request = store.get(key);
-        } else if (action === "set") {
-            request = store.put(value, key);
-        } else if (action === "delete") {
-            request = store.delete(key);
-        } else {
-            reject(new Error("Operação de armazenamento inválida."));
-            return;
-        }
-
-        request.onsuccess = () => {
-            result = request.result;
-
-            if (action === "get") {
-                resolve(result);
+    if (action === "set") {
+        return db.create([
+            {
+                tbn: OAUTH_STORE_NAME,
+                tbk: key,
+                tbv: Array.isArray(value) ? [value] : value
             }
-        };
+        ]);
+    }
 
-        request.onerror = () => {
-            reject(request.error || new Error("Falha na operação IndexedDB."));
-        };
+    if (action === "delete") {
+        return db.delete({
+            tbn: OAUTH_STORE_NAME,
+            tbk: key
+        });
+    }
 
-        transaction.oncomplete = () => {
-            if (action !== "get") resolve(true);
-        };
-
-        transaction.onerror = () => {
-            reject(
-                transaction.error || new Error("Falha na transação IndexedDB.")
-            );
-        };
-
-        transaction.onabort = () => {
-            reject(
-                transaction.error || new Error("Transação IndexedDB cancelada.")
-            );
-        };
-    });
+    throw new Error("Operação de armazenamento inválida.");
 }
 
 
@@ -525,7 +497,7 @@ async function saveStoredGitHubAuth(user, token) {
 
     await db.create([
         {
-            tbn: "config",
+            tbn: OAUTH_STORE_NAME,
             tbk: "user-github",
             tbv: auth
         }
@@ -856,7 +828,7 @@ async function logoutGitHub(request) {
         const db = await getDatabase();
 
         await db.delete({
-            tbn: "config",
+            tbn: OAUTH_STORE_NAME,
             tbk: "user-github"
         });
 
@@ -903,7 +875,7 @@ async function refreshGitHubToken(request) {
     try {
         const db = await getDatabase();
         const stored = await db.read({
-            tbn: "config",
+            tbn: OAUTH_STORE_NAME,
             tbk: "user-github"
         });
 
@@ -1321,6 +1293,198 @@ async function syncPendingRecords() {
 }
 
 
+const ANALYTICS_SYNC_INTERVAL = 15 * 60 * 1000;
+const ANALYTICS_SYNC = {
+    store: "analytics",
+    key: "site-analytics",
+    consentKey: "consent",
+    marker: "records-sync-analytics",
+    path: "/v1/analytics"
+};
+
+let analyticsSyncPromise = null;
+
+/**
+ * Checks whether the user authorized analytics collection/sync in IndexedDB.
+ * @param {Object} db - Database connection.
+ * @return {Promise<boolean>}
+ */
+async function isAnalyticsAuthorized(db) {
+    const consent = await db.read({
+        tbn: ANALYTICS_SYNC.store,
+        tbk: ANALYTICS_SYNC.consentKey
+    });
+
+    if (consent && typeof consent === "object" && typeof consent.enabled === "boolean") {
+        return consent.enabled;
+    }
+
+    const preferences = await db.read({
+        tbn: "config",
+        tbk: "preferences"
+    });
+
+    return Boolean(preferences?.connNotific2);
+}
+
+/**
+ * Dispatches the site analytics object directly as JSON to the Cloudflare Worker
+ * every 15 minutes and clears only user.pages and system after a valid response.
+ * @param {Object} settings - Loaded site settings.
+ * @return {Promise<void>}
+ */
+async function syncAnalytics(settings) {
+    const endpoint = settings?.jwt?.records?.endpoint;
+
+    if (typeof endpoint !== "string" || !endpoint.trim()) {
+        return;
+    }
+
+    const db = await getDatabase();
+    const authorized = await isAnalyticsAuthorized(db);
+
+    if (!authorized) {
+        return;
+    }
+
+    const record = await db.read({
+        tbn: ANALYTICS_SYNC.store,
+        tbk: ANALYTICS_SYNC.key
+    });
+
+    if (
+        !record ||
+        typeof record !== "object" ||
+        Array.isArray(record) ||
+        typeof record.userId !== "string" ||
+        !record.userId
+    ) {
+        return;
+    }
+
+    const pages = Array.isArray(record.user?.pages) ? record.user.pages : [];
+    const system = Array.isArray(record.system) ? record.system : [];
+
+    if (!pages.length && !system.length) {
+        return;
+    }
+
+    const lastAttempt = await db.read({
+        tbn: "config",
+        tbk: ANALYTICS_SYNC.marker
+    });
+
+    const lastAttemptTime = Number(lastAttempt) || 0;
+    const now = Date.now();
+
+    if (now - lastAttemptTime < ANALYTICS_SYNC_INTERVAL) {
+        return;
+    }
+
+    await db.create([
+        {
+            tbn: "config",
+            tbk: ANALYTICS_SYNC.marker,
+            tbv: now
+        }
+    ]);
+
+    const payload = {
+        userId: record.userId,
+        user: {
+            userAgent: String(record.user?.userAgent || ""),
+            browser: String(record.user?.browser || ""),
+            osVersion: String(record.user?.osVersion || ""),
+            language: String(record.user?.language || ""),
+            pages: pages.slice()
+        },
+        system: system.slice()
+    };
+
+    const baseURL = endpoint.trim().replace(/\/+$/, "");
+    let response;
+
+    try {
+        response = await fetch(baseURL + ANALYTICS_SYNC.path, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload),
+            cache: "no-store"
+        });
+    } catch (error) {
+        console.error("[SW] Falha de rede ao sincronizar analytics:", error);
+        return;
+    }
+
+    if (response.ok || response.status === 409) {
+        const latest = await db.read({
+            tbn: ANALYTICS_SYNC.store,
+            tbk: ANALYTICS_SYNC.key
+        });
+
+        if (latest && typeof latest === "object" && !Array.isArray(latest)) {
+            const remainingPages = Array.isArray(latest.user?.pages)
+                ? latest.user.pages.filter(page => !pages.includes(page))
+                : [];
+            const remainingSystem = Array.isArray(latest.system)
+                ? latest.system.slice(system.length)
+                : [];
+
+            await db.create([
+                {
+                    tbn: ANALYTICS_SYNC.store,
+                    tbk: ANALYTICS_SYNC.key,
+                    tbv: {
+                        ...latest,
+                        user: {
+                            ...(latest.user || payload.user),
+                            pages: remainingPages
+                        },
+                        system: remainingSystem
+                    }
+                }
+            ]);
+        }
+
+        return;
+    }
+
+    console.warn(
+        "[SW] Backend recusou a sincronização de analytics:",
+        response.status
+    );
+}
+
+/**
+ * Synchronizes the site analytics object independently of feedback/errors queues.
+ * @return {Promise<void>}
+ */
+async function syncPendingAnalytics() {
+    if (analyticsSyncPromise) return analyticsSyncPromise;
+
+    analyticsSyncPromise = (async () => {
+        try {
+            const settings = await loadSettings();
+            await syncAnalytics(settings);
+        } catch (error) {
+            console.error(
+                "[SW] Não foi possível sincronizar o analytics:",
+                error
+            );
+        }
+    })();
+
+    try {
+        await analyticsSyncPromise;
+    } finally {
+        analyticsSyncPromise = null;
+    }
+}
+
+
 /**
  * Handles POST requests.
  * @description Requests to the same origin that match a registered route are handled by it. Form data for the configured routes is saved to the queue. Feedback and bug reports trigger a synchronization.
@@ -1383,7 +1547,16 @@ self.addEventListener("install", event => {
 });
 
 self.addEventListener("activate", event => {
-    event.waitUntil(self.clients.claim().then(() => syncPendingRecords()));
+    event.waitUntil(
+        self.clients
+            .claim()
+            .then(() =>
+                Promise.allSettled([
+                    syncPendingRecords(),
+                    syncPendingAnalytics()
+                ])
+            )
+    );
 });
 
 self.addEventListener("fetch", event => {
@@ -1404,9 +1577,14 @@ self.addEventListener("fetch", event => {
     }
 
     event.waitUntil(
-        syncPendingRecords().catch(error => {
-            console.error("[SW] Verificação da fila falhou:", error);
-        })
+        Promise.allSettled([
+            syncPendingRecords().catch(error => {
+                console.error("[SW] Verificação da fila falhou:", error);
+            }),
+            syncPendingAnalytics().catch(error => {
+                console.error("[SW] Verificação do analytics falhou:", error);
+            })
+        ])
     );
 
     const response = Router(request);

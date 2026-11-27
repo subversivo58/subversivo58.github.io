@@ -100,13 +100,103 @@ export default class PolicyHandler {
      * @param {boolean|Function} [logging=false]
      * @description The initial permission is 'authorized' when the __DSPolicy__ cookie exists, otherwise 'unauthorized'.
      */
-    constructor(name = 'default', logging = false) {
+    constructor(name = 'default', logging = false, analytics = null) {
         this.name       = name
         this.permission = dc.cookie.includes('__DSPolicy__') ? 'authorized' : 'unauthorized'
+        this.analyticsEnabled = false
+        this.analytics = analytics || null
         // to register logs
         this.log = (logging && typeof logging === 'object') ? logging : noop
 
         this.log.success('[Policy Handler]: ', 'handler has been initialized')
+    }
+
+    /**
+     * Attaches the Analytics instance used to report technical failures.
+     * @param {Object|null} analytics
+     */
+    setAnalytics(analytics) {
+        this.analytics = analytics || null
+    }
+
+    /**
+     * Loads the analytics consent state from the analytics object store,
+     * falling back to legacy config/preferences.connNotific2 when present.
+     * @param {Object} database - Opened AwesomeIndexedDB connection.
+     * @return {Promise<boolean>}
+     */
+    async loadAnalyticsConsent(database) {
+        if (!database || typeof database.read !== 'function') {
+            return this.analyticsEnabled
+        }
+
+        try {
+            const stored = await database.read({
+                tbn: 'analytics',
+                tbk: 'consent'
+            })
+
+            if (stored && typeof stored === 'object' && typeof stored.enabled === 'boolean') {
+                this.analyticsEnabled = stored.enabled
+                return this.analyticsEnabled
+            }
+
+            const preferences = await database.read({
+                tbn: 'config',
+                tbk: 'preferences'
+            })
+
+            if (preferences && typeof preferences === 'object' && typeof preferences.connNotific2 === 'boolean') {
+                this.analyticsEnabled = preferences.connNotific2
+                if (typeof database.create === 'function') {
+                    await database.create([
+                        {
+                            tbn: 'analytics',
+                            tbk: 'consent',
+                            tbv: {
+                                enabled: this.analyticsEnabled,
+                                updatedAt: new Date().toISOString()
+                            }
+                        }
+                    ]).catch(() => {})
+                }
+            }
+        } catch (error) {
+            console.error('[POLICY]: Could not load analytics consent', error)
+            this.analytics?.trackError?.('policy', error)?.catch?.(() => {})
+        }
+
+        return this.analyticsEnabled
+    }
+
+    /**
+     * Persists the user analytics consent decision in the analytics object store.
+     * @param {boolean} enabled
+     * @param {Object} database - Opened AwesomeIndexedDB connection.
+     * @return {Promise<boolean>}
+     */
+    async setAnalyticsConsent(enabled, database) {
+        this.analyticsEnabled = Boolean(enabled)
+
+        if (database && typeof database.create === 'function') {
+            try {
+                await database.create([
+                    {
+                        tbn: 'analytics',
+                        tbk: 'consent',
+                        tbv: {
+                            enabled: this.analyticsEnabled,
+                            updatedAt: new Date().toISOString()
+                        }
+                    }
+                ])
+            } catch (error) {
+                this.analytics?.trackError?.('policy', error)?.catch?.(() => {})
+                throw error
+            }
+        }
+
+        return this.analyticsEnabled
     }
 
     /**
@@ -141,7 +231,12 @@ export default class PolicyHandler {
      * @return {Promise<void>}
      */
     acceptStoragement() {
-        return Cookies.set('__DSPolicy__', Date.now(), {expire: 30, secure: true}).then(() => { return this.permission = 'authorized' })
+        return Cookies.set('__DSPolicy__', Date.now(), {expire: 30, secure: true})
+            .then(() => { return this.permission = 'authorized' })
+            .catch(error => {
+                this.analytics?.trackError?.('policy', error)?.catch?.(() => {})
+                throw error
+            })
     }
 
     /**
@@ -150,7 +245,14 @@ export default class PolicyHandler {
      * @return {Promise<void>}
      */
     refuseStoragement(clearAllData) {
-        return clearAllData ? (Promise.resolve(CleanBrowserStoragement()).then(() => { this.permission = 'unauthorized' })) : Cookies.del('__DSPolicy__').then(() => { return this.permission = 'unauthorized' })
+        const action = clearAllData
+            ? Promise.resolve(CleanBrowserStoragement()).then(() => { this.permission = 'unauthorized' })
+            : Cookies.del('__DSPolicy__').then(() => { return this.permission = 'unauthorized' })
+
+        return action.catch(error => {
+            this.analytics?.trackError?.('policy', error)?.catch?.(() => {})
+            throw error
+        })
     }
 
     static get permission() {

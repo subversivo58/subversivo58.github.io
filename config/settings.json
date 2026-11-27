@@ -49,7 +49,7 @@
             "endpoint": "https://webpush-proxy.dib.workers.dev"
         },
         "storage": {
-            "store": "config",
+            "store": "credentials",
             "key": "credenciais"
         },
         "services": [
@@ -185,6 +185,12 @@
             },
             {
                 "tbn": "analytics"
+            },
+            {
+                "tbn": "github"
+            },
+            {
+                "tbn": "credentials"
             }
         ]
     },

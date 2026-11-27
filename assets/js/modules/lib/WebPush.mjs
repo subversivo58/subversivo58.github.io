@@ -231,12 +231,13 @@ export class WebPush {
    * @throws {Error} If the proxy URL is not a non-empty string.
    * @description The proxy is required because the push service does not accept requests made directly from the browser.
    */
-  constructor(proxy) {
+  constructor(proxy, { analytics = null } = {}) {
     if (typeof proxy !== 'string' || proxy.length === 0) {
       throw new Error('WebPush constructor requires a proxy URL string.');
     }
     this._proxy = proxy.replace(/\/$/, '');
     this._vapidDetails = null;
+    this._analytics = analytics || null;
   }
 
   /**
@@ -330,27 +331,32 @@ export class WebPush {
    * @return {Promise<Response>}
    */
   async sendNotification(subscription, payload, options = {}) {
-    const details = await this.generateRequestDetails(subscription, payload, options);
+    try {
+      const details = await this.generateRequestDetails(subscription, payload, options);
 
-    const resp = await fetch(details.endpoint, {
-      method: details.method,
-      headers: details.headers,
-      body: details.body || undefined,
-      mode: 'cors',
-      credentials: 'omit',
-    });
+      const resp = await fetch(details.endpoint, {
+        method: details.method,
+        headers: details.headers,
+        body: details.body || undefined,
+        mode: 'cors',
+        credentials: 'omit',
+      });
 
-    const text = await resp.text().catch(() => '');
-    if (resp.status < 200 || resp.status > 299) {
-      throw new WebPushError(
-        'Unexpected response code',
-        resp.status,
-        Object.fromEntries(resp.headers.entries()),
-        text,
-        details.originalEndpoint
-      );
+      const text = await resp.text().catch(() => '');
+      if (resp.status < 200 || resp.status > 299) {
+        throw new WebPushError(
+          'Unexpected response code',
+          resp.status,
+          Object.fromEntries(resp.headers.entries()),
+          text,
+          details.originalEndpoint
+        );
+      }
+      return { statusCode: resp.status, body: text, headers: Object.fromEntries(resp.headers.entries()) };
+    } catch (error) {
+      this._analytics?.trackError?.('web-push', error)?.catch?.(() => {});
+      throw error;
     }
-    return { statusCode: resp.status, body: text, headers: Object.fromEntries(resp.headers.entries()) };
   }
 }
 

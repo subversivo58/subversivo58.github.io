@@ -53,7 +53,8 @@ class WysiwygEditor {
         this.options = options
         this.permissions = options.permissions || null
         this.root = options.root || null
-        this.postManager = options.postManager || new PostManager()
+        this.analytics = options.analytics || null
+        this.postManager = options.postManager || new PostManager({ analytics: this.analytics })
         this.imageProcessor = options.imageProcessor || new ImageProcessor({ auto: true })
         this.onCreate = options.onCreate || (() => {})
         this.onStatus = options.onStatus || (() => {})
@@ -185,6 +186,7 @@ class WysiwygEditor {
         this.adminPosts = new AdminPosts(this)
         this.adminPosts.mount().catch(error => {
             console.error('[WysiwygEditor]: Erro ao inicializar gerenciamento de postagens:', error)
+            this.analytics?.trackError?.('admin-posts', error)?.catch?.(() => {})
         })
 
         this.ready = this.initStorage()

@@ -654,7 +654,7 @@ export default class JWTManager {
      */
     async _getGitHubAccessToken() {
         const auth = await this.database.read({
-            tbn: "config",
+            tbn: "github",
             tbk: "user-github"
         });
 

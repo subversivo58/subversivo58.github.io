@@ -81,7 +81,7 @@ import {
  * Initializes the Bootstrap Native components that have not been started yet.
  * @description Bootstrap scans the page when it loads. If the target of a button, such as a modal, comes from a template that was not inserted yet, the button would not work. This runs after the templates are inserted.
  */
-const initPendingComponents = () => {
+const initPendingComponents = (analytics = null) => {
     try {
         document.querySelectorAll("[data-fix-modal]").forEach(element => {
             if (element.tagName === "A") {
@@ -114,6 +114,7 @@ const initPendingComponents = () => {
                         new Constructor(element);
                     } catch (error) {
                         console.error(`BSN (re-init ${name}): ${error}`);
+                        analytics?.trackError?.("templates", error)?.catch?.(() => {});
                     }
                 }
             });
@@ -123,6 +124,7 @@ const initPendingComponents = () => {
             "Templates: não foi possível reiniciar os componentes do Bootstrap",
             error
         );
+        analytics?.trackError?.("templates", error)?.catch?.(() => {});
     }
 };
 
@@ -135,7 +137,7 @@ const observedTargets = new WeakSet();
  * @param {Object} i18n - IlibJS instance.
  * @return {Promise<void>} Resolves when all templates have been inserted.
  */
-const RenderTemplate = (cfg, replace, i18n) => {
+const RenderTemplate = (cfg, replace, i18n, analytics = null) => {
     let urls = [],
         param = [],
         len = cfg.files.length;
@@ -175,6 +177,7 @@ const RenderTemplate = (cfg, replace, i18n) => {
                     `Templates: não foi possível carregar "${url}"`,
                     error
                 );
+                analytics?.trackError?.("templates", error)?.catch?.(() => {});
                 return undefined;
             });
     };
@@ -204,6 +207,10 @@ const RenderTemplate = (cfg, replace, i18n) => {
                     console.warn(
                         `Templates: alvo "${param[i].target}" não encontrado`
                     );
+                    analytics?.trackError?.(
+                        "templates",
+                        new Error(`Target "${param[i].target}" not found`)
+                    )?.catch?.(() => {});
                     return;
                 }
                 // initialize MutationObserver
@@ -257,7 +264,7 @@ export default class Templates {
      * @param  {Object} replace   regras de substituição
      * @param  {Object} iLib      instância do IlibJS
      */
-    constructor(templates = [], replace = false, iLib = false) {
+    constructor(templates = [], replace = false, iLib = false, analytics = null) {
         this.templates = templates;
         this.replace = !!replace
             ? replace
@@ -266,6 +273,7 @@ export default class Templates {
                   replacement: []
               };
         this.iLib = iLib && iLib instanceof IlibJS ? iLib : new IlibJS("i18n");
+        this.analytics = analytics || null;
     }
 
     /**
@@ -291,13 +299,13 @@ export default class Templates {
                 : _.isArray(source) && source.includes(currentRoute);
 
             if (matches) {
-                jobs.push(RenderTemplate(item, this.replace, this.iLib));
+                jobs.push(RenderTemplate(item, this.replace, this.iLib, this.analytics));
             }
         });
 
         // permite aguardar: await TemplatesReady.import
         return Promise.all(jobs).then(results => {
-            initPendingComponents();
+            initPendingComponents(this.analytics);
             return results;
         });
     }
