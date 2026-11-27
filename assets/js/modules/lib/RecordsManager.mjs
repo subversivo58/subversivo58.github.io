@@ -6,19 +6,9 @@
  * @version 0.1.0 [development stage]
  */
 export default class RecordsManager {
-    constructor({
-        endpoint,
-        jwtManager,
-        root,
-        analytics = null
-    } = {}) {
-        if (
-            typeof endpoint !== "string" ||
-            !endpoint.trim()
-        ) {
-            throw new TypeError(
-                "Endpoint do serviço Records inválido."
-            );
+    constructor({ endpoint, jwtManager, root, analytics = null } = {}) {
+        if (typeof endpoint !== "string" || !endpoint.trim()) {
+            throw new TypeError("Endpoint do serviço Records inválido.");
         }
 
         if (!root) {
@@ -73,9 +63,7 @@ export default class RecordsManager {
     initialize() {
         if (this.initialized) return this;
 
-        this.root.querySelectorAll(
-            "[data-records-tab]"
-        ).forEach(button => {
+        this.root.querySelectorAll("[data-records-tab]").forEach(button => {
             button.addEventListener("click", () => {
                 this.showTab(button.dataset.recordsTab);
             });
@@ -115,10 +103,7 @@ export default class RecordsManager {
             if (!this.tables[table]) return;
 
             if (action === "delete") {
-                this.deleteRecord(
-                    table,
-                    button.dataset.recordId
-                );
+                this.deleteRecord(table, button.dataset.recordId);
 
                 return;
             }
@@ -134,9 +119,7 @@ export default class RecordsManager {
         });
 
         this.root.addEventListener("change", event => {
-            const input = event.target.closest(
-                "[data-records-date]"
-            );
+            const input = event.target.closest("[data-records-date]");
 
             if (!input || !this.root.contains(input)) {
                 return;
@@ -145,16 +128,12 @@ export default class RecordsManager {
             const table = input.dataset.recordsTable;
             const field = input.dataset.recordsDate;
 
-            if (
-                !this.tables[table] ||
-                !["from", "to"].includes(field)
-            ) {
+            if (!this.tables[table] || !["from", "to"].includes(field)) {
                 return;
             }
 
-            this.state[table][
-                field === "from" ? "dateFrom" : "dateTo"
-            ] = input.value;
+            this.state[table][field === "from" ? "dateFrom" : "dateTo"] =
+                input.value;
         });
 
         this.initialized = true;
@@ -174,25 +153,16 @@ export default class RecordsManager {
 
         this.activeTab = table;
 
-        this.root.querySelectorAll(
-            "[data-records-tab]"
-        ).forEach(button => {
-            const active =
-                button.dataset.recordsTab === table;
+        this.root.querySelectorAll("[data-records-tab]").forEach(button => {
+            const active = button.dataset.recordsTab === table;
 
             button.classList.toggle("active", active);
 
-            button.setAttribute(
-                "aria-selected",
-                String(active)
-            );
+            button.setAttribute("aria-selected", String(active));
         });
 
-        this.root.querySelectorAll(
-            "[data-records-panel]"
-        ).forEach(panel => {
-            panel.hidden =
-                panel.dataset.recordsPanel !== table;
+        this.root.querySelectorAll("[data-records-panel]").forEach(panel => {
+            panel.hidden = panel.dataset.recordsPanel !== table;
         });
     }
 
@@ -202,9 +172,7 @@ export default class RecordsManager {
      */
     async loadAll() {
         await Promise.all(
-            Object.keys(this.tables).map(table =>
-                this.load(table, 1)
-            )
+            Object.keys(this.tables).map(table => this.load(table, 1))
         );
     }
 
@@ -215,17 +183,13 @@ export default class RecordsManager {
      */
     getAccessToken() {
         if (!this.jwtManager) {
-            throw new Error(
-                "Gerenciador JWT indisponível."
-            );
+            throw new Error("Gerenciador JWT indisponível.");
         }
 
         const credentials = this.jwtManager.getCredentials();
 
         if (!Array.isArray(credentials)) {
-            throw new Error(
-                "Não foi possível consultar as credenciais JWT."
-            );
+            throw new Error("Não foi possível consultar as credenciais JWT.");
         }
 
         const now = Math.floor(Date.now() / 1000);
@@ -236,15 +200,14 @@ export default class RecordsManager {
                     ...token
                 }))
             )
-            .filter(token =>
-                token.aud === "blog-records" &&
-                typeof token.token === "string" &&
-                token.token &&
-                Number(token.expiresAt) > now
+            .filter(
+                token =>
+                    token.aud === "blog-records" &&
+                    typeof token.token === "string" &&
+                    token.token &&
+                    Number(token.expiresAt) > now
             )
-            .sort((a, b) =>
-                Number(b.expiresAt) - Number(a.expiresAt)
-            );
+            .sort((a, b) => Number(b.expiresAt) - Number(a.expiresAt));
 
         if (!tokens.length) {
             return null;
@@ -253,51 +216,40 @@ export default class RecordsManager {
         return tokens[0].token;
     }
 
-    async request(path, {
-        method = "GET",
-        token,
-        body
-    } = {}) {
-        if (
-            typeof token !== "string" ||
-            !token
-        ) {
-            throw new Error(
-                "Token JWT não disponível."
-            );
+    async request(path, { method = "GET", token, body } = {}) {
+        if (typeof token !== "string" || !token) {
+            throw new Error("Token JWT não disponível.");
         }
 
-        const response = await fetch(
-            `${this.endpoint}${path}`,
-            {
-                method,
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    ...(body ? {
-                        "Content-Type": "application/json"
-                    } : {})
-                },
-                ...(body ? {
-                    body: JSON.stringify(body)
-                } : {}),
-                cache: "no-store"
-            }
-        );
+        const response = await fetch(`${this.endpoint}${path}`, {
+            method,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                ...(body
+                    ? {
+                          "Content-Type": "application/json"
+                      }
+                    : {})
+            },
+            ...(body
+                ? {
+                      body: JSON.stringify(body)
+                  }
+                : {}),
+            cache: "no-store"
+        });
 
         let data;
 
         try {
             data = await response.json();
         } catch {
-            throw new Error(
-                "Resposta inválida do serviço Records."
-            );
+            throw new Error("Resposta inválida do serviço Records.");
         }
 
         if (!response.ok || data.success !== true) {
             throw new Error(
-                data.error ||
-                `Falha na operação: HTTP ${response.status}.`
+                data.error || `Falha na operação: HTTP ${response.status}.`
             );
         }
 
@@ -337,50 +289,46 @@ export default class RecordsManager {
                 return;
             }
 
-            const data = await this.request(
-                `/v1/admin/${table}?page=${page}`,
-                {
-                    token
-                }
-            );
+            const data = await this.request(`/v1/admin/${table}?page=${page}`, {
+                token
+            });
 
             if (!Array.isArray(data.results)) {
-                throw new Error(
-                    "Formato de resultados inválido."
-                );
+                throw new Error("Formato de resultados inválido.");
             }
 
             state.results = data.results;
-
+            if (table === "analytics") {
+                console.info(
+                    "[ANALYTICS DEBUG] Registros recebidos:",
+                    data.results.map(({ id, created_at, content }) => ({
+                        id,
+                        created_at,
+                        content
+                    }))
+                );
+            }
             state.pagination = data.pagination || {
                 page,
                 limit: 25,
                 total: data.results.length,
                 totalPages: 1
             };
-
         } catch (error) {
             state.error = error.message;
 
             state.results = [];
             state.pagination = null;
 
-            console.error(
-                `[RECORDS]: Falha ao consultar ${table}.`,
-                error
-            );
+            console.error(`[RECORDS]: Falha ao consultar ${table}.`, error);
             this.analytics?.trackError?.("records", error)?.catch?.(() => {});
-
         } finally {
             state.loading = false;
             this.render(table);
         }
     }
 
-    async reloadAfterMutation(table, {
-        message = null,
-        error = null
-    } = {}) {
+    async reloadAfterMutation(table, { message = null, error = null } = {}) {
         const state = this.state[table];
 
         state.deleting = false;
@@ -409,16 +357,13 @@ export default class RecordsManager {
 
         const recordId = Number(id);
 
-        if (
-            !Number.isSafeInteger(recordId) ||
-            recordId < 1
-        ) {
+        if (!Number.isSafeInteger(recordId) || recordId < 1) {
             return;
         }
 
         const confirmed = confirm(
             `Deseja realmente excluir o registro #${recordId} ` +
-            `da tabela ${this.tables[table].label}?`
+                `da tabela ${this.tables[table].label}?`
         );
 
         if (!confirmed) return;
@@ -445,17 +390,12 @@ export default class RecordsManager {
                 );
             }
 
-            await this.request(
-                `/v1/admin/${table}/${recordId}`,
-                {
-                    method: "DELETE",
-                    token
-                }
-            );
+            await this.request(`/v1/admin/${table}/${recordId}`, {
+                method: "DELETE",
+                token
+            });
 
-            message =
-                `Registro #${recordId} excluído com sucesso.`;
-
+            message = `Registro #${recordId} excluído com sucesso.`;
         } catch (error) {
             errorMessage = error.message;
 
@@ -464,7 +404,6 @@ export default class RecordsManager {
                 error
             );
             this.analytics?.trackError?.("records", error)?.catch?.(() => {});
-
         }
 
         await this.reloadAfterMutation(table, {
@@ -490,8 +429,7 @@ export default class RecordsManager {
         const to = state.dateTo;
 
         if (!from || !to) {
-            state.error =
-                "Informe a data inicial e a data final.";
+            state.error = "Informe a data inicial e a data final.";
 
             state.message = null;
 
@@ -511,9 +449,7 @@ export default class RecordsManager {
                 return false;
             }
 
-            const date = new Date(
-                `${value}T00:00:00.000Z`
-            );
+            const date = new Date(`${value}T00:00:00.000Z`);
 
             return (
                 !Number.isNaN(date.getTime()) &&
@@ -531,8 +467,7 @@ export default class RecordsManager {
         }
 
         if (from > to) {
-            state.error =
-                "A data inicial não pode ser posterior à data final.";
+            state.error = "A data inicial não pode ser posterior à data final.";
 
             state.message = null;
 
@@ -543,8 +478,8 @@ export default class RecordsManager {
 
         const confirmed = confirm(
             `Deseja realmente excluir os registros da tabela ` +
-            `${this.tables[table].label} entre ${from} e ${to}?\n\n` +
-            "Essa operação não pode ser desfeita."
+                `${this.tables[table].label} entre ${from} e ${to}?\n\n` +
+                "Essa operação não pode ser desfeita."
         );
 
         if (!confirmed) return;
@@ -582,19 +517,14 @@ export default class RecordsManager {
 
             const deleted = Number(data.deleted);
 
-            if (
-                !Number.isSafeInteger(deleted) ||
-                deleted < 0
-            ) {
-                throw new Error(
-                    "Quantidade de registros excluídos inválida."
-                );
+            if (!Number.isSafeInteger(deleted) || deleted < 0) {
+                throw new Error("Quantidade de registros excluídos inválida.");
             }
 
-            message = deleted === 0
-                ? "Nenhum registro encontrado nesse período."
-                : `${deleted} registro(s) excluído(s) do período selecionado.`;
-
+            message =
+                deleted === 0
+                    ? "Nenhum registro encontrado nesse período."
+                    : `${deleted} registro(s) excluído(s) do período selecionado.`;
         } catch (error) {
             errorMessage = error.message;
 
@@ -626,10 +556,10 @@ export default class RecordsManager {
 
         const confirmed = confirm(
             `ATENÇÃO!\n\n` +
-            `Você está prestes a excluir TODOS os registros ` +
-            `da tabela ${this.tables[table].label}.\n\n` +
-            "Essa operação não pode ser desfeita.\n\n" +
-            "Deseja continuar?"
+                `Você está prestes a excluir TODOS os registros ` +
+                `da tabela ${this.tables[table].label}.\n\n` +
+                "Essa operação não pode ser desfeita.\n\n" +
+                "Deseja continuar?"
         );
 
         if (!confirmed) return;
@@ -652,36 +582,25 @@ export default class RecordsManager {
                 );
             }
 
-            const data = await this.request(
-                `/v1/admin/${table}`,
-                {
-                    method: "DELETE",
-                    token
-                }
-            );
+            const data = await this.request(`/v1/admin/${table}`, {
+                method: "DELETE",
+                token
+            });
 
             const deleted = Number(data.deleted);
 
-            if (
-                !Number.isSafeInteger(deleted) ||
-                deleted < 0
-            ) {
-                throw new Error(
-                    "Quantidade de registros excluídos inválida."
-                );
+            if (!Number.isSafeInteger(deleted) || deleted < 0) {
+                throw new Error("Quantidade de registros excluídos inválida.");
             }
 
-            message = deleted === 0
-                ? "Não existiam registros para excluir."
-                : `Todos os ${deleted} registros foram excluídos.`;
-
+            message =
+                deleted === 0
+                    ? "Não existiam registros para excluir."
+                    : `Todos os ${deleted} registros foram excluídos.`;
         } catch (error) {
             errorMessage = error.message;
 
-            console.error(
-                `[RECORDS]: Falha na limpeza de ${table}.`,
-                error
-            );
+            console.error(`[RECORDS]: Falha na limpeza de ${table}.`, error);
             this.analytics?.trackError?.("records", error)?.catch?.(() => {});
         }
 
@@ -699,13 +618,14 @@ export default class RecordsManager {
     escapeHTML(value) {
         return String(value ?? "").replace(
             /[&<>"']/g,
-            character => ({
-                "&": "&amp;",
-                "<": "&lt;",
-                ">": "&gt;",
-                '"': "&quot;",
-                "'": "&#39;"
-            })[character]
+            character =>
+                ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                })[character]
         );
     }
 
@@ -737,11 +657,7 @@ export default class RecordsManager {
         }
 
         try {
-            return JSON.stringify(
-                JSON.parse(value),
-                null,
-                2
-            );
+            return JSON.stringify(JSON.parse(value), null, 2);
         } catch {
             return value;
         }
@@ -770,9 +686,7 @@ export default class RecordsManager {
                     <strong>Gerenciar registros</strong>
 
                     <span class="small text-muted">
-                        ${this.escapeHTML(
-                            this.tables[table].label
-                        )}
+                        ${this.escapeHTML(this.tables[table].label)}
                     </span>
 
                 </summary>
@@ -847,12 +761,16 @@ export default class RecordsManager {
 
                     </div>
 
-                    ${state.deleting ? `
+                    ${
+                        state.deleting
+                            ? `
                         <div class="small text-muted mt-3">
                             <span class="spinner-border spinner-border-sm mr-2"></span>
                             Excluindo registros. Aguarde...
                         </div>
-                    ` : ""}
+                    `
+                            : ""
+                    }
 
                 </div>
 
@@ -924,9 +842,7 @@ export default class RecordsManager {
                     </strong>
 
                     <small class="text-muted">
-                        ${this.escapeHTML(
-                            this.formatDate(record.created_at)
-                        )}
+                        ${this.escapeHTML(this.formatDate(record.created_at))}
                     </small>
 
                 </summary>
@@ -965,9 +881,7 @@ export default class RecordsManager {
     bindCollapsibleToggles(table, list) {
         const state = this.state[table];
 
-        const manager = list.querySelector(
-            "[data-records-manager]"
-        );
+        const manager = list.querySelector("[data-records-manager]");
 
         if (manager) {
             manager.addEventListener("toggle", () => {
@@ -975,9 +889,7 @@ export default class RecordsManager {
             });
         }
 
-        list.querySelectorAll(
-            "[data-records-record]"
-        ).forEach(details => {
+        list.querySelectorAll("[data-records-record]").forEach(details => {
             details.addEventListener("toggle", () => {
                 const id = details.dataset.recordId;
 
@@ -1000,9 +912,7 @@ export default class RecordsManager {
     render(table) {
         const state = this.state[table];
 
-        const list = this.root.querySelector(
-            `[data-records-list="${table}"]`
-        );
+        const list = this.root.querySelector(`[data-records-list="${table}"]`);
 
         const count = this.root.querySelector(
             `[data-records-count="${table}"]`
@@ -1017,9 +927,7 @@ export default class RecordsManager {
         const total = state.pagination?.total;
 
         count.textContent =
-            total === undefined
-                ? state.loading ? "..." : "—"
-                : String(total);
+            total === undefined ? (state.loading ? "..." : "—") : String(total);
 
         if (state.loading) {
             list.innerHTML = `
@@ -1076,12 +984,9 @@ export default class RecordsManager {
 
                 </div>
             `;
-
         } else {
             content += state.results
-                .map(record =>
-                    this.renderRecord(table, record)
-                )
+                .map(record => this.renderRecord(table, record))
                 .join("");
         }
 
@@ -1107,10 +1012,7 @@ export default class RecordsManager {
 
         const pagination = state.pagination;
 
-        if (
-            !pagination ||
-            pagination.totalPages <= 1
-        ) {
+        if (!pagination || pagination.totalPages <= 1) {
             container.innerHTML = "";
             return;
         }
