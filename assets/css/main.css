@@ -2998,3 +2998,8 @@ html[data-theme="dark"] .wysiwyg-editor .wysiwyg-select {
 html[data-theme="dark"] .markdown-body table {
     color: #dbe3ec;
 }
+html[data-theme="dark"] #admin-view-records [data-records-record] .card-body pre {
+    color: #dbe3ec;
+    background-color: #161b22;
+    border-color: #2d3748;
+}
