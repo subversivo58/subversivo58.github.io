@@ -1,9 +1,10 @@
 /**
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file BasePrefixes.mjs
+ * @description Detects the execution context (browser, frameable, Node) and exposes environment flags.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
-
 /**
  * Define execution context (web only)[not Node environment or others][not frameable]
  * -- Browser Context    - main browser (window and document access)

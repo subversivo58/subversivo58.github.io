@@ -1,9 +1,10 @@
-
-/*
-  @license The MIT License (MIT)
-  @copyright Copyright (c) 2010-2026 Lauro Moraes
-*/
-
+/**
+ * @file RecordsManager.mjs
+ * @description Client for CRUD operations on records served by the backend, authenticated with JWT.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
+ * @version 0.1.0 [development stage]
+ */
 export default class RecordsManager {
     constructor({
         endpoint,
@@ -63,6 +64,10 @@ export default class RecordsManager {
         this.initialized = false;
     }
 
+    /**
+     * Binds the tab, panel and action events of the records interface and renders the initial state.
+     * @return {RecordsManager} The instance, for chaining.
+     */
     initialize() {
         if (this.initialized) return this;
 
@@ -157,6 +162,11 @@ export default class RecordsManager {
         return this;
     }
 
+    /**
+     * Shows the panel of one table and marks its tab as active.
+     * @param {string} table - Table name. Ignored if it does not exist.
+     * @return {void}
+     */
     showTab(table) {
         if (!this.tables[table]) return;
 
@@ -184,6 +194,10 @@ export default class RecordsManager {
         });
     }
 
+    /**
+     * Loads the first page of every configured table.
+     * @return {Promise<void>}
+     */
     async loadAll() {
         await Promise.all(
             Object.keys(this.tables).map(table =>
@@ -192,6 +206,11 @@ export default class RecordsManager {
         );
     }
 
+    /**
+     * Returns a valid JWT for the records service.
+     * @return {string} The access token.
+     * @throws {Error} If the JWT manager is not available.
+     */
     getAccessToken() {
         if (!this.jwtManager) {
             throw new Error(
@@ -283,6 +302,13 @@ export default class RecordsManager {
         return data;
     }
 
+    /**
+     * Loads one page of records from a table and updates the interface.
+     * @param {string} table - Table name.
+     * @param {number} [page=1] - Page number.
+     * @return {Promise<void>}
+     * @description Without a valid token, the table shows a message asking the user to create or renew a credential.
+     */
     async load(table, page = 1) {
         if (!this.tables[table]) return;
 
@@ -369,6 +395,12 @@ export default class RecordsManager {
         this.render(table);
     }
 
+    /**
+     * Deletes one record after confirmation.
+     * @param {string} table - Table name.
+     * @param {number|string} id - Record identifier. Invalid values are ignored.
+     * @return {Promise<void>}
+     */
     async deleteRecord(table, id) {
         if (!this.tables[table]) return;
 
@@ -437,6 +469,12 @@ export default class RecordsManager {
         });
     }
 
+    /**
+     * Deletes the records of a table within a date range, after confirmation.
+     * @param {string} table - Table name.
+     * @return {Promise<void>}
+     * @description The dates must be in YYYY-MM-DD format, and the start date cannot be later than the end date.
+     */
     async deletePeriod(table) {
         if (!this.tables[table]) return;
 
@@ -458,6 +496,12 @@ export default class RecordsManager {
             return;
         }
 
+        /**
+         * Checks whether a string is a real calendar date in YYYY-MM-DD format.
+         * @private
+         * @param {string} value
+         * @return {boolean}
+         */
         const validDate = value => {
             if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
                 return false;
@@ -562,6 +606,12 @@ export default class RecordsManager {
         });
     }
 
+    /**
+     * Deletes all records of a table after a double confirmation.
+     * @param {string} table - Table name.
+     * @return {Promise<void>}
+     * @description The operation cannot be undone.
+     */
     async deleteAll(table) {
         if (!this.tables[table]) return;
 
@@ -635,6 +685,11 @@ export default class RecordsManager {
         });
     }
 
+    /**
+     * Escapes special HTML characters to prevent injection when rendering values.
+     * @param {*} value
+     * @return {string} The escaped value. null and undefined become an empty string.
+     */
     escapeHTML(value) {
         return String(value ?? "").replace(
             /[&<>"']/g,
@@ -648,6 +703,11 @@ export default class RecordsManager {
         );
     }
 
+    /**
+     * Formats a date for display in the local format.
+     * @param {string} value - Date value.
+     * @return {string} The formatted date, the original value when it is invalid, or "—" when empty.
+     */
     formatDate(value) {
         if (!value) return "—";
 
@@ -660,6 +720,11 @@ export default class RecordsManager {
         return date.toLocaleString();
     }
 
+    /**
+     * Formats a value as indented JSON, when possible.
+     * @param {*} value
+     * @return {string} Formatted JSON, or the original text when it is not valid JSON.
+     */
     formatContent(value) {
         if (typeof value !== "string") {
             return JSON.stringify(value, null, 2);
@@ -676,6 +741,11 @@ export default class RecordsManager {
         }
     }
 
+    /**
+     * Builds the HTML of the toolbar for managing records in a table.
+     * @param {string} table - Table name.
+     * @return {string} HTML markup.
+     */
     renderToolbar(table) {
         const state = this.state[table];
         const disabled = state.loading || state.deleting;
@@ -784,6 +854,12 @@ export default class RecordsManager {
         `;
     }
 
+    /**
+     * Builds the HTML of one record card, with fields that depend on the table.
+     * @param {string} table - Table name.
+     * @param {Object} record - Record data.
+     * @return {string} HTML markup. All values are escaped.
+     */
     renderRecord(table, record) {
         let description = "";
 
@@ -874,6 +950,12 @@ export default class RecordsManager {
         `;
     }
 
+    /**
+     * Keeps the open and closed state of the toolbar and of the records in sync with the state.
+     * @param {string} table - Table name.
+     * @param {HTMLElement} list - Container with the rendered records.
+     * @return {void}
+     */
     bindCollapsibleToggles(table, list) {
         const state = this.state[table];
 
@@ -904,6 +986,11 @@ export default class RecordsManager {
         });
     }
 
+    /**
+     * Renders the list, the toolbar and the pagination of a table from its state.
+     * @param {string} table - Table name.
+     * @return {void}
+     */
     render(table) {
         const state = this.state[table];
 
@@ -998,6 +1085,11 @@ export default class RecordsManager {
         this.renderPagination(table);
     }
 
+    /**
+     * Renders the pagination controls of a table.
+     * @param {string} table - Table name.
+     * @return {void}
+     */
     renderPagination(table) {
         const state = this.state[table];
 

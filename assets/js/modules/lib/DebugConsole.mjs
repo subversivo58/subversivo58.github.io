@@ -1,10 +1,10 @@
 /**
- * Debug Console - Mobile `window.console` debugger
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file DebugConsole.mjs
+ * @description On-screen console for debugging window.console on mobile, enabled by the DEBUG meta tag.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
-
 const DebugConsole = (() => {
     'use strict';
 
@@ -51,6 +51,12 @@ if (!isDebugEnabled && !isLocalhost) {
 
     const originalConsole = {};
 
+    /**
+     * Converts a value into an object that can be stored and displayed.
+     * @private
+     * @param {*} value
+     * @return {Object}
+     */
     const stringify = (value) => {
         if (value instanceof Error) {
             return {
@@ -86,6 +92,12 @@ if (!isDebugEnabled && !isLocalhost) {
         }
     };
 
+    /**
+     * Saves the log entries in sessionStorage.
+     * @private
+     * @return {void}
+     * @description Failures are ignored.
+     */
     const persist = () => {
         try {
             sessionStorage.setItem(
@@ -235,6 +247,11 @@ if (!isDebugEnabled && !isLocalhost) {
     // Interface state
     // --------------------------------------------------
 
+    /**
+     * Opens or closes the console panel.
+     * @private
+     * @param {boolean} open
+     */
     const setOpen = (open) => {
         panel.style.display = open ? 'flex' : 'none';
         fab.style.display = open ? 'none' : 'flex';
@@ -248,6 +265,11 @@ if (!isDebugEnabled && !isLocalhost) {
     // Rendering
     // --------------------------------------------------
 
+    /**
+     * Renders one log entry in the output.
+     * @private
+     * @param {Object} entry
+     */
     const renderEntry = (entry) => {
         const element = document.createElement('div');
 
@@ -274,6 +296,10 @@ if (!isDebugEnabled && !isLocalhost) {
         output.appendChild(element);
     };
 
+    /**
+     * Renders all the log entries again.
+     * @private
+     */
     const renderAll = () => {
         output.replaceChildren();
 
@@ -286,6 +312,13 @@ if (!isDebugEnabled && !isLocalhost) {
     // Recording
     // --------------------------------------------------
 
+    /**
+     * Adds a log entry, saves it and renders it.
+     * @private
+     * @param {string} level - Log level, such as log, warn or error.
+     * @param {IArguments|Array} args - Values logged.
+     * @param {string|null} [stack=null]
+     */
     const add = (level, args, stack = null) => {
         const entry = {
             level,
@@ -431,6 +464,10 @@ if (!isDebugEnabled && !isLocalhost) {
     // Initialization
     // --------------------------------------------------
 
+    /**
+     * Creates the console interface and adds it to the page when it is not there yet.
+     * @private
+     */
     const initialize = () => {
         if (!document.body.contains(host)) {
             document.body.appendChild(host);

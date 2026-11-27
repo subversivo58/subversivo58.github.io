@@ -1,14 +1,10 @@
 /**
+ * @file WysiwygEditor.mjs
+ * @description Native WYSIWYG editor with image storage in IndexedDB, resizing and lazy loading.
  * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage] - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
- *
- * @file WysiwygEditor.mjs
- * @description Editor WYSIWYG nativo construído do zero com suporte a imagens em IndexedDB,
- *              redimensionamento/alinhamento fora do contenteditable, <picture> + LazyLoad,
- *              rascunhos locais, reconhecimento de voz e publicação em HTML completo.
+ * @version 0.1.0 [development stage]
  */
-
 import PostManager from './PostManager.mjs'
 import AdminPosts from './AdminPosts.mjs'
 import ImageProcessor from '../lib/ImageProcessor.mjs'
@@ -46,6 +42,13 @@ const IMAGE_EXTENSIONS = {
 }
 
 class WysiwygEditor {
+    /**
+     * Creates the editor.
+     * @param {Object} [options={}]
+     * @param {Object} [options.permissions] - Permissions manager.
+     * @param {HTMLElement} [options.root] - Root element.
+     * @param {PostManager} [options.postManager] - Post manager used for slugs and drafts.
+     */
     constructor(options = {}) {
         this.options = options
         this.permissions = options.permissions || null
@@ -93,6 +96,11 @@ class WysiwygEditor {
         this.isMounted = false
     }
 
+    /**
+     * Mounts the editor on the root element and binds its events.
+     * @param {HTMLElement} [root=this.root]
+     * @return {boolean} false when no root element is given.
+     */
     mount(root = this.root) {
         if (!root) {
             console.error('[WysiwygEditor]: Elemento raiz não informado.')
@@ -161,7 +169,6 @@ class WysiwygEditor {
         try {
             document.execCommand('defaultParagraphSeparator', false, 'p')
         } catch {
-            // Navegador ignora se não suportado.
         }
 
         this.updateSurfacePlaceholder()
@@ -184,6 +191,9 @@ class WysiwygEditor {
         return true
     }
 
+    /**
+     * Shows the placeholder text when the content area is empty.
+     */
     updateSurfacePlaceholder() {
         const surface = this.elements.content
         if (!surface) return
@@ -193,12 +203,20 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Enables the microphone button only when microphone permission is granted.
+     * @return {Promise<void>}
+     */
     async updateMicrophoneButton() {
         if (!this.elements.microphone || !this.permissions) return
         await this.permissions.ready
         this.elements.microphone.disabled = this.permissions.status.microphone !== 'granted'
     }
 
+    /**
+     * Creates the speech recognition object when the browser supports it.
+     * @return {boolean} false when speech recognition is unavailable.
+     */
     initializeSpeechRecognition() {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
         if (!SpeechRecognition) {
@@ -239,6 +257,10 @@ class WysiwygEditor {
         return true
     }
 
+    /**
+     * Updates the microphone button for the active or inactive state.
+     * @param {boolean} active
+     */
     setSpeechRecognitionActive(active) {
         this.isRecognizing = active
         const mic = this.elements.microphone
@@ -248,6 +270,9 @@ class WysiwygEditor {
         mic.classList.toggle('pulse-red', active)
     }
 
+    /**
+     * Starts or stops speech recognition. Shows a status message when it is unavailable.
+     */
     toggleSpeechRecognition() {
         if (!this.recognition) {
             this.setStatus('speech_unavailable')
@@ -271,6 +296,10 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Binds the events of the title, toolbar, content area, sidebar and controls.
+     * @private
+     */
     bindEvents() {
         const el = this.elements
 
@@ -352,7 +381,6 @@ class WysiwygEditor {
             if (this.previewVisible) this.updatePreview()
         })
 
-        // Evita perda de seleção ao clicar nos botões da toolbar
         el.toolbar.addEventListener('mousedown', event => {
             const target = event.target.closest('button, label.wysiwyg-color-btn')
             if (
@@ -433,7 +461,6 @@ class WysiwygEditor {
             el.content.focus()
         })
 
-        // Image overlay controls (fora do contenteditable)
         el.imageOverlay?.addEventListener('click', event => {
             const widthBtn = event.target.closest('[data-img-width]')
             if (widthBtn && this.selectedImage) {
@@ -476,6 +503,9 @@ class WysiwygEditor {
         el.generate.addEventListener('click', () => this.generatePost())
     }
 
+    /**
+     * Shows the post path (/posts/<slug>.html) computed from the slug field.
+     */
     updateSlugPreview() {
         const slug = this.postManager.slugify(this.elements.slug?.value || '')
         if (this.elements.slugPreview) {
@@ -483,6 +513,9 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Saves the current selection when it is inside the content area, so it can be restored after focus changes.
+     */
     saveSelection() {
         const selection = window.getSelection()
         if (!selection || !selection.rangeCount) return
@@ -492,6 +525,10 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Restores the selection saved by saveSelection.
+     * @return {boolean} false when there is nothing to restore.
+     */
     restoreSelection() {
         if (!this.savedRange) return false
         const selection = window.getSelection()
@@ -501,6 +538,11 @@ class WysiwygEditor {
         return true
     }
 
+    /**
+     * Applies a document command to the content area.
+     * @param {string} command - Command name for execCommand.
+     * @param {string|null} [value=null] - Command value.
+     */
     applyCommand(command, value = null) {
         if (this.sourceMode) return
         this.elements.content.focus()
@@ -508,7 +550,6 @@ class WysiwygEditor {
         try {
             document.execCommand(command, false, value)
         } catch {
-            // Ignora comando não suportado
         }
         this.saveSelection()
         this.markAsChanged()
@@ -517,6 +558,10 @@ class WysiwygEditor {
         this.refreshToolbarState()
     }
 
+    /**
+     * Applies a block tag (for example h2, p or blockquote) to the current selection.
+     * @param {string} tag
+     */
     applyBlockTag(tag) {
         if (this.sourceMode) return
         this.elements.content.focus()
@@ -540,6 +585,10 @@ class WysiwygEditor {
         this.refreshToolbarState()
     }
 
+    /**
+     * Runs the toolbar action with the given name.
+     * @param {string} action - Action name, such as undo, redo or bold.
+     */
     applyToolbarAction(action) {
         if (this.sourceMode) return
 
@@ -606,6 +655,9 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Wraps the selection in an inline code element, or removes it when it is already applied.
+     */
     toggleInlineCode() {
         this.elements.content.focus()
         this.restoreSelection()
@@ -645,6 +697,9 @@ class WysiwygEditor {
         if (this.previewVisible) this.updatePreview()
     }
 
+    /**
+     * Inserts a code block with the selected text, or a placeholder when nothing is selected.
+     */
     insertCodeBlock() {
         this.elements.content.focus()
         this.restoreSelection()
@@ -678,6 +733,10 @@ class WysiwygEditor {
         if (this.previewVisible) this.updatePreview()
     }
 
+    /**
+     * Applies a font size from the allowed list (12px to 32px).
+     * @param {string} size
+     */
     applyFontSize(size) {
         const allowed = ['12px', '14px', '16px', '18px', '20px', '24px', '28px', '32px']
         if (!allowed.includes(size) || this.sourceMode) return
@@ -712,6 +771,9 @@ class WysiwygEditor {
         if (this.previewVisible) this.updatePreview()
     }
 
+    /**
+     * Opens the link bar, pre-filled from the link under the selection.
+     */
     openLinkBar() {
         this.saveSelection()
         const selection = window.getSelection()
@@ -728,6 +790,10 @@ class WysiwygEditor {
         this.elements.linkUrl.focus()
     }
 
+    /**
+     * Creates or updates a link from the values in the link bar.
+     * @description The URL is validated before the link is applied.
+     */
     applyLinkFromBar() {
         const rawUrl = (this.elements.linkUrl.value || '').trim()
         const label = (this.elements.linkText.value || '').trim()
@@ -784,6 +850,9 @@ class WysiwygEditor {
         if (this.previewVisible) this.updatePreview()
     }
 
+    /**
+     * Removes the link at the selection.
+     */
     removeLinkAtSelection() {
         this.elements.content.focus()
         this.restoreSelection()
@@ -801,6 +870,10 @@ class WysiwygEditor {
         this.elements.linkBar.hidden = true
     }
 
+    /**
+     * Inserts a table with the rows and columns from the table bar.
+     * @description The table is limited to 20 rows and 10 columns.
+     */
     insertTableFromBar() {
         const rows = Math.min(20, Math.max(1, Number(this.elements.tableRows.value) || 3))
         const cols = Math.min(10, Math.max(1, Number(this.elements.tableCols.value) || 3))
@@ -855,6 +928,10 @@ class WysiwygEditor {
         if (this.previewVisible) this.updatePreview()
     }
 
+    /**
+     * Handles keyboard shortcuts and the Enter and Tab behavior in the content area.
+     * @param {KeyboardEvent} event
+     */
     handleKeyDown(event) {
         if ((event.ctrlKey || event.metaKey) && !event.shiftKey) {
             const key = event.key.toLowerCase()
@@ -933,11 +1010,16 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Handles paste events.
+     * @description Inside a pre block, pastes plain text and keeps line breaks. Elsewhere, pastes sanitized HTML.
+     * @param {ClipboardEvent} event
+     * @return {Promise<void>}
+     */
     async handlePaste(event) {
         const clipboard = event.clipboardData
         if (!clipboard) return
 
-        // 0. Dentro de <pre>: cola sempre texto puro preservando quebras de linha (\n)
         const selection = window.getSelection()
         const insidePre = selection?.anchorNode
             ? (selection.anchorNode.nodeType === 1 ? selection.anchorNode : selection.anchorNode.parentElement)?.closest('pre')
@@ -956,7 +1038,6 @@ class WysiwygEditor {
             }
         }
 
-        // 1. Arquivos de imagem colados diretamente
         const imageFiles = Array.from(clipboard.files || []).filter(
             file => file.type && file.type.startsWith('image/')
         )
@@ -981,11 +1062,22 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Removes unsafe or unsupported nodes from pasted HTML.
+     * @param {string} rawHtml
+     * @return {DocumentFragment} The sanitized content.
+     */
     sanitizePastedHTML(rawHtml) {
         const parser = new DOMParser()
         const doc = parser.parseFromString(String(rawHtml || ''), 'text/html')
         const fragment = document.createDocumentFragment()
 
+        /**
+         * Copies the allowed nodes from the parsed document to the target node.
+         * @private
+         * @param {Node} node - Source node.
+         * @param {Node} targetParent - Destination node.
+         */
         const walk = (node, targetParent) => {
             for (const child of Array.from(node.childNodes)) {
                 if (child.nodeType === Node.TEXT_NODE) {
@@ -1057,6 +1149,10 @@ class WysiwygEditor {
         return holder.innerHTML
     }
 
+    /**
+     * Updates the toolbar buttons to reflect the formats at the caret.
+     * @description Does nothing in source mode.
+     */
     refreshToolbarState() {
         if (this.sourceMode) return
         const commands = {
@@ -1092,8 +1188,11 @@ class WysiwygEditor {
         }
     }
 
-    // ---------- Seleção e controle de imagem fora do contenteditable ----------
 
+    /**
+     * Selects an image so it can be resized, aligned or captioned.
+     * @param {HTMLImageElement} img
+     */
     selectImage(img) {
         this.clearImageSelection()
         this.selectedImage = img
@@ -1114,6 +1213,9 @@ class WysiwygEditor {
         overlay.hidden = false
     }
 
+    /**
+     * Removes the selection from the current image.
+     */
     clearImageSelection() {
         if (this.selectedImage) {
             this.selectedImage.classList.remove('wysiwyg-img-selected')
@@ -1124,6 +1226,11 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Reads the width of an image in percent, from data-width-percent or from its style.
+     * @param {HTMLImageElement} img
+     * @return {number}
+     */
     readImageWidthPercent(img) {
         const attr = Number(img.dataset.widthPercent)
         if (Number.isFinite(attr) && attr > 0) return attr
@@ -1133,6 +1240,11 @@ class WysiwygEditor {
         return 100
     }
 
+    /**
+     * Sets the width of the selected image.
+     * @param {number} percent
+     * @description The value is limited to the range 15 to 100.
+     */
     setImageWidth(percent) {
         if (!this.selectedImage) return
         const clamped = Math.min(100, Math.max(15, Math.round(percent)))
@@ -1145,6 +1257,10 @@ class WysiwygEditor {
         if (this.previewVisible) this.updatePreview()
     }
 
+    /**
+     * Aligns the selected image.
+     * @param {string} align - left, center or right.
+     */
     setImageAlignment(align) {
         if (!this.selectedImage) return
         const wrapper = this.selectedImage.closest('figure') ||
@@ -1166,6 +1282,11 @@ class WysiwygEditor {
         if (this.previewVisible) this.updatePreview()
     }
 
+    /**
+     * Sets, updates or removes the caption of an image.
+     * @param {HTMLImageElement} img
+     * @param {string} text - Caption text. Empty text removes the caption.
+     */
     setImageCaption(img, text) {
         const clean = String(text || '').trim()
         let figure = img.closest('figure')
@@ -1199,6 +1320,9 @@ class WysiwygEditor {
         if (this.previewVisible) this.updatePreview()
     }
 
+    /**
+     * Removes the selected image together with its figure or picture wrapper.
+     */
     deleteSelectedImage() {
         if (!this.selectedImage) return
         const figure = this.selectedImage.closest('figure')
@@ -1212,8 +1336,11 @@ class WysiwygEditor {
         this.cleanupImages()
     }
 
-    // ---------- Fonte HTML / Pré-visualização ----------
 
+    /**
+     * Switches between the visual editor and HTML source mode.
+     * @param {boolean} [enable] - Desired mode. Defaults to the opposite of the current mode.
+     */
     toggleSourceMode(enable = !this.sourceMode) {
         const nextMode = Boolean(enable)
         if (nextMode === this.sourceMode) return
@@ -1243,6 +1370,10 @@ class WysiwygEditor {
         if (this.previewVisible) this.updatePreview()
     }
 
+    /**
+     * Shows or hides the preview panel.
+     * @param {boolean} [visible] - Desired state. Defaults to the opposite of the current state.
+     */
     togglePreview(visible = !this.previewVisible) {
         this.previewVisible = Boolean(visible)
         this.elements.previewPanel.hidden = !this.previewVisible
@@ -1256,6 +1387,10 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Returns the post HTML from the source field in source mode, or from the content area otherwise.
+     * @return {string}
+     */
     getCleanEditorHTML() {
         if (this.sourceMode) {
             return this.elements.htmlSource.value
@@ -1272,6 +1407,11 @@ class WysiwygEditor {
         return clone.innerHTML
     }
 
+    /**
+     * Measures the caret position inside a code block as character offsets.
+     * @param {HTMLElement} codeEl - Code element.
+     * @return {{start: number, end: number}|null} null when the caret is outside the code element.
+     */
     measureCaretInCode(codeEl) {
         const selection = window.getSelection()
         if (!selection || !selection.rangeCount) return null
@@ -1280,9 +1420,21 @@ class WysiwygEditor {
             return null
         }
 
+        /**
+         * Returns the character offset of a DOM position inside the code element.
+         * @private
+         * @param {Node} targetNode
+         * @param {number} targetOffset
+         * @return {number}
+         */
         const offsetAt = (targetNode, targetOffset) => {
             let count = 0
             let done = false
+            /**
+             * Walks the text nodes and counts characters until the target node is reached.
+             * @private
+             * @param {Node} node
+             */
             const walk = node => {
                 if (done) return
                 if (node === targetNode) {
@@ -1324,11 +1476,22 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Restores the caret in a code block from offsets created by measureCaretInCode.
+     * @param {HTMLElement} codeEl - Code element.
+     * @param {{start: number, end: number}|null} offsets
+     */
     restoreCaretInCode(codeEl, offsets) {
         if (!offsets) return
         const selection = window.getSelection()
         if (!selection) return
 
+        /**
+         * Finds the text node and offset for a character index inside the code element.
+         * @private
+         * @param {number} charIndex
+         * @return {{node: Node, offset: number}|null}
+         */
         const locate = charIndex => {
             let remaining = Math.max(0, charIndex)
             let lastText = null
@@ -1357,6 +1520,11 @@ class WysiwygEditor {
         selection.addRange(range)
     }
 
+    /**
+     * Applies syntax highlighting to the code blocks in the editor.
+     * @param {Object} [options={}]
+     * @param {boolean} [options.preserveCaret=true] - Keeps the caret position in the active code block.
+     */
     highlightEditorCodeBlocks({ preserveCaret = true } = {}) {
         if (!this.elements.content || this.sourceMode) return
 
@@ -1382,6 +1550,10 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Schedules a highlighting pass after a short delay.
+     * @description Pending passes are cancelled, so only the latest one runs.
+     */
     scheduleCodeHighlight() {
         if (this.highlightTimer) {
             clearTimeout(this.highlightTimer)
@@ -1395,6 +1567,10 @@ class WysiwygEditor {
         }, 140)
     }
 
+    /**
+     * Loads HTML into the content area and highlights its code blocks.
+     * @param {string} html
+     */
     setEditorHTML(html) {
         const normalized = this.unwrapPicturesForEditor(String(html || ''))
         this.elements.content.innerHTML = normalized
@@ -1419,6 +1595,11 @@ class WysiwygEditor {
         if (this.previewVisible) this.updatePreview()
     }
 
+    /**
+     * Converts picture elements into img elements so they can be edited.
+     * @param {string} html
+     * @return {string}
+     */
     unwrapPicturesForEditor(html) {
         const parser = new DOMParser()
         const doc = parser.parseFromString(html, 'text/html')
@@ -1448,6 +1629,9 @@ class WysiwygEditor {
         return doc.body.innerHTML
     }
 
+    /**
+     * Updates the preview panel with the current content.
+     */
     updatePreview() {
         if (!this.elements.content) return
         const html = this.getCleanEditorHTML()
@@ -1461,6 +1645,10 @@ class WysiwygEditor {
         this.updateDerivedMetadata()
     }
 
+    /**
+     * Builds a summary of up to 160 characters from the text, cut at a word boundary.
+     * @return {string}
+     */
     buildAutomaticSummary() {
         const text = this.extractPlainText()
         if (!text) return ''
@@ -1471,6 +1659,10 @@ class WysiwygEditor {
         return (lastSpace > 0 ? excerpt.slice(0, lastSpace) : excerpt.slice(0, limit)).trim()
     }
 
+    /**
+     * Returns the plain text of the post, from the source field or the content area.
+     * @return {string}
+     */
     extractPlainText() {
         const source = this.sourceMode
             ? (() => {
@@ -1483,6 +1675,10 @@ class WysiwygEditor {
         return source.replace(/\s+/g, ' ').trim()
     }
 
+    /**
+     * Updates the word count and the reading time.
+     * @description Reading time assumes 250 words per minute, with a minimum of 1 minute.
+     */
     updateDerivedMetadata() {
         const text = this.extractPlainText()
         const words = text ? text.split(/\s+/).length : 0
@@ -1502,11 +1698,17 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Marks the post as having unsaved changes.
+     */
     markAsChanged() {
         this.hasChanges = true
         this.setStatus('pending_changes')
     }
 
+    /**
+     * Starts the timer that saves the draft automatically when there are changes.
+     */
     startAutoSaveTimer() {
         if (this.autoSaveTimer) clearInterval(this.autoSaveTimer)
         this.autoSaveTimer = setInterval(() => {
@@ -1514,6 +1716,10 @@ class WysiwygEditor {
         }, this.autoSaveInterval)
     }
 
+    /**
+     * Returns the current post data.
+     * @return {Object} Title, slug, summary, content and metadata.
+     */
     getEditorData() {
         return {
             title: this.elements.title.value.trim(),
@@ -1528,8 +1734,13 @@ class WysiwygEditor {
         }
     }
 
-    // ---------- Imagens locais em IndexedDB ----------
 
+    /**
+     * Inserts image files into the editor.
+     * @description Images are processed, hashed and stored in the drafts store. Only files with an image MIME type are used.
+     * @param {FileList|File[]} files
+     * @return {Promise<void>}
+     */
     async insertImages(files) {
         const list = Array.from(files || []).filter(
             file => file.type && file.type.startsWith('image/')
@@ -1644,6 +1855,12 @@ class WysiwygEditor {
             if (this.previewVisible) this.updatePreview()
 
             if (processedSize < originalSize) {
+                /**
+                 * Formats a size in bytes as KB or MB.
+                 * @private
+                 * @param {number} size
+                 * @return {string}
+                 */
                 const formatSize = size => size >= 1048576
                     ? (size / 1048576).toFixed(2) + ' MB'
                     : (size / 1024).toFixed(1) + ' KB'
@@ -1659,6 +1876,11 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Reads the width and height of an image.
+     * @param {Blob} blob
+     * @return {Promise<{width: number, height: number}>} 0 by 0 when createImageBitmap is unavailable.
+     */
     async readImageDimensions(blob) {
         if (typeof createImageBitmap !== 'function') return { width: 0, height: 0 }
         try {
@@ -1671,6 +1893,11 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Computes the SHA-256 hash of a file, used as the image key.
+     * @param {File|Blob} file
+     * @return {Promise<string>}
+     */
     async hashFile(file) {
         const buffer = await file.arrayBuffer()
         if (globalThis.crypto && crypto.subtle) {
@@ -1680,7 +1907,6 @@ class WysiwygEditor {
                     .map(byte => byte.toString(16).padStart(2, '0'))
                     .join('')
             } catch {
-                // Usa fallback abaixo
             }
         }
 
@@ -1696,6 +1922,11 @@ class WysiwygEditor {
         return 'f' + (h2 >>> 0).toString(16).padStart(8, '0') + (h1 >>> 0).toString(16).padStart(8, '0') + '-' + bytes.length
     }
 
+    /**
+     * Loads the images for the given hashes from the database and creates object URLs.
+     * @param {string[]} hashes
+     * @return {Promise<void>}
+     */
     async loadMedia(hashes) {
         if (!this.db) return
         let changed = false
@@ -1726,6 +1957,9 @@ class WysiwygEditor {
         if (changed && this.previewVisible) this.updatePreview()
     }
 
+    /**
+     * Revokes the object URLs and clears the media caches.
+     */
     releaseMedia() {
         this.mediaURLs.forEach(url => URL.revokeObjectURL(url))
         this.mediaURLs.clear()
@@ -1734,8 +1968,10 @@ class WysiwygEditor {
     }
 
     /**
-     * Prepara todas as imagens locais para envio ao GitHub e serializa o HTML
-     * final com <picture><img src="/assets/media/image/1x1.gif" data-src="/..." data-lazy-target></picture>.
+     * Prepares all local images to be sent to GitHub and serializes the final HTML.
+     * @description Each image is wrapped in a picture element with a 1x1 placeholder and a data-src attribute, so it is loaded lazily.
+     * @param {string} rawHtml - HTML of the post.
+     * @return {Promise<string>}
      */
     async prepareImages(rawHtml) {
         const parser = new DOMParser()
@@ -1824,6 +2060,11 @@ class WysiwygEditor {
 
     // ---------- Rascunhos & Autosave ----------
 
+    /**
+     * Builds the draft key from the title.
+     * @param {string} title
+     * @return {string} The title, normalized and with collapsed spaces, prefixed by the draft prefix.
+     */
     getDraftKey(title) {
         return DRAFT_PREFIX + String(title || '')
             .normalize('NFC')
@@ -1832,6 +2073,10 @@ class WysiwygEditor {
             .toLowerCase()
     }
 
+    /**
+     * Builds the record stored as a draft from the current editor data.
+     * @return {Object}
+     */
     buildDraftRecord() {
         const data = this.getEditorData()
         return {
@@ -1845,12 +2090,22 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Runs a storage task after the previous ones, so storage operations do not overlap.
+     * @private
+     * @param {Function} task - Function that returns a promise.
+     * @return {Promise<*>} The result of the task.
+     */
     _enqueue(task) {
         const run = this._queue.then(task)
         this._queue = run.catch(() => {})
         return run
     }
 
+    /**
+     * Initializes the drafts storage and loads the draft list.
+     * @return {Promise<boolean>} false when the database is unavailable.
+     */
     async initStorage() {
         if (!this.db) {
             this.setStatus('drafts_db_unavailable')
@@ -1863,6 +2118,10 @@ class WysiwygEditor {
         return true
     }
 
+    /**
+     * Saves the draft when the page is hidden or closed.
+     * @private
+     */
     bindLifecycle() {
         this._onHide = () => {
             if (document.visibilityState === 'hidden') this.autoSave()
@@ -1874,11 +2133,19 @@ class WysiwygEditor {
         window.addEventListener('pagehide', this._onPageHide)
     }
 
+    /**
+     * Removes the listeners added by bindLifecycle.
+     * @private
+     */
     unbindLifecycle() {
         document.removeEventListener('visibilitychange', this._onHide)
         window.removeEventListener('pagehide', this._onPageHide)
     }
 
+    /**
+     * Saves the current content as the automatic draft when there are unsaved changes.
+     * @return {Promise<boolean>} false when there is nothing to save.
+     */
     async autoSave() {
         if (!this.hasChanges || !this.db) return false
 
@@ -1909,6 +2176,12 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Returns a translated message from the editor message bank.
+     * @param {string} id - Message identifier.
+     * @param {...*} args - Values for the message placeholders.
+     * @return {string} The identifier when the message is missing.
+     */
     message(id, ...args) {
         let bank = this.root ? this.root.querySelector(`[data-msg="${id}"]`) : null
         if (bank && !bank.textContent.trim()) {
@@ -1929,6 +2202,11 @@ class WysiwygEditor {
         return text
     }
 
+    /**
+     * Shows a status message in the editor and reports it through onStatus.
+     * @param {string} id - Message identifier.
+     * @param {...*} args - Values for the message placeholders.
+     */
     setStatus(id, ...args) {
         const text = this.message(id, ...args)
         if (this.elements.status) {
@@ -1937,6 +2215,10 @@ class WysiwygEditor {
         this.onStatus(text)
     }
 
+    /**
+     * Saves the current content as a named draft.
+     * @return {Promise<boolean>} false when there is nothing to save or the operation fails.
+     */
     async saveDraft() {
         const data = this.getEditorData()
 
@@ -1987,6 +2269,10 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Restores the automatic draft when the editor has no unsaved changes.
+     * @return {Promise<boolean>} true when a draft was restored.
+     */
     async restoreAutoSave() {
         if (!this.db) return false
         try {
@@ -2005,6 +2291,10 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Loads the saved drafts into the draft selector, sorted by the most recent update.
+     * @param {string} [selected=''] - Draft key to select after loading.
+     */
     async loadDraftList(selected = '') {
         const select = this.elements.draftList
         if (!select || !this.db) return
@@ -2028,6 +2318,10 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Loads the draft selected in the draft list into the editor.
+     * @return {Promise<boolean>}
+     */
     async loadSelectedDraft() {
         const key = this.elements.draftList.value
         if (!key) {
@@ -2052,6 +2346,10 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Deletes the draft selected in the draft list.
+     * @return {Promise<boolean>}
+     */
     async deleteSelectedDraft() {
         const key = this.elements.draftList?.value
         if (!key || !this.db) {
@@ -2071,6 +2369,10 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Fills the editor with the data of a draft.
+     * @param {Object} draft - Draft data.
+     */
     restoreDraftData(draft) {
         if (this.sourceMode) this.toggleSourceMode(false)
         this.clearImageSelection()
@@ -2091,6 +2393,11 @@ class WysiwygEditor {
         this.setEditorHTML(draft.content || '')
     }
 
+    /**
+     * Extracts the image hashes referenced in an HTML string.
+     * @param {string} html
+     * @return {Set<string>}
+     */
     extractHashesFromHTML(html) {
         const hashes = new Set()
         const pattern = /data-media-hash="([A-Za-z0-9_-]+)"/g
@@ -2101,6 +2408,10 @@ class WysiwygEditor {
         return hashes
     }
 
+    /**
+     * Deletes the stored images that are no longer used by any draft or by the current content.
+     * @return {Promise<number>} Number of images removed, or 0 when nothing could be cleaned.
+     */
     async cleanupImages() {
         if (!this.db || this._pendingInserts > 0) return 0
         try {
@@ -2113,6 +2424,11 @@ class WysiwygEditor {
                 ])
 
                 const used = new Set()
+                /**
+                 * Adds the image hashes of an HTML string to the set of used hashes.
+                 * @private
+                 * @param {string} html
+                 */
                 const collect = html => {
                     this.extractHashesFromHTML(html).forEach(h => used.add(h))
                 }
@@ -2141,6 +2457,9 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Clears the editor fields, the content and the image selection.
+     */
     resetEditor() {
         if (this.sourceMode) this.toggleSourceMode(false)
         this.clearImageSelection()
@@ -2183,6 +2502,10 @@ class WysiwygEditor {
         this.setStatus('editor_ready_new')
     }
 
+    /**
+     * Resets the editor and removes the automatic draft after a post is published.
+     * @return {Promise<void>}
+     */
     async confirmPublication() {
         this.resetEditor()
 
@@ -2198,6 +2521,11 @@ class WysiwygEditor {
         return true
     }
 
+    /**
+     * Generates the post file from the current content and publishes it.
+     * @return {Promise<boolean>} false when a generation is already in progress or it fails.
+     * @description The generate button is disabled while the operation runs.
+     */
     async generatePost() {
         if (this.isGenerating) return false
         this.isGenerating = true
@@ -2294,6 +2622,9 @@ class WysiwygEditor {
         }
     }
 
+    /**
+     * Stops the timers and releases the resources of the editor.
+     */
     destroy() {
         if (this.highlightTimer) {
             clearTimeout(this.highlightTimer)

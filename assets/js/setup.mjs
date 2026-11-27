@@ -1,15 +1,14 @@
 /**
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file setup.mjs
+ * @description Application entry point: loads settings, opens the database, loads modules and initializes the page.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
 "use strict";
 
-// Console de depuração (liga sozinho quando <meta name="DEBUG" content="true">).
-// Fica como primeiro import para registrar os erros dos módulos seguintes.
 import "./modules/lib/DebugConsole.mjs";
 
-// Carrega as configurações sempre com dados atualizados do servidor.
 const settingsResponse = await fetch(
     new URL("../../config/settings.json", import.meta.url),
     {
@@ -111,7 +110,6 @@ import {
     IlibJS
 } from "./modules/lib/Exporter.mjs";
 
-// Cookies desativados: este site não funciona nesse modo, mostra a página explicativa
 if (!navigator.cookieEnabled && PathName(true) !== "nocookie") {
     location.replace("/nocookie.html");
 }
@@ -120,8 +118,17 @@ const LocalStorage = AWStorage();
 
 const THEME_STORAGE_KEY = "theme";
 
+/**
+ * Normalizes a theme name to "light" or "dark". Any other value becomes "light".
+ * @param {*} value
+ * @return {"light"|"dark"}
+ */
 const normalizeTheme = value => (value === "dark" ? "dark" : "light");
 
+/**
+ * Reads the theme saved in local storage.
+ * @return {"light"|"dark"} "light" when nothing is saved or storage is unavailable.
+ */
 const getSavedTheme = () => {
     try {
         return normalizeTheme(LocalStorage.get(THEME_STORAGE_KEY));
@@ -130,6 +137,10 @@ const getSavedTheme = () => {
     }
 };
 
+/**
+ * Updates the theme buttons of the drawer (pressed state and visibility).
+ * @param {string} theme
+ */
 const syncDrawerThemeButtons = theme => {
     const normalized = normalizeTheme(theme);
     const darkBtn = dc.getElementById("drawer-theme-dark");
@@ -146,6 +157,12 @@ const syncDrawerThemeButtons = theme => {
     }
 };
 
+/**
+ * Applies a theme to the document: the data-theme attribute, the theme-dark class, color-scheme and the theme-color meta tag.
+ * @param {string} theme
+ * @param {Object} [options={}]
+ * @param {boolean} [options.persist=false] - Saves the choice in local storage.
+ */
 const applyTheme = (theme, { persist = false } = {}) => {
     const normalized = normalizeTheme(theme);
 
@@ -186,7 +203,6 @@ import PolicyHandler from "./modules/models/PolicyHandler.mjs";
 
 import Templates from "./modules/models/Templates.mjs";
 
-// Postagens recentes (carrossel da home e resumo no rodapé)
 import {
     renderFooterNews,
     renderIndexCarousel
@@ -199,8 +215,6 @@ import { DrawerEvents, SlideMenus } from "./modules/models/UIHandler.mjs";
 // logging
 const SetupLog = new indexedDBLogs("[SETUP]: ");
 
-// Envio de bug e feedback sem sair da página.
-// O formulário é enviado por fetch: o Service Worker grava e responde 200.
 const FORM_STATUS = {
     "bugs-report-form": {
         ok: "drawer.bug_report.sent",
@@ -216,14 +230,20 @@ const FORM_STATUS = {
     }
 };
 
-// Avaliação por estrelas do feedback (1 a 5, ou nenhuma).
-// Sem escolha, o campo "rating" fica desabilitado e não é enviado.
+/**
+ * Paints the feedback stars up to the given value.
+ * @param {number} value
+ */
 const paintRating = value => {
     dc.querySelectorAll("#drawer-feedback-block .star-rating").forEach(star => {
         star.textContent = Number(star.dataset.starValue) <= value ? "★" : "☆";
     });
 };
 
+/**
+ * Sets the value of the feedback rating field. A falsy value clears it.
+ * @param {number|null} value
+ */
 const setRating = value => {
     const input = dc.getElementById("feedback-rating");
     if (!input) return;
@@ -267,6 +287,11 @@ dc.addEventListener("submit", async event => {
 
     const status = document.getElementById(`${form.id}-status`);
 
+    /**
+     * Shows a translated status message with a CSS class.
+     * @param {string} key - i18n key of the message.
+     * @param {string} cls - CSS class to apply.
+     */
     const showStatus = (key, cls) => {
         if (!status) return;
         status.className = `small mt-2 mb-0 i18n ${cls}`;
@@ -276,7 +301,6 @@ dc.addEventListener("submit", async event => {
         i18n.transcript();
     };
 
-    // Validação específica dos formulários de feedback e erros.
     if (
         form.id === "feedback-form" ||
         form.id === "bugs-report-form"
@@ -493,6 +517,11 @@ if ("serviceWorker" in navigator) {
     });
 }
 
+/**
+ * Runs the setup once the DOM is parsed.
+ * @description Handles the one-time site data cleanup, triggered by the "?clear-site-data=1" query parameter, and then initializes the page.
+ * @param {Event} evt - DOMContentLoaded event.
+ */
 const SetupDOMReady = async evt => {
     // After HTMLDocument is charged and parsed [don't wait charge stylesheet's, images and subframe's]
     //_.DOM.event(dc, 'DOMContentLoaded', async evt => {
@@ -521,7 +550,6 @@ const SetupDOMReady = async evt => {
     // this route
     const router = PathName(true);
 
-    // Destaca blocos de código imediatamente sem depender de i18n, templates ou API do GitHub.
     const postCodeEnhancementsPromise =
         router === "post"
             ? (async () => {
@@ -603,6 +631,10 @@ const SetupDOMReady = async evt => {
     const lazyLoad = new LazyLoad("undefined");
     // @revise - move this to PolicyInspector.mjs class constructor
     // @priority: MODERATE
+    /**
+     * Checks the data storage policy cookie and shows the notification when it is missing.
+     * @description The notification is shown only when the __DSPolicy__ cookie is not set.
+     */
     const DataStoragePolicy = () => {
         AWCookies.get("__DSPolicy__").catch(() => {
             // @revise defaulted "english" message
@@ -667,11 +699,7 @@ const SetupDOMReady = async evt => {
         );
     });
 
-    // Troca de idioma (pop-up do drawer)
-    // O idioma escolhido é um cookie funcional ("i18n"), lido pelo PolicyHandler.language.
-    // Depois de salvar, a página é recarregada para aplicar a tradução.
     dc.addEventListener("click", async evt => {
-        // Ao abrir o pop-up, destaca o idioma atual
         if (evt.target.closest("#drawer-language-selector")) {
             const current = PolicyHandler.language;
             dc.querySelectorAll(".change-language").forEach(item => {
@@ -698,7 +726,6 @@ const SetupDOMReady = async evt => {
         }
     });
 
-    // Alternância de tema claro/escuro pelo botão do Drawer
     dc.addEventListener("click", evt => {
         const trigger = evt.target.closest(
             "#drawer-theme-dark, #drawer-theme-light"
@@ -729,7 +756,6 @@ const SetupDOMReady = async evt => {
             }
 
             await TemplatesReady.import;
-            // Exibe o atalho administrativo quando existe uma autenticação OAuth.
             const adminShortcut = dc.getElementById("drawer-admin");
             let adminAuth = false;
 
@@ -766,7 +792,11 @@ const SetupDOMReady = async evt => {
                 );
             }
 
-            // Utilitários compartilhados entre postagens e blog
+            /**
+             * Escapes the characters &, <, > and " for safe HTML insertion.
+             * @param {*} text
+             * @return {string}
+             */
             const escHTML = text =>
                 String(text ?? "").replace(
                     /[&<>"]/g,
@@ -781,6 +811,11 @@ const SetupDOMReady = async evt => {
 
             const AUTHOR_CACHE_PREFIX = "subversivo58:author:";
 
+            /**
+             * Reads a cached author from sessionStorage.
+             * @param {string} key - Author identifier.
+             * @return {Object|null}
+             */
             const readAuthorCache = key => {
                 try {
                     const raw = sessionStorage.getItem(
@@ -792,6 +827,11 @@ const SetupDOMReady = async evt => {
                 }
             };
 
+            /**
+             * Saves an author in sessionStorage. Failures are ignored and the page works without the cache.
+             * @param {string} key - Author identifier.
+             * @param {Object} author
+             */
             const writeAuthorCache = (key, author) => {
                 try {
                     sessionStorage.setItem(
@@ -799,12 +839,16 @@ const SetupDOMReady = async evt => {
                         JSON.stringify(author)
                     );
                 } catch {
-                    // Armazenamento indisponível: segue sem cache.
                 }
             };
 
             const authorRequests = new Map();
 
+            /**
+             * Returns the data of an author, using the cache and sharing requests already in progress.
+             * @param {string|number} id - Author identifier.
+             * @return {Promise<Object|null>} Resolves with null when there is no identifier.
+             */
             const fetchAuthor = id => {
                 if (!id) return Promise.resolve(null);
 
@@ -850,6 +894,11 @@ const SetupDOMReady = async evt => {
                 return request;
             };
 
+            /**
+             * Formats a timestamp as a localized date using the policy language.
+             * @param {number} timestamp
+             * @return {string} Empty string when the timestamp is invalid.
+             */
             const formatDateLocale = timestamp => {
                 if (!timestamp) return "";
                 const date = new Date(timestamp);
@@ -892,6 +941,11 @@ const SetupDOMReady = async evt => {
                         }
                     });
 
+                    /**
+                     * Builds the HTML badge for an author, with the avatar loaded lazily.
+                     * @param {Object} author - Author data with name, login and avatar.
+                     * @return {string} HTML markup.
+                     */
                     const renderAuthorBadge = author => {
                         const displayName = author.name || author.login;
                         return `
@@ -940,6 +994,12 @@ const SetupDOMReady = async evt => {
             if (router === "blog") {
                 const box = document.getElementById("index-central-block");
 
+                /**
+                 * Returns the publication time of a post in milliseconds.
+                 * @param {Object} post
+                 * @return {number} The timestamp (in ms) or 0 when there is no valid date.
+                 * @description Values below 1e12 are treated as seconds.
+                 */
                 const getPostTimestamp = post => {
                     const timestamp = Number(post.timestamp);
                     if (Number.isFinite(timestamp) && timestamp > 0) {
@@ -977,6 +1037,10 @@ const SetupDOMReady = async evt => {
                             </div>
                         </div>`;
                 } else {
+                    /**
+                     * Filters the posts by the active tag and the search text.
+                     * @return {Object[]}
+                     */
                     const getFiltered = () =>
                         posts.filter(post => {
                             const tags = Array.isArray(post.tags)
@@ -996,12 +1060,22 @@ const SetupDOMReady = async evt => {
                             return haystack.includes(searchQuery);
                         });
 
+                    /**
+                     * Converts a value in seconds or milliseconds to milliseconds.
+                     * @param {number|string} value
+                     * @return {number} 0 when the value is invalid.
+                     */
                     const normalizeMs = value => {
                         const num = Number(value);
                         if (!Number.isFinite(num) || num <= 0) return 0;
                         return num > 1e12 ? num : num * 1000;
                     };
 
+                    /**
+                     * Builds the HTML card of a blog post.
+                     * @param {Object} post - Post data.
+                     * @return {string} HTML markup.
+                     */
                     const cardHTML = post => {
                         const postPath = `/${String(post.path || `posts/${post.slug}.html`).replace(/^\/+/, "")}`;
                         const rawCover =
@@ -1143,6 +1217,10 @@ const SetupDOMReady = async evt => {
                     const tagsWrap =
                         document.getElementById("blog-tag-filters");
 
+                    /**
+                     * Loads the data of the authors shown in the visible cards and updates their badges.
+                     * @return {void}
+                     */
                     const hydrateCardAuthors = () => {
                         const slots = [
                             ...listEl.querySelectorAll("[data-blog-author]")
@@ -1190,6 +1268,11 @@ const SetupDOMReady = async evt => {
                         });
                     };
 
+                    /**
+                     * Renders the posts that match the filters, up to the visible limit.
+                     * @return {void}
+                     * @description Shows the empty-state message when no post matches.
+                     */
                     const renderCatalog = () => {
                         const filtered = getFiltered();
                         const shown = Math.min(visible, filtered.length);
@@ -1306,6 +1389,12 @@ const SetupDOMReady = async evt => {
                 const REPOSITORY_BRANCH = "main";
                 const TOKEN_REFRESH_MARGIN_MS = 5 * 60 * 1000;
 
+                /**
+                 * Returns a translated message from the GitHub authentication panel.
+                 * @param {string} id - Message identifier.
+                 * @param {string} [value=""] - Text used when the message is missing.
+                 * @return {string}
+                 */
                 const authMessage = (id, value = "") => {
                     const item = dc.querySelector(
                         `#github-auth-messages [data-msg="${id}"]`
@@ -1319,6 +1408,11 @@ const SetupDOMReady = async evt => {
                         : "";
                 };
 
+                /**
+                 * Returns a message from the admin dashboard.
+                 * @param {string} id - Message identifier.
+                 * @return {string}
+                 */
                 const dashMessage = id => {
                     const item = dc.querySelector(
                         `#admin-dashboard-messages [data-msg="${id}"]`
@@ -1358,6 +1452,10 @@ const SetupDOMReady = async evt => {
                 let currentGitHubUser = null;
                 let refreshInFlight = null;
 
+                /**
+                 * Shows an authentication error in the GitHub modal and logs it.
+                 * @param {Error|string} error
+                 */
                 const showAuthError = error => {
                     const message =
                         error instanceof Error ? error.message : String(error);
@@ -1381,6 +1479,10 @@ const SetupDOMReady = async evt => {
                     }
                 });
 
+                /**
+                 * Shows the GitHub identity of the authenticated user in the admin interface.
+                 * @param {Object} user - GitHub user data.
+                 */
                 const renderAdminGitHubIdentity = user => {
                     if (!user || typeof user !== "object") return;
                     currentGitHubUser = user;
@@ -1434,6 +1536,10 @@ const SetupDOMReady = async evt => {
                     if (sessEmail) sessEmail.textContent = user.email || "—";
                 };
 
+                /**
+                 * Shows the scope, the date obtained and the expiry date of the stored session.
+                 * @param {Object} storedAuth - Stored session data.
+                 */
                 const renderSessionDetails = storedAuth => {
                     const tokens = storedAuth?.tokens || {};
                     const scopeEl = dc.getElementById("admin-session-scope");
@@ -1504,6 +1610,10 @@ const SetupDOMReady = async evt => {
                     }
                 };
 
+                /**
+                 * Fetches the authentication diagnostics and shows them in the panel.
+                 * @return {Promise<void>}
+                 */
                 const loadSessionDiagnostics = async () => {
                     const diagPre = dc.getElementById(
                         "admin-session-diagnostics"
@@ -1543,6 +1653,11 @@ const SetupDOMReady = async evt => {
                     }
                 };
 
+                /**
+                 * Resets and shows the GitHub authentication modal.
+                 * @param {string} [messageText] - Message to show.
+                 * @description Also clears the current GitHub API instance.
+                 */
                 const openReauthModal = messageText => {
                     GitHubAPIInstance = null;
                     introElement.hidden = false;
@@ -1553,6 +1668,11 @@ const SetupDOMReady = async evt => {
                     githubAuthModal.show();
                 };
 
+                /**
+                 * Requests the renewal of the session (POST /admin-auth/refresh).
+                 * @return {Promise<Object|null>} Response payload.
+                 * @throws {Error} When the renewal fails.
+                 */
                 const performTokenRefresh = async () => {
                     const response = await fetch("/admin-auth/refresh", {
                         method: "POST",
@@ -1606,6 +1726,9 @@ const SetupDOMReady = async evt => {
                 ) => {
                     if (!DBMethods) return false;
 
+                    /**
+                     * Restores the session from IndexedDB and renders the administrator identity and details.
+                     */
                     const run = async () => {
                         const storedAuth = await DBMethods.read({
                             tbn: "config",
@@ -1701,6 +1824,11 @@ const SetupDOMReady = async evt => {
                     return refreshInFlight;
                 };
 
+                /**
+                 * Reads the GitHub session from IndexedDB.
+                 * @return {Promise<Object>} The stored session.
+                 * @throws {Error} If IndexedDB is not available.
+                 */
                 const loadAdminGitHubAuth = async () => {
                     if (!DBMethods) {
                         throw new Error(
@@ -1745,7 +1873,6 @@ const SetupDOMReady = async evt => {
                     showAuthError(error);
                 }
 
-                // Navegação do Dashboard Unificado + Sidebar Responsiva
                 const sidebar = dc.getElementById("admin-sidebar");
                 const sidebarToggle = dc.getElementById("admin-sidebar-toggle");
                 const sidebarClose = dc.getElementById("admin-sidebar-close");
@@ -1753,6 +1880,10 @@ const SetupDOMReady = async evt => {
                     "admin-sidebar-backdrop"
                 );
 
+                /**
+                 * Opens or closes the admin sidebar and its backdrop.
+                 * @param {boolean} open
+                 */
                 const setSidebarOpen = open => {
                     if (!sidebar) return;
                     sidebar.classList.toggle("is-open", open);
@@ -1790,9 +1921,6 @@ const SetupDOMReady = async evt => {
                     devtools: dc.getElementById("admin-view-devtools")
                 };
 
-                // --------------------------------------------------
-                // Renderização das credenciais JWT
-                // --------------------------------------------------
 
                 const credentialsList = dc.getElementById(
                     "admin-credentials-list"
@@ -1805,12 +1933,23 @@ const SetupDOMReady = async evt => {
                 const credentialsEmpty = dc.getElementById(
                     "admin-credentials-empty"
                 );
+                /**
+                 * Converts a base64url value to base64 with padding.
+                 * @param {string} value
+                 * @return {string}
+                 */
                 const base64UrlToBase64 = value => {
                     const base64 = value.replace(/-/g, "+").replace(/_/g, "/");
 
                     return base64.padEnd(Math.ceil(base64.length / 4) * 4, "=");
                 };
 
+                /**
+                 * Formats a key in PEM format.
+                 * @param {string} value - Base64url key data.
+                 * @param {"public"|"private"} type
+                 * @return {string}
+                 */
                 const formatPEM = (value, type) => {
                     const base64 = base64UrlToBase64(value);
                     const lines = base64.match(/.{1,64}/g) || [];
@@ -1825,6 +1964,10 @@ const SetupDOMReady = async evt => {
                     ].join("\n");
                 };
 
+                /**
+                 * Renders the list of JWT credentials and their count.
+                 * @return {void}
+                 */
                 const renderCredentials = () => {
                     if (
                         !jwtManager ||
@@ -2065,6 +2208,11 @@ const SetupDOMReady = async evt => {
 
                 renderCredentials();
 
+                /**
+                 * Shows an admin view by name. Unknown names fall back to "posts".
+                 * @param {string} viewName
+                 * @description The devtools and records views load their data when opened.
+                 */
                 const showAdminView = viewName => {
                     const target = views[viewName] ? viewName : "posts";
 
@@ -2099,6 +2247,12 @@ const SetupDOMReady = async evt => {
                 };
                 const devToolsRoot = views.devtools;
 
+                /**
+                 * Returns a translated devtools text, or the fallback text when the translation is missing.
+                 * @param {string} key
+                 * @param {string} fallback
+                 * @return {string}
+                 */
                 const devToolsText = (key, fallback) => {
                     const value = i18n.getWord(
                         `admin_dashboard.devtools.${key}`
@@ -2108,6 +2262,13 @@ const SetupDOMReady = async evt => {
                         : fallback;
                 };
 
+                /**
+                 * Builds the HTML of a devtools action button.
+                 * @param {string} action
+                 * @param {string} label
+                 * @param {string} [attributes=""]
+                 * @return {string}
+                 */
                 const devToolsButton = (action, label, attributes = "") => `
     <button
         type="button"
@@ -2118,6 +2279,11 @@ const SetupDOMReady = async evt => {
     </button>
 `;
 
+                /**
+                 * Builds the HTML of a devtools error message.
+                 * @param {Error|string} error
+                 * @return {string}
+                 */
                 const devToolsError = error => `
     <p class="text-danger mb-0">
         ${escHTML(error?.message || String(error))}
@@ -2141,6 +2307,10 @@ const SetupDOMReady = async evt => {
                     .querySelector(".row")
                     ?.prepend(devToolsServiceWorkers);
 
+                /**
+                 * Renders the registered service workers in devtools.
+                 * @param {Object} result - Result of DevTools.refresh().
+                 */
                 const renderServiceWorkers = result => {
                     const root = dc.getElementById(
                         "admin-devtools-service-workers"
@@ -2190,6 +2360,10 @@ const SetupDOMReady = async evt => {
                         .join("");
                 };
 
+                /**
+                 * Renders the IndexedDB databases and their object stores in devtools.
+                 * @param {Object} result
+                 */
                 const renderIndexedDB = result => {
                     const root = dc.getElementById("admin-devtools-indexeddb");
 
@@ -2245,6 +2419,10 @@ const SetupDOMReady = async evt => {
                         .join("");
                 };
 
+                /**
+                 * Renders the Cache Storage entries in devtools.
+                 * @param {Object} result
+                 */
                 const renderCaches = result => {
                     const root = dc.getElementById(
                         "admin-devtools-cache-storage"
@@ -2290,6 +2468,10 @@ const SetupDOMReady = async evt => {
                         .join("");
                 };
 
+                /**
+                 * Renders the localStorage and sessionStorage areas in devtools.
+                 * @param {Object} result
+                 */
                 const renderWebStorage = result => {
                     const root = dc.getElementById(
                         "admin-devtools-local-storage"
@@ -2297,6 +2479,12 @@ const SetupDOMReady = async evt => {
 
                     if (!root) return;
 
+                    /**
+                     * Builds the HTML section of one storage area.
+                     * @param {string} name
+                     * @param {Object} storage - Area data, including the record count.
+                     * @return {string}
+                     */
                     const renderArea = (name, storage) => `
         <section class="mb-4">
             <h4 class="h6">${name}</h4>
@@ -2340,6 +2528,10 @@ const SetupDOMReady = async evt => {
                         renderArea("Session Storage", result.sessionStorage);
                 };
 
+                /**
+                 * Renders the accessible cookies in devtools.
+                 * @param {Object} result
+                 */
                 const renderCookies = result => {
                     const root = dc.getElementById("admin-devtools-cookies");
 
@@ -2386,6 +2578,11 @@ const SetupDOMReady = async evt => {
 
                 let devToolsLoading = false;
 
+                /**
+                 * Refreshes and renders the devtools data.
+                 * @return {Promise<void>}
+                 * @description Concurrent calls are ignored while a refresh is in progress.
+                 */
                 const loadDevTools = async () => {
                     if (devToolsLoading || !devToolsRoot) return;
 
@@ -2545,9 +2742,6 @@ const SetupDOMReady = async evt => {
                     });
                 });
 
-                // --------------------------------------------------
-                // Gerenciamento de credenciais e tokens JWT
-                // --------------------------------------------------
 
                 const credentialsNewButton = dc.getElementById(
                     "admin-credentials-new"
@@ -2557,6 +2751,11 @@ const SetupDOMReady = async evt => {
                     "admin-credentials-feedback"
                 );
 
+                /**
+                 * Shows a feedback message in the credentials panel.
+                 * @param {string} message
+                 * @param {string} [type="success"] - Bootstrap alert type.
+                 */
                 const showCredentialsFeedback = (message, type = "success") => {
                     if (!credentialsFeedback) return;
 
@@ -2616,6 +2815,9 @@ const SetupDOMReady = async evt => {
                     "admin-confirm-submit"
                 );
 
+                /**
+                 * Fills the audience selector with the services configured in the settings.
+                 */
                 const fillTokenAudiences = () => {
                     if (!tokenAudienceSelect) return;
                     const services = settings.jwt?.services || [];
@@ -2646,6 +2848,9 @@ const SetupDOMReady = async evt => {
                         tokenAudienceSelect.options.length <= 1;
                 };
 
+                /**
+                 * Opens the modal to create a credential.
+                 */
                 const openCredentialCreateModal = () => {
                     if (!credentialCreateModal || !credentialCreateForm) {
                         showCredentialsFeedback(
@@ -2659,6 +2864,10 @@ const SetupDOMReady = async evt => {
                     credentialCreateModal.show();
                 };
 
+                /**
+                 * Opens the modal to create a JWT for a credential.
+                 * @param {string} kid - Credential identifier.
+                 */
                 const openTokenCreateModal = kid => {
                     if (!tokenCreateModal || !tokenCreateForm) {
                         showCredentialsFeedback(
@@ -2725,6 +2934,14 @@ const SetupDOMReady = async evt => {
 
                 let pendingCredentialOperation = null;
 
+                /**
+                 * Opens the confirmation modal for a deletion.
+                 * @param {Object} options
+                 * @param {string} options.type - Kind of item to delete.
+                 * @param {string} options.kid - Credential identifier.
+                 * @param {string} [options.jti=""] - Token identifier, when applicable.
+                 * @param {string} options.message - Message shown to the user.
+                 */
                 const openConfirmModal = ({ type, kid, jti = "", message }) => {
                     if (!confirmModal) {
                         showCredentialsFeedback(
@@ -2779,6 +2996,11 @@ const SetupDOMReady = async evt => {
                     confirmModal.show();
                 };
 
+                /**
+                 * Returns a credential by its identifier.
+                 * @param {string} kid
+                 * @return {Object|undefined}
+                 */
                 const getCredentialByKid = kid => {
                     return jwtManager
                         ?.getCredentials()
@@ -2795,9 +3017,6 @@ const SetupDOMReady = async evt => {
                     });
                 }
 
-                // --------------------------------------------------
-                // CRIAR CREDENCIAL
-                // --------------------------------------------------
 
                 if (credentialCreateForm) {
                     credentialCreateForm.addEventListener(
@@ -2861,9 +3080,6 @@ const SetupDOMReady = async evt => {
                     );
                 }
 
-                // --------------------------------------------------
-                // CRIAR JWT
-                // --------------------------------------------------
 
                 if (tokenCreateForm) {
                     tokenCreateForm.addEventListener("submit", async event => {
@@ -3036,9 +3252,6 @@ const SetupDOMReady = async evt => {
                     });
                 }
 
-                // --------------------------------------------------
-                // CONFIRMAR OPERAÇÃO
-                // --------------------------------------------------
 
                 if (confirmSubmitButton) {
                     confirmSubmitButton.addEventListener("click", async () => {
@@ -3110,9 +3323,6 @@ const SetupDOMReady = async evt => {
                     });
                 }
 
-                // --------------------------------------------------
-                // EVENTOS DA LISTAGEM DE CREDENCIAIS
-                // --------------------------------------------------
 
                 if (credentialsList) {
                     credentialsList.addEventListener("click", async event => {
@@ -3145,9 +3355,6 @@ const SetupDOMReady = async evt => {
                             return;
                         }
 
-                        // ------------------------------------------
-                        // ABRIR FORMULÁRIO DE CRIAÇÃO DE JWT
-                        // ------------------------------------------
 
                         if (button.dataset.jwtCreate) {
                             openTokenCreateModal(kid);
@@ -3279,9 +3486,6 @@ const SetupDOMReady = async evt => {
                             return;
                         }
 
-                        // ------------------------------------------
-                        // COPIAR CHAVES
-                        // ------------------------------------------
 
                         if (button.dataset.jwtCopy) {
                             const type = button.dataset.jwtCopy;
@@ -3334,9 +3538,6 @@ const SetupDOMReady = async evt => {
                             return;
                         }
 
-                        // ------------------------------------------
-                        // EXCLUIR CREDENCIAL COMPLETA
-                        // ------------------------------------------
 
                         if (button.dataset.jwtDelete) {
                             openConfirmModal({
@@ -3447,6 +3648,10 @@ const SetupDOMReady = async evt => {
                                 }
                             }
 
+                            /**
+                             * Sets the repository and branch and pushes the pending files as a single commit.
+                             * @return {Promise<void>}
+                             */
                             const executeCommit = async () => {
                                 const api = GitHubAPIInstance;
                                 api.setRepo(REPOSITORY_OWNER, REPOSITORY_NAME);
@@ -3489,7 +3694,6 @@ const SetupDOMReady = async evt => {
 
                 wysiwygEditor.mount();
 
-                // Footoodles admin em painel isolado
                 const { default: Footoodles } =
                     await import("./modules/models/Footoodles.mjs");
 
@@ -3564,6 +3768,11 @@ const SetupDOMReady = async evt => {
                     "policy-container-privacy"
                 );
 
+                /**
+                 * Opens a print window with the given HTML.
+                 * @param {string} _html - Content to print.
+                 * @param {string} [_injectHeader=""] - Header to add to the print window.
+                 */
                 const PrinterJS = (_html, _injectHeader = "") => {
                     let popup = window.open(
                         "about:blank",
@@ -3701,6 +3910,9 @@ const SetupDOMReady = async evt => {
             let AcceptCookiesBtn = _.DOM.getById("yes-cookies-accept");
 
             if (AcceptCookiesBtn) {
+                /**
+                 * Changes the cookie button so it opens the disable-cookies modal.
+                 */
                 const GoToDisable = () => {
                     AcceptCookiesBtn.innerHTML =
                         i18n.dictionary().pages.policy.cookies.disable;
@@ -3719,6 +3931,9 @@ const SetupDOMReady = async evt => {
                             : null;
                     });
 
+                    /**
+                     * Removes the modal attributes from the cookie button.
+                     */
                     const RemoveAttr = () => {
                         AcceptCookiesBtn.removeAttribute("data-toggle");
                         AcceptCookiesBtn.removeAttribute("data-target");
@@ -3828,7 +4043,7 @@ const SetupDOMReady = async evt => {
 
         default:
             break;
-    } // Rodapé: últimas postagens (limite: settings.articles['footer-max-list'])
+    }
     renderFooterNews(
         settings,
         document.getElementById("dinamic-footer-news"),
@@ -3862,6 +4077,10 @@ const SetupDOMReady = async evt => {
     }
 
     // fix BootstrapNative Modals for dinamic templates
+    /**
+     * Prevents the default action of the elements marked with data-fix-modal inside the given root.
+     * @param {Document|HTMLElement} [root=dc]
+     */
     const processFixModals = (root = dc) => {
         root.querySelectorAll("[data-fix-modal]").forEach(element => {
             if (element.tagName === "A") {
@@ -3888,7 +4107,6 @@ const SetupDOMReady = async evt => {
 
     processFixModals();
 
-    // Intercepta qualquer clique em link com href="::" para nunca navegar e garantir abertura do modal
     _.DOM.event(dc, "click", evt => {
         const link =
             evt.target && evt.target.closest
@@ -3909,9 +4127,7 @@ const SetupDOMReady = async evt => {
     i18n.transcript();
     i18n.observe(document);
 
-    // Libera a página após a tradução inicial.
     dc.documentElement.classList.remove("i18n-loading");
-    // Preferências individuais do usuário
     const preferenceSwitches = {
         "sets-media-audio": "mediaAudio",
         "sets-media-video": "mediaVideo",
@@ -3922,7 +4138,6 @@ const SetupDOMReady = async evt => {
         "sets-conn-notific2": "connNotific2"
     };
 
-    // Estado inicial: todos os switches desligados.
     const userPreferences = {
         mediaAudio: false,
         mediaVideo: false,
@@ -3933,7 +4148,6 @@ const SetupDOMReady = async evt => {
         connNotific2: false
     };
 
-    // Recupera as preferências salvas.
     if (DBMethods) {
         try {
             const savedPreferences = await DBMethods.read({
@@ -3957,7 +4171,11 @@ const SetupDOMReady = async evt => {
         }
     }
 
-    // Atualiza o indicador visual de cada switch.
+    /**
+     * Shows the state of a preference with a coloured indicator.
+     * @param {string} id - Element identifier.
+     * @param {boolean} enabled
+     */
     const renderPreferenceSwitch = (id, enabled) => {
         const element = dc.getElementById(id);
         if (!element) return;
@@ -3968,15 +4186,12 @@ const SetupDOMReady = async evt => {
         indicator.textContent = enabled ? "🟢" : "🔴";
     };
 
-    // Aplica os estados recuperados ao painel.
     Object.entries(preferenceSwitches).forEach(([id, key]) => {
         renderPreferenceSwitch(id, userPreferences[key]);
     });
 
-    // Serializa as gravações para preservar a ordem dos cliques.
     let preferenceSaveQueue = Promise.resolve();
 
-    // Alterna e salva a preferência acionada.
     dc.addEventListener("click", evt => {
         const element = evt.target.closest(
             "#settings-slide .preference-switch"
@@ -4034,7 +4249,6 @@ const SetupDOMReady = async evt => {
     //}, _.EventOptions(false, true, true), true);
 };
 
-// Executa quando o DOM estiver pronto
 if (dc.readyState === "loading") {
     _.DOM.event(dc, "DOMContentLoaded", SetupDOMReady);
 } else {
@@ -4043,6 +4257,11 @@ if (dc.readyState === "loading") {
 
 // Drawer > clear modal: press and hold the button to erase all browser data.
 // Independent from the cookie consent buttons on the policy page.
+/**
+ * Binds the press-and-hold button that clears all data.
+ * @param {HTMLElement} button
+ * @description The binding runs only once per button.
+ */
 const bindClearAllButton = button => {
     if (button.dataset.clearBound) return;
     button.dataset.clearBound = "true";
@@ -4082,6 +4301,10 @@ new MutationObserver(() => {
 
 // Footoodles: inject one random item into the footer head on any page.
 // Uses the settings already loaded by setup; no admin module is imported.
+/**
+ * Shows a random footoodle in the footer.
+ * @description Does nothing when there are no footoodles in the settings.
+ */
 const injectFootoodle = () => {
     const list = settings.articles?.footoodles ?? [];
     if (!list.length) return;
@@ -4119,7 +4342,13 @@ dc.addEventListener("click", async event => {
         // the user cancelled the share sheet
     }
 });
-// Limpa as credenciais OAuth do GitHub pelos botões da sidebar e da visão de sessão.
+/**
+ * Clears the GitHub credentials after confirmation, ending the session and reloading the panel.
+ *
+ * @param {Event} event - Click event on a clear-credentials button.
+ * @return {Promise<void>}
+ * @description Calls the logout endpoint, removes the stored user-github record from IndexedDB and reloads the page. If the operation fails, the button is enabled again.
+ */
 const handleGitHubCredentialsClear = async event => {
     const button = event.target.closest(
         "#admin-github-credentials-clear, " + "#admin-session-credentials-clear"
@@ -4156,7 +4385,6 @@ const handleGitHubCredentialsClear = async event => {
             tbk: "user-github"
         });
 
-        // Recarrega o painel sem a autenticação anterior.
         wd.location.reload();
     } catch (error) {
         button.disabled = false;

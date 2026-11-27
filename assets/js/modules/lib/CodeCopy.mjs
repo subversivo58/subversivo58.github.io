@@ -1,14 +1,10 @@
 /**
- * @license The MIT License (MIT)
- * @copyright Copyright (c) 2010-2026 Lauro Moraes
- *
- * CodeCopy.mjs
- * Adds copy buttons to rendered code blocks.
- *
- * Receives CSS selectors to locate the target container
- * and the HTML template used to create the copy buttons.
+ * @file CodeCopy.mjs
+ * @description Adds copy buttons to rendered code blocks.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
+ * @version 0.1.0 [development stage]
  */
-
 export default function CodeCopy(containerSelector, templateSelector) {
     if (typeof containerSelector !== "string" || !containerSelector.trim()) {
         throw new TypeError(

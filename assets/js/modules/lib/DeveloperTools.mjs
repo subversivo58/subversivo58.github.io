@@ -1,12 +1,10 @@
-
 /**
- * Developer Tools - Browser environment inspection utilities
- *
- * @license The MIT License (MIT)
- * @copyright Copyright (c) 2010-2026 Lauro Moraes
+ * @file DeveloperTools.mjs
+ * @description Browser environment inspection tools, including IndexedDB and storage inspection.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
  * @version 0.2.0 [development stage]
  */
-
 export default class DeveloperTools {
 
     constructor({
@@ -277,6 +275,11 @@ export default class DeveloperTools {
      */
     getWebStorage() {
 
+        /**
+         * Lists the entries of a storage, each with its key and value.
+         * @param {Storage} storage - localStorage or sessionStorage.
+         * @return {{count: number, entries: Array<{key: string, value: string|null}>}}
+         */
         const inspect = storage => {
 
             const entries = [];

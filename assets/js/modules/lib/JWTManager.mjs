@@ -1,13 +1,20 @@
 /**
- * JWT Manager - Gerenciamento de pares de chaves e credenciais JWT
- * @license The MIT License (MIT) - https://github.com/subversivo58/subversivo58.github.io/blob/main/LICENSE
- * @copyright Copyright (c) 2010-2026 Lauro Moraes - https://github.com/subversivo58
+ * @file JWTManager.mjs
+ * @description Management of JWT key pairs and credentials.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
  * @version 0.1.0 [development stage]
  */
-
 import { JWToken } from "./JWToken.mjs";
 
 export default class JWTManager {
+    /**
+     * Creates a JWT manager bound to a configuration and an IndexedDB connection.
+     * @param {Object} [options={}]
+     * @param {Object} options.config - Configuration with issuer, sub, proxy.endpoint and storage.store/storage.key.
+     * @param {Object} options.database - Connection with read and update methods.
+     * @throws {TypeError} If the configuration or the database connection is invalid.
+     */
     constructor({ config, database } = {}) {
         if (!config || typeof config !== "object") {
             throw new TypeError("Configuração JWT não informada.");
@@ -54,7 +61,6 @@ export default class JWTManager {
         this.initialized = false;
         this._initializing = null;
 
-        // RENOVAÇÃO AUTOMÁTICA
         this._autoRefreshInterval = null;
         this._autoRefreshRunning = false;
         this._autoRefreshOAuthBlocked = false;
@@ -63,10 +69,15 @@ export default class JWTManager {
         this.autoRefreshIntervalMs = 5 * 60 * 1000;
     }
 
-    // --------------------------------------------------
-    // IDENTIFICAÇÃO
-    // --------------------------------------------------
 
+    /**
+     * Normalizes a credential identifier to the external format "K_<32 hex chars>".
+     * @private
+     * @param {string} kid - Credential identifier, with or without the "K_" prefix.
+     * @return {string} The normalized identifier.
+     * @throws {TypeError} If kid is empty.
+     * @throws {Error} If the format is invalid.
+     */
     _normalizeKid(kid) {
         if (typeof kid !== "string" || !kid.trim()) {
             throw new TypeError("Identificador da credencial inválido.");
@@ -83,10 +94,21 @@ export default class JWTManager {
         return normalized;
     }
 
+    /**
+     * Returns the identifier used for storage: the normalized KID without the "K_" prefix.
+     * @private
+     * @param {string} kid
+     * @return {string}
+     */
     _getStoredKid(kid) {
         return this._normalizeKid(kid).slice(2);
     }
 
+    /**
+     * Generates a random key identifier with 32 hexadecimal characters.
+     * @private
+     * @return {string}
+     */
     _generateKeyId() {
         const bytes = crypto.getRandomValues(new Uint8Array(16));
 
@@ -95,10 +117,16 @@ export default class JWTManager {
         ).join("");
     }
 
-    // --------------------------------------------------
-    // VALIDAÇÃO DE METADADOS
-    // --------------------------------------------------
 
+    /**
+     * Validates and trims the name and description of a credential.
+     * @private
+     * @param {Object} [metadata={}]
+     * @param {string} metadata.name
+     * @param {string} metadata.description
+     * @return {{name: string, description: string}}
+     * @throws {TypeError} If name or description is empty.
+     */
     _normalizeMetadata({ name, description } = {}) {
         name = typeof name === "string"
             ? name.trim()
@@ -120,10 +148,14 @@ export default class JWTManager {
         };
     }
 
-    // --------------------------------------------------
-    // CONVERSÃO PEM
-    // --------------------------------------------------
 
+    /**
+     * Converts a Base64URL value into a PEM block for a public or private key.
+     * @private
+     * @param {string} value - Base64URL-encoded key data.
+     * @param {string} type - "private" for a private key; any other value generates a public key block.
+     * @return {string} PEM-formatted key.
+     */
     _toPEM(value, type) {
         const label = type === "private"
             ? "PRIVATE KEY"
@@ -146,10 +178,12 @@ export default class JWTManager {
         ].join("\n");
     }
 
-    // --------------------------------------------------
-    // INICIALIZAÇÃO
-    // --------------------------------------------------
 
+    /**
+     * Loads the stored credentials and starts the automatic renewal check.
+     * @return {Promise<JWTManager>} The initialized instance.
+     * @description Calling this method again returns the same pending initialization. The renewal check runs immediately and then at each interval set by autoRefreshIntervalMs.
+     */
     async initialize() {
         if (this.initialized) {
             return this;
@@ -165,10 +199,8 @@ export default class JWTManager {
             await this._initializing;
             this.initialized = true;
 
-            // Verificação imediata antes de iniciar o monitoramento.
             await this._runAutoRefreshCheck();
 
-            // O temporizador permanece ativo enquanto esta instância existir.
             this._startAutoRefresh();
 
             return this;
@@ -177,6 +209,12 @@ export default class JWTManager {
         }
     }
 
+    /**
+     * Reads the stored credentials from IndexedDB and keeps them in memory.
+     * @private
+     * @return {Promise<void>}
+     * @description Accepts a single credential object or an array; invalid values are ignored.
+     */
     async _loadCredentials() {
         const stored = await this.database.read({
             tbn: this.store,
@@ -263,10 +301,13 @@ export default class JWTManager {
         this.credentials = loaded;
     }
 
-    // --------------------------------------------------
-    // RENOVAÇÃO AUTOMÁTICA
-    // --------------------------------------------------
 
+    /**
+     * Returns how long before expiry a token should be renewed, based on its duration.
+     * @private
+     * @param {string} expiresIn - Token duration: "8h", "6m" or "1y".
+     * @return {number|null} Margin in milliseconds, or null when the token must not be renewed automatically.
+     */
     _getAutoRefreshMarginMs(expiresIn) {
         switch (expiresIn) {
             case "8h":
@@ -277,7 +318,6 @@ export default class JWTManager {
                 return 24 * 60 * 60 * 1000;
 
             default:
-                // Não renova automaticamente registros sem duração reconhecida.
                 return null;
         }
     }
@@ -305,6 +345,12 @@ export default class JWTManager {
         return expiresAtMs - now <= margin;
     }
 
+    /**
+     * Starts the interval that checks tokens for automatic renewal.
+     * @private
+     * @return {void}
+     * @description Does nothing if the interval is already running.
+     */
     _startAutoRefresh() {
         if (this._autoRefreshInterval !== null) {
             return;
@@ -320,6 +366,12 @@ export default class JWTManager {
         }, this.autoRefreshIntervalMs);
     }
 
+    /**
+     * Checks every stored token and renews those inside the refresh window.
+     * @private
+     * @return {Promise<boolean>} false if the check was skipped or could not run.
+     * @description Reloads the credentials first, so changes made in other tabs are used. Renewal uses a per-token lock. After an OAuth failure, renewal waits until the GitHub access token changes.
+     */
     async _runAutoRefreshCheck() {
         if (!this.initialized || this._autoRefreshRunning) {
             return false;
@@ -328,12 +380,8 @@ export default class JWTManager {
         this._autoRefreshRunning = true;
 
         try {
-            // Atualiza a cópia em memória para não trabalhar com registros
-            // antigos caso outra aba já tenha renovado ou excluído um token.
             await this._loadCredentials();
 
-            // Após uma falha OAuth, aguarda a troca/renovação da sessão.
-            // Enquanto o token OAuth armazenado continuar igual, não insiste.
             if (this._autoRefreshOAuthBlocked) {
                 let currentAccessToken;
 
@@ -368,8 +416,6 @@ export default class JWTManager {
                     ].join(":");
 
                     const renewToken = async () => {
-                        // Recarrega os dados depois de obter o bloqueio.
-                        // Outra aba pode ter renovado ou excluído este JWT.
                         await this._loadCredentials();
 
                         const latestCredential = this.credentials.find(
@@ -418,9 +464,6 @@ export default class JWTManager {
                                 return "OAUTH_EXPIRED";
                             }
 
-                            // Falhas de rede ou do Worker não removem nem
-                            // modificam o JWT. A próxima verificação tentará
-                            // novamente se ele continuar na janela.
                             console.warn(
                                 "[JWTManager] Não foi possível renovar o JWT:",
                                 error
@@ -435,8 +478,6 @@ export default class JWTManager {
                     let result;
 
                     try {
-                        // Web Locks evita que abas diferentes renovem o
-                        // mesmo JWT simultaneamente quando a API está disponível.
                         if (
                             typeof navigator !== "undefined" &&
                             navigator.locks &&
@@ -452,8 +493,6 @@ export default class JWTManager {
                                 }
                             );
                         } else {
-                            // O bloqueio interno de refresh continua protegendo
-                            // chamadas simultâneas nesta instância do Manager.
                             result = await renewToken();
                         }
                     } catch (error) {
@@ -474,7 +513,6 @@ export default class JWTManager {
 
             return true;
         } catch (error) {
-            // Uma falha geral de leitura/verificação não apaga credenciais.
             console.error(
                 "[JWTManager] Não foi possível verificar os JWTs:",
                 error
@@ -486,10 +524,13 @@ export default class JWTManager {
         }
     }
 
-    // --------------------------------------------------
-    // PERSISTÊNCIA
-    // --------------------------------------------------
 
+    /**
+     * Persists the credentials to IndexedDB.
+     * @private
+     * @param {Object[]} credentials - Credentials to save.
+     * @return {Promise<void>}
+     */
     async _saveCredentials(credentials) {
         await this.database.update([
             {
@@ -500,10 +541,11 @@ export default class JWTManager {
         ]);
     }
 
-    // --------------------------------------------------
-    // CONSULTA
-    // --------------------------------------------------
 
+    /**
+     * Returns copies of the stored credentials, including their key pairs and tokens.
+     * @return {Object[]} Copies, so changes to the result do not affect the internal state.
+     */
     getCredentials() {
         return this.credentials.map(credential => ({
             ...credential,
@@ -522,9 +564,6 @@ export default class JWTManager {
         }));
     }
 
-    // --------------------------------------------------
-    // CRIAÇÃO DE CREDENCIAL
-    // --------------------------------------------------
 
     async createCredential({
         name,
@@ -606,10 +645,13 @@ export default class JWTManager {
         }
     }
 
-    // --------------------------------------------------
-    // SESSÃO OAUTH GITHUB
-    // --------------------------------------------------
 
+    /**
+     * Reads the GitHub access token from the stored OAuth session.
+     * @private
+     * @return {Promise<string>} The access token.
+     * @throws {Error} With code OAUTH_EXPIRED if there is no session.
+     */
     async _getGitHubAccessToken() {
         const auth = await this.database.read({
             tbn: "config",
@@ -631,9 +673,6 @@ export default class JWTManager {
         return accessToken;
     }
 
-    // --------------------------------------------------
-    // CRIAÇÃO DE JWT
-    // --------------------------------------------------
 
     async createToken({
         kid,
@@ -798,10 +837,17 @@ export default class JWTManager {
         return { ...tokenRecord };
     }
 
-    // --------------------------------------------------
-    // RENOVAÇÃO DE JWT
-    // --------------------------------------------------
 
+    /**
+     * Renews a JWT by its KID and JTI.
+     * @param {Object} options
+     * @param {string} options.kid - Credential identifier.
+     * @param {string} options.jti - Unique identifier of the token to renew.
+     * @return {Promise<Object>} Result of the renewal.
+     * @throws {Error} If the manager is not initialized.
+     * @throws {TypeError} If the KID or JTI is invalid.
+     * @description Concurrent calls for the same token share a single operation.
+     */
     async refresh({ kid, jti } = {}) {
         if (!this.initialized) {
             throw new Error(
@@ -841,6 +887,15 @@ export default class JWTManager {
         }
     }
 
+    /**
+     * Performs the renewal request through the JWT proxy and stores the new token.
+     * @private
+     * @param {Object} options
+     * @param {string} options.kid
+     * @param {string} options.jti
+     * @return {Promise<Object>} Result of the renewal.
+     * @throws {Error} If the credential or token is not found.
+     */
     async _refreshToken({ kid, jti } = {}) {
         if (!this.initialized) {
             throw new Error(
@@ -950,9 +1005,6 @@ export default class JWTManager {
         return { ...updatedRecord };
     }
 
-    // --------------------------------------------------
-    // EDIÇÃO DE METADADOS DA CREDENCIAL
-    // --------------------------------------------------
 
     async updateCredentialMetadata({
         kid,
@@ -1006,9 +1058,6 @@ export default class JWTManager {
         );
     }
 
-    // --------------------------------------------------
-    // EDIÇÃO DE METADADOS DO JWT
-    // --------------------------------------------------
 
     async updateTokenMetadata({
         kid,
@@ -1084,10 +1133,15 @@ export default class JWTManager {
         };
     }
 
-    // --------------------------------------------------
-    // EXCLUSÃO INDIVIDUAL DE JWT
-    // --------------------------------------------------
 
+    /**
+     * Deletes a single JWT from a credential.
+     * @param {Object} options
+     * @param {string} options.kid - Credential identifier.
+     * @param {string} options.jti - Identifier of the token to delete.
+     * @return {Promise<void>}
+     * @throws {Error} If the manager is not initialized.
+     */
     async deleteToken({ kid, jti } = {}) {
         if (!this.initialized) {
             throw new Error(
@@ -1145,10 +1199,13 @@ export default class JWTManager {
         return true;
     }
 
-    // --------------------------------------------------
-    // EXCLUSÃO DE CREDENCIAL
-    // --------------------------------------------------
 
+    /**
+     * Deletes a credential and all of its tokens.
+     * @param {string} kid - Credential identifier.
+     * @return {Promise<void>}
+     * @throws {Error} If the manager is not initialized or the credential does not exist.
+     */
     async deleteCredential(kid) {
         if (!this.initialized) {
             throw new Error(

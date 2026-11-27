@@ -1,12 +1,16 @@
 /**
- * Emmiter - Event Emitter
- * @license The MIT License (MIT)                    - [https://github.com/subversivo58/Emitter/blob/master/LICENSE]
+ * @file Emitter.mjs
+ * @description Event emitter built on EventTarget with a listener registry.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]                - [https://github.com/subversivo58/Emitter/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
 const registry = Symbol('listenerRegistry')
 
 export default class Emitter extends EventTarget {
+    /**
+     * Creates an event emitter.
+     */
     constructor() {
         super()
 
@@ -19,6 +23,13 @@ export default class Emitter extends EventTarget {
         this[registry] = Object.create(null)
     }
 
+    /**
+     * Adds a listener to an event.
+     * @param {string} e - Event name.
+     * @param {Function} cb - Listener.
+     * @param {boolean} [once=false] - Removes the listener after the first call.
+     * @throws {TypeError} If the listener is not a function.
+     */
     on(e, cb, once = false) {
         if (typeof cb !== 'function') {
             throw new TypeError('The listener must be a function')
@@ -59,6 +70,12 @@ export default class Emitter extends EventTarget {
         this.addEventListener(event, record.listener, record.once ? { once: true } : undefined)
     }
 
+    /**
+     * Removes a listener record from the registry.
+     * @private
+     * @param {string} event
+     * @param {Object} record
+     */
     _removeRecord(event, record) {
         const records = this[registry][event]
         if (!records) return
@@ -86,6 +103,11 @@ export default class Emitter extends EventTarget {
         }
     }
 
+    /**
+     * Removes a listener from an event.
+     * @param {string} e - Event name.
+     * @param {Function|false} [Fn=false] - Listener to remove. false removes all listeners of the event.
+     */
     off(e, Fn = false) {
         const event = String(e)
         const records = this[registry][event]
@@ -104,6 +126,11 @@ export default class Emitter extends EventTarget {
         }
     }
 
+    /**
+     * Emits an event with data for its listeners.
+     * @param {string} e - Event name.
+     * @param {*} d - Data sent as the event detail.
+     */
     emit(e, d) {
         const event = String(e)
         const detail = { detail: d }
@@ -116,6 +143,11 @@ export default class Emitter extends EventTarget {
         this.dispatchEvent(new CustomEvent(event, detail))
     }
 
+    /**
+     * Adds a listener that runs only once.
+     * @param {string} e
+     * @param {Function} cb
+     */
     once(e, cb) {
         this.on(e, cb, true)
     }

@@ -1,10 +1,10 @@
 /**
- * LifeCycle - Inspired in Android LifeCycle
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file LifeCycle.mjs
+ * @description Application lifecycle manager, inspired by Android Lifecycle, that drives component states.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
-
 //
 import indexedDBLogs from '../lib/IndexedLogs.mjs'
 import Emitter from '../lib/Emitter.mjs'
@@ -22,12 +22,21 @@ const onDestroy = Symbol()
 
 export default class LifeCycle {
 
+    /**
+     * Creates a lifecycle manager for a named component.
+     * @param {string} name
+     */
     constructor(name) {
         this.name = name
         this.stack = indexedDBLogs.getStack()
         this[cycles] = {}
     }
 
+    /**
+     * Creates a resource bound to this lifecycle, using a proxy that emits change events.
+     * @param {Object} resource
+     * @return {Proxy}
+     */
     create(resource) {
         return this[onCreate](resource)
     }
@@ -59,12 +68,27 @@ export default class LifeCycle {
 
         let sketch = {
             state: new Proxy(state, {
+                /**
+                 * Proxy trap that reads a property of the target.
+                 * @private
+                 * @param {Object} obj
+                 * @param {string|symbol} prop
+                 * @return {*}
+                 */
                 get(obj, prop) {
                     if ( prop in obj ) {
                         return obj[prop]
                     }
                     throw new ReferenceError(`${prop} is not defined`)
                 },
+                /**
+                 * Proxy trap that writes a property and emits a change event after the component is created.
+                 * @private
+                 * @param {Object} target
+                 * @param {string|symbol} key
+                 * @param {*} value
+                 * @return {boolean}
+                 */
                 set(target, key, value) {
                     target[key] = value
                     if ( this.get(state, 'state') !== 'created' ) {

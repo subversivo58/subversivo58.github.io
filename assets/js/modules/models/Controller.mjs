@@ -1,8 +1,9 @@
 /**
- * Policy Handler
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file Controller.mjs
+ * @description Controller class that coordinates model and view logic.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
 import _, {
     IsWebBrowserContext,
@@ -38,16 +39,27 @@ import PolicyHandler from './PolicyHandler.mjs'
 
 
 export default class Controller {
+    /**
+     * Creates the controller and its policy handler.
+     */
     constructor() {
         this.policy = new PolicyHandler('Controller')
     }
 
+    /**
+     * Logs the permissions of the browser for the cookies policy.
+     * @description For diagnostic purposes.
+     */
     Cookies() {
         this.policy.getAllPermissions().then(list => {
             console.log(list)
         })
     }
 
+    /**
+     * Logs the state of the persistent storage permission.
+     * @description For diagnostic purposes.
+     */
     Storage() {
         this.policy.getPermission('persistent-storage').then(response => {
             console.log(response)

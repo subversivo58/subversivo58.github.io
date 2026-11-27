@@ -1,17 +1,17 @@
-
 /**
- * @license The MIT License (MIT)
- * @copyright Copyright (c) 2010-2026 Lauro Moraes
- *
  * @file RSSFeed.mjs
- * @description Geração do feed RSS das postagens do Blog Subversivo58.
+ * @description Generation of the blog RSS feed.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
+ * @version 0.1.0 [development stage]
  */
-
 const DEFAULT_SITE_ORIGIN = `${globalThis.location.protocol}//${globalThis.location.host}`
 
 export default class RSSFeed {
     /**
-     * Escapa caracteres reservados do XML e remove caracteres de controle inválidos.
+     * Escapes the characters reserved by XML and removes invalid control characters.
+     * @param {*} value
+     * @return {string}
      */
     static escapeXML(value) {
         return String(value ?? '')
@@ -26,7 +26,9 @@ export default class RSSFeed {
     }
 
     /**
-     * Normaliza timestamps em segundos ou milissegundos.
+     * Normalizes a timestamp given in seconds or milliseconds.
+     * @param {number|string} value
+     * @return {Date|null} null when the value is not a valid date.
      */
     static normalizeDate(value) {
         const timestamp = Number(value)
@@ -45,14 +47,19 @@ export default class RSSFeed {
     }
 
     /**
-     * Converte uma data para o formato RFC 822 utilizado pelo RSS.
+     * Formats a date in RFC 822, the date format used by RSS.
+     * @param {Date|null} date
+     * @return {string} Empty string when there is no date.
      */
     static formatDate(date) {
         return date ? date.toUTCString() : ''
     }
 
     /**
-     * Resolve um endereço público pertencente ao próprio site.
+     * Resolves a public address that belongs to the site.
+     * @param {string} path
+     * @param {string} siteOrigin
+     * @return {string|null}
      */
     static buildURL(path, siteOrigin) {
         if (typeof path !== 'string' || !path.trim()) {
@@ -76,7 +83,10 @@ export default class RSSFeed {
     }
 
     /**
-     * Resolve o endereço público de uma postagem.
+     * Resolves the public address of a post.
+     * @param {Object} post
+     * @param {string} siteOrigin
+     * @return {string|null}
      */
     static buildPostURL(post, siteOrigin) {
         const path = typeof post.path === 'string' && post.path.trim()
@@ -87,7 +97,9 @@ export default class RSSFeed {
     }
 
     /**
-     * Identifica o tipo MIME da imagem pela extensão.
+     * Returns the MIME type of an image, based on its extension.
+     * @param {string} imageURL
+     * @return {string}
      */
     static getImageType(imageURL) {
         const extension = imageURL
@@ -110,11 +122,10 @@ export default class RSSFeed {
     }
 
     /**
-     * Gera o XML RSS 2.0 a partir de articles.storage.
-     *
-     * @param {object[]} posts Lista de postagens.
-     * @param {object} options Configurações opcionais do feed.
-     * @returns {string} Documento XML completo.
+     * Generates the RSS 2.0 XML from the posts.
+     * @param {object[]} [posts=[]] - List of posts, usually articles.storage.
+     * @param {object} [options={}] - Optional feed settings.
+     * @return {string} The complete XML document.
      */
     static generate(posts = [], options = {}) {
         const siteOrigin = String(
@@ -193,7 +204,6 @@ export default class RSSFeed {
                     this.getImageType(item.cover)
                 )
 
-                // Media RSS: imagem principal e miniatura da postagem.
                 fields.push(
                     `        <media:content url="${imageURL}" type="${imageType}" medium="image" />`,
                     `        <media:thumbnail url="${imageURL}" />`

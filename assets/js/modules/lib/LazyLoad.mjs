@@ -1,25 +1,49 @@
-
 /**
- * LazyLoad - 'wraper' to lazy-load with `IntersectionObserver()`
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file LazyLoad.mjs
+ * @description Lazy loading of images and elements with IntersectionObserver.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
-
 // utils
 const _ = {
+    /**
+     * Returns the Object.prototype.toString tag of a value.
+     * @param {*} o
+     * @return {string}
+     */
     typeOf(o) {
         return Object.prototype.toString.call(o)
     },
+    /**
+     * Checks whether a value is a non-null object.
+     * @param {*} obj
+     * @return {boolean}
+     */
     isObject(obj) {
         return obj !== null && typeof obj === 'object'
     },
+    /**
+     * Checks whether a value is undefined.
+     * @param {*} arg
+     * @return {boolean}
+     */
     isUndefined(arg) {
         return arg === void 0
     },
+    /**
+     * Checks whether a value is a DOM Element.
+     * @param {*} obj
+     * @return {boolean}
+     */
     isElement(obj) {
         return obj instanceof Element
     },
+    /**
+     * Checks whether a value is a NodeList or an HTMLCollection.
+     * @param {*} list
+     * @return {boolean}
+     */
     isNodeList(list) {
         return (
             list instanceof NodeList ||
@@ -31,15 +55,30 @@ const _ = {
             )
         )
     },
+    /**
+     * Checks whether a value is a string.
+     * @param {*} str
+     * @return {boolean}
+     */
     isString(str) {
         return typeof str === 'string'
     },
+    /**
+     * Checks whether a value is an array.
+     * @param {*} obj
+     * @return {boolean}
+     */
     isArray(obj) {
         return Array.isArray(obj)
     }
 }
 
 class LazyImage {
+    /**
+     * Creates a lazy loader based on IntersectionObserver.
+     * @param {Element|string} [container] - Container element, or a selector. Defaults to the viewport.
+     * @param {string} [margin] - Margin for the observer, such as 200px.
+     */
     constructor(container, margin) {
         // container: Element | undefined (viewport) | selector string
         if (_.isElement(container)) {

@@ -1,14 +1,17 @@
 /**
- * @license The MIT License (MIT)
- * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- *
  * @file AdminPosts.mjs
- * @description Gerenciamento de postagens HTML (/posts/<slug>.html) no painel administrativo.
+ * @description Admin management of HTML post files.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
+ * @version 0.1.0 [development stage]
  */
-
 import RSSFeed from '../lib/RSSFeed.mjs'
 
 class AdminPosts {
+    /**
+     * Creates the admin post manager.
+     * @param {WysiwygEditor} editor - Editor instance used to create and edit posts.
+     */
     constructor(editor) {
         this.editor = editor
         this.postManager = editor.postManager
@@ -27,6 +30,13 @@ class AdminPosts {
         this.installEditorIntegration()
     }
 
+    /**
+     * Adds or updates the RSS feed in the list of files to publish.
+     * @description Generates the feed from the posts in the settings file and replaces any existing feed file.
+     * @param {Object[]} files - Files to publish, each with path, content and delete fields.
+     * @return {Object[]} The updated list.
+     * @throws {Error} rss_files_missing, rss_settings_missing or rss_posts_invalid when the input is invalid.
+     */
     attachRSSFeed(files) {
         if (!Array.isArray(files)) {
             throw new Error('rss_files_missing')
@@ -65,6 +75,10 @@ class AdminPosts {
         return files
     }
 
+    /**
+     * Gets the page elements and binds the list events.
+     * @return {void}
+     */
     mount() {
         this.listEl = document.getElementById('admin-posts-list')
         this.searchEl = document.getElementById('admin-posts-search')
@@ -119,12 +133,20 @@ class AdminPosts {
         return this.refresh()
     }
 
+    /**
+     * Shows an admin view through the dashboard, when the dashboard is available.
+     * @param {string} viewName
+     */
     showView(viewName) {
         if (typeof window.__adminShowView === 'function') {
             window.__adminShowView(viewName)
         }
     }
 
+    /**
+     * Connects the post manager to the editor, replacing the publish, update and delete flows.
+     * @description The editor keeps a reference to this manager, so the actions of the editor and the list operate on the same data.
+     */
     installEditorIntegration() {
         const editor = this.editor
         const manager = this.postManager
@@ -235,12 +257,20 @@ class AdminPosts {
         }
     }
 
+    /**
+     * Translates the editor interface, when the editor supports it.
+     */
     translate() {
         if (typeof this.editor.translate === 'function') {
             this.editor.translate()
         }
     }
 
+    /**
+     * Sets the translation key of an element and keeps its other classes.
+     * @param {HTMLElement} element
+     * @param {string} key - i18n key.
+     */
     setKey(element, key) {
         if (!element) return
         element.classList.remove('i18n', 'i18n-append', 'i18n-prepend', 'i18n-pure')
@@ -252,6 +282,11 @@ class AdminPosts {
         this.translate()
     }
 
+    /**
+     * Reloads the posts from the settings and renders the list.
+     * @return {Promise<void>}
+     * @description Failures are shown as an error message in the list.
+     */
     async refresh() {
         try {
             const settings = await this.postManager.loadSettings()
@@ -273,6 +308,10 @@ class AdminPosts {
         }
     }
 
+    /**
+     * Renders the posts that match the current search, in the list.
+     * @return {void}
+     */
     renderList() {
         if (!this.listEl) return
         this.listEl.replaceChildren()
@@ -298,6 +337,11 @@ class AdminPosts {
         })
     }
 
+    /**
+     * Creates the list item of a post from the template.
+     * @param {Object} post
+     * @return {DocumentFragment|HTMLElement}
+     */
     createPostItem(post) {
         const fragment = document.getElementById('admin-post-item-template').content.cloneNode(true)
 
@@ -369,6 +413,11 @@ class AdminPosts {
         return item
     }
 
+    /**
+     * Handles the clicks on the action buttons of the list.
+     * @param {MouseEvent} event
+     * @return {Promise<void>}
+     */
     async handleListClick(event) {
         const button = event.target.closest('button[data-post-action]')
         if (!button || !this.listEl.contains(button)) return
@@ -384,6 +433,11 @@ class AdminPosts {
         }
     }
 
+    /**
+     * Returns the time of the last update of a post, in milliseconds.
+     * @param {Object} post
+     * @return {number} 0 when there is no valid date.
+     */
     getPostTimestamp(post) {
         const timestamp = Number(post.timestamp)
         if (Number.isFinite(timestamp) && timestamp > 0) {
@@ -393,6 +447,11 @@ class AdminPosts {
         return Number.isFinite(date) && date > 0 ? date * 1000 : 0
     }
 
+    /**
+     * Returns the original publication time of a post, in milliseconds.
+     * @param {Object} post
+     * @return {number} The current time when there is no valid date.
+     */
     getOriginalTimestamp(post) {
         const timestamp = Number(post.timestamp)
         if (Number.isFinite(timestamp) && timestamp > 0) {
@@ -402,6 +461,11 @@ class AdminPosts {
         return Number.isFinite(date) && date > 0 ? date * 1000 : Date.now()
     }
 
+    /**
+     * Returns the relative path of the file of a post.
+     * @param {Object} post
+     * @return {string}
+     */
     getPostPath(post) {
         if (typeof post.path === 'string' && post.path.trim()) {
             return post.path.replace(/^\/+/, '')
@@ -409,6 +473,12 @@ class AdminPosts {
         return this.postManager.buildPostPath(post.slug)
     }
 
+    /**
+     * Extracts the content of a post from its HTML page.
+     * @description Uses the POST_CONTENT_START and POST_CONTENT_END markers when they exist. Otherwise, it reads the main content of the page.
+     * @param {string} pageHtml
+     * @return {string}
+     */
     extractContentFromHTML(pageHtml) {
         const match = String(pageHtml || '').match(
             /<!--\s*POST_CONTENT_START\s*-->([\s\S]*?)<!--\s*POST_CONTENT_END\s*-->/
@@ -420,6 +490,12 @@ class AdminPosts {
         return article ? article.innerHTML.trim() : ''
     }
 
+    /**
+     * Downloads the HTML page of a post and extracts its content.
+     * @param {Object} post
+     * @return {Promise<string>}
+     * @throws {Error} post_fetch_error when the page cannot be loaded.
+     */
     async fetchPostContentHTML(post) {
         const path = this.getPostPath(post)
         const response = await fetch(`/${path}?_=${Date.now()}`, { cache: 'no-store' })
@@ -430,6 +506,11 @@ class AdminPosts {
         return this.extractContentFromHTML(pageHtml)
     }
 
+    /**
+     * Loads a published post into the editor for editing.
+     * @param {Object} post
+     * @return {Promise<void>}
+     */
     async editPost(post) {
         try {
             const contentHtml = await this.fetchPostContentHTML(post)
@@ -440,6 +521,12 @@ class AdminPosts {
         }
     }
 
+    /**
+     * Collects the paths of the post images that are in assets/posts/images/.
+     * @param {Object} post
+     * @param {string} [html='']
+     * @return {Set<string>}
+     */
     collectPostImages(post, html = '') {
         const images = new Set()
 
@@ -463,6 +550,12 @@ class AdminPosts {
         return [...images]
     }
 
+    /**
+     * Collects the image paths used by the other posts, except the one given.
+     * @param {Object[]} posts
+     * @param {string} excludedSlug
+     * @return {Set<string>}
+     */
     collectOtherPostImages(posts, excludedSlug) {
         const images = new Set()
         posts.forEach(post => {
@@ -472,6 +565,13 @@ class AdminPosts {
         return images
     }
 
+    /**
+     * Prepares the files and settings needed to update a post.
+     * @param {Object} post - Post being updated.
+     * @param {Object} data - New post data.
+     * @return {Promise<Object>} The files and data to publish.
+     * @throws {Error} post_missing when the post does not exist in the settings.
+     */
     async prepareUpdatePost(post, data) {
         const settings = await this.postManager.loadSettings()
         const storage = settings.articles.storage
@@ -587,6 +687,13 @@ class AdminPosts {
         }
     }
 
+    /**
+     * Prepares the files and settings needed to delete a post.
+     * @param {Object} post
+     * @param {string} contentHtml - Current content of the post page.
+     * @return {Promise<Object>}
+     * @throws {Error} post_missing_delete when the post does not exist in the settings.
+     */
     async prepareDeletePost(post, contentHtml) {
         const settings = await this.postManager.loadSettings()
         const storage = settings.articles.storage
@@ -653,6 +760,12 @@ class AdminPosts {
         }
     }
 
+    /**
+     * Deletes a post after confirmation.
+     * @param {Object} post
+     * @param {HTMLElement} trigger - Button that started the action. It is disabled while the operation runs.
+     * @return {Promise<void>}
+     */
     async deletePost(post, trigger) {
         if (this.modalBusy) return
         trigger.disabled = true
@@ -662,7 +775,6 @@ class AdminPosts {
             try {
                 contentHtml = await this.fetchPostContentHTML(post)
             } catch {
-                // Mesmo se a página ainda não existir no servidor, usa os metadados.
             }
 
             const payload = await this.prepareDeletePost(post, contentHtml)
@@ -675,6 +787,11 @@ class AdminPosts {
         }
     }
 
+    /**
+     * Opens the modal that confirms the deletion of a post.
+     * @param {Object} post
+     * @param {Object} payload - Prepared deletion data.
+     */
     openDeleteModal(post, payload) {
         if (this.modal) return
 
@@ -782,6 +899,10 @@ class AdminPosts {
         confirm.focus()
     }
 
+    /**
+     * Closes the confirmation modal.
+     * @param {boolean} [force=false] - Closes the modal even while an operation is busy.
+     */
     closeModal(force = false) {
         if (!this.modal || (this.modalBusy && !force)) return
         this.modal.remove()

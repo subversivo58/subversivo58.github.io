@@ -1,8 +1,9 @@
 /**
- * Awesome Storage - Storage utilities
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file AwesomeStorage.mjs
+ * @description Storage utilities for reading, writing and clearing localStorage and sessionStorage.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
 import {
     IsWebBrowserContext,
@@ -16,6 +17,12 @@ import MISH from './AwesomeIndexedDB.mjs'
 
 
 export const Caches = {
+    /**
+     * Clears the data of the storage: cookies, localStorage, sessionStorage and the Cache API.
+     * @param {string|false} [name=false] - Name of the item to clear. false clears everything.
+     * @return {Promise<void>}
+     * @description The Cache API is available only in secure contexts (HTTPS or localhost).
+     */
     clear(name = false) {
         // the Cache API only exists in secure contexts (https or localhost)
         if ( typeof caches === 'undefined' ) {
@@ -41,6 +48,12 @@ export const Cookies = {
      * @return {Object}:Promise
      */
     get(cname, regex = false, sync = false) {
+        /**
+         * Searches for a cookie by name and returns its value.
+         * @private
+         * @param {string} name
+         * @return {string|null}
+         */
         const search = name => {
             return dc.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + name.replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1") || false
         }
@@ -66,6 +79,12 @@ export const Cookies = {
             }
         })
     },
+    /**
+     * Reads a value synchronously from the cookies or the storage.
+     * @param {string} cname - Item name.
+     * @param {boolean} [regex=false]
+     * @return {*}
+     */
     getSync(cname, regex = false) {
         return this.get(cname, regex, true)
     },
@@ -85,6 +104,12 @@ export const Cookies = {
                 secure: "; Secure",
                 same: "; SameSite=Strict"
             }
+            /**
+             * Converts a duration in days into an expiration date.
+             * @private
+             * @param {number|string|Date} t - Number of days, or a date.
+             * @return {string}
+             */
             let makeTime = t => {
                 if ( typeof t === 'number' ) {
                     let d = new Date()
@@ -145,6 +170,11 @@ export const Cookies = {
     clear(domain, path) {
         return new Promise(resolve => {
             try {
+                /**
+                 * Deletes a cookie by name, for the given domain and path.
+                 * @private
+                 * @param {string} cookiename
+                 */
                 const deleteCookie = cookiename => {
                     let expires = "; expires=Thu, 01 Jan 1970 00:00:00 UTC",
                         d = (!!domain && typeof domain === 'string') ? domain : location.hostname,
@@ -170,6 +200,11 @@ export const Cookies = {
     }
 }
 
+/**
+ * Creates a wrapper for localStorage or sessionStorage.
+ * @param {'localStorage'|'sessionStorage'} [mode='localStorage']
+ * @return {Object} Object with get, set, remove and clear methods.
+ */
 export function Storage(mode = 'localStorage') {
 
     let storagement = (typeof mode === 'string' && (mode === 'localStorage' || mode === 'sessionStorage')) ? mode : 'localStorage'
@@ -275,6 +310,12 @@ const CLEAN_TIMEOUT = 3000
  * @return {Promise<void>} resolves when everything has been cleaned (or after `CLEAN_TIMEOUT`); never rejects
  */
 export function CleanBrowserStoragement() {
+    /**
+     * Returns a handler that logs a warning when clearing a storage item fails.
+     * @private
+     * @param {string} label
+     * @return {Function}
+     */
     const warn = label => error => console.warn(`[CleanBrowserStoragement] ${label}:`, error)
     let timer
     // clear local and session storagement

@@ -1,8 +1,9 @@
 /**
- * User Interface Event Handlers
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file UIHandler.mjs
+ * @description User interface event handlers.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
 import _, {
     IsWebBrowserContext,
@@ -62,6 +63,10 @@ const SlideMenus = () => {
                 }
 
                 // hide current slide
+                /**
+                 * Hides a slide panel and binds its close link.
+                 * @description When the close link points to #body, the click does not navigate away from the page.
+                 */
                 const HideSlidePanel = (slide, direction) => {
                     // get closer
                     let closer = slide.querySelector('a[id^="slide-link"]');
@@ -130,7 +135,6 @@ const NotificationRequest =( permissions , notify)=> {
                 }
 
                 try {
-                    // A solicitação acontece diretamente no clique.
                     const permissionRequest = NotificationAPI.requestPermission()
                     const result = await permissionRequest
                     const state = result === 'default' ? 'prompt' : result
@@ -202,9 +206,19 @@ const PromptRequest = ({ button: selector, modal: modalId, key, permissions = nu
     })
 }
 
+/**
+ * Creates the error used when a device API is not available.
+ * @return {Error}
+ */
 const unsupported = () => Object.assign(new Error('Not supported'), { name: 'NotSupportedError' })
 
 // Media: asks for the device and stops the capture right after authorization.
+/**
+ * Returns a function that asks for camera or microphone access and stops the capture right after authorization.
+ * @param {MediaStreamConstraints} constraints
+ * @return {Function} Async function that resolves when access is granted.
+ * @throws {Error} NotSupportedError when the API is not available.
+ */
 const requestMedia = constraints => async () => {
     const mediaDevices = wd.navigator?.mediaDevices
 
@@ -215,6 +229,11 @@ const requestMedia = constraints => async () => {
 }
 
 // Geolocation: a single position read, which triggers the browser prompt.
+/**
+ * Requests the current position of the device.
+ * @return {Promise<GeolocationPosition>}
+ * @throws {Error} NotSupportedError when geolocation is not available.
+ */
 const requestLocation = () => new Promise((resolve, reject) => {
     const geolocation = wd.navigator?.geolocation
 
@@ -223,6 +242,11 @@ const requestLocation = () => new Promise((resolve, reject) => {
     geolocation.getCurrentPosition(resolve, reject)
 })
 
+/**
+ * Creates the microphone permission request.
+ * @param {Object|null} [permissions=null]
+ * @return {Object}
+ */
 const MicrophoneRequest = (permissions = null) => PromptRequest({
     button: '#modal-getmedia-audio-request',
     modal: 'modal-getmedia-audio',
@@ -231,6 +255,11 @@ const MicrophoneRequest = (permissions = null) => PromptRequest({
     request: requestMedia({ audio: true })
 })
 
+/**
+ * Creates the camera permission request.
+ * @param {Object|null} [permissions=null]
+ * @return {Object}
+ */
 const CameraRequest = (permissions = null) => PromptRequest({
     button: '#modal-getmedia-video-request',
     modal: 'modal-getmedia-video',
@@ -239,6 +268,11 @@ const CameraRequest = (permissions = null) => PromptRequest({
     request: requestMedia({ video: true, audio: true })
 })
 
+/**
+ * Creates the geolocation permission request.
+ * @param {Object|null} [permissions=null]
+ * @return {Object}
+ */
 const GeoRequest = (permissions = null) => PromptRequest({
     button: '#modal-geolocation-request',
     modal: 'modal-geolocation',
@@ -248,6 +282,11 @@ const GeoRequest = (permissions = null) => PromptRequest({
 })
 
 
+/**
+ * Binds the permission events of the drawer: notifications, microphone, camera and geolocation.
+ * @param {Object|null} [permissions=null]
+ * @param {Function|null} [notify=null] - Function that notifies the user.
+ */
 const DrawerEvents = (permissions = null, notify = null) => {
     NotificationRequest(permissions, notify)
     MicrophoneRequest(permissions)
@@ -294,6 +333,10 @@ const DrawerEvents = (permissions = null, notify = null) => {
                 }
 
                 // set UI
+                /**
+                 * Updates the classes of a drawer button and its icon.
+                 * @param {HTMLElement} btn - Drawer button.
+                 */
                 let setDrawerUI = (btn) => {
                     let idtoclass = btn.id,
                         parts = btn.id.split('-')
@@ -315,6 +358,10 @@ const DrawerEvents = (permissions = null, notify = null) => {
                             let iconsContainer = _.DOM.getById('drawer-icons')
                             iconsContainer.classList.remove('p-3')
                             iconsContainer.classList.add('p-2')
+                            /**
+                             * Adjusts the padding of the drawer icons according to the window width.
+                             * @description The breakpoint is 480px.
+                             */
                             let onResize = () => {
                                 if ( wd.innerWidth > 480 ) {
                                     ;[..._.DOM.querySelectorAll('[id^="drawer-icons"] div')].forEach(div => (div.classList.remove('p-3', 'col-4'), div.classList.add('col-2', 'p-2')))
@@ -372,6 +419,9 @@ const DrawerEvents = (permissions = null, notify = null) => {
                     }
                 }
 
+               /**
+                * Sets up the drawer interface for the visible drawer panel.
+                */
                let inEvents = () => {
                     if ( drawer.length > 0 ) {
                         let target = _.DOM.getById(drawer[0]);

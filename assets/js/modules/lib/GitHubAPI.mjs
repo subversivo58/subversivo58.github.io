@@ -1,13 +1,20 @@
 /**
- * GitHubAPI - Wrapper to upload binary files to GitHub repo
- * Uses the modified GitHub library under the hood and exposes it as `gh` property for get instance of all methods
- * @note:
- *   -- inspired at article: @see <https://medium.freecodecamp.org/pushing-a-list-of-files-to-the-github-with-javascript-b724c8c09b66>
- * @copyright Copyright (c) 2010-2026 Lauro Moraes <https://github.com/subversivo58>
- * @license MIT License <https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE>
+ * @file GitHubAPI.mjs
+ * @description Wrapper to upload binary files to a GitHub repository.
+ * -- inspired at article: @see <https://medium.freecodecamp.org/pushing-a-list-of-files-to-the-github-with-javascript-b724c8c09b66>
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
+ * @version 0.1.0 [development stage]
  */
 import GitHub from '../vendor/GitHub.bundle.mjs';
 
+/**
+ * Creates a GitHubAPI instance authenticated with the given credentials.
+ *
+ * @constructor
+ * @param {Object|string} auth - Credentials accepted by the underlying GitHub library (e.g. a token).
+ * @description Exposes setRepo, setBranch and pushFiles as public methods. The repository and branch are set before a push.
+ */
 const GitHubAPI = function(auth) {
     let repo,
         currentBranch = {},

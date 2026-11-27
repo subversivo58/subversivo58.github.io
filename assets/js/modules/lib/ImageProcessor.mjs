@@ -1,13 +1,17 @@
-
 /**
+ * @file ImageProcessor.mjs
+ * @description Local, client-side image processing in the browser.
  * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- *
- * @file ImageProcessor.mjs
- * @description Processamento local e independente de imagens no navegador.
+ * @version 0.1.0 [development stage]
  */
-
 class ImageProcessor {
+    /**
+     * Creates an image processor.
+     * @param {Object} [options={}]
+     * @param {boolean} [options.auto=false] - Optimizes images automatically in process().
+     * @param {number} [options.maxLandscapeWidth=1024] - Maximum width for landscape images.
+     */
     constructor(options = {}) {
         this.options = {
             auto: false,
@@ -21,12 +25,22 @@ class ImageProcessor {
         this.options.auto = options.auto === true
     }
 
+    /**
+     * Processes a file. Optimizes it only when automatic optimization is enabled.
+     * @param {Blob} file
+     * @return {Promise<Blob>}
+     */
     async process(file) {
         if (!this.options.auto) return file
 
         return this.optimize(file)
     }
 
+    /**
+     * Optimizes an image by resizing and compressing it when it is a JPEG or WebP.
+     * @param {Blob} file
+     * @return {Promise<Blob>} The original file when it cannot be optimized.
+     */
     async optimize(file) {
         if (!(file instanceof Blob)) return file
 
@@ -60,6 +74,11 @@ class ImageProcessor {
         }
     }
 
+    /**
+     * Resizes an image to the maximum width, keeping its proportions.
+     * @param {Blob} file
+     * @return {Promise<Blob>}
+     */
     async resize(file) {
         const type = this.getType(file)
 
@@ -86,6 +105,11 @@ class ImageProcessor {
         }
     }
 
+    /**
+     * Compresses a JPEG or WebP image.
+     * @param {Blob} file
+     * @return {Promise<Blob>}
+     */
     async compress(file) {
         const type = this.getType(file)
 
@@ -112,6 +136,12 @@ class ImageProcessor {
         }
     }
 
+    /**
+     * Converts an image to another format.
+     * @param {Blob} file
+     * @param {string} format - Target format, such as image/webp.
+     * @return {Promise<Blob>}
+     */
     async convert(file, format) {
         const sourceType = this.getType(file)
         const targetType = this.normalizeType(format)
@@ -142,6 +172,12 @@ class ImageProcessor {
         }
     }
 
+    /**
+     * Draws an image on a canvas and exports it as a Blob.
+     * @param {Blob} file
+     * @param {Object} [options={}]
+     * @return {Promise<Blob>} The original file when createImageBitmap is unavailable.
+     */
     async render(file, options = {}) {
         if (typeof createImageBitmap !== 'function') {
             return file
@@ -220,6 +256,12 @@ class ImageProcessor {
         }
     }
 
+    /**
+     * Calculates the dimensions of an image that fits in the maximum sizes, keeping its proportions.
+     * @param {number} width
+     * @param {number} height
+     * @return {{width: number, height: number}}
+     */
     getDimensions(width, height) {
         let maxWidth = width
         let maxHeight = height
@@ -245,6 +287,11 @@ class ImageProcessor {
         }
     }
 
+    /**
+     * Returns the normalized MIME type of a file, using its extension when the type is missing.
+     * @param {File|Blob} file
+     * @return {string}
+     */
     getType(file) {
         if (file.type) return this.normalizeType(file.type)
 
@@ -265,6 +312,11 @@ class ImageProcessor {
         return types[extension] || ''
     }
 
+    /**
+     * Normalizes a MIME type or image format name.
+     * @param {string} type
+     * @return {string}
+     */
     normalizeType(type) {
         const value = String(type || '').toLowerCase()
 
@@ -278,6 +330,12 @@ class ImageProcessor {
         return value
     }
 
+    /**
+     * Replaces the extension of a file name.
+     * @param {string} name
+     * @param {string} extension
+     * @return {string}
+     */
     replaceExtension(name, extension) {
         const base = String(name || 'image')
             .replace(/\.[^.]+$/, '')
@@ -285,6 +343,11 @@ class ImageProcessor {
         return base + '.' + extension
     }
 
+    /**
+     * Checks whether a WebP file is animated.
+     * @param {Blob} file
+     * @return {Promise<boolean>} false for any file that is not WebP.
+     */
     async isAnimatedWebP(file) {
         if (this.getType(file) !== 'image/webp') return false
 
@@ -294,6 +357,13 @@ class ImageProcessor {
 
             if (bytes.length < 16) return false
 
+            /**
+             * Reads a string of characters from a byte array.
+             * @private
+             * @param {number} start - Start position.
+             * @param {number} length - Number of bytes.
+             * @return {string}
+             */
             const readText = (start, length) => {
                 return String.fromCharCode(
                     ...bytes.slice(start, start + length)

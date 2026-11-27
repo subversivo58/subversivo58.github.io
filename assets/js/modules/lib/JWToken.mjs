@@ -1,8 +1,9 @@
 /**
- * Developer Tools - Browser environment inspection utilities
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/main/LICENSE]
+ * @file JWToken.mjs
+ * @description Creation and verification of JWT tokens with WebCrypto.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/main/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
@@ -23,10 +24,12 @@ export class JWToken {
     this.keys = new Map();
   }
 
-  // --------------------------------------------------
-  // Utilitários
-  // --------------------------------------------------
 
+  /**
+   * Encodes bytes or an ArrayBuffer in Base64URL, without padding.
+   * @param {Uint8Array|ArrayBuffer} data
+   * @return {string}
+   */
   static base64UrlEncode(data) {
     const bytes = data instanceof Uint8Array
       ? data
@@ -44,6 +47,11 @@ export class JWToken {
       .replace(/=+$/g, "");
   }
 
+  /**
+   * Decodes a Base64URL string into bytes.
+   * @param {string} value
+   * @return {Uint8Array}
+   */
   static base64UrlDecode(value) {
     const base64 = value
       .replace(/-/g, "+")
@@ -62,12 +70,22 @@ export class JWToken {
     );
   }
 
+  /**
+   * Encodes an object as Base64URL JSON.
+   * @param {*} value
+   * @return {string}
+   */
   static encodeJSON(value) {
     return JWToken.base64UrlEncode(
       encoder.encode(JSON.stringify(value))
     );
   }
 
+  /**
+   * Decodes a Base64URL JSON string into an object.
+   * @param {string} value
+   * @return {*}
+   */
   static decodeJSON(value) {
     return JSON.parse(
       decoder.decode(
@@ -76,6 +94,12 @@ export class JWToken {
     );
   }
 
+  /**
+   * Creates an error with a code, used to identify token errors.
+   * @param {string} code
+   * @param {string} message
+   * @return {Error} The error, with name and code set to the code.
+   */
   static createError(code, message) {
     const error = new Error(message);
     error.name = code;
@@ -83,9 +107,6 @@ export class JWToken {
     return error;
   }
 
-  // --------------------------------------------------
-  // Geração de chaves
-  // --------------------------------------------------
 
   async generateKeys({
     keyId,
@@ -116,9 +137,6 @@ export class JWToken {
     };
   }
 
-  // --------------------------------------------------
-  // Importação de chaves
-  // --------------------------------------------------
 
   async importKey({
     keyId,
@@ -164,9 +182,6 @@ export class JWToken {
     return key;
   }
 
-  // --------------------------------------------------
-  // Exportação de chaves
-  // --------------------------------------------------
 
   async exportKey({
     key,
@@ -243,10 +258,14 @@ export class JWToken {
     return `${signingInput}.${JWToken.base64UrlEncode(signature)}`;
   }
 
-  // --------------------------------------------------
-  // Decodificação
-  // --------------------------------------------------
 
+  /**
+   * Decodes a JWT without verifying its signature.
+   * @param {string} token
+   * @return {{header: Object, payload: Object, signature: string}}
+   * @throws {Error} If the token is not a string or is malformed.
+   * @description Use verification before trusting the payload.
+   */
   decode(token) {
     if (typeof token !== "string") {
       throw new Error("JWT inválido.");
@@ -268,9 +287,6 @@ export class JWToken {
     }
   }
 
-  // --------------------------------------------------
-  // Verificação
-  // --------------------------------------------------
 
   async verify({
     token,
@@ -362,9 +378,6 @@ export class JWToken {
     return true;
   }
 
-  // --------------------------------------------------
-  // Verificação de expiração
-  // --------------------------------------------------
 
   isExpired(token, {
     serverTime,
@@ -397,9 +410,6 @@ export class JWToken {
     return currentTime >= payload.exp * 1000;
   }
 
-  // --------------------------------------------------
-  // Renovação
-  // --------------------------------------------------
 
   async refresh({
     url,

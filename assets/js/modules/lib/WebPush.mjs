@@ -1,13 +1,12 @@
 /**
- * WebPush - Web Push 100% no navegador (zero dependências, Web Crypto API)
- * @description API espelhando `web-push`. Content-Encoding: aes128gcm. Proxy obrigatório.
+ * @file WebPush.mjs
+ * @description Web Push implementation in the browser (aes128gcm with WebCrypto). Requires a proxy.
  * @see  Push API - W3C                       - [https://w3c.github.io/push-api/]
  * @see  RFC 8291 - Message Encryption        - [https://datatracker.ietf.org/doc/html/rfc8291]
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
-
 const DEFAULT_TTL = 2419200;
 const DEFAULT_EXPIRATION_SECONDS = 12 * 60 * 60;
 const MAX_EXPIRATION_SECONDS = 24 * 60 * 60;
@@ -49,6 +48,10 @@ function normalizePayload(payload) {
 
 // ---------- VAPID keys ----------
 
+/**
+ * Generates a VAPID key pair (ECDSA P-256) for Web Push.
+ * @return {Promise<{publicKey: string, privateKey: string}>} Keys in Base64URL format.
+ */
 export async function generateVAPIDKeys() {
   const kp = await crypto.subtle.generateKey(
     { name: 'ECDSA', namedCurve: 'P-256' },
@@ -60,6 +63,12 @@ export async function generateVAPIDKeys() {
   return { publicKey: bytesToB64u(raw), privateKey: jwk.d };
 }
 
+/**
+ * Imports a VAPID private key from its Base64URL value.
+ * @private
+ * @param {string} privateKeyB64u
+ * @return {Promise<CryptoKey>}
+ */
 async function importVapidPrivateKey(privateKeyB64u) {
   return crypto.subtle.importKey(
     'jwk',
@@ -72,6 +81,17 @@ async function importVapidPrivateKey(privateKeyB64u) {
 
 // ---------- VAPID JWT (ES256) ----------
 
+/**
+ * Builds the VAPID JWT used to authenticate with the push service.
+ * @private
+ * @param {string} audience - Origin of the push service.
+ * @param {string} subject - Contact URI, such as mailto:.
+ * @param {string} publicKeyB64u
+ * @param {string} privateKeyB64u
+ * @param {number} expiration - Expiration in seconds.
+ * @return {Promise<string>}
+ * @throws {Error} If the audience, subject or keys are invalid.
+ */
 async function buildVapidJwt(audience, subject, publicKeyB64u, privateKeyB64u, expiration) {
   if (!audience) throw new Error('No audience for VAPID.');
   if (!subject || typeof subject !== 'string') throw new Error('No subject set.');
@@ -108,6 +128,15 @@ function audienceFromEndpoint(endpoint) {
 
 // ---------- Criptografia do payload (RFC 8291 / aes128gcm) ----------
 
+/**
+ * Derives a key with HKDF (SHA-256).
+ * @private
+ * @param {ArrayBuffer} salt
+ * @param {ArrayBuffer} ikm - Input keying material.
+ * @param {ArrayBuffer} info
+ * @param {number} length - Length in bytes.
+ * @return {Promise<ArrayBuffer>}
+ */
 async function hkdf(salt, ikm, info, length) {
   const baseKey = await crypto.subtle.importKey('raw', ikm, 'HKDF', false, ['deriveBits']);
   const bits = await crypto.subtle.deriveBits(
@@ -116,6 +145,14 @@ async function hkdf(salt, ikm, info, length) {
   return new Uint8Array(bits);
 }
 
+/**
+ * Encrypts a payload for a subscription using the aes128gcm content encoding (RFC 8291).
+ * @private
+ * @param {Object} subscription - Subscription with endpoint and keys (p256dh and auth).
+ * @param {string} payloadString
+ * @return {Promise<Object>} Encrypted body and headers.
+ * @throws {Error} If the subscription is incomplete.
+ */
 async function encryptPayload(subscription, payloadString) {
   if (!subscription || !subscription.endpoint) throw new Error('subscription.endpoint required.');
   if (!subscription.keys || !subscription.keys.p256dh || !subscription.keys.auth) {
@@ -167,6 +204,14 @@ async function encryptPayload(subscription, payloadString) {
 // ---------- WebPushError ----------
 
 export class WebPushError extends Error {
+  /**
+   * Creates an error for a failed push request.
+   * @param {string} message
+   * @param {number} statusCode - HTTP status code.
+   * @param {Object} headers
+   * @param {*} body
+   * @param {string} endpoint
+   */
   constructor(message, statusCode, headers, body, endpoint) {
     super(message);
     this.name = 'WebPushError';
@@ -180,6 +225,12 @@ export class WebPushError extends Error {
 // ---------- WebPush ----------
 
 export class WebPush {
+  /**
+   * Creates a WebPush client that sends requests through a proxy.
+   * @param {string} proxy - Proxy URL.
+   * @throws {Error} If the proxy URL is not a non-empty string.
+   * @description The proxy is required because the push service does not accept requests made directly from the browser.
+   */
   constructor(proxy) {
     if (typeof proxy !== 'string' || proxy.length === 0) {
       throw new Error('WebPush constructor requires a proxy URL string.');
@@ -188,6 +239,13 @@ export class WebPush {
     this._vapidDetails = null;
   }
 
+  /**
+   * Sets the VAPID details used to sign requests.
+   * @param {string|null} subject - Contact URI. Pass null as the only argument to remove the details.
+   * @param {string} publicKey
+   * @param {string} privateKey
+   * @throws {Error} If a value is invalid.
+   */
   setVapidDetails(subject, publicKey, privateKey) {
     if (arguments.length === 1 && subject === null) { this._vapidDetails = null; return; }
     if (!subject || typeof subject !== 'string') throw new Error('subject must be string.');
@@ -198,15 +256,38 @@ export class WebPush {
     this._vapidDetails = { subject, publicKey, privateKey };
   }
 
+  /**
+   * Encrypts a payload for a subscription.
+   * @param {Object} subscription
+   * @param {string|Object} payload
+   * @return {Promise<Object>}
+   */
   async encrypt(subscription, payload) {
     return encryptPayload(subscription, normalizePayload(payload));
   }
 
+  /**
+   * Returns the VAPID headers for a request.
+   * @param {string} audience
+   * @param {string} subject
+   * @param {string} publicKey
+   * @param {string} privateKey
+   * @param {number} expiration
+   * @return {Promise<{Authorization: string}>}
+   */
   async getVapidHeaders(audience, subject, publicKey, privateKey, expiration) {
     const jwt = await buildVapidJwt(audience, subject, publicKey, privateKey, expiration);
     return { Authorization: 'vapid t=' + jwt + ', k=' + publicKey };
   }
 
+  /**
+   * Builds the URL, headers and body of a push request.
+   * @param {Object} subscription
+   * @param {string|Object} payload
+   * @param {Object} [options={}]
+   * @return {Promise<Object>}
+   * @throws {Error} If the subscription has no endpoint.
+   */
   async generateRequestDetails(subscription, payload, options = {}) {
     if (!subscription || !subscription.endpoint) throw new Error('subscription.endpoint required.');
     const endpoint = subscription.endpoint;
@@ -241,6 +322,13 @@ export class WebPush {
     return { method: 'POST', endpoint: finalEndpoint, originalEndpoint: endpoint, headers, body };
   }
 
+  /**
+   * Sends a push notification through the proxy.
+   * @param {Object} subscription
+   * @param {string|Object} payload
+   * @param {Object} [options={}]
+   * @return {Promise<Response>}
+   */
   async sendNotification(subscription, payload, options = {}) {
     const details = await this.generateRequestDetails(subscription, payload, options);
 

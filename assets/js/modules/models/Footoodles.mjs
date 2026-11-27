@@ -1,12 +1,10 @@
-
 /**
- * @license The MIT License (MIT)
- * @copyright Copyright (c) 2026 Lauro Moraes - [https://github.com/subversivo58]
- *
  * @file Footoodles.mjs
- * @description Administração de Footoodles em painel isolado com pré-visualização de imagem e renovação de sessão.
+ * @description Admin panel for footoodle banners, with image preview and session renewal.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
+ * @version 0.1.0 [development stage]
  */
-
 import PostManager from './PostManager.mjs'
 import ImageProcessor from '../lib/ImageProcessor.mjs'
 
@@ -16,6 +14,16 @@ const TITLE_LIMIT = 50
 const CONTENT_LIMIT = 280
 
 class Footoodles {
+    /**
+     * Creates the footoodle manager.
+     * @param {Object} [options={}]
+     * @param {Function} options.getApi - Returns the GitHub API instance.
+     * @param {Function} options.ensureSession - Checks the GitHub session.
+     * @param {Object} options.repo - Repository with owner and name.
+     * @param {string} options.branch - Branch used for the commits.
+     * @param {string} options.settingsPath
+     * @param {Function} options.translate - Translation function.
+     */
     constructor({ getApi, ensureSession, repo, branch, settingsPath, translate } = {}) {
         this.getApi = getApi
         this.ensureSession = ensureSession
@@ -31,12 +39,21 @@ class Footoodles {
         this.cardPreviewUrls = new Map()
     }
 
+    /**
+     * Returns a translated text from the footoodles dictionary.
+     * @param {string} key
+     * @return {string}
+     */
     tr(key) {
         return this.translate(`admin_dashboard.footoodles.${key}`)
     }
 
     // ---------- data ----------
 
+    /**
+     * Loads the settings with the footoodles, using the committed copy when it exists.
+     * @return {Promise<Object>}
+     */
     async load() {
         if (this.committed) {
             return structuredClone(this.committed)
@@ -47,16 +64,34 @@ class Footoodles {
         return settings
     }
 
+    /**
+     * Returns the list of footoodles.
+     * @return {Promise<Object[]>}
+     */
     async list() {
         const settings = await this.load()
         return settings.articles.footoodles
     }
 
+    /**
+     * Builds the repository path of a footoodle image.
+     * @param {string} id - Footoodle identifier.
+     * @param {File} file - Image file, used for its extension.
+     * @return {string}
+     */
     imagePath(id, file) {
         const extension = (file.name.split('.').pop() || 'png').toLowerCase()
         return `${FOOTOODLES_PATH}/images/${id}.${extension}`
     }
 
+    /**
+     * Commits the given files and settings to the repository.
+     * @param {string} message - Commit message.
+     * @param {Object} settings - Settings to save.
+     * @param {Object[]} [files=[]] - Additional files to commit.
+     * @return {Promise<void>}
+     * @throws {Error} If the GitHub session or API is not available.
+     */
     async commit(message, settings, files = []) {
         if (typeof this.ensureSession === 'function') {
             const valid = await this.ensureSession(false)
@@ -65,6 +100,10 @@ class Footoodles {
             }
         }
 
+        /**
+         * Pushes the files to the repository branch.
+         * @private
+         */
         const executePush = async () => {
             const api = this.getApi()
             if (!api) throw new Error('GitHub API unavailable')
@@ -98,6 +137,14 @@ class Footoodles {
         }
     }
 
+    /**
+     * Creates a footoodle with an image.
+     * @param {Object} data
+     * @param {string} data.title
+     * @param {string} data.content
+     * @param {File} data.image
+     * @return {Promise<void>}
+     */
     async create({ title, content, image }) {
         const settings = await this.load()
         const id = this.posts.generateID()
@@ -116,6 +163,16 @@ class Footoodles {
         return entry
     }
 
+    /**
+     * Updates a footoodle. The image is replaced only when a new one is given.
+     * @param {string} id - Footoodle identifier.
+     * @param {Object} data
+     * @param {string} data.title
+     * @param {string} data.content
+     * @param {File|null} [data.image=null]
+     * @return {Promise<void>}
+     * @throws {Error} If the footoodle is not found.
+     */
     async edit(id, { title, content, image = null }) {
         const settings = await this.load()
         const list = settings.articles.footoodles
@@ -148,6 +205,12 @@ class Footoodles {
         return list[index]
     }
 
+    /**
+     * Removes a footoodle, and its image when no other footoodle uses it.
+     * @param {string} id
+     * @return {Promise<void>}
+     * @throws {Error} If the footoodle is not found.
+     */
     async remove(id) {
         const settings = await this.load()
         const list = settings.articles.footoodles
@@ -166,12 +229,28 @@ class Footoodles {
         this.clearCardPreview(id)
     }
 
+    /**
+     * Checks whether an image path is used by another footoodle.
+     * @param {Object[]} list - Footoodle list.
+     * @param {string} path - Image path.
+     * @param {string} ignoreId - Identifier to ignore in the check.
+     * @return {boolean}
+     */
     isImageShared(list, path, ignoreId) {
         return list.some(item => item.id !== ignoreId && item.image === path)
     }
 
     // ---------- admin interface ----------
 
+    /**
+     * Gets the page elements and renders the footoodle list.
+     * @param {Object} elements
+     * @param {HTMLElement} elements.listEl
+     * @param {HTMLElement} elements.badgeEl
+     * @param {HTMLElement} elements.emptyEl
+     * @param {HTMLElement} [elements.editorRoot]
+     * @return {Promise<void>}
+     */
     async mount({ listEl, badgeEl, emptyEl, editorRoot }) {
         this.listEl = listEl
         this.badgeEl = badgeEl
@@ -216,6 +295,10 @@ class Footoodles {
         await this.refresh()
     }
 
+    /**
+     * Releases the preview of the image selected in the form.
+     * @return {void}
+     */
     clearPreview() {
         if (this.previewObjectUrl) {
             URL.revokeObjectURL(this.previewObjectUrl)
@@ -227,6 +310,10 @@ class Footoodles {
         }
     }
 
+    /**
+     * Shows the preview of an image file selected in the form.
+     * @param {File|null} file
+     */
     setPreviewFile(file) {
         this.clearPreview()
         if (!file || !this.el?.imagePreview) return
@@ -235,6 +322,10 @@ class Footoodles {
         this.el.imagePreview.hidden = false
     }
 
+    /**
+     * Shows the preview of an image that is already stored.
+     * @param {string} path - Image path.
+     */
     setPreviewUrl(path) {
         this.clearPreview()
         if (!path || !this.el?.imagePreview) return
@@ -242,6 +333,11 @@ class Footoodles {
         this.el.imagePreview.hidden = false
     }
 
+    /**
+     * Shows the preview of an image in a footoodle card.
+     * @param {string} id
+     * @param {File|null} file
+     */
     setCardPreviewFile(id, file) {
         this.clearCardPreview(id)
 
@@ -253,6 +349,10 @@ class Footoodles {
         return url
     }
 
+    /**
+     * Releases the preview of a footoodle card.
+     * @param {string} id
+     */
     clearCardPreview(id) {
         const url = this.cardPreviewUrls.get(id)
 
@@ -262,6 +362,11 @@ class Footoodles {
         }
     }
 
+    /**
+     * Opens the editor, to create a footoodle or to edit an existing one.
+     * @param {Object|null} [item=null] - Footoodle to edit. Null to create a new one.
+     * @description Also switches the admin dashboard to the footoodles view, when available.
+     */
     openEditor(item) {
         if (typeof window.__adminShowView === 'function') {
             window.__adminShowView('footoodles')
@@ -292,6 +397,9 @@ class Footoodles {
         }
     }
 
+    /**
+     * Clears the editing form and the image preview.
+     */
     resetForm() {
         this.editingId = null
         this.el.title.value = ''
@@ -302,17 +410,29 @@ class Footoodles {
         this.updateCount()
     }
 
+    /**
+     * Updates the character counter of the content field.
+     */
     updateCount() {
         const length = this.el.content.value.length
         this.el.count.textContent = this.tr('character_count').replace('{count}', length)
     }
 
+    /**
+     * Shows a translated status message in the form.
+     * @param {string} key
+     * @param {string} [className='']
+     */
     setStatus(key, className = '') {
         this.el.status.className = `small mt-2 mb-0 ${className}`
         this.el.status.textContent = this.tr(key)
         this.el.status.hidden = false
     }
 
+    /**
+     * Saves the footoodle from the form, creating or updating it.
+     * @return {Promise<void>}
+     */
     async save() {
         const title = this.el.title.value.trim()
         const content = this.el.content.value.trim()
@@ -348,6 +468,10 @@ class Footoodles {
         }
     }
 
+    /**
+     * Reloads the footoodle list and renders it.
+     * @return {Promise<void>}
+     */
     async refresh() {
         let list = null
         try {
@@ -379,6 +503,11 @@ class Footoodles {
         list.forEach(item => this.listEl.appendChild(this.renderCard(item)))
     }
 
+    /**
+     * Builds a translated note paragraph.
+     * @param {string} key
+     * @return {HTMLParagraphElement}
+     */
     note(key) {
         const paragraph = document.createElement('p')
         paragraph.className = 'small text-muted px-2 mb-0 col-12'
@@ -386,6 +515,11 @@ class Footoodles {
         return paragraph
     }
 
+    /**
+     * Builds the card of a footoodle, with its image and actions.
+     * @param {Object} item
+     * @return {HTMLElement}
+     */
     renderCard(item) {
         const col = document.createElement('div')
         col.className = 'col-12 col-md-6 col-xl-4 mb-3'
@@ -429,6 +563,13 @@ class Footoodles {
         return col
     }
 
+    /**
+     * Builds a button with a label, a class and a click handler.
+     * @param {string} label
+     * @param {string} className
+     * @param {Function} handler
+     * @return {HTMLButtonElement}
+     */
     button(label, className, handler) {
         const button = document.createElement('button')
         button.type = 'button'
@@ -438,6 +579,11 @@ class Footoodles {
         return button
     }
 
+    /**
+     * Removes a footoodle after confirmation.
+     * @param {string} id
+     * @return {Promise<void>}
+     */
     async confirmRemove(id) {
         if (!window.confirm(this.tr('delete_confirm'))) return
 

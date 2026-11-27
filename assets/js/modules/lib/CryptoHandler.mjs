@@ -1,12 +1,10 @@
 /**
- * CryptoHandler - WebCrypto utilities
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file CryptoHandler.mjs
+ * @description WebCrypto utilities for hashing, encryption and key handling.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
-
-
-
 const UTILS = {
     /**
      * Extend objects - simple and minimalist merge objects
@@ -21,17 +19,37 @@ const UTILS = {
             return {}
         }
     },
+    /**
+     * Checks whether a value is an ArrayBuffer or a typed array view.
+     * @param {*} val
+     * @return {boolean}
+     */
     isArrayBuffer(val) {
         return val && val.buffer instanceof ArrayBuffer && val.byteLength !== undefined
     },
+    /**
+     * Encodes a string as UTF-8 bytes.
+     * @param {string} str
+     * @return {Uint8Array}
+     */
     String2ArrayBuffer(str) {
         let encoder = new TextEncoder('utf-8')
         return encoder.encode(str)
     },
+    /**
+     * Decodes UTF-8 bytes into a string.
+     * @param {BufferSource} buffer
+     * @return {string}
+     */
     ArrayBuffer2String(buffer) {
         let decoder = new TextDecoder('utf-8')
         return decoder.decode(buffer)
     },
+    /**
+     * Converts bytes to a hexadecimal string.
+     * @param {ArrayBuffer|ArrayBufferView} ArrayBuffer
+     * @return {string}
+     */
     Buffer2Hex(ArrayBuffer) {
         let view = new Uint8Array(ArrayBuffer),
             result = '',

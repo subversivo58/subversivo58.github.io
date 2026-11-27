@@ -1,8 +1,9 @@
 /**
- * Utilities collection
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file Helpers.mjs
+ * @description Utility collection used across modules.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
 import {
     IsWebBrowserContext,
@@ -44,9 +45,22 @@ let _ = {
     object2String(o) {
         return Object.prototype.toString.call(o)
     },
+    /**
+     * Checks whether an object has its own property.
+     * @param {Object} obj
+     * @param {string|symbol} prop
+     * @return {boolean}
+     */
     hasOwnProperty(obj, prop) {
         return Object.prototype.hasOwnProperty.call(obj, prop)
     },
+    /**
+     * Intended to check whether a value is in a collection.
+     * @param {*} needle
+     * @param {*} haystack
+     * @return {boolean|undefined}
+     * @description Known issue: the method calls needle.includes(haystack), which reverses the intended order, and does not return the result, so it returns undefined when no error occurs. Do not rely on its return value until it is fixed.
+     */
     inArray(needle, haystack) {
         try {
             needle.includes(haystack)
@@ -54,18 +68,38 @@ let _ = {
             return false
         }
     },
+    /**
+     * Returns the lowercase type name of a value, based on Object.prototype.toString.
+     * @param {*} obj
+     * @return {string}
+     */
     type(obj) {
         return (obj) ? this.object2String(obj).replace(/^\[object (.+)\]$/, '$1').toLowerCase() : 'undefined'
     },
     //
+    /**
+     * Encodes a string as UTF-8 bytes.
+     * @param {string} str
+     * @return {Uint8Array}
+     */
     string2ArrayBuffer(str) {
         let encoder = new TextEncoder('utf-8')
         return encoder.encode(str)
     },
+    /**
+     * Decodes UTF-8 bytes into a string.
+     * @param {BufferSource} buffer
+     * @return {string}
+     */
     arrayBuffer2String(buffer) {
         let decoder = new TextDecoder('utf-8')
         return decoder.decode(buffer)
     },
+    /**
+     * Converts bytes to a hexadecimal string.
+     * @param {ArrayLike<number>} arr
+     * @return {string}
+     */
     buffer2Hex(arr) {
         let i,
             len,
@@ -80,6 +114,11 @@ let _ = {
         }
         return hex
     },
+    /**
+     * Converts a hexadecimal string to bytes.
+     * @param {string} hex
+     * @return {Uint8Array}
+     */
     hex2Buffer(hex) {
       let i,
           byteLen = hex.length / 2,
@@ -95,6 +134,13 @@ let _ = {
       }
       return arr
     },
+    /**
+     * Merges arrays into a single sorted array without duplicates.
+     * @param {Array} origin - Base array. Returned unchanged when the first argument is not an array.
+     * @param {...Array} args - Arrays to merge.
+     * @return {Array}
+     * @description The sort uses the default order of Array.prototype.sort, which compares values as text.
+     */
     merge(origin, ...args) {
         if ( !Array.isArray(...args) ) {
             return origin
@@ -150,24 +196,62 @@ let _ = {
         return shortVersion ? Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) : ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16))
     },
     // utils "is"
+    /**
+     * Checks whether a value is a string.
+     * @param {*} str
+     * @return {boolean}
+     */
     isString(str) {
         return typeof str === 'string'
     },
+    /**
+     * Checks whether a value is a boolean.
+     * @param {*} val
+     * @return {boolean}
+     */
     isBoolean(val) {
         return typeof val === 'boolean'
     },
+    /**
+     * Checks whether a value is an integer.
+     * @param {*} int
+     * @return {boolean}
+     */
     isInteger(int){
         return Number.isInteger(int)
     },
+    /**
+     * Checks whether a value has the number type.
+     * @param {*} arg
+     * @return {boolean}
+     * @description NaN also returns true.
+     */
     isNumber(arg) {
         return typeof arg === 'number'
     },
+    /**
+     * Checks whether a value is null.
+     * @param {*} arg
+     * @return {boolean}
+     */
     isNull(arg) {
         return arg === null
     },
+    /**
+     * Checks whether a value has the object type.
+     * @param {*} obj
+     * @return {boolean}
+     * @description null also returns true, because typeof null is 'object'.
+     */
     isObject(obj) {
         return typeof obj === 'object'
     },
+    /**
+     * Checks whether a value looks like a DOM element.
+     * @param {*} obj
+     * @return {boolean}
+     * @description The check is based on the prototype chain of the constructor, so it is approximate.
+     */
     isElement(obj) {
         try {
             return (obj.constructor.__proto__.prototype.constructor.name) ? true : false
@@ -175,61 +259,158 @@ let _ = {
             return false
         }
     },
+    /**
+     * Checks whether a value looks like a NodeList.
+     * @param {*} list
+     * @return {boolean}
+     */
     isNodeList(list) {
         return (!this.isUndefined(list.length) && !this.isUndefined(list.item))
     },
+    /**
+     * Checks whether a value is a File.
+     * @param {*} inp
+     * @return {boolean}
+     */
     isFile(inp) {
         return inp instanceof File ? true : false
     },
+    /**
+     * Checks whether a value is a Blob.
+     * @param {*} inp
+     * @return {boolean}
+     */
     isBlob(inp) {
         return inp instanceof Blob ? true : false
     },
+    /**
+     * Checks whether a value is an array.
+     * @param {*} obj
+     * @return {boolean}
+     */
     isArray(obj) {
         return Array.isArray(obj)
     },
+    /**
+     * Checks whether a value is a typed array or a DataView.
+     * @param {*} obj
+     * @return {boolean}
+     */
     isArrayBufferView(obj) {
         return obj && obj.buffer instanceof ArrayBuffer && obj.byteLength !== undefined
     },
+    /**
+     * Checks whether a value is undefined.
+     * @param {*} arg
+     * @return {boolean}
+     */
     isUndefined(arg) {
         return arg === void 0
     },
+    /**
+     * Checks whether a value is a function.
+     * @param {*} arg
+     * @return {boolean}
+     */
     isFunction(arg) {
         return typeof arg === 'function'
     },
+    /**
+     * Checks whether a value is a primitive (null, boolean, number, string, symbol, bigint or undefined).
+     * @param {*} arg
+     * @return {boolean}
+     */
     isPrimitive(arg) {
         return arg === null || typeof arg === 'boolean' || typeof arg === 'number' || typeof arg === 'string' || /* ES6 symbol */ typeof arg === 'symbol' || typeof arg === 'undefined'
     },
+    /**
+     * Checks whether a value is a Date.
+     * @param {*} d
+     * @return {boolean}
+     */
     isDate(d) {
         return this.isObject(d) && this.object2String(d) === '[object Date]'
     },
+    /**
+     * Checks whether a value is an Error.
+     * @param {*} e
+     * @return {boolean}
+     */
     isError(e) {
         return this.isObject(e) && (this.object2String(e) === '[object Error]' || e instanceof Error)
     },
+    /**
+     * Checks whether a value is a regular expression.
+     * @param {*} re
+     * @return {boolean}
+     */
     isRegEx(re) {
         return this.isObject(re) && this.object2String(re) === '[object RegExp]'
     },
+    /**
+     * Checks whether a value is a symbol.
+     * @param {*} arg
+     * @return {boolean}
+     */
     isSymbol(arg) {
         return typeof arg === 'symbol'
     },
+    /**
+     * Checks whether a value is an async function.
+     * @param {*} obj
+     * @return {boolean}
+     */
     isAsyncFunction(obj) {
         return obj && this.isFunction(obj) && this.object2String(obj) === '[object AsyncFunction]'
     },
+    /**
+     * Checks whether a value is a Promise.
+     * @param {*} obj
+     * @return {boolean}
+     */
     isPromise(obj) {
         return obj && this.isObject(obj) && !this.isFunction(obj) && (obj instanceof Promise && this.object2String(obj) === '[object Promise]')
     },
+    /**
+     * Checks whether a string has the format of a JWT (three Base64URL segments).
+     * @param {string} str
+     * @return {boolean}
+     * @description Checks the format only. It does not verify the signature.
+     */
     isJWT(str) {
         return this.isString(str) && /^[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)?$/.test(str)
     },
+    /**
+     * Checks whether a string is valid Base64.
+     * @param {string} str
+     * @return {boolean}
+     */
     isBase64(str) {
         //@see https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/btoa#Polyfill
         return this.isString(str) && /^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$/.test(str)/*/^[A-Za-z0-9\-_]+$/.test(str)*/
     },
+    /**
+     * Checks whether two values are the same, using Object.is.
+     * @param {*} a
+     * @param {*} b
+     * @return {boolean}
+     */
     isEqual(a, b) {
         return Object.is(a, b)
     },
+    /**
+     * Checks whether a value is a Map.
+     * @param {*} obj
+     * @return {boolean}
+     */
     isMap(obj) {
         return this.isObject(obj) && (obj instanceof Map && this.object2String(obj) === '[object Map]')
     },
+    /**
+     * Checks whether a value is a Set.
+     * @param {*} obj
+     * @return {boolean}
+     */
     isSet(obj) {
         return this.isObject(obj) && (obj instanceof Set && this.object2String(obj) === '[object Set]')
     },
@@ -239,8 +420,20 @@ let _ = {
     node2Array(nodeList) {
         return this.isNodeList(nodeList) ? [...nodeList] : []
     },
+    /**
+     * Builds the options object for addEventListener, detecting passive support in the browser.
+     * @param {boolean} capture
+     * @param {boolean} passive
+     * @param {boolean} once
+     * @return {Object|boolean} The options object, or the capture value when options are not supported.
+     */
     EventOptions(capture, passive, once) {
         // test passive support [every first]
+        /**
+         * Detects whether the browser supports the passive option.
+         * @private
+         * @return {boolean}
+         */
         let passiveSupport = () => {
             let supportsPassive = false
             try {
@@ -258,6 +451,14 @@ let _ = {
             }
             return supportsPassive
         }
+        /**
+         * Builds the options object with the given values.
+         * @private
+         * @param {boolean} cap
+         * @param {boolean} pas
+         * @param {boolean} onc
+         * @return {Object}
+         */
         let ObjRes = (cap, pas, onc) => {
             return {
                 capture: cap,
@@ -302,6 +503,11 @@ let _ = {
             }
         }
     },
+    /**
+     * Calculates the approximate size of an object in bytes.
+     * @param {Object} obj
+     * @return {number}
+     */
     objectSize(obj) {
         function sizeOfObject (object) {
             if ( object == null ) {
@@ -443,34 +649,91 @@ switch (true) {
          * Helper's DOM manipulate HTMLElement [not allow in (Web|Service) Worker]
          */
         _.DOM = {
+            /**
+             * Creates an element with the given tag.
+             * @param {string} tag
+             * @return {HTMLElement}
+             */
             create(tag) {
                 return dc.createElement(tag)
             },
+            /**
+             * Appends a node to the end of the document body.
+             * @param {Node} node
+             */
             addNode(node) {
                 dc.body.appendChild(node)
             },
+            /**
+             * Creates a text node.
+             * @param {string} text
+             * @return {Text}
+             * @description The method name is misspelled (ceateTextNode). It is kept as is for compatibility.
+             */
             ceateTextNode(text) {
                 return dc.createTextNode(text)
             },
+            /**
+             * Returns the element with the given id.
+             * @param {string} id
+             * @return {HTMLElement|null}
+             */
             getById(id) {
                 return dc.getElementById(id)
             },
+            /**
+             * Returns the elements with the given class name.
+             * @param {string} className
+             * @return {HTMLCollection}
+             */
             getByClassName(className) {
                 return dc.getElementsByClassName(className)
             },
+            /**
+             * Returns the elements with the given tag name, from a node or from the document.
+             * @param {string} tagName
+             * @param {Node} [node]
+             * @return {HTMLCollection}
+             */
             getByTagName(tagName, node) {
                 return node ? node.getElementsByTagName(tagName) : dc.getElementsByTagName(tagName)
             },
+            /**
+             * Returns the first element that matches a selector.
+             * @param {string} selector
+             * @param {Node} [node]
+             * @param {boolean} [head=false] - Search in the document head.
+             * @return {Element|null}
+             */
             querySelector(selector, node, head = false) {
                 return head ? dc.head.querySelector(selector) : (selector && node) ? node.querySelector(selector) : dc.querySelector(selector)
             },
+            /**
+             * Returns all the elements that match a selector.
+             * @param {string} selector
+             * @param {Node} [node]
+             * @param {boolean} [head=false] - Search in the document head.
+             * @return {NodeList}
+             */
             querySelectorAll(selector, node, head = false) {
                 return head ? dc.head.querySelectorAll(selector) : (selector && node) ? node.querySelectorAll(selector) : dc.querySelectorAll(selector)
             },
+            /**
+             * Returns the value of an attribute.
+             * @param {Element} node
+             * @param {string} attribute
+             * @return {string|null}
+             */
             getAttribute(node, attribute) {
                 return node.getAttribute(attribute)
             },
-            // waithing dinãmic elements
+            /**
+             * Waits for elements that match a selector to appear, then runs a callback.
+             * @param {Node} [node=dc]
+             * @param {string} selector
+             * @param {Function} callback - Receives the list of found elements.
+             * @description Checks on each animation frame until at least one element is found.
+             */
             waitEl(node = dc, selector, callback) {
                 let Animation,
                     list,
@@ -485,6 +748,11 @@ switch (true) {
                 }
                 setTimeout(step, 100)
             },
+            /**
+             * Returns the position of an element relative to the document.
+             * @param {Element} node
+             * @return {{x: number, y: number}}
+             */
             getPosition(node) {
                 // default positions
                 let xPos = 0,
@@ -509,6 +777,15 @@ switch (true) {
                    y: yPos
                 }
             },
+            /**
+             * Adds or removes event listeners on an element, or on a list of elements.
+             * @param {EventTarget|EventTarget[]} element
+             * @param {string|string[]} event - Event name or list of names.
+             * @param {Function} callback
+             * @param {Object|boolean} [options=false]
+             * @param {boolean} [mode=true] - true adds the listener, false removes it.
+             * @param {Function|false} [finallyCb=false] - Called after the last event is bound.
+             */
             event(element, event, callback, options = false, mode = true, finallyCb = false) {
                 if ( !element ) {
                     return
@@ -596,6 +873,11 @@ switch (true) {
                     }
                 }, (timing * 1000))
             },
+            /**
+             * Checks whether an element is visible in the layout.
+             * @param {Element} element
+             * @return {boolean}
+             */
             isVisible(element) {
                 return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length)
             }
@@ -604,6 +886,11 @@ switch (true) {
         _.$ = function(selector) {
 
             // constructor
+            /**
+             * Wrapper that queries elements by selector and exposes chainable methods.
+             * @param {string} selector
+             * @description Returns a wrapper with the matching elements in the elems property.
+             */
             const base = function(selector) {
                 if ( !selector ) {
                     return
@@ -621,9 +908,17 @@ switch (true) {
             }
 
             let methods = {
+                /**
+                 * Returns the wrapped element, or the list of elements when there is more than one.
+                 * @return {Element|Element[]}
+                 */
                 element() {
                     return ( this.elems.length === 1 ) ? [this.elems[0]] : this.elems
                 },
+                /**
+                 * Runs a callback for each wrapped element.
+                 * @param {Function} callback - Receives the element and its index.
+                 */
                 each(callback) {
                     if (!callback || typeof callback !== 'function') return;
                     for (let i = 0; i < this.elems.length; i++) {
@@ -631,6 +926,10 @@ switch (true) {
                     }
                     return this;
                 },
+                /**
+                 * Adds one or more CSS classes to the wrapped elements.
+                 * @param {string} className - Classes separated by spaces.
+                 */
                 addClass(className) {
                     let list = className.trim().split(' ')
                     this.each(function (item) {
@@ -638,6 +937,10 @@ switch (true) {
                     });
                     return this;
                 },
+                /**
+                 * Removes one or more CSS classes from the wrapped elements.
+                 * @param {string} className - Classes separated by spaces.
+                 */
                 removeClass(className) {
                     let list = className.trim().split(' ')
                     this.each(function (item) {
@@ -645,6 +948,11 @@ switch (true) {
                     });
                     return this;
                 },
+                /**
+                 * Checks whether an element of the wrapper has a CSS class.
+                 * @param {string} className
+                 * @return {this|false} The wrapper when a matching element has the class, otherwise false.
+                 */
                 hasClass(className) {
                     for (let i = 0; i < this.elems.length; i++) {
                          if ( this.elems[i].classList.contains(className) ) {
@@ -653,6 +961,11 @@ switch (true) {
                     }
                     return false
                 },
+                /**
+                 * Sets an attribute on the wrapped elements, or reads it from the first element that has it.
+                 * @param {string} attribute
+                 * @param {string} [value] - When given, sets the attribute and returns the wrapper. Otherwise returns the value found, or false.
+                 */
                 attr(attribute, value) {
                     if ( !!value ) {
                         this.each(item => {
@@ -667,12 +980,20 @@ switch (true) {
                     }
                      return false
                 },
+                /**
+                 * Removes an attribute from the wrapped elements.
+                 * @param {string} attribute
+                 */
                 removeAttribute(attribute) {
                     this.each(item => {
                         item.removeAttribute(attribute)
                     })
                     return this
                 },
+                /**
+                 * Checks whether any wrapped element is visible.
+                 * @return {this|false} The wrapper when at least one element is visible, otherwise false.
+                 */
                 isVisible() {
                     for (let i = 0; i < this.elems.length; i++) {
                          if ( !!( this.elems[i].offsetWidth || this.elems[i].offsetHeight || this.elems[i].getClientRects().length ) ) {
@@ -681,6 +1002,9 @@ switch (true) {
                     }
                     return false
                 },
+                /**
+                 * Removes the wrapped elements from the DOM and clears the list.
+                 */
                 remove() {
                     this.each(item => {
                         item.parentElement.removeChild(item)

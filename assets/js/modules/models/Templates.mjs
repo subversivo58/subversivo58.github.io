@@ -1,8 +1,9 @@
 /**
- * HTML Templates Maker
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file Templates.mjs
+ * @description HTML template and fragment builder.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
 import _, {
     IsWebBrowserContext,
@@ -44,7 +45,6 @@ import _, {
 
 import IlibJS from "../lib/IlibJS.mjs";
 
-// Bootstrap Native (mesma instância carregada pelo setup.mjs)
 import BootstrapNative from "../vendor/bootstrap-native.mjs";
 
 // LazyLoadImage
@@ -78,13 +78,11 @@ import {
 } from "../functions/Functions.mjs";
 
 /**
- * Ativa os componentes do Bootstrap Native que ainda não foram iniciados.
- * O Bootstrap varre a página assim que carrega; se o alvo de um botão (ex.: um modal) vem de um template
- * ainda não inserido, o botão ficava sem função. Aqui ele é iniciado depois que os templates entram.
+ * Initializes the Bootstrap Native components that have not been started yet.
+ * @description Bootstrap scans the page when it loads. If the target of a button, such as a modal, comes from a template that was not inserted yet, the button would not work. This runs after the templates are inserted.
  */
 const initPendingComponents = () => {
     try {
-        // Converte e previne navegação em links [data-fix-modal] vindos dos templates
         document.querySelectorAll("[data-fix-modal]").forEach(element => {
             if (element.tagName === "A") {
                 element.addEventListener(
@@ -128,15 +126,14 @@ const initPendingComponents = () => {
     }
 };
 
-// alvos que já têm um MutationObserver (evita observers duplicados no mesmo alvo)
 const observedTargets = new WeakSet();
 
 /**
- * Busca os templates da rota, aplica as substituições e insere no DOM
- * @param  {Object} cfg      item de "templates" do settings.json ({source, files})
- * @param  {Object} replace  {rule, replacement} usados pelo FindAndReplace
- * @param  {Object} i18n     instância do IlibJS
- * @return {Promise}         resolve quando todos os templates foram inseridos
+ * Fetches the templates of the route, applies the replacements and inserts them in the DOM.
+ * @param {Object} cfg - Item of the templates list in settings.json, with source and files.
+ * @param {Object} replace - Rule and replacement used by FindAndReplace.
+ * @param {Object} i18n - IlibJS instance.
+ * @return {Promise<void>} Resolves when all templates have been inserted.
  */
 const RenderTemplate = (cfg, replace, i18n) => {
     let urls = [],
@@ -151,7 +148,12 @@ const RenderTemplate = (cfg, replace, i18n) => {
         });
     }
 
-    // se falhar (rede ou HTTP != 2xx) devolve undefined e a página segue sem esse template
+    /**
+     * Fetches a template, returning an empty string for failed responses.
+     * @param {string} url
+     * @param {number} i - Position of the template in the list.
+     * @return {Promise<string>}
+     */
     let fetchResource = (url, i) => {
         return Fetch(url)
             .then(response => {
@@ -177,8 +179,14 @@ const RenderTemplate = (cfg, replace, i18n) => {
             });
     };
 
+    /**
+     * Observes a DOM node with a single MutationObserver per target.
+     * @param {Node} node
+     * @param {Function} callback
+     * @param {MutationObserverInit} options
+     * @description Repeated calls for the same node are ignored.
+     */
     let SpyDOM = (node, callback, options) => {
-        // um único observer por alvo
         if (observedTargets.has(node)) {
             return;
         }
@@ -264,10 +272,8 @@ export default class Templates {
      *
      */
     get import() {
-        // Rota atual, obtida a partir da raiz do domínio.
         const route = PathName(true);
 
-        // Converte a rota para o formato absoluto usado em "source".
         const currentRoute =
             route === "index"
                 ? "/"
@@ -280,7 +286,6 @@ export default class Templates {
         this.templates.forEach(item => {
             const source = item.source;
 
-            // Verifica se o source corresponde à rota atual.
             const matches = _.isString(source)
                 ? source === "*" || source === currentRoute
                 : _.isArray(source) && source.includes(currentRoute);

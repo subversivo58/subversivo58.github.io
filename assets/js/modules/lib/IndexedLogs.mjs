@@ -1,13 +1,10 @@
 /**
-
-* Indexed Events Log
-* Indexed Execution Tracking
-* 
-* @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
-* @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
-* @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
-  */
-
+ * @file IndexedLogs.mjs
+ * @description Indexed event log with execution tracking and automatic record pruning.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
+ * @version 0.1.0 [development stage]
+ */
 // functions
 import { PathName } from '../functions/Functions.mjs'
 
@@ -89,6 +86,13 @@ import { PathName } from '../functions/Functions.mjs'
   */
   let LogSequence = 0
 
+/**
+ * Generates a unique key for a log record.
+ * @param {string} name - Logger name.
+ * @param {string} timestamp - ISO timestamp.
+ * @return {string}
+ * @description The key combines the name, the timestamp, a sequence number and a random suffix, so it stays unique and sorted by time.
+ */
 const LogKey = (name, timestamp) => {
 
 const sequence = ++LogSequence
@@ -204,6 +208,12 @@ return `${name}|${timestamp}-${String(sequence).padStart(6, '0')}-${hex}`
   */
   class IndexedDBLogs {
   
+  /**
+   * Creates an indexed logger.
+   * @param {string} name - Logger name. Must be a non-empty string.
+   * @param {number} [limit=500] - Maximum number of records to keep.
+   * @throws {TypeError} If the name is empty.
+   */
   constructor(name, limit = 500) {
   
    if (typeof name !== 'string' || !name.trim()) {

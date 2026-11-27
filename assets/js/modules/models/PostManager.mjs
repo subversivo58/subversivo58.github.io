@@ -1,24 +1,35 @@
 /**
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
- * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
- *
  * @file PostManager.mjs
- * @description Gerenciamento de postagens HTML em /posts/<slug>.html, metadados e sitemap.
+ * @description Management of post HTML files, their metadata and the sitemap.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
+ * @version 0.1.0 [development stage]
  */
-
 import Hashids from '../vendor/Hashids/hashids-es6.mjs'
 import { highlightCodeBlocks } from '../lib/Highlight.mjs'
 
 const SITE_ORIGIN = `${globalThis.location.protocol}//${globalThis.location.host}`
 const DEFAULT_OG_IMAGE = 'assets/media/image/graph.webp'
 
+/**
+ * Escapes the characters &, <, > and " in a string.
+ * @param {*} text
+ * @return {string}
+ */
 const esc = text => String(text ?? '').replace(
     /[&<>"]/g,
     char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char])
 )
 
 export default class PostManager {
+    /**
+     * Creates a post manager.
+     * @param {Object} [options={}]
+     * @param {string} [options.salt='subversivo58'] - Salt used by Hashids.
+     * @param {number} [options.minLength=8] - Minimum length of Hashids identifiers.
+     * @param {string} [options.settingsPath='config/settings.json']
+     * @param {string} [options.sitemapPath='sitemap.xml']
+     */
     constructor(options = {}) {
         this.hashids = new Hashids(
             options.salt ?? 'subversivo58',
@@ -36,19 +47,23 @@ export default class PostManager {
         this.templateCache = null
     }
 
-    /**
-     * Gera um Hash ID (mantido para Footoodles).
-     */
     generateID(timestamp = Date.now()) {
         return this.hashids.encode(timestamp)
     }
 
+    /**
+     * Decodes a Hashids identifier.
+     * @param {string} id
+     * @return {number[]}
+     */
     decodeID(id) {
         return this.hashids.decode(id)
     }
 
     /**
-     * Converte título ou texto livre em slug válido para /posts/<slug>.html.
+     * Converts a title or free text into a valid slug for /posts/<slug>.html.
+     * @param {string} text
+     * @return {string}
      */
     slugify(text) {
         return String(text ?? '')
@@ -60,6 +75,13 @@ export default class PostManager {
             .replace(/-{2,}/g, '-')
     }
 
+    /**
+     * Returns a slug that does not collide with existing ones, adding a numeric suffix when needed.
+     * @param {string} rawSlug - Slug or text to convert.
+     * @param {Object[]} [storage=[]] - Existing records with a slug field.
+     * @param {string|null} [ignoreSlug=null] - Slug to ignore in the check, such as the current post.
+     * @return {string}
+     */
     ensureUniqueSlug(rawSlug, storage = [], ignoreSlug = null) {
         const base = this.slugify(rawSlug) || `post-${Date.now()}`
         const taken = new Set(
@@ -77,14 +99,29 @@ export default class PostManager {
         return `${base}-${counter}`
     }
 
+    /**
+     * Returns the relative path of a post file.
+     * @param {string} slug
+     * @return {string} For example, posts/my-post.html.
+     */
     buildPostPath(slug) {
         return `posts/${slug}.html`
     }
 
+    /**
+     * Returns the absolute URL of a post.
+     * @param {string} slug
+     * @return {string}
+     */
     buildPostURL(slug) {
         return `${this.siteOrigin}/${this.buildPostPath(slug)}`
     }
 
+    /**
+     * Normalizes tags: trims them, converts them to lowercase, removes duplicates and empty values.
+     * @param {string[]|string} [tags=[]] - Array, or comma-separated text.
+     * @return {string[]}
+     */
     normalizeTags(tags = []) {
         const values = Array.isArray(tags)
             ? tags
@@ -97,6 +134,11 @@ export default class PostManager {
         )]
     }
 
+    /**
+     * Normalizes a reading time to a whole number of minutes.
+     * @param {*} value
+     * @return {number} At least 1.
+     */
     normalizeReadingTime(value) {
         const readingTime = Number(value)
         if (!Number.isFinite(readingTime)) return 1
@@ -104,7 +146,9 @@ export default class PostManager {
     }
 
     /**
-     * Extrai caminhos em assets/posts/images/ na ordem em que aparecem no HTML.
+     * Extracts the paths of the images in assets/posts/images/, in the order they appear in the HTML.
+     * @param {string} html
+     * @return {string[]}
      */
     extractImagePaths(html) {
         const doc = new DOMParser().parseFromString(String(html || ''), 'text/html')
@@ -123,6 +167,12 @@ export default class PostManager {
         return paths
     }
 
+    /**
+     * Sorts image records in the order they appear in the HTML.
+     * @param {string} html
+     * @param {Object[]} [images=[]] - Image records with a path field.
+     * @return {Object[]}
+     */
     orderImages(html, images = []) {
         const orderedPaths = this.extractImagePaths(html)
         const byPath = new Map(images.map(item => [item.path.replace(/^\/+/, ''), item]))
@@ -138,7 +188,6 @@ export default class PostManager {
             }
         }
 
-        // Mantém quaisquer imagens enviadas que tenham correspondência
         for (const item of images) {
             const clean = item.path.replace(/^\/+/, '')
             if (!result.some(entry => entry.path === clean)) {
@@ -149,6 +198,11 @@ export default class PostManager {
         return result
     }
 
+    /**
+     * Loads the post HTML template and caches it.
+     * @return {Promise<string>}
+     * @throws {Error} If the template cannot be loaded.
+     */
     async loadTemplate() {
         if (this.templateCache) return this.templateCache
 
@@ -164,6 +218,11 @@ export default class PostManager {
         return this.templateCache
     }
 
+    /**
+     * Applies syntax highlighting to the pre blocks of the post HTML.
+     * @param {string} html
+     * @return {string} The highlighted HTML, or the original text when there are no pre blocks.
+     */
     highlightPostContent(html) {
         const raw = String(html || '').trim()
         if (!raw || !/<pre\b/i.test(raw)) return raw
@@ -228,6 +287,10 @@ export default class PostManager {
         return html
     }
 
+    /**
+     * Loads settings.json, or returns a copy of the committed settings when they exist.
+     * @return {Promise<Object>}
+     */
     async loadSettings() {
         if (this.committedSettings) {
             return structuredClone(this.committedSettings)
@@ -249,6 +312,12 @@ export default class PostManager {
         return settings
     }
 
+    /**
+     * Stores the committed settings and sitemap, which are used as the base for later loads.
+     * @param {Object} [options={}]
+     * @param {Object|string|null} [options.settings]
+     * @param {string|null} [options.sitemap]
+     */
     markCommitted({ settings = null, sitemap = null } = {}) {
         if (settings) {
             this.committedSettings = typeof settings === 'string'
@@ -260,6 +329,10 @@ export default class PostManager {
         }
     }
 
+    /**
+     * Loads sitemap.xml, or returns the committed version.
+     * @return {Promise<string|null>} null when the file cannot be loaded.
+     */
     async loadSitemapXML() {
         if (this.committedSitemap) return this.committedSitemap
 
@@ -270,15 +343,28 @@ export default class PostManager {
         return response.text()
     }
 
+    /**
+     * Prepares the updated sitemap XML, refreshing the blog entry and adding, updating or removing a post entry.
+     * @param {number} timestamp - Time used for the lastmod date.
+     * @param {Object} [options={}]
+     * @param {Object|null} [options.upsertUrl=null] - Entry to add or update.
+     * @param {string|null} [options.removeUrl=null] - URL to remove.
+     * @return {Promise<string|null>} The new XML, or null on failure.
+     */
     async prepareSitemap(timestamp, { upsertUrl = null, removeUrl = null } = {}) {
         try {
             let xml = await this.loadSitemapXML()
             if (!xml) return null
 
             const date = new Date(timestamp).toISOString().slice(0, 10)
+            /**
+             * Escapes the special characters of a string for use in a regular expression.
+             * @private
+             * @param {string} str
+             * @return {string}
+             */
             const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-            // Atualiza lastmod do blog.html
             const blogEntry = new RegExp(
                 `(<url>\\s*<loc>${escapeRegex(this.blogUrl)}</loc>)([\\s\\S]*?)(</url>)`
             )
@@ -318,6 +404,11 @@ export default class PostManager {
         }
     }
 
+    /**
+     * Creates a post record with a unique slug, normalized tags and reading time.
+     * @param {Object} [data={}] - Post data, including title, slug, tags and reading time.
+     * @return {Promise<Object>} The post record.
+     */
     async createPost(data = {}) {
         const timestamp = Date.now()
         const lastModified = timestamp

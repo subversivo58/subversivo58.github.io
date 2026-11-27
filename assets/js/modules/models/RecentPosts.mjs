@@ -1,17 +1,29 @@
 /**
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file RecentPosts.mjs
+ * @description Rendering of recent-post lists for the home carousel and the footer.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
+ * @version 0.1.0 [development stage]
  */
 'use strict'
 
-// Listas de postagens recentes: carrossel da página inicial e resumo no rodapé.
-// Utiliza os metadados do settings.json e aponta diretamente para /posts/<slug>.html.
 
+/**
+ * Escapes the characters &, <, > and " in a string.
+ * @param {*} text
+ * @return {string}
+ */
 const esc = text => String(text).replace(
     /[&<>"]/g,
     char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char])
 )
 
+/**
+ * Returns the publication time of a post in milliseconds.
+ * @param {Object} post
+ * @return {number} 0 when the post has no valid timestamp.
+ * @description Values below 1e12 are treated as seconds.
+ */
 const getTimestamp = post => {
     const timestamp = Number(post.timestamp)
     if (Number.isFinite(timestamp) && timestamp > 0) {
@@ -21,6 +33,12 @@ const getTimestamp = post => {
     return Number.isFinite(legacyDate) && legacyDate > 0 ? legacyDate * 1000 : NaN
 }
 
+/**
+ * Formats a timestamp as a localized date.
+ * @param {number} timestamp
+ * @param {string} locale
+ * @return {string} Empty string when the timestamp is invalid.
+ */
 const formatDate = (timestamp, locale) => {
     const date = new Date(timestamp)
     return Number.isNaN(date.getTime())
@@ -28,6 +46,11 @@ const formatDate = (timestamp, locale) => {
         : date.toLocaleDateString(locale, { dateStyle: 'medium' })
 }
 
+/**
+ * Returns a timestamp in ISO format.
+ * @param {number} timestamp
+ * @return {string} Empty string when the timestamp is invalid.
+ */
 const isoDate = timestamp => {
     const date = new Date(timestamp)
     return Number.isNaN(date.getTime())
@@ -35,22 +58,49 @@ const isoDate = timestamp => {
         : date.toISOString().slice(0, 10)
 }
 
+/**
+ * Returns the reading time of a post, in minutes.
+ * @param {Object} post
+ * @return {number} 0 when there is no valid value.
+ */
 const getReadingTime = post => {
     const value = Number(post.readingTime ?? post.minutes)
     return Number.isFinite(value) && value > 0 ? Math.round(value) : 0
 }
 
+/**
+ * Replaces the {name} placeholders of a text with values.
+ * @param {string} text
+ * @param {Object} vars
+ * @return {string} Placeholders without a value are kept.
+ */
 const fill = (text, vars) => text.replace(
     /\{(\w+)\}/g,
     (match, name) => name in vars ? vars[name] : match
 )
 
+/**
+ * Returns the most recent posts.
+ * @param {Object} settings - Settings with articles.storage.
+ * @param {number} limit
+ * @return {Object[]}
+ */
 const latest = (settings, limit) => [...settings.articles.storage]
     .sort((a, b) => getTimestamp(b) - getTimestamp(a))
     .slice(0, limit)
 
+/**
+ * Converts a path to a root-relative URL.
+ * @param {string} path
+ * @return {string}
+ */
 const toRootRelative = path => `/${String(path || '').replace(/^\/+/, '')}`
 
+/**
+ * Returns the URL of a post from its path or its slug.
+ * @param {Object} post
+ * @return {string}
+ */
 const postURL = post => {
     if (post && typeof post.path === 'string' && post.path.trim()) {
         return toRootRelative(post.path)
@@ -64,6 +114,11 @@ const postURL = post => {
 const ICON_DATE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'
 const ICON_TIME = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>'
 
+/**
+ * Picks one of three tone variants for a text, based on its characters.
+ * @param {string} text
+ * @return {number} 0, 1 or 2.
+ */
 const tone = text => [...String(text)].reduce(
     (sum, char) => sum + char.charCodeAt(0),
     0
@@ -71,9 +126,6 @@ const tone = text => [...String(text)].reduce(
 
 const INTERVAL = 6000
 
-/**
- * Rodapé: últimas postagens no #dinamic-footer-news com links /posts/<slug>.html.
- */
 export function renderFooterNews(
     settings,
     container,
@@ -103,9 +155,6 @@ export function renderFooterNews(
     }).join('')
 }
 
-/**
- * Página inicial: carrossel de cards com caminhos raiz / e links diretos /posts/<slug>.html.
- */
 export function renderIndexCarousel(settings, container, {
     image = '/assets/media/image/graph.webp',
     locale = navigator.language,
@@ -181,8 +230,18 @@ export function renderIndexCarousel(settings, container, {
     const buttons = [...container.querySelectorAll('#posts-dots button')]
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
+    /**
+     * Returns the index of the slide currently visible in the carousel.
+     * @return {number}
+     */
     const current = () => Math.round(track.scrollLeft / (track.clientWidth || 1))
 
+    /**
+     * Scrolls the carousel to a slide.
+     * @param {number} index
+     * @param {boolean} [smooth=true]
+     * @description Motion is disabled when the user prefers reduced motion.
+     */
     const goTo = (index, smooth = true) => {
         track.scrollTo({
             left: index * track.clientWidth,
@@ -191,6 +250,10 @@ export function renderIndexCarousel(settings, container, {
     }
 
     let frame = null
+    /**
+     * Updates the navigation buttons to show the current slide.
+     * @description Runs once per animation frame.
+     */
     const sync = () => {
         frame = null
         const index = current()
@@ -211,11 +274,18 @@ export function renderIndexCarousel(settings, container, {
     let timer = null
     let visible = true
 
+    /**
+     * Stops the automatic rotation of the carousel.
+     */
     const stop = () => {
         clearInterval(timer)
         timer = null
     }
 
+    /**
+     * Starts the automatic rotation of the carousel.
+     * @description It does not run when there are fewer than two posts, when the carousel is held or hidden, or when the user prefers reduced motion.
+     */
     const play = () => {
         stop()
         if (posts.length < 2 || hold.size || !visible || document.hidden || reduceMotion.matches) {
@@ -227,7 +297,15 @@ export function renderIndexCarousel(settings, container, {
         }, INTERVAL)
     }
 
+    /**
+     * Pauses the automatic rotation for a reason.
+     * @param {string} reason - Reason identifier, used to resume later.
+     */
     const holdOn = reason => { hold.add(reason); play() }
+    /**
+     * Resumes the automatic rotation for a reason.
+     * @param {string} reason
+     */
     const holdOff = reason => { hold.delete(reason); play() }
 
     buttons.forEach((button, index) => {

@@ -1,8 +1,9 @@
 /**
- * Policy Handler
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file PolicyHandler.mjs
+ * @description Privacy policy consent handling and cookie-based authorization state.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
 import _, {
     IsWebBrowserContext,
@@ -93,6 +94,12 @@ const getAllPermissions = async () => {
  *
  */
 export default class PolicyHandler {
+    /**
+     * Creates a policy handler.
+     * @param {string} [name='default'] - Handler name, used in logs.
+     * @param {boolean|Function} [logging=false]
+     * @description The initial permission is 'authorized' when the __DSPolicy__ cookie exists, otherwise 'unauthorized'.
+     */
     constructor(name = 'default', logging = false) {
         this.name       = name
         this.permission = dc.cookie.includes('__DSPolicy__') ? 'authorized' : 'unauthorized'
@@ -102,23 +109,46 @@ export default class PolicyHandler {
         this.log.success('[Policy Handler]: ', 'handler has been initialized')
     }
 
+    /**
+     * Returns all the permissions of the browser.
+     * @return {Promise<Object>}
+     */
     async getAllPermissions() {
         return await getAllPermissions()
     }
 
+    /**
+     * Returns the state of one permission.
+     * @param {string} permission - Permission name.
+     * @return {Promise<string|undefined>}
+     */
     async getPermission(permission) {
        const list = await this.getAllPermissions()
        return list[permission]
     }
 
+    /**
+     * Requests a permission.
+     * @param {string} feature
+     * @description The method is not implemented yet. It has no effect.
+     */
     requestPermission(feature) {
         // check support
     }
 
+    /**
+     * Accepts the data storage policy: sets the __DSPolicy__ cookie for 30 days.
+     * @return {Promise<void>}
+     */
     acceptStoragement() {
         return Cookies.set('__DSPolicy__', Date.now(), {expire: 30, secure: true}).then(() => { return this.permission = 'authorized' })
     }
 
+    /**
+     * Refuses the data storage policy, optionally clearing the stored data.
+     * @param {boolean} clearAllData - Clears cookies and browser storage when true.
+     * @return {Promise<void>}
+     */
     refuseStoragement(clearAllData) {
         return clearAllData ? (Promise.resolve(CleanBrowserStoragement()).then(() => { this.permission = 'unauthorized' })) : Cookies.del('__DSPolicy__').then(() => { return this.permission = 'unauthorized' })
     }

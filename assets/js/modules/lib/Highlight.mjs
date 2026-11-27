@@ -1,40 +1,14 @@
 /**
+ * @file Highlight.mjs
+ * @description Dependency-free syntax highlighter for code blocks.
  * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- *
- * Highlight.mjs
- * Destaque de sintaxe para blocos de código, sem biblioteca externa.
- *
- * Uso (classe language-<nome> no <code>, data-lang no <pre>, ou detecção automática):
- *
- *   <pre><code class="language-javascript">
- *   const a = 1
- *   </code></pre>
- *
- * Linguagens: javascript (js), typescript (ts), css, html (xml, svg),
- * json e bash (sh, shell). Com language-none / language-text o bloco
- * fica sem destaque.
- *
- * O resultado são <span class="hl-..."> dentro do <code>. As cores
- * ficam no main.css (seção SYNTAX HIGHLIGHT).
- *
- * Para criar outra linguagem: uma gramática é só uma lista de regras
- * { re, cls, when, enter, nested } (veja jsonGrammar, a menor).
- *   re      regex com a flag "y" (sticky): casa exatamente na posição atual
- *   cls     nome da classe (hl-<cls>), ou função (valor, estado, texto, fim)
- *           que devolve o nome; null/'' deixa o trecho sem cor
- *   when    (estado, ultimoCaractere) => boolean: só tenta a regra se true
- *   enter   (estado, valor) => void: atualiza o estado ao casar
- *   nested  (estado) => 'js' | 'css': destaca o trecho com outra gramática
+ * @version 0.1.0 [development stage]
  */
-
 function words(list) {
   return new Set(list.split(/\s+/));
 }
 
-/**
- * Confere se logo depois da posição "end" vem o padrão (regex sticky).
- */
 function followedBy(text, end, pattern) {
   pattern.lastIndex = end;
   return pattern.test(text);
@@ -69,7 +43,6 @@ const JS_BUILTINS = words(
 function jsGrammar(typescript) {
   return {
     rules: [
-      // comentários
       {
         re: /\/\/[^\n]*|\/\*[\s\S]*?(?:\*\/|$)/y,
         cls: 'comment'
@@ -81,14 +54,12 @@ function jsGrammar(typescript) {
         cls: 'string'
       },
 
-      // regex literal (só quando "/" não pode ser divisão)
       {
         re: /\/(?![*\/])(?:\\.|\[(?:\\.|[^\]\\\n])*\]|[^\/\\\n\[])+\/[a-z]*/y,
         cls: 'regex',
         when: (state, last) => !/[\w$)\]]/.test(last)
       },
 
-      // palavras: keyword, literal, builtin, Classe, função(
       {
         re: /[A-Za-z_$][\w$]*/y,
         cls: (value, state, text, end) => {
@@ -111,7 +82,6 @@ function jsGrammar(typescript) {
         }
       },
 
-      // números
       {
         re: /0[xX][\da-fA-F_]+n?|0[bB][01_]+n?|0[oO][0-7_]+n?|(?:\d[\d_]*\.?\d*|\.\d+)(?:[eE][+-]?\d+)?n?/y,
         cls: 'number'
@@ -144,7 +114,6 @@ const cssGrammar = {
       enter: state => { state.atrule = true; }
     },
 
-    // controle de { } ( ) ;  (sem cor, só atualizam o estado)
     {
       re: /\{/y,
       cls: null,
@@ -173,14 +142,12 @@ const cssGrammar = {
 
     { re: /!\s*important\b/y, cls: 'keyword' },
 
-    // #fff dentro de um bloco
     {
       re: /#[\da-fA-F]{3,8}\b/y,
       cls: 'number',
       when: state => state.depth > 0
     },
 
-    // seletores fora dos blocos: .classe #id :hover tag
     {
       re: /[.#][\w-]+/y,
       cls: 'selector',
@@ -192,7 +159,6 @@ const cssGrammar = {
       when: state => state.depth === 0 && state.paren === 0 && !state.atrule
     },
 
-    // palavras: propriedade, função(), tag
     {
       re: /-{0,2}[A-Za-z_][\w-]*/y,
       cls: (value, state, text, end) => {
@@ -226,7 +192,6 @@ const htmlGrammar = {
   init: () => ({ inTag: false, raw: null, pendingRaw: null }),
 
   rules: [
-    // conteúdo de <script> e <style>: destaca como JS ou CSS
     {
       re: /[\s\S]*?(?=<\/(?:script|style)\b|$)/y,
       nested: state => (state.raw === 'script' ? 'js' : 'css'),
@@ -266,7 +231,6 @@ const htmlGrammar = {
       }
     },
 
-    // > ou />
     {
       re: /\/?>/y,
       cls: 'tag',
@@ -282,7 +246,6 @@ const htmlGrammar = {
       }
     },
 
-    // dentro da tag: "valor" e nome-do-atributo
     {
       re: /"[^"]*"?|'[^']*'?/y,
       cls: 'string',
@@ -314,7 +277,6 @@ const jsonGrammar = {
       cls: 'comment'
     },
     {
-      // "chave": vira property; "valor" vira string
       re: /"(?:\\[\s\S]|[^"\\\n])*"?/y,
       cls: (value, state, text, end) =>
         followedBy(text, end, /\s*:/y) ? 'property' : 'string'
@@ -349,7 +311,6 @@ const BASH_COMMANDS = words(
 
 const bashGrammar = {
   rules: [
-    // # comentário (só no começo ou depois de espaço)
     {
       re: /(?<=^|\s)#[^\n]*/y,
       cls: 'comment'
@@ -363,7 +324,6 @@ const bashGrammar = {
       re: /\$(?:\{[^}\n]*\}?|[A-Za-z_]\w*|[@#?*$!\d-])/y,
       cls: 'variable'
     },
-    // -f  --flag  --flag=valor
     {
       re: /(?<=\s)-{1,2}[A-Za-z][\w-]*/y,
       cls: 'attr'
@@ -386,7 +346,6 @@ const bashGrammar = {
 };
 
 /* ------------------------------------------------------------------ */
-/* Catálogo                                                           */
 /* ------------------------------------------------------------------ */
 
 const GRAMMARS = {
@@ -398,7 +357,6 @@ const GRAMMARS = {
   bash: bashGrammar
 };
 
-// Nome escrito depois das três crases -> gramática
 const ALIASES = {
   javascript: 'js',
   js: 'js',
@@ -428,10 +386,6 @@ const DISABLED_LANGS = new Set(['none', 'plain', 'plaintext', 'text', 'txt', 'no
 /* Tokenizador                                                        */
 /* ------------------------------------------------------------------ */
 
-/**
- * Percorre o texto uma vez e devolve [[classe|null, trecho], ...].
- * Em cada posição vale a primeira regra que casar.
- */
 function tokenize(text, grammar) {
   const state = grammar.init ? grammar.init() : {};
   const tokens = [];
@@ -440,6 +394,10 @@ function tokenize(text, grammar) {
   let last = '';
   let i = 0;
 
+  /**
+   * Adds the pending plain text to the token list.
+   * @private
+   */
   const flush = () => {
     if (plain) {
       tokens.push([null, plain]);
@@ -495,9 +453,6 @@ function tokenize(text, grammar) {
   return tokens;
 }
 
-/**
- * Monta os nós com textContent: nada do código vira HTML.
- */
 function render(tokens) {
   const fragment = document.createDocumentFragment();
 
@@ -517,17 +472,17 @@ function render(tokens) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Helpers DOM & Autodetecção                                         */
 /* ------------------------------------------------------------------ */
 
-/**
- * Extrai texto de um <code> preservando quebras de linha (\n) mesmo quando
- * contenteditable inseriu <br> ou blocos internos.
- */
 export function readCodeText(node) {
   if (!node) return '';
 
   let out = '';
+  /**
+   * Walks the child nodes of a node and collects their text.
+   * @private
+   * @param {Node} current
+   */
   const walk = current => {
     for (const child of current.childNodes) {
       if (child.nodeType === 3) {
@@ -551,6 +506,11 @@ export function readCodeText(node) {
   return out.replace(/\r\n?/g, '\n');
 }
 
+/**
+ * Detects the language of a code block from its text.
+ * @param {string} rawText
+ * @return {string|null} The language name, or null when it is not recognized.
+ */
 export function detectLanguage(rawText) {
   const text = String(rawText || '').trim();
   if (!text) return null;
@@ -610,6 +570,13 @@ export function detectLanguage(rawText) {
   return null;
 }
 
+/**
+ * Returns the language of a code element, from its class, its parent data-lang attribute or automatic detection.
+ * @param {HTMLElement} codeEl
+ * @param {Object} [options={}]
+ * @param {boolean} [options.autoDetect=true]
+ * @return {string|null}
+ */
 export function resolveCodeLanguage(codeEl, { autoDetect = true } = {}) {
   if (!codeEl) return null;
 
@@ -626,6 +593,11 @@ export function resolveCodeLanguage(codeEl, { autoDetect = true } = {}) {
   return detectLanguage(readCodeText(codeEl));
 }
 
+/**
+ * Removes the highlight markup from the code blocks inside a root element, keeping the text.
+ * @param {Element} root
+ * @return {Element} The same root element.
+ */
 export function stripCodeHighlight(root) {
   if (!root) return root;
 
@@ -640,6 +612,13 @@ export function stripCodeHighlight(root) {
   return root;
 }
 
+/**
+ * Highlights a code element in place.
+ * @param {HTMLElement} codeEl
+ * @param {Object} [options={}]
+ * @param {boolean} [options.autoDetect=true]
+ * @return {string|null} The detected language, or null when nothing was highlighted.
+ */
 export function highlightElement(codeEl, { autoDetect = true } = {}) {
   if (!codeEl) return null;
 
@@ -670,6 +649,13 @@ export function highlightElement(codeEl, { autoDetect = true } = {}) {
   return language;
 }
 
+/**
+ * Highlights all the code blocks inside a root element.
+ * @param {Element} root
+ * @param {Object} [options={}]
+ * @param {boolean} [options.autoDetect=true]
+ * @param {boolean} [options.normalizeBarePre=false] - Wraps pre blocks that have no code element in a code element.
+ */
 export function highlightCodeBlocks(root, { autoDetect = true, normalizeBarePre = false } = {}) {
   if (!root) return;
 
@@ -690,12 +676,15 @@ export function highlightCodeBlocks(root, { autoDetect = true, normalizeBarePre 
 }
 
 /* ------------------------------------------------------------------ */
-/* Extensão padrão                                                    */
 /* ------------------------------------------------------------------ */
 
 export default {
   stage: ['after'],
 
+  /**
+   * Highlights the code blocks of a root element after rendering.
+   * @param {Element} root
+   */
   after(root) {
     highlightCodeBlocks(root, { autoDetect: true });
   },

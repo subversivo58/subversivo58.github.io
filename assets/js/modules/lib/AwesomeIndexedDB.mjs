@@ -1,12 +1,10 @@
 /**
- * Awesome IndexedDB - IndexedDB CRUD operations
- * Hybrid-maintenance release: preserves the original MISH API while
- * making request/transaction handling predictable.
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file AwesomeIndexedDB.mjs
+ * @description IndexedDB CRUD wrapper with schema-based upgrades and transactional operations.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
-
 const CRUD_METHODS = new Set(['count', 'like', 'one', 'all', 'getAll']);
 const WRITE_METHODS = new Set(['put', 'add']);
 const CRUD_ERROR = 'No database connection is available for this operation.';
@@ -20,8 +18,22 @@ function createInstanceId() {
     return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 }
 
+/**
+ * Checks whether IndexedDB is available in the current global scope.
+ * @return {boolean}
+ */
 const hasIndexedDB = () => typeof globalThis !== 'undefined' && !!globalThis.indexedDB;
+/**
+ * Checks whether a value is a plain object (not null and not an array).
+ * @param {*} value
+ * @return {boolean}
+ */
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+/**
+ * Returns the unique values of an array, preserving insertion order.
+ * @param {Array} values
+ * @return {Array}
+ */
 const unique = values => [...new Set(values)];
 
 function makeError(message, cause) {
@@ -57,6 +69,15 @@ function normalizeSchema(schema) {
 }
 
 class IDBStorage {
+    /**
+     * Creates an IndexedDB wrapper for a database name.
+     * @param {string} name - Database name.
+     * @param {number} [version=1] - Database version; invalid values fall back to 1.
+     * @param {Function|boolean} [logging=false] - Logger function, or false to disable logs.
+     * @throws {TypeError} If the name is empty.
+     * @throws {Error} If IndexedDB is not available.
+     * @description Each instance opens its own connection. A BroadcastChannel, when available, only shares state and change notifications between instances of the same database.
+     */
     constructor(name, version = 1, logging = false) {
         if (typeof name !== 'string' || !name.trim()) {
             throw new TypeError('[IDBStorage] A non-empty database name is required.');
@@ -101,6 +122,13 @@ class IDBStorage {
         }
     }
 
+    /**
+     * Sends a protocol message to other instances of the same database through the BroadcastChannel.
+     * @private
+     * @param {string} type - Message type (e.g. 'instance-ready', 'db-change').
+     * @param {Object} [details={}] - Extra fields merged into the message.
+     * @return {void}
+     */
     _broadcast(type, details = {}) {
         if (!this.broadCaster || this._disposed) return;
         const message = {
@@ -122,6 +150,12 @@ class IDBStorage {
         }
     }
 
+    /**
+     * Processes a message received from another instance and updates the peer map.
+     * @private
+     * @param {Object} message - Message received from the BroadcastChannel.
+     * @return {void}
+     */
     _handleBroadcastMessage(message) {
         if (!message || typeof message !== 'object' ||
             message.protocol !== CHANNEL_PROTOCOL ||
@@ -195,6 +229,12 @@ class IDBStorage {
         }
     }
 
+    /**
+     * Dispatches a change event to every registered change listener.
+     * @private
+     * @param {Object} change - Change event object.
+     * @return {void}
+     */
     _emitChange(change) {
         for (const listener of this._changeListeners) {
             try { listener(change); }
@@ -202,6 +242,13 @@ class IDBStorage {
         }
     }
 
+    /**
+     * Notifies local listeners and other instances that stores were changed.
+     * @private
+     * @param {string} operation - Operation name ('create', 'update' or 'delete').
+     * @param {string[]} stores - Names of the stores that were changed.
+     * @return {void}
+     */
     _announceChange(operation, stores) {
         const event = {
             type: 'change',
@@ -216,6 +263,13 @@ class IDBStorage {
         this._broadcast('db-change', { operation, stores: event.stores });
     }
 
+    /**
+     * Registers a listener for data changes made in this or other instances.
+     * @param {Function} callback - Receives an event with type, operation, stores and timestamp.
+     * @return {Function} A function that removes the listener.
+     * @throws {TypeError} If callback is not a function.
+     * @throws {Error} If the instance has been disposed.
+     */
     onChange(callback) {
         if (typeof callback !== 'function') throw new TypeError('onChange() expects a callback function.');
         if (this._disposed) throw new Error('This AwesomeIndexedDB instance has been disposed.');
@@ -223,14 +277,34 @@ class IDBStorage {
         return () => this._changeListeners.delete(callback);
     }
 
+    /**
+     * Reports an error to the logger without throwing.
+     * @private
+     * @param {string} method - Name of the method where the error happened.
+     * @param {Error|string} error - The error or message.
+     * @return {void}
+     */
     _report(method, error) {
         try { this.log(`[IDBStorage.${method} Error]: ${error?.message || error}`); } catch (_) { /* logging must not break storage */ }
     }
 
+    /**
+     * Ensures that the database connection is open.
+     * @private
+     * @param {string} method - Name of the calling method, used in the error message.
+     * @throws {Error} If there is no open connection.
+     */
     _assertOpen(method) {
         if (!this.db) throw makeError(`[IDBStorage.${method}]: ${CRUD_ERROR}`);
     }
 
+    /**
+     * Ensures that an Object Store exists in the open database.
+     * @private
+     * @param {string} name - Object Store name.
+     * @throws {TypeError} If the name is empty.
+     * @throws {Error} If the store does not exist; it must be included in the schema and the version increased.
+     */
     _assertStore(name) {
         if (typeof name !== 'string' || !name.trim()) throw new TypeError('A non-empty "tbn" Object Store name is required.');
         if (!this.db.objectStoreNames.contains(name)) {
@@ -238,6 +312,13 @@ class IDBStorage {
         }
     }
 
+    /**
+     * Opens the database and creates any missing Object Stores from the schema.
+     * @param {Array<Object>} [schema=[]] - Store definitions. Each entry requires a "tbn" name and may include "keyPath", "autoIncrement" and "tbk"/"tbv" seed data.
+     * @return {Promise<Object>} Resolves with the connection object (read, create, update, delete, close, onChange).
+     * @throws {TypeError} If the schema is invalid.
+     * @description If the connection is already open, the method only checks the stores in the schema. Entries with "tbk" are used as initial data after the stores are created.
+     */
     open(schema = []) {
         if (this._disposed) return Promise.reject(new Error('This AwesomeIndexedDB instance has been disposed.'));
         if (this._opening) return this._opening;
@@ -343,6 +424,11 @@ class IDBStorage {
         return this._opening;
     }
 
+    /**
+     * Returns the public connection object used by consumers of this instance.
+     * @private
+     * @return {Object} Object with close, create, read, update, delete, onChange and a read-only objects getter.
+     */
     _connection() {
         const handler = this;
         return {
@@ -356,6 +442,11 @@ class IDBStorage {
         };
     }
 
+    /**
+     * Closes the database connection and notifies other instances.
+     * @param {string} [reason='manual'] - Reason sent with the close notification.
+     * @return {void}
+     */
     close(reason = 'manual') {
         const db = this.db;
         if (!db) return;
@@ -365,6 +456,16 @@ class IDBStorage {
         finally { this._broadcast('db-close', { reason }); }
     }
 
+    /**
+     * Runs a write transaction over one or more Object Stores.
+     * @private
+     * @param {Array<Object>} data - Entries with "tbn", "tbk" and "tbv". "tbk" and "tbv" may be arrays for bulk writes.
+     * @param {string} operation - 'create', 'update' or 'delete'.
+     * @param {string} [method='put'] - IndexedDB method used for updates: 'put' or 'add'.
+     * @return {Promise<boolean>} Resolves with true after the transaction commits.
+     * @throws {TypeError} If the data is invalid.
+     * @description The transaction is aborted if any write fails. Changes are announced only after the commit.
+     */
     async _writeBatch(data, operation, method = 'put') {
         this._assertOpen(operation);
         if (!Array.isArray(data) || data.length === 0) throw new TypeError(`"${operation}" expects a non-empty Array.`);
@@ -403,14 +504,32 @@ class IDBStorage {
         }
     }
 
+    /**
+     * Adds records to the database, replacing any existing record with the same key.
+     * @param {Array<Object>} data - Entries with "tbn", "tbk" and "tbv".
+     * @return {Promise<boolean>}
+     */
     create(data) {
         return this._writeBatch(data, 'create', 'put').catch(error => { this._report('create', error); throw error; });
     }
 
+    /**
+     * Updates records in the database.
+     * @param {Array<Object>} data - Entries with "tbn", "tbk" and "tbv".
+     * @param {string} [method='put'] - 'put' replaces or inserts; 'add' only inserts.
+     * @return {Promise<boolean>}
+     */
     update(data, method = 'put') {
         return this._writeBatch(data, 'update', method).catch(error => { this._report('update', error); throw error; });
     }
 
+    /**
+     * Reads records from an Object Store.
+     * @param {Object} data - Query object with "tbn" (store name), "tbk" (key) and optional "method".
+     * @param {string} [data.method='one'] - 'one' returns one value, 'all' or 'getAll' return every value, 'count' returns the number of records, and 'like' returns {key, value} for keys that start with "tbk".
+     * @return {Promise<*>} The result, depending on the method. Returns false when 'one' finds nothing.
+     * @throws {TypeError} If the query is invalid.
+     */
     async read(data) {
         try {
             this._assertOpen('read');
@@ -459,6 +578,12 @@ class IDBStorage {
         } catch (error) { this._report('read', error); throw error; }
     }
 
+    /**
+     * Deletes one or more records.
+     * @param {Object|Object[]} data - An entry or array of entries with "tbn" and "tbk".
+     * @return {Promise<Array|boolean>} Array of deleted keys when an array was passed, otherwise true.
+     * @throws {TypeError} If an entry lacks "tbn" or "tbk".
+     */
     delete(data) {
         const entries = Array.isArray(data) ? data : [data];
         if (!entries.length) return Promise.resolve([]);
@@ -476,6 +601,12 @@ class IDBStorage {
             .catch(error => { this._report('delete', error); throw error; });
     }
 
+    /**
+     * Checks whether a database exists.
+     * @param {string} [dbname=this.name] - Database name.
+     * @return {Promise<boolean>}
+     * @description Uses indexedDB.databases() when available. Otherwise it opens the database and aborts the upgrade to detect whether it was created.
+     */
     async exists(dbname = this.name) {
         if (typeof dbname !== 'string' || !dbname.trim()) dbname = this.name;
         const idb = globalThis.indexedDB;
@@ -502,6 +633,12 @@ class IDBStorage {
         });
     }
 
+    /**
+     * Deletes a database by name, closing this instance's connection first when it is the same database.
+     * @private
+     * @param {string} dbname - Database name.
+     * @return {Promise<boolean>} Resolves with true after the deletion succeeds.
+     */
     async _deleteDatabase(dbname) {
         if (dbname === this.name) this.close('database-delete-requested');
         return new Promise((resolve, reject) => {
@@ -515,6 +652,11 @@ class IDBStorage {
         });
     }
 
+    /**
+     * Deletes one or more databases.
+     * @param {string|string[]|false} [list=false] - Database name, list of names, or false to delete the current database.
+     * @return {Promise<boolean|string[]>} A boolean when a single name is given, otherwise the array of deleted names.
+     */
     async erase(list = false) {
         const names = Array.isArray(list) ? unique(list.filter(name => typeof name === 'string' && name.trim()))
             : [typeof list === 'string' && list.trim() ? list : this.name];
@@ -529,6 +671,11 @@ class IDBStorage {
         return Array.isArray(list) ? deleted : (deleted.length > 0);
     }
 
+    /**
+     * Deletes every database visible to this origin.
+     * @return {Promise<string[]>} Names of the deleted databases.
+     * @throws {Error} If indexedDB.databases() is not supported by the browser.
+     */
     async eraseAll() {
         if (typeof globalThis.indexedDB.databases !== 'function') {
             throw new Error('eraseAll() is not supported by this browser because indexedDB.databases() is unavailable.');
@@ -545,6 +692,11 @@ class IDBStorage {
         return deleted;
     }
 
+    /**
+     * Closes the connection and removes the BroadcastChannel and event listeners of this instance.
+     * @return {void}
+     * @description After dispose(), the instance cannot be used again.
+     */
     dispose() {
         if (this._disposed) return;
         this.close('dispose');

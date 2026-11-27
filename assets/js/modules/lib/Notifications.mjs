@@ -1,11 +1,11 @@
 /**
- * Notifications - Wraper to `Notificatios API`
+ * @file Notifications.mjs
+ * @description Wrapper for the Notifications API.
  * @see  The Holy Grail of Notifications      - [https://web-push-book.gauntface.com]
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
-
 import Emitter from './Emitter.mjs';
 
 /**
@@ -108,6 +108,11 @@ const uuidv4 = function(shortVersion = false) {
         );
 };
 
+/**
+ * Checks whether an element is visible in the layout.
+ * @param {Element} element
+ * @return {boolean}
+ */
 const isVisible = function(element) {
     return !!(
         element.offsetWidth ||
@@ -116,6 +121,9 @@ const isVisible = function(element) {
     );
 };
 
+/**
+ * No-operation function, used as a default callback.
+ */
 const noop = () => {};
 
 /**
@@ -181,6 +189,12 @@ const TimeAgo = time => {
     let now = Date.now();
     let t;
 
+    /**
+     * Formats a number with a unit in singular or plural form.
+     * @param {number} n
+     * @param {string} unit
+     * @return {string}
+     */
     let format = (n, unit) => {
         let a = 'hora' == unit ? 'ha' : '1';
 
@@ -232,6 +246,10 @@ const TimeAgo = time => {
  * Nice time for humans readable.
  */
 const TimeLength = (milliseconds, locale = false) => {
+    /**
+     * Detects whether the browser accepts the language used for date formatting.
+     * @return {string|undefined} The supported language, or undefined.
+     */
     const lang = ((testLang) => {
         if (testLang) {
             try {
@@ -278,6 +296,12 @@ const frameInterval = (callback, delay) => {
     let start = dateNow();
     let stop;
 
+    /**
+     * Starts an interval that calls a callback at the given delay, based on the clock time.
+     * @param {Function} callback
+     * @param {number} delay - Delay in milliseconds.
+     * @return {{clear: Function}} Object with a clear method that stops the interval.
+     */
     let intervalFunc = function() {
         dateNow() - start < delay ||
             (start += delay, callback());
@@ -288,6 +312,9 @@ const frameInterval = (callback, delay) => {
     requestAnimation(intervalFunc);
 
     return {
+        /**
+         * Stops the interval started by the timer.
+         */
         clear() {
             stop = 1;
         }
@@ -317,6 +344,11 @@ function slideIt(element, direction, slideDuration, callback) {
  * NotifyJS
  */
 class NotifyJS extends Emitter {
+    /**
+     * Creates the notification manager.
+     * @param {Object} [settings={}] - Notification settings.
+     * @description Shares a Permissions instance and listens to permission changes.
+     */
     constructor(settings = {}) {
         super();
 
@@ -345,7 +377,6 @@ class NotifyJS extends Emitter {
             typeof settings.player === 'function'
         ) ? settings.player : noop;
 
-        // Tradução de textos fixos (opcional): translate(chave, textoPadrao)
         this.translate = (
             'translate' in settings &&
             typeof settings.translate === 'function'
@@ -474,6 +505,10 @@ class NotifyJS extends Emitter {
             }
 
             // Listen for subsequent permission changes.
+            /**
+             * Handles changes of the notification permission state.
+             * @description Emits an event when the permission changes.
+             */
             const handleChange = () => {
                 const previous = this.permission;
                 const current = permissionStatus.state;
@@ -557,14 +592,27 @@ class NotifyJS extends Emitter {
         }
     }
 
+    /**
+     * Sets whether the user can change the notification settings.
+     * @param {boolean} Boolean
+     */
     set disableUserSettings(Boolean) {
         this.log('> disability user configuration: ', Boolean);
     }
 
+    /**
+     * Handles the show event of a notification and emits it.
+     * @param {Event} Event
+     */
     onshow(Event) {
         this.emit('show', Event.target);
     }
 
+    /**
+     * Handles the click event of a notification and emits it.
+     * @param {Event} Event
+     * @description Closes the notification when it supports closing.
+     */
     onclick(Event) {
         this.emit('click', Event);
 
@@ -573,6 +621,11 @@ class NotifyJS extends Emitter {
         }
     }
 
+    /**
+     * Handles the close event of a notification and removes it from the list.
+     * @param {Event} Event
+     * @param {string} id - Notification identifier.
+     */
     onclose(Event, id) {
         this.emit('close', Event.target);
 
@@ -587,6 +640,10 @@ class NotifyJS extends Emitter {
         }
     }
 
+    /**
+     * Handles an error event of a notification, logs it and emits it.
+     * @param {Event} Event
+     */
     onerror(Event) {
         console.error(Event);
         this.emit('error', Event.target);
@@ -946,6 +1003,12 @@ const notificationTiming = (
                     let TimmerToClose;
 
                     // Mouse over timer.
+                    /**
+                     * Starts a timer that calls a callback after the given delay, for notifications that close on mouse out.
+                     * @param {Function} callback
+                     * @param {number} ms - Delay in milliseconds.
+                     * @return {number} Timer identifier.
+                     */
                     const TimerOfMouseOver = (callback, ms) => {
                         return TimmerToClose = setTimeout(
                             callback,

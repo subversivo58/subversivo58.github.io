@@ -1,14 +1,12 @@
 /**
- * @license The MIT License (MIT) - [https://github.com/Pluggeding/pluggeding.github.io/blob/master/LICENSE]
+ * @file ServiceWorker.mjs
+ * @description Service worker: request caching strategies, GitHub OAuth flow and auth storage in IndexedDB.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
  * @version 0.1.0 [development stage]
  */
-
 import AWIndexedDB from "./assets/js/modules/lib/AwesomeIndexedDB.mjs";
 
-// ===============================================================
-// CONFIGURAÇÃO GITHUB OAUTH
-// ===============================================================
 
 const GITHUB_CLIENT_ID = "Ov23limwScBObcEQ2q8m";
 const GITHUB_REDIRECT_URI = "https://subversivo58.github.io/admin.html";
@@ -200,9 +198,6 @@ const AdminHTML = `<!--
 </body>
 </html>`;
 
-// ===============================================================
-// ROTAS
-// ===============================================================
 
 const Routes = new Map();
 
@@ -269,6 +264,13 @@ function getDatabase() {
     return databasePromise;
 }
 
+/**
+ * Appends an entry to a list stored in the database under a given key.
+ * @param {string} store - Object Store name.
+ * @param {string} key - Record key.
+ * @param {Object} entry - Entry to add to the end of the list.
+ * @return {Promise<void>}
+ */
 async function appendSubmission(store, key, entry) {
     const db = await getDatabase();
     const previous = await db.read({ tbn: store, tbk: key });
@@ -277,9 +279,6 @@ async function appendSubmission(store, key, entry) {
     await db.create([{ tbn: store, tbk: key, tbv: [list] }]);
 }
 
-// ===============================================================
-// ARMAZENAMENTO TEMPORÁRIO DA AUTENTICAÇÃO OAUTH
-// ===============================================================
 
 const AUTH_DB_NAME = "Subversivo58GitHubAuth";
 const AUTH_DB_VERSION = 1;
@@ -312,6 +311,14 @@ function openAuthDatabase() {
     return authDatabasePromise;
 }
 
+/**
+ * Runs a get, set or delete operation on the OAuth storage database.
+ * @param {"get"|"set"|"delete"} action - Operation to run.
+ * @param {string} key - Record key.
+ * @param {*} [value] - Value for the set operation.
+ * @return {Promise<*>} The stored value for get, otherwise the operation result.
+ * @description This storage is separate from the main database and holds only temporary OAuth data.
+ */
 async function authStorage(action, key, value) {
     const database = await openAuthDatabase();
 
@@ -363,9 +370,6 @@ async function authStorage(action, key, value) {
     });
 }
 
-// ===============================================================
-// DIAGNÓSTICO — NUNCA REGISTRA TOKEN, CODE, VERIFIER OU STATE
-// ===============================================================
 
 let oauthDiagnostics = [];
 
@@ -382,10 +386,18 @@ function logOAuth(stage, status, details = "") {
     }
 }
 
+/**
+ * Saves the OAuth diagnostics log.
+ * @return {Promise<void>}
+ */
 async function saveDiagnostics() {
     await authStorage("set", "oauth_diagnostics", oauthDiagnostics);
 }
 
+/**
+ * Reads the OAuth diagnostics log.
+ * @return {Promise<Array>} Saved entries, or the in-memory log if nothing was saved.
+ */
 async function readDiagnostics() {
     const saved = await authStorage("get", "oauth_diagnostics");
     return Array.isArray(saved) ? saved : oauthDiagnostics;
@@ -396,9 +408,6 @@ function safeFailure(code, message) {
     return { code, message };
 }
 
-// ===============================================================
-// FUNÇÕES CRIPTOGRÁFICAS — PKCE
-// ===============================================================
 
 function base64UrlEncode(bytes) {
     let binary = "";
@@ -417,6 +426,11 @@ function randomOAuthValue(size = 32) {
     return base64UrlEncode(crypto.getRandomValues(new Uint8Array(size)));
 }
 
+/**
+ * Computes the PKCE code challenge (S256) for an OAuth code verifier.
+ * @param {string} verifier - Code verifier.
+ * @return {Promise<string>} Base64URL-encoded SHA-256 digest.
+ */
 async function createCodeChallenge(verifier) {
     const digest = await crypto.subtle.digest(
         "SHA-256",
@@ -426,9 +440,6 @@ async function createCodeChallenge(verifier) {
     return base64UrlEncode(new Uint8Array(digest));
 }
 
-// ===============================================================
-// RESPOSTAS JSON E VALIDAÇÃO DE ORIGEM
-// ===============================================================
 
 function jsonResponse(body, status = 200) {
     return new Response(JSON.stringify(body), {
@@ -452,7 +463,6 @@ function isSameOrigin(request) {
     );
 }
 
-// Normaliza a identidade pública recebida diretamente do GitHub.
 function publicUser(user) {
     return {
         id: user.id,
@@ -465,7 +475,6 @@ function publicUser(user) {
     };
 }
 
-// Formato definitivo da autenticação persistida no banco principal.
 function storedGitHubAuth(user, token) {
     if (!isValidGitHubUser(user)) {
         throw new Error("GITHUB_IDENTITY_INVALID");
@@ -503,10 +512,13 @@ function isValidGitHubUser(user) {
     );
 }
 
-// ===============================================================
-// GRAVAÇÃO DA AUTENTICAÇÃO NO BANCO PRINCIPAL
-// ===============================================================
 
+/**
+ * Saves the authenticated GitHub user and token in the main database.
+ * @param {Object} user - GitHub user data.
+ * @param {Object} token - OAuth tokens.
+ * @return {Promise<boolean>} Resolves with true.
+ */
 async function saveStoredGitHubAuth(user, token) {
     const auth = storedGitHubAuth(user, token);
     const db = await getDatabase();
@@ -522,10 +534,13 @@ async function saveStoredGitHubAuth(user, token) {
     return true;
 }
 
-// ===============================================================
-// INÍCIO DO OAUTH — POST /admin-auth/start
-// ===============================================================
 
+/**
+ * Starts the GitHub OAuth flow (POST /admin-auth/start).
+ * @description Generates a state and a PKCE verifier, stores them temporarily and returns the GitHub authorization URL. Only same-origin POST requests are accepted.
+ * @param {Request} request - Incoming request.
+ * @return {Promise<Response>} JSON response with the URL or an error.
+ */
 async function startGitHubOAuth(request) {
     if (request.method !== "POST" || !isSameOrigin(request)) {
         return jsonResponse(
@@ -546,8 +561,6 @@ async function startGitHubOAuth(request) {
         const verifier = randomOAuthValue(64);
         const challenge = await createCodeChallenge(verifier);
 
-        // O state e o verifier precisam sobreviver ao redirecionamento.
-        // São temporários e removidos durante o callback.
         await authStorage("set", "oauth_pending", {
             state,
             verifier,
@@ -602,10 +615,14 @@ async function startGitHubOAuth(request) {
     }
 }
 
-// ===============================================================
-// TROCA DO CÓDIGO PELO TOKEN — PROXY CLOUDFLARE
-// ===============================================================
 
+/**
+ * Exchanges the authorization code for an access token through the OAuth proxy.
+ * @param {string} code - Code returned by GitHub.
+ * @param {string} verifier - PKCE code verifier.
+ * @return {Promise<Object>} Token data returned by the proxy.
+ * @throws {Error} If the exchange fails.
+ */
 async function exchangeGitHubCode(code, verifier) {
     logOAuth("Proxy", "ENVIANDO", "Solicitando troca do código OAuth.");
 
@@ -647,10 +664,13 @@ async function exchangeGitHubCode(code, verifier) {
     return result;
 }
 
-// ===============================================================
-// IDENTIFICAÇÃO DA CONTA — GITHUB /USER
-// ===============================================================
 
+/**
+ * Retrieves the identity of the authenticated GitHub account.
+ * @param {string} accessToken - GitHub access token.
+ * @return {Promise<Object>} Validated user data.
+ * @throws {Error} With code GITHUB_IDENTITY_FAILED or GITHUB_IDENTITY_INVALID.
+ */
 async function getGitHubUser(accessToken) {
     logOAuth("GitHub /user", "ENVIANDO", "Consultando identidade da conta.");
 
@@ -683,6 +703,12 @@ async function getGitHubUser(accessToken) {
 // CALLBACK — /admin.html?code=...&state=...
 // ===============================================================
 
+/**
+ * Handles the GitHub redirect back to the admin page.
+ * @description Checks the state and removes the temporary OAuth data. If the flow succeeds, it exchanges the code, reads the user, saves the session and returns the admin page.
+ * @param {URL} url - Callback URL with the code, state or error parameters.
+ * @return {Promise<Response>}
+ */
 async function handleGitHubCallback(url) {
     logOAuth("Callback", "INÍCIO", "Retorno do GitHub recebido.");
     try {
@@ -719,17 +745,12 @@ async function handleGitHubCallback(url) {
 
         logOAuth("Validação state", "OK", "Correspondência confirmada.");
 
-        // O verifier já está em memória. Podemos remover o registro temporário
-        // antes de iniciar a troca do código.
         await authStorage("delete", "oauth_pending");
 
-        // Troca o código pelos tokens OAuth.
         const tokens = await exchangeGitHubCode(code, pending.verifier);
 
-        // Consulta a identidade da conta autenticada.
         const user = await getGitHubUser(tokens.access_token);
 
-        // Persiste identidade e todos os campos de token no banco principal.
         await saveStoredGitHubAuth(user, tokens);
 
         logOAuth(
@@ -782,17 +803,18 @@ async function handleGitHubCallback(url) {
         await saveDiagnostics().catch(() => {});
     }
 
-    // O callback sempre retorna à página administrativa.
     return Response.redirect(
         new URL("/admin.html", url.origin).toString(),
         303
     );
 }
 
-// ===============================================================
-// PÁGINA ADMINISTRATIVA
-// ===============================================================
 
+/**
+ * Serves the admin page, or processes the GitHub callback when the URL has OAuth parameters.
+ * @param {Request} request
+ * @return {Promise<Response>}
+ */
 async function handleAdminPage(request) {
     const url = new URL(request.url);
 
@@ -811,6 +833,12 @@ async function handleAdminPage(request) {
 // ENCERRAMENTO — POST /admin-auth/logout
 // ===============================================================
 
+/**
+ * Ends the GitHub session (POST /admin-auth/logout).
+ * @description Removes the temporary OAuth data and the stored identity. Only same-origin POST requests are accepted.
+ * @param {Request} request
+ * @return {Promise<Response>} JSON response with ok: true or an error.
+ */
 async function logoutGitHub(request) {
     if (request.method !== "POST" || !isSameOrigin(request)) {
         return jsonResponse(
@@ -825,7 +853,6 @@ async function logoutGitHub(request) {
     try {
         await authStorage("delete", "oauth_pending");
 
-        // Logout remove também a identidade definitiva.
         const db = await getDatabase();
 
         await db.delete({
@@ -855,10 +882,13 @@ async function logoutGitHub(request) {
     }
 }
 
-// ===============================================================
-// REVALIDAÇÃO DO TOKEN — POST /admin-auth/refresh
-// ===============================================================
 
+/**
+ * Renews the GitHub session (POST /admin-auth/refresh).
+ * @description Reads the stored session and checks the token again. Only same-origin POST requests are accepted.
+ * @param {Request} request
+ * @return {Promise<Response>} JSON response with the result or an error.
+ */
 async function refreshGitHubToken(request) {
     if (request.method !== "POST" || !isSameOrigin(request)) {
         return jsonResponse(
@@ -1034,10 +1064,13 @@ async function refreshGitHubToken(request) {
     }
 }
 
-// ===============================================================
-// DIAGNÓSTICO — GET /admin-auth/diagnostics
-// ===============================================================
 
+/**
+ * Returns the OAuth diagnostics log (GET).
+ * @description Only same-origin GET requests are accepted.
+ * @param {Request} request
+ * @return {Promise<Response>} JSON response with the entries.
+ */
 async function getAuthDiagnostics(request) {
     if (request.method !== "GET" || !isSameOrigin(request)) {
         return jsonResponse(
@@ -1068,9 +1101,6 @@ async function getAuthDiagnostics(request) {
     }
 }
 
-// ===============================================================
-// REGISTRO DAS ROTAS ADMINISTRATIVAS
-// ===============================================================
 
 RegisterRoute("/admin.html", handleAdminPage);
 RegisterRoute("/admin-auth/start", startGitHubOAuth);
@@ -1078,9 +1108,6 @@ RegisterRoute("/admin-auth/refresh", refreshGitHubToken);
 RegisterRoute("/admin-auth/logout", logoutGitHub);
 RegisterRoute("/admin-auth/diagnostics", getAuthDiagnostics);
 
-// ===============================================================
-// FILA E SINCRONIZAÇÃO DOS REGISTROS
-// ===============================================================
 
 const RECORDS_SYNC_INTERVAL = 60 * 60 * 1000;
 const RECORDS_QUEUE = {
@@ -1143,6 +1170,12 @@ function normalizeError(entry) {
     return { type, message };
 }
 
+/**
+ * Reads a queue of records from the database.
+ * @param {IDBDatabase|Object} db - Database connection.
+ * @param {Object} route - Route with store and key.
+ * @return {Promise<Array>} The list, or an empty array.
+ */
 async function readSubmissionList(db, route) {
     const value = await db.read({
         tbn: route.store,
@@ -1152,6 +1185,13 @@ async function readSubmissionList(db, route) {
     return Array.isArray(value) ? value : [];
 }
 
+/**
+ * Writes a queue of records to the database.
+ * @param {Object} db - Database connection.
+ * @param {Object} route - Route with store and key.
+ * @param {Array} list - Queue to save.
+ * @return {Promise<void>}
+ */
 async function writeSubmissionList(db, route, list) {
     await db.create([
         {
@@ -1162,6 +1202,13 @@ async function writeSubmissionList(db, route, list) {
     ]);
 }
 
+/**
+ * Sends the pending records of one route to the configured endpoint.
+ * @param {Object} settings - Loaded site settings.
+ * @param {string} routeName - "feedback" or "errors".
+ * @return {Promise<void>}
+ * @description Invalid records are discarded. The method respects a minimum interval between attempts (RECORDS_SYNC_INTERVAL), which is stored in the database.
+ */
 async function syncRecordRoute(settings, routeName) {
     const route = RECORDS_QUEUE[routeName];
     const endpoint = settings?.jwt?.records?.endpoint;
@@ -1173,7 +1220,6 @@ async function syncRecordRoute(settings, routeName) {
     const db = await getDatabase();
     let list = await readSubmissionList(db, route);
 
-    // Registros inválidos são descartados sem consumir o intervalo.
     while (list.length) {
         const payload =
             routeName === "feedback"
@@ -1200,8 +1246,6 @@ async function syncRecordRoute(settings, routeName) {
         return;
     }
 
-    // O marcador é gravado antes da requisição. Falhas também consomem
-    // o intervalo de uma hora, independentemente da resposta recebida.
     await db.create([
         {
             tbn: "config",
@@ -1233,22 +1277,23 @@ async function syncRecordRoute(settings, routeName) {
         return;
     }
 
-    // 201 = criado; 409 = duplicado. Nos dois casos, o registro
-    // já está confirmado no backend e pode sair da fila local.
     if (response.status === 201 || response.status === 409) {
         list.shift();
         await writeSubmissionList(db, route, list);
         return;
     }
 
-    // 429, 403, erros 4xx e 5xx permanecem na fila. O marcador
-    // já foi atualizado e impede nova tentativa antes de uma hora.
     console.warn(
         `[SW] Backend recusou a sincronização de ${routeName}:`,
         response.status
     );
 }
 
+/**
+ * Synchronizes the feedback and error queues.
+ * @return {Promise<void>}
+ * @description Concurrent calls share the same pending synchronization. Each queue is processed independently.
+ */
 async function syncPendingRecords() {
     if (recordsSyncPromise) return recordsSyncPromise;
 
@@ -1256,8 +1301,6 @@ async function syncPendingRecords() {
         try {
             const settings = await loadSettings();
 
-            // Os limites são independentes: uma tentativa de feedback
-            // não bloqueia uma tentativa de erro, e vice-versa.
             await Promise.allSettled([
                 syncRecordRoute(settings, "feedback"),
                 syncRecordRoute(settings, "errors")
@@ -1277,10 +1320,13 @@ async function syncPendingRecords() {
     }
 }
 
-// ===============================================================
-// ENVIOS DE FORMULÁRIO (POST)
-// ===============================================================
 
+/**
+ * Handles POST requests.
+ * @description Requests to the same origin that match a registered route are handled by it. Form data for the configured routes is saved to the queue. Feedback and bug reports trigger a synchronization.
+ * @param {Request} request
+ * @return {Promise<Response>}
+ */
 async function handlePost(request) {
     const url = new URL(request.url);
 
@@ -1309,8 +1355,6 @@ async function handlePost(request) {
             sentAt: new Date().toISOString()
         });
 
-        // /notes continua apenas com armazenamento local.
-        // Feedback e erros entram na fila de sincronização.
         if (route.key === "feedback" || route.key === "bug") {
             await syncPendingRecords();
         }
@@ -1333,9 +1377,6 @@ async function handlePost(request) {
     }
 }
 
-// ===============================================================
-// CICLO DE VIDA E INTERCEPTAÇÃO
-// ===============================================================
 
 self.addEventListener("install", event => {
     event.waitUntil(self.skipWaiting());
@@ -1362,8 +1403,6 @@ self.addEventListener("fetch", event => {
         return;
     }
 
-    // Cada navegação/requisição GET verifica os marcadores temporais.
-    // O Service Worker não depende de Periodic Background Sync.
     event.waitUntil(
         syncPendingRecords().catch(error => {
             console.error("[SW] Verificação da fila falhou:", error);

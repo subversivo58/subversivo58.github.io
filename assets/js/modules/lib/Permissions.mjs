@@ -1,11 +1,10 @@
-
 /**
- * Permissions - utilities for `Permissions API`
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file Permissions.mjs
+ * @description Helpers for the Permissions API.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
-
 const precheck = async function(instance) {
     if (
         typeof navigator === 'undefined' ||
@@ -58,6 +57,10 @@ const precheck = async function(instance) {
 };
 
 class Permissions {
+    /**
+     * Creates a permissions manager that tracks the browser permissions it supports.
+     * @description Supported permissions include geolocation and notifications.
+     */
     constructor() {
         this.permission = [
             'geolocation',

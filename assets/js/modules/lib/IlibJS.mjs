@@ -1,11 +1,19 @@
 /**
- * IlibJS - Document translator
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file IlibJS.mjs
+ * @description Document translator that loads language dictionaries and applies them to the DOM.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
 import _ from '../helpers/Helpers.mjs'
 
+/**
+ * Fetches a resource and parses it as JSON.
+ * @param {string} uri
+ * @param {RequestInit} [options={}]
+ * @return {Promise<Object>} The parsed JSON, or an empty object when the request fails.
+ * @description Errors are caught inside the function.
+ */
 async function GetResource(uri, options = {}) {
     try {
         return await fetch(uri, options).then(response => response.json())
@@ -18,6 +26,10 @@ async function GetResource(uri, options = {}) {
  * Simple and funny Storage System in memory
  */
 class MemoryStorage {
+    /**
+     * Creates an in-memory storage for dictionaries.
+     * @param {string} key - Storage key.
+     */
     constructor(key) {
         this.key = key
         this.resources = []
@@ -25,6 +37,11 @@ class MemoryStorage {
         this.length = 0
     }
 
+    /**
+     * Adds a resource to the storage, replacing any entry with the same URI.
+     * @param {string} uri
+     * @param {Object} resource
+     */
     add(uri, resource) {
         const index = this.resources.findIndex(item => item.uri === uri)
         const entry = { uri, resource }
@@ -39,6 +56,10 @@ class MemoryStorage {
         return entry
     }
 
+    /**
+     * Sets the active dictionary.
+     * @param {Object} resource - Dictionary object. Other values are replaced with an empty object.
+     */
     put(resource) {
         this.dictionary = resource && typeof resource === 'object'
             ? resource
@@ -47,6 +68,10 @@ class MemoryStorage {
         return this.dictionary
     }
 
+    /**
+     * Returns the state of the storage.
+     * @return {{key: string, resources: Object[], dictionary: Object}}
+     */
     get() {
         return {
             key: this.key,
@@ -55,12 +80,20 @@ class MemoryStorage {
         }
     }
 
+    /**
+     * Removes a resource by URI.
+     * @param {string} uri
+     * @return {number} Number of remaining resources.
+     */
     del(uri) {
         this.resources = this.resources.filter(item => item.uri !== uri)
         this.length = this.resources.length
         return this.length
     }
 
+    /**
+     * Removes all resources and clears the active dictionary.
+     */
     clear() {
         this.resources = []
         this.dictionary = {}
@@ -69,6 +102,13 @@ class MemoryStorage {
 }
 
 // MutationObserver helper.
+/**
+ * Observes DOM mutations of a node with a MutationObserver.
+ * @param {Node} node
+ * @param {Function} callback - Called when the node changes.
+ * @param {MutationObserverInit} [options={}]
+ * @return {MutationObserver|false} false when the node is missing or MutationObserver is not available.
+ */
 const SpyDOM = (node, callback, options = {}) => {
     if (!node || typeof MutationObserver === 'undefined') {
         return false
@@ -145,6 +185,11 @@ const Translate = (node, data, mode, getWord) => {
         return false
     }
 
+    /**
+     * Sets the title, tooltip and other attributes of an element from an attribute object.
+     * @param {Element} element
+     * @param {Object} attribute - Attribute values to apply.
+     */
     const setAttr = (element, attribute) => {
         const attributes = [
             ['title', attribute.title],
@@ -181,6 +226,11 @@ const Translate = (node, data, mode, getWord) => {
         }
     }
 
+    /**
+     * Returns the translation of a key as HTML, or the key when there is no translation.
+     * @param {string} key
+     * @return {string}
+     */
     const translatedHTML = key => {
         const value = key ? getWord(key) : false
 
@@ -295,6 +345,11 @@ export default class IlibJS {
         }
     }
 
+    /**
+     * Changes the active dictionary to a resource already stored.
+     * @param {string} uri
+     * @return {boolean} true when the resource exists.
+     */
     changeDictionary(uri) {
         const resources = this.storage.get().resources || []
 
@@ -311,6 +366,11 @@ export default class IlibJS {
         return dictionary
     }
 
+    /**
+     * Adds a dictionary resource when no resource with the same URI exists.
+     * @param {string} uri
+     * @param {Object} resource
+     */
     addDictionary(uri, resource) {
         const resources = this.storage.get().resources || []
 
@@ -321,6 +381,12 @@ export default class IlibJS {
         return this
     }
 
+    /**
+     * Returns a dictionary from storage, or downloads it when it is not stored.
+     * @param {string} uri
+     * @param {RequestInit} [options={}]
+     * @return {Promise<Object>}
+     */
     async get(uri, options = {}) {
         const resources = this.storage.get().resources || []
 
@@ -369,6 +435,10 @@ export default class IlibJS {
     }
 
     // Return the current dictionary.
+    /**
+     * Returns the active dictionary.
+     * @return {Object}
+     */
     dictionary() {
         return this.storage.get().dictionary
     }
@@ -397,6 +467,11 @@ export default class IlibJS {
             '.i18n:not([translated])'
         ) || []
 
+        /**
+         * Applies the translation to a list of elements.
+         * @param {Element[]} elements
+         * @param {string} mode - Translation mode.
+         */
         const runNodes = (elements, mode) => {
             for (const element of elements) {
                 Translate(

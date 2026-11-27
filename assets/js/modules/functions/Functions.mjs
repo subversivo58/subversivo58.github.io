@@ -1,8 +1,9 @@
 /**
- * Functions collection
- * @license The MIT License (MIT)             - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
+ * @file Functions.mjs
+ * @description Collection of general-purpose functions shared across modules.
+ * @license The MIT License (MIT) - [https://github.com/subversivo58/subversivo58.github.io/blob/master/LICENSE]
  * @copyright Copyright (c) 2010-2026 Lauro Moraes - [https://github.com/subversivo58]
- * @version 0.1.0 [development stage]         - [https://github.com/subversivo58/subversivo58.github.io/blob/master/VERSIONING.md]
+ * @version 0.1.0 [development stage]
  */
 import _, {
     IsWebBrowserContext,
@@ -40,6 +41,14 @@ import _, {
 
 
 
+/**
+ * Fills an element while the user holds it down, and dispatches a pressHold event.
+ * @param {HTMLElement} element
+ * @param {Function} initCallback - Called when the press starts.
+ * @param {Function} endCallback - Called when the press ends before completion.
+ * @param {Function} completedCallback - Called when the press is completed.
+ * @description The completion event is dispatched once the hold reaches its full duration.
+ */
 const PressHoldCollorCharger = (element, initCallback, endCallback, completedCallback, timer) => {
 
     // make a `CustomEvent`
@@ -329,6 +338,12 @@ const TimeAgo = time => {
     let round = Math.round,
         now = Date.now(),
         t
+    /**
+     * Formats a number with a Portuguese unit, in singular or plural form.
+     * @param {number} n
+     * @param {string} unit
+     * @return {string}
+     */
     let format = (n, unit) => {
         let a = 'hora' == unit ? 'ha' : '1'
         unit = 1 == n ? unit : (unit !== 'mês' ? unit + 's' : unit)
@@ -372,6 +387,11 @@ const ReadingTextTime = text => {
  */
 const AnchorScrool = function() {
     let bod = _.DOM.getByTagName('html')[0];
+    /**
+     * Returns the scroll speed in milliseconds for a distance.
+     * @param {number} length - Distance in pixels.
+     * @return {number} Between 700 and the upper limit used for long distances.
+     */
     let speed = length => {
         let result = Math.abs(length)
         if ( result < 500 ) {
@@ -383,6 +403,12 @@ const AnchorScrool = function() {
              return length
         }
     }
+    /**
+     * Scrolls the page to a target element, with a speed based on the distance.
+     * @param {HTMLElement} element
+     * @param {HTMLElement} target - Destination element.
+     * @param {number} margin - Offset from the top of the target.
+     */
     let eventHandler = (element, target, margin) => {
         let length = Math.abs(target.offsetTop - bod.scrollTop),
             timing = speed(length);
@@ -482,6 +508,12 @@ const AnchorScrool = function() {
 const DeepEqual = function(obj1, obj2, strictDeep = false) {
     const top1 = obj1;
     const top2 = obj2;
+    /**
+     * Compares two objects property by property.
+     * @param {Object} obj1
+     * @param {Object} obj2
+     * @return {boolean}
+     */
     const run = (obj1, obj2) => {
         for (var p in obj1) {
             //Check property exists on both objects
@@ -534,6 +566,12 @@ const ValidURL = (uri, secure = false) => {
  * @return {Number}      - estimated distance of strings
  */
 const StringDistance = (str1, str2) => {//
+    /**
+     * Calculates the Levenshtein distance between two strings, ignoring case.
+     * @param {string} s1
+     * @param {string} s2
+     * @return {number}
+     */
     const distance = (s1, s2) => {
         s1 = s1.toLowerCase()
         s2 = s2.toLowerCase()
@@ -657,9 +695,13 @@ const Stack = function() {
     }
 }
 
+/**
+ * Returns the route of the current page.
+ * @param {boolean} [showPath=false] - Returns the full path instead of the route name.
+ * @return {string}
+ * @description A page can declare its own route with a meta tag named "route", such as the 404 page.
+ */
 const PathName = showPath => {
-    // Página que declara a própria rota (ex.: 404.html, servida pelo GitHub Pages
-    // em qualquer endereço inexistente) com <meta name="route" content="404">
     const declared = document.querySelector('meta[name="route"]')
     if ( declared && declared.content ) {
         return declared.content
@@ -683,6 +725,10 @@ const PathName = showPath => {
     }
 }
 
+/**
+ * Returns the number of directory levels between the current page and the site root.
+ * @return {number}
+ */
 const DirsLevel = () => {
     let lp = location.pathname
     let pn = PathName()
@@ -722,11 +768,23 @@ const DirsLevel = () => {
     }
 }
 
+/**
+ * Redirects the page to a URL.
+ * @param {string} uri
+ * @return {boolean} Always false.
+ */
 const Redirect = uri => {
     location.replace(uri)
     return false
 }
 
+/**
+ * Sends data with navigator.sendBeacon, optionally with an authorization header through fetch.
+ * @param {string} uri
+ * @param {Object|string} data
+ * @param {string|false} [auth=false] - Authorization token. Without it, sendBeacon is used.
+ * @return {boolean}
+ */
 const SendBeacon = (uri, data, auth) => {
     try {
         if ( auth ) {
