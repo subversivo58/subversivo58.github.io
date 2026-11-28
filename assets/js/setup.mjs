@@ -671,7 +671,7 @@ const SetupDOMReady = async evt => {
         SiteAnalytics
     );
 
-    TemplatesReady.import.catch(error => {
+    await TemplatesReady.import.catch(error => {
         SiteAnalytics?.trackError("templates", error).catch(() => {});
     });
 
@@ -804,7 +804,7 @@ const SetupDOMReady = async evt => {
                 // is pwa launch ... register log
             }
 
-            await TemplatesReady.import;
+            //await TemplatesReady.import;
             const adminShortcut = dc.getElementById("drawer-admin");
             let adminAuth = false;
 
